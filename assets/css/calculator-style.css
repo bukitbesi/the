@@ -1,1 +1,128 @@
+/* --- Root Variables for Easy Customization --- */
+:root {
+    --primary-color: #007bff; /* Main brand color (e.g., buttons, highlights) */
+    --background-color: #ffffff; /* Calculator background */
+    --form-bg-color: #f8f9fa; /* Input area background */
+    --text-color: #333; /* Primary text */
+    --label-color: #555; /* Field labels */
+    --border-color: #dee2e6; /* Borders and dividers */
+    --border-radius: 8px; /* Rounded corners for a modern look */
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Main Calculator Container --- */
+.loan-calculator-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 500px;
+    margin: 40px auto;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* --- Header --- */
+.calculator-header {
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+.calculator-header h2 {
+    margin: 0 0 5px 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+.calculator-header p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--label-color);
+}
+
+/* --- Input Form & Groups --- */
+.calculator-form {
+    display: grid;
+    gap: 20px;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--label-color);
+    margin-bottom: 8px;
+}
+.calculator-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background-color: var(--form-bg-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Important for padding and border */
+}
+.calculator-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Results Section --- */
+.calculator-results {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+.result-label {
+    font-size: 1rem;
+    color: var(--label-color);
+}
+.result-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.result-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 5px 0;
+}
+
+/* --- Footer --- */
+.calculator-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 600px) {
+    .loan-calculator-container {
+        padding: 20px;
+        margin: 20px;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+    .calculator-header h2 {
+        font-size: 1.3rem;
+    }
+    .result-value {
+        font-size: 1.1rem;
+    }
+}
 
