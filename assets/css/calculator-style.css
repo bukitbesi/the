@@ -12,7 +12,7 @@
 
 /* --- Main Calculator Container --- */
 .loan-calculator-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Poppins", Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Poppins", Segoe UI, Roboto, Arial, sans-serif;
     background-color: var(--background-color);
     padding: 25px;
     border-radius: var(--border-radius);
