@@ -1,1 +1,25 @@
 
+{
+  "name": "The Bukit Besi",
+  "short_name": "Bukit Besi Blog",
+  "description": "AI tools, Blogger guides, and productivity tips by Bukit Besi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "en",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://cdn.jsdelivr.net/gh/bukitbesi/the@main/assets/favicon-image/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn.jsdelivr.net/gh/bukitbesi/the@main/assets/favicon-image/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
