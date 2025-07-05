@@ -1,0 +1,16 @@
+# System
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Build & Logs
+dist/
+build/
+*.log
+
+# Node
+node_modules/
+.env
