@@ -11,7 +11,7 @@ const AlchemistTheme = {
     tocHeadlineSelector: '.post-body h2, .post-body h3',
     breakingNews: {
       containerId: 'breaking-news-ticker',
-      label: 'TERKINI',
+      label: 'TERKINI', // Or any label you prefer
       maxPosts: 5
     }
   },
@@ -23,10 +23,15 @@ const AlchemistTheme = {
       this.ui.initBackToTop();
       this.ui.initDarkMode();
       this.utils.updateCopyrightYear();
-      this.features.initAutoTOC();
-      this.features.initBreakingNews();
-      this.utils.transmuteParagraphs();
-      this.utils.initLazyLoadVideos();
+      
+      // Page-specific initializations
+      if (document.body.classList.contains('post-view')) {
+        this.features.initAutoTOC();
+        this.utils.transmuteParagraphs();
+      }
+      if (document.body.classList.contains('homepage-view')) {
+        this.features.initBreakingNews();
+      }
     });
   },
 
@@ -35,13 +40,18 @@ const AlchemistTheme = {
       const toggle = document.getElementById('mobile-nav-toggle');
       const menu = document.getElementById('main-nav');
       if (toggle && menu) {
-        toggle.addEventListener('click', () => menu.classList.toggle('is-open'));
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('is-open');
+        });
       }
     },
     initBackToTop: () => {
       const button = document.querySelector('.back-to-top');
       if (button) {
-        window.addEventListener('scroll', () => button.classList.toggle('visible', window.scrollY > 300));
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('visible', window.scrollY > 400);
+        });
         button.addEventListener('click', e => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -86,6 +96,10 @@ const AlchemistTheme = {
       const feedUrl = `/feeds/posts/default?alt=json-in-script&max-results=${maxPosts}`;
       
       window.breakingNewsCallback = (json) => {
+        if (!json.feed.entry) {
+            container.innerHTML = '<span>No recent posts found.</span>';
+            return;
+        }
         let listHtml = '<ul>';
         json.feed.entry.forEach(entry => {
           let postUrl = '';
@@ -113,35 +127,21 @@ const AlchemistTheme = {
       if (el) el.textContent = new Date().getFullYear();
     },
     transmuteParagraphs: () => {
-      const postBody = document.querySelector('.post-body');
+      const postBody = document.querySelector('.post-body.entry-content');
       if (!postBody) return;
-      // This regex finds 2 or more consecutive <br> tags, with optional whitespace
+      
       const brRegex = /(<br\s*\/?>\s*){2,}/gi;
       const originalHtml = postBody.innerHTML;
 
-      // Only run if double <br> tags exist to avoid re-processing
       if (brRegex.test(originalHtml)) {
         const segments = originalHtml.split(brRegex);
         const newHtml = segments
           .map(segment => segment ? segment.trim() : '')
-          .filter(segment => segment.length > 0)
+          .filter(segment => segment && !/^\s*$/.test(segment))
           .map(segment => `<p>${segment}</p>`)
           .join('');
         postBody.innerHTML = newHtml;
       }
-    },
-    initLazyLoadVideos: () => {
-      document.querySelectorAll('.lazy-video').forEach(container => {
-        const button = container.querySelector('button');
-        button.addEventListener('click', () => {
-          const iframe = document.createElement('iframe');
-          iframe.setAttribute('src', container.dataset.src);
-          iframe.setAttribute('frameborder', '0');
-          iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
-          iframe.setAttribute('allowfullscreen', '');
-          container.replaceWith(iframe);
-        }, { once: true });
-      });
     }
   }
 };
