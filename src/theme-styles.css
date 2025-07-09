@@ -4,38 +4,39 @@
 
 /* Widgets */
 .widget {
-  background: #fff;
+  background: var(--color-widget-background);
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.07);
+  border: 1px solid var(--color-border);
   border-radius: 5px;
 }
 .widget .title {
-  font-size: 1.1em;
-  font-weight: 600;
-  padding-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: 700;
+  padding-bottom: 15px;
   margin: -20px -20px 15px -20px;
   padding: 15px 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
+.widget ul {list-style:none; margin:0; padding:0;}
 .widget ul li {
   padding: 10px 0;
-  border-bottom: 1px dotted #ddd;
+  border-bottom: 1px dotted var(--color-border-light);
 }
 .widget ul li:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 .widget ul li a {
-  color: #333;
+  color: var(--color-text);
   font-weight: 500;
 }
 .widget ul li a:hover {
   color: var(--color-primary);
 }
 
-/* Recent Posts Widget */
-ul.recent-posts-list li a {
+/* Recent Posts Widget Specifics */
+#recent-posts-widget-container ul.recent-posts-list li a {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -65,9 +66,11 @@ ul.recent-posts-list li a {
   padding-top: 30px;
   border-top: 1px solid var(--color-border);
 }
-#related-posts .title {
+#related-posts .related-title {
   font-size: 1.5em;
   margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
 }
 .related-posts-container {
   display: grid;
@@ -76,7 +79,7 @@ ul.recent-posts-list li a {
 }
 .related-post-item a {
   display: block;
-  color: #222;
+  color: var(--color-text);
 }
 .related-post-item-thumb {
   position: relative;
@@ -88,10 +91,8 @@ ul.recent-posts-list li a {
   margin-bottom: 10px;
 }
 .related-post-item-thumb img {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute; left: 0; top: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
   transition: transform .3s ease;
 }
@@ -108,33 +109,29 @@ ul.recent-posts-list li a {
 #auto-toc-container {
   display: none; /* Hidden by default, shown by JS if needed */
   background: #f9f9f9;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   padding: 20px;
-  margin: 20px 0;
+  margin: 30px 0;
   border-radius: 5px;
+}
+.dark-mode #auto-toc-container {
+  background: #2c2c2c;
+  border-color: #444;
 }
 #auto-toc-container:before {
   content: "Table of Contents";
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.1em;
   display: block;
   margin-bottom: 15px;
 }
-#auto-toc-container ul {
-  list-style: none;
-}
-#auto-toc-container li {
-  padding: 4px 0;
-}
+#auto-toc-container ul { list-style: none; margin:0; padding:0; }
 #auto-toc-container li a {
-  color: #333;
-  text-decoration: none;
+  padding: 4px 0;
+  display: block;
+  color: var(--color-text);
 }
-#auto-toc-container li a:hover {
-  text-decoration: underline;
-}
-#auto-toc-container .toc-indent {
-  padding-left: 20px;
-}
+#auto-toc-container .toc-indent { padding-left: 20px; }
 
 /* Sharing Buttons */
 .native-share-buttons {
@@ -147,14 +144,12 @@ ul.recent-posts-list li a {
   padding: 10px 20px;
   margin: 5px;
   border-radius: 5px;
-  color: #fff;
+  color: #fff !important; /* Force color */
   text-decoration: none;
   font-weight: 600;
   transition: opacity .2s ease;
 }
-.native-share-buttons a:hover {
-  opacity: 0.85;
-}
+.native-share-buttons a:hover { opacity: 0.85; }
 .share-facebook { background-color: #1877F2; }
 .share-twitter { background-color: #1DA1F2; }
 .share-whatsapp { background-color: #25D366; }
@@ -178,7 +173,4 @@ ul.recent-posts-list li a {
   justify-content: space-between;
   align-items: center;
 }
-#footer-bottom a {
-  color: #fff;
-  font-weight: 600;
-}
+#footer-bottom a { color: #fff; font-weight: 600; }
