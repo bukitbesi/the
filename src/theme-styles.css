@@ -1,180 +1,184 @@
 /**
- * Theme: The Bukit Besi - High-Performance CSS
- * Author: (SEO Alchemist)
- * Version: 2.0 (Complete Refactor)
+ * Alchemist V1 - Deferred Styles
  */
 
-/* ==========================================================================
-   1. Design System (CSS Variables)
-   ========================================================================== */
-:root {
-  --font-primary: 'Poppins', sans-serif;
-  --color-text: #333;
-  --color-heading: #111;
-  --color-background: #FFFFFF;
-  --color-primary: #007BFF; /* Example primary color */
-  --color-primary-dark: #0056b3;
-  --color-border: #EAEAEA;
-  --header-height: 60px;
-  --container-width: 1100px;
-  --radius: 4px;
+/* Widgets */
+.widget {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.07);
+  border-radius: 5px;
+}
+.widget .title {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding-bottom: 10px;
+  margin: -20px -20px 15px -20px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+.widget ul li {
+  padding: 10px 0;
+  border-bottom: 1px dotted #ddd;
+}
+.widget ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.widget ul li a {
+  color: #333;
+  font-weight: 500;
+}
+.widget ul li a:hover {
+  color: var(--color-primary);
 }
 
-/* Dark Mode Palette */
-.dark-mode {
-  --color-text: #E0E0E0;
-  --color-heading: #FFFFFF;
-  --color-background: #121212;
-  --color-border: #2D2D2D;
+/* Recent Posts Widget */
+ul.recent-posts-list li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.recent-post-thumb {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.recent-post-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recent-post-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-
-/* ==========================================================================
-   2. Base & Reset
-   ========================================================================== */
-*, *::before, *::after { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: var(--font-primary);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Related Posts */
+#related-posts {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--color-border);
 }
-h1, h2, h3, h4, h5, h6 { color: var(--color-heading); margin-top: 0; }
-a { color: var(--color-primary); text-decoration: none; transition: color 0.2s ease; }
-a:hover, a:focus { color: var(--color-primary-dark); }
-img { max-width: 100%; height: auto; display: block; }
-
-
-/* ==========================================================================
-   3. Main Theme Structure
-   ========================================================================== */
-.site-container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 15px;
+#related-posts .title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
-#wrapper { display: flex; flex-wrap: wrap; }
-#content-wrapper { width: 100%; }
-#sidebar-wrapper { width: 100%; }
-
-@media (min-width: 768px) {
-  #content-wrapper { width: 70%; padding-right: 30px; }
-  #sidebar-wrapper { width: 30%; }
+.related-posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+.related-post-item a {
+  display: block;
+  color: #222;
+}
+.related-post-item-thumb {
+  position: relative;
+  background: #f0f0f0;
+  padding-bottom: 100%; /* 1:1 Aspect Ratio */
+  display: block;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.related-post-item-thumb img {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.related-post-item a:hover .related-post-item-thumb img {
+  transform: scale(1.05);
+}
+.related-post-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-
-/* ==========================================================================
-   4. Header & Navigation
-   ========================================================================== */
-#header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--color-background);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: background-color 0.3s ease;
+/* Auto Table of Contents */
+#auto-toc-container {
+  display: none; /* Hidden by default, shown by JS if needed */
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
 }
-#header .site-container {
+#auto-toc-container:before {
+  content: "Table of Contents";
+  font-weight: 600;
+  display: block;
+  margin-bottom: 15px;
+}
+#auto-toc-container ul {
+  list-style: none;
+}
+#auto-toc-container li {
+  padding: 4px 0;
+}
+#auto-toc-container li a {
+  color: #333;
+  text-decoration: none;
+}
+#auto-toc-container li a:hover {
+  text-decoration: underline;
+}
+#auto-toc-container .toc-indent {
+  padding-left: 20px;
+}
+
+/* Sharing Buttons */
+.native-share-buttons {
+  margin: 30px 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+.native-share-buttons a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity .2s ease;
+}
+.native-share-buttons a:hover {
+  opacity: 0.85;
+}
+.share-facebook { background-color: #1877F2; }
+.share-twitter { background-color: #1DA1F2; }
+.share-whatsapp { background-color: #25D366; }
+.share-telegram { background-color: #2AABEE; }
+
+/* Footer */
+#footer-container {
+  background: linear-gradient(50deg, #ff4169, #8b41f6);
+  color: #fff;
+  padding: 60px 0;
+  margin-top: 30px;
+}
+#footer-bottom {
+  background: #111;
+  padding: 25px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+#footer-bottom .site-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: var(--header-height);
 }
-#Header1 h1.title, #Header1 h2.title { font-size: 1.5rem; margin: 0; }
-#Header1 a { color: var(--color-heading); }
-
-/* Mobile Navigation */
-#nav-toggle { display: none; }
-#nav-toggle:checked ~ #simplify-click {
-  display: block;
-}
-#newsimplify label {
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: block;
-}
-#simplify-click {
-  display: none;
-  position: absolute;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  background: var(--color-background);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-  padding: 1rem;
-}
-#simplify-click ul { list-style: none; padding: 0; margin: 0; }
-#simplify-click li a {
-  display: block;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-@media (min-width: 768px) {
-  #newsimplify label { display: none; }
-  #simplify-click {
-    display: flex;
-    position: static;
-    box-shadow: none;
-    background: none;
-    padding: 0;
-  }
-  #simplify-click > li { margin-left: 1.5rem; }
-  #simplify-click li a { border: none; padding: 0; }
-  #simplify-click ul { display: none; } /* Add dropdown logic later if needed */
-}
-
-/* ==========================================================================
-   5. Blog Posts
-   ========================================================================== */
-.post.hentry {
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 2rem;
-}
-.post-thumb img { border-radius: var(--radius); }
-.post-title a { color: var(--color-heading); }
-.post-body { line-height: 1.8; }
-.post-body img { border-radius: var(--radius); margin: 1rem 0; }
-
-
-/* ==========================================================================
-   6. Widgets & Components
-   ========================================================================== */
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-  background: none;
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-.dark-mode .fa-sun-o { display: none; }
-.dark-mode .fa-moon-o { display: inline; }
-html:not(.dark-mode) .fa-sun-o { display: inline; }
-html:not(.dark-mode) .fa-moon-o { display: none; }
-
-/* Back to Top */
-.simplifytotop {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--color-primary);
+#footer-bottom a {
   color: #fff;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  border-radius: 50%;
-  transition: opacity 0.3s, visibility 0.3s;
-  opacity: 1;
-  visibility: visible;
-  z-index: 999;
-}
-.simplifytotop.hider {
-  opacity: 0;
-  visibility: hidden;
+  font-weight: 600;
 }
