@@ -61,7 +61,7 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
+  "screenshots": [// to fix the errors on options//
     {
       "src": "/pwa/screenshot-desktop.png",
       "sizes": "1920x1080",
