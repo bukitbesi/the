@@ -52,7 +52,7 @@ function renderTools(filter){
     if(t.badge === "new") badgeHTML = '<span class="tool-card-badge new">New</span>';
     else if(t.badge === "popular") badgeHTML = '<span class="tool-card-badge popular">Popular</span>';
     else if(t.badge === "hot") badgeHTML = '<span class="tool-card-badge hot">Hot</span>';
-    html += '<a href="'+t.url+'" class="tool-card reveal reveal-stagger visible" style="--i:'+Math.min(i,8)+'" title="'+t.name+'">'
+    html += '<a href="'+t.url+'" class="tool-card reveal reveal-stagger visible delay-'+Math.min(i,8)+'" title="'+t.name+'">'
       + badgeHTML
       + '<div class="tool-icon '+t.iconCls+'">'+t.icon+'</div>'
       + '<h3>'+t.name+'</h3>'
@@ -83,10 +83,10 @@ for(var fb = 0; fb < filterBtns.length; fb++){
   filterBtns[fb].addEventListener("click", function(){
     for(var x = 0; x < filterBtns.length; x++){
       filterBtns[x].classList.remove("active");
-      filterBtns[x].setAttribute("aria-selected","false");
+      filterBtns[x].setAttribute("aria-pressed","false");
     }
     this.classList.add("active");
-    this.setAttribute("aria-selected","true");
+    this.setAttribute("aria-pressed","true");
     renderTools(this.getAttribute("data-filter"));
   });
 }
@@ -98,10 +98,10 @@ for(var cl = 0; cl < catLinks.length; cl++){
     var f = this.getAttribute("data-filter-link");
     for(var x = 0; x < filterBtns.length; x++){
       filterBtns[x].classList.remove("active");
-      filterBtns[x].setAttribute("aria-selected","false");
+      filterBtns[x].setAttribute("aria-pressed","false");
       if(filterBtns[x].getAttribute("data-filter") === f){
         filterBtns[x].classList.add("active");
-        filterBtns[x].setAttribute("aria-selected","true");
+        filterBtns[x].setAttribute("aria-pressed","true");
       }
     }
     renderTools(f);
@@ -110,12 +110,10 @@ for(var cl = 0; cl < catLinks.length; cl++){
 
 /* ====== NAVBAR SCROLL ====== */
 var navbar = document.getElementById("navbar");
-var lastScroll = 0;
 function handleScroll(){
   var st = window.pageYOffset || document.documentElement.scrollTop;
   if(st > 50) navbar.classList.add("scrolled");
-  else navbar.classList.remove("scrolled");
-  lastScroll = st;
+  else navbar.classList.remove("scrolled");
 }
 
 /* ====== BACK TO TOP ====== */
@@ -136,7 +134,7 @@ mobileToggle.addEventListener("click", function(){
   var isOpen = mobileMenu.classList.toggle("open");
   this.classList.toggle("active");
   this.setAttribute("aria-expanded", isOpen ? "true" : "false");
-  document.body.style.overflow = isOpen ? "hidden" : "";
+  document.documentElement.classList.toggle("tbb-menu-lock", isOpen);
 });
 var mobileLinks = mobileMenu.querySelectorAll("a");
 for(var ml = 0; ml < mobileLinks.length; ml++){
@@ -144,7 +142,7 @@ for(var ml = 0; ml < mobileLinks.length; ml++){
     mobileMenu.classList.remove("open");
     mobileToggle.classList.remove("active");
     mobileToggle.setAttribute("aria-expanded","false");
-    document.body.style.overflow = "";
+    document.documentElement.classList.remove("tbb-menu-lock");
   });
 }
 
