@@ -1,0 +1,425 @@
+<div id="tb-tools-app">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<!-- ============ ANIMATED BACKGROUND ============ -->
+<div class="tb-bg-mesh" aria-hidden="true"></div>
+<!-- ============ TOP NAVBAR ============ -->
+<nav class="tb-navbar" role="navigation" aria-label="Tools navigation">
+  <div class="tb-navbar-inner">
+    <div class="tb-logo">BukitBesi<span aria-hidden="true"></span> Tools</div>
+    <div class="tb-nav-search">
+      <span class="tb-search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="tb-main-search" placeholder="Cari alatan..." autocomplete="off" aria-label="Search tools">
+    </div>
+    <div class="tb-nav-actions">
+      <button class="tb-fav-badge" id="tb-nav-fav" title="My Saved Tools" aria-label="My saved tools">
+        ⭐
+        <span class="tb-fav-count" id="tb-fav-count" aria-live="polite">0</span>
+      </button>a
+      <button class="tb-theme-toggle" id="tb-theme-btn" title="Toggle theme" aria-label="Toggle dark/light mode">\u2600</button>
+    </div>
+  </div>
+</nav>
+<!-- ============ MAIN CONTENT ============ -->
+<main id="tb-main" class="tb-wrap">
+  <!-- HERO -->
+  <section class="tb-hero" aria-labelledby="tb-hero-h1">
+    <div class="tb-hero-badge"><span class="tb-dot" aria-hidden="true"></span> 50+ Free Online Tools - No Signup</div>
+    <h1 id="tb-hero-h1">Free Online Tools for<br><span class="tb-gradient-text">Developers &amp; Creators</span></h1>
+    <p>Kode minifier, image compressor, SEO generators, text utilities &amp; more - semua percuma, selamat, berfungsi dalam browser anda.</p>
+    <div class="tb-hero-cta">
+      <button class="tb-btn-primary" onclick="document.getElementById('tb-tools-section').scrollIntoView({behavior:'smooth'})" aria-label="Explore all tools">
+        <span>⚡</span><span class="tb-cta-text">Explore All Tools</span>
+      </button>
+      <button class="tb-btn-ghost" onclick="tbScrollToFavs()" aria-label="View my saved tools">
+        <span>⭐</span><span>My Saved Tools</span>
+      </button>
+    </div>
+  </section>
+  <!-- STATS BAR -->
+  <div class="tb-stats-bar" role="region" aria-label="Site statistics">
+    <div class="tb-stat-item">
+      <div class="tb-stat-num" id="tb-stat-tools">50+</div>
+      <div class="tb-stat-label">Free Tools</div>
+    </div>
+    <div class="tb-stat-divider" aria-hidden="true"></div>
+    <div class="tb-stat-item">
+      <div class="tb-stat-num" id="tb-stat-users">12,847</div>
+      <div class="tb-stat-label">Users Today</div>
+    </div>
+    <div class="tb-stat-divider" aria-hidden="true"></div>
+    <div class="tb-stat-item">
+      <div class="tb-stat-num">100%</div>
+      <div class="tb-stat-label">Browser-Based</div>
+    </div>
+    <div class="tb-stat-divider" aria-hidden="true"></div>
+    <div class="tb-stat-item">
+      <div class="tb-stat-num">0</div>
+      <div class="tb-stat-label">Signup Required</div>
+    </div>
+  </div>
+  <!-- AD SLOT - TOP LEADERBOARD -->
+  <div class="tb-ad-slot" role="complementary" aria-label="Advertisement">
+    <div class="tb-ad-slot-label">Advertisement</div>
+    <div class="tb-ad-slot-inner">
+      <!-- Paste AdSense / Demand Supply code here -->
+      <span style="opacity:0.3">[ 728×90 Leaderboard Ad ]</span>
+    </div>
+  </div>
+  <!-- MY TOOLS (FAVORITES) -->
+  <section class="tb-my-tools" id="tb-my-tools-section" aria-labelledby="tb-my-tools-title" role="region">
+    <div class="tb-section-header">
+      <h2 class="tb-section-title" id="tb-my-tools-title">⭐ My Saved Tools <span class="tb-badge" id="tb-fav-badge-count">0</span></h2>
+      <button class="tb-clear-fav" id="tb-clear-fav" onclick="tbClearFavs()">✕ Clear All</button>
+    </div>
+    <div class="tb-tools-grid" id="tb-fav-grid" aria-label="Saved tools grid"></div>
+  </section>
+  <!-- RECENTLY USED -->
+  <section class="tb-my-tools" id="tb-recent-section" aria-labelledby="tb-recent-title" role="region" style="display:none;">
+    <div class="tb-section-header">
+      <h2 class="tb-section-title" id="tb-recent-title">🕐 Recently Used <span class="tb-badge tb-badge-recent" id="tb-recent-badge-count">0</span></h2>
+      <button class="tb-clear-fav" onclick="tbClearRecent()">✕ Clear History</button>
+    </div>
+    <div class="tb-tools-grid" id="tb-recent-grid" aria-label="Recently used tools grid"></div>
+  </section>
+  <!-- TOOLS SECTION -->
+  <section id="tb-tools-section" aria-labelledby="tb-tools-section-title">
+    <!-- CATEGORY FILTER -->
+    <div class="tb-cat-filter" role="tablist" aria-label="Filter tools by category">
+      <button class="tb-cat-btn tb-active" data-cat="all" role="tab" aria-selected="true">🌐 All Tools</button>
+      <button class="tb-cat-btn" data-cat="developer" role="tab" aria-selected="false">💻 Developer</button>
+      <button class="tb-cat-btn" data-cat="image" role="tab" aria-selected="false">🖼 Image</button>
+      <button class="tb-cat-btn" data-cat="text" role="tab" aria-selected="false">📝 Text</button>
+      <button class="tb-cat-btn" data-cat="seo" role="tab" aria-selected="false">📈 SEO</button>
+      <button class="tb-cat-btn" data-cat="utility" role="tab" aria-selected="false">🔧 Utility</button>
+    </div>
+    <!-- ACTIVE FILTER LABEL -->
+    <div id="tb-filter-label" style="font-size:13px;color:var(--tb-text-muted);margin-bottom:20px;min-height:20px;"></div>
+    <!-- TOOL CARDS GRID -->
+    <div class="tb-tools-grid" id="tb-grid" role="list" aria-label="Tools grid"></div>
+    <!-- NO RESULTS -->
+    <div class="tb-no-results" id="tb-no-results" role="status" aria-live="polite">
+      <div class="tb-no-emoji">🔍</div>
+      <h3>Tiada alatan dijumpai</h3>
+      <p>Cuba cari dengan kata kunci lain atau terokai semua kategori.</p>
+    </div>
+
+  </section>
+  <!-- AD SLOT - MID CONTENT -->
+  <div class="tb-ad-slot" role="complementary" aria-label="Advertisement">
+    <div class="tb-ad-slot-label">Advertisement</div>
+    <div class="tb-ad-slot-inner">
+      <!-- Paste AdSense / Demand Supply code here -->
+      <span style="opacity:0.3">[ 300×250 Rectangle Ad ]</span>
+    </div>
+  </div>
+  <!-- SEO INTERNAL LINKS BOOST BLOCK -->
+  <section class="tb-seo-links" aria-labelledby="tb-seo-links-title">
+    <h2 id="tb-seo-links-title">🔗 Explore More Tools by Category</h2>
+    <div class="tb-link-grid">
+      <a href="/p/developer-tools.html" rel="internal" target="_blank" class="tb-link-item">💻 Developer Tools <span class="tb-link-arrow">→</span></a>
+      <a href="/p/image-tools.html" rel="internal" target="_blank" class="tb-link-item">🖼 Image Tools <span class="tb-link-arrow">→</span></a>
+      <a href="/p/text-tools.html" rel="internal" target="_blank" class="tb-link-item">📝 Text Utilities <span class="tb-link-arrow">→</span></a>
+      <a href="/p/seo-tools.html" rel="internal" target="_blank" class="tb-link-item">📈 SEO Tools <span class="tb-link-arrow">→</span></a>
+      <a href="/p/utility-tools.html" rel="internal" target="_blank" class="tb-link-item">🔧 Utility Tools <span class="tb-link-arrow">→</span></a>
+      <a href="/p/calculator.html" rel="internal" target="_blank" class="tb-link-item">🧮 Calculator <span class="tb-link-arrow">→</span></a>
+      <a href="/p/zakat-calculator.html" rel="internal" target="_blank" class="tb-link-item">☪️ Zakat Calculator <span class="tb-link-arrow">→</span></a>
+      <a href="/p/waktu-solat.html" rel="internal" target="_blank" class="tb-link-item">🕌 Waktu Solat <span class="tb-link-arrow">→</span></a>
+      <a href="/p/qr-generator.html" rel="internal" target="_blank" class="tb-link-item">📱 QR Generator <span class="tb-link-arrow">→</span></a>
+      <a href="/p/password-generator.html" rel="internal" target="_blank" class="tb-link-item">🔐 Password Generator <span class="tb-link-arrow">→</span></a>
+      <a href="/p/color-picker.html" rel="internal" target="_blank" class="tb-link-item">🎨 Color Picker <span class="tb-link-arrow">→</span></a>
+      <a href="/p/word-counter.html" rel="internal" target="_blank" class="tb-link-item">📊 Word Counter <span class="tb-link-arrow">→</span></a>
+    </div>
+  </section>
+  <!-- FAQ SECTION -->
+  <section class="tb-faq" aria-labelledby="tb-faq-title">
+    <h2 class="tb-faq-title" id="tb-faq-title">Soalan Lazim Berkaitan Semua Free Tool Ini (FAQ)</h2>
+    <p class="tb-faq-sub">Semua yang anda perlu tahu tentang free tool kami</p>
+    <div class="tb-faq-list" role="list">
+      <div class="tb-faq-item" role="listitem">
+        <div class="tb-faq-q" onclick="tbToggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+          <span>Apakah itu alatan dalam talian percuma?</span>
+          <span class="tb-faq-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="tb-faq-a">
+          <div class="tb-faq-a-inner">Alatan dalam talian percuma adalah utiliti berasaskan web yang membantu pembangun, pereka, dan pencipta kandungan melaksanakan tugasan seperti meminifikasi kod, memampatkan imej, menjana kod QR, dan banyak lagi - terus dalam pelayar anda, tanpa sebarang pemasangan perisian.</div>
+        </div>
+      </div>
+      <div class="tb-faq-item" role="listitem">
+        <div class="tb-faq-q" onclick="tbToggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+          <span>Adakah semua alatan ini benar-benar percuma?</span>
+          <span class="tb-faq-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="tb-faq-a">
+          <div class="tb-faq-a-inner">Ya, semua 50+ alatan di thebukitbesi.com adalah percuma sepenuhnya - tiada caj tersembunyi, tiada akaun diperlukan, dan tiada had penggunaan.</div>
+        </div>
+      </div>
+      <div class="tb-faq-item" role="listitem">
+        <div class="tb-faq-q" onclick="tbToggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+          <span>Adakah data saya selamat (محفوظ)?</span>
+          <span class="tb-faq-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="tb-faq-a">
+          <div class="tb-faq-a-inner">Semua alatan memproses data sepenuhnya dalam pelayar anda. Tiada data dihantar ke pelayan kami. Fail dan teks anda tidak pernah meninggalkan peranti anda - privasi anda 100% terjamin.</div>
+        </div>
+      </div>
+      <div class="tb-faq-item" role="listitem">
+        <div class="tb-faq-q" onclick="tbToggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+          <span>Perlukah saya memasang sesuatu?</span>
+          <span class="tb-faq-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="tb-faq-a">
+          <div class="tb-faq-a-inner">Tidak perlu memasang apa-apa. Semua alatan berjalan terus dalam pelayar web anda pada mana-mana peranti - PC, tablet, atau telefon pintar.</div>
+        </div>
+      </div>
+      <div class="tb-faq-item" role="listitem">
+        <div class="tb-faq-q" onclick="tbToggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+          <span>Bolehkah saya gunakan alatan ini pada telefon mudah alih?</span>
+          <span class="tb-faq-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="tb-faq-a">
+          <div class="tb-faq-a-inner">Ya! Semua alatan dioptimumkan sepenuhnya untuk mudah alih dengan reka bentuk responsif dan antara muka mesra ibu jari untuk penggunaan lancar pada telefon pintar dan tablet.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- AD SLOT - BOTTOM -->
+  <div class="tb-ad-slot" role="complementary" aria-label="Advertisement">
+    <div class="tb-ad-slot-label">Sponsored</div>
+    <div class="tb-ad-slot-inner">
+      <!-- Affiliate / AdSense code here -->
+      <span style="opacity:0.3">[ Affiliate Banner / 728×90 ]</span>
+    </div>
+  </div>
+</main>
+<!-- FOOTER -->
+<footer class="tb-footer">
+  <div class="tb-wrap">
+    <p>© 2026 <a href="/" rel="internal" target="_blank">thebukitbesi.com</a> - 50+ Free Online Tools. No signup. No limits.</p>
+    <p style="margin-top:8px">Built with ❤️ in Malaysia | <a href="/p/about.html" rel="internal" target="_blank">About</a> · <a href="/p/contact.html" rel="internal" target="_blank">Contact</a> · <a href="/p/privacy.html" rel="internal" target="_blank">Privacy</a></p>
+  </div>
+</footer>
+<!-- STICKY BOTTOM CTA (Mobile) -->
+<div class="tb-sticky-cta" role="complementary">
+  <div class="tb-sticky-cta-inner">
+    <div class="tb-sticky-cta-text">
+      <strong>50+ Free Tools</strong>
+      No signup · Works offline
+    </div>
+    <button class="tb-sticky-btn" onclick="document.getElementById('tb-tools-section').scrollIntoView({behavior:'smooth'})">
+      ⚡ Explore Now
+    </button>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="tb-toast-container" id="tb-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+</div><!-- END #tb-tools-app -->
+<style>
+#tb-tools-app {--tb-bg:#06070f; --tb-surface:#0e1019; --tb-surface2:#141622; --tb-border:rgba(255,255,255,0.07); --tb-accent1:#4f8bff; --tb-accent2:#9b59f5; --tb-accent3:#00d4aa; --tb-accent4:#ff6b35; --tb-text:#e8eaf0; --tb-text-muted:#6b7280; --tb-text-dim:#9ca3af; --tb-radius:16px; --tb-radius-sm:8px; --tb-glow1:rgba(79, 139, 255, 0.15); --tb-glow2:rgba(155, 89, 245, 0.12); --tb-font-display:'Inter', 'Cairo', sans-serif; --tb-font-body:'DM Sans', 'Nunito', sans-serif; --tb-font-mono:'JetBrains Mono', 'Fira Code', monospace; --tb-transition:0.25s cubic-bezier(0.4, 0, 0.2, 1); --tb-shadow:0 4px 24px rgba(0, 0, 0, 0.4); --tb-shadow-lg:0 16px 64px rgba(0, 0, 0, 0.6); font-family:var(--tb-font-body); background:var(--tb-bg); color:var(--tb-text); line-height:1.6; border-radius:10px; min-height:100vh; overflow-x:hidden; position:relative;}
+#tb-tools-app.tb-light {--tb-bg:#f0f2f8; --tb-surface:#ffffff; --tb-surface2:#f7f8fc; --tb-border:rgba(0,0,0,0.08); --tb-text:#0f1117; --tb-text-muted:#6b7280; --tb-text-dim:#9ca3af; --tb-glow1:rgba(79, 139, 255, 0.08); --tb-glow2:rgba(155, 89, 245, 0.06); --tb-shadow:0 4px 24px rgba(0,0,0,0.08); --tb-shadow-lg:0 16px 64px rgba(0, 0, 0, 0.12);}
+#tb-tools-app .tb-font-import {display:none;}
+#tb-tools-app *, #tb-tools-app *::before, #tb-tools-app *::after {box-sizing:border-box; margin:0; padding:0;}
+#tb-tools-app a {color:inherit; text-decoration:none;}
+#tb-tools-app button {cursor:pointer; border:none; background:none; font-family:inherit;}
+#tb-tools-app input, #tb-tools-app select {font-family:inherit;}
+#tb-tools-app ul, #tb-tools-app ol {list-style:none;}
+#tb-tools-app img {max-width:100%; display:block;}
+#tb-tools-app .tb-bg-mesh {position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+#tb-tools-app .tb-bg-mesh::before {content:''; position:absolute; width:800px; height:800px; background:radial-gradient(circle, rgba(79,139,255,0.08) 0%, transparent 70%); top:-200px; left:-200px; animation:tb-pulse-orb 8s ease-in-out infinite;}
+#tb-tools-app .tb-bg-mesh::after {content:''; position:absolute; width:600px; height:600px; background:radial-gradient(circle, rgba(155,89,245,0.07) 0%, transparent 70%); bottom:-100px; right:-100px; animation:tb-pulse-orb 10s ease-in-out infinite reverse;}
+
+@keyframes tb-pulse-orb {
+0%, 100% {transform:scale(1) translate(0,0); opacity:0.6;}
+50% {transform:scale(1.2) translate(30px, 20px); opacity:1;}
+}
+
+#tb-tools-app .tb-wrap {position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:0 10px;}
+#tb-tools-app .tb-navbar {position:sticky; top:0; z-index:100; background:rgba(6,7,15,0.85); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--tb-border); padding:10px 10px;}
+#tb-tools-app.tb-light .tb-navbar {background:rgba(240,242,248,0.9);}
+#tb-tools-app .tb-navbar-inner {max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px;}
+#tb-tools-app .tb-logo {font-family:var(--tb-font-display); font-size:20px; font-weight:700; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; white-space:nowrap; flex-shrink:0;}
+#tb-tools-app .tb-logo span {display:inline-block; width:8px; height:8px; background:var(--tb-accent3); border-radius:50%; margin-left:4px; vertical-align:middle; animation:tb-blink 2s ease-in-out infinite;}
+
+@keyframes tb-blink {
+0%, 100% {opacity:1; transform:scale(1);}
+50% {opacity:0.4; transform:scale(0.7);}
+}
+
+#tb-tools-app .tb-nav-search {flex:1; max-width:400px; position:relative;}
+#tb-tools-app .tb-nav-search input {width:100%; background:var(--tb-surface2); border:1px solid var(--tb-border); border-radius:40px; padding:10px 10px 10px 36px; color:var(--tb-text); font-size:14px; outline:none; transition:border-color var(--tb-transition), box-shadow var(--tb-transition);}
+#tb-tools-app .tb-nav-search input::placeholder {color:var(--tb-text-muted);}
+#tb-tools-app .tb-nav-search input:focus {border-color:var(--tb-accent1); box-shadow:0 0 0 3px var(--tb-glow1);}
+#tb-tools-app .tb-nav-search .tb-search-icon {position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--tb-text-muted); font-size:14px; pointer-events:none;}
+#tb-tools-app .tb-nav-actions {display:flex; align-items:center; gap:8px;}
+#tb-tools-app .tb-theme-toggle {width:40px; height:40px; border-radius:50%; background:var(--tb-surface2); border:1px solid var(--tb-border); display:flex; align-items:center; justify-content:center; font-size:18px; transition:all var(--tb-transition); color:var(--tb-text);}
+#tb-tools-app .tb-theme-toggle:hover {background:var(--tb-surface); border-color:var(--tb-accent1);}
+#tb-tools-app .tb-fav-badge {position:relative; width:40px; height:40px; border-radius:50%; background:var(--tb-surface2); border:1px solid var(--tb-border); display:flex; align-items:center; justify-content:center; font-size:18px; transition:all var(--tb-transition); color:var(--tb-text);}
+#tb-tools-app .tb-fav-badge:hover {background:var(--tb-surface); border-color:var(--tb-accent2);}
+#tb-tools-app .tb-fav-count {position:absolute; top:-4px; right:-4px; background:var(--tb-accent2); color:#fff; font-size:10px; font-weight:700; min-width:18px; height:18px; border-radius:9px; display:flex; align-items:center; justify-content:center; display:none;}
+#tb-tools-app .tb-hero {padding:80px 0 60px; text-align:center; position:relative;}
+#tb-tools-app .tb-hero-badge {display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, rgba(79,139,255,0.15), rgba(155, 89, 245, 0.15)); border:1px solid rgba(79, 139, 255, 0.3); border-radius:40px; padding:6px 16px; font-size:12px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--tb-accent1); margin-bottom:24px; animation:tb-fade-up 0.6s ease both;}
+#tb-tools-app .tb-hero-badge .tb-dot {width:6px; height:6px; background:var(--tb-accent3); border-radius:50%; animation:tb-blink 1.5s ease-in-out infinite;}
+#tb-tools-app .tb-hero h1 {font-family:var(--tb-font-display); font-size:clamp(32px, 5vw, 62px); font-weight:800; line-height:1.1; letter-spacing:-0.03em; margin-bottom:20px; animation:tb-fade-up 0.7s ease 0.1s both;}
+#tb-tools-app .tb-hero h1 .tb-gradient-text {background:linear-gradient(135deg, var(--tb-accent1) 0%, var(--tb-accent2) 50%, var(--tb-accent3) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+#tb-tools-app .tb-hero p {font-size:clamp(15px, 2vw, 18px); color:var(--tb-text-muted); max-width:560px; margin:0 auto 36px; animation:tb-fade-up 0.7s ease 0.2s both;}
+#tb-tools-app .tb-hero-cta {display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; animation:tb-fade-up 0.7s ease 0.3s both;}
+#tb-tools-app .tb-btn-primary {display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); color:#fff; font-size:15px; font-weight:700; padding:14px 28px; border-radius:40px; transition:all var(--tb-transition); box-shadow:0 4px 20px rgba(79,139,255,0.3); position:relative; overflow:hidden;}
+#tb-tools-app .tb-btn-primary::before {content:''; position:absolute; inset:0; background:linear-gradient(135deg, var(--tb-accent2), var(--tb-accent1)); opacity:0; transition:opacity var(--tb-transition);}
+#tb-tools-app .tb-btn-primary:hover::before {opacity:1;}
+#tb-tools-app .tb-btn-primary span {position:relative; z-index:1;}
+#tb-tools-app .tb-btn-primary:hover {transform:translateY(-2px); box-shadow:0 8px 32px rgba(79,139,255,0.45);}
+#tb-tools-app .tb-btn-ghost {display:inline-flex; align-items:center; gap:8px; background:var(--tb-surface2); border:1px solid var(--tb-border); color:var(--tb-text); font-size:15px; font-weight:600; padding:14px 28px; border-radius:40px; transition:all var(--tb-transition);}
+#tb-tools-app .tb-btn-ghost:hover {border-color:var(--tb-accent1); background:var(--tb-surface); transform:translateY(-2px);}
+#tb-tools-app .tb-stats-bar {display:flex; align-items:center; justify-content:center; gap:48px; padding:24px 0 48px; flex-wrap:wrap; animation:tb-fade-up 0.7s ease 0.4s both;}
+#tb-tools-app .tb-stat-item {text-align:center;}
+#tb-tools-app .tb-stat-num {font-family:var(--tb-font-display); font-size:28px; font-weight:800; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+#tb-tools-app .tb-stat-label {font-size:12px; color:var(--tb-text-muted); font-weight:500; text-transform:uppercase; letter-spacing:0.05em;}
+#tb-tools-app .tb-stat-divider {width:1px; height:40px; background:var(--tb-border);}
+#tb-tools-app .tb-my-tools {margin-bottom:40px; display:none;}
+#tb-tools-app .tb-my-tools.tb-visible {display:block;}
+#tb-tools-app .tb-section-header {display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;}
+#tb-tools-app .tb-section-title {font-family:var(--tb-font-display); font-size:20px; font-weight:700; display:flex; align-items:center; gap:10px;}
+#tb-tools-app .tb-section-title .tb-badge {font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); color:#fff;}
+#tb-tools-app .tb-clear-fav {font-size:12px; color:var(--tb-text-muted); padding:6px 14px; border-radius:20px; border:1px solid var(--tb-border); background:none; transition:all var(--tb-transition); color:var(--tb-text-dim);}
+#tb-tools-app .tb-clear-fav:hover {border-color:var(--tb-accent4); color:var(--tb-accent4);}
+#tb-tools-app .tb-cat-filter {display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; padding:0 0 4px;}
+#tb-tools-app .tb-cat-btn {display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border-radius:30px; font-size:13px; font-weight:600; background:var(--tb-surface2); border:1px solid var(--tb-border); color:var(--tb-text-dim); transition:all var(--tb-transition); white-space:nowrap;}
+#tb-tools-app .tb-cat-btn:hover {border-color:var(--tb-accent1); color:var(--tb-accent1); background:rgba(79,139,255,0.08);}
+#tb-tools-app .tb-cat-btn.tb-active {background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); border-color:transparent; color:#fff; box-shadow:0 4px 16px rgba(79,139,255,0.3);}
+#tb-tools-app .tb-tools-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px; margin-bottom:48px;}
+#tb-tools-app .tb-tool-card {position:relative; background:var(--tb-surface); border:1px solid var(--tb-border); border-radius:var(--tb-radius); padding:16px 10px; transition:all var(--tb-transition); cursor:pointer; overflow:hidden; display:flex; flex-direction:column; gap:12px;}
+#tb-tools-app .tb-tool-card::before {content:''; position:absolute; inset:0; background:linear-gradient(135deg, var(--tb-glow1), var(--tb-glow2)); opacity:0; transition:opacity var(--tb-transition);}
+#tb-tools-app .tb-tool-card:hover {border-color:rgba(79,139,255,0.3); transform:translateY(-4px); box-shadow:var(--tb-shadow-lg);}
+#tb-tools-app .tb-tool-card:hover::before {opacity:1;}
+#tb-tools-app .tb-tool-card.tb-skeleton {pointer-events:none;}
+#tb-tools-app .tb-tool-card.tb-skeleton .tb-tool-icon, #tb-tools-app .tb-tool-card.tb-skeleton .tb-tool-name, #tb-tools-app .tb-tool-card.tb-skeleton .tb-tool-desc, #tb-tools-app .tb-tool-card.tb-skeleton .tb-tool-footer {background:linear-gradient(90deg, var(--tb-surface2) 25%, var(--tb-border) 50%, var(--tb-surface2) 75%); background-size:200% 100%; animation:tb-shimmer 1.5s infinite; border-radius:8px; color:transparent !important; border:none !important;}
+
+@keyframes tb-shimmer {
+0% {background-position:200% center;}
+100% {background-position:-200% center;}
+}
+
+#tb-tools-app .tb-tool-card-top {display:flex; align-items:flex-start; justify-content:space-between; gap:12px; position:relative; z-index:1;}
+#tb-tools-app .tb-tool-icon {width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; transition:transform var(--tb-transition);}
+#tb-tools-app .tb-tool-card:hover .tb-tool-icon {transform:scale(1.1) rotate(5deg);}
+#tb-tools-app .tb-tool-icon.tb-ic-dev {background:rgba(79,139,255,0.15);}
+#tb-tools-app .tb-tool-icon.tb-ic-img {background:rgba(155,89,245,0.15);}
+#tb-tools-app .tb-tool-icon.tb-ic-text {background:rgba(0,212,170,0.15);}
+#tb-tools-app .tb-tool-icon.tb-ic-seo {background:rgba(255,107,53,0.15);}
+#tb-tools-app .tb-tool-icon.tb-ic-util {background:rgba(255,206,84,0.15);}
+#tb-tools-app .tb-tool-actions {display:flex; align-items:center; gap:6px;}
+#tb-tools-app .tb-fav-btn {width:30px; height:30px; border-radius:50%; border:1px solid var(--tb-border); background:var(--tb-surface2); display:flex; align-items:center; justify-content:center; font-size:14px; transition:all var(--tb-transition); color:var(--tb-text-muted); position:relative; z-index:2;}
+#tb-tools-app .tb-fav-btn:hover, #tb-tools-app .tb-fav-btn.tb-faved {background:rgba(255,206,84,0.15); border-color:#ffce54; color:#ffce54; transform:scale(1.1);}
+#tb-tools-app .tb-trending-badge {font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; background:rgba(255,107,53,0.15); color:var(--tb-accent4); border:1px solid rgba(255, 107, 53, 0.25); white-space:nowrap;}
+#tb-tools-app .tb-new-badge {font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; background:rgba(0,212,170,0.15); color:var(--tb-accent3); border:1px solid rgba(0, 212, 170, 0.25); white-space:nowrap;}
+#tb-tools-app .tb-tool-body {position:relative; z-index:1; flex:1;}
+#tb-tools-app .tb-tool-name {font-family:var(--tb-font-display); font-size:15px; font-weight:700; color:var(--tb-text); margin-bottom:6px; line-height:1.3;}
+#tb-tools-app .tb-tool-desc {font-size:13px; color:var(--tb-text-muted); line-height:1.5;}
+#tb-tools-app .tb-tool-preview {position:absolute; bottom:calc(100% + 8px); left:0; right:0; background:var(--tb-surface2); border:1px solid var(--tb-border); border-radius:var(--tb-radius-sm); padding:12px; font-size:12px; font-family:var(--tb-font-mono); color:var(--tb-accent3); z-index:200; opacity:0; transform:translateY(8px); transition:all var(--tb-transition); pointer-events:none; white-space:pre; box-shadow:var(--tb-shadow-lg); max-height:120px; overflow:hidden;}
+#tb-tools-app .tb-tool-card:hover .tb-tool-preview {opacity:1; transform:translateY(0);}
+#tb-tools-app .tb-tool-footer {display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; margin-top:4px;}
+#tb-tools-app .tb-tool-usage {font-size:11px; color:var(--tb-text-muted); display:flex; align-items:center; gap:4px;}
+#tb-tools-app .tb-tool-usage .tb-fire {color:var(--tb-accent4);}
+#tb-tools-app .tb-try-btn {font-size:12px; font-weight:700; padding:7px 16px; border-radius:20px; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); color:#fff; transition:all var(--tb-transition); box-shadow:0 2px 10px rgba(79,139,255,0.2); position:relative; overflow:hidden;}
+#tb-tools-app .tb-try-btn:hover {transform:scale(1.05); box-shadow:0 4px 16px rgba(79,139,255,0.4);}
+#tb-tools-app .tb-no-results {grid-column:1 / -1; text-align:center; padding:60px 20px; display:none;}
+#tb-tools-app .tb-no-results.tb-visible {display:block;}
+#tb-tools-app .tb-no-results .tb-no-emoji {font-size:48px; margin-bottom:16px;}
+#tb-tools-app .tb-no-results h3 {font-family:var(--tb-font-display); font-size:20px; font-weight:700; margin-bottom:8px;}
+#tb-tools-app .tb-no-results p {color:var(--tb-text-muted); font-size:14px;}
+#tb-tools-app .tb-ad-slot {background:var(--tb-surface2); border:1px dashed var(--tb-border); border-radius:var(--tb-radius); padding:16px 10px; text-align:center; margin:24px 0; color:var(--tb-text-muted); font-size:12px;}
+#tb-tools-app .tb-ad-slot-label {font-size:10px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;}
+#tb-tools-app .tb-ad-slot-inner {min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--tb-text-muted); font-size:13px;}
+#tb-tools-app .tb-seo-links {background:var(--tb-surface); border:1px solid var(--tb-border); border-radius:var(--tb-radius); padding:24px 10px; margin:40px 0;}
+#tb-tools-app .tb-seo-links h2 {font-family:var(--tb-font-display); font-size:20px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:10px;}
+#tb-tools-app .tb-link-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;}
+#tb-tools-app .tb-link-item {display:flex; align-items:center; gap:10px; padding:10px 10px; background:var(--tb-surface2); border:1px solid var(--tb-border); border-radius:var(--tb-radius-sm); font-size:13px; font-weight:500; transition:all var(--tb-transition); color:var(--tb-text-dim);}
+#tb-tools-app .tb-link-item:hover {border-color:var(--tb-accent1); color:var(--tb-accent1); transform:translateX(4px);}
+#tb-tools-app .tb-link-item .tb-link-arrow {opacity:0; transition:opacity var(--tb-transition);}
+#tb-tools-app .tb-link-item:hover .tb-link-arrow {opacity:1;}
+#tb-tools-app .tb-faq {padding:40px 0;}
+#tb-tools-app .tb-faq-title {font-family:var(--tb-font-display); font-size:clamp(24px, 3vw, 36px); font-weight:800; text-align:center; margin-bottom:8px;}
+#tb-tools-app .tb-faq-sub {text-align:center; color:var(--tb-text-muted); font-size:15px; margin-bottom:36px;}
+#tb-tools-app .tb-faq-list {max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+#tb-tools-app .tb-faq-item {background:var(--tb-surface); border:1px solid var(--tb-border); border-radius:var(--tb-radius); overflow:hidden; transition:border-color var(--tb-transition);}
+#tb-tools-app .tb-faq-item:hover {border-color:rgba(79,139,255,0.25);}
+#tb-tools-app .tb-faq-q {padding:16px 10px; font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:space-between; gap:16px; cursor:pointer; user-select:none;}
+#tb-tools-app .tb-faq-q .tb-faq-arrow {font-size:18px; transition:transform var(--tb-transition); color:var(--tb-text-muted); flex-shrink:0;}
+#tb-tools-app .tb-faq-item.tb-open .tb-faq-arrow {transform:rotate(180deg);}
+#tb-tools-app .tb-faq-a {max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-size:14px; color:var(--tb-text-muted); line-height:1.7;}
+#tb-tools-app .tb-faq-item.tb-open .tb-faq-a {max-height:200px;}
+#tb-tools-app .tb-faq-a-inner {padding:0 10px 16px;}
+#tb-tools-app .tb-footer {border-top:1px solid var(--tb-border); padding:32px 10px 100px; text-align:center; color:var(--tb-text-muted); font-size:13px;}
+#tb-tools-app .tb-footer a {color:var(--tb-accent1); transition:color var(--tb-transition);}
+#tb-tools-app .tb-footer a:hover {color:var(--tb-accent2);}
+#tb-tools-app .tb-sticky-cta {position:fixed; bottom:0; left:0; right:0; z-index:90; background:rgba(6,7,15,0.95); backdrop-filter:blur(20px); border-top:1px solid var(--tb-border); padding:10px 10px; display:none;}
+
+@media (max-width: 768px) {
+#tb-tools-app .tb-sticky-cta {display:block;}
+}
+
+#tb-tools-app .tb-sticky-cta-inner {display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:600px; margin:0 auto;}
+#tb-tools-app .tb-sticky-cta-text {font-size:13px; color:var(--tb-text-muted); flex:1;}
+#tb-tools-app .tb-sticky-cta-text strong {display:block; color:var(--tb-text); font-weight:700;}
+#tb-tools-app .tb-sticky-btn {padding:10px 22px; border-radius:30px; background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent2)); color:#fff; font-size:13px; font-weight:700; white-space:nowrap; flex-shrink:0;}
+#tb-tools-app .tb-toast-container {position:fixed; bottom:80px; right:10px; z-index:9999; display:flex; flex-direction:column; gap:10px; pointer-events:none;}
+
+@media (max-width: 768px) {
+#tb-tools-app .tb-toast-container {bottom:120px; left:10px; right:10px;}
+}
+
+#tb-tools-app .tb-toast {background:var(--tb-surface); border:1px solid var(--tb-border); border-radius:var(--tb-radius-sm); padding:12px 10px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:var(--tb-shadow-lg); transform:translateX(120%); transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:auto;}
+#tb-tools-app .tb-toast.tb-show {transform:translateX(0);}
+#tb-tools-app .tb-toast.tb-success {border-color:rgba(0,212,170,0.4);}
+#tb-tools-app .tb-toast.tb-info {border-color:rgba(79,139,255,0.4);}
+#tb-tools-app .tb-toast.tb-warn {border-color:rgba(255,206,84,0.4);}
+#tb-tools-app .tb-toast-icon {font-size:16px;}
+
+@keyframes tb-fade-up {
+from {opacity:0; transform:translateY(20px);}
+to {opacity:1; transform:translateY(0);}
+}
+
+#tb-tools-app .tb-card-animate {animation:tb-fade-up 0.5s ease both;}
+
+@media (max-width: 1024px) {
+#tb-tools-app .tb-tools-grid {grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));}
+}
+
+@media (max-width: 768px) {
+#tb-tools-app .tb-navbar {padding:10px 10px;}
+#tb-tools-app .tb-navbar-inner {gap:8px;}
+#tb-tools-app .tb-logo {font-size:15px;}
+#tb-tools-app .tb-nav-search {max-width:160px;}
+#tb-tools-app .tb-stats-bar {gap:16px; padding:16px 10px 32px;}
+#tb-tools-app .tb-stat-divider {display:none;}
+#tb-tools-app .tb-hero {padding:40px 0 24px;}
+#tb-tools-app .tb-tools-grid {grid-template-columns:1fr 1fr; gap:10px;}
+#tb-tools-app .tb-tool-card {padding:12px 10px;}
+#tb-tools-app .tb-tool-preview {display:none;}
+#tb-tools-app .tb-seo-links {padding:20px 10px;}
+#tb-tools-app .tb-faq-q {padding:14px 10px; font-size:14px;}
+#tb-tools-app .tb-faq-a-inner {padding:0 10px 14px;}
+#tb-tools-app .tb-ad-slot {padding:12px 10px;}
+}
+
+@media (max-width: 480px) {
+#tb-tools-app .tb-tools-grid {grid-template-columns:1fr; gap:10px;}
+#tb-tools-app .tb-hero-cta {flex-direction:column;}
+#tb-tools-app .tb-btn-primary, #tb-tools-app .tb-btn-ghost {width:100%; justify-content:center;}
+#tb-tools-app .tb-cat-filter {flex-wrap:nowrap; overflow-x:auto; padding:0 0 8px;}
+#tb-tools-app .tb-cat-filter::-webkit-scrollbar {height:3px;}
+#tb-tools-app .tb-cat-filter::-webkit-scrollbar-thumb {background:var(--tb-border); border-radius:2px;}
+#tb-tools-app .tb-tool-card {padding:10px 10px;}
+#tb-tools-app .tb-sticky-cta {padding:10px 10px;}
+#tb-tools-app .tb-seo-links {padding:16px 10px;}
+#tb-tools-app .tb-faq-q {padding:12px 10px;}
+#tb-tools-app .tb-faq-a-inner {padding:0 10px 12px;}
+#tb-tools-app .tb-footer {padding:24px 10px 80px;}
+}
+
+#tb-tools-app .tb-recent-pill {font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; background:rgba(79,139,255,0.12); color:var(--tb-accent1); border:1px solid rgba(79, 139, 255, 0.25); white-space:nowrap;}
+#tb-tools-app .tb-badge-recent {background:linear-gradient(135deg, var(--tb-accent1), var(--tb-accent3)) !important;}
+</style>
+<script src="https://cdn.jsdelivr.net/gh/tbbcom/hub@main/asset/js/landing.min.js?v=20260327-1.0" defer='defer'></script>
