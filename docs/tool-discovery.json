@@ -1,0 +1,495 @@
+{
+  "checkedDate": "2026-10-06",
+  "sitemap": "https://www.thebukitbesi.com/sitemap-pages.xml",
+  "pagesScanned": 58,
+  "publishedToolPages": 48,
+  "method": "Fetched every Blogger static-page sitemap URL and checked HTTP status, canonical and robots metadata. Tool descriptions were reviewed against page titles, descriptions and tool interfaces.",
+  "searchMethod": "Public web searches and an authenticated Ubersuggest domain_top_pages report. Public search visibility is not proof of a Google rank or exhaustive index coverage.",
+  "rankingReport": "Ubersuggest returned two article pages and no tool pages; no per-tool ranking positions were available.",
+  "tools": [
+    {
+      "url": "https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html",
+      "title": "Javascript Minifier & Obfuscator Generator | Free Online JS Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "javascript-minifier-obfuscator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/css-minifier-tool.html",
+      "title": "CSS Minifier Tool - Compress CSS Online Free | Reduce File Size by 70%",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/css-minifier-tool.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "css-minifier-tool"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/html-beautifier-online.html",
+      "title": "HTML Beautifier Online - Free HTML Formatter Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/html-beautifier-online.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "observed_in_public_search",
+      "icon": "html-beautifier-online"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/parse-html.html",
+      "title": "Parse HTML Online For Blogger XML Templates (Converter)",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/parse-html.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "parse-html"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/html-table-generator.html",
+      "title": "Advanced HTML Table Generator | Free, Fast & SEO-Friendly",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/html-table-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "html-table-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+      "title": "JSON Formatter & Validator ( Free, SEO Friendly & Private",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "json-formatter-validator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/parser-unparser.html",
+      "title": "Free Online Parser & Unparser Tool - Analyze & Convert Data Strings",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/parser-unparser.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "parser-unparser"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/github-link-converter.html",
+      "title": "Github Link Converter from CDN Jsdelivr - Free Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/github-link-converter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "observed_in_public_search",
+      "icon": "github-link-converter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/best-javascript-minifier-online.html",
+      "title": "Free Best Javascript Minifier Online - Compress & Optimize JS Code",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/best-javascript-minifier-online.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "best-javascript-minifier-online"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/json-schema-markup-generator.html",
+      "title": "JSON Schema Markup Generator - Create Structured Data for Better SEO",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/json-schema-markup-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "json-schema-markup-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/video-schema-markup-generator.html",
+      "title": "Free SEO Video Schema Markup Generator Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/video-schema-markup-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "video-schema-markup-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+      "title": "Advanced Robots.txt Generator for Blogger & Any Site | Free SEO Tool Advanced Robots.txt Generator (Google/Bing Ready)",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "robotstxt-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html",
+      "title": "SEO Meta Analyzer Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "seo-meta-analyzer-tool"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/faq-formatter-tool.html",
+      "title": "FAQ Formatter Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/faq-formatter-tool.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "faq-formatter-tool"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html",
+      "title": "Free Word Counter & SEO Keyword Density Checker",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "free-word-counter-seo-keyword-density"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/word-counter.html",
+      "title": "Free Online Word Counter & Character Count Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/word-counter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "word-counter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/remove-characters-from-text.html",
+      "title": "Remove Characters from Text: The Ultimate Online Text Cleaner",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/remove-characters-from-text.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "remove-characters-from-text"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
+      "title": "Plain Text to HTML Converter: Copy or Download",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "text-to-html-converter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/find-replace-text.html",
+      "title": "Find & Replace Text + Regex Tool (Free, Fast, Online)",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/find-replace-text.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "find-replace-text"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/convert-case.html",
+      "title": "Convert Case",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/convert-case.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "convert-case"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/online-notepad.html",
+      "title": "Free Online Notepad for Students & Writers (Fast, Unlimited & Autosave)",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/online-notepad.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "online-notepad"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/webp-image-converter.html",
+      "title": "WebP Image Converter: Batch Convert from any to any for Free",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/webp-image-converter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "webp-image-converter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/image-converter.html",
+      "title": "Free Online Image Converter | Turn JPG, PNG, WebP ETC Instantly",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/image-converter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "image-converter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/color-contrast.html",
+      "title": "Color Contrast Checker - WCAG 2.2 Compliance Tool",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/color-contrast.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "color-contrast"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/online-photoshop.html",
+      "title": "Online Photoshop",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/online-photoshop.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "online-photoshop"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html",
+      "title": "Sticker Whatsapp Maker",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "sticker-whatsapp-maker"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html",
+      "title": "Whatsapp Sticker Maker",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "whatsapp-sticker-maker"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html",
+      "title": "AI Prompt Generator: Create Perfect Art Prompts for Any Models",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "observed_in_public_search",
+      "icon": "ai-art-prompt-optimizer-create-perfect"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/free-ai-image-generator.html",
+      "title": "Free AI Image Generator | Create Instant Art from Text",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/free-ai-image-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "free-ai-image-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/ai-video-prompt.html",
+      "title": "AI Video Prompt",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/ai-video-prompt.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "ai-video-prompt"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/image-to-prompt.html",
+      "title": "AI Generator: Convert Image to Prompt & Enhance Text",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/image-to-prompt.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "image-to-prompt"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/ai-paraphraser-tool.html",
+      "title": "Free AI Paraphraser Tool Online: Grammar Checker - Rewrite & More",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/ai-paraphraser-tool.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "ai-paraphraser-tool"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html",
+      "title": "Cartoonizer AI Tool: Tukar Gambar Jadi Kartun Online",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "cartoonizer-ai-tool"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/free-privacy-policy-generator.html",
+      "title": "Free Privacy Policy Generator",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/free-privacy-policy-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "free-privacy-policy-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/secure-link-generator.html",
+      "title": "Secure Link Generator",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/secure-link-generator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "secure-link-generator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/whatsapp-link-creator.html",
+      "title": "Whatsapp Link Creator",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/whatsapp-link-creator.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "whatsapp-link-creator"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html",
+      "title": "Semak Tracking Semua Kurier di Malaysia - Pos Laju, J&T, DHL",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "semak-tracking-semua-kurier-di-malaysia"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/pdf-converter.html",
+      "title": "The Ultimate PDF Converter: Transform Your Documents Online",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/pdf-converter.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "pdf-converter"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/currency-converter-malaysia.html",
+      "title": "Currency Converter Malaysia:",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/currency-converter-malaysia.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "currency-converter-malaysia"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/tm-speed-test.html",
+      "title": "TM Speed Test - Uji Kelajuan Unifi, Ping & Jitter Malaysia",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/tm-speed-test.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "observed_in_public_search",
+      "icon": "tm-speed-test"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/internet-speed-test.html",
+      "title": "Internet Speed Test: Check Your Bandwidth Online for Free",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/internet-speed-test.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "internet-speed-test"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",
+      "title": "Kalkulator Faraid Malaysia 2026: Kira Bahagian Waris",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "kalkulator-faraid"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-zakat.html",
+      "title": "Kalkulator Zakat Malaysia 2025",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-zakat.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "observed_in_public_search",
+      "icon": "kalkulator-zakat"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html",
+      "title": "Kalkulator Jantina Bayi: Kira Usia Kehamilan Guna NIPT/Ultrasound",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "kalkulator-jantina-bayi"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html",
+      "title": "Kalkulator Saiz Kasut Malaysia",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "kalkulator-saiz-kasut"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-kalori.html",
+      "title": "Kalkulator Kalori Malaysia: Kira BMR, TDEE, BMI & Makro - Percuma",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-kalori.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "kalkulator-kalori"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/kalkulator-bmi.html",
+      "title": "Kalkulator BMI",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/kalkulator-bmi.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "kalkulator-bmi"
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html",
+      "title": "BMI Calculator Malaysia (Asia-Pacific): Fast, Accurate, Metric & Imperial",
+      "httpStatus": 200,
+      "canonical": "https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "searchPresence": "unverified",
+      "icon": "bmi-calculator-malaysia"
+    }
+  ],
+  "excludedPages": [
+    {
+      "url": "https://www.thebukitbesi.com/p/hub.html",
+      "title": "Hub",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/about.html",
+      "title": "About: From the East Coast to Kuala Lumpur",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/contact.html",
+      "title": "Contact",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/tools.html",
+      "title": "Creator Tools Hub | Essential Digital Resources",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/swjs.html",
+      "title": "Kalkulator Kalori",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/search-result.html",
+      "title": "Search Result",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/this-blog-site-is-published-by-and.html",
+      "title": "Disclaimer",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/term-of-service.html",
+      "title": "Terms of Service",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/sitemap.html",
+      "title": "Sitemap - Archives",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    },
+    {
+      "url": "https://www.thebukitbesi.com/p/privacy-policy.html",
+      "title": "Privacy Policy",
+      "reason": "Publisher/support page or tool directory; not an individual tool."
+    }
+  ]
+}

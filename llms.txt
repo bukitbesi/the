@@ -1,70 +1,84 @@
 # The Bukit Besi Tools
 
-> 36 free online tools for developers and creators: minifiers, formatters, image converters, SEO and schema generators. No signup required.
+> 48 free online tools for code, SEO, writing, images and AI, plus Malaysian calculators, currency conversion and speed tests. Explore the full collection.
 
-Canonical page: https://the.thebukitbesi.com/ . Operated by The Bukit Besi (https://www.thebukitbesi.com/). Last updated 2026-10-06.
+This is a directory linking to tools on https://www.thebukitbesi.com/, not an on-page tool runner. Only published tools are listed. Last updated 2026-10-07.
+
+## Directory
+
+- [Free online tools](https://the.thebukitbesi.com/): Canonical directory with tool descriptions, categories and usage guidance.
 
 ## Developer Tools
 
-- [JavaScript Minifier & Obfuscator](https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html): Minify JavaScript to cut file size and optionally obfuscate code to protect it.
-- [CSS Minifier](https://www.thebukitbesi.com/p/css-minifier-tool.html): Compress and optimize CSS files instantly. Remove whitespace and comments.
-- [HTML Beautifier & Formatter](https://www.thebukitbesi.com/p/html-beautifier.html): Format and beautify raw HTML code for better readability and clean structure.
-- [HTML Minifier](https://www.thebukitbesi.com/p/html-minifier.html): Compress HTML by removing unnecessary whitespace, comments, and redundant code.
-- [Parse HTML Online](https://www.thebukitbesi.com/p/parse-html.html): Convert AdSense or any HTML code to XML-compatible code for Blogger.
-- [HTML Table Generator](https://www.thebukitbesi.com/p/html-table-generator.html): Create responsive, accessible HTML tables with custom styles, zebra stripes, sticky headers.
-- [JSON Validator & Formatter](https://www.thebukitbesi.com/p/json-validator.html): Validate, format, and beautify JSON data with syntax highlighting and error detection.
-- [Parser & Unparser Tool](https://www.thebukitbesi.com/p/parser-unparser.html): Parse JSON, CSV, query strings, INI, Base64, URL encode/decode and more.
-- [GitHub Link Converter](https://www.thebukitbesi.com/p/github-link-converter.html): Convert GitHub repository links to raw/CDN-ready URLs for direct file embedding.
-- [Regex Tester](https://www.thebukitbesi.com/p/regex-tester.html): Test and debug regular expressions with real-time matching and syntax highlighting.
-- [Diff Checker](https://www.thebukitbesi.com/p/diff-checker.html): Compare two texts side by side and highlight the differences instantly.
+- [JavaScript Minifier & Obfuscator](https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html): Minify JavaScript and configure obfuscation options to reduce file size and transform your code.
+- [CSS Minifier](https://www.thebukitbesi.com/p/css-minifier-tool.html): Compress CSS by removing unnecessary whitespace and comments, then copy or download the result.
+- [HTML Beautifier & Minifier](https://www.thebukitbesi.com/p/html-beautifier-online.html): Format messy HTML for readability or minify it for a smaller file in one tool.
+- [Parse HTML Online](https://www.thebukitbesi.com/p/parse-html.html): Escape HTML and AdSense snippets for use in Blogger XML templates.
+- [HTML Table Generator](https://www.thebukitbesi.com/p/html-table-generator.html): Build HTML tables with customizable styles and copy the generated markup.
+- [JSON Formatter & Validator](https://www.thebukitbesi.com/p/json-formatter-validator.html): Validate, beautify or minify JSON, sort keys and inspect formatting errors.
+- [Parser & Unparser Tool](https://www.thebukitbesi.com/p/parser-unparser.html): Convert structured data into strings and parse supported data formats back into usable values.
+- [GitHub Link Converter](https://www.thebukitbesi.com/p/github-link-converter.html): Turn public GitHub file links into jsDelivr CDN URLs for embedding assets.
+- [JavaScript Minifier](https://www.thebukitbesi.com/p/best-javascript-minifier-online.html): Compress JavaScript and review the output size before copying or downloading your file.
 
 ## SEO Tools
 
-- [JSON Schema Generator](https://www.thebukitbesi.com/p/json-schema-generator.html): Auto-generate structured JSON-LD schema markup for SEO and rich snippets.
-- [Video JSON Schema Generator](https://www.thebukitbesi.com/p/video-json-schema.html): Generate VideoObject JSON-LD schema for video SEO and rich results.
-- [Robots.txt Generator](https://www.thebukitbesi.com/p/robots-txt-generator.html): Generate Robots.txt for Blogger & WordPress with built-in tester.
-- [SEO Keyword Density Checker](https://www.thebukitbesi.com/p/keyword-density-checker.html): Analyze keyword density to optimize blog posts for #1 rankings.
-- [Free Keywords Generator](https://www.thebukitbesi.com/p/keywords-generator.html): Generate relevant keyword ideas for content strategy and SEO planning.
-- [Meta Tags Generator](https://www.thebukitbesi.com/p/meta-tags-generator.html): Create optimized meta title, description, and Open Graph tags for better SEO.
-- [Slug Generator](https://www.thebukitbesi.com/p/slug-generator.html): Convert any text to SEO-friendly URL slugs with custom separators.
-- [Sitemap Generator](https://www.thebukitbesi.com/p/sitemap-generator.html): Generate XML sitemaps for better search engine crawling and indexing.
-- [Open Graph Preview](https://www.thebukitbesi.com/p/og-preview.html): Preview how your page looks when shared on Facebook, Twitter, and LinkedIn.
+- [JSON-LD Schema Markup Generator](https://www.thebukitbesi.com/p/json-schema-markup-generator.html): Generate structured data for articles, organizations, local businesses and other supported page types.
+- [Video Schema Markup Generator](https://www.thebukitbesi.com/p/video-schema-markup-generator.html): Create VideoObject JSON-LD from your video details for use on your website.
+- [Robots.txt Generator](https://www.thebukitbesi.com/p/robotstxt-generator.html): Build robots.txt rules for user agents, crawl paths and sitemap locations.
+- [SEO Meta Analyzer](https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html): Check title and description lengths and preview how your text could appear in search results.
+- [FAQ Formatter](https://www.thebukitbesi.com/p/faq-formatter-tool.html): Turn question-and-answer text into HTML and matching FAQPage JSON-LD markup.
+- [Word Counter & Keyword Density Checker](https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html): Count words, inspect keyword frequency and estimate reading time for your content.
 
 ## Content Tools
 
-- [Word Counter](https://www.thebukitbesi.com/p/word-counter.html): Count words, characters, sentences, paragraphs, and pages instantly.
-- [Text & Character Remover](https://www.thebukitbesi.com/p/text-character-remover.html): Remove specific characters, words, or patterns from any text instantly.
-- [Lorem Ipsum Generator](https://www.thebukitbesi.com/p/lorem-ipsum-generator.html): Generate placeholder text in various lengths for design mockups.
-- [Text to HTML Converter](https://www.thebukitbesi.com/p/text-to-html.html): Convert plain text with line breaks and formatting into clean HTML code.
-- [Markdown to HTML](https://www.thebukitbesi.com/p/markdown-to-html.html): Convert Markdown syntax to clean, semantic HTML ready for any CMS.
+- [Word Counter](https://www.thebukitbesi.com/p/word-counter.html): Count words, characters and sentences and review reading-time estimates as you type.
+- [Text & Character Remover](https://www.thebukitbesi.com/p/remove-characters-from-text.html): Clean text by removing selected characters, numbers, punctuation or extra spaces.
+- [Text to HTML Converter](https://www.thebukitbesi.com/p/text-to-html-converter.html): Convert plain text into HTML paragraphs, lists and links, then copy or download the output.
+- [Find & Replace Text](https://www.thebukitbesi.com/p/find-replace-text.html): Apply multiple replacement rules to text, with regular expressions and highlighted matches.
+- [Text Case Converter](https://www.thebukitbesi.com/p/convert-case.html): Switch between uppercase, lowercase, title case and developer naming styles such as camelCase.
+- [Online Notepad](https://www.thebukitbesi.com/p/online-notepad.html): Write notes with autosave, snapshots, word counts and TXT or Markdown import and export.
 
 ## Design Tools
 
-- [WebP Image Converter](https://www.thebukitbesi.com/p/webp-converter.html): Drag and drop JPG, PNG, GIF to instantly convert to optimized WebP format.
-- [Image Format Converter](https://www.thebukitbesi.com/p/image-converter.html): Convert images between any format — PNG, JPG, WebP, BMP, GIF and more.
-- [Color Palette Generator](https://www.thebukitbesi.com/p/color-palette-generator.html): Generate beautiful color palettes and extract hex, RGB, HSL values.
-- [CSS Gradient Generator](https://www.thebukitbesi.com/p/css-gradient-generator.html): Create stunning CSS gradients with visual editor and copy-ready code.
-- [Favicon Generator](https://www.thebukitbesi.com/p/favicon-generator.html): Create favicons in multiple sizes from any image for your website.
+- [WebP Image Converter](https://www.thebukitbesi.com/p/webp-image-converter.html): Batch-convert images to WebP with resizing and compression controls.
+- [Image Format Converter](https://www.thebukitbesi.com/p/image-converter.html): Convert images between supported formats and download batch results as a ZIP file.
+- [Color Contrast Checker](https://www.thebukitbesi.com/p/color-contrast.html): Compare text and background colors and check WCAG AA and AAA contrast ratios.
+- [Online Photo Editor](https://www.thebukitbesi.com/p/online-photoshop.html): Edit images with layers, brushes, shapes and filters, then export your work.
+- [WhatsApp Sticker Editor](https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html): Create individual stickers with text, filters, outlines and export controls.
+- [WhatsApp Sticker Pack Maker](https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html): Prepare multiple stickers, customize pack details and download the files together.
 
 ## AI Tools
 
-- [AI Prompt Generator](https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html): Craft perfect prompts for Midjourney, Stable Diffusion, DALL·E, and GPT models.
-- [AI Image Generator](https://www.thebukitbesi.com/p/ai-image-generator.html): Generate stunning AI images with detailed prompts and style controls.
+- [AI Art Prompt Generator](https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html): Build image prompts from a subject, art style, details and negative prompts.
+- [AI Image Generator](https://www.thebukitbesi.com/p/free-ai-image-generator.html): Create images from text prompts using the generation options on the tool page.
+- [AI Video Prompt Generator](https://www.thebukitbesi.com/p/ai-video-prompt.html): Compose detailed prompts for image and video generation models.
+- [Image to Prompt](https://www.thebukitbesi.com/p/image-to-prompt.html): Use an image as a starting point for a prompt and refine the resulting text.
+- [AI Paraphraser & Grammar Checker](https://www.thebukitbesi.com/p/ai-paraphraser-tool.html): Rewrite text and explore grammar, tone and other writing options on the tool page.
+- [AI Cartoonizer](https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html): Apply cartoon-style effects to an uploaded image and download the result.
 
 ## Utilities
 
-- [Privacy Policy Generator](https://www.thebukitbesi.com/p/privacy-policy-generator.html): Generate GDPR-compliant privacy policies for your website or app.
-- [Base64 Encoder/Decoder](https://www.thebukitbesi.com/p/base64-encoder.html): Encode and decode Base64 strings for data URIs, APIs, and embeds.
-- [URL Encoder/Decoder](https://www.thebukitbesi.com/p/url-encoder.html): Encode and decode URLs for safe sharing and API parameter passing.
-- [QR Code Generator](https://www.thebukitbesi.com/p/qr-code-generator.html): Generate customizable QR codes for URLs, text, WiFi, and more.
+- [Privacy Policy Generator](https://www.thebukitbesi.com/p/free-privacy-policy-generator.html): Draft a privacy policy from your website details and review it before publishing.
+- [Link Generator & Protector](https://www.thebukitbesi.com/p/secure-link-generator.html): Create encoded links, UTM tracking URLs and QR codes. Encoding is not encryption.
+- [WhatsApp Link Creator](https://www.thebukitbesi.com/p/whatsapp-link-creator.html): Create WhatsApp chat links with a preset message, QR code and bulk link options.
+- [Malaysia Courier Tracking](https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html): Find tracking destinations for Malaysian couriers including Pos Laju, J&T and DHL.
+- [PDF & Word Converter](https://www.thebukitbesi.com/p/pdf-converter.html): Convert PDF and Word documents or combine images into a PDF using supported options.
+- [Malaysia Currency Converter](https://www.thebukitbesi.com/p/currency-converter-malaysia.html): Convert MYR and other supported currencies using the exchange-rate data available in the tool.
+- [TM Unifi Speed Test](https://www.thebukitbesi.com/p/tm-speed-test.html): Measure download, upload, ping and jitter for your internet connection.
+- [Internet Speed Test](https://www.thebukitbesi.com/p/internet-speed-test.html): Run an internet speed test and review bandwidth and connection latency.
 
-## About
+## Calculators
 
-- Are all the tools really free to use? Yes. Every tool listed on this page is free to use with no subscription, no paywall and no usage limit.
-- Is my data safe? Do you store the code I paste? The tools are built to run in your browser, so the code, text and images you work with are processed on your own device rather than being uploaded for storage. Each tool page states how it handles your input.
-- Do I need to create an account? No. There is no account, email or login. Open a tool and start using it.
-- Can I use the output for commercial projects? Yes. Minified code, converted images, generated schema and other output are yours to use in personal or commercial projects.
-- Which tools help improve Core Web Vitals and page speed? The JavaScript Minifier, CSS Minifier and HTML Minifier reduce file size so pages download and parse faster, and the Image Converter can turn heavy JPG or PNG files into lighter formats such as WebP. Smaller assets typically improve Largest Contentful Paint (LCP) and Lighthouse performance scores.
-- Which platforms work with these tools? The output is plain HTML, CSS, JavaScript, JSON and images, so it works on Blogger, WordPress, Shopify, Wix, custom HTML sites and frameworks such as React and Vue.
-- Will more tools be added? Yes. New tools are added regularly and this page is updated each time a tool goes live.
-- How can I suggest a new tool? Use the contact page on The Bukit Besi blog and describe the tool you need. Requests from readers are reviewed.
+- [Kalkulator Faraid](https://www.thebukitbesi.com/p/kalkulator-faraid.html): Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.
+- [Kalkulator Zakat](https://www.thebukitbesi.com/p/kalkulator-zakat.html): Estimate zakat for income, savings, gold and other supported categories using the tool settings.
+- [Pregnancy Dates & Test Timing](https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html): Estimate gestational age and view NIPT or ultrasound timing from your pregnancy dates.
+- [Kalkulator Saiz Kasut](https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html): Convert shoe sizes between UK, US, EU and centimeter measurements.
+- [Kalkulator Kalori](https://www.thebukitbesi.com/p/kalkulator-kalori.html): Estimate BMR, daily calorie needs and macronutrients from your activity and body measurements.
+- [Kalkulator BMI (Bahasa Melayu)](https://www.thebukitbesi.com/p/kalkulator-bmi.html): Calculate BMI with a Malay-language interface and review the categories shown by the tool.
+- [BMI Calculator Malaysia (English)](https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html): Calculate BMI using metric or imperial measurements with an English-language interface.
+
+## Optional
+
+- [About The Bukit Besi](https://www.thebukitbesi.com/p/about.html): Information about the publisher.
+- [Contact](https://www.thebukitbesi.com/p/contact.html): Suggest a tool or report a problem.
+- [Privacy policy](https://www.thebukitbesi.com/p/privacy-policy.html): Publisher privacy information.

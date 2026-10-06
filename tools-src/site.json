@@ -2,61 +2,65 @@
   "origin": "https://the.thebukitbesi.com",
   "mainSite": "https://www.thebukitbesi.com",
   "brand": "The Bukit Besi",
-  "dateModified": "2026-10-06",
+  "dateModified": "2026-10-07",
   "twitter": "@BukitBesiBlog",
-  "icon": "/assets/favicon-image/web-app-manifest-192x192.png",
+  "icon": "/assets/favicon-image/bukit-besi-512.webp",
   "ogImage": {
-    "url": "/assets/favicon-image/web-app-manifest-512x512.png",
-    "width": 349,
-    "height": 349,
+    "url": "/assets/favicon-image/bukit-besi-512.webp",
+    "width": 512,
+    "height": 512,
     "alt": "The Bukit Besi logo"
   },
   "categories": {
     "dev": {
       "label": "Developer Tools",
-      "blurb": "Minify, format, validate and convert code so your pages ship smaller and cleaner."
+      "blurb": "Minify JavaScript and CSS, format HTML and JSON, generate tables and convert developer data."
     },
     "seo": {
       "label": "SEO Tools",
-      "blurb": "Generate schema markup, meta tags, robots.txt and sitemaps, and check keyword density."
+      "blurb": "Build schema and robots.txt, format FAQs and review meta tags or keyword frequency."
     },
     "content": {
       "label": "Content Tools",
-      "blurb": "Count words, clean up text and convert plain text or Markdown into clean HTML."
+      "blurb": "Count words, clean and replace text, change letter case and write notes in your browser."
     },
     "design": {
       "label": "Design Tools",
-      "blurb": "Convert and optimise images, build colour palettes, gradients and favicons."
+      "blurb": "Convert images, check color contrast, edit photos and prepare WhatsApp stickers."
     },
     "ai": {
       "label": "AI Tools",
-      "blurb": "Write better prompts and generate images with AI."
+      "blurb": "Create image and video prompts, paraphrase text and explore image generation or cartoon effects."
     },
     "util": {
       "label": "Utilities",
-      "blurb": "Encode and decode data, create QR codes and generate policy pages."
+      "blurb": "Work with links, QR codes, PDF files, currency conversion, speed tests and courier tracking."
+    },
+    "calc": {
+      "label": "Calculators",
+      "blurb": "Explore Malaysian calculators for zakat, faraid, shoe sizes, BMI, calories and pregnancy dates."
     }
   },
   "faq": [
     {
       "q": "Are all the tools really free to use?",
-      "a": "Yes. Every tool listed on this page is free to use with no subscription, no paywall and no usage limit."
+      "a": "The directory lists tools offered as free online tools. Check each tool page for available features, usage limits and any external services it uses."
     },
     {
       "q": "Is my data safe? Do you store the code I paste?",
-      "a": "The tools are built to run in your browser, so the code, text and images you work with are processed on your own device rather than being uploaded for storage. Each tool page states how it handles your input."
+      "a": "This directory does not accept or process your code, text or images. Follow a tool link and check that tool page for how it handles input. Avoid pasting sensitive information unless you have verified its data handling."
     },
     {
       "q": "Do I need to create an account?",
-      "a": "No. There is no account, email or login. Open a tool and start using it."
+      "a": "You do not need an account to browse this directory. Each tool page explains any requirements for its features or external services."
     },
     {
       "q": "Can I use the output for commercial projects?",
-      "a": "Yes. Minified code, converted images, generated schema and other output are yours to use in personal or commercial projects."
+      "a": "Check the relevant tool and any external service terms before using output commercially. Review generated code, documents and images before publishing them."
     },
     {
       "q": "Which tools help improve Core Web Vitals and page speed?",
-      "a": "The JavaScript Minifier, CSS Minifier and HTML Minifier reduce file size so pages download and parse faster, and the Image Converter can turn heavy JPG or PNG files into lighter formats such as WebP. Smaller assets typically improve Largest Contentful Paint (LCP) and Lighthouse performance scores."
+      "a": "The JavaScript Minifier and CSS Minifier can reduce code size, and the Image Format Converter can help prepare smaller images. Results depend on the original files and how your site loads them; use PageSpeed Insights to measure your page before and after changes."
     },
     {
       "q": "Which platforms work with these tools?",
@@ -70,5 +74,13 @@
       "q": "How can I suggest a new tool?",
       "a": "Use the contact page on The Bukit Besi blog and describe the tool you need. Requests from readers are reviewed."
     }
-  ]
+  ],
+  "logo": {
+    "base": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqjFdEWNgwNSHf8cuiBJ5SO6VLtkzs2xcmzsaEK7jELM2mLf5IB2oiMcnEQmeAzIokVd4pKnasNfrNAKj50Q8eGodMdghKT8EQVCc9ViaX7yebBtN_ByUgCGgZkF9KJp68K5l7xgovnldmexg9hdaPdA1TMb_4SVrfAuZ7TNY68vouUIHaE__kwBrL3mPF",
+    "file": "bukit-besi-blog.webp",
+    "original": 512,
+    "local72": "/assets/favicon-image/bukit-besi-72.webp",
+    "local192": "/assets/favicon-image/bukit-besi-192.webp",
+    "local512": "/assets/favicon-image/bukit-besi-512.webp"
+  }
 }

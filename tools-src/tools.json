@@ -1,326 +1,578 @@
 [
- {
-  "name": "JavaScript Minifier & Obfuscator",
-  "desc": "Minify JavaScript to cut file size and optionally obfuscate code to protect it.",
-  "url": "https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html",
-  "cat": "dev",
-  "icon": "{ }",
-  "badge": "popular",
-  "live": true
- },
- {
-  "name": "CSS Minifier",
-  "desc": "Compress and optimize CSS files instantly. Remove whitespace and comments.",
-  "url": "https://www.thebukitbesi.com/p/css-minifier-tool.html",
-  "cat": "dev",
-  "icon": "#",
-  "badge": "popular",
-  "live": true
- },
- {
-  "name": "HTML Beautifier & Formatter",
-  "desc": "Format and beautify raw HTML code for better readability and clean structure.",
-  "url": "https://www.thebukitbesi.com/p/html-beautifier.html",
-  "cat": "dev",
-  "icon": "<>",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "HTML Minifier",
-  "desc": "Compress HTML by removing unnecessary whitespace, comments, and redundant code.",
-  "url": "https://www.thebukitbesi.com/p/html-minifier.html",
-  "cat": "dev",
-  "icon": "</>",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Parse HTML Online",
-  "desc": "Convert AdSense or any HTML code to XML-compatible code for Blogger.",
-  "url": "https://www.thebukitbesi.com/p/parse-html.html",
-  "cat": "dev",
-  "icon": "⟨⟩",
-  "badge": "",
-  "live": true
- },
- {
-  "name": "HTML Table Generator",
-  "desc": "Create responsive, accessible HTML tables with custom styles, zebra stripes, sticky headers.",
-  "url": "https://www.thebukitbesi.com/p/html-table-generator.html",
-  "cat": "dev",
-  "icon": "▦",
-  "badge": "hot",
-  "live": true
- },
- {
-  "name": "JSON Validator & Formatter",
-  "desc": "Validate, format, and beautify JSON data with syntax highlighting and error detection.",
-  "url": "https://www.thebukitbesi.com/p/json-validator.html",
-  "cat": "dev",
-  "icon": "{}",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "JSON Schema Generator",
-  "desc": "Auto-generate structured JSON-LD schema markup for SEO and rich snippets.",
-  "url": "https://www.thebukitbesi.com/p/json-schema-generator.html",
-  "cat": "seo",
-  "icon": "📋",
-  "badge": "new",
-  "live": false
- },
- {
-  "name": "Video JSON Schema Generator",
-  "desc": "Generate VideoObject JSON-LD schema for video SEO and rich results.",
-  "url": "https://www.thebukitbesi.com/p/video-json-schema.html",
-  "cat": "seo",
-  "icon": "🎬",
-  "badge": "new",
-  "live": false
- },
- {
-  "name": "Parser & Unparser Tool",
-  "desc": "Parse JSON, CSV, query strings, INI, Base64, URL encode/decode and more.",
-  "url": "https://www.thebukitbesi.com/p/parser-unparser.html",
-  "cat": "dev",
-  "icon": "⇄",
-  "badge": "popular",
-  "live": true
- },
- {
-  "name": "GitHub Link Converter",
-  "desc": "Convert GitHub repository links to raw/CDN-ready URLs for direct file embedding.",
-  "url": "https://www.thebukitbesi.com/p/github-link-converter.html",
-  "cat": "dev",
-  "icon": "🔗",
-  "badge": "",
-  "live": true
- },
- {
-  "name": "Robots.txt Generator",
-  "desc": "Generate Robots.txt for Blogger & WordPress with built-in tester.",
-  "url": "https://www.thebukitbesi.com/p/robots-txt-generator.html",
-  "cat": "seo",
-  "icon": "🤖",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "SEO Keyword Density Checker",
-  "desc": "Analyze keyword density to optimize blog posts for #1 rankings.",
-  "url": "https://www.thebukitbesi.com/p/keyword-density-checker.html",
-  "cat": "seo",
-  "icon": "🔍",
-  "badge": "popular",
-  "live": false
- },
- {
-  "name": "Free Keywords Generator",
-  "desc": "Generate relevant keyword ideas for content strategy and SEO planning.",
-  "url": "https://www.thebukitbesi.com/p/keywords-generator.html",
-  "cat": "seo",
-  "icon": "🗝️",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Meta Tags Generator",
-  "desc": "Create optimized meta title, description, and Open Graph tags for better SEO.",
-  "url": "https://www.thebukitbesi.com/p/meta-tags-generator.html",
-  "cat": "seo",
-  "icon": "🏷️",
-  "badge": "new",
-  "live": false
- },
- {
-  "name": "WebP Image Converter",
-  "desc": "Drag and drop JPG, PNG, GIF to instantly convert to optimized WebP format.",
-  "url": "https://www.thebukitbesi.com/p/webp-converter.html",
-  "cat": "design",
-  "icon": "🖼️",
-  "badge": "popular",
-  "live": false
- },
- {
-  "name": "Image Format Converter",
-  "desc": "Convert images between any format — PNG, JPG, WebP, BMP, GIF and more.",
-  "url": "https://www.thebukitbesi.com/p/image-converter.html",
-  "cat": "design",
-  "icon": "🔄",
-  "badge": "",
-  "live": true
- },
- {
-  "name": "AI Prompt Generator",
-  "desc": "Craft perfect prompts for Midjourney, Stable Diffusion, DALL·E, and GPT models.",
-  "url": "https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html",
-  "cat": "ai",
-  "icon": "🧠",
-  "badge": "hot",
-  "live": true
- },
- {
-  "name": "AI Image Generator",
-  "desc": "Generate stunning AI images with detailed prompts and style controls.",
-  "url": "https://www.thebukitbesi.com/p/ai-image-generator.html",
-  "cat": "ai",
-  "icon": "🎨",
-  "badge": "new",
-  "live": false
- },
- {
-  "name": "Word Counter",
-  "desc": "Count words, characters, sentences, paragraphs, and pages instantly.",
-  "url": "https://www.thebukitbesi.com/p/word-counter.html",
-  "cat": "content",
-  "icon": "📝",
-  "badge": "",
-  "live": true
- },
- {
-  "name": "Text & Character Remover",
-  "desc": "Remove specific characters, words, or patterns from any text instantly.",
-  "url": "https://www.thebukitbesi.com/p/text-character-remover.html",
-  "cat": "content",
-  "icon": "✂️",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Privacy Policy Generator",
-  "desc": "Generate GDPR-compliant privacy policies for your website or app.",
-  "url": "https://www.thebukitbesi.com/p/privacy-policy-generator.html",
-  "cat": "util",
-  "icon": "📜",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Lorem Ipsum Generator",
-  "desc": "Generate placeholder text in various lengths for design mockups.",
-  "url": "https://www.thebukitbesi.com/p/lorem-ipsum-generator.html",
-  "cat": "content",
-  "icon": "📄",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Text to HTML Converter",
-  "desc": "Convert plain text with line breaks and formatting into clean HTML code.",
-  "url": "https://www.thebukitbesi.com/p/text-to-html.html",
-  "cat": "content",
-  "icon": "🔀",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Markdown to HTML",
-  "desc": "Convert Markdown syntax to clean, semantic HTML ready for any CMS.",
-  "url": "https://www.thebukitbesi.com/p/markdown-to-html.html",
-  "cat": "content",
-  "icon": "📑",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Base64 Encoder/Decoder",
-  "desc": "Encode and decode Base64 strings for data URIs, APIs, and embeds.",
-  "url": "https://www.thebukitbesi.com/p/base64-encoder.html",
-  "cat": "util",
-  "icon": "🔐",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "URL Encoder/Decoder",
-  "desc": "Encode and decode URLs for safe sharing and API parameter passing.",
-  "url": "https://www.thebukitbesi.com/p/url-encoder.html",
-  "cat": "util",
-  "icon": "🌐",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Color Palette Generator",
-  "desc": "Generate beautiful color palettes and extract hex, RGB, HSL values.",
-  "url": "https://www.thebukitbesi.com/p/color-palette-generator.html",
-  "cat": "design",
-  "icon": "🎨",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "CSS Gradient Generator",
-  "desc": "Create stunning CSS gradients with visual editor and copy-ready code.",
-  "url": "https://www.thebukitbesi.com/p/css-gradient-generator.html",
-  "cat": "design",
-  "icon": "🌈",
-  "badge": "new",
-  "live": false
- },
- {
-  "name": "Favicon Generator",
-  "desc": "Create favicons in multiple sizes from any image for your website.",
-  "url": "https://www.thebukitbesi.com/p/favicon-generator.html",
-  "cat": "design",
-  "icon": "⭐",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "QR Code Generator",
-  "desc": "Generate customizable QR codes for URLs, text, WiFi, and more.",
-  "url": "https://www.thebukitbesi.com/p/qr-code-generator.html",
-  "cat": "util",
-  "icon": "▣",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Slug Generator",
-  "desc": "Convert any text to SEO-friendly URL slugs with custom separators.",
-  "url": "https://www.thebukitbesi.com/p/slug-generator.html",
-  "cat": "seo",
-  "icon": "🔗",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Sitemap Generator",
-  "desc": "Generate XML sitemaps for better search engine crawling and indexing.",
-  "url": "https://www.thebukitbesi.com/p/sitemap-generator.html",
-  "cat": "seo",
-  "icon": "🗺️",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Open Graph Preview",
-  "desc": "Preview how your page looks when shared on Facebook, Twitter, and LinkedIn.",
-  "url": "https://www.thebukitbesi.com/p/og-preview.html",
-  "cat": "seo",
-  "icon": "👁️",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Regex Tester",
-  "desc": "Test and debug regular expressions with real-time matching and syntax highlighting.",
-  "url": "https://www.thebukitbesi.com/p/regex-tester.html",
-  "cat": "dev",
-  "icon": ".*",
-  "badge": "",
-  "live": false
- },
- {
-  "name": "Diff Checker",
-  "desc": "Compare two texts side by side and highlight the differences instantly.",
-  "url": "https://www.thebukitbesi.com/p/diff-checker.html",
-  "cat": "dev",
-  "icon": "⟷",
-  "badge": "",
-  "live": false
- }
+  {
+    "name": "JavaScript Minifier & Obfuscator",
+    "desc": "Minify JavaScript and configure obfuscation options to reduce file size and transform your code.",
+    "url": "https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html",
+    "cat": "dev",
+    "icon": "javascript-minifier-obfuscator",
+    "badge": "popular",
+    "live": true
+  },
+  {
+    "name": "CSS Minifier",
+    "desc": "Compress CSS by removing unnecessary whitespace and comments, then copy or download the result.",
+    "url": "https://www.thebukitbesi.com/p/css-minifier-tool.html",
+    "cat": "dev",
+    "icon": "css-minifier-tool",
+    "badge": "popular",
+    "live": true
+  },
+  {
+    "name": "HTML Beautifier & Minifier",
+    "desc": "Format messy HTML for readability or minify it for a smaller file in one tool.",
+    "url": "https://www.thebukitbesi.com/p/html-beautifier-online.html",
+    "cat": "dev",
+    "icon": "html-beautifier-online",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Parse HTML Online",
+    "desc": "Escape HTML and AdSense snippets for use in Blogger XML templates.",
+    "url": "https://www.thebukitbesi.com/p/parse-html.html",
+    "cat": "dev",
+    "icon": "parse-html",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "HTML Table Generator",
+    "desc": "Build HTML tables with customizable styles and copy the generated markup.",
+    "url": "https://www.thebukitbesi.com/p/html-table-generator.html",
+    "cat": "dev",
+    "icon": "html-table-generator",
+    "badge": "hot",
+    "live": true
+  },
+  {
+    "name": "JSON Formatter & Validator",
+    "desc": "Validate, beautify or minify JSON, sort keys and inspect formatting errors.",
+    "url": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+    "cat": "dev",
+    "icon": "json-formatter-validator",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Parser & Unparser Tool",
+    "desc": "Convert structured data into strings and parse supported data formats back into usable values.",
+    "url": "https://www.thebukitbesi.com/p/parser-unparser.html",
+    "cat": "dev",
+    "icon": "parser-unparser",
+    "badge": "popular",
+    "live": true
+  },
+  {
+    "name": "GitHub Link Converter",
+    "desc": "Turn public GitHub file links into jsDelivr CDN URLs for embedding assets.",
+    "url": "https://www.thebukitbesi.com/p/github-link-converter.html",
+    "cat": "dev",
+    "icon": "github-link-converter",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "JavaScript Minifier",
+    "desc": "Compress JavaScript and review the output size before copying or downloading your file.",
+    "url": "https://www.thebukitbesi.com/p/best-javascript-minifier-online.html",
+    "cat": "dev",
+    "icon": "best-javascript-minifier-online",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "JSON-LD Schema Markup Generator",
+    "desc": "Generate structured data for articles, organizations, local businesses and other supported page types.",
+    "url": "https://www.thebukitbesi.com/p/json-schema-markup-generator.html",
+    "cat": "seo",
+    "icon": "json-schema-markup-generator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Video Schema Markup Generator",
+    "desc": "Create VideoObject JSON-LD from your video details for use on your website.",
+    "url": "https://www.thebukitbesi.com/p/video-schema-markup-generator.html",
+    "cat": "seo",
+    "icon": "video-schema-markup-generator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Robots.txt Generator",
+    "desc": "Build robots.txt rules for user agents, crawl paths and sitemap locations.",
+    "url": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+    "cat": "seo",
+    "icon": "robotstxt-generator",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "SEO Meta Analyzer",
+    "desc": "Check title and description lengths and preview how your text could appear in search results.",
+    "url": "https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html",
+    "cat": "seo",
+    "icon": "seo-meta-analyzer-tool",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "FAQ Formatter",
+    "desc": "Turn question-and-answer text into HTML and matching FAQPage JSON-LD markup.",
+    "url": "https://www.thebukitbesi.com/p/faq-formatter-tool.html",
+    "cat": "seo",
+    "icon": "faq-formatter-tool",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Word Counter & Keyword Density Checker",
+    "desc": "Count words, inspect keyword frequency and estimate reading time for your content.",
+    "url": "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html",
+    "cat": "seo",
+    "icon": "free-word-counter-seo-keyword-density",
+    "badge": "popular",
+    "live": true
+  },
+  {
+    "name": "Word Counter",
+    "desc": "Count words, characters and sentences and review reading-time estimates as you type.",
+    "url": "https://www.thebukitbesi.com/p/word-counter.html",
+    "cat": "content",
+    "icon": "word-counter",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Text & Character Remover",
+    "desc": "Clean text by removing selected characters, numbers, punctuation or extra spaces.",
+    "url": "https://www.thebukitbesi.com/p/remove-characters-from-text.html",
+    "cat": "content",
+    "icon": "remove-characters-from-text",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Text to HTML Converter",
+    "desc": "Convert plain text into HTML paragraphs, lists and links, then copy or download the output.",
+    "url": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
+    "cat": "content",
+    "icon": "text-to-html-converter",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Find & Replace Text",
+    "desc": "Apply multiple replacement rules to text, with regular expressions and highlighted matches.",
+    "url": "https://www.thebukitbesi.com/p/find-replace-text.html",
+    "cat": "content",
+    "icon": "find-replace-text",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Text Case Converter",
+    "desc": "Switch between uppercase, lowercase, title case and developer naming styles such as camelCase.",
+    "url": "https://www.thebukitbesi.com/p/convert-case.html",
+    "cat": "content",
+    "icon": "convert-case",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Online Notepad",
+    "desc": "Write notes with autosave, snapshots, word counts and TXT or Markdown import and export.",
+    "url": "https://www.thebukitbesi.com/p/online-notepad.html",
+    "cat": "content",
+    "icon": "online-notepad",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "WebP Image Converter",
+    "desc": "Batch-convert images to WebP with resizing and compression controls.",
+    "url": "https://www.thebukitbesi.com/p/webp-image-converter.html",
+    "cat": "design",
+    "icon": "webp-image-converter",
+    "badge": "popular",
+    "live": true
+  },
+  {
+    "name": "Image Format Converter",
+    "desc": "Convert images between supported formats and download batch results as a ZIP file.",
+    "url": "https://www.thebukitbesi.com/p/image-converter.html",
+    "cat": "design",
+    "icon": "image-converter",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Color Contrast Checker",
+    "desc": "Compare text and background colors and check WCAG AA and AAA contrast ratios.",
+    "url": "https://www.thebukitbesi.com/p/color-contrast.html",
+    "cat": "design",
+    "icon": "color-contrast",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Online Photo Editor",
+    "desc": "Edit images with layers, brushes, shapes and filters, then export your work.",
+    "url": "https://www.thebukitbesi.com/p/online-photoshop.html",
+    "cat": "design",
+    "icon": "online-photoshop",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "WhatsApp Sticker Editor",
+    "desc": "Create individual stickers with text, filters, outlines and export controls.",
+    "url": "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html",
+    "cat": "design",
+    "icon": "sticker-whatsapp-maker",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "WhatsApp Sticker Pack Maker",
+    "desc": "Prepare multiple stickers, customize pack details and download the files together.",
+    "url": "https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html",
+    "cat": "design",
+    "icon": "whatsapp-sticker-maker",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "AI Art Prompt Generator",
+    "desc": "Build image prompts from a subject, art style, details and negative prompts.",
+    "url": "https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html",
+    "cat": "ai",
+    "icon": "ai-art-prompt-optimizer-create-perfect",
+    "badge": "hot",
+    "live": true
+  },
+  {
+    "name": "AI Image Generator",
+    "desc": "Create images from text prompts using the generation options on the tool page.",
+    "url": "https://www.thebukitbesi.com/p/free-ai-image-generator.html",
+    "cat": "ai",
+    "icon": "free-ai-image-generator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "AI Video Prompt Generator",
+    "desc": "Compose detailed prompts for image and video generation models.",
+    "url": "https://www.thebukitbesi.com/p/ai-video-prompt.html",
+    "cat": "ai",
+    "icon": "ai-video-prompt",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Image to Prompt",
+    "desc": "Use an image as a starting point for a prompt and refine the resulting text.",
+    "url": "https://www.thebukitbesi.com/p/image-to-prompt.html",
+    "cat": "ai",
+    "icon": "image-to-prompt",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "AI Paraphraser & Grammar Checker",
+    "desc": "Rewrite text and explore grammar, tone and other writing options on the tool page.",
+    "url": "https://www.thebukitbesi.com/p/ai-paraphraser-tool.html",
+    "cat": "ai",
+    "icon": "ai-paraphraser-tool",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "AI Cartoonizer",
+    "desc": "Apply cartoon-style effects to an uploaded image and download the result.",
+    "url": "https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html",
+    "cat": "ai",
+    "icon": "cartoonizer-ai-tool",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Privacy Policy Generator",
+    "desc": "Draft a privacy policy from your website details and review it before publishing.",
+    "url": "https://www.thebukitbesi.com/p/free-privacy-policy-generator.html",
+    "cat": "util",
+    "icon": "free-privacy-policy-generator",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Link Generator & Protector",
+    "desc": "Create encoded links, UTM tracking URLs and QR codes. Encoding is not encryption.",
+    "url": "https://www.thebukitbesi.com/p/secure-link-generator.html",
+    "cat": "util",
+    "icon": "secure-link-generator",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "WhatsApp Link Creator",
+    "desc": "Create WhatsApp chat links with a preset message, QR code and bulk link options.",
+    "url": "https://www.thebukitbesi.com/p/whatsapp-link-creator.html",
+    "cat": "util",
+    "icon": "whatsapp-link-creator",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Malaysia Courier Tracking",
+    "desc": "Find tracking destinations for Malaysian couriers including Pos Laju, J&T and DHL.",
+    "url": "https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html",
+    "cat": "util",
+    "icon": "semak-tracking-semua-kurier-di-malaysia",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "PDF & Word Converter",
+    "desc": "Convert PDF and Word documents or combine images into a PDF using supported options.",
+    "url": "https://www.thebukitbesi.com/p/pdf-converter.html",
+    "cat": "util",
+    "icon": "pdf-converter",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Malaysia Currency Converter",
+    "desc": "Convert MYR and other supported currencies using the exchange-rate data available in the tool.",
+    "url": "https://www.thebukitbesi.com/p/currency-converter-malaysia.html",
+    "cat": "util",
+    "icon": "currency-converter-malaysia",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "TM Unifi Speed Test",
+    "desc": "Measure download, upload, ping and jitter for your internet connection.",
+    "url": "https://www.thebukitbesi.com/p/tm-speed-test.html",
+    "cat": "util",
+    "icon": "tm-speed-test",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Internet Speed Test",
+    "desc": "Run an internet speed test and review bandwidth and connection latency.",
+    "url": "https://www.thebukitbesi.com/p/internet-speed-test.html",
+    "cat": "util",
+    "icon": "internet-speed-test",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Faraid",
+    "desc": "Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",
+    "cat": "calc",
+    "icon": "kalkulator-faraid",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Zakat",
+    "desc": "Estimate zakat for income, savings, gold and other supported categories using the tool settings.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-zakat.html",
+    "cat": "calc",
+    "icon": "kalkulator-zakat",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Pregnancy Dates & Test Timing",
+    "desc": "Estimate gestational age and view NIPT or ultrasound timing from your pregnancy dates.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html",
+    "cat": "calc",
+    "icon": "kalkulator-jantina-bayi",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Saiz Kasut",
+    "desc": "Convert shoe sizes between UK, US, EU and centimeter measurements.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html",
+    "cat": "calc",
+    "icon": "kalkulator-saiz-kasut",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Kalori",
+    "desc": "Estimate BMR, daily calorie needs and macronutrients from your activity and body measurements.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-kalori.html",
+    "cat": "calc",
+    "icon": "kalkulator-kalori",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "Kalkulator BMI (Bahasa Melayu)",
+    "desc": "Calculate BMI with a Malay-language interface and review the categories shown by the tool.",
+    "url": "https://www.thebukitbesi.com/p/kalkulator-bmi.html",
+    "cat": "calc",
+    "icon": "kalkulator-bmi",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "BMI Calculator Malaysia (English)",
+    "desc": "Calculate BMI using metric or imperial measurements with an English-language interface.",
+    "url": "https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html",
+    "cat": "calc",
+    "icon": "bmi-calculator-malaysia",
+    "badge": "",
+    "live": true
+  },
+  {
+    "name": "HTML Minifier",
+    "desc": "Compress HTML by removing unnecessary whitespace, comments, and redundant code.",
+    "url": "https://www.thebukitbesi.com/p/html-minifier.html",
+    "cat": "dev",
+    "icon": "</>",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Free Keywords Generator",
+    "desc": "Generate relevant keyword ideas for content strategy and SEO planning.",
+    "url": "https://www.thebukitbesi.com/p/keywords-generator.html",
+    "cat": "seo",
+    "icon": "🗝️",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Meta Tags Generator",
+    "desc": "Create optimized meta title, description, and Open Graph tags for better SEO.",
+    "url": "https://www.thebukitbesi.com/p/meta-tags-generator.html",
+    "cat": "seo",
+    "icon": "🏷️",
+    "badge": "new",
+    "live": false
+  },
+  {
+    "name": "Lorem Ipsum Generator",
+    "desc": "Generate placeholder text in various lengths for design mockups.",
+    "url": "https://www.thebukitbesi.com/p/lorem-ipsum-generator.html",
+    "cat": "content",
+    "icon": "📄",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Markdown to HTML",
+    "desc": "Convert Markdown syntax to clean, semantic HTML ready for any CMS.",
+    "url": "https://www.thebukitbesi.com/p/markdown-to-html.html",
+    "cat": "content",
+    "icon": "📑",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Base64 Encoder/Decoder",
+    "desc": "Encode and decode Base64 strings for data URIs, APIs, and embeds.",
+    "url": "https://www.thebukitbesi.com/p/base64-encoder.html",
+    "cat": "util",
+    "icon": "🔐",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "URL Encoder/Decoder",
+    "desc": "Encode and decode URLs for safe sharing and API parameter passing.",
+    "url": "https://www.thebukitbesi.com/p/url-encoder.html",
+    "cat": "util",
+    "icon": "🌐",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Color Palette Generator",
+    "desc": "Generate beautiful color palettes and extract hex, RGB, HSL values.",
+    "url": "https://www.thebukitbesi.com/p/color-palette-generator.html",
+    "cat": "design",
+    "icon": "🎨",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "CSS Gradient Generator",
+    "desc": "Create stunning CSS gradients with visual editor and copy-ready code.",
+    "url": "https://www.thebukitbesi.com/p/css-gradient-generator.html",
+    "cat": "design",
+    "icon": "🌈",
+    "badge": "new",
+    "live": false
+  },
+  {
+    "name": "Favicon Generator",
+    "desc": "Create favicons in multiple sizes from any image for your website.",
+    "url": "https://www.thebukitbesi.com/p/favicon-generator.html",
+    "cat": "design",
+    "icon": "⭐",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "QR Code Generator",
+    "desc": "Generate customizable QR codes for URLs, text, WiFi, and more.",
+    "url": "https://www.thebukitbesi.com/p/qr-code-generator.html",
+    "cat": "util",
+    "icon": "▣",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Slug Generator",
+    "desc": "Convert any text to SEO-friendly URL slugs with custom separators.",
+    "url": "https://www.thebukitbesi.com/p/slug-generator.html",
+    "cat": "seo",
+    "icon": "🔗",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Sitemap Generator",
+    "desc": "Generate XML sitemaps for better search engine crawling and indexing.",
+    "url": "https://www.thebukitbesi.com/p/sitemap-generator.html",
+    "cat": "seo",
+    "icon": "🗺️",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Open Graph Preview",
+    "desc": "Preview how your page looks when shared on Facebook, Twitter, and LinkedIn.",
+    "url": "https://www.thebukitbesi.com/p/og-preview.html",
+    "cat": "seo",
+    "icon": "👁️",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Regex Tester",
+    "desc": "Test and debug regular expressions with real-time matching and syntax highlighting.",
+    "url": "https://www.thebukitbesi.com/p/regex-tester.html",
+    "cat": "dev",
+    "icon": ".*",
+    "badge": "",
+    "live": false
+  },
+  {
+    "name": "Diff Checker",
+    "desc": "Compare two texts side by side and highlight the differences instantly.",
+    "url": "https://www.thebukitbesi.com/p/diff-checker.html",
+    "cat": "dev",
+    "icon": "⟷",
+    "badge": "",
+    "live": false
+  }
 ]

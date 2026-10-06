@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Free Online Tools for Developers &amp; Creators | The Bukit Besi</title>
-<meta name="description" content="{{COUNT}} free online tools for developers and creators: JS &amp; CSS minifiers, HTML and JSON formatters, image converters, SEO and schema generators. No signup.">
-<meta name="keywords" content="free online tools, developer tools, creator tools, JavaScript minifier, CSS minifier, HTML formatter, JSON validator, image converter, WebP converter, SEO tools, schema generator, robots.txt generator, AI prompt generator">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
 <meta name="author" content="{{BRAND}}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#0a0a0f">
@@ -13,16 +12,20 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="application-name" content="{{BRAND}} Tools">
 <link rel="canonical" href="{{ORIGIN}}/">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Bukit Besi Tools">
+<link rel="alternate" type="text/plain" href="{{ORIGIN}}/llms.txt" title="Tool directory for language models">
 <link rel="alternate" hreflang="en" href="{{ORIGIN}}/">
 <link rel="alternate" hreflang="x-default" href="{{ORIGIN}}/">
 <link rel="icon" href="/assets/favicon-image/favicon.ico" sizes="48x48">
+<link rel="icon" sizes="192x192" href="{{LOGO_192}}">
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-image/favicon-96x96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-image/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{BRAND}} Tools">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Free Online Tools for Developers &amp; Creators | {{BRAND}}">
-<meta property="og:description" content="{{COUNT}} free tools: minifiers, formatters, image converters, SEO and schema generators. No signup, works in your browser.">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
 <meta property="og:url" content="{{ORIGIN}}/">
 <meta property="og:image" content="{{OG_IMAGE}}">
 <meta property="og:image:width" content="{{OG_W}}">
@@ -30,8 +33,8 @@
 <meta property="og:image:alt" content="{{OG_ALT}}">
 <meta name="twitter:card" content="{{TWITTER_CARD}}">
 <meta name="twitter:site" content="{{TWITTER}}">
-<meta name="twitter:title" content="Free Online Tools for Developers &amp; Creators">
-<meta name="twitter:description" content="{{COUNT}} free tools: minifiers, formatters, image converters, SEO and schema generators. No signup.">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{DESCRIPTION}}">
 <meta name="twitter:image" content="{{OG_IMAGE}}">
 <meta name="twitter:image:alt" content="{{OG_ALT}}">
 <script type="application/ld+json">{{JSONLD}}</script>
@@ -70,7 +73,7 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
 
 /* Header */
-.header{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:rgba(10,10,15,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:var(--bg);border-bottom:1px solid var(--border)}
 .header .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;min-height:44px}
 .logo img{width:36px;height:36px;border-radius:10px}
@@ -83,6 +86,7 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .btn.ghost{background:transparent;border:1px solid var(--border2);box-shadow:none;color:var(--text)}
 .btn.ghost:hover{border-color:var(--accent2);filter:none}
 .btn.sm{padding:0 18px;font-size:.85rem}
+@media(max-width:380px){.header .container{gap:8px}.logo{font-size:.92rem;gap:8px}.btn.sm{padding:0 12px;font-size:.8rem}}
 
 /* Hero */
 .hero{padding:112px 0 64px;text-align:center;background:radial-gradient(640px 420px at 88% -8%,rgba(108,92,231,.28),transparent 70%),radial-gradient(520px 380px at 0% 100%,rgba(0,206,201,.14),transparent 70%)}
@@ -114,6 +118,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 .card p{font-size:.875rem;color:var(--text2);line-height:1.55;flex:1}
 .go{font-size:.85rem;font-weight:600;color:var(--accent2)}
 .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;line-height:1}
+.ic svg{display:block;width:24px;height:24px;flex-shrink:0}
 .tag{position:absolute;top:14px;right:14px;padding:3px 10px;border-radius:99px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 .tag.new{background:rgba(0,206,201,.15);color:#2ee6e0}
 .tag.popular{background:rgba(108,92,231,.2);color:#b9b3ff}
@@ -124,6 +129,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 .t-design{background:rgba(255,107,107,.12);color:#ff8f8f}
 .t-ai{background:rgba(162,155,254,.14);color:#b9b3ff}
 .t-util{background:rgba(129,236,236,.12);color:#81ecec}
+.t-calc{background:rgba(253,203,110,.12);color:#fdcb6e}
 
 /* Content blocks */
 .cats{display:grid;grid-template-columns:1fr;gap:16px;margin-top:36px}
@@ -166,6 +172,11 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 .fgrid li a{display:inline-flex;align-items:center;min-height:36px;font-size:.9rem;color:var(--text2)}
 .fgrid li a:hover{color:var(--accent2)}
 .fbot{padding-top:20px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+.pwa-actions{margin-top:16px}
+.pwa-notice{position:fixed;bottom:16px;right:16px;width:min(380px,calc(100% - 32px));z-index:1100;padding:18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--surface);box-shadow:0 8px 32px #0008;font-size:.9rem}
+.pwa-notice p{color:var(--text2);margin-bottom:12px}
+.pwa-notice .actions{justify-content:flex-start}
+.btn:disabled{opacity:.65;cursor:wait}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
@@ -176,7 +187,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 
 <header class="header">
   <div class="container">
-    <a href="/" class="logo" aria-label="{{BRAND}} Tools home"><img src="/assets/favicon-image/favicon-96x96.png" width="36" height="36" alt="" decoding="async"><span>{{BRAND}}</span></a>
+    <a href="/" class="logo" aria-label="{{BRAND}} Tools home"><img src="{{LOGO_72}}" width="36" height="36" alt="" decoding="async"><span>{{BRAND}}</span></a>
     <nav class="nav" aria-label="Page sections">
       <a href="#tools">Tools</a>
       <a href="#categories">Categories</a>
@@ -191,9 +202,9 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 <section class="hero" aria-labelledby="h1">
   <div class="container">
     <div class="hero-in">
-      <p class="badge"><i aria-hidden="true"></i>{{COUNT}} free tools &middot; No signup required</p>
+      <p class="badge"><i aria-hidden="true"></i>{{COUNT}} free tools &middot; {{CAT_COUNT}} categories</p>
       <h1 id="h1">Free Online Tools for <span class="grad">Developers &amp; Creators</span></h1>
-      <p class="lead">{{BRAND}} Tools is a free collection of {{COUNT}} browser-based tools for developers, bloggers and creators: minify JavaScript, CSS and HTML, format JSON, convert images to WebP, generate schema, meta tags and robots.txt, and write AI prompts.</p>
+      <p class="lead">Explore {{COUNT}} free online tools from {{BRAND}} for developers, bloggers and everyday tasks. Minify code, validate JSON, generate schema, edit images, write AI prompts, check internet speed and use Malaysian calculators.</p>
       <p class="updated">Last updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></p>
       <div class="actions">
         <a href="#tools" class="btn">Browse all {{COUNT}} tools</a>
@@ -241,11 +252,11 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
     <div class="center">
       <span class="label">Why use it</span>
       <h2 id="why-h">Fast, free and <span class="grad">simple</span></h2>
-      <p class="lead">Built to get a job done in seconds, without accounts, installs or paywalls.</p>
+      <p class="lead">Find the tool for your next task and open it directly in your browser.</p>
     </div>
     <div class="why">
-      <div class="panel"><h3>Free, no signup</h3><p>No account, no email and no usage limit. Open a tool and use it.</p></div>
-      <div class="panel"><h3>Runs in your browser</h3><p>Tools are built to process your input on your own device, so you do not need to upload code, text or images to use them.</p></div>
+      <div class="panel"><h3>Free to explore</h3><p>Browse the collection without creating an account. Each tool page explains its features and any service requirements.</p></div>
+      <div class="panel"><h3>Open in your browser</h3><p>Follow a tool link to get started. Check each tool page for supported formats, features and how it handles your input.</p></div>
       <div class="panel"><h3>Made for page speed</h3><p>Minifiers and image converters help you ship smaller files, which supports better Core Web Vitals and Lighthouse scores.</p></div>
       <div class="panel"><h3>Works on any platform</h3><p>Output is plain HTML, CSS, JavaScript, JSON and images, ready for Blogger, WordPress, Shopify or custom sites.</p></div>
       <div class="panel"><h3>Mobile friendly</h3><p>Every tool is designed to work on phones, tablets and desktops.</p></div>
@@ -295,8 +306,9 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
   <div class="container">
     <div class="fgrid">
       <div>
-        <a href="/" class="logo"><img src="/assets/favicon-image/favicon-96x96.png" width="36" height="36" alt="" loading="lazy" decoding="async"><span>{{BRAND}}</span></a>
+        <a href="/" class="logo"><img src="{{LOGO_72}}" width="36" height="36" alt="" loading="lazy" decoding="async"><span>{{BRAND}}</span></a>
         <p>A free collection of online tools for developers, bloggers and creators.</p>
+        <div class="pwa-actions"><button type="button" class="btn ghost sm" id="pwaInstall" hidden>Install app</button></div>
       </div>
       <nav aria-label="Popular tools">
         <h2>Popular tools</h2>
@@ -326,6 +338,16 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
     </div>
   </div>
 </footer>
+
+<aside class="pwa-notice" id="pwaNotice" aria-label="App status" hidden>
+  <p id="pwaMessage" role="status" aria-live="polite"></p>
+  <div class="actions">
+    <button type="button" class="btn sm" id="pwaUpdate" hidden>Update</button>
+    <a class="btn ghost sm" id="pwaOpen" hidden>Open tool anyway</a>
+    <button type="button" class="btn ghost sm" id="pwaClose">Dismiss</button>
+  </div>
+</aside>
+<script src="/assets/PWA/pwa.min.js" defer></script>
 
 <script>
 (function(){

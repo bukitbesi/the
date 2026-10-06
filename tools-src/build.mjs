@@ -1,14 +1,17 @@
-// Builds tool.html, llms.txt and sitemap.xml from tools.json + site.json + template.html.
+// Builds the public page and crawl files from the same validated tool catalog.
 // Usage (from repo root):  node tools-src/build.mjs
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(dir, '..');
 const read = f => fs.readFileSync(path.join(dir, f), 'utf8');
 const site = JSON.parse(read('site.json'));
-const tools = JSON.parse(read('tools.json'));
+const catalog = JSON.parse(read('tools.json'));
+const tools = catalog.filter(t => t.live === true);
 let html = read('template.html');
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -20,11 +23,18 @@ const abs = u => (/^https?:/.test(u) ? u : site.origin + u);
 
 // ---- validate
 const problems = [];
-tools.forEach(t => {
+catalog.forEach(t => {
   if (!site.categories[t.cat]) problems.push(`unknown category "${t.cat}" on ${t.name}`);
   if (!/^https:\/\//.test(t.url)) problems.push(`non-absolute url on ${t.name}: ${t.url}`);
+  if (typeof t.live !== 'boolean') problems.push(`missing live status on ${t.name}`);
+  if (t.live && !Object.hasOwn(icons, t.icon)) problems.push(`missing SVG icon on ${t.name}`);
 });
-if (new Set(tools.map(t => t.url)).size !== tools.length) problems.push('duplicate tool URLs');
+if (new Set(catalog.map(t => t.url)).size !== catalog.length) problems.push('duplicate tool URLs');
+if (!tools.length) problems.push('no live tools to publish');
+if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('published tools must have their own icon');
+if (new URL(site.origin).origin !== site.origin) problems.push('origin must be an origin without a trailing slash');
+if (fs.readFileSync(path.join(root, 'CNAME'), 'utf8').trim() !== new URL(site.origin).hostname) problems.push('CNAME and canonical host differ');
+if (!/^\d{4}-\d{2}-\d{2}$/.test(site.dateModified) || Number.isNaN(date.getTime())) problems.push('invalid modification date');
 if (problems.length) { console.error(problems.join('\n')); process.exit(1); }
 
 // ---- HTML fragments
@@ -34,7 +44,7 @@ const chips = [`      <button type="button" class="chip" data-filter="all" aria-
 
 const cards = tools.map(t => {
   const tag = t.badge ? `<span class="tag ${t.badge}">${t.badge}</span>` : '';
-  return `      <li class="card" data-cat="${t.cat}"><span class="ic t-${t.cat}" aria-hidden="true">${esc(t.icon)}</span>${tag}<h3><a class="card-link" href="${esc(t.url)}">${esc(t.name)}</a></h3><p>${esc(t.desc)}</p><span class="go" aria-hidden="true">Use tool &rarr;</span></li>`;
+  return `      <li class="card" data-cat="${t.cat}"><span class="ic t-${t.cat}" data-icon="${t.icon}" aria-hidden="true">${renderIcon(t.icon)}</span>${tag}<h3><a class="card-link" href="${esc(t.url)}">${esc(t.name)}</a></h3><p>${esc(t.desc)}</p><span class="go" aria-hidden="true">Use tool &rarr;</span></li>`;
 }).join('\n');
 
 const categoryBlocks = cats.filter(c => byCat(c).length).map(c => {
@@ -51,12 +61,12 @@ const footerCats = cats.filter(c => byCat(c).length).map(c =>
   `          <li><a href="#tools" data-filter="${c}">${esc(site.categories[c].label)}</a></li>`).join('\n');
 
 // ---- JSON-LD
-const title = 'Free Online Tools for Developers & Creators';
-const description = `${tools.length} free online tools for developers and creators: minifiers, formatters, image converters, SEO and schema generators. No signup required.`;
+const title = 'Free Online Tools, AI & Calculators';
+const description = `${tools.length} free online tools for code, SEO, writing, images and AI, plus Malaysian calculators, currency conversion and speed tests. Explore the full collection.`;
 const graph = [
   {
     '@type': 'Organization', '@id': site.mainSite + '/#organization', name: site.brand, url: site.mainSite + '/',
-    logo: { '@type': 'ImageObject', url: abs(site.icon), width: 192, height: 192 },
+    logo: { '@type': 'ImageObject', url: abs(site.logo.local512), width: 512, height: 512 },
     sameAs: [`https://x.com/${site.twitter.replace('@', '')}`]
   },
   {
@@ -68,7 +78,7 @@ const graph = [
     description, inLanguage: 'en', isAccessibleForFree: true,
     isPartOf: { '@id': site.origin + '/#website' }, about: { '@id': site.mainSite + '/#organization' },
     primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
-    datePublished: '2026-10-06', dateModified: site.dateModified,
+    dateModified: site.dateModified,
     mainEntity: { '@id': site.origin + '/#toollist' }
   },
   {
@@ -84,15 +94,17 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 
 // ---- fill template
 const map = {
+  TITLE: esc(title + ' | ' + site.brand), DESCRIPTION: esc(description),
   COUNT: tools.length, CAT_COUNT: cats.filter(c => byCat(c).length).length, BRAND: site.brand, ORIGIN: site.origin,
   MAIN_SITE: site.mainSite, DATE_ISO: site.dateModified, DATE_TEXT: dateText, YEAR: date.getUTCFullYear(),
+  LOGO_72: site.logo.local72, LOGO_192: site.logo.local192,
   OG_IMAGE: abs(site.ogImage.url), OG_W: site.ogImage.width, OG_H: site.ogImage.height, OG_ALT: site.ogImage.alt,
   // summary_large_image needs a ~2:1 image; fall back to "summary" for square logos
   TWITTER_CARD: site.ogImage.width / site.ogImage.height >= 1.5 ? 'summary_large_image' : 'summary',
   TWITTER: site.twitter, CHIPS: chips, CARDS: cards, CATEGORY_BLOCKS: categoryBlocks, FAQ_HTML: faqHtml,
   FOOTER_POPULAR: footerPopular, FOOTER_CATS: footerCats, JSONLD: jsonld
 };
-html = html.replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => {
+html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
   if (!(k in map)) { console.error('Unknown placeholder ' + m); process.exit(1); }
   return map[k];
 });
@@ -104,15 +116,21 @@ const llms = [
   '',
   `> ${description}`,
   '',
-  `Canonical page: ${site.origin}/ . Operated by ${site.brand} (${site.mainSite}/). Last updated ${site.dateModified}.`,
+  `This is a directory linking to tools on ${site.mainSite}/, not an on-page tool runner. Only published tools are listed. Last updated ${site.dateModified}.`,
+  '',
+  '## Directory',
+  '',
+  `- [Free online tools](${site.origin}/): Canonical directory with tool descriptions, categories and usage guidance.`,
   '',
   ...cats.filter(c => byCat(c).length).flatMap(c => [
     `## ${site.categories[c].label}`, '',
     ...byCat(c).map(t => `- [${t.name}](${t.url}): ${t.desc}`), ''
   ]),
-  '## About',
+  '## Optional',
   '',
-  ...site.faq.map(f => `- ${f.q} ${f.a}`),
+  `- [About ${site.brand}](${site.mainSite}/p/about.html): Information about the publisher.`,
+  `- [Contact](${site.mainSite}/p/contact.html): Suggest a tool or report a problem.`,
+  `- [Privacy policy](${site.mainSite}/p/privacy-policy.html): Publisher privacy information.`,
   ''
 ].join('\n');
 fs.writeFileSync(path.join(root, 'llms.txt'), llms);
@@ -121,15 +139,49 @@ fs.writeFileSync(path.join(root, 'llms.txt'), llms);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>${site.origin}/</loc>
+    <loc>${esc(site.origin)}/</loc>
     <lastmod>${site.dateModified}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
 </urlset>
 `;
 fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
 
-const dead = tools.filter(t => !t.live);
-console.log(`Built tool.html (${(html.length / 1024).toFixed(1)} KB), llms.txt, sitemap.xml`);
-console.log(`${tools.length} tools, ${tools.length - dead.length} marked live, ${dead.length} marked live:false`);
+// Let crawlers fetch the 404 page so they can see its noindex directive.
+const robots = `# Public directory: search and AI crawlers may access the site.\nUser-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`;
+fs.writeFileSync(path.join(root, 'robots.txt'), robots);
+
+// ---- Installable PWA. Stable app ID and root worker scope match the custom host.
+const manifest = {
+  id: '/', name: site.brand + ' Tools', short_name: 'Bukit Besi Tools',
+  description: 'Free online tool directory for code, content, design, AI and Malaysian calculators.',
+  lang: 'en', dir: 'ltr', start_url: '/', scope: '/', display: 'standalone',
+  theme_color: '#0a0a0f', background_color: '#0a0a0f',
+  categories: ['utilities', 'productivity'], prefer_related_applications: false,
+  icons: [
+    { src: '/assets/PWA/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: '/assets/PWA/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: '/assets/PWA/icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+  ],
+  shortcuts: [
+    { name: 'Browse tools', url: '/#tools', description: 'Browse all published tools' },
+    { name: 'Tool categories', url: '/#categories', description: 'Find a category' }
+  ]
+};
+const manifestJSON = JSON.stringify(manifest, null, 2) + '\n';
+fs.writeFileSync(path.join(root, 'manifest.webmanifest'), manifestJSON);
+// Keep the old source manifest valid for anyone still referencing it.
+fs.writeFileSync(path.join(root, 'src/manifest.json'), manifestJSON);
+const precache = [...new Set([
+  '/', '/offline.html', '/manifest.webmanifest', '/assets/PWA/pwa.min.js',
+  site.logo.local72, '/assets/favicon-image/favicon.ico',
+  '/assets/favicon-image/apple-touch-icon.png', '/assets/favicon-image/favicon-96x96.png',
+  site.logo.local192, ...manifest.icons.map(icon => icon.src)
+])];
+const workerTemplate = fs.readFileSync(path.join(root, 'assets/PWA/sw.js'), 'utf8');
+const hash = createHash('sha256').update(html).update(workerTemplate).update(manifestJSON);
+for (const resource of precache.filter(url => url !== '/')) hash.update(fs.readFileSync(path.join(root, resource)));
+const revision = hash.digest('hex').slice(0, 16);
+const worker = workerTemplate.replace('__CACHE_VERSION__', revision).replace('__PRECACHE_JSON__', JSON.stringify(precache));
+fs.writeFileSync(path.join(root, 'sw.js'), worker);
+console.log(`Built tool.html (${(Buffer.byteLength(html) / 1024).toFixed(1)} KB), crawl files, manifest and sw.js (${revision})`);
+console.log(`${tools.length} published tools; ${catalog.length - tools.length} unpublished records retained in tools.json`);
