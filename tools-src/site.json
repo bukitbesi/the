@@ -1,0 +1,74 @@
+{
+  "origin": "https://the.thebukitbesi.com",
+  "mainSite": "https://www.thebukitbesi.com",
+  "brand": "The Bukit Besi",
+  "dateModified": "2026-10-06",
+  "twitter": "@BukitBesiBlog",
+  "icon": "/assets/favicon-image/web-app-manifest-192x192.png",
+  "ogImage": {
+    "url": "/assets/favicon-image/web-app-manifest-512x512.png",
+    "width": 349,
+    "height": 349,
+    "alt": "The Bukit Besi logo"
+  },
+  "categories": {
+    "dev": {
+      "label": "Developer Tools",
+      "blurb": "Minify, format, validate and convert code so your pages ship smaller and cleaner."
+    },
+    "seo": {
+      "label": "SEO Tools",
+      "blurb": "Generate schema markup, meta tags, robots.txt and sitemaps, and check keyword density."
+    },
+    "content": {
+      "label": "Content Tools",
+      "blurb": "Count words, clean up text and convert plain text or Markdown into clean HTML."
+    },
+    "design": {
+      "label": "Design Tools",
+      "blurb": "Convert and optimise images, build colour palettes, gradients and favicons."
+    },
+    "ai": {
+      "label": "AI Tools",
+      "blurb": "Write better prompts and generate images with AI."
+    },
+    "util": {
+      "label": "Utilities",
+      "blurb": "Encode and decode data, create QR codes and generate policy pages."
+    }
+  },
+  "faq": [
+    {
+      "q": "Are all the tools really free to use?",
+      "a": "Yes. Every tool listed on this page is free to use with no subscription, no paywall and no usage limit."
+    },
+    {
+      "q": "Is my data safe? Do you store the code I paste?",
+      "a": "The tools are built to run in your browser, so the code, text and images you work with are processed on your own device rather than being uploaded for storage. Each tool page states how it handles your input."
+    },
+    {
+      "q": "Do I need to create an account?",
+      "a": "No. There is no account, email or login. Open a tool and start using it."
+    },
+    {
+      "q": "Can I use the output for commercial projects?",
+      "a": "Yes. Minified code, converted images, generated schema and other output are yours to use in personal or commercial projects."
+    },
+    {
+      "q": "Which tools help improve Core Web Vitals and page speed?",
+      "a": "The JavaScript Minifier, CSS Minifier and HTML Minifier reduce file size so pages download and parse faster, and the Image Converter can turn heavy JPG or PNG files into lighter formats such as WebP. Smaller assets typically improve Largest Contentful Paint (LCP) and Lighthouse performance scores."
+    },
+    {
+      "q": "Which platforms work with these tools?",
+      "a": "The output is plain HTML, CSS, JavaScript, JSON and images, so it works on Blogger, WordPress, Shopify, Wix, custom HTML sites and frameworks such as React and Vue."
+    },
+    {
+      "q": "Will more tools be added?",
+      "a": "Yes. New tools are added regularly and this page is updated each time a tool goes live."
+    },
+    {
+      "q": "How can I suggest a new tool?",
+      "a": "Use the contact page on The Bukit Besi blog and describe the tool you need. Requests from readers are reviewed."
+    }
+  ]
+}

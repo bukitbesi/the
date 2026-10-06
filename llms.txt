@@ -1,0 +1,70 @@
+# The Bukit Besi Tools
+
+> 36 free online tools for developers and creators: minifiers, formatters, image converters, SEO and schema generators. No signup required.
+
+Canonical page: https://the.thebukitbesi.com/ . Operated by The Bukit Besi (https://www.thebukitbesi.com/). Last updated 2026-10-06.
+
+## Developer Tools
+
+- [JavaScript Minifier & Obfuscator](https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html): Minify JavaScript to cut file size and optionally obfuscate code to protect it.
+- [CSS Minifier](https://www.thebukitbesi.com/p/css-minifier-tool.html): Compress and optimize CSS files instantly. Remove whitespace and comments.
+- [HTML Beautifier & Formatter](https://www.thebukitbesi.com/p/html-beautifier.html): Format and beautify raw HTML code for better readability and clean structure.
+- [HTML Minifier](https://www.thebukitbesi.com/p/html-minifier.html): Compress HTML by removing unnecessary whitespace, comments, and redundant code.
+- [Parse HTML Online](https://www.thebukitbesi.com/p/parse-html.html): Convert AdSense or any HTML code to XML-compatible code for Blogger.
+- [HTML Table Generator](https://www.thebukitbesi.com/p/html-table-generator.html): Create responsive, accessible HTML tables with custom styles, zebra stripes, sticky headers.
+- [JSON Validator & Formatter](https://www.thebukitbesi.com/p/json-validator.html): Validate, format, and beautify JSON data with syntax highlighting and error detection.
+- [Parser & Unparser Tool](https://www.thebukitbesi.com/p/parser-unparser.html): Parse JSON, CSV, query strings, INI, Base64, URL encode/decode and more.
+- [GitHub Link Converter](https://www.thebukitbesi.com/p/github-link-converter.html): Convert GitHub repository links to raw/CDN-ready URLs for direct file embedding.
+- [Regex Tester](https://www.thebukitbesi.com/p/regex-tester.html): Test and debug regular expressions with real-time matching and syntax highlighting.
+- [Diff Checker](https://www.thebukitbesi.com/p/diff-checker.html): Compare two texts side by side and highlight the differences instantly.
+
+## SEO Tools
+
+- [JSON Schema Generator](https://www.thebukitbesi.com/p/json-schema-generator.html): Auto-generate structured JSON-LD schema markup for SEO and rich snippets.
+- [Video JSON Schema Generator](https://www.thebukitbesi.com/p/video-json-schema.html): Generate VideoObject JSON-LD schema for video SEO and rich results.
+- [Robots.txt Generator](https://www.thebukitbesi.com/p/robots-txt-generator.html): Generate Robots.txt for Blogger & WordPress with built-in tester.
+- [SEO Keyword Density Checker](https://www.thebukitbesi.com/p/keyword-density-checker.html): Analyze keyword density to optimize blog posts for #1 rankings.
+- [Free Keywords Generator](https://www.thebukitbesi.com/p/keywords-generator.html): Generate relevant keyword ideas for content strategy and SEO planning.
+- [Meta Tags Generator](https://www.thebukitbesi.com/p/meta-tags-generator.html): Create optimized meta title, description, and Open Graph tags for better SEO.
+- [Slug Generator](https://www.thebukitbesi.com/p/slug-generator.html): Convert any text to SEO-friendly URL slugs with custom separators.
+- [Sitemap Generator](https://www.thebukitbesi.com/p/sitemap-generator.html): Generate XML sitemaps for better search engine crawling and indexing.
+- [Open Graph Preview](https://www.thebukitbesi.com/p/og-preview.html): Preview how your page looks when shared on Facebook, Twitter, and LinkedIn.
+
+## Content Tools
+
+- [Word Counter](https://www.thebukitbesi.com/p/word-counter.html): Count words, characters, sentences, paragraphs, and pages instantly.
+- [Text & Character Remover](https://www.thebukitbesi.com/p/text-character-remover.html): Remove specific characters, words, or patterns from any text instantly.
+- [Lorem Ipsum Generator](https://www.thebukitbesi.com/p/lorem-ipsum-generator.html): Generate placeholder text in various lengths for design mockups.
+- [Text to HTML Converter](https://www.thebukitbesi.com/p/text-to-html.html): Convert plain text with line breaks and formatting into clean HTML code.
+- [Markdown to HTML](https://www.thebukitbesi.com/p/markdown-to-html.html): Convert Markdown syntax to clean, semantic HTML ready for any CMS.
+
+## Design Tools
+
+- [WebP Image Converter](https://www.thebukitbesi.com/p/webp-converter.html): Drag and drop JPG, PNG, GIF to instantly convert to optimized WebP format.
+- [Image Format Converter](https://www.thebukitbesi.com/p/image-converter.html): Convert images between any format — PNG, JPG, WebP, BMP, GIF and more.
+- [Color Palette Generator](https://www.thebukitbesi.com/p/color-palette-generator.html): Generate beautiful color palettes and extract hex, RGB, HSL values.
+- [CSS Gradient Generator](https://www.thebukitbesi.com/p/css-gradient-generator.html): Create stunning CSS gradients with visual editor and copy-ready code.
+- [Favicon Generator](https://www.thebukitbesi.com/p/favicon-generator.html): Create favicons in multiple sizes from any image for your website.
+
+## AI Tools
+
+- [AI Prompt Generator](https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html): Craft perfect prompts for Midjourney, Stable Diffusion, DALL·E, and GPT models.
+- [AI Image Generator](https://www.thebukitbesi.com/p/ai-image-generator.html): Generate stunning AI images with detailed prompts and style controls.
+
+## Utilities
+
+- [Privacy Policy Generator](https://www.thebukitbesi.com/p/privacy-policy-generator.html): Generate GDPR-compliant privacy policies for your website or app.
+- [Base64 Encoder/Decoder](https://www.thebukitbesi.com/p/base64-encoder.html): Encode and decode Base64 strings for data URIs, APIs, and embeds.
+- [URL Encoder/Decoder](https://www.thebukitbesi.com/p/url-encoder.html): Encode and decode URLs for safe sharing and API parameter passing.
+- [QR Code Generator](https://www.thebukitbesi.com/p/qr-code-generator.html): Generate customizable QR codes for URLs, text, WiFi, and more.
+
+## About
+
+- Are all the tools really free to use? Yes. Every tool listed on this page is free to use with no subscription, no paywall and no usage limit.
+- Is my data safe? Do you store the code I paste? The tools are built to run in your browser, so the code, text and images you work with are processed on your own device rather than being uploaded for storage. Each tool page states how it handles your input.
+- Do I need to create an account? No. There is no account, email or login. Open a tool and start using it.
+- Can I use the output for commercial projects? Yes. Minified code, converted images, generated schema and other output are yours to use in personal or commercial projects.
+- Which tools help improve Core Web Vitals and page speed? The JavaScript Minifier, CSS Minifier and HTML Minifier reduce file size so pages download and parse faster, and the Image Converter can turn heavy JPG or PNG files into lighter formats such as WebP. Smaller assets typically improve Largest Contentful Paint (LCP) and Lighthouse performance scores.
+- Which platforms work with these tools? The output is plain HTML, CSS, JavaScript, JSON and images, so it works on Blogger, WordPress, Shopify, Wix, custom HTML sites and frameworks such as React and Vue.
+- Will more tools be added? Yes. New tools are added regularly and this page is updated each time a tool goes live.
+- How can I suggest a new tool? Use the contact page on The Bukit Besi blog and describe the tool you need. Requests from readers are reviewed.
