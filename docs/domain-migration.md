@@ -14,8 +14,6 @@ At the DNS provider for `thebukitbesi.com`, add:
 | --- | --- | --- |
 | CNAME | `tool` | `bukitbesi.github.io` |
 
-Keep the existing `the` record until step 3 is live.
-
 ## 2. Set the custom domain in GitHub
 
 This repo deploys with GitHub Actions, so GitHub **ignores the `CNAME` file**
@@ -27,24 +25,18 @@ for routing. Set it manually:
    **GitHub profile Settings → Pages → Verified domains** to block subdomain
    takeover of unused hosts.
 
-## 3. Redirect the old host
+## 3. Redirect the old host (done)
 
-GitHub Pages serves one custom domain per repository, so the old host needs
-its own redirect. Pick one (both are free):
+`the.thebukitbesi.com` is redirected at Namecheap with a **301 (permanent)**
+URL Redirect record to `https://tool.thebukitbesi.com/`. No GitHub repository
+serves the old host any more. Check that it keeps working:
 
-- **Cloudflare (best, real HTTP 301)** — only if `thebukitbesi.com` DNS is on
-  Cloudflare. Rules → Redirect Rules → *Dynamic*: when hostname equals
-  `the.thebukitbesi.com`, redirect to
-  `concat("https://tool.thebukitbesi.com", http.request.uri.path)` with status
-  301 and *Preserve query string*. The `the` DNS record must be proxied.
-- **Second GitHub Pages repo** — create a public repo (for example
-  `bukitbesi/the-redirect`), copy everything in `migration/old-host/` into its
-  root, enable Pages from the `main` branch, and set its custom domain to
-  `the.thebukitbesi.com`. The page uses `meta refresh` 0 plus a script that
-  keeps the path and fragment; Google treats an instant meta refresh as a
-  permanent redirect. Its `sw.js` replaces the old directory service worker,
-  clears its caches and unregisters, so installed users stop seeing the old
-  copy.
+- `http://the.thebukitbesi.com/` and `https://the.thebukitbesi.com/` both
+  return 301 to the new host. If the HTTPS form shows a certificate error,
+  Namecheap is not covering HTTPS for the redirect; move DNS to Cloudflare
+  and use a Redirect Rule instead.
+- A deep link such as `http://the.thebukitbesi.com/#tools` lands on the new
+  directory.
 
 PWA installs are tied to the origin. Anyone who installed the app from the old
 host must install it again from `tool.thebukitbesi.com`.

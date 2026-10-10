@@ -50,7 +50,6 @@ tools-src/build.mjs      generates tool.html, sitemap, robots, llms.txt, manifes
 tools-src/validate.mjs   fails the deploy on SEO, schema or PWA drift
 tools-src/images.mjs     renders the social card and PWA screenshots (Playwright)
 assets/PWA/sw.js         service-worker source template
-migration/old-host/      redirect bundle for the retired the.thebukitbesi.com host
 ```
 
 ## Build, preview, deploy
