@@ -30,7 +30,7 @@ const toolIcons = [...html.matchAll(/data-icon="([^"]+)"/g)].map(m => m[1]);
 assert.deepEqual(toolIcons, tools.map(item => item.icon), 'Every card has its own icon');
 assert.equal(new Set(toolIcons).size, tools.length, 'Unique icon keys');
 assert.equal(new Set(tools.map(item => icons[item.icon])).size, tools.length, 'Distinct SVG artwork');
-assert.equal((html.match(/<svg\b/g) || []).length, tools.length, 'One inline SVG per tool');
+assert.equal((html.match(/data-icon="[^"]+" aria-hidden="true"><svg\b/g) || []).length, tools.length, 'One inline SVG per tool');
 const faq = graph.find(item => item['@type'] === 'FAQPage');
 assert.equal(faq.mainEntity.length, (html.match(/<details>/g) || []).length, 'FAQ schema matches visible questions');
 for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(m[1]);
@@ -69,4 +69,31 @@ for (const resource of precache.filter(url => url !== '/')) assert(fs.statSync(p
 assert(precache.includes('/assets/PWA/pwa.min.js') && precache.includes('/offline.html'), 'Offline app assets');
 assert(precache.every(url => url.startsWith('/') && !url.startsWith('//')), 'Same-origin precache only');
 assert(!/<a\b[^>]*target="_blank"/.test(html), 'Directory links use the same tab');
+// JPEG dimensions come from the first start-of-frame marker.
+const jpegSize = file => {
+  const b = fs.readFileSync(path.join(root, file));
+  assert.equal(b.readUInt16BE(0), 0xffd8, `${file} is a JPEG`);
+  for (let i = 2; i < b.length;) {
+    const marker = b.readUInt16BE(i);
+    if (marker >= 0xffc0 && marker <= 0xffc3) return `${b.readUInt16BE(i + 7)}x${b.readUInt16BE(i + 5)}`;
+    i += 2 + b.readUInt16BE(i + 2);
+  }
+  assert.fail(`${file} has no frame header`);
+};
+assert.equal(jpegSize(site.ogImage.url), `${site.ogImage.width}x${site.ogImage.height}`, 'Social image matches declared size');
+assert(html.includes('content="summary_large_image"'), 'Large social card for a wide image');
+for (const shot of manifest.screenshots) assert.equal(jpegSize(shot.src), shot.sizes, `Screenshot ${shot.src} size`);
+assert(manifest.screenshots.some(s => s.form_factor === 'wide') && manifest.screenshots.some(s => s.form_factor === 'narrow'), 'Rich install screenshots');
+assert.equal(read(site.indexNowKey + '.txt').trim(), site.indexNowKey, 'IndexNow key file');
+assert(!html.includes('{count}') && !llms.includes('{count}'), 'FAQ count placeholders resolved');
+const ads = site.adsense || {};
+if (ads.client) {
+  assert.equal((html.match(/<ins class="adsbygoogle"/g) || []).length, 3, 'Three ad units');
+  assert(!/<script[^>]+adsbygoogle\.js/.test(html), 'AdSense library is lazy-loaded, never render-blocking');
+  assert(read('ads.txt').includes(ads.client.replace('ca-', '')), 'ads.txt names the publisher');
+} else {
+  assert(!html.includes('adsbygoogle'), 'No ad markup without a publisher ID');
+}
+assert(html.includes('id="themeToggle"'), 'Theme toggle present');
+assert(read('CNAME').trim() === new URL(site.origin).hostname, 'CNAME matches canonical host');
 console.log(`Validated ${tools.length} tools, SEO files, scripts, PWA manifest, icons and offline assets.`);

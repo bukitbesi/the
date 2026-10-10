@@ -1,58 +1,108 @@
-# The Bukit Besi Tools
+# The Bukit Besi Tools — 48 Free Online Tools for Developers & Creators
 
-A lightweight directory of free developer and creator tools, hosted at
-https://the.thebukitbesi.com/ on GitHub Pages.
+[![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
+[![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-00cec9)](LICENSE)
 
-## Edit and build
+**[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
+directory of 48 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+code minifiers, SEO and schema generators, writing utilities, image editors,
+AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
+No signup, no tracking scripts, works offline after one visit.
 
-Edit `tools-src/tools.json` for tool records, `tools-src/site.json` for site
-metadata and FAQs, and `tools-src/template.html` for the page layout.
-Only records with `live: true` appear in the directory, structured data,
-and LLM summary. Keep unpublished records until their pages are ready.
-Each published tool has a distinct SVG icon in `tools-src/icons.mjs`; the
-build checks that every live record names an existing icon.
+| Category | Examples |
+| --- | --- |
+| Developer Tools | JavaScript minifier & obfuscator, CSS minifier, HTML beautifier, JSON formatter & validator |
+| SEO Tools | JSON-LD and video schema generators, robots.txt generator, SEO meta analyzer, FAQ formatter |
+| Content Tools | Word counter, text case converter, find & replace, text to HTML, online notepad |
+| Design Tools | WebP and image format converters, color contrast checker, photo editor, WhatsApp stickers |
+| AI Tools | AI art and video prompt generators, image to prompt, paraphraser, cartoonizer |
+| Utilities | WhatsApp link creator, PDF & Word converter, currency converter, speed tests, courier tracking |
+| Calculators | Kalkulator zakat, faraid, saiz kasut, kalori, BMI, pregnancy dates |
+
+The full, always-current list is generated into [`llms.txt`](llms.txt).
+
+## Performance and search
+
+- **Core Web Vitals:** single static HTML file, inline critical CSS, system
+  fonts, inline SVG icons, no render-blocking third-party code. Local
+  Lighthouse mobile with all three ad units enabled: 99–100 performance,
+  100 accessibility/best practices/SEO, TBT 0 ms, CLS 0
+  ([audit](docs/seo-audit.md)). GitHub Pages CDN keeps TTFB low.
+- **SEO:** canonical URL, Open Graph + 1200×630 social card, sitemap,
+  robots.txt, one `@graph` of Organization, WebSite, CollectionPage,
+  ItemList (with per-tool descriptions) and FAQPage JSON-LD that is checked
+  against the visible content on every build.
+- **AEO / LLM visibility:** answer-first FAQ, an `llms.txt` directory
+  ([llmstxt.org](https://llmstxt.org/)), open crawling for AI agents and an
+  IndexNow ping on every deployment (Bing, ChatGPT search, Copilot).
+- **PWA:** web app manifest with maskable icons and install screenshots, a
+  versioned service worker (network-first directory, offline fallback,
+  consent-based updates). See [PWA details](docs/pwa.md).
+
+- **Theme:** light by default (matches standard AdSense creatives), with a
+  dark-mode toggle. The choice is stored per browser and applied before
+  first paint, so there is no flash or layout shift. Both themes pass
+  WCAG AA contrast (axe-core).
+
+## AdSense
+
+Fill in `adsense` in `tools-src/site.json`:
+
+```json
+"adsense": {
+  "client": "ca-pub-0000000000000000",
+  "slots": { "top": "1234567890", "middle": "1234567890", "bottom": "1234567890" }
+}
+```
+
+Create three **Display ads → Responsive** units in AdSense and paste their
+`data-ad-slot` values. The build then adds the units (after the hero, between
+Categories and Why, and between FAQ and the closing call to action), each
+labelled "Advertisement" with space reserved to prevent layout shift, and
+writes `ads.txt`. The AdSense library loads only after the visitor's first
+scroll, tap, key press or mouse move; the ad code itself is unmodified. With
+`client` empty, no ad code is published.
+
+## Project layout
+
+```
+tools-src/tools.json     tool records (only live: true is published)
+tools-src/site.json      host, brand, categories, FAQ, social image, IndexNow key, AdSense IDs
+tools-src/template.html  page layout
+tools-src/icons.mjs      one SVG icon per tool
+tools-src/build.mjs      generates tool.html, sitemap, robots, llms.txt, manifest, sw.js
+tools-src/validate.mjs   fails the deploy on SEO, schema or PWA drift
+tools-src/images.mjs     renders the social card and PWA screenshots (Playwright)
+assets/PWA/sw.js         service-worker source template
+```
+
+## Build, preview, deploy
 
 ```sh
 node tools-src/build.mjs
 node tools-src/validate.mjs
+node tools-src/preview.mjs        # http://127.0.0.1:8765/
+node tools-src/images.mjs         # only after brand, count or layout changes
 ```
 
-The build generates `tool.html`, `robots.txt`, `sitemap.xml`, and `llms.txt`.
-Update `dateModified` when the published content materially changes.
-The sitemap lists the directory's canonical URL; linked tools on the main blog
-belong in that host's sitemap.
+A push to `main` builds, validates and publishes to GitHub Pages, then pings
+IndexNow. Update `dateModified` in `site.json` when published content changes.
+Set `live: true` only after a tool's page returns HTTP 200. Do not edit
+generated files (`tool.html`, `sw.js`, `manifest.webmanifest`, `llms.txt`,
+`sitemap.xml`, `robots.txt`) by hand.
 
-## Preview and deploy
+The `CNAME` file and the `origin` in `site.json` must match; the build checks
+this. **Settings → Pages → Source must be "GitHub Actions".** With "Deploy
+from a branch", GitHub serves this README as the home page instead of the
+built directory. Set the custom domain on the same settings page. See [the domain migration](docs/domain-migration.md).
 
-```sh
-node tools-src/preview.mjs
-```
+## More documentation
 
-Open http://127.0.0.1:8765/. The preview serves the directory at the root so
-service-worker caching matches production. The deployment workflow builds and validates
-the files, stages `tool.html` as `index.html`, and publishes the crawl files,
-404 page, PWA manifest, root service worker, offline fallback, and local image
-assets. A push to `main` triggers deployment.
-
-The `CNAME` and `site.json` origin must agree.
-
-## PWA and offline access
-
-The app installs as The Bukit Besi Tools. It saves the directory and local
-assets after a successful online visit. Tool pages on Blogger still require
-internet. Same-tab links preserve normal Back-button navigation.
-
-Edit the worker source in `assets/PWA/sw.js`, and rebuild to generate `/sw.js`.
-The build derives its cache revision from the content and precached assets.
-Do not edit the generated worker by hand. See [PWA details](docs/pwa.md).
-
-## Verification
-
-See [the SEO and performance audit](docs/seo-audit.md) for measured results and
-remaining production checks. Lighthouse scores are lab checks; actual visitor
-Core Web Vitals and search rankings depend on the deployed site.
-The [Blogger discovery report](docs/tool-discovery.md) documents all 48 current
-tool pages and distinguishes verified live links from observed search results.
+- [SEO and performance audit](docs/seo-audit.md)
+- [PWA and offline behaviour](docs/pwa.md)
+- [Tool discovery report](docs/tool-discovery.md)
+- [Domain migration](docs/domain-migration.md)
 
 ## License
 

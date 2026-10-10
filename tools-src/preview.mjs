@@ -9,14 +9,14 @@ const files = new Set(['tool.html', 'sw.js', 'manifest.webmanifest', 'offline.ht
   '404.html', 'robots.txt', 'sitemap.xml', 'llms.txt']);
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.webmanifest': 'application/manifest+json', '.txt': 'text/plain; charset=utf-8',
-  '.xml': 'application/xml', '.png': 'image/png', '.webp': 'image/webp', '.ico': 'image/x-icon' };
+  '.xml': 'application/xml', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {
   try {
     if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); res.end(); return; }
     const url = new URL(req.url, 'http://localhost');
     const name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : decodeURIComponent(url.pathname).slice(1);
     const absolute = path.resolve(root, name);
-    const permitted = files.has(name) || /^assets\/(?:PWA|favicon-image)\/[\w/.-]+$/.test(name);
+    const permitted = files.has(name) || /^[0-9a-f]{32}\.txt$/.test(name) || /^assets\/(?:PWA|favicon-image)\/[\w/.-]+$/.test(name);
     if (!permitted || !absolute.startsWith(root + path.sep)) throw new Error('Not found');
     const content = await fs.readFile(absolute);
     res.writeHead(200, { 'Content-Type': mime[path.extname(name)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });

@@ -1,7 +1,7 @@
 # PWA and offline access
 
-Updated 7 October 2026 for `https://the.thebukitbesi.com/`. Saved locally;
-not pushed or deployed by this task.
+Updated 7 October 2026; host moved to `https://tool.thebukitbesi.com/` on 10 October 2026.
+See [the domain migration](domain-migration.md) for the old host.
 
 ## What changed
 

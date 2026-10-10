@@ -35,12 +35,27 @@ jobs:
           mkdir -p _site/assets
           cp tool.html _site/index.html
           cp robots.txt sitemap.xml llms.txt 404.html offline.html manifest.webmanifest sw.js CNAME _site/
+          cp "$(node -p "require('./tools-src/site.json').indexNowKey").txt" _site/
+          if [ -f ads.txt ]; then cp ads.txt _site/; fi
           cp -r assets/favicon-image _site/assets/
           mkdir -p _site/assets/PWA
           cp assets/PWA/pwa.min.js _site/assets/PWA/
-          cp -r assets/PWA/icons _site/assets/PWA/
+          cp -r assets/PWA/icons assets/PWA/screenshots _site/assets/PWA/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing/Yandex (and Bing-powered AI search) the directory changed. Never fails the deploy.
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: |
+          node -e "
+            const s = require('./tools-src/site.json');
+            const body = { host: new URL(s.origin).hostname, key: s.indexNowKey,
+              keyLocation: s.origin + '/' + s.indexNowKey + '.txt',
+              urlList: [s.origin + '/', s.origin + '/llms.txt'] };
+            fetch('https://api.indexnow.org/indexnow', { method: 'POST',
+              headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(body) })
+              .then(r => console.log('IndexNow HTTP', r.status));
+          "
