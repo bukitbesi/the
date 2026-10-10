@@ -41,13 +41,17 @@
     if (w <= 20000) return Math.ceil(w / 100) * 100;
     return w;
   }
-  function epf(w, age60) {
+  function epf(w, age60, permanentResident) {
     var base = epfWage(w);
-    var er = age60 ? 0.04 : (w > 5000 ? 0.12 : 0.13);
-    var ee = age60 ? 0 : 0.11;
+    var er = age60 ? (permanentResident ? (w > 5000 ? 0.06 : 0.065) : 0.04) : (w > 5000 ? 0.12 : 0.13);
+    var ee = age60 ? (permanentResident ? 0.055 : 0) : 0.11;
+    // Above RM20,000, KWSP rounds the COMBINED contribution upward once.
+    // Keep employee's actual cents; allocate the rounding difference to the employer.
+    var employee = w > 20000 ? cents(w * ee) : Math.ceil(cents(base * ee));
+    var employer = w > 20000 ? Math.ceil(cents(w * (ee + er)) - 1e-9) - employee : Math.ceil(cents(base * er));
     return {
-      employee: Math.ceil(cents(base * ee)),
-      employer: Math.ceil(cents(base * er)),
+      employee: employee,
+      employer: cents(employer),
       employeeRate: ee, employerRate: er
     };
   }
@@ -66,13 +70,13 @@
     else steps = Math.round(steps);
     return cents(steps * 5 / 100);
   }
-  function perkeso(w, age60, lindung) {
+  function perkeso(w, age60, lindung, eisExempt) {
     var mid = perkesoMid(w);
     return {
       socsoEmployee: age60 ? 0 : round5(mid * 0.005),
       socsoEmployer: round5(mid * (age60 ? 0.0125 : 0.0175)),
-      eisEmployee: age60 ? 0 : round5(mid * 0.002),
-      eisEmployer: age60 ? 0 : round5(mid * 0.002),
+      eisEmployee: age60 || eisExempt ? 0 : round5(mid * 0.002),
+      eisEmployer: age60 || eisExempt ? 0 : round5(mid * 0.002),
       lindung: lindung ? round5(mid * 0.0075) : 0
     };
   }
@@ -102,7 +106,11 @@
     return {
       chargeable: Math.max(0, p),
       monthly: cents(mtd),
-      net: cents(Math.max(0, mtd - o.zakat)),
+      net: (function () {
+        // Round the final monthly deduction AFTER zakat, per LHDN PCB specification.
+        var afterZakat = Math.max(0, mtd - o.zakat);
+        return cents(Math.ceil(afterZakat * 20 - 1e-9) / 20);
+      })(),
       rate: b ? b[1] : 0
     };
   }
@@ -123,6 +131,9 @@
     return {
       salary: cents(num(input.salary, 0, 1000000)),
       age60: !!input.age60,
+      age57: !!input.age57 && !input.age60,
+      permanentResident: !!input.permanentResident,
+      eisExempt: !!input.age57 && !input.age60 && !!input.eisExempt,
       status: input.status === 'spouse' ? 'spouse' : (input.status === 'married' ? 'married' : 'single'),
       children: Math.round(num(input.children, 0, 20)),
       otherRelief: cents(num(input.otherRelief, 0, 1000000)),
@@ -133,8 +144,8 @@
 
   function calculate(input) {
     var o = normalise(input);
-    var e = epf(o.salary, o.age60);
-    var s = perkeso(o.salary, o.age60, o.lindung);
+    var e = epf(o.salary, o.age60, o.permanentResident);
+    var s = perkeso(o.salary, o.age60, o.lindung, o.eisExempt);
     var t = pcb(o, e.employee);
     var deductions = cents(e.employee + s.socsoEmployee + s.eisEmployee + s.lindung + t.net + o.zakat);
     var employerCost = cents(o.salary + e.employer + s.socsoEmployer + s.eisEmployer);
@@ -150,7 +161,7 @@
         gross: cents(o.salary * 12),
         net: cents((o.salary - deductions) * 12),
         epfTotal: cents((e.employee + e.employer) * 12),
-        tax: annualTax(t.chargeable, o.status)
+        tax: cents(Math.max(0, annualTax(t.chargeable, o.status) - o.zakat * 12))
       }
     };
   }

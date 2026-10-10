@@ -7,7 +7,7 @@
   "description": "Kalkulator gaji bersih Malaysia 2026 percuma. Kira gaji selepas potongan KWSP, PERKESO, SIP, LINDUNG 24 Jam dan PCB, serta kos majikan. Kadar terkini.",
   "llms": "Kalkulator gaji bersih Malaysia 2026 (Bahasa Melayu): potongan KWSP mengikut Jadual Ketiga, PERKESO, SIP dan LINDUNG 24 Jam (siling RM6,000) serta PCB/MTD mengikut kaedah pengiraan berkomputer LHDN, termasuk kos majikan.",
   "datePublished": "2026-10-10",
-  "dateModified": "2026-10-10",
+  "dateModified": "2026-10-11",
   "salary": true,
   "scripts": ["/assets/js/salary.js"],
   "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Gaji Bersih", null]],
@@ -57,8 +57,16 @@
         <div class="seg">
           <label><input type="radio" name="age" value="0" checked> Bawah 60</label>
           <label><input type="radio" name="age" value="60"> 60 ke atas</label>
+          <label><input type="radio" name="age" value="57"> 57–59 tahun</label>
         </div>
       </fieldset>
+      <div class="field">
+        <label for="residency">Status kewarganegaraan KWSP</label>
+        <select class="input" id="residency" name="residency">
+          <option value="citizen">Warganegara Malaysia</option>
+          <option value="pr">Pemastautin tetap (PR)</option>
+        </select>
+      </div>
       <div class="field">
         <label for="status">Status cukai</label>
         <select class="input" id="status" name="status">
@@ -73,6 +81,7 @@
         <p class="help" id="children-help">Pelepasan RM2,000 setiap anak. Anak yang lebih tua di institusi pengajian tinggi layak untuk pelepasan lebih; masukkan bezanya dalam pelepasan tambahan.</p>
       </div>
       <details class="more-opts" id="moreOpts">
+        <div class="field"><label class="check"><input type="checkbox" id="eisExempt" name="eisExempt" disabled> <span>Pengecualian SIP: umur 57–59 dan tiada caruman SIP sebelum mencapai umur 57 tahun.</span></label></div>
         <summary>Pilihan lain</summary>
         <div class="field">
           <label for="otherRelief">Pelepasan tahunan tambahan yang diisytiharkan kepada majikan (Borang TP1)</label>

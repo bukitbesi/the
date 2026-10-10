@@ -56,3 +56,33 @@ test('Net pay = gross minus every employee deduction', () => {
   assert.equal(r.net, 4268.2);
   assert.equal(r.employerCost, 5746.55);
 });
+
+test('PR aged 60 or above uses KWSP Third Schedule Part C', () => {
+  const r = S.calculate({ salary: 3250, age60: true, permanentResident: true });
+  assert.deepEqual([r.epf.employee, r.epf.employer], [180, 212]);
+});
+
+test('Above RM20,000 round the combined EPF shares only once', () => {
+  const r = S.epf(20001, false, false);
+  assert.equal(r.employee + r.employer, 4601);
+  assert.equal(r.employee, 2200.11);
+});
+
+test('EIS first-time contributor aged 57-59 is exempt', () => {
+  const r = S.calculate({ salary: 6000, age57: true, eisExempt: true });
+  assert.equal(r.perkeso.eisEmployee, 0);
+  assert.equal(r.perkeso.eisEmployer, 0);
+  assert.equal(S.calculate({salary: 6000, age57: true}).perkeso.eisEmployee, 11.9);
+  assert.equal(S.calculate({salary: 6000, eisExempt: true}).perkeso.eisEmployee, 11.9);
+});
+
+test('Projected annual tax includes the capped annual zakat rebate', () => {
+  const r = S.calculate({ salary: 5000, zakat: 100 });
+  assert.equal(r.annual.tax, 120);
+  assert.equal(S.calculate({ salary: 5000, zakat: 200 }).annual.tax, 0);
+});
+
+test('Net PCB is rounded to 5 sen after zakat', () => {
+  const r = S.calculate({ salary: 5000, zakat: 0.02 });
+  assert.equal(r.pcb.net, 110);
+});

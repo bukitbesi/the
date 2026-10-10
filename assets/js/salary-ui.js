@@ -31,6 +31,9 @@
     return {
       salary: f('salary').value,
       age60: f('age').value === '60',
+      age57: f('age').value === '57',
+      permanentResident: f('residency').value === 'pr',
+      eisExempt: f('eisExempt').checked,
       status: f('status').value,
       children: f('children').value,
       otherRelief: f('otherRelief').value,
@@ -42,6 +45,9 @@
 
   function render(writeHash) {
     var input = read();
+    f('eisExempt').disabled = !input.age57;
+    if (!input.age57) f('eisExempt').checked = false;
+    input.eisExempt = f('eisExempt').checked;
     var r = S.calculate(input);
     var err = $('salaryError');
     f('salary').setAttribute('aria-invalid', r.valid ? 'false' : 'true');
@@ -64,7 +70,8 @@
     $('rNote').textContent = r.pcb.monthly ? TEXT.tax(r) : TEXT.zero;
     $('rLive').textContent = TEXT.live(r);
     if (writeHash) {
-      var h = 'salary=' + r.input.salary + '&age=' + (r.input.age60 ? 60 : 0) + '&status=' + r.input.status +
+      var h = 'salary=' + r.input.salary + '&age=' + (r.input.age60 ? 60 : (r.input.age57 ? 57 : 0)) +
+        '&residency=' + (r.input.permanentResident ? 'pr' : 'citizen') + '&eisExempt=' + (r.input.eisExempt ? 1 : 0) + '&status=' + r.input.status +
         '&children=' + r.input.children + '&relief=' + r.input.otherRelief + '&zakat=' + r.input.zakat + '&lindung=' + (r.input.lindung ? 1 : 0);
       history.replaceState(null, '', '#' + h);
     }
@@ -75,13 +82,15 @@
     var q = {};
     location.hash.slice(1).split('&').forEach(function (p) { var kv = p.split('='); q[kv[0]] = decodeURIComponent(kv[1] || ''); });
     if (q.salary) f('salary').value = q.salary;
-    f('age').value = q.age === '60' ? '60' : '0';
+    f('age').value = q.age === '60' ? '60' : (q.age === '57' ? '57' : '0');
+    f('residency').value = q.residency === 'pr' ? 'pr' : 'citizen';
+    f('eisExempt').checked = q.eisExempt === '1';
     if (/^(single|married|spouse)$/.test(q.status)) f('status').value = q.status;
     if (q.children) f('children').value = q.children;
     if (q.relief) f('otherRelief').value = q.relief;
     if (q.zakat) f('zakat').value = q.zakat;
     f('lindung').checked = q.lindung !== '0';
-    if (Number(q.relief) || Number(q.zakat) || q.lindung === '0') $('moreOpts').open = true;
+    if (Number(q.relief) || Number(q.zakat) || q.lindung === '0' || q.eisExempt === '1') $('moreOpts').open = true;
   }
 
   var frame = 0;

@@ -7,7 +7,7 @@
   "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam and PCB tax, plus your employer's cost. Updated rates.",
   "llms": "Calculates 2026 Malaysian take-home pay from gross monthly salary: EPF (KWSP Third Schedule), SOCSO, EIS, LINDUNG 24 Jam (PERKESO, RM6,000 ceiling) and PCB/MTD tax (LHDN computerised method), with employer cost and a table of net pay at common salaries.",
   "datePublished": "2026-10-10",
-  "dateModified": "2026-10-10",
+  "dateModified": "2026-10-11",
   "salary": true,
   "scripts": ["/assets/js/salary.js"],
   "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Malaysia Salary Calculator", null]],
@@ -57,8 +57,16 @@
         <div class="seg">
           <label><input type="radio" name="age" value="0" checked> Below 60</label>
           <label><input type="radio" name="age" value="60"> 60 and above</label>
+          <label><input type="radio" name="age" value="57"> 57–59 years</label>
         </div>
       </fieldset>
+      <div class="field">
+        <label for="residency">EPF citizenship status</label>
+        <select class="input" id="residency" name="residency">
+          <option value="citizen">Malaysian citizen</option>
+          <option value="pr">Permanent resident (PR)</option>
+        </select>
+      </div>
       <div class="field">
         <label for="status">Tax status</label>
         <select class="input" id="status" name="status">
@@ -73,6 +81,7 @@
         <p class="help" id="children-help">RM2,000 relief each. Older children in tertiary study qualify for more; add the difference under extra reliefs.</p>
       </div>
       <details class="more-opts" id="moreOpts">
+        <div class="field"><label class="check"><input type="checkbox" id="eisExempt" name="eisExempt" disabled> <span>EIS exemption: aged 57–59 and no EIS contributions before turning 57.</span></label></div>
         <summary>More options</summary>
         <div class="field">
           <label for="otherRelief">Extra annual reliefs declared to your employer (Form TP1)</label>
