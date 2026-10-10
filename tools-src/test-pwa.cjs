@@ -6,22 +6,20 @@ const http = require('node:http');
 const assert = require('node:assert/strict');
 const puppeteer = require(process.env.PUPPETEER_MODULE || 'puppeteer-core');
 const root = path.resolve(__dirname, '..');
-const read = name => fs.readFileSync(path.join(root, name));
+// Serves the built site from docs/, as GitHub Pages does.
+const read = name => fs.readFileSync(path.join(root, name.startsWith('tools-src/') ? name : path.join('docs', name)));
 const tools = JSON.parse(read('tools-src/tools.json')).filter(tool => tool.live);
 let worker = read('sw.js').toString();
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.webmanifest': 'application/manifest+json',
   '.png': 'image/png', '.webp': 'image/webp', '.ico': 'image/x-icon', '.txt': 'text/plain' };
 const fixture = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
-  let name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : url.pathname.slice(1);
-  // Generated pages and bundles are served from dist/, as on the deployed site.
-  const built = path.join('dist', name.endsWith('/') ? name + 'index.html' : name);
-  if (name !== 'tool.html' && fs.existsSync(path.join(root, built)) && fs.statSync(path.join(root, built)).isFile()) name = built;
+  let name = path.join('docs', url.pathname.endsWith('/') ? url.pathname + 'index.html' : url.pathname);
   const absolute = path.resolve(root, name);
   if (req.method !== 'GET') { res.writeHead(405); return res.end(); }
   try {
     assert(absolute.startsWith(root + path.sep));
-    const body = name === 'sw.js' ? worker : fs.readFileSync(absolute);
+    const body = name === path.join('docs', 'sw.js') ? worker : fs.readFileSync(absolute);
     res.writeHead(200, { 'Content-Type': mime[path.extname(name)] || 'text/plain', 'Cache-Control': 'no-store' });
     res.end(body);
   } catch {

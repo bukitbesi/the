@@ -1,5 +1,7 @@
-name: Deploy to GitHub Pages
+name: Check site
 
+# GitHub Pages publishes main:/docs directly ("Deploy from a branch"), so the site goes live
+# without Actions. This workflow only proves docs/ is correct and current, and pings IndexNow.
 on:
   push:
     branches: [main]
@@ -8,16 +10,12 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Pull request checks get their own group so they never cancel a deployment.
 concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('check-{0}', github.ref) || 'pages' }}
+  group: check-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # Runs on every pull request so problems show up before merge.
   check:
     runs-on: ubuntu-latest
     steps:
@@ -30,50 +28,23 @@ jobs:
           node --test tools-src/tests/*.test.mjs
           node tools-src/build.mjs
           node tools-src/validate.mjs
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: check
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Build and validate the site
+      - name: docs/ matches the sources
         run: |
-          node tools-src/build.mjs
-          node tools-src/validate.mjs
-      - uses: actions/configure-pages@v5
-      - name: Stage site files
-        run: |
-          mkdir -p _site/assets
-          cp tool.html _site/index.html
-          cp -r dist/. _site/
-          cp robots.txt sitemap.xml llms.txt 404.html offline.html manifest.webmanifest sw.js CNAME _site/
-          cp "$(node -p "require('./tools-src/site.json').indexNowKey").txt" _site/
-          if [ -f ads.txt ]; then cp ads.txt _site/; fi
-          cp -r assets/favicon-image _site/assets/
-          mkdir -p _site/assets/PWA
-          cp assets/PWA/pwa.min.js _site/assets/PWA/
-          cp -r assets/PWA/icons assets/PWA/screenshots _site/assets/PWA/
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      - id: deployment
-        uses: actions/deploy-pages@v4
-      # Tell Bing/Yandex (and Bing-powered AI search) the directory changed. Never fails the deploy.
+          if [ -n "$(git status --porcelain -- docs)" ]; then
+            git status --short -- docs
+            echo "::error::docs/ is out of date. Run 'node tools-src/build.mjs' and commit docs/."
+            exit 1
+          fi
+      # Tell Bing/Yandex (and Bing-powered AI search) the site changed. Never fails the run.
       - name: Notify IndexNow
+        if: github.event_name == 'push'
         continue-on-error: true
         run: |
           node -e "
             const s = require('./tools-src/site.json');
+            const urls = [...require('fs').readFileSync('docs/sitemap.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
             const body = { host: new URL(s.origin).hostname, key: s.indexNowKey,
-              keyLocation: s.origin + '/' + s.indexNowKey + '.txt',
-              urlList: [...require('fs').readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]).concat(s.origin + '/llms.txt') };
+              keyLocation: s.origin + '/' + s.indexNowKey + '.txt', urlList: urls.concat(s.origin + '/llms.txt') };
             fetch('https://api.indexnow.org/indexnow', { method: 'POST',
               headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(body) })
               .then(r => console.log('IndexNow HTTP', r.status));

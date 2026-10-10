@@ -7,10 +7,12 @@ import { fileURLToPath } from 'node:url';
 import { icons } from './icons.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const read = name => fs.readFileSync(path.join(root, name), 'utf8');
+// Everything public is checked as deployed, from docs/; sources come from tools-src/.
+const pub = path.join(root, 'docs');
+const read = name => fs.readFileSync(name.startsWith('tools-src/') ? path.join(root, name) : path.join(pub, name), 'utf8');
 const site = JSON.parse(read('tools-src/site.json'));
 const tools = JSON.parse(read('tools-src/tools.json')).filter(t => t.live);
-const html = read('tool.html');
+const html = read('index.html');
 assert(!/\{\{[A-Z0-9_]+\}\}/.test(html), 'Unresolved template placeholders');
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Exactly one main heading');
 assert(html.includes(`<link rel="canonical" href="${site.origin}/">`), 'Canonical URL');
@@ -18,7 +20,7 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'Unique element IDs');
 for (const m of html.matchAll(/\bhref="#([^"]+)"/g)) assert(ids.includes(m[1]), `Missing fragment ${m[1]}`);
 for (const m of html.matchAll(/\b(?:src|href)="(\/assets\/[^"?#]+)"/g)) {
-  assert(fs.statSync(path.join(root, m[1])).size > 0, `Missing or empty resource ${m[1]}`);
+  assert(fs.statSync(path.join(pub, m[1])).size > 0, `Missing or empty resource ${m[1]}`);
 }
 const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
 const list = graph.find(item => item['@type'] === 'ItemList');
@@ -38,13 +40,13 @@ for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(m[
 const llms = read('llms.txt');
 for (const tool of tools) assert(llms.includes(`](${tool.url})`), `Missing LLM tool ${tool.name}`);
 for (const tool of JSON.parse(read('tools-src/tools.json')).filter(t => !t.live)) assert(!llms.includes(tool.url), `Unpublished LLM link ${tool.name}`);
-// ---- generated pages in dist/
-const pageDirs = fs.readdirSync(path.join(root, 'dist'), { withFileTypes: true })
+// ---- generated pages in docs/
+const pageDirs = fs.readdirSync(pub, { withFileTypes: true })
   .filter(d => d.isDirectory() && d.name !== 'assets').map(d => '/' + d.name + '/');
-const pageHtml = new Map(pageDirs.map(p => [p, read('dist' + p + 'index.html')]));
+const pageHtml = new Map(pageDirs.map(p => [p, read(p.slice(1) + 'index.html')]));
 const locations = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
 assert.deepEqual(locations.sort(), [site.origin + '/', ...pageDirs.map(p => site.origin + p)].sort(), 'Sitemap lists the home page and every generated page');
-const routeExists = href => href === '/' || pageHtml.has(href) || fs.existsSync(path.join(root, href)) || fs.existsSync(path.join(root, 'dist', href));
+const routeExists = href => href === '/' || pageHtml.has(href) || fs.existsSync(path.join(pub, href));
 for (const [p, page] of pageHtml) {
   const where = ` on ${p}`;
   assert(!/\{\{[A-Z0-9_]+\}\}/.test(page), 'Unresolved placeholders' + where);
@@ -68,21 +70,20 @@ for (const [p, page] of pageHtml) {
   }
   for (const m of page.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(m[1]);
 }
-for (const f of fs.readdirSync(path.join(root, 'dist/assets/js'))) new vm.Script(read('dist/assets/js/' + f));
+for (const f of fs.readdirSync(path.join(pub, 'assets/js'))) new vm.Script(read('assets/js/' + f));
 assert(read('sitemap.xml').includes('xmlns:xhtml'), 'Sitemap carries hreflang alternates');
 assert(read('robots.txt').includes(`Sitemap: ${site.origin}/sitemap.xml`), 'Robots sitemap URL');
 assert(!read('robots.txt').includes('Disallow:'), 'Public resources and noindex 404 remain crawlable');
 assert(read('404.html').includes('content="noindex,follow"'), '404 indexing directive');
 
 const manifest = JSON.parse(read('manifest.webmanifest'));
-assert.deepEqual(JSON.parse(read('src/manifest.json')), manifest, 'Legacy source manifest stays valid');
 assert.equal(manifest.id, '/');
 assert.equal(manifest.scope, '/');
 assert.equal(manifest.start_url, '/');
 assert.equal(manifest.display, 'standalone');
 assert(html.includes('<link rel="manifest" href="/manifest.webmanifest">'), 'Manifest linked in page');
 for (const icon of manifest.icons) {
-  const bytes = fs.readFileSync(path.join(root, icon.src));
+  const bytes = fs.readFileSync(path.join(pub, icon.src));
   assert.equal(bytes.subarray(1, 4).toString(), 'PNG', 'Manifest icons are PNGs');
   const size = `${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}`;
   assert.equal(size, icon.sizes, 'Declared icon dimensions match image');
@@ -96,9 +97,7 @@ assert(!worker.includes('__CACHE_VERSION__') && !worker.includes('__PRECACHE_JSO
 new vm.Script(worker);
 new vm.Script(read('assets/PWA/pwa.min.js'));
 const precache = JSON.parse(worker.match(/const PRECACHE = (\[[^;]+\]);/)[1]);
-const builtFile = url => url === '/' ? path.join(root, 'tool.html')
-  : url.endsWith('/') ? path.join(root, 'dist', url, 'index.html')
-  : fs.existsSync(path.join(root, 'dist', url)) ? path.join(root, 'dist', url) : path.join(root, url);
+const builtFile = url => url.endsWith('/') ? path.join(pub, url, 'index.html') : path.join(pub, url);
 for (const resource of precache) assert(fs.statSync(builtFile(resource)).size > 0, `Missing offline asset ${resource}`);
 const workerPages = JSON.parse(worker.match(/const PAGES = new Set\((\[[^;]+\])\);/)[1]);
 assert.deepEqual(workerPages.sort(), ['/', ...pageDirs].sort(), 'Every page is available offline');
@@ -108,7 +107,7 @@ assert(precache.every(url => url.startsWith('/') && !url.startsWith('//')), 'Sam
 assert(!/<a\b[^>]*target="_blank"/.test(html), 'Directory links use the same tab');
 // JPEG dimensions come from the first start-of-frame marker.
 const jpegSize = file => {
-  const b = fs.readFileSync(path.join(root, file));
+  const b = fs.readFileSync(path.join(pub, file));
   assert.equal(b.readUInt16BE(0), 0xffd8, `${file} is a JPEG`);
   for (let i = 2; i < b.length;) {
     const marker = b.readUInt16BE(i);
@@ -133,4 +132,5 @@ if (ads.client) {
 }
 assert(html.includes('id="themeToggle"'), 'Theme toggle present');
 assert(read('CNAME').trim() === new URL(site.origin).hostname, 'CNAME matches canonical host');
+assert(fs.existsSync(path.join(pub, '.nojekyll')), 'Pages serves docs/ without Jekyll');
 console.log(`Validated ${tools.length} tools, SEO files, scripts, PWA manifest, icons and offline assets.`);

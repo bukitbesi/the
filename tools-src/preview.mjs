@@ -1,32 +1,26 @@
-// Serve the same root URLs as the GitHub Pages deployment (no dependencies).
+// Serve docs/ exactly as GitHub Pages does (no dependencies). Run build.mjs first.
 // Usage: node tools-src/preview.mjs [port]
 import http from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const files = new Set(['tool.html', 'sw.js', 'manifest.webmanifest', 'offline.html',
-  '404.html', 'robots.txt', 'sitemap.xml', 'llms.txt']);
+const pub = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
-  '.webmanifest': 'application/manifest+json', '.txt': 'text/plain; charset=utf-8',
-  '.xml': 'application/xml', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.ico': 'image/x-icon' };
+  '.webmanifest': 'application/manifest+json', '.txt': 'text/plain; charset=utf-8', '.json': 'application/json',
+  '.xml': 'application/xml', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml' };
 const server = http.createServer(async (req, res) => {
   try {
     if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); res.end(); return; }
-    const url = new URL(req.url, 'http://localhost');
-    let name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : decodeURIComponent(url.pathname).slice(1);
-    // Generated pages and bundles live in dist/, like the deployed site root.
-    const built = path.join('dist', name.endsWith('/') ? name + 'index.html' : name);
-    if (name !== 'tool.html' && await fs.stat(path.join(root, built)).then(st => st.isFile(), () => false)) name = built;
-    const absolute = path.resolve(root, name);
-    const permitted = name.startsWith('dist/') || files.has(name) || /^[0-9a-f]{32}\.txt$/.test(name) || /^assets\/(?:PWA|favicon-image)\/[\w/.-]+$/.test(name);
-    if (!permitted || !absolute.startsWith(root + path.sep)) throw new Error('Not found');
-    const content = await fs.readFile(absolute);
-    res.writeHead(200, { 'Content-Type': mime[path.extname(name)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
+    let file = path.resolve(pub, '.' + decodeURIComponent(new URL(req.url, 'http://localhost').pathname));
+    if (!file.startsWith(pub)) throw new Error('Not found');
+    if ((await fs.stat(file)).isDirectory()) file = path.join(file, 'index.html');
+    const content = await fs.readFile(file);
+    res.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
     res.end(req.method === 'HEAD' ? undefined : content);
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(await fs.readFile(path.join(root, '404.html')));
+    res.end(await fs.readFile(path.join(pub, '404.html')));
   }
 });
 server.listen(Number(process.argv[2] || 8765), '127.0.0.1', () => console.log(`Preview: http://127.0.0.1:${server.address().port}/`));
