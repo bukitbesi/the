@@ -1,5 +1,5 @@
 // Renders the 1200x630 social card and the PWA install screenshots with Chromium.
-// Run after build.mjs whenever the brand, tool count or layout changes.
+// Run after build.mjs (it serves docs/) whenever the brand, tool count or layout changes.
 // Usage: node tools-src/images.mjs   (PLAYWRIGHT_MODULE may point to a playwright install)
 import fs from 'node:fs';
 import http from 'node:http';
@@ -43,9 +43,9 @@ h1 span{background:linear-gradient(135deg,#a29bfe,#00cec9);-webkit-background-cl
 // Serve the built page at the root, matching production paths for the screenshots.
 const server = http.createServer((req, res) => {
   const name = new URL(req.url, 'http://x').pathname;
-  const file = name === '/' ? 'tool.html' : name.slice(1);
+  const file = path.join('docs', name.endsWith('/') ? name + 'index.html' : name);
   const absolute = path.resolve(root, file);
-  if (!absolute.startsWith(root + path.sep) || !fs.existsSync(absolute) || file === 'sw.js') { res.writeHead(404); return res.end(); }
+  if (!absolute.startsWith(root + path.sep) || !fs.existsSync(absolute) || file === path.join('docs', 'sw.js')) { res.writeHead(404); return res.end(); }
   res.writeHead(200); res.end(fs.readFileSync(absolute));
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));

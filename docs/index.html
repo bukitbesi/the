@@ -268,7 +268,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
     </div>
   </div>
 </section>
-
+<div class="ad"><p class="ad-label">Advertisement</p><ins class="adsbygoogle" data-ad-client="ca-pub-0182550701431501" data-ad-slot="2106466698" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 <section class="section alt" id="tools" aria-labelledby="tools-h">
   <div class="container">
     <span class="label">Tools collection</span>
@@ -357,7 +357,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
     </div>
   </div>
 </section>
-
+<div class="ad"><p class="ad-label">Advertisement</p><ins class="adsbygoogle" data-ad-client="ca-pub-0182550701431501" data-ad-slot="9960905984" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 <section class="section alt cv" id="why" aria-labelledby="why-h">
   <div class="container">
     <div class="center">
@@ -410,7 +410,7 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
     </div>
   </div>
 </section>
-
+<div class="ad"><p class="ad-label">Advertisement</p><ins class="adsbygoogle" data-ad-client="ca-pub-0182550701431501" data-ad-slot="9686493684" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 <section class="section cv" aria-labelledby="cta-h">
   <div class="container">
     <div class="cta">
@@ -511,6 +511,21 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
   sync();
 })();
 </script>
-
+<script>
+(function(){
+  var slots=document.querySelectorAll("ins.adsbygoogle"),done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  if(!slots.length)return;
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    var s=document.createElement("script");
+    s.async=true;s.crossOrigin="anonymous";
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0182550701431501";
+    document.head.appendChild(s);
+    for(var i=0;i<slots.length;i++)(window.adsbygoogle=window.adsbygoogle||[]).push({});
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+})();
+</script>
 </body>
 </html>

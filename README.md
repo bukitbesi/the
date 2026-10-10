@@ -28,7 +28,7 @@ The full, always-current list is generated into [`llms.txt`](llms.txt).
   fonts, inline SVG icons, no render-blocking third-party code. Local
   Lighthouse mobile with all three ad units enabled: 99–100 performance,
   100 accessibility/best practices/SEO, TBT 0 ms, CLS 0
-  ([audit](docs/seo-audit.md)). GitHub Pages CDN keeps TTFB low.
+  ([audit](documentation/seo-audit.md)). GitHub Pages CDN keeps TTFB low.
 - **SEO:** canonical URL, Open Graph + 1200×630 social card, sitemap,
   robots.txt, one `@graph` of Organization, WebSite, CollectionPage,
   ItemList (with per-tool descriptions) and FAQPage JSON-LD that is checked
@@ -38,7 +38,7 @@ The full, always-current list is generated into [`llms.txt`](llms.txt).
   IndexNow ping on every deployment (Bing, ChatGPT search, Copilot).
 - **PWA:** web app manifest with maskable icons and install screenshots, a
   versioned service worker (network-first directory, offline fallback,
-  consent-based updates). See [PWA details](docs/pwa.md).
+  consent-based updates). See [PWA details](documentation/pwa.md).
 
 - **Theme:** light by default (matches standard AdSense creatives), with a
   dark-mode toggle. The choice is stored per browser and applied before
@@ -56,8 +56,9 @@ Fill in `adsense` in `tools-src/site.json`:
 }
 ```
 
-Create three **Display ads → Responsive** units in AdSense and paste their
-`data-ad-slot` values. The build then adds the units (after the hero, between
+Create three **Display ads → Responsive** units in AdSense and paste only their
+`data-ad-slot` **numbers** (e.g. `2106466698`), not the whole ad code; the build
+writes the ad markup and rejects anything that is not digits. The build then adds the units (after the hero, between
 Categories and Why, and between FAQ and the closing call to action), each
 labelled "Advertisement" with space reserved to prevent layout shift, and
 writes `ads.txt`. The AdSense library loads only after the visitor's first
@@ -97,11 +98,11 @@ tools-src/home.html         directory home page body
 tools-src/pages/*.html      other pages; JSON front matter sets URL, language, hreflang, schema, FAQ
 tools-src/css/              base.css (shared), home.css, page.css
 tools-src/icons.mjs         one SVG icon per tool
-tools-src/build.mjs         generates tool.html, dist/ pages and bundles, sitemap, robots, llms.txt, manifest, sw.js
+tools-src/build.mjs         writes the whole public site to docs/ (pages, bundles, crawl files, manifest, sw.js, assets)
 tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attribute or PWA drift
 tools-src/tests/            unit tests for calculation cores (node --test)
 tools-src/images.mjs        renders the social card and PWA screenshots (Playwright)
-assets/js/salary-*.js       salary calculator core and UI (bundled to dist/assets/js/salary.js)
+assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
 assets/PWA/sw.js            service-worker source template
 ```
 
@@ -120,23 +121,27 @@ node tools-src/preview.mjs        # http://127.0.0.1:8765/
 node tools-src/images.mjs         # only after brand, count or layout changes
 ```
 
-Pull requests run the tests, build and validator. A push to `main` does the
-same, publishes to GitHub Pages and pings IndexNow with every sitemap URL. Update `dateModified` in `site.json` when published content changes.
-Set `live: true` only after a tool's page returns HTTP 200. Do not edit
-generated files (`tool.html`, `dist/`, `sw.js`, `manifest.webmanifest`, `llms.txt`,
-`sitemap.xml`, `robots.txt`) by hand.
+**Publishing:** `docs/` is the complete public site and is committed. GitHub
+Pages serves it directly: **Settings → Pages → Build and deployment → Source:
+"Deploy from a branch" → Branch: `main` → Folder: `/docs` → Save.** No Actions
+minutes or billing are involved. After changing any source file, run the build
+and commit `docs/` with it.
+
+The `Check site` workflow runs the tests, build and validator on pull requests
+and pushes, fails if `docs/` is out of date, and pings IndexNow after a push to
+`main`. Update `dateModified` in `site.json` when published content changes.
+Set `live: true` only after a tool's page returns HTTP 200. Never edit files in
+`docs/` by hand; they are overwritten on every build.
 
 The `CNAME` file and the `origin` in `site.json` must match; the build checks
-this. **Settings → Pages → Source must be "GitHub Actions".** With "Deploy
-from a branch", GitHub serves this README as the home page instead of the
-built directory. Set the custom domain on the same settings page. See [the domain migration](docs/domain-migration.md).
+this and copies `CNAME` into `docs/`. See [the domain migration](documentation/domain-migration.md).
 
 ## More documentation
 
-- [SEO and performance audit](docs/seo-audit.md)
-- [PWA and offline behaviour](docs/pwa.md)
-- [Tool discovery report](docs/tool-discovery.md)
-- [Domain migration](docs/domain-migration.md)
+- [SEO and performance audit](documentation/seo-audit.md)
+- [PWA and offline behaviour](documentation/pwa.md)
+- [Tool discovery report](documentation/tool-discovery.md)
+- [Domain migration](documentation/domain-migration.md)
 
 ## License
 

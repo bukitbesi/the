@@ -1,7 +1,7 @@
 // Source template. tools-src/build.mjs writes the versioned root /sw.js.
 'use strict';
 const CACHE_PREFIX = 'bukit-tools-';
-const CACHE_NAME = CACHE_PREFIX + 'b40bf5ab3a24889d';
+const CACHE_NAME = CACHE_PREFIX + '69331ba041e3b91b';
 const PRECACHE = ["/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/js/salary.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
 // Pages are HTML routes (network first, saved copy offline); everything else is a static asset.
 const PAGES = new Set(["/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/"]);

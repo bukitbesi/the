@@ -1,7 +1,7 @@
 // Builds every public page and crawl file from one layout, the tool catalog and tools-src/pages/*.html.
 // Usage (from repo root):  node tools-src/build.mjs
-// Outputs: tool.html (home, deployed as /index.html), dist/<page>/index.html, dist/assets/js/*,
-// sitemap.xml, robots.txt, llms.txt, manifest.webmanifest, sw.js, ads.txt (when configured).
+// Output: docs/ is the complete public site (GitHub Pages serves main /docs as-is; no Actions needed):
+// index.html, <page>/index.html, assets, crawl files, manifest, sw.js, CNAME and ads.txt (when configured).
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -11,7 +11,7 @@ import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(dir, '..');
-const dist = path.join(root, 'dist');
+const pub = path.join(root, 'docs');
 const read = f => fs.readFileSync(path.join(dir, f), 'utf8');
 const require = createRequire(import.meta.url);
 const salary = require('../assets/js/salary-core.js');
@@ -94,7 +94,7 @@ const catLabel = (c, lang) => lang === 'ms' ? CAT_MS[c] || site.categories[c].la
 
 // ---- AdSense: three manual responsive units. The library loads on the visitor's first
 // scroll, tap, key or mouse move, so it never competes with LCP or the first input.
-const adUnit = (key, lang) => !ads.client ? '' : `<aside class="ad" aria-label="${T[lang].AD}"><p class="ad-label">${T[lang].AD}</p><ins class="adsbygoogle" data-ad-client="${ads.client}" data-ad-slot="${ads.slots[key]}" data-ad-format="auto" data-full-width-responsive="true"></ins></aside>`;
+const adUnit = (key, lang) => !ads.client ? '' : `<div class="ad"><p class="ad-label">${T[lang].AD}</p><ins class="adsbygoogle" data-ad-client="${ads.client}" data-ad-slot="${ads.slots[key]}" data-ad-format="auto" data-full-width-responsive="true"></ins></div>`;
 const adLoader = !ads.client ? '' : `<script>
 (function(){
   var slots=document.querySelectorAll("ins.adsbygoogle"),done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
@@ -214,7 +214,9 @@ const homeHtml = render({
 })();
 </script>`
 });
-fs.writeFileSync(path.join(root, 'tool.html'), homeHtml);
+fs.rmSync(pub, { recursive: true, force: true });
+fs.mkdirSync(pub, { recursive: true });
+fs.writeFileSync(path.join(pub, 'index.html'), homeHtml);
 
 // ---- salary calculator helpers (build-time rendering keeps first paint complete and crawlable)
 const money = (n, lang) => new Intl.NumberFormat(lang === 'ms' ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR' }).format(n);
@@ -253,7 +255,6 @@ ${rows}
 }
 
 // ---- content pages
-fs.rmSync(dist, { recursive: true, force: true });
 const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
   const url = site.origin + p.path;
@@ -299,19 +300,19 @@ for (const p of pages) {
     ...(p.salary ? salaryMap(p.lang) : {})
   };
   const html = render(map);
-  fs.mkdirSync(path.join(dist, p.path), { recursive: true });
-  fs.writeFileSync(path.join(dist, p.path, 'index.html'), html);
+  fs.mkdirSync(path.join(pub, p.path), { recursive: true });
+  fs.writeFileSync(path.join(pub, p.path, 'index.html'), html);
   outputs.set(p.path, html);
 }
 
 // ---- page scripts: concatenate sources into one deferred, cacheable file per tool
-fs.mkdirSync(path.join(dist, 'assets/js'), { recursive: true });
+fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
 const bundles = { 'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'] };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
   const code = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n')
     .replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('//')).join('\n');
-  fs.writeFileSync(path.join(dist, 'assets/js', name), code + '\n');
+  fs.writeFileSync(path.join(pub, 'assets/js', name), code + '\n');
 }
 
 // ---- llms.txt (plain-text summary for LLM crawlers; llmstxt.org format)
@@ -342,7 +343,7 @@ const llms = [
   ...pages.filter(p => p.policy).map(p => `- [${p.title}](${site.origin + p.path}): ${p.description}`),
   ''
 ].join('\n');
-fs.writeFileSync(path.join(root, 'llms.txt'), llms);
+fs.writeFileSync(path.join(pub, 'llms.txt'), llms);
 
 // ---- sitemap.xml with hreflang pairs (only this host's URLs)
 const sitemapPages = [{ path: '/', dateModified: site.dateModified, alternates: {} }, ...pages.filter(p => p.sitemap !== false)];
@@ -357,17 +358,17 @@ ${sitemapPages.map(p => {
 }).join('\n')}
 </urlset>
 `;
-fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
+fs.writeFileSync(path.join(pub, 'sitemap.xml'), sitemap);
 
 // Let crawlers fetch the 404 page so they can see its noindex directive.
 const robots = `# Public site: search and AI crawlers may access everything.\nUser-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`;
-fs.writeFileSync(path.join(root, 'robots.txt'), robots);
+fs.writeFileSync(path.join(pub, 'robots.txt'), robots);
 // ads.txt authorises the publisher on this host as well as the root domain.
-const adsTxt = path.join(root, 'ads.txt');
+const adsTxt = path.join(pub, 'ads.txt');
 if (ads.client) fs.writeFileSync(adsTxt, `google.com, ${ads.client.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n`);
 else fs.rmSync(adsTxt, { force: true });
 // IndexNow ownership file (Bing, Yandex, Seznam, Naver). The key is public by design.
-fs.writeFileSync(path.join(root, site.indexNowKey + '.txt'), site.indexNowKey + '\n');
+fs.writeFileSync(path.join(pub, site.indexNowKey + '.txt'), site.indexNowKey + '\n');
 
 // ---- Installable PWA. Stable app ID and root worker scope match the custom host.
 const appPages = pages.filter(p => p.app);
@@ -393,9 +394,7 @@ const manifest = {
   ]
 };
 const manifestJSON = JSON.stringify(manifest, null, 2) + '\n';
-fs.writeFileSync(path.join(root, 'manifest.webmanifest'), manifestJSON);
-// Keep the old source manifest valid for anyone still referencing it.
-fs.writeFileSync(path.join(root, 'src/manifest.json'), manifestJSON);
+fs.writeFileSync(path.join(pub, 'manifest.webmanifest'), manifestJSON);
 
 const pagePaths = ['/', ...pages.map(p => p.path)];
 const precache = [...new Set([
@@ -405,7 +404,13 @@ const precache = [...new Set([
   '/assets/favicon-image/apple-touch-icon.png', '/assets/favicon-image/favicon-96x96.png',
   site.logo.local192, ...manifest.icons.map(icon => icon.src)
 ])];
-const fileFor = url => fs.existsSync(path.join(dist, url)) && !url.endsWith('/') ? path.join(dist, url) : path.join(root, url);
+// ---- static files: copied as-is so docs/ is self-contained
+const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub, to), { recursive: true });
+['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots'].forEach(f => copy(f));
+fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
+// Serve files exactly as built; Jekyll processing is unnecessary and slower.
+fs.writeFileSync(path.join(pub, '.nojekyll'), '');
+const fileFor = url => path.join(pub, url);
 const workerTemplate = fs.readFileSync(path.join(root, 'assets/PWA/sw.js'), 'utf8');
 const hash = createHash('sha256').update(workerTemplate).update(manifestJSON);
 for (const html of outputs.values()) hash.update(html);
@@ -413,6 +418,6 @@ for (const resource of precache.filter(url => !pagePaths.includes(url))) hash.up
 const revision = hash.digest('hex').slice(0, 16);
 const worker = workerTemplate.replace('__CACHE_VERSION__', revision).replace('__PRECACHE_JSON__', JSON.stringify(precache))
   .replace('__PAGES_JSON__', JSON.stringify(pagePaths));
-fs.writeFileSync(path.join(root, 'sw.js'), worker);
-console.log(`Built tool.html (${(Buffer.byteLength(homeHtml) / 1024).toFixed(1)} KB), ${pages.length} pages in dist/, crawl files, manifest and sw.js (${revision})`);
+fs.writeFileSync(path.join(pub, 'sw.js'), worker);
+console.log(`Built docs/: home (${(Buffer.byteLength(homeHtml) / 1024).toFixed(1)} KB), ${pages.length} pages, crawl files, manifest and sw.js (${revision})`);
 console.log(`${tools.length} published tools; ${catalog.length - tools.length} unpublished records retained in tools.json`);

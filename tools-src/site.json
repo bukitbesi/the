@@ -93,39 +93,8 @@
   },
   "indexNowKey": "a23a48e05a9411b3da9c72fc138a6206",
   "adsense": {
-    "_comment": "Paste your AdSense publisher ID (ca-pub-0000000000000000) and three display ad unit IDs. Leave client empty to publish without ads.",
+    "_comment": "Publisher ID plus the data-ad-slot NUMBER of each display unit (digits only, not the full ad code).",
     "client": "ca-pub-0182550701431501",
-    "slots": {
-      "top": "<!-- tool-top -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-0182550701431501"
-     data-ad-slot="2106466698"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>",
-      "middle": "<!-- tool-middle -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-0182550701431501"
-     data-ad-slot="9960905984"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>",
-      "bottom": "<!-- tool-bottom -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-0182550701431501"
-     data-ad-slot="9686493684"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>"
-    }
+    "slots": { "top": "2106466698", "middle": "9960905984", "bottom": "9686493684" }
   }
 }
