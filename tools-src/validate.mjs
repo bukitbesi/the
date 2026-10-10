@@ -30,7 +30,7 @@ const toolIcons = [...html.matchAll(/data-icon="([^"]+)"/g)].map(m => m[1]);
 assert.deepEqual(toolIcons, tools.map(item => item.icon), 'Every card has its own icon');
 assert.equal(new Set(toolIcons).size, tools.length, 'Unique icon keys');
 assert.equal(new Set(tools.map(item => icons[item.icon])).size, tools.length, 'Distinct SVG artwork');
-assert.equal((html.match(/<svg\b/g) || []).length, tools.length, 'One inline SVG per tool');
+assert.equal((html.match(/data-icon="[^"]+" aria-hidden="true"><svg\b/g) || []).length, tools.length, 'One inline SVG per tool');
 const faq = graph.find(item => item['@type'] === 'FAQPage');
 assert.equal(faq.mainEntity.length, (html.match(/<details>/g) || []).length, 'FAQ schema matches visible questions');
 for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(m[1]);
@@ -86,5 +86,14 @@ for (const shot of manifest.screenshots) assert.equal(jpegSize(shot.src), shot.s
 assert(manifest.screenshots.some(s => s.form_factor === 'wide') && manifest.screenshots.some(s => s.form_factor === 'narrow'), 'Rich install screenshots');
 assert.equal(read(site.indexNowKey + '.txt').trim(), site.indexNowKey, 'IndexNow key file');
 assert(!html.includes('{count}') && !llms.includes('{count}'), 'FAQ count placeholders resolved');
+const ads = site.adsense || {};
+if (ads.client) {
+  assert.equal((html.match(/<ins class="adsbygoogle"/g) || []).length, 3, 'Three ad units');
+  assert(!/<script[^>]+adsbygoogle\.js/.test(html), 'AdSense library is lazy-loaded, never render-blocking');
+  assert(read('ads.txt').includes(ads.client.replace('ca-', '')), 'ads.txt names the publisher');
+} else {
+  assert(!html.includes('adsbygoogle'), 'No ad markup without a publisher ID');
+}
+assert(html.includes('id="themeToggle"'), 'Theme toggle present');
 assert(read('CNAME').trim() === new URL(site.origin).hostname, 'CNAME matches canonical host');
 console.log(`Validated ${tools.length} tools, SEO files, scripts, PWA manifest, icons and offline assets.`);

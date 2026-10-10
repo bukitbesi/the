@@ -36,6 +36,7 @@ jobs:
           cp tool.html _site/index.html
           cp robots.txt sitemap.xml llms.txt 404.html offline.html manifest.webmanifest sw.js CNAME _site/
           cp "$(node -p "require('./tools-src/site.json').indexNowKey").txt" _site/
+          if [ -f ads.txt ]; then cp ads.txt _site/; fi
           cp -r assets/favicon-image _site/assets/
           mkdir -p _site/assets/PWA
           cp assets/PWA/pwa.min.js _site/assets/PWA/

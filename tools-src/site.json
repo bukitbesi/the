@@ -91,5 +91,14 @@
     "local192": "/assets/favicon-image/bukit-besi-192.webp",
     "local512": "/assets/favicon-image/bukit-besi-512.webp"
   },
-  "indexNowKey": "a23a48e05a9411b3da9c72fc138a6206"
+  "indexNowKey": "a23a48e05a9411b3da9c72fc138a6206",
+  "adsense": {
+    "_comment": "Paste your AdSense publisher ID (ca-pub-0000000000000000) and three display ad unit IDs. Leave client empty to publish without ads.",
+    "client": "",
+    "slots": {
+      "top": "",
+      "middle": "",
+      "bottom": ""
+    }
+  }
 }

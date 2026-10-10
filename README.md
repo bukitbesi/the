@@ -25,8 +25,9 @@ The full, always-current list is generated into [`llms.txt`](llms.txt).
 ## Performance and search
 
 - **Core Web Vitals:** single static HTML file, inline critical CSS, system
-  fonts, inline SVG icons, no third-party requests. Local Lighthouse mobile:
-  100/100/100/100, LCP ≈ 1.1 s, TBT ≈ 0 ms, CLS 0
+  fonts, inline SVG icons, no render-blocking third-party code. Local
+  Lighthouse mobile with all three ad units enabled: 99–100 performance,
+  100 accessibility/best practices/SEO, TBT 0 ms, CLS 0
   ([audit](docs/seo-audit.md)). GitHub Pages CDN keeps TTFB low.
 - **SEO:** canonical URL, Open Graph + 1200×630 social card, sitemap,
   robots.txt, one `@graph` of Organization, WebSite, CollectionPage,
@@ -39,11 +40,35 @@ The full, always-current list is generated into [`llms.txt`](llms.txt).
   versioned service worker (network-first directory, offline fallback,
   consent-based updates). See [PWA details](docs/pwa.md).
 
+- **Theme:** light by default (matches standard AdSense creatives), with a
+  dark-mode toggle. The choice is stored per browser and applied before
+  first paint, so there is no flash or layout shift. Both themes pass
+  WCAG AA contrast (axe-core).
+
+## AdSense
+
+Fill in `adsense` in `tools-src/site.json`:
+
+```json
+"adsense": {
+  "client": "ca-pub-0000000000000000",
+  "slots": { "top": "1234567890", "middle": "1234567890", "bottom": "1234567890" }
+}
+```
+
+Create three **Display ads → Responsive** units in AdSense and paste their
+`data-ad-slot` values. The build then adds the units (after the hero, between
+Categories and Why, and between FAQ and the closing call to action), each
+labelled "Advertisement" with space reserved to prevent layout shift, and
+writes `ads.txt`. The AdSense library loads only after the visitor's first
+scroll, tap, key press or mouse move; the ad code itself is unmodified. With
+`client` empty, no ad code is published.
+
 ## Project layout
 
 ```
 tools-src/tools.json     tool records (only live: true is published)
-tools-src/site.json      host, brand, categories, FAQ, social image, IndexNow key
+tools-src/site.json      host, brand, categories, FAQ, social image, IndexNow key, AdSense IDs
 tools-src/template.html  page layout
 tools-src/icons.mjs      one SVG icon per tool
 tools-src/build.mjs      generates tool.html, sitemap, robots, llms.txt, manifest, sw.js
@@ -68,8 +93,9 @@ generated files (`tool.html`, `sw.js`, `manifest.webmanifest`, `llms.txt`,
 `sitemap.xml`, `robots.txt`) by hand.
 
 The `CNAME` file and the `origin` in `site.json` must match; the build checks
-this. Because deployment uses GitHub Actions, the custom domain must also be
-set in **Settings → Pages**. See [the domain migration](docs/domain-migration.md).
+this. **Settings → Pages → Source must be "GitHub Actions".** With "Deploy
+from a branch", GitHub serves this README as the home page instead of the
+built directory. Set the custom domain on the same settings page. See [the domain migration](docs/domain-migration.md).
 
 ## More documentation
 

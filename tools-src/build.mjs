@@ -37,6 +37,11 @@ if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('publis
 if (new URL(site.origin).origin !== site.origin) problems.push('origin must be an origin without a trailing slash');
 if (fs.readFileSync(path.join(root, 'CNAME'), 'utf8').trim() !== new URL(site.origin).hostname) problems.push('CNAME and canonical host differ');
 if (!/^[0-9a-f]{32}$/.test(site.indexNowKey || '')) problems.push('indexNowKey must be 32 lowercase hex characters');
+const ads = site.adsense || { client: '', slots: {} };
+if (ads.client) {
+  if (!/^ca-pub-\d{16}$/.test(ads.client)) problems.push('adsense.client must look like ca-pub-0000000000000000');
+  for (const k of ['top', 'middle', 'bottom']) if (!/^\d{8,12}$/.test(ads.slots[k] || '')) problems.push(`adsense.slots.${k} must be a numeric ad unit ID`);
+}
 if (!/^\d{4}-\d{2}-\d{2}$/.test(site.dateModified) || Number.isNaN(date.getTime())) problems.push('invalid modification date');
 if (problems.length) { console.error(problems.join('\n')); process.exit(1); }
 
@@ -98,6 +103,26 @@ const graph = [
 ];
 const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
 
+// ---- AdSense: three manual responsive units. The library loads on the visitor's first
+// scroll, tap, key or mouse move, so it never competes with LCP or the first input.
+const adUnit = key => !ads.client ? '' : `<aside class="ad" aria-label="Advertisement"><p class="ad-label">Advertisement</p><ins class="adsbygoogle" data-ad-client="${ads.client}" data-ad-slot="${ads.slots[key]}" data-ad-format="auto" data-full-width-responsive="true"></ins></aside>`;
+const adLoader = !ads.client ? '' : `<script>
+(function(){
+  var slots=document.querySelectorAll("ins.adsbygoogle"),done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  if(!slots.length)return;
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    var s=document.createElement("script");
+    s.async=true;s.crossOrigin="anonymous";
+    s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}";
+    document.head.appendChild(s);
+    for(var i=0;i<slots.length;i++)(window.adsbygoogle=window.adsbygoogle||[]).push({});
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+})();
+</script>`;
+
 // ---- fill template
 const map = {
   TITLE: esc(title + ' | ' + site.brand), DESCRIPTION: esc(description),
@@ -108,7 +133,7 @@ const map = {
   // summary_large_image needs a ~2:1 image; fall back to "summary" for square logos
   TWITTER_CARD: site.ogImage.width / site.ogImage.height >= 1.5 ? 'summary_large_image' : 'summary',
   TWITTER: site.twitter, CHIPS: chips, CARDS: cards, CATEGORY_BLOCKS: categoryBlocks, FAQ_HTML: faqHtml,
-  FOOTER_POPULAR: footerPopular, FOOTER_CATS: footerCats, JSONLD: jsonld
+  FOOTER_POPULAR: footerPopular, AD_TOP: adUnit('top'), AD_MIDDLE: adUnit('middle'), AD_BOTTOM: adUnit('bottom'), AD_LOADER: adLoader, FOOTER_CATS: footerCats, JSONLD: jsonld
 };
 html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
   if (!(k in map)) { console.error('Unknown placeholder ' + m); process.exit(1); }
@@ -155,6 +180,10 @@ fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
 // Let crawlers fetch the 404 page so they can see its noindex directive.
 const robots = `# Public directory: search and AI crawlers may access the site.\nUser-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`;
 fs.writeFileSync(path.join(root, 'robots.txt'), robots);
+// ads.txt authorises the publisher on this host as well as the root domain.
+const adsTxt = path.join(root, 'ads.txt');
+if (ads.client) fs.writeFileSync(adsTxt, `google.com, ${ads.client.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n`);
+else fs.rmSync(adsTxt, { force: true });
 // IndexNow ownership file (Bing, Yandex, Seznam, Naver). The key is public by design.
 fs.writeFileSync(path.join(root, site.indexNowKey + '.txt'), site.indexNowKey + '\n');
 
@@ -164,7 +193,7 @@ const manifest = {
   description: 'Free online tool directory for code, content, design, AI and Malaysian calculators.',
   lang: 'en', dir: 'ltr', start_url: '/', scope: '/', display: 'standalone',
   display_override: ['standalone', 'minimal-ui'],
-  theme_color: '#0a0a0f', background_color: '#0a0a0f',
+  theme_color: '#ffffff', background_color: '#ffffff',
   categories: ['utilities', 'productivity'], prefer_related_applications: false,
   icons: [
     { src: '/assets/PWA/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

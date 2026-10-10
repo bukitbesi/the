@@ -12,8 +12,8 @@
     "standalone",
     "minimal-ui"
   ],
-  "theme_color": "#0a0a0f",
-  "background_color": "#0a0a0f",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "categories": [
     "utilities",
     "productivity"
