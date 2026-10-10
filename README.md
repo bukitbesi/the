@@ -64,32 +64,66 @@ writes `ads.txt`. The AdSense library loads only after the visitor's first
 scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 `client` empty, no ad code is published.
 
+## Hosted calculators
+
+| Page | Language | Targets |
+| --- | --- | --- |
+| [/salary-calculator-malaysia/](https://tool.thebukitbesi.com/salary-calculator-malaysia/) | English | salary calculator malaysia, PCB / EPF / SOCSO calculator |
+| [/kalkulator-gaji/](https://tool.thebukitbesi.com/kalkulator-gaji/) | Bahasa Melayu | kalkulator gaji bersih, kalkulator KWSP / PCB |
+
+Both pages share one tested calculation core (`assets/js/salary-core.js`):
+EPF from the KWSP Third Schedule bands, SOCSO / EIS / LINDUNG 24 Jam from
+PERKESO's RM100 bands with the RM6,000 ceiling, and PCB from LHDN's
+computerised method. The build renders the first result, the worked example
+and the salary table into the HTML, so the page is complete before any script
+runs. They are linked as `hreflang` pairs, carry WebApplication, BreadcrumbList
+and FAQPage JSON-LD, cite their official sources and work offline.
+
+**Yearly upkeep:** after each Budget or KWSP/PERKESO/LHDN change, update the
+rates in `salary-core.js`, its `RULES.verified` date and the tests in
+`tools-src/tests/salary.test.mjs`, then update `dateModified` on both pages.
+
+[Privacy policy](https://tool.thebukitbesi.com/privacy/) and
+[Terms of use](https://tool.thebukitbesi.com/terms/) live on this host and
+cover AdSense cookies, on-device storage and calculator disclaimers.
+
 ## Project layout
 
 ```
-tools-src/tools.json     tool records (only live: true is published)
-tools-src/site.json      host, brand, categories, FAQ, social image, IndexNow key, AdSense IDs
-tools-src/template.html  page layout
-tools-src/icons.mjs      one SVG icon per tool
-tools-src/build.mjs      generates tool.html, sitemap, robots, llms.txt, manifest, sw.js
-tools-src/validate.mjs   fails the deploy on SEO, schema or PWA drift
-tools-src/images.mjs     renders the social card and PWA screenshots (Playwright)
-assets/PWA/sw.js         service-worker source template
+tools-src/tools.json        tool records (only live: true is published)
+tools-src/site.json         host, brand, categories, FAQ, social image, IndexNow key, AdSense IDs
+tools-src/layout.html       shared page shell: head/meta, header, footer, theme, ads
+tools-src/home.html         directory home page body
+tools-src/pages/*.html      other pages; JSON front matter sets URL, language, hreflang, schema, FAQ
+tools-src/css/              base.css (shared), home.css, page.css
+tools-src/icons.mjs         one SVG icon per tool
+tools-src/build.mjs         generates tool.html, dist/ pages and bundles, sitemap, robots, llms.txt, manifest, sw.js
+tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attribute or PWA drift
+tools-src/tests/            unit tests for calculation cores (node --test)
+tools-src/images.mjs        renders the social card and PWA screenshots (Playwright)
+assets/js/salary-*.js       salary calculator core and UI (bundled to dist/assets/js/salary.js)
+assets/PWA/sw.js            service-worker source template
 ```
+
+To add a tool page, create `tools-src/pages/<slug>.html` with front matter
+(copy an existing page), add its record to `tools.json` with the full URL on
+this host, then build. The sitemap, llms.txt, offline cache and IndexNow
+ping pick it up automatically.
 
 ## Build, preview, deploy
 
 ```sh
+node --test tools-src/tests/*.test.mjs
 node tools-src/build.mjs
 node tools-src/validate.mjs
 node tools-src/preview.mjs        # http://127.0.0.1:8765/
 node tools-src/images.mjs         # only after brand, count or layout changes
 ```
 
-A push to `main` builds, validates and publishes to GitHub Pages, then pings
-IndexNow. Update `dateModified` in `site.json` when published content changes.
+Pull requests run the tests, build and validator. A push to `main` does the
+same, publishes to GitHub Pages and pings IndexNow with every sitemap URL. Update `dateModified` in `site.json` when published content changes.
 Set `live: true` only after a tool's page returns HTTP 200. Do not edit
-generated files (`tool.html`, `sw.js`, `manifest.webmanifest`, `llms.txt`,
+generated files (`tool.html`, `dist/`, `sw.js`, `manifest.webmanifest`, `llms.txt`,
 `sitemap.xml`, `robots.txt`) by hand.
 
 The `CNAME` file and the `origin` in `site.json` must match; the build checks

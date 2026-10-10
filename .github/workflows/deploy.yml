@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -10,12 +11,29 @@ permissions:
   pages: write
   id-token: write
 
+# Pull request checks get their own group so they never cancel a deployment.
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && format('check-{0}', github.ref) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
+  # Runs on every pull request so problems show up before merge.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests, build and validate
+        run: |
+          node --test tools-src/tests/*.test.mjs
+          node tools-src/build.mjs
+          node tools-src/validate.mjs
+
   deploy:
+    if: github.event_name != 'pull_request'
+    needs: check
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -25,7 +43,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Build and validate the public directory
+      - name: Build and validate the site
         run: |
           node tools-src/build.mjs
           node tools-src/validate.mjs
@@ -34,6 +52,7 @@ jobs:
         run: |
           mkdir -p _site/assets
           cp tool.html _site/index.html
+          cp -r dist/. _site/
           cp robots.txt sitemap.xml llms.txt 404.html offline.html manifest.webmanifest sw.js CNAME _site/
           cp "$(node -p "require('./tools-src/site.json').indexNowKey").txt" _site/
           if [ -f ads.txt ]; then cp ads.txt _site/; fi
@@ -54,7 +73,7 @@ jobs:
             const s = require('./tools-src/site.json');
             const body = { host: new URL(s.origin).hostname, key: s.indexNowKey,
               keyLocation: s.origin + '/' + s.indexNowKey + '.txt',
-              urlList: [s.origin + '/', s.origin + '/llms.txt'] };
+              urlList: [...require('fs').readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]).concat(s.origin + '/llms.txt') };
             fetch('https://api.indexnow.org/indexnow', { method: 'POST',
               headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(body) })
               .then(r => console.log('IndexNow HTTP', r.status));

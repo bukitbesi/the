@@ -1,9 +1,11 @@
 // Source template. tools-src/build.mjs writes the versioned root /sw.js.
 'use strict';
 const CACHE_PREFIX = 'bukit-tools-';
-const CACHE_NAME = CACHE_PREFIX + '106a7353b0c6abce';
-const PRECACHE = ["/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
-const ASSETS = new Set(PRECACHE.filter(url => url !== '/'));
+const CACHE_NAME = CACHE_PREFIX + 'b40bf5ab3a24889d';
+const PRECACHE = ["/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/js/salary.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
+// Pages are HTML routes (network first, saved copy offline); everything else is a static asset.
+const PAGES = new Set(["/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/"]);
+const ASSETS = new Set(PRECACHE.filter(url => !PAGES.has(url)));
 
 self.addEventListener('install', event => {
   // Updates wait until the user chooses Update, or all old app tabs close.
@@ -38,14 +40,15 @@ async function offlinePage(cache) {
 async function navigate(event) {
   const cache = await caches.open(CACHE_NAME);
   const url = new URL(event.request.url);
-  // Only the public directory is stored. Do not cache arbitrary pages or queries.
-  const directory = url.pathname === '/' || url.pathname === '/index.html';
+  // Only this site's own pages are stored, keyed by path so tracking queries share one entry.
+  const key = url.pathname === '/index.html' ? '/' : url.pathname;
+  const directory = PAGES.has(key);
   const network = (async () => {
     const response = await event.preloadResponse || await fetch(event.request);
     if (directory && response.ok && response.type === 'basic' &&
         response.headers.get('Content-Type')?.includes('text/html')) {
       // Storage failure must never prevent the live page from opening.
-      await cache.put('/', response.clone()).catch(() => {});
+      await cache.put(key, response.clone()).catch(() => {});
     }
     return response;
   })();
@@ -58,7 +61,7 @@ async function navigate(event) {
     })]);
   } catch {
     if (directory) {
-      const saved = await cache.match('/');
+      const saved = await cache.match(key);
       if (saved) return saved;
     }
     return offlinePage(cache);

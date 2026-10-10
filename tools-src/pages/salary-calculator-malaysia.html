@@ -1,0 +1,229 @@
+<!--page
+{
+  "path": "/salary-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-gaji/" },
+  "title": "Malaysia Salary Calculator 2026: PCB, EPF, SOCSO & EIS",
+  "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam and PCB tax, plus your employer's cost. Updated rates.",
+  "llms": "Calculates 2026 Malaysian take-home pay from gross monthly salary: EPF (KWSP Third Schedule), SOCSO, EIS, LINDUNG 24 Jam (PERKESO, RM6,000 ceiling) and PCB/MTD tax (LHDN computerised method), with employer cost and a table of net pay at common salaries.",
+  "datePublished": "2026-10-10",
+  "dateModified": "2026-10-10",
+  "salary": true,
+  "scripts": ["/assets/js/salary.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Malaysia Salary Calculator", null]],
+  "about": ["Employees Provident Fund (EPF)", "SOCSO (PERKESO)", "Employment Insurance System (EIS)", "Monthly tax deduction (PCB/MTD)", "Malaysian income tax"],
+  "app": {
+    "name": "Malaysia Salary Calculator 2026",
+    "category": "FinanceApplication",
+    "features": ["Net (take-home) pay", "EPF employee and employer shares using the Third Schedule", "SOCSO, EIS and LINDUNG 24 Jam with the RM6,000 wage ceiling", "PCB/MTD using the LHDN computerised method", "Tax status, children, zakat and extra reliefs", "Employer cost", "Works offline"]
+  },
+  "citations": [
+    ["KWSP: Employer mandatory contribution", "https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution"],
+    ["KWSP: Third Schedule contribution rates", "https://www.kwsp.gov.my/documents/d/guest/jadual-ketiga-bi-pdf-1"],
+    ["PERKESO: Wage ceiling raised to RM6,000 from 1 October 2024", "https://perkeso.gov.my/images/kenyataan_media/2024/011024%20-%20SIARAN%20MEDIA%20KUATKUASA%20PENINGKATAN%20SILING%20GAJI%20RM5,000%20KEPADA%20RM6,000%20FINAL.pdf"],
+    ["PERKESO: LINDUNG 24 Jam FAQ", "https://www.perkeso.gov.my/images/lindung/lindung-24-jam/130726-FAQ_LINDUNG_24_JAM.pdf"],
+    ["LHDN: PCB submission and payment", "https://www.hasil.gov.my/majikan/pembayaran-pcb/"]
+  ],
+  "faq": [
+    { "q": "How much EPF is deducted from my salary in 2026?", "a": "Malaysian and permanent resident employees under 60 contribute 11% of monthly wages. The employer adds 13% when wages are RM5,000 or less and 12% above RM5,000. From age 60 the employee share is 0% and the employer pays 4%. Amounts follow the KWSP Third Schedule wage bands and are rounded up to the next ringgit, so they can be slightly higher than a straight percentage." },
+    { "q": "How is PCB (monthly tax deduction) calculated?", "a": "Employers use LHDN's computerised method. Your monthly pay is projected over the year, then EPF (up to RM4,000), the RM9,000 personal relief, spouse and child reliefs and any reliefs you declare on Form TP1 are deducted. Resident tax rates are applied to that chargeable income, the RM400 rebate is subtracted below RM35,000, and the result is spread across the remaining months, rounded up to the next 5 sen. If the monthly amount is under RM10, no PCB is deducted." },
+    { "q": "What is the SOCSO and EIS wage ceiling?", "a": "PERKESO contributions are capped at RM6,000 of monthly wages from 1 October 2024. At or above that level an employee under 60 pays RM29.75 to SOCSO and RM11.90 to EIS each month, while the employer pays RM104.15 and RM11.90." },
+    { "q": "What is LINDUNG 24 Jam and do I have to pay it?", "a": "LINDUNG 24 Jam is PERKESO's non-work accident scheme. From 1 June 2026 workers contribute 0.75% of wages up to the RM6,000 ceiling, with no employer share. Reports in July 2026 said the government made the contribution voluntary, so check your payslip or ask your employer. Switch it off in the calculator if you have opted out." },
+    { "q": "Is my employer's EPF contribution part of my salary?", "a": "No. The employer's EPF, SOCSO and EIS contributions are paid on top of your gross salary and do not reduce your take-home pay. The employer's EPF share is credited to your EPF account, so it is part of your retirement savings and your total employment cost." },
+    { "q": "Why does the calculator show RM0 PCB?", "a": "PCB is zero when your projected chargeable income is low enough that the monthly tax would be under RM10. For a single employee with no other reliefs, this applies up to a gross salary of roughly RM3,800 a month. Your final tax is still settled when you file your annual return." },
+    { "q": "What is the minimum wage in Malaysia?", "a": "The minimum wage is RM1,700 a month. It took effect on 1 February 2025 for employers with five or more workers and on 1 August 2025 for smaller employers." },
+    { "q": "Does this calculator save or send my salary details?", "a": "No. All calculations run in your browser. Your inputs are not sent to a server, and the shareable link keeps them after the # sign, which browsers do not send to websites." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Salary calculator</li></ol></nav>
+  <h1>Malaysia Salary Calculator {{S_YEAR}}</h1>
+  <p class="answer">On a <strong>{{S_GROSS}}</strong> monthly salary in {{S_YEAR}}, a single employee under 60 takes home about <strong>{{S_NET}}</strong> after EPF ({{S_EPF}}), SOCSO ({{S_SOCSO}}), EIS ({{S_EIS}}), LINDUNG 24 Jam ({{S_LINDUNG}}) and PCB tax ({{S_PCB}}). Enter your own salary to see your take-home pay and what your employer pays.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-gaji/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="salaryForm" novalidate aria-labelledby="form-h">
+      <h2 id="form-h">Your details</h2>
+      <div class="field">
+        <label for="salary">Monthly gross salary</label>
+        <div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="1000" max="1000000" step="0.01" value="{{S_DEFAULT}}" required aria-describedby="salary-help salaryError"></div>
+        <p class="help" id="salary-help">Basic pay plus fixed allowances, before any deductions.</p>
+        <p class="error" id="salaryError" role="alert" hidden></p>
+      </div>
+      <fieldset class="field">
+        <legend>Age</legend>
+        <div class="seg">
+          <label><input type="radio" name="age" value="0" checked> Below 60</label>
+          <label><input type="radio" name="age" value="60"> 60 and above</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="status">Tax status</label>
+        <select class="input" id="status" name="status">
+          <option value="single">Single</option>
+          <option value="married">Married, spouse working</option>
+          <option value="spouse">Married, spouse not working</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="children">Children under 18</label>
+        <div class="input"><input id="children" name="children" type="number" inputmode="numeric" min="0" max="20" step="1" value="0" aria-describedby="children-help"></div>
+        <p class="help" id="children-help">RM2,000 relief each. Older children in tertiary study qualify for more; add the difference under extra reliefs.</p>
+      </div>
+      <details class="more-opts" id="moreOpts">
+        <summary>More options</summary>
+        <div class="field">
+          <label for="otherRelief">Extra annual reliefs declared to your employer (Form TP1)</label>
+          <div class="input"><span aria-hidden="true">RM</span><input id="otherRelief" name="otherRelief" type="number" inputmode="decimal" min="0" step="1" value="0" aria-describedby="relief-help"></div>
+          <p class="help" id="relief-help">For example life insurance (up to RM3,000), SOCSO/EIS (up to RM350) or lifestyle (up to RM2,500).</p>
+        </div>
+        <div class="field">
+          <label for="zakat">Monthly zakat deducted through payroll</label>
+          <div class="input"><span aria-hidden="true">RM</span><input id="zakat" name="zakat" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div>
+        </div>
+        <div class="field">
+          <label class="check"><input type="checkbox" id="lindung" name="lindung" checked> <span>Include LINDUNG 24 Jam (0.75%, from 1 June 2026). Untick if you have opted out.</span></label>
+        </div>
+      </details>
+    </form>
+
+    <section class="box" id="results" aria-labelledby="results-h">
+      <h2 id="results-h">Your monthly pay</h2>
+      <div class="net">
+        <p>Take-home pay</p>
+        <output id="rNet" for="salary">{{S_NET}}</output>
+        <p><span id="rNetYear">{{S_NET_YEAR}}</span> a year</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Deductions from your salary</caption>
+        <tbody>
+          <tr><th scope="row">Gross salary</th><td id="rGross">{{S_GROSS}}</td></tr>
+          <tr><th scope="row">EPF (KWSP)<small>Employee · employer rate: <span id="rEpfRate">11% · 13%</span></small></th><td id="rEpf">{{S_EPF}}</td></tr>
+          <tr><th scope="row">SOCSO (PERKESO)</th><td id="rSocso">{{S_SOCSO}}</td></tr>
+          <tr><th scope="row">EIS (SIP)</th><td id="rEis">{{S_EIS}}</td></tr>
+          <tr id="rowLindung"><th scope="row">LINDUNG 24 Jam</th><td id="rLindung">{{S_LINDUNG}}</td></tr>
+          <tr><th scope="row">PCB (monthly tax)</th><td id="rPcb">{{S_PCB}}</td></tr>
+          <tr id="rowZakat" hidden><th scope="row">Zakat</th><td id="rZakat">{{S_ZAKAT}}</td></tr>
+          <tr class="total"><th scope="row">Total deductions</th><td id="rDed">{{S_DED}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Paid by your employer (on top of salary)</caption>
+        <tbody>
+          <tr><th scope="row">EPF employer share</th><td id="rEpfEr">{{S_EPF_ER}}</td></tr>
+          <tr><th scope="row">SOCSO employer share</th><td id="rSocsoEr">{{S_SOCSO_ER}}</td></tr>
+          <tr><th scope="row">EIS employer share</th><td id="rEisEr">{{S_EIS_ER}}</td></tr>
+          <tr class="total"><th scope="row">Total employer cost</th><td id="rCost">{{S_COST}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Yearly view</caption>
+        <tbody>
+          <tr><th scope="row">EPF saved (both shares)</th><td id="rEpfYear">{{S_EPF_YEAR}}</td></tr>
+          <tr><th scope="row">Estimated income tax for the year</th><td id="rTaxYear">{{S_TAX_YEAR}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note" id="rNote">{{S_NOTE}}</p>
+      <div class="tool-actions">
+        <button type="button" class="btn sm" id="copyLink">Copy link to this result</button>
+        <button type="button" class="btn ghost sm" id="printBtn">Print or save as PDF</button>
+      </div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="how">How your take-home pay is calculated</h2>
+  <p>Take-home pay is your gross monthly salary minus five statutory deductions. Each one follows its agency's own table, so the calculator applies the published rules rather than flat percentages:</p>
+  <ol>
+    <li><strong>EPF (KWSP):</strong> 11% of wages, read from the KWSP Third Schedule. Wages are grouped into RM20 bands up to RM5,000 and RM100 bands up to RM20,000; the rate applies to the top of the band and is rounded up to the next ringgit.</li>
+    <li><strong>SOCSO (PERKESO):</strong> about 0.5% of wages up to RM6,000, taken from PERKESO's RM100 wage bands.</li>
+    <li><strong>EIS (SIP):</strong> about 0.2% of wages up to RM6,000, using the same bands.</li>
+    <li><strong>LINDUNG 24 Jam:</strong> 0.75% of wages up to RM6,000 from 1 June 2026, paid by the employee only.</li>
+    <li><strong>PCB (MTD):</strong> monthly income tax withheld under LHDN's computerised method, after EPF relief (up to RM4,000 a year) and your personal, spouse and child reliefs.</li>
+  </ol>
+  <p>Zakat paid through your employer reduces PCB ringgit for ringgit. The zakat itself is shown on its own line.</p>
+
+  <h2 id="rates">EPF, SOCSO and EIS rates for {{S_YEAR}}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates">
+    <table class="data text">
+      <thead><tr><th scope="col">Contribution</th><th scope="col">Employee</th><th scope="col">Employer</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">EPF, under 60</th><td>11%</td><td>13% (wages up to RM5,000)<br>12% (above RM5,000)</td><td>No wage ceiling. Malaysian citizens and permanent residents.</td></tr>
+        <tr><th scope="row">EPF, 60 and above</th><td>0%</td><td>4%</td><td>Malaysian citizens.</td></tr>
+        <tr><th scope="row">SOCSO, under 60</th><td>0.5%</td><td>1.75%</td><td>Employment Injury and Invalidity schemes. Maximum RM29.75 and RM104.15.</td></tr>
+        <tr><th scope="row">SOCSO, 60 and above</th><td>0%</td><td>1.25%</td><td>Employment Injury scheme only.</td></tr>
+        <tr><th scope="row">EIS</th><td>0.2%</td><td>0.2%</td><td>Maximum RM11.90 each. Not payable from age 60.</td></tr>
+        <tr><th scope="row">LINDUNG 24 Jam</th><td>0.75%</td><td>None</td><td>From 1 June 2026. Reported to have become voluntary in July 2026.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>PERKESO contributions use a wage ceiling of RM6,000 from 1 October 2024. Percentages are approximate because the official schedules list a fixed amount for each wage band.</p>
+
+  <h2 id="pcb">PCB tax rates for {{S_YEAR}}</h2>
+  <p>PCB is an advance payment of your income tax. The chargeable income bands below apply to resident individuals. If your chargeable income is RM35,000 or less, a RM400 rebate applies (RM800 when your spouse has no income and you claim the spouse relief).</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pcb">
+    <table class="data">
+      <thead><tr><th scope="col">Chargeable income (RM)</th><th scope="col">Rate on this band</th><th scope="col">Tax on lower bands</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">0 – 5,000</th><td>0%</td><td>RM0</td></tr>
+        <tr><th scope="row">5,001 – 20,000</th><td>1%</td><td>RM0</td></tr>
+        <tr><th scope="row">20,001 – 35,000</th><td>3%</td><td>RM150</td></tr>
+        <tr><th scope="row">35,001 – 50,000</th><td>6%</td><td>RM600</td></tr>
+        <tr><th scope="row">50,001 – 70,000</th><td>11%</td><td>RM1,500</td></tr>
+        <tr><th scope="row">70,001 – 100,000</th><td>19%</td><td>RM3,700</td></tr>
+        <tr><th scope="row">100,001 – 400,000</th><td>25%</td><td>RM9,400</td></tr>
+        <tr><th scope="row">400,001 – 600,000</th><td>26%</td><td>RM84,400</td></tr>
+        <tr><th scope="row">600,001 – 2,000,000</th><td>28%</td><td>RM136,400</td></tr>
+        <tr><th scope="row">Above 2,000,000</th><td>30%</td><td>RM528,400</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Worked example: {{S_GROSS}} a month</h3>
+  <p>A single employee earns {{S_GROSS}} × 12 = RM60,000 a year. EPF relief is capped at RM4,000 and personal relief is RM9,000, leaving RM47,000 chargeable income. Tax is RM600 on the first RM35,000 plus 6% of RM12,000 (RM720), or RM1,320 for the year. Spread over 12 months, PCB is <strong>{{S_PCB}}</strong> a month.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="examples-h">Take-home pay at common salaries ({{S_YEAR}})</h2>
+  <p>Monthly amounts for a single employee under 60 with no children, no extra reliefs and LINDUNG 24 Jam included. The first row is the RM1,700 minimum wage.</p>
+  {{S_TABLE}}
+
+  <h2 id="limits">Assumptions and limits</h2>
+  <ul>
+    <li>For Malaysian citizens and permanent residents who are tax residents. Foreign workers have different EPF, SOCSO and tax rules.</li>
+    <li>Assumes the same salary every month. Bonuses, commission, overtime, arrears and benefits in kind change PCB in the month they are paid.</li>
+    <li>All pay entered is treated as wages for EPF, SOCSO and EIS. Some payments, such as overtime, are not counted for EPF.</li>
+    <li>Uses the statutory 11% employee EPF rate. You can elect to contribute more; your employer then deducts the higher amount.</li>
+    <li>For wages below RM1,000, check the official schedules, which use smaller wage bands.</li>
+    <li>PCB is an estimate of tax withheld. Your actual tax is settled when you file your annual return (Form BE).</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <p>Rates and methods were checked against these official publications on {{S_VERIFIED}}:</p>
+  <ul>
+    <li><a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution" rel="noopener">KWSP: employer mandatory contribution</a> and the <a href="https://www.kwsp.gov.my/documents/d/guest/jadual-ketiga-bi-pdf-1" rel="noopener">Third Schedule</a></li>
+    <li><a href="https://perkeso.gov.my/images/kenyataan_media/2024/011024%20-%20SIARAN%20MEDIA%20KUATKUASA%20PENINGKATAN%20SILING%20GAJI%20RM5,000%20KEPADA%20RM6,000%20FINAL.pdf" rel="noopener">PERKESO: RM6,000 wage ceiling from 1 October 2024</a></li>
+    <li><a href="https://www.perkeso.gov.my/images/lindung/lindung-24-jam/130726-FAQ_LINDUNG_24_JAM.pdf" rel="noopener">PERKESO: LINDUNG 24 Jam FAQ</a></li>
+    <li><a href="https://www.hasil.gov.my/majikan/pembayaran-pcb/" rel="noopener">LHDN: PCB submission and payment</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> This calculator gives estimates for planning and is not payroll, tax or financial advice. Your payslip may differ because of your employer's payroll settings and information you have declared. For official figures, use your employer's payroll records or the KWSP, PERKESO and LHDN calculators.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/kalkulator-zakat.html">Kalkulator Zakat<small>Zakat on income and savings</small></a>
+    <a href="https://www.thebukitbesi.com/p/currency-converter-malaysia.html">Malaysia Currency Converter<small>MYR exchange rates</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free calculators and utilities</small></a>
+  </div>
+</section>
