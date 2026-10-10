@@ -24,6 +24,15 @@ contexts. It uses the native installation prompt when available and provides
 browser-menu instructions otherwise. It does not request notification
 permissions or subscribe visitors to push services.
 
+## Calculator pages (10 October 2026)
+
+Every page built from `tools-src/pages/` is precached and listed in the
+worker's `PAGES` set, so the salary calculators, privacy policy and terms open
+offline after one online visit. Pages are network first with the saved copy
+as fallback; the calculator bundle `/assets/js/salary.js` is cache first and
+refreshed with each new worker revision. Offline notices are shown in Bahasa
+Melayu on `lang="ms"` pages.
+
 ## Cache behavior
 
 - Installation precaches the public directory, offline fallback, PWA client,

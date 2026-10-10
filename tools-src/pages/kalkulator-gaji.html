@@ -1,0 +1,229 @@
+<!--page
+{
+  "path": "/kalkulator-gaji/",
+  "lang": "ms",
+  "alternates": { "en": "/salary-calculator-malaysia/" },
+  "title": "Kalkulator Gaji Bersih 2026: PCB, KWSP, PERKESO & SIP",
+  "description": "Kalkulator gaji bersih Malaysia 2026 percuma. Kira gaji selepas potongan KWSP, PERKESO, SIP, LINDUNG 24 Jam dan PCB, serta kos majikan. Kadar terkini.",
+  "llms": "Kalkulator gaji bersih Malaysia 2026 (Bahasa Melayu): potongan KWSP mengikut Jadual Ketiga, PERKESO, SIP dan LINDUNG 24 Jam (siling RM6,000) serta PCB/MTD mengikut kaedah pengiraan berkomputer LHDN, termasuk kos majikan.",
+  "datePublished": "2026-10-10",
+  "dateModified": "2026-10-10",
+  "salary": true,
+  "scripts": ["/assets/js/salary.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Gaji Bersih", null]],
+  "about": ["Kumpulan Wang Simpanan Pekerja (KWSP)", "PERKESO (SOCSO)", "Sistem Insurans Pekerjaan (SIP)", "Potongan Cukai Bulanan (PCB)", "Cukai pendapatan Malaysia"],
+  "app": {
+    "name": "Kalkulator Gaji Bersih Malaysia 2026",
+    "category": "FinanceApplication",
+    "features": ["Gaji bersih", "Caruman KWSP pekerja dan majikan mengikut Jadual Ketiga", "PERKESO, SIP dan LINDUNG 24 Jam dengan siling gaji RM6,000", "PCB/MTD mengikut kaedah pengiraan berkomputer LHDN", "Status cukai, anak, zakat dan pelepasan tambahan", "Kos majikan", "Berfungsi di luar talian"]
+  },
+  "citations": [
+    ["KWSP: Caruman wajib majikan", "https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution"],
+    ["KWSP: Jadual Ketiga kadar caruman", "https://www.kwsp.gov.my/documents/d/guest/jadual-ketiga-bi-pdf-1"],
+    ["PERKESO: Siling gaji RM6,000 mulai 1 Oktober 2024", "https://perkeso.gov.my/images/kenyataan_media/2024/011024%20-%20SIARAN%20MEDIA%20KUATKUASA%20PENINGKATAN%20SILING%20GAJI%20RM5,000%20KEPADA%20RM6,000%20FINAL.pdf"],
+    ["PERKESO: Soalan lazim LINDUNG 24 Jam", "https://www.perkeso.gov.my/images/lindung/lindung-24-jam/130726-FAQ_LINDUNG_24_JAM.pdf"],
+    ["LHDN: Pengemukaan dan bayaran PCB", "https://www.hasil.gov.my/majikan/pembayaran-pcb/"]
+  ],
+  "faq": [
+    { "q": "Berapa potongan KWSP daripada gaji pada 2026?", "a": "Pekerja warganegara dan pemastautin tetap di bawah umur 60 tahun mencarum 11% daripada gaji bulanan. Majikan mencarum 13% jika gaji RM5,000 ke bawah dan 12% jika melebihi RM5,000. Mulai umur 60 tahun, caruman pekerja ialah 0% dan majikan 4%. Jumlah dikira mengikut julat gaji dalam Jadual Ketiga KWSP dan dibundarkan ke ringgit berikutnya, jadi ia boleh lebih sedikit daripada peratusan biasa." },
+    { "q": "Bagaimana PCB (potongan cukai bulanan) dikira?", "a": "Majikan menggunakan kaedah pengiraan berkomputer LHDN. Gaji bulanan diunjurkan untuk setahun, kemudian KWSP (sehingga RM4,000), pelepasan diri RM9,000, pelepasan pasangan dan anak serta pelepasan yang diisytiharkan dalam Borang TP1 ditolak. Kadar cukai pemastautin dikenakan pada pendapatan bercukai itu, rebat RM400 ditolak jika di bawah RM35,000, dan hasilnya dibahagikan mengikut baki bulan serta dibundarkan ke atas kepada 5 sen terdekat. Jika jumlah bulanan kurang daripada RM10, PCB tidak dipotong." },
+    { "q": "Berapakah siling gaji PERKESO dan SIP?", "a": "Caruman PERKESO dihadkan kepada gaji RM6,000 sebulan mulai 1 Oktober 2024. Pada paras itu atau lebih, pekerja di bawah 60 tahun membayar RM29.75 untuk PERKESO dan RM11.90 untuk SIP setiap bulan, manakala majikan membayar RM104.15 dan RM11.90." },
+    { "q": "Apakah LINDUNG 24 Jam dan adakah saya perlu mencarum?", "a": "LINDUNG 24 Jam ialah skim kemalangan bukan bencana kerja PERKESO. Mulai 1 Jun 2026 pekerja mencarum 0.75% daripada gaji sehingga siling RM6,000, tanpa caruman majikan. Laporan pada Julai 2026 menyatakan kerajaan menjadikan caruman ini sukarela, jadi semak slip gaji atau tanya majikan anda. Matikan pilihan ini dalam kalkulator jika anda telah menarik diri." },
+    { "q": "Adakah caruman KWSP majikan sebahagian daripada gaji saya?", "a": "Tidak. Caruman KWSP, PERKESO dan SIP majikan dibayar di atas gaji kasar anda dan tidak mengurangkan gaji bersih. Caruman KWSP majikan dikreditkan ke akaun KWSP anda, jadi ia sebahagian daripada simpanan persaraan dan jumlah kos pekerjaan anda." },
+    { "q": "Kenapa kalkulator menunjukkan PCB RM0?", "a": "PCB adalah sifar apabila unjuran pendapatan bercukai anda cukup rendah sehingga cukai bulanan kurang daripada RM10. Bagi pekerja bujang tanpa pelepasan lain, ini berlaku sehingga gaji kasar kira-kira RM3,800 sebulan. Cukai sebenar anda tetap dimuktamadkan semasa mengisi borang cukai tahunan." },
+    { "q": "Berapakah gaji minimum di Malaysia?", "a": "Gaji minimum ialah RM1,700 sebulan. Ia berkuat kuasa pada 1 Februari 2025 bagi majikan dengan lima pekerja atau lebih dan 1 Ogos 2025 bagi majikan yang lebih kecil." },
+    { "q": "Adakah kalkulator ini menyimpan atau menghantar maklumat gaji saya?", "a": "Tidak. Semua pengiraan dibuat dalam pelayar anda. Maklumat anda tidak dihantar ke pelayan, dan pautan kongsi menyimpannya selepas tanda #, yang tidak dihantar oleh pelayar ke laman web." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Laluan"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator gaji bersih</li></ol></nav>
+  <h1>Kalkulator Gaji Bersih Malaysia {{S_YEAR}}</h1>
+  <p class="answer">Dengan gaji bulanan <strong>{{S_GROSS}}</strong> pada {{S_YEAR}}, pekerja bujang di bawah 60 tahun menerima gaji bersih kira-kira <strong>{{S_NET}}</strong> selepas potongan KWSP ({{S_EPF}}), PERKESO ({{S_SOCSO}}), SIP ({{S_EIS}}), LINDUNG 24 Jam ({{S_LINDUNG}}) dan PCB ({{S_PCB}}). Masukkan gaji anda untuk melihat gaji bersih dan caruman majikan.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/salary-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="salaryForm" novalidate aria-labelledby="form-h">
+      <h2 id="form-h">Maklumat anda</h2>
+      <div class="field">
+        <label for="salary">Gaji kasar bulanan</label>
+        <div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="1000" max="1000000" step="0.01" value="{{S_DEFAULT}}" required aria-describedby="salary-help salaryError"></div>
+        <p class="help" id="salary-help">Gaji pokok dan elaun tetap, sebelum sebarang potongan.</p>
+        <p class="error" id="salaryError" role="alert" hidden></p>
+      </div>
+      <fieldset class="field">
+        <legend>Umur</legend>
+        <div class="seg">
+          <label><input type="radio" name="age" value="0" checked> Bawah 60</label>
+          <label><input type="radio" name="age" value="60"> 60 ke atas</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="status">Status cukai</label>
+        <select class="input" id="status" name="status">
+          <option value="single">Bujang</option>
+          <option value="married">Berkahwin, pasangan bekerja</option>
+          <option value="spouse">Berkahwin, pasangan tidak bekerja</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="children">Anak bawah 18 tahun</label>
+        <div class="input"><input id="children" name="children" type="number" inputmode="numeric" min="0" max="20" step="1" value="0" aria-describedby="children-help"></div>
+        <p class="help" id="children-help">Pelepasan RM2,000 setiap anak. Anak yang lebih tua di institusi pengajian tinggi layak untuk pelepasan lebih; masukkan bezanya dalam pelepasan tambahan.</p>
+      </div>
+      <details class="more-opts" id="moreOpts">
+        <summary>Pilihan lain</summary>
+        <div class="field">
+          <label for="otherRelief">Pelepasan tahunan tambahan yang diisytiharkan kepada majikan (Borang TP1)</label>
+          <div class="input"><span aria-hidden="true">RM</span><input id="otherRelief" name="otherRelief" type="number" inputmode="decimal" min="0" step="1" value="0" aria-describedby="relief-help"></div>
+          <p class="help" id="relief-help">Contohnya insurans nyawa (sehingga RM3,000), PERKESO/SIP (sehingga RM350) atau gaya hidup (sehingga RM2,500).</p>
+        </div>
+        <div class="field">
+          <label for="zakat">Zakat bulanan melalui potongan gaji</label>
+          <div class="input"><span aria-hidden="true">RM</span><input id="zakat" name="zakat" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div>
+        </div>
+        <div class="field">
+          <label class="check"><input type="checkbox" id="lindung" name="lindung" checked> <span>Termasuk LINDUNG 24 Jam (0.75%, mulai 1 Jun 2026). Nyahtanda jika anda telah menarik diri.</span></label>
+        </div>
+      </details>
+    </form>
+
+    <section class="box" id="results" aria-labelledby="results-h">
+      <h2 id="results-h">Gaji bulanan anda</h2>
+      <div class="net">
+        <p>Gaji bersih</p>
+        <output id="rNet" for="salary">{{S_NET}}</output>
+        <p><span id="rNetYear">{{S_NET_YEAR}}</span> setahun</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Potongan daripada gaji anda</caption>
+        <tbody>
+          <tr><th scope="row">Gaji kasar</th><td id="rGross">{{S_GROSS}}</td></tr>
+          <tr><th scope="row">KWSP<small>Kadar pekerja · majikan: <span id="rEpfRate">11% · 13%</span></small></th><td id="rEpf">{{S_EPF}}</td></tr>
+          <tr><th scope="row">PERKESO</th><td id="rSocso">{{S_SOCSO}}</td></tr>
+          <tr><th scope="row">SIP</th><td id="rEis">{{S_EIS}}</td></tr>
+          <tr id="rowLindung"><th scope="row">LINDUNG 24 Jam</th><td id="rLindung">{{S_LINDUNG}}</td></tr>
+          <tr><th scope="row">PCB (cukai bulanan)</th><td id="rPcb">{{S_PCB}}</td></tr>
+          <tr id="rowZakat" hidden><th scope="row">Zakat</th><td id="rZakat">{{S_ZAKAT}}</td></tr>
+          <tr class="total"><th scope="row">Jumlah potongan</th><td id="rDed">{{S_DED}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Dibayar oleh majikan (di atas gaji)</caption>
+        <tbody>
+          <tr><th scope="row">KWSP majikan</th><td id="rEpfEr">{{S_EPF_ER}}</td></tr>
+          <tr><th scope="row">PERKESO majikan</th><td id="rSocsoEr">{{S_SOCSO_ER}}</td></tr>
+          <tr><th scope="row">SIP majikan</th><td id="rEisEr">{{S_EIS_ER}}</td></tr>
+          <tr class="total"><th scope="row">Jumlah kos majikan</th><td id="rCost">{{S_COST}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Paparan tahunan</caption>
+        <tbody>
+          <tr><th scope="row">Simpanan KWSP (pekerja dan majikan)</th><td id="rEpfYear">{{S_EPF_YEAR}}</td></tr>
+          <tr><th scope="row">Anggaran cukai pendapatan setahun</th><td id="rTaxYear">{{S_TAX_YEAR}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note" id="rNote">{{S_NOTE}}</p>
+      <div class="tool-actions">
+        <button type="button" class="btn sm" id="copyLink">Salin pautan keputusan ini</button>
+        <button type="button" class="btn ghost sm" id="printBtn">Cetak atau simpan PDF</button>
+      </div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="how">Cara gaji bersih dikira</h2>
+  <p>Gaji bersih ialah gaji kasar bulanan ditolak lima potongan berkanun. Setiap satu mengikut jadual agensi masing-masing, jadi kalkulator ini menggunakan peraturan rasmi, bukan peratusan rata:</p>
+  <ol>
+    <li><strong>KWSP:</strong> 11% daripada gaji mengikut Jadual Ketiga KWSP. Gaji dikumpulkan dalam julat RM20 sehingga RM5,000 dan julat RM100 sehingga RM20,000; kadar dikenakan pada had atas julat dan dibundarkan ke ringgit berikutnya.</li>
+    <li><strong>PERKESO:</strong> kira-kira 0.5% daripada gaji sehingga RM6,000, mengikut julat gaji RM100 PERKESO.</li>
+    <li><strong>SIP:</strong> kira-kira 0.2% daripada gaji sehingga RM6,000, menggunakan julat yang sama.</li>
+    <li><strong>LINDUNG 24 Jam:</strong> 0.75% daripada gaji sehingga RM6,000 mulai 1 Jun 2026, dibayar oleh pekerja sahaja.</li>
+    <li><strong>PCB (MTD):</strong> cukai pendapatan bulanan yang dipotong mengikut kaedah pengiraan berkomputer LHDN, selepas pelepasan KWSP (sehingga RM4,000 setahun) dan pelepasan diri, pasangan serta anak.</li>
+  </ol>
+  <p>Zakat yang dibayar melalui majikan mengurangkan PCB ringgit demi ringgit. Zakat itu sendiri ditunjukkan pada baris berasingan.</p>
+
+  <h2 id="rates">Kadar KWSP, PERKESO dan SIP {{S_YEAR}}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates">
+    <table class="data text">
+      <thead><tr><th scope="col">Caruman</th><th scope="col">Pekerja</th><th scope="col">Majikan</th><th scope="col">Catatan</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">KWSP, bawah 60</th><td>11%</td><td>13% (gaji sehingga RM5,000)<br>12% (melebihi RM5,000)</td><td>Tiada siling gaji. Warganegara dan pemastautin tetap.</td></tr>
+        <tr><th scope="row">KWSP, 60 ke atas</th><td>0%</td><td>4%</td><td>Warganegara Malaysia.</td></tr>
+        <tr><th scope="row">PERKESO, bawah 60</th><td>0.5%</td><td>1.75%</td><td>Skim Bencana Pekerjaan dan Skim Keilatan. Maksimum RM29.75 dan RM104.15.</td></tr>
+        <tr><th scope="row">PERKESO, 60 ke atas</th><td>0%</td><td>1.25%</td><td>Skim Bencana Pekerjaan sahaja.</td></tr>
+        <tr><th scope="row">SIP</th><td>0.2%</td><td>0.2%</td><td>Maksimum RM11.90 setiap pihak. Tidak dikenakan mulai umur 60.</td></tr>
+        <tr><th scope="row">LINDUNG 24 Jam</th><td>0.75%</td><td>Tiada</td><td>Mulai 1 Jun 2026. Dilaporkan menjadi sukarela pada Julai 2026.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Caruman PERKESO menggunakan siling gaji RM6,000 mulai 1 Oktober 2024. Peratusan adalah anggaran kerana jadual rasmi menetapkan amaun tetap bagi setiap julat gaji.</p>
+
+  <h2 id="pcb">Kadar cukai PCB {{S_YEAR}}</h2>
+  <p>PCB ialah bayaran awal cukai pendapatan anda. Julat pendapatan bercukai di bawah terpakai kepada individu pemastautin. Jika pendapatan bercukai anda RM35,000 atau kurang, rebat RM400 diberi (RM800 jika pasangan tiada pendapatan dan anda menuntut pelepasan pasangan).</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pcb">
+    <table class="data">
+      <thead><tr><th scope="col">Pendapatan bercukai (RM)</th><th scope="col">Kadar julat ini</th><th scope="col">Cukai julat bawah</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">0 – 5,000</th><td>0%</td><td>RM0</td></tr>
+        <tr><th scope="row">5,001 – 20,000</th><td>1%</td><td>RM0</td></tr>
+        <tr><th scope="row">20,001 – 35,000</th><td>3%</td><td>RM150</td></tr>
+        <tr><th scope="row">35,001 – 50,000</th><td>6%</td><td>RM600</td></tr>
+        <tr><th scope="row">50,001 – 70,000</th><td>11%</td><td>RM1,500</td></tr>
+        <tr><th scope="row">70,001 – 100,000</th><td>19%</td><td>RM3,700</td></tr>
+        <tr><th scope="row">100,001 – 400,000</th><td>25%</td><td>RM9,400</td></tr>
+        <tr><th scope="row">400,001 – 600,000</th><td>26%</td><td>RM84,400</td></tr>
+        <tr><th scope="row">600,001 – 2,000,000</th><td>28%</td><td>RM136,400</td></tr>
+        <tr><th scope="row">Melebihi 2,000,000</th><td>30%</td><td>RM528,400</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Contoh pengiraan: {{S_GROSS}} sebulan</h3>
+  <p>Pekerja bujang memperoleh {{S_GROSS}} × 12 = RM60,000 setahun. Pelepasan KWSP dihadkan kepada RM4,000 dan pelepasan diri RM9,000, menjadikan pendapatan bercukai RM47,000. Cukai ialah RM600 bagi RM35,000 pertama ditambah 6% daripada RM12,000 (RM720), iaitu RM1,320 setahun. Dibahagi 12 bulan, PCB ialah <strong>{{S_PCB}}</strong> sebulan.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="examples-h">Gaji bersih mengikut gaji biasa ({{S_YEAR}})</h2>
+  <p>Amaun bulanan bagi pekerja bujang di bawah 60 tahun tanpa anak, tanpa pelepasan tambahan dan termasuk LINDUNG 24 Jam. Baris pertama ialah gaji minimum RM1,700.</p>
+  {{S_TABLE}}
+
+  <h2 id="limits">Andaian dan had</h2>
+  <ul>
+    <li>Untuk warganegara Malaysia dan pemastautin tetap yang merupakan pemastautin cukai. Pekerja asing tertakluk kepada peraturan KWSP, PERKESO dan cukai yang berbeza.</li>
+    <li>Mengandaikan gaji yang sama setiap bulan. Bonus, komisen, kerja lebih masa, tunggakan dan manfaat berupa barangan mengubah PCB pada bulan ia dibayar.</li>
+    <li>Semua bayaran yang dimasukkan dianggap gaji untuk KWSP, PERKESO dan SIP. Sesetengah bayaran, seperti kerja lebih masa, tidak dikira untuk KWSP.</li>
+    <li>Menggunakan kadar KWSP pekerja berkanun 11%. Anda boleh memilih untuk mencarum lebih; majikan akan memotong amaun yang lebih tinggi itu.</li>
+    <li>Bagi gaji bawah RM1,000, rujuk jadual rasmi yang menggunakan julat gaji lebih kecil.</li>
+    <li>PCB ialah anggaran cukai yang dipotong. Cukai sebenar dimuktamadkan semasa anda mengisi borang cukai tahunan (Borang BE).</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <p>Kadar dan kaedah disemak berdasarkan penerbitan rasmi ini pada {{S_VERIFIED}}:</p>
+  <ul>
+    <li><a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution" rel="noopener">KWSP: caruman wajib majikan</a> dan <a href="https://www.kwsp.gov.my/documents/d/guest/jadual-ketiga-bi-pdf-1" rel="noopener">Jadual Ketiga</a></li>
+    <li><a href="https://perkeso.gov.my/images/kenyataan_media/2024/011024%20-%20SIARAN%20MEDIA%20KUATKUASA%20PENINGKATAN%20SILING%20GAJI%20RM5,000%20KEPADA%20RM6,000%20FINAL.pdf" rel="noopener">PERKESO: siling gaji RM6,000 mulai 1 Oktober 2024</a></li>
+    <li><a href="https://www.perkeso.gov.my/images/lindung/lindung-24-jam/130726-FAQ_LINDUNG_24_JAM.pdf" rel="noopener">PERKESO: soalan lazim LINDUNG 24 Jam</a></li>
+    <li><a href="https://www.hasil.gov.my/majikan/pembayaran-pcb/" rel="noopener">LHDN: pengemukaan dan bayaran PCB</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Kalkulator ini memberi anggaran untuk perancangan dan bukan nasihat penggajian, cukai atau kewangan. Slip gaji anda mungkin berbeza kerana tetapan penggajian majikan dan maklumat yang anda isytiharkan. Untuk angka rasmi, rujuk rekod penggajian majikan atau kalkulator KWSP, PERKESO dan LHDN.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/kalkulator-zakat.html">Kalkulator Zakat<small>Zakat pendapatan dan simpanan</small></a>
+    <a href="https://www.thebukitbesi.com/p/kalkulator-bmi.html">Kalkulator BMI<small>Indeks jisim badan</small></a>
+    <a href="/">Semua alat {{BRAND}}<small>Kalkulator dan utiliti percuma</small></a>
+  </div>
+</section>

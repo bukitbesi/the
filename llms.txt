@@ -1,8 +1,13 @@
 # The Bukit Besi Tools
 
-> 48 free online tools for code, SEO, writing, images and AI, plus Malaysian calculators, currency conversion and speed tests. Explore the full collection.
+> 49 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
 
-This is a directory linking to tools on https://www.thebukitbesi.com/, not an on-page tool runner. Only published tools are listed. Last updated 2026-10-10.
+This site hosts its own calculators and a directory of free tools, most of which run on https://www.thebukitbesi.com/. Calculators on this site run in the browser and do not send inputs anywhere. Last updated 2026-10-10.
+
+## Calculators on this site
+
+- [Kalkulator Gaji Bersih 2026: PCB, KWSP, PERKESO & SIP](https://tool.thebukitbesi.com/kalkulator-gaji/): Kalkulator gaji bersih Malaysia 2026 (Bahasa Melayu): potongan KWSP mengikut Jadual Ketiga, PERKESO, SIP dan LINDUNG 24 Jam (siling RM6,000) serta PCB/MTD mengikut kaedah pengiraan berkomputer LHDN, termasuk kos majikan.
+- [Malaysia Salary Calculator 2026: PCB, EPF, SOCSO & EIS](https://tool.thebukitbesi.com/salary-calculator-malaysia/): Calculates 2026 Malaysian take-home pay from gross monthly salary: EPF (KWSP Third Schedule), SOCSO, EIS, LINDUNG 24 Jam (PERKESO, RM6,000 ceiling) and PCB/MTD tax (LHDN computerised method), with employer cost and a table of net pay at common salaries.
 
 ## Directory
 
@@ -69,6 +74,7 @@ This is a directory linking to tools on https://www.thebukitbesi.com/, not an on
 
 ## Calculators
 
+- [Malaysia Salary Calculator](https://tool.thebukitbesi.com/salary-calculator-malaysia/): Work out 2026 take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam and PCB tax, plus your employer's cost. English and Bahasa Melayu.
 - [Kalkulator Faraid](https://www.thebukitbesi.com/p/kalkulator-faraid.html): Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.
 - [Kalkulator Zakat](https://www.thebukitbesi.com/p/kalkulator-zakat.html): Estimate zakat for income, savings, gold and other supported categories using the tool settings.
 - [Pregnancy Dates & Test Timing](https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html): Estimate gestational age and view NIPT or ultrasound timing from your pregnancy dates.
@@ -81,4 +87,5 @@ This is a directory linking to tools on https://www.thebukitbesi.com/, not an on
 
 - [About The Bukit Besi](https://www.thebukitbesi.com/p/about.html): Information about the publisher.
 - [Contact](https://www.thebukitbesi.com/p/contact.html): Suggest a tool or report a problem.
-- [Privacy policy](https://www.thebukitbesi.com/p/privacy-policy.html): Publisher privacy information.
+- [Privacy Policy](https://tool.thebukitbesi.com/privacy/): How The Bukit Besi Tools handles data: calculators run in your browser, no accounts or analytics, on-device storage and Google AdSense cookies.
+- [Terms of Use](https://tool.thebukitbesi.com/terms/): Terms for using The Bukit Besi Tools: free tools provided as is, calculator results are estimates and not financial, tax or legal advice, and external links.

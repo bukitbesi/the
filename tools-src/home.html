@@ -1,0 +1,101 @@
+<section class="hero" aria-labelledby="h1">
+  <div class="container">
+    <div class="hero-in">
+      <p class="badge"><i aria-hidden="true"></i>{{COUNT}} free tools &middot; {{CAT_COUNT}} categories</p>
+      <h1 id="h1">Free Online Tools for <span class="grad">Developers &amp; Creators</span></h1>
+      <p class="lead">Explore {{COUNT}} free online tools from {{BRAND}} for developers, bloggers and everyday tasks. Minify code, validate JSON, generate schema, edit images, write AI prompts, check internet speed and use Malaysian calculators.</p>
+      <p class="updated">Last updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></p>
+      <div class="actions">
+        <a href="#tools" class="btn">Browse all {{COUNT}} tools</a>
+        <a href="{{MAIN_SITE}}/" class="btn ghost">Visit the blog</a>
+      </div>
+      <div class="stats">
+        <div><strong>{{COUNT}}</strong><span>Free tools</span></div>
+        <div><strong>{{CAT_COUNT}}</strong><span>Categories</span></div>
+        <div><strong>0</strong><span>Signups needed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+{{AD_TOP}}
+<section class="section alt" id="tools" aria-labelledby="tools-h">
+  <div class="container">
+    <span class="label">Tools collection</span>
+    <h2 id="tools-h">All {{COUNT}} <span class="grad">free tools</span></h2>
+    <p class="lead">Pick a category or scroll through every tool. Each one opens on its own page and is free to use.</p>
+    <div class="chips" role="group" aria-label="Filter tools by category">
+{{CHIPS}}
+    </div>
+    <p id="filterStatus" class="sr-only" role="status" aria-live="polite"></p>
+    <ul class="grid" id="toolsGrid">
+{{CARDS}}
+    </ul>
+  </div>
+</section>
+
+<section class="section cv" id="categories" aria-labelledby="cats-h">
+  <div class="container">
+    <div class="center">
+      <span class="label">Categories</span>
+      <h2 id="cats-h">What tools are <span class="grad">included?</span></h2>
+      <p class="lead">The hub covers {{CAT_COUNT}} categories. Here is what each one contains.</p>
+    </div>
+    <div class="cats">
+{{CATEGORY_BLOCKS}}
+    </div>
+  </div>
+</section>
+{{AD_MIDDLE}}
+<section class="section alt cv" id="why" aria-labelledby="why-h">
+  <div class="container">
+    <div class="center">
+      <span class="label">Why use it</span>
+      <h2 id="why-h">Fast, free and <span class="grad">simple</span></h2>
+      <p class="lead">Find the tool for your next task and open it directly in your browser.</p>
+    </div>
+    <div class="why">
+      <div class="panel"><h3>Free to explore</h3><p>Browse the collection without creating an account. Each tool page explains its features and any service requirements.</p></div>
+      <div class="panel"><h3>Open in your browser</h3><p>Follow a tool link to get started. Check each tool page for supported formats, features and how it handles your input.</p></div>
+      <div class="panel"><h3>Made for page speed</h3><p>Minifiers and image converters help you ship smaller files, which supports better Core Web Vitals and Lighthouse scores.</p></div>
+      <div class="panel"><h3>Works on any platform</h3><p>Output is plain HTML, CSS, JavaScript, JSON and images, ready for Blogger, WordPress, Shopify or custom sites.</p></div>
+      <div class="panel"><h3>Mobile friendly</h3><p>Every tool is designed to work on phones, tablets and desktops.</p></div>
+      <div class="panel"><h3>Regularly updated</h3><p>New tools are added over time and this page lists every one that is live.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cv" id="how" aria-labelledby="how-h">
+  <div class="container">
+    <div class="center">
+      <span class="label">How it works</span>
+      <h2 id="how-h">Use any tool in <span class="grad">three steps</span></h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Choose a tool</h3><p>Filter by category or scan the list above and open the tool you need.</p></li>
+      <li><h3>Add your input</h3><p>Paste code or text, or drop in an image. No signup or install is needed.</p></li>
+      <li><h3>Copy or download</h3><p>Get the result instantly and use it in your site, project or content.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section alt cv" id="faq" aria-labelledby="faq-h">
+  <div class="container">
+    <div class="center">
+      <span class="label">FAQ</span>
+      <h2 id="faq-h">Frequently asked <span class="grad">questions</span></h2>
+    </div>
+    <div class="faq">
+{{FAQ_HTML}}
+    </div>
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="section cv" aria-labelledby="cta-h">
+  <div class="container">
+    <div class="cta">
+      <h2 id="cta-h">Ready to speed up <span class="grad">your workflow?</span></h2>
+      <p class="lead">Pick a tool and get your result in seconds. Free, with no signup.</p>
+      <a href="#tools" class="btn">Start using the tools</a>
+    </div>
+  </div>
+</section>

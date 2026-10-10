@@ -2,7 +2,7 @@
   "id": "/",
   "name": "The Bukit Besi Tools",
   "short_name": "Bukit Besi Tools",
-  "description": "Free online tool directory for code, content, design, AI and Malaysian calculators.",
+  "description": "Free online tools and Malaysian calculators for code, content, design, AI and payroll.",
   "lang": "en",
   "dir": "ltr",
   "start_url": "/",
@@ -16,7 +16,8 @@
   "background_color": "#ffffff",
   "categories": [
     "utilities",
-    "productivity"
+    "productivity",
+    "finance"
   ],
   "prefer_related_applications": false,
   "icons": [
@@ -62,9 +63,9 @@
       "description": "Browse all published tools"
     },
     {
-      "name": "Tool categories",
-      "url": "/#categories",
-      "description": "Find a category"
+      "name": "Malaysia Salary Calculator 2026",
+      "url": "/salary-calculator-malaysia/",
+      "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"
     }
   ]
 }

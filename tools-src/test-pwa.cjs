@@ -13,7 +13,10 @@ const mime = { '.html': 'text/html', '.js': 'text/javascript', '.webmanifest': '
   '.png': 'image/png', '.webp': 'image/webp', '.ico': 'image/x-icon', '.txt': 'text/plain' };
 const fixture = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
-  const name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : url.pathname.slice(1);
+  let name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : url.pathname.slice(1);
+  // Generated pages and bundles are served from dist/, as on the deployed site.
+  const built = path.join('dist', name.endsWith('/') ? name + 'index.html' : name);
+  if (name !== 'tool.html' && fs.existsSync(path.join(root, built)) && fs.statSync(path.join(root, built)).isFile()) name = built;
   const absolute = path.resolve(root, name);
   if (req.method !== 'GET') { res.writeHead(405); return res.end(); }
   try {

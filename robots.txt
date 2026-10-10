@@ -1,4 +1,4 @@
-# Public directory: search and AI crawlers may access the site.
+# Public site: search and AI crawlers may access everything.
 User-agent: *
 Allow: /
 

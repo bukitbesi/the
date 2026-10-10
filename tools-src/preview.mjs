@@ -14,9 +14,12 @@ const server = http.createServer(async (req, res) => {
   try {
     if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); res.end(); return; }
     const url = new URL(req.url, 'http://localhost');
-    const name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : decodeURIComponent(url.pathname).slice(1);
+    let name = url.pathname === '/' || url.pathname === '/index.html' ? 'tool.html' : decodeURIComponent(url.pathname).slice(1);
+    // Generated pages and bundles live in dist/, like the deployed site root.
+    const built = path.join('dist', name.endsWith('/') ? name + 'index.html' : name);
+    if (name !== 'tool.html' && await fs.stat(path.join(root, built)).then(st => st.isFile(), () => false)) name = built;
     const absolute = path.resolve(root, name);
-    const permitted = files.has(name) || /^[0-9a-f]{32}\.txt$/.test(name) || /^assets\/(?:PWA|favicon-image)\/[\w/.-]+$/.test(name);
+    const permitted = name.startsWith('dist/') || files.has(name) || /^[0-9a-f]{32}\.txt$/.test(name) || /^assets\/(?:PWA|favicon-image)\/[\w/.-]+$/.test(name);
     if (!permitted || !absolute.startsWith(root + path.sep)) throw new Error('Not found');
     const content = await fs.readFile(absolute);
     res.writeHead(200, { 'Content-Type': mime[path.extname(name)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });

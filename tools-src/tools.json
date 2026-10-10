@@ -369,6 +369,15 @@
     "live": true
   },
   {
+    "name": "Malaysia Salary Calculator",
+    "desc": "Work out 2026 take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam and PCB tax, plus your employer's cost. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/salary-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "salary-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Kalkulator Faraid",
     "desc": "Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.",
     "url": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",
