@@ -2,11 +2,11 @@
 
 > 48 free online tools for code, SEO, writing, images and AI, plus Malaysian calculators, currency conversion and speed tests. Explore the full collection.
 
-This is a directory linking to tools on https://www.thebukitbesi.com/, not an on-page tool runner. Only published tools are listed. Last updated 2026-10-07.
+This is a directory linking to tools on https://www.thebukitbesi.com/, not an on-page tool runner. Only published tools are listed. Last updated 2026-10-10.
 
 ## Directory
 
-- [Free online tools](https://the.thebukitbesi.com/): Canonical directory with tool descriptions, categories and usage guidance.
+- [Free online tools](https://tool.thebukitbesi.com/): Canonical directory with tool descriptions, categories and usage guidance.
 
 ## Developer Tools
 

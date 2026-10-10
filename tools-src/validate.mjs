@@ -69,4 +69,22 @@ for (const resource of precache.filter(url => url !== '/')) assert(fs.statSync(p
 assert(precache.includes('/assets/PWA/pwa.min.js') && precache.includes('/offline.html'), 'Offline app assets');
 assert(precache.every(url => url.startsWith('/') && !url.startsWith('//')), 'Same-origin precache only');
 assert(!/<a\b[^>]*target="_blank"/.test(html), 'Directory links use the same tab');
+// JPEG dimensions come from the first start-of-frame marker.
+const jpegSize = file => {
+  const b = fs.readFileSync(path.join(root, file));
+  assert.equal(b.readUInt16BE(0), 0xffd8, `${file} is a JPEG`);
+  for (let i = 2; i < b.length;) {
+    const marker = b.readUInt16BE(i);
+    if (marker >= 0xffc0 && marker <= 0xffc3) return `${b.readUInt16BE(i + 7)}x${b.readUInt16BE(i + 5)}`;
+    i += 2 + b.readUInt16BE(i + 2);
+  }
+  assert.fail(`${file} has no frame header`);
+};
+assert.equal(jpegSize(site.ogImage.url), `${site.ogImage.width}x${site.ogImage.height}`, 'Social image matches declared size');
+assert(html.includes('content="summary_large_image"'), 'Large social card for a wide image');
+for (const shot of manifest.screenshots) assert.equal(jpegSize(shot.src), shot.sizes, `Screenshot ${shot.src} size`);
+assert(manifest.screenshots.some(s => s.form_factor === 'wide') && manifest.screenshots.some(s => s.form_factor === 'narrow'), 'Rich install screenshots');
+assert.equal(read(site.indexNowKey + '.txt').trim(), site.indexNowKey, 'IndexNow key file');
+assert(!html.includes('{count}') && !llms.includes('{count}'), 'FAQ count placeholders resolved');
+assert(read('CNAME').trim() === new URL(site.origin).hostname, 'CNAME matches canonical host');
 console.log(`Validated ${tools.length} tools, SEO files, scripts, PWA manifest, icons and offline assets.`);

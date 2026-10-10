@@ -1,15 +1,15 @@
 {
-  "origin": "https://the.thebukitbesi.com",
+  "origin": "https://tool.thebukitbesi.com",
   "mainSite": "https://www.thebukitbesi.com",
   "brand": "The Bukit Besi",
-  "dateModified": "2026-10-07",
+  "dateModified": "2026-10-10",
   "twitter": "@BukitBesiBlog",
   "icon": "/assets/favicon-image/bukit-besi-512.webp",
   "ogImage": {
-    "url": "/assets/favicon-image/bukit-besi-512.webp",
-    "width": 512,
-    "height": 512,
-    "alt": "The Bukit Besi logo"
+    "url": "/assets/favicon-image/og-image.jpg",
+    "width": 1200,
+    "height": 630,
+    "alt": "The Bukit Besi Tools: free online tools for developers, bloggers and creators"
   },
   "categories": {
     "dev": {
@@ -34,7 +34,7 @@
     },
     "util": {
       "label": "Utilities",
-      "blurb": "Work with links, QR codes, PDF files, currency conversion, speed tests and courier tracking."
+      "blurb": "Create protected and WhatsApp links, generate a privacy policy, convert PDF and Word files, convert currency, test internet speed and track Malaysian couriers."
     },
     "calc": {
       "label": "Calculators",
@@ -42,6 +42,10 @@
     }
   },
   "faq": [
+    {
+      "q": "What is The Bukit Besi Tools?",
+      "a": "The Bukit Besi Tools is a free directory of {count} browser-based tools published by The Bukit Besi, a Malaysian blog. It groups code minifiers, SEO generators, writing utilities, image editors, AI prompt tools and Malaysian calculators such as zakat and faraid into seven categories, with each tool opening on its own page."
+    },
     {
       "q": "Are all the tools really free to use?",
       "a": "The directory lists tools offered as free online tools. Check each tool page for available features, usage limits and any external services it uses."
@@ -67,6 +71,10 @@
       "a": "The output is plain HTML, CSS, JavaScript, JSON and images, so it works on Blogger, WordPress, Shopify, Wix, custom HTML sites and frameworks such as React and Vue."
     },
     {
+      "q": "Can I install the directory as an app or use it offline?",
+      "a": "Yes. The directory is a progressive web app, so supported browsers can install it from the Install app button or the browser menu. After one online visit, the tool list, categories and descriptions open offline; the tools themselves still need an internet connection."
+    },
+    {
       "q": "Will more tools be added?",
       "a": "Yes. New tools are added regularly and this page is updated each time a tool goes live."
     },
@@ -82,5 +90,6 @@
     "local72": "/assets/favicon-image/bukit-besi-72.webp",
     "local192": "/assets/favicon-image/bukit-besi-192.webp",
     "local512": "/assets/favicon-image/bukit-besi-512.webp"
-  }
+  },
+  "indexNowKey": "a23a48e05a9411b3da9c72fc138a6206"
 }

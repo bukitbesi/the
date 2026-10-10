@@ -1,7 +1,7 @@
 // Source template. tools-src/build.mjs writes the versioned root /sw.js.
 'use strict';
 const CACHE_PREFIX = 'bukit-tools-';
-const CACHE_NAME = CACHE_PREFIX + '498df74eda84d5ed';
+const CACHE_NAME = CACHE_PREFIX + '3b772159f8e30397';
 const PRECACHE = ["/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
 const ASSETS = new Set(PRECACHE.filter(url => url !== '/'));
 

@@ -8,6 +8,10 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "theme_color": "#0a0a0f",
   "background_color": "#0a0a0f",
   "categories": [
@@ -33,6 +37,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/PWA/screenshots/wide.jpg",
+      "sizes": "1280x800",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Tool directory on desktop"
+    },
+    {
+      "src": "/assets/PWA/screenshots/narrow.jpg",
+      "sizes": "824x1830",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Tool directory on mobile"
     }
   ],
   "shortcuts": [

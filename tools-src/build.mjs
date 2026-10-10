@@ -20,6 +20,8 @@ const byCat = c => tools.filter(t => t.cat === c);
 const date = new Date(site.dateModified + 'T00:00:00Z');
 const dateText = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const abs = u => (/^https?:/.test(u) ? u : site.origin + u);
+// FAQ copy may say {count}; keep visible text, schema and llms.txt in sync with the catalog.
+site.faq = site.faq.map(f => ({ q: f.q, a: f.a.replaceAll('{count}', tools.length) }));
 
 // ---- validate
 const problems = [];
@@ -34,6 +36,7 @@ if (!tools.length) problems.push('no live tools to publish');
 if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('published tools must have their own icon');
 if (new URL(site.origin).origin !== site.origin) problems.push('origin must be an origin without a trailing slash');
 if (fs.readFileSync(path.join(root, 'CNAME'), 'utf8').trim() !== new URL(site.origin).hostname) problems.push('CNAME and canonical host differ');
+if (!/^[0-9a-f]{32}$/.test(site.indexNowKey || '')) problems.push('indexNowKey must be 32 lowercase hex characters');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(site.dateModified) || Number.isNaN(date.getTime())) problems.push('invalid modification date');
 if (problems.length) { console.error(problems.join('\n')); process.exit(1); }
 
@@ -63,6 +66,7 @@ const footerCats = cats.filter(c => byCat(c).length).map(c =>
 // ---- JSON-LD
 const title = 'Free Online Tools, AI & Calculators';
 const description = `${tools.length} free online tools for code, SEO, writing, images and AI, plus Malaysian calculators, currency conversion and speed tests. Explore the full collection.`;
+const CATEGORY_TOPICS = cats.filter(c => byCat(c).length).map(c => ({ '@type': 'Thing', name: site.categories[c].label, description: site.categories[c].blurb }));
 const graph = [
   {
     '@type': 'Organization', '@id': site.mainSite + '/#organization', name: site.brand, url: site.mainSite + '/',
@@ -71,19 +75,21 @@ const graph = [
   },
   {
     '@type': 'WebSite', '@id': site.origin + '/#website', url: site.origin + '/', name: site.brand + ' Tools',
+    alternateName: ['Bukit Besi Tools', 'The Bukit Besi free online tools'],
     description, inLanguage: 'en', publisher: { '@id': site.mainSite + '/#organization' }
   },
   {
     '@type': 'CollectionPage', '@id': site.origin + '/#webpage', url: site.origin + '/', name: title + ' | ' + site.brand,
     description, inLanguage: 'en', isAccessibleForFree: true,
-    isPartOf: { '@id': site.origin + '/#website' }, about: { '@id': site.mainSite + '/#organization' },
-    primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
-    dateModified: site.dateModified,
+    isPartOf: { '@id': site.origin + '/#website' },     primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
+    dateModified: site.dateModified, author: { '@id': site.mainSite + '/#organization' },
+    audience: { '@type': 'Audience', audienceType: 'Developers, bloggers, content creators and Malaysian users' },
+    about: CATEGORY_TOPICS,
     mainEntity: { '@id': site.origin + '/#toollist' }
   },
   {
     '@type': 'ItemList', '@id': site.origin + '/#toollist', name: `${site.brand} free online tools`, numberOfItems: tools.length,
-    itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: t.url }))
+    itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, description: t.desc, url: t.url }))
   },
   {
     '@type': 'FAQPage', '@id': site.origin + '/#faq', isPartOf: { '@id': site.origin + '/#webpage' },
@@ -149,18 +155,25 @@ fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
 // Let crawlers fetch the 404 page so they can see its noindex directive.
 const robots = `# Public directory: search and AI crawlers may access the site.\nUser-agent: *\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`;
 fs.writeFileSync(path.join(root, 'robots.txt'), robots);
+// IndexNow ownership file (Bing, Yandex, Seznam, Naver). The key is public by design.
+fs.writeFileSync(path.join(root, site.indexNowKey + '.txt'), site.indexNowKey + '\n');
 
 // ---- Installable PWA. Stable app ID and root worker scope match the custom host.
 const manifest = {
   id: '/', name: site.brand + ' Tools', short_name: 'Bukit Besi Tools',
   description: 'Free online tool directory for code, content, design, AI and Malaysian calculators.',
   lang: 'en', dir: 'ltr', start_url: '/', scope: '/', display: 'standalone',
+  display_override: ['standalone', 'minimal-ui'],
   theme_color: '#0a0a0f', background_color: '#0a0a0f',
   categories: ['utilities', 'productivity'], prefer_related_applications: false,
   icons: [
     { src: '/assets/PWA/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
     { src: '/assets/PWA/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
     { src: '/assets/PWA/icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+  ],
+  screenshots: [
+    { src: '/assets/PWA/screenshots/wide.jpg', sizes: '1280x800', type: 'image/jpeg', form_factor: 'wide', label: 'Tool directory on desktop' },
+    { src: '/assets/PWA/screenshots/narrow.jpg', sizes: '824x1830', type: 'image/jpeg', form_factor: 'narrow', label: 'Tool directory on mobile' }
   ],
   shortcuts: [
     { name: 'Browse tools', url: '/#tools', description: 'Browse all published tools' },
