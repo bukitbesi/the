@@ -378,6 +378,15 @@
     "live": true
   },
   {
+    "name": "Income Tax Calculator Malaysia",
+    "desc": "Work out YA2026 income tax with every LHDN relief, rebates, zakat and a PCB refund check, and compare it with the Budget 2027 proposal. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/income-tax-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "income-tax-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "CGPA to Percentage Calculator",
     "desc": "Convert CGPA to percentage with your university's formula: CBSE, VTU, AKTU, MAKAUT, SPPU, GTU, Mumbai and Anna, plus a full conversion table.",
     "url": "https://tool.thebukitbesi.com/cgpa-to-percentage/",

@@ -96,3 +96,7 @@ fieldset{border:0}
 .entry th:last-child{width:48px}
 .entry td{padding:4px 3px}
 .entry select{padding:0 6px}
+.calc>*{min-width:0}
+select.input{max-width:100%;text-overflow:ellipsis}
+.prose li a{display:inline-block;padding:3px 0}
+.prose ul>li+li{margin-top:10px}

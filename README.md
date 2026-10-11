@@ -71,6 +71,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | --- | --- | --- |
 | [/salary-calculator-malaysia/](https://tool.thebukitbesi.com/salary-calculator-malaysia/) | English | salary calculator malaysia, PCB / EPF / SOCSO calculator |
 | [/kalkulator-gaji/](https://tool.thebukitbesi.com/kalkulator-gaji/) | Bahasa Melayu | kalkulator gaji bersih, kalkulator KWSP / PCB |
+| [/income-tax-calculator-malaysia/](https://tool.thebukitbesi.com/income-tax-calculator-malaysia/) | English | income tax calculator malaysia, YA2026 tax relief, Budget 2027 tax |
+| [/kalkulator-cukai-pendapatan/](https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/) | Bahasa Melayu | kalkulator cukai pendapatan, pelepasan cukai TT2026 |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 
@@ -81,6 +83,8 @@ computerised method. The build renders the first result, the worked example
 and the salary table into the HTML, so the page is complete before any script
 runs. They are linked as `hreflang` pairs, carry WebApplication, BreadcrumbList
 and FAQPage JSON-LD, cite their official sources and work offline.
+
+**Yearly upkeep (tax):** after each Budget, add the new year to `YEARS` in `tax-core.js` (bands, individual relief) and update relief limits, labels in `build.mjs` (`TAX_LABELS`) and `tools-src/tests/tax.test.mjs`. When the Finance Act passes, drop the `proposal` flag.
 
 **Yearly upkeep:** after each Budget or KWSP/PERKESO/LHDN change, update the
 rates in `salary-core.js`, its `RULES.verified` date and the tests in
@@ -105,6 +109,7 @@ tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attri
 tools-src/tests/            unit tests for calculation cores (node --test)
 tools-src/images.mjs        renders the social card and PWA screenshots (Playwright)
 assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
+assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/PWA/sw.js            service-worker source template
 ```
