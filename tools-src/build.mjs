@@ -15,6 +15,7 @@ const pub = path.join(root, 'docs');
 const read = f => fs.readFileSync(path.join(dir, f), 'utf8');
 const require = createRequire(import.meta.url);
 const salary = require('../assets/js/salary-core.js');
+const grades = require('../assets/js/grade-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -254,6 +255,51 @@ ${rows}
   };
 }
 
+// ---- grade tools (CGPA converter and calculator), rendered at build time like the salary pages
+const pct = n => `${Number(n.toFixed(2))}%`;
+const CGPA_DEFAULT = 8.2;
+const PERCENT_DEFAULT = 75;
+const COLUMN_PRESETS = ['cbse', 'anna', 'vtu', 'gtu', 'mu'];
+function cgpaPercentMap() {
+  const r = grades.toPercent(CGPA_DEFAULT, 'generic95');
+  const rows = [];
+  for (let c = 100; c >= 50; c--) {
+    const v = c / 10;
+    rows.push(`        <tr><th scope="row">${v.toFixed(1)}</th>${COLUMN_PRESETS.map(id => `<td>${pct(grades.toPercent(v, id).percent)}</td>`).join('')}</tr>`);
+  }
+  const formulaOf = id => grades.FORMULAS[grades.PRESETS.find(p => p.id === id).formula].label;
+  return {
+    G_DEFAULT: CGPA_DEFAULT, G_PERCENT: pct(r.percent), G_FORMULA: `${r.formula} = ${pct(r.percent)}`,
+    G_PERCENT_DEFAULT: PERCENT_DEFAULT, G_REVERSE: grades.toCgpa(PERCENT_DEFAULT, 'generic95').cgpa.toFixed(2).replace(/0$/, ''),
+    G_OPTIONS: grades.PRESETS.map(p => `<option value="${p.id}"${p.id === 'generic95' ? ' selected' : ''}>${esc(p.name)}</option>`).join(''),
+    G_COMPARE: grades.PRESETS.filter(p => !['generic95', 'generic10', 'proportional', 'custom'].includes(p.id)).map(p =>
+      `<tr data-preset="${p.id}"><th scope="row">${esc(p.name)}</th><td>${pct(grades.toPercent(CGPA_DEFAULT, p.id).percent)}</td><td>${esc(grades.FORMULAS[p.formula].label)}</td></tr>`).join('\n'),
+    G_TABLE_HEAD: `<tr><th scope="col">CGPA</th>${COLUMN_PRESETS.map(id => `<th scope="col">${esc(formulaOf(id))}</th>`).join('')}</tr>`,
+    G_TABLE: rows.join('\n'),
+    G_EX_CBSE: pct(grades.toPercent(CGPA_DEFAULT, 'cbse').percent), G_EX_VTU: pct(grades.toPercent(CGPA_DEFAULT, 'vtu').percent),
+    G_EX_ANNA: pct(grades.toPercent(CGPA_DEFAULT, 'anna').percent)
+  };
+}
+const SEM_EXAMPLE = [[8.2, 20], [7.9, 22], [8.6, 21], [8.4, 20]];
+const COURSE_EXAMPLE = [['O', 4], ['A+', 3], ['A', 3], ['B+', 3], ['A', 2]];
+function cgpaMap() {
+  const sem = grades.cgpaFromSemesters(SEM_EXAMPLE.map(([sgpa, credits]) => ({ sgpa, credits })));
+  const course = grades.gpaFromCourses(COURSE_EXAMPLE.map(([grade, credits]) => ({ grade, credits })), 'india10');
+  const gradeOptions = (scale, chosen) => '<option value="">Grade</option>' + grades.SCALES[scale].grades.map(([g, pts]) =>
+    `<option value="${esc(g)}"${g === chosen ? ' selected' : ''}>${esc(g)} (${pts.toFixed(scale === 'my4' ? 2 : 0)})</option>`).join('');
+  const del = n => `<td><button type="button" class="row-del" aria-label="Remove row ${n}">×</button></td>`;
+  const scaleTable = scale => grades.SCALES[scale].grades.map(([g, pts]) => `<tr><th scope="row">${esc(g)}</th><td>${pts.toFixed(2)}</td></tr>`).join('');
+  return {
+    C_SEM_ROWS: SEM_EXAMPLE.map(([sgpa, credits], i) => `<tr><td>${i + 1}</td><td><input type="number" inputmode="decimal" min="0" max="10" step="0.01" value="${sgpa}" aria-label="SGPA semester ${i + 1}"></td><td><input type="number" inputmode="decimal" min="0" step="0.5" value="${credits}" aria-label="Credits semester ${i + 1}"></td>${del(i + 1)}</tr>`).join('\n'),
+    C_SEM_CGPA: sem.cgpa.toFixed(2), C_SEM_DETAIL: `${sem.semesters} semesters, ${sem.credits} credits (credit-weighted)`,
+    C_SEM_LINK: `/cgpa-to-percentage/#cgpa=${sem.cgpa.toFixed(2)}&amp;u=generic95`,
+    C_COURSE_ROWS: COURSE_EXAMPLE.map(([g, credits], i) => `<tr><td>${i + 1}</td><td><select aria-label="Grade course ${i + 1}">${gradeOptions('india10', g)}</select></td><td><input type="number" inputmode="decimal" min="0" step="0.5" value="${credits}" aria-label="Credits course ${i + 1}"></td>${del(i + 1)}</tr>`).join('\n'),
+    C_GPA: course.gpa.toFixed(2), C_CREDITS: course.credits, C_POINTS: course.qualityPoints.toFixed(2),
+    C_SCALE_INDIA: scaleTable('india10'), C_SCALE_MY: scaleTable('my4')
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap };
+
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
@@ -297,7 +343,8 @@ for (const p of pages) {
     MAIN: p.body, FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
     PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n'),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
-    ...(p.salary ? salaryMap(p.lang) : {})
+    ...(p.salary ? salaryMap(p.lang) : {}),
+    ...(p.render ? RENDERERS[p.render](p.lang) : {})
   };
   const html = render(map);
   fs.mkdirSync(path.join(pub, p.path), { recursive: true });
@@ -307,7 +354,11 @@ for (const p of pages) {
 
 // ---- page scripts: concatenate sources into one deferred, cacheable file per tool
 fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
-const bundles = { 'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'] };
+const bundles = {
+  'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
+  'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
+  'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js']
+};
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
   const code = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n')

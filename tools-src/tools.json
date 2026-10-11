@@ -378,6 +378,24 @@
     "live": true
   },
   {
+    "name": "CGPA to Percentage Calculator",
+    "desc": "Convert CGPA to percentage with your university's formula: CBSE, VTU, AKTU, MAKAUT, SPPU, GTU, Mumbai and Anna, plus a full conversion table.",
+    "url": "https://tool.thebukitbesi.com/cgpa-to-percentage/",
+    "cat": "calc",
+    "icon": "cgpa-to-percentage",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "CGPA Calculator",
+    "desc": "Turn semester SGPAs into a credit-weighted CGPA, or course grades into GPA on India's 10-point or Malaysia's 4.00 scale.",
+    "url": "https://tool.thebukitbesi.com/cgpa-calculator/",
+    "cat": "calc",
+    "icon": "cgpa-calculator",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Kalkulator Faraid",
     "desc": "Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.",
     "url": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",

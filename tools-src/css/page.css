@@ -77,3 +77,22 @@ fieldset{border:0}
 .related a:hover{border-color:var(--card-hover)}
 .related small{display:block;font-weight:400;color:var(--text3);margin-top:4px}
 @media print{.header,.footer,.ad,.tool-actions,.pwa-notice,.more-opts summary,.skip{display:none!important}.page{padding-top:0}.calc{grid-template-columns:1fr 1fr}}
+/* Editable rows (CGPA calculator) */
+.entry{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:.9rem}
+.entry th{font-size:.78rem;font-weight:600;color:var(--text3);text-align:left;padding:4px 6px}
+.entry td{padding:4px 6px}
+.entry td:first-child{width:2.5em;color:var(--text3);font-variant-numeric:tabular-nums}
+.entry input,.entry select{width:100%;min-height:44px;padding:0 10px;border:1px solid var(--border2);border-radius:10px;background:var(--bg);color:var(--text);font:inherit}
+.entry input:focus,.entry select:focus{border-color:var(--accent2);outline:3px solid var(--tint-b);outline-offset:0}
+.row-del{width:44px;height:44px;border-radius:10px;color:var(--text3);font-size:1.3rem;line-height:1}
+.row-del:hover{color:var(--text);background:var(--tint)}
+.box .net{margin-top:16px}
+.box>.btn{margin-top:4px}
+.sub-h{font-size:.95rem;margin:4px 0 10px}
+.data caption{text-align:left;font-weight:700;padding:10px 12px}
+.entry{table-layout:fixed}
+.entry th:first-child{width:2.2em}
+.entry th:nth-child(2){width:50%}
+.entry th:last-child{width:48px}
+.entry td{padding:4px 3px}
+.entry select{padding:0 6px}

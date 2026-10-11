@@ -63,6 +63,16 @@
       "description": "Browse all published tools"
     },
     {
+      "name": "CGPA Calculator",
+      "url": "/cgpa-calculator/",
+      "description": "Free CGPA calculator. Turn semester SGPAs into CGPA (credit-weighted), or course grades into GPA on "
+    },
+    {
+      "name": "CGPA to Percentage Calculator",
+      "url": "/cgpa-to-percentage/",
+      "description": "Convert CGPA to percentage with your university's formula: CBSE × 9.5, VTU, AKTU, MAKAUT and SPPU (C"
+    },
+    {
       "name": "Malaysia Salary Calculator 2026",
       "url": "/salary-calculator-malaysia/",
       "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"

@@ -1,0 +1,132 @@
+<!--page
+{
+  "path": "/cgpa-calculator/",
+  "lang": "en",
+  "title": "CGPA Calculator: SGPA to CGPA and GPA from Grades",
+  "description": "Free CGPA calculator. Turn semester SGPAs into CGPA (credit-weighted), or course grades into GPA on India's 10-point or Malaysia's 4.00 scale.",
+  "llms": "Calculates CGPA from semester SGPAs (credit-weighted, or a simple average without credits) and GPA/CGPA from course letter grades on the UGC 10-point scale (O, A+, A … P, F) or the Malaysian 4.00 scale (A 4.00, A− 3.67, B+ 3.33 …), including continuing from a previous CGPA.",
+  "datePublished": "2026-10-11",
+  "dateModified": "2026-10-11",
+  "render": "cgpa",
+  "scripts": ["/assets/js/cgpa.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["CGPA Calculator", null]],
+  "about": ["Cumulative Grade Point Average (CGPA)", "Semester Grade Point Average (SGPA)", "Grade point average (GPA)"],
+  "app": {
+    "name": "CGPA Calculator",
+    "category": "EducationalApplication",
+    "features": ["SGPA to CGPA, credit-weighted or simple average", "Course grades to GPA", "India 10-point (UGC) and Malaysia 4.00 grade scales", "Continue from a previous CGPA", "Link to CGPA-to-percentage conversion", "Works offline"]
+  },
+  "faq": [
+    { "q": "How is CGPA calculated from SGPA?", "a": "Multiply each semester's SGPA by that semester's total credits, add the results, and divide by the total credits of all semesters. For example, SGPAs of 8.0 over 20 credits and 9.0 over 25 credits give (160 + 225) ÷ 45 = 8.56. If every semester has the same credits, this equals the simple average of the SGPAs." },
+    { "q": "What is the difference between SGPA, CGPA and GPA?", "a": "SGPA is the grade point average for one semester. CGPA is the cumulative average across all semesters completed so far, weighted by credits. GPA is the general term, often used for a single term in Malaysia and elsewhere." },
+    { "q": "Can I calculate CGPA without credits?", "a": "Yes. Leave every credit box empty and the calculator takes the simple average of your SGPAs. This matches the credit-weighted CGPA only when all semesters carry the same credits, so use credits when you have them." },
+    { "q": "What are the grade points on the 10-point scale?", "a": "Under the UGC choice-based credit system, O (Outstanding) is 10, A+ is 9, A is 8, B+ is 7, B is 6, C is 5, P (Pass) is 4, and F (Fail) and Ab (Absent) are 0. Some universities use different letters, so check your grade card." },
+    { "q": "What are the grade points on the Malaysian 4.00 scale?", "a": "Malaysian public universities commonly use A = 4.00, A− = 3.67, B+ = 3.33, B = 3.00, B− = 2.67, C+ = 2.33, C = 2.00, C− = 1.67, D+ = 1.33, D = 1.00 and E or F = 0. Some universities, such as UiTM, also award A+ at 4.00." },
+    { "q": "How do I convert my CGPA to a percentage?", "a": "Use the CGPA to percentage converter on this site. It applies the formula your university publishes, such as CGPA × 9.5 for CBSE or (CGPA − 0.75) × 10 for VTU, AKTU, MAKAUT and SPPU engineering." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">CGPA calculator</li></ol></nav>
+  <h1>CGPA Calculator</h1>
+  <p class="answer">Your <strong>CGPA is the credit-weighted average of your semester SGPAs</strong>: multiply each SGPA by its credits, add them up and divide by the total credits. The four example semesters below give a CGPA of <strong>{{C_SEM_CGPA}}</strong>. Enter your own SGPAs, or work out a GPA from course grades on India's 10-point or Malaysia's 4.00 scale.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/cgpa-to-percentage/">Convert CGPA to percentage</a></p>
+
+  <div class="calc">
+    <form class="box" id="semForm" novalidate aria-labelledby="sem-h">
+      <h2 id="sem-h">SGPA to CGPA</h2>
+      <p class="help">Leave all credits blank to take a simple average.</p>
+      <table class="entry">
+        <thead><tr><th scope="col">Sem</th><th scope="col">SGPA</th><th scope="col">Credits</th><th scope="col"><span class="sr-only">Remove</span></th></tr></thead>
+        <tbody id="semRows">
+{{C_SEM_ROWS}}
+        </tbody>
+      </table>
+      <template id="semTpl"><tr><td></td><td><input type="number" inputmode="decimal" min="0" max="10" step="0.01"></td><td><input type="number" inputmode="decimal" min="0" step="0.5"></td><td><button type="button" class="row-del" aria-label="Remove row">×</button></td></tr></template>
+      <button type="button" class="btn ghost sm" id="semAdd">Add semester</button>
+      <p class="error" id="semError" role="alert" hidden></p>
+      <div class="net">
+        <p>CGPA</p>
+        <output id="semCgpa">{{C_SEM_CGPA}}</output>
+        <p id="semDetail">{{C_SEM_DETAIL}}</p>
+      </div>
+      <p class="sr-only" id="semLive" aria-live="polite"></p>
+      <a class="btn sm" id="semConvert" href="{{C_SEM_LINK}}">Convert to percentage</a>
+    </form>
+
+    <form class="box" id="courseForm" novalidate aria-labelledby="course-h">
+      <h2 id="course-h">GPA from course grades</h2>
+      <div class="field">
+        <label for="scale">Grading scale</label>
+        <select class="input" id="scale" name="scale">
+          <option value="india10" selected>India 10-point (O, A+, A … P)</option>
+          <option value="my4">Malaysia 4.00 (A, A−, B+ …)</option>
+        </select>
+      </div>
+      <table class="entry">
+        <thead><tr><th scope="col">#</th><th scope="col">Grade</th><th scope="col">Credits</th><th scope="col"><span class="sr-only">Remove</span></th></tr></thead>
+        <tbody id="courseRows">
+{{C_COURSE_ROWS}}
+        </tbody>
+      </table>
+      <template id="courseTpl"><tr><td></td><td><select></select></td><td><input type="number" inputmode="decimal" min="0" step="0.5"></td><td><button type="button" class="row-del" aria-label="Remove row">×</button></td></tr></template>
+      <button type="button" class="btn ghost sm" id="courseAdd">Add course</button>
+      <details class="more-opts">
+        <summary>Include previous semesters</summary>
+        <div class="field"><label for="prevCgpa">Current CGPA</label><div class="input"><input id="prevCgpa" name="prevCgpa" type="number" inputmode="decimal" min="0" step="0.01"></div></div>
+        <div class="field"><label for="prevCredits">Credits completed so far</label><div class="input"><input id="prevCredits" name="prevCredits" type="number" inputmode="decimal" min="0" step="0.5"></div></div>
+      </details>
+      <p class="error" id="courseError" role="alert" hidden></p>
+      <div class="net">
+        <p>GPA</p>
+        <output id="courseGpa">{{C_GPA}}</output>
+        <p><span id="courseCredits">{{C_CREDITS}}</span> credits · <span id="coursePoints">{{C_POINTS}}</span> grade points</p>
+        <p id="courseCgpaRow" hidden>New CGPA: <strong id="courseCgpa"></strong></p>
+      </div>
+      <p class="sr-only" id="courseLive" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="how">How to calculate CGPA</h2>
+  <ol>
+    <li><strong>Find each semester's SGPA and credits</strong> on your grade cards.</li>
+    <li><strong>Multiply</strong> each SGPA by that semester's credits.</li>
+    <li><strong>Add</strong> the results, then <strong>divide</strong> by the total number of credits.</li>
+  </ol>
+  <p>The same method gives a semester GPA from course grades: multiply each course's grade point by its credits, add them up and divide by the total credits.</p>
+  <h3>Worked example</h3>
+  <p>Two semesters: SGPA 8.0 over 20 credits and SGPA 9.0 over 25 credits. (8.0 × 20) + (9.0 × 25) = 160 + 225 = 385. Divide by 45 credits: <strong>CGPA 8.56</strong>. A simple average would give 8.50, because it ignores that the second semester carried more credits.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="scales">Grade point scales</h2>
+  <div class="related">
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="scale-in">
+      <table class="data"><caption id="scale-in">India 10-point (UGC CBCS)</caption><thead><tr><th scope="col">Grade</th><th scope="col">Points</th></tr></thead><tbody>{{C_SCALE_INDIA}}</tbody></table>
+    </div>
+    <div class="table-wrap" tabindex="0" role="region" aria-labelledby="scale-my">
+      <table class="data"><caption id="scale-my">Malaysia 4.00</caption><thead><tr><th scope="col">Grade</th><th scope="col">Points</th></tr></thead><tbody>{{C_SCALE_MY}}</tbody></table>
+    </div>
+  </div>
+  <p>Letter grades and points vary between universities. If your grade card lists different points, use the SGPA to CGPA calculator with the SGPAs printed on it.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> Results are calculated from the grades and credits you enter and are not an official transcript. Your university's records are final.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/cgpa-to-percentage/">CGPA to Percentage<small>University formulas and conversion table</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free calculators and utilities</small></a>
+  </div>
+</section>
