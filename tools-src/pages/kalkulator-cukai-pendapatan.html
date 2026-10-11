@@ -1,0 +1,169 @@
+<!--page
+{
+  "path": "/kalkulator-cukai-pendapatan/",
+  "lang": "ms",
+  "alternates": { "en": "/income-tax-calculator-malaysia/" },
+  "title": "Kalkulator Cukai Pendapatan TT2026 & Bajet 2027",
+  "description": "Kalkulator cukai pendapatan Malaysia TT2026 percuma: semua pelepasan LHDN, rebat, zakat, semakan bayaran balik PCB dan cukai di bawah cadangan Bajet 2027.",
+  "llms": "Kalkulator cukai pendapatan individu pemastautin Malaysia bagi TT2026 (pendapatan 2026, diisytihar pada 2027): pendapatan tahunan, setiap pelepasan cukai dengan hadnya, derma diluluskan, rebat RM400, zakat dan PCB yang telah dipotong (bayaran balik atau baki), berserta perbandingan dengan cadangan Bajet 2027 (pelepasan individu RM12,000, kadar 18% dan 24%, 30% melebihi RM1 juta) bagi TT2027.",
+  "datePublished": "2026-10-11",
+  "dateModified": "2026-10-11",
+  "render": "tax",
+  "scripts": ["/assets/js/tax.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Cukai Pendapatan", null]],
+  "about": ["Cukai pendapatan individu Malaysia", "Pelepasan cukai LHDN", "Tahun Taksiran 2026", "Bajet 2027"],
+  "app": {
+    "name": "Kalkulator Cukai Pendapatan Malaysia TT2026",
+    "category": "FinanceApplication",
+    "features": ["Kadar cukai pemastautin TT2026", "Setiap pelepasan cukai dengan hadnya", "Rebat RM400, zakat dan derma diluluskan", "Semakan bayaran balik atau baki PCB", "Perbandingan Bajet 2027 (TT2027)", "Kadar cukai efektif dan marginal", "Berfungsi di luar talian"]
+  },
+  "citations": [
+    ["PwC Malaysia: Cukai pendapatan individu (kadar, pelepasan dan cadangan Bajet 2027)", "https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html"],
+    ["Malay Mail: Bajet 2027 naikkan pelepasan individu kepada RM12,000", "https://www.malaymail.com/news/malaysia/2026/10/09/budget-2027-individual-tax-relief-rises-to-rm12000-income-tax-percentage-lowered/238401"],
+    ["The Star: Bajet 2027 kurangkan cukai bagi pendapatan RM70,000 hingga RM150,000", "https://www.thestar.com.my/news/nation/2026/10/09/budget-2027-lower-income-tax-for-rm70000-to-rm150000-range"],
+    ["CIMB: Pelepasan cukai individu TT2026", "https://www.cimb.com.my/en/personal/life-goals/money-basics/malaysia-personal-tax-relief-ya2026-what-you-can-still-tick-off-before-year-end.html"],
+    ["LHDN: Pengemukaan dan bayaran PCB", "https://www.hasil.gov.my/majikan/pembayaran-pcb/"]
+  ],
+  "faq": [
+    { "q": "Berapa cukai pendapatan bagi RM60,000 setahun?", "a": "Kira-kira RM1,299 bagi TT2026 jika anda bujang dan menuntut pelepasan individu automatik RM9,000, KWSP (RM4,000) serta PERKESO/SIP (RM350). Pendapatan bercukai menjadi RM46,650: cukai RM600 bagi RM35,000 pertama ditambah 6% daripada RM11,650. Setiap pelepasan tambahan mengurangkan lagi cukai anda." },
+    { "q": "Apakah perubahan cukai dalam Bajet 2027?", "a": "Bajet 2027 yang dibentangkan pada 9 Oktober 2026 mencadangkan pelepasan individu dinaikkan daripada RM9,000 kepada RM12,000, kadar bagi pendapatan bercukai RM70,001–RM100,000 diturunkan daripada 19% kepada 18%, RM100,001–RM150,000 daripada 25% kepada 24%, dan kadar tertinggi 30% dikenakan mulai RM1 juta, bukan RM2 juta. Perubahan ini terpakai mulai TT2027 (pendapatan tahun 2027) selepas diluluskan dalam Akta Kewangan." },
+    { "q": "Apakah beza pelepasan cukai dan rebat cukai?", "a": "Pelepasan mengurangkan pendapatan bercukai sebelum cukai dikira, jadi penjimatannya mengikut kadar marginal anda. Rebat pula mengurangkan cukai secara terus, ringgit demi ringgit. Rebat RM400 (RM800 jika pasangan tidak bekerja) diberi apabila pendapatan bercukai RM35,000 atau kurang, dan zakat yang dibayar juga ialah rebat, sehingga jumlah cukai." },
+    { "q": "Adakah saya akan dapat bayaran balik cukai?", "a": "Bandingkan PCB yang dipotong oleh majikan sepanjang tahun dengan cukai perlu dibayar. Jika PCB lebih tinggi, contohnya kerana pelepasan yang tidak diisytiharkan kepada majikan, LHDN akan memulangkan bezanya selepas anda mengisi borang. Masukkan jumlah PCB dalam kalkulator untuk melihat anggaran bayaran balik atau baki." },
+    { "q": "Tahun taksiran mana yang perlu saya gunakan?", "a": "Gunakan TT2026 bagi pendapatan Januari hingga Disember 2026, yang diisytiharkan pada awal 2027. TT2027 ialah bagi pendapatan tahun 2027, apabila cadangan Bajet 2027 dijangka berkuat kuasa." },
+    { "q": "Adakah kalkulator ini untuk warga asing atau bukan pemastautin?", "a": "Tidak. Ia menggunakan kadar bagi pemastautin cukai, iaitu biasanya mereka yang berada di Malaysia 182 hari atau lebih dalam setahun. Bukan pemastautin dikenakan kadar rata 30% atas pendapatan penggajian dan tidak boleh menuntut pelepasan individu." },
+    { "q": "Adakah maklumat saya disimpan atau dihantar?", "a": "Tidak. Kalkulator ini berfungsi sepenuhnya dalam pelayar anda. Pautan yang disalin menyimpan input selepas tanda #, yang tidak dihantar oleh pelayar ke mana-mana pelayan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Laluan"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator cukai pendapatan</li></ol></nav>
+  <h1>Kalkulator Cukai Pendapatan Malaysia (TT2026)</h1>
+  <p class="answer">Dengan pendapatan tahunan RM60,000, pembayar cukai bujang yang menuntut pelepasan KWSP dan PERKESO membayar kira-kira <strong>{{X_EX_TAX}}</strong> cukai pendapatan bagi TT2026. Di bawah <strong>cadangan Bajet 2027</strong> (pelepasan individu RM12,000 dan kadar lebih rendah), pendapatan yang sama dikenakan {{X_EX_PROPOSAL}}. Masukkan pendapatan dan pelepasan anda untuk melihat cukai, bayaran balik dan penjimatan Bajet 2027.</p>
+  <p class="meta"><span>Dikemas kini <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time>, selepas Bajet 2027</span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/income-tax-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="taxForm" novalidate aria-labelledby="tax-h">
+      <h2 id="tax-h">Pendapatan dan pelepasan 2026</h2>
+      <div class="field">
+        <label for="employment">Pendapatan penggajian setahun</label>
+        <div class="input"><span aria-hidden="true">RM</span><input id="employment" name="employment" type="number" inputmode="decimal" min="0" step="1" value="{{X_EMPLOYMENT}}" aria-describedby="emp-help"></div>
+        <p class="help" id="emp-help">Gaji, bonus, komisen dan elaun sebelum potongan (jumlah dalam Borang EA).</p>
+      </div>
+      <div class="field">
+        <label for="other">Pendapatan lain</label>
+        <div class="input"><span aria-hidden="true">RM</span><input id="other" name="other" type="number" inputmode="decimal" min="0" step="1" placeholder="0"></div>
+        <p class="help">Contohnya sewa atau keuntungan perniagaan.</p>
+      </div>
+{{X_FIELDS}}
+      <details class="more-opts">
+        <summary>Zakat, derma dan PCB yang dipotong</summary>
+        <div class="field"><label for="zakat">Zakat atau fitrah dibayar pada 2026</label><div class="input"><span aria-hidden="true">RM</span><input id="zakat" name="zakat" type="number" inputmode="decimal" min="0" step="1" placeholder="0"></div></div>
+        <div class="field"><label for="donations">Derma kepada organisasi yang diluluskan</label><div class="input"><span aria-hidden="true">RM</span><input id="donations" name="donations" type="number" inputmode="decimal" min="0" step="1" placeholder="0"></div><p class="help">Boleh ditolak sehingga 10% daripada pendapatan.</p></div>
+        <div class="field"><label for="pcb">Jumlah PCB dipotong pada 2026</label><div class="input"><span aria-hidden="true">RM</span><input id="pcb" name="pcb" type="number" inputmode="decimal" min="0" step="1" placeholder="0"></div><p class="help">Tertera dalam Borang EA. Digunakan untuk anggaran bayaran balik atau baki.</p></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="tax-result-h">
+      <h2 id="tax-result-h">Cukai anda bagi TT2026</h2>
+      <div class="net">
+        <p>Cukai perlu dibayar</p>
+        <output id="tPayable" for="employment">{{X_PAYABLE}}</output>
+        <p>Purata <span id="tMonthly">{{X_MONTHLY}}</span> sebulan</p>
+        <p id="tBalanceRow" hidden><span id="tBalanceLabel"></span>: <strong id="tBalance"></strong></p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Cara cukai dikira</caption>
+        <tbody>
+          <tr><th scope="row">Jumlah pendapatan</th><td id="tIncome">{{X_INCOME}}</td></tr>
+          <tr id="rowDonations" hidden><th scope="row">Derma diluluskan</th><td id="tDonations">{{X_DONATIONS}}</td></tr>
+          <tr><th scope="row">Jumlah pelepasan</th><td id="tReliefs">{{X_RELIEFS}}</td></tr>
+          <tr><th scope="row">Pendapatan bercukai</th><td id="tChargeable">{{X_CHARGEABLE}}</td></tr>
+          <tr><th scope="row">Cukai atas pendapatan bercukai</th><td id="tGross">{{X_GROSS}}</td></tr>
+          <tr id="rowRebate" hidden><th scope="row">Rebat</th><td id="tRebate">{{X_REBATE}}</td></tr>
+          <tr id="rowZakat" hidden><th scope="row">Rebat zakat</th><td id="tZakat">{{X_ZAKAT}}</td></tr>
+          <tr class="total"><th scope="row">Kadar efektif · marginal</th><td id="tRates">{{X_RATES}}</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><p><strong>Bajet 2027 (TT2027, cadangan):</strong> <span id="tProposal">{{X_PROPOSAL}}</span>. <span id="tCompare">{{X_COMPARE}}</span></p></div>
+      <table class="rows">
+        <caption>Pelepasan yang dituntut</caption>
+        <tbody id="reliefRows" data-self="{{X_SELF}}">{{X_RELIEF_ROWS}}</tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="taxPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">Cara cukai pendapatan dikira</h2>
+  <ol>
+    <li><strong>Jumlahkan pendapatan</strong> setahun: pendapatan penggajian (Borang EA) dan pendapatan lain.</li>
+    <li><strong>Tolak derma diluluskan</strong> (sehingga 10% pendapatan) dan <strong>pelepasan anda</strong>, setiap satu mengikut hadnya. Bakinya ialah pendapatan bercukai.</li>
+    <li><strong>Kenakan kadar cukai</strong> mengikut julat ke atas pendapatan bercukai.</li>
+    <li><strong>Tolak rebat:</strong> RM400 jika pendapatan bercukai RM35,000 atau kurang (RM800 jika pasangan tidak bekerja), kemudian zakat yang dibayar.</li>
+    <li><strong>Bandingkan dengan PCB</strong> yang dipotong oleh majikan untuk melihat bayaran balik atau baki.</li>
+  </ol>
+
+  <h2 id="rates">Kadar cukai pendapatan: TT2026 dan Bajet 2027</h2>
+  <p>Kadar bagi individu pemastautin. Lajur Bajet 2027 ialah cadangan yang dibentangkan pada 9 Oktober 2026 bagi TT2027; perubahan ditebalkan.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates">
+    <table class="data">
+      <thead><tr><th scope="col">Pendapatan bercukai (RM)</th><th scope="col">TT2026</th><th scope="col">TT2027 (cadangan)</th></tr></thead>
+      <tbody>
+{{X_BANDS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Bajet 2027 juga mencadangkan pelepasan individu dinaikkan daripada RM9,000 kepada RM12,000, kenaikan pertama sejak 2010, serta meluaskan pelepasan kepada langganan AI, vaksinasi dan pengambilan haiwan peliharaan, dan penjagaan selepas bersalin. Had bagi perkara baharu ini belum diumumkan semasa halaman ini dikemas kini.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="examples-h">Cukai pendapatan mengikut gaji biasa</h2>
+  <p>Pembayar cukai bujang yang menuntut pelepasan individu automatik, KWSP (11% pendapatan, sehingga RM4,000) dan PERKESO/SIP (RM350) sahaja.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Pendapatan setahun</th><th scope="col">Cukai TT2026</th><th scope="col">Kadar efektif</th><th scope="col">TT2027 (cadangan)</th><th scope="col">Penjimatan</th></tr></thead>
+      <tbody>
+{{X_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="reliefs-h">Had pelepasan cukai TT2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="reliefs-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Pelepasan</th><th scope="col">Had</th></tr></thead>
+      <tbody>
+{{X_RELIEF_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Simpan resit selama tujuh tahun: LHDN boleh meminta bukti bagi setiap pelepasan yang dituntut.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html" rel="noopener">PwC Malaysia: kadar cukai, pelepasan dan cadangan Bajet 2027</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2026/10/09/budget-2027-individual-tax-relief-rises-to-rm12000-income-tax-percentage-lowered/238401" rel="noopener">Malay Mail: perubahan pelepasan dan kadar Bajet 2027</a></li>
+    <li><a href="https://www.thestar.com.my/news/nation/2026/10/09/budget-2027-lower-income-tax-for-rm70000-to-rm150000-range" rel="noopener">The Star: cukai lebih rendah bagi RM70,000 hingga RM150,000</a></li>
+    <li><a href="https://www.cimb.com.my/en/personal/life-goals/money-basics/malaysia-personal-tax-relief-ya2026-what-you-can-still-tick-off-before-year-end.html" rel="noopener">CIMB: pelepasan cukai individu TT2026</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Kalkulator ini memberi anggaran bagi individu pemastautin dan bukan nasihat cukai. Syarat pelepasan terpakai; angka Bajet 2027 ialah cadangan sehingga diluluskan. Sahkan penyata anda di MyTax atau dengan perunding cukai.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih bulanan dan PCB</small></a>
+    <a href="https://www.thebukitbesi.com/p/kalkulator-zakat.html">Kalkulator Zakat<small>Zakat pendapatan dan simpanan</small></a>
+    <a href="/">Semua alat {{BRAND}}<small>Kalkulator dan utiliti percuma</small></a>
+  </div>
+</section>

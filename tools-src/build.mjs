@@ -16,6 +16,7 @@ const read = f => fs.readFileSync(path.join(dir, f), 'utf8');
 const require = createRequire(import.meta.url);
 const salary = require('../assets/js/salary-core.js');
 const grades = require('../assets/js/grade-core.js');
+const taxes = require('../assets/js/tax-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -298,7 +299,90 @@ function cgpaMap() {
     C_SCALE_INDIA: scaleTable('india10'), C_SCALE_MY: scaleTable('my4')
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap };
+// ---- annual income tax (EN + BM): relief form, results and tables generated from tax-core.js
+const TAX_LABELS = {
+  self: ['Individual (automatic)', 'Individu (automatik)'],
+  disabled: ['Disabled individual (OKU)', 'Individu kurang upaya (OKU)'],
+  spouse: ['Spouse with no income, or joint assessment', 'Pasangan tiada pendapatan, atau taksiran bersama'],
+  spouseDisabled: ['Spouse is disabled (OKU)', 'Pasangan OKU'],
+  childUnder18: ['Children under 18', 'Anak bawah 18 tahun'],
+  child18School: ['Children 18+ in A-level, matriculation or similar', 'Anak 18 tahun ke atas di A-Level, matrikulasi atau setara'],
+  child18Higher: ['Children 18+ studying for a diploma or degree', 'Anak 18 tahun ke atas belajar diploma atau ijazah'],
+  childDisabled: ['Disabled children', 'Anak OKU'],
+  parentsMedical: ['Parents: medical, dental and care', 'Ibu bapa: perubatan, pergigian dan penjagaan'],
+  medical: ['Medical for self, spouse and children', 'Perubatan diri, pasangan dan anak'],
+  equipment: ['Support equipment for a disabled family member', 'Peralatan sokongan ahli keluarga OKU'],
+  education: ['Your own education fees', 'Yuran pendidikan sendiri'],
+  lifestyle: ['Lifestyle: books, computer, phone, internet', 'Gaya hidup: buku, komputer, telefon, internet'],
+  sports: ['Sports equipment, facilities and fees', 'Peralatan, fasiliti dan yuran sukan'],
+  breastfeeding: ['Breastfeeding equipment', 'Peralatan penyusuan ibu'],
+  childcare: ['Childcare centre or kindergarten fees', 'Yuran taska atau tadika'],
+  sspn: ['SSPN net savings', 'Simpanan bersih SSPN'],
+  epf: ['EPF (your share)', 'KWSP (bahagian anda)'],
+  lifeInsurance: ['Life insurance or family takaful', 'Insurans nyawa atau takaful keluarga'],
+  prs: ['PRS and deferred annuity', 'PRS dan anuiti tertangguh'],
+  eduMedInsurance: ['Education or medical insurance', 'Insurans pendidikan atau perubatan'],
+  socso: ['SOCSO and EIS', 'PERKESO dan SIP'],
+  evCharging: ['EV charging or food-waste composter', 'Pengecasan EV atau mesin kompos sisa makanan'],
+  housingLoan: ['First-home loan interest', 'Faedah pinjaman rumah pertama']
+};
+const TAX_HELP = {
+  medical: ['Serious illness, fertility treatment, vaccination, dental, check-ups and children\'s learning-disability support.', 'Penyakit serius, rawatan kesuburan, vaksinasi, pergigian, pemeriksaan dan sokongan kesukaran pembelajaran anak.'],
+  education: ['Includes up to RM2,000 for upskilling courses.', 'Termasuk sehingga RM2,000 untuk kursus peningkatan kemahiran.'],
+  epf: ['Enter what was deducted from your pay; relief is capped at RM4,000.', 'Masukkan jumlah yang dipotong daripada gaji; pelepasan dihadkan RM4,000.'],
+  housingLoan: ['Sale and purchase agreement signed 2025–2027. RM7,000 for homes up to RM500,000; RM5,000 up to RM750,000.', 'Perjanjian jual beli ditandatangani 2025–2027. RM7,000 untuk rumah sehingga RM500,000; RM5,000 sehingga RM750,000.']
+};
+const TAX_GROUPS = [
+  [['Family', 'Keluarga'], ['disabled', 'spouse', 'spouseDisabled', 'childUnder18', 'child18School', 'child18Higher', 'childDisabled'], false],
+  [['Savings and insurance', 'Simpanan dan insurans'], ['epf', 'socso', 'lifeInsurance', 'eduMedInsurance', 'prs', 'sspn'], true],
+  [['Medical', 'Perubatan'], ['medical', 'parentsMedical', 'equipment'], false],
+  [['Lifestyle, education and home', 'Gaya hidup, pendidikan dan rumah'], ['lifestyle', 'sports', 'education', 'childcare', 'breastfeeding', 'evCharging', 'housingLoan'], false]
+];
+const TAX_EXAMPLE = { employment: 60000, epf: 6600, socso: 350 };
+function taxMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const rm = n => money(n, lang);
+  const relief = Object.fromEntries(taxes.RELIEFS.map(r => [r.id, r]));
+  const field = id => {
+    const r = relief[id], label = esc(TAX_LABELS[id][L]), help = TAX_HELP[id] ? `<p class="help" id="h-${id}">${esc(TAX_HELP[id][L])}</p>` : '';
+    const describedby = TAX_HELP[id] ? ` aria-describedby="h-${id}"` : '';
+    if (r.flag) return `<div class="field"><label class="check"><input type="checkbox" name="${id}" data-name="${label}"> <span>${label} <small>(${rm(r.limit)})</small></span></label></div>`;
+    if (r.per) return `<div class="field"><label for="f-${id}">${label} <small>(${rm(r.per)} ${L ? 'seorang' : 'each'})</small></label><div class="input"><input id="f-${id}" name="${id}" data-name="${label}" type="number" inputmode="numeric" min="0" max="20" step="1" value="${TAX_EXAMPLE[id] ?? ''}" placeholder="0"></div></div>`;
+    const tier = id === 'housingLoan' ? `<select class="input" name="housingTier" aria-label="${L ? 'Harga rumah' : 'Home price'}"><option value="lower" selected>${L ? 'Sehingga RM500,000' : 'Up to RM500,000'}</option><option value="upper">RM500,001–RM750,000</option></select>` : '';
+    return `<div class="field"><label for="f-${id}">${label} <small>(${L ? 'had' : 'max'} ${rm(r.limit)})</small></label><div class="input"><span aria-hidden="true">RM</span><input id="f-${id}" name="${id}" data-name="${label}" type="number" inputmode="decimal" min="0" step="1" value="${TAX_EXAMPLE[id] ?? ''}" placeholder="0"${describedby}></div>${help}${tier}</div>`;
+  };
+  const groups = TAX_GROUPS.map(([title, ids, open]) => `<details class="more-opts"${open ? ' open' : ''}><summary>${esc(title[L])}</summary>${ids.map(field).join('')}</details>`).join('\n');
+  const r = taxes.calculate(TAX_EXAMPLE, 2026), p = taxes.calculate(TAX_EXAMPLE, 2027);
+  const bandRows = () => {
+    const edges = [...new Set([...taxes.BANDS_2026, ...taxes.BANDS_2027].flatMap(b => [b[0], b[1]]))].sort((a, b) => a - b);
+    const rateAt = (bands, x) => bands.find(b => x > b[0] && x <= b[1])[2];
+    return edges.slice(0, -1).map((lo, i) => {
+      const hi = edges[i + 1], mid = lo + 1;
+      const a = rateAt(taxes.BANDS_2026, mid), b = rateAt(taxes.BANDS_2027, mid);
+      const range = hi === Infinity ? `${L ? 'Melebihi' : 'Above'} ${lo.toLocaleString('en')}` : `${(lo ? lo + 1 : 0).toLocaleString('en')} – ${hi.toLocaleString('en')}`;
+      return `<tr><th scope="row">${range}</th><td>${Math.round(a * 100)}%</td><td>${a !== b ? '<strong>' : ''}${Math.round(b * 100)}%${a !== b ? '</strong>' : ''}</td></tr>`;
+    }).join('\n');
+  };
+  const examples = [36000, 48000, 60000, 84000, 120000, 180000, 240000, 360000].map(inc => {
+    const x = { employment: inc, epf: inc * 0.11, socso: 350 };
+    const a = taxes.calculate(x, 2026), b = taxes.calculate(x, 2027);
+    return `<tr><th scope="row">${rm(inc)}</th><td>${rm(a.payable)}</td><td>${a.effectiveRate}%</td><td>${rm(b.payable)}</td><td>${rm(a.payable - b.payable)}</td></tr>`;
+  }).join('\n');
+  const reliefTable = [['self', 9000], ...taxes.RELIEFS.map(x => [x.id, x.limit || x.per])].map(([id, lim]) =>
+    `<tr><th scope="row">${esc(TAX_LABELS[id][L])}</th><td>${rm(lim)}${relief[id] && relief[id].per ? (L ? ' seorang' : ' each') : ''}</td></tr>`).join('\n');
+  return {
+    X_FIELDS: groups, X_SELF: esc(TAX_LABELS.self[L]),
+    X_EMPLOYMENT: TAX_EXAMPLE.employment,
+    X_PAYABLE: rm(r.payable), X_MONTHLY: rm(r.monthly), X_INCOME: rm(r.income), X_RELIEFS: rm(r.reliefTotal),
+    X_DONATIONS: rm(r.donations), X_CHARGEABLE: rm(r.chargeable), X_GROSS: rm(r.grossTax), X_REBATE: rm(r.rebate), X_ZAKAT: rm(r.zakat),
+    X_RATES: `${r.effectiveRate}% · ${r.marginalRate}%`, X_PROPOSAL: rm(p.payable),
+    X_COMPARE: L ? `Jimat ${rm(r.payable - p.payable)} di bawah cadangan Bajet 2027 (TT2027).` : `You would pay ${rm(r.payable - p.payable)} less under the Budget 2027 proposal (YA2027).`,
+    X_RELIEF_ROWS: r.reliefs.map(x => `<tr><th scope="row">${esc(TAX_LABELS[x.id][L])}</th><td>${rm(x.amount)}</td></tr>`).join(''),
+    X_BANDS: bandRows(), X_EXAMPLES: examples, X_RELIEF_TABLE: reliefTable,
+    X_EX_TAX: rm(r.payable), X_EX_PROPOSAL: rm(p.payable), X_EX_SAVE: rm(r.payable - p.payable)
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap };
 
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
@@ -357,7 +441,8 @@ fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
 const bundles = {
   'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
-  'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js']
+  'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
+  'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
