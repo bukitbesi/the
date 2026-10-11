@@ -9,6 +9,8 @@ const image = rect(3, 4, 18, 16) + circle(8, 9, 1.5) + p('m3 17 5-5 4 4 3-3 6 6'
 const chat = p('M20 15a3 3 0 0 1-3 3H8l-5 3V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3Z');
 
 export const icons = {
+  'cgpa-to-percentage': circle(7, 7, 2.5) + circle(17, 17, 2.5) + p('M19 5 5 19'),
+  'cgpa-calculator': p('M2 9l10-5 10 5-10 5Z') + p('M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5') + p('M22 9v6'),
   'salary-calculator-malaysia': rect(2, 6, 20, 13) + p('M2 10h20') + text('RM', 6.5).replace('y="15"', 'y="17"'),
   'javascript-minifier-obfuscator': p('m12 2 8 3v6c0 5-4 8-8 11-4-3-8-6-8-11V5Z') + text('JS'),
   'css-minifier-tool': file('CSS'),

@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/cgpa-to-percentage/",
+  "lang": "en",
+  "title": "CGPA to Percentage Calculator: VTU, AKTU, SPPU, CBSE & More",
+  "description": "Convert CGPA to percentage with your university's formula: CBSE × 9.5, VTU, AKTU, MAKAUT and SPPU (CGPA − 0.75) × 10, GTU, Mumbai and Anna. Free.",
+  "llms": "Converts CGPA to percentage (and percentage back to CGPA) with the formula each university commonly publishes: CBSE CGPA × 9.5, VTU/AKTU/MAKAUT/SPPU (CGPA − 0.75) × 10, GTU (CGPA − 0.5) × 10, University of Mumbai CGPA × 7.1 + 11, Anna University CGPA × 10, any-scale proportional and custom formulas, with a full CGPA 5.0–10.0 conversion table.",
+  "datePublished": "2026-10-11",
+  "dateModified": "2026-10-11",
+  "render": "cgpaPercent",
+  "scripts": ["/assets/js/cgpa-percent.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["CGPA to Percentage", null]],
+  "about": ["Cumulative Grade Point Average (CGPA)", "Grade point to percentage conversion", "Indian university grading"],
+  "app": {
+    "name": "CGPA to Percentage Calculator",
+    "category": "EducationalApplication",
+    "features": ["University formula presets", "Comparison of every formula for the same CGPA", "Percentage to CGPA", "Any grading scale", "Custom formula", "CGPA 5.0–10.0 conversion table", "Works offline"]
+  },
+  "faq": [
+    { "q": "How do I convert CGPA to percentage?", "a": "Multiply your CGPA by 9.5 if your university does not publish its own formula. This is the CBSE method and the most widely used default, so a CGPA of 8.2 equals 77.9%. If your university publishes a formula, use that instead: for example VTU, AKTU, MAKAUT and SPPU engineering use (CGPA − 0.75) × 10, which gives 74.5% for 8.2." },
+    { "q": "What is 8 CGPA in percentage?", "a": "8 CGPA is 76% with the CBSE formula (8 × 9.5), 80% with CGPA × 10, 72.5% with (CGPA − 0.75) × 10, 75% with (CGPA − 0.5) × 10 and 67.8% with the University of Mumbai formula (8 × 7.1 + 11)." },
+    { "q": "Why does CBSE multiply CGPA by 9.5?", "a": "CBSE derived the factor from past results: students in the top grade band scored about 95% on average, so a 10-point CGPA is scaled by 9.5 to approximate a percentage. Many institutions also use CGPA × 9.5 when a university has not published its own conversion." },
+    { "q": "Which formula should I use for a job or admission form?", "a": "Use the formula printed on your marksheet or in your university's conversion certificate. If you do not have one, ask your university's examination section for a CGPA-to-percentage conversion certificate, because employers and admission offices may accept only the official figure." },
+    { "q": "How do I convert a 4.0 GPA to percentage?", "a": "There is no single standard. A simple proportional conversion is GPA ÷ 4 × 100, so 3.5 becomes 87.5%. Many universities and foreign credential evaluators use their own tables, so check the receiving institution's requirement." },
+    { "q": "How do I convert percentage to CGPA?", "a": "Reverse the same formula. With CGPA × 9.5, divide the percentage by 9.5: 75% is about 7.89 CGPA. With (CGPA − 0.75) × 10, divide by 10 and add 0.75: 75% is 8.25 CGPA. The converter does this for whichever formula you choose." },
+    { "q": "Does this converter store my results?", "a": "No. It runs entirely in your browser and works offline after your first visit. A copied link keeps your inputs after the # sign, which is not sent to any server." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">CGPA to percentage</li></ol></nav>
+  <h1>CGPA to Percentage Calculator</h1>
+  <p class="answer">To convert CGPA to percentage, <strong>multiply your CGPA by 9.5</strong> unless your university publishes its own formula. A CGPA of {{G_DEFAULT}} is <strong>{{G_EX_CBSE}}</strong> this way. VTU, AKTU, MAKAUT and SPPU engineering use (CGPA − 0.75) × 10 ({{G_EX_VTU}}), and Anna University uses CGPA × 10 ({{G_EX_ANNA}}). Pick your university below to see your exact figure.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/cgpa-calculator/">Need your CGPA first? CGPA calculator</a></p>
+
+  <div class="calc">
+    <form class="box" id="convForm" novalidate aria-labelledby="conv-h">
+      <h2 id="conv-h">Convert</h2>
+      <div class="field">
+        <label for="cgpa">Your CGPA</label>
+        <div class="input"><input id="cgpa" name="cgpa" type="number" inputmode="decimal" min="0" max="10" step="0.01" value="{{G_DEFAULT}}" required aria-describedby="convError"></div>
+        <p class="error" id="convError" role="alert" hidden></p>
+      </div>
+      <div class="field">
+        <label for="preset">University or board</label>
+        <select class="input" id="preset" name="preset">{{G_OPTIONS}}</select>
+      </div>
+      <div class="field" id="scaleField" hidden>
+        <label for="max">Grading scale (maximum CGPA)</label>
+        <div class="input"><input id="max" name="max" type="number" inputmode="decimal" min="1" max="100" step="0.5" value="10"></div>
+      </div>
+      <div id="customFields" hidden>
+        <p class="help">Enter your university's formula as percentage = CGPA × multiplier + adjustment.</p>
+        <div class="field"><label for="a">Multiplier</label><div class="input"><input id="a" name="a" type="number" inputmode="decimal" step="0.01" value="9.5"></div></div>
+        <div class="field"><label for="b">Adjustment (use a minus sign to subtract)</label><div class="input"><input id="b" name="b" type="number" inputmode="decimal" step="0.01" value="0"></div></div>
+      </div>
+      <div class="more-opts">
+        <h3 class="sub-h">Percentage to CGPA</h3>
+        <div class="field">
+          <label for="percent">Percentage</label>
+          <div class="input"><input id="percent" name="percent" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="{{G_PERCENT_DEFAULT}}"><span aria-hidden="true">%</span></div>
+          <p class="help">Equivalent CGPA with the same formula: <strong id="rCgpa">{{G_REVERSE}}</strong></p>
+        </div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="result-h">
+      <h2 id="result-h">Result</h2>
+      <div class="net">
+        <p>Percentage</p>
+        <output id="rPercent" for="cgpa preset">{{G_PERCENT}}</output>
+        <p id="rFormula">{{G_FORMULA}}</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <p class="note" id="rNote"></p>
+      <table class="rows">
+        <caption>The same CGPA with each university's formula</caption>
+        <tbody id="compareBody">
+{{G_COMPARE}}
+        </tbody>
+      </table>
+      <p class="note">Your university's conversion certificate or the formula on your marksheet is the official figure.</p>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="formulas">CGPA to percentage formulas by university</h2>
+  <p>These are the formulas each body commonly publishes for its 10-point CGPA. Formulas can change with a new scheme or admission year, so confirm against your own university's latest circular.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="formulas">
+    <table class="data text">
+      <thead><tr><th scope="col">University or board</th><th scope="col">Formula</th><th scope="col">8.2 CGPA</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">CBSE (Class 10, CCE scheme) and default</th><td>CGPA × 9.5</td><td>77.9%</td></tr>
+        <tr><th scope="row">VTU (2015 scheme onwards), AKTU, MAKAUT, SPPU engineering (2019 pattern)</th><td>(CGPA − 0.75) × 10</td><td>74.5%</td></tr>
+        <tr><th scope="row">GTU</th><td>(CGPA − 0.5) × 10</td><td>77%</td></tr>
+        <tr><th scope="row">University of Mumbai</th><td>CGPA × 7.1 + 11</td><td>69.22%</td></tr>
+        <tr><th scope="row">Anna University</th><td>CGPA × 10</td><td>82%</td></tr>
+        <tr><th scope="row">Any scale (e.g. 4.00 GPA)</th><td>CGPA ÷ maximum × 100</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Worked example</h3>
+  <p>A VTU student with a CGPA of 8.2 subtracts 0.75 to get 7.45, then multiplies by 10: <strong>74.5%</strong>. The same CGPA is 77.9% with the CBSE formula, which is why using the right formula matters on job and admission forms.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="table-h">CGPA to percentage conversion table</h2>
+  <p>Percentages for every CGPA from 10.0 to 5.0 with the five most common formulas.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead>{{G_TABLE_HEAD}}</thead>
+      <tbody>
+{{G_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="limits">Things to know</h2>
+  <ul>
+    <li>Your university's conversion certificate is the official figure. Request one from the examination section if a form asks for a percentage.</li>
+    <li>SGPA (one semester) converts with the same formula as CGPA at most universities.</li>
+    <li>Results below 0% are shown as 0%, and above 100% as 100%.</li>
+    <li>For a grading scale other than 10, choose "Any scale" or enter your university's formula as a custom formula.</li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Formulas are as commonly published by each university or board and are provided for guidance. They are not an official conversion. {{BRAND}} is not affiliated with any university or board.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/cgpa-calculator/">CGPA Calculator<small>SGPA to CGPA and GPA from grades</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free calculators and utilities</small></a>
+  </div>
+</section>

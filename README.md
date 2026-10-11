@@ -71,6 +71,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | --- | --- | --- |
 | [/salary-calculator-malaysia/](https://tool.thebukitbesi.com/salary-calculator-malaysia/) | English | salary calculator malaysia, PCB / EPF / SOCSO calculator |
 | [/kalkulator-gaji/](https://tool.thebukitbesi.com/kalkulator-gaji/) | Bahasa Melayu | kalkulator gaji bersih, kalkulator KWSP / PCB |
+| [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
+| [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 
 Both pages share one tested calculation core (`assets/js/salary-core.js`):
 EPF from the KWSP Third Schedule bands, SOCSO / EIS / LINDUNG 24 Jam from
@@ -103,6 +105,7 @@ tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attri
 tools-src/tests/            unit tests for calculation cores (node --test)
 tools-src/images.mjs        renders the social card and PWA screenshots (Playwright)
 assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
+assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/PWA/sw.js            service-worker source template
 ```
 

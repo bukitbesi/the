@@ -1,11 +1,13 @@
 # The Bukit Besi Tools
 
-> 49 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
+> 51 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
 
-This site hosts its own calculators and a directory of free tools, most of which run on https://www.thebukitbesi.com/. Calculators on this site run in the browser and do not send inputs anywhere. Last updated 2026-10-10.
+This site hosts its own calculators and a directory of free tools, most of which run on https://www.thebukitbesi.com/. Calculators on this site run in the browser and do not send inputs anywhere. Last updated 2026-10-11.
 
 ## Calculators on this site
 
+- [CGPA Calculator: SGPA to CGPA and GPA from Grades](https://tool.thebukitbesi.com/cgpa-calculator/): Calculates CGPA from semester SGPAs (credit-weighted, or a simple average without credits) and GPA/CGPA from course letter grades on the UGC 10-point scale (O, A+, A … P, F) or the Malaysian 4.00 scale (A 4.00, A− 3.67, B+ 3.33 …), including continuing from a previous CGPA.
+- [CGPA to Percentage Calculator: VTU, AKTU, SPPU, CBSE & More](https://tool.thebukitbesi.com/cgpa-to-percentage/): Converts CGPA to percentage (and percentage back to CGPA) with the formula each university commonly publishes: CBSE CGPA × 9.5, VTU/AKTU/MAKAUT/SPPU (CGPA − 0.75) × 10, GTU (CGPA − 0.5) × 10, University of Mumbai CGPA × 7.1 + 11, Anna University CGPA × 10, any-scale proportional and custom formulas, with a full CGPA 5.0–10.0 conversion table.
 - [Kalkulator Gaji Bersih 2026: PCB, KWSP, PERKESO & SIP](https://tool.thebukitbesi.com/kalkulator-gaji/): Kalkulator gaji bersih Malaysia 2026 (Bahasa Melayu): potongan KWSP mengikut Jadual Ketiga, PERKESO, SIP dan LINDUNG 24 Jam (siling RM6,000) serta PCB/MTD mengikut kaedah pengiraan berkomputer LHDN, termasuk kos majikan.
 - [Malaysia Salary Calculator 2026: PCB, EPF, SOCSO & EIS](https://tool.thebukitbesi.com/salary-calculator-malaysia/): Calculates 2026 Malaysian take-home pay from gross monthly salary: EPF (KWSP Third Schedule), SOCSO, EIS, LINDUNG 24 Jam (PERKESO, RM6,000 ceiling) and PCB/MTD tax (LHDN computerised method), with employer cost and a table of net pay at common salaries.
 
@@ -75,6 +77,8 @@ This site hosts its own calculators and a directory of free tools, most of which
 ## Calculators
 
 - [Malaysia Salary Calculator](https://tool.thebukitbesi.com/salary-calculator-malaysia/): Work out 2026 take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam and PCB tax, plus your employer's cost. English and Bahasa Melayu.
+- [CGPA to Percentage Calculator](https://tool.thebukitbesi.com/cgpa-to-percentage/): Convert CGPA to percentage with your university's formula: CBSE, VTU, AKTU, MAKAUT, SPPU, GTU, Mumbai and Anna, plus a full conversion table.
+- [CGPA Calculator](https://tool.thebukitbesi.com/cgpa-calculator/): Turn semester SGPAs into a credit-weighted CGPA, or course grades into GPA on India's 10-point or Malaysia's 4.00 scale.
 - [Kalkulator Faraid](https://www.thebukitbesi.com/p/kalkulator-faraid.html): Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.
 - [Kalkulator Zakat](https://www.thebukitbesi.com/p/kalkulator-zakat.html): Estimate zakat for income, savings, gold and other supported categories using the tool settings.
 - [Pregnancy Dates & Test Timing](https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html): Estimate gestational age and view NIPT or ultrasound timing from your pregnancy dates.
