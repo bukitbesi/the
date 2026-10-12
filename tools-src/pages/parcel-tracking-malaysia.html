@@ -32,7 +32,7 @@
     { "q": "Why does my tracking number show no result?", "a": "A new label often shows nothing for up to 24 hours, until the courier scans the parcel at pick-up or drop-off. Check that you used the right courier and copied the number exactly, without spaces. If nothing appears after 2 working days, ask the seller to confirm the number and courier." },
     { "q": "How long does delivery take in Malaysia?", "a": "Within Peninsular Malaysia most standard parcels arrive in 1 to 3 working days. Between Peninsular and Sabah, Sarawak or Labuan allow 3 to 7 working days. Rural areas, public holidays, sale seasons and bad weather add delays; the courier's tracking page gives the current estimate." },
     { "q": "What does Return to sender mean?", "a": "The courier is sending the parcel back to the seller, usually after failed delivery attempts, a wrong or incomplete address, or a refused parcel. Contact the seller quickly; some couriers can redeliver if you call before the return is processed." },
-    { "q": "Is this parcel tracker free and private?", "a": "Yes. It is free with no signup. Detection runs in your browser, the number is never sent to this site, and recent numbers are stored only on your device. Delivery status comes from the courier's own website." }
+    { "q": "Is this parcel tracker free and private?", "a": "Yes. It is free with no signup. Detection runs in your browser, the number is never sent to this site, and recent numbers are stored only on your device. Delivery status comes from the courier's own website, or from 17TRACK only if you choose Show status on this page." }
   ]
 }
 -->
@@ -43,41 +43,7 @@
   <p class="answer">Paste any <strong>tracking number</strong> to see which courier it belongs to and open that courier's <strong>official tracking page</strong>. Works for <strong>Pos Laju, J&amp;T Express, SPX (Shopee), Ninja Van, DHL, GDEX, City-Link</strong> and {{TR_COUNT}} couriers in total, with a universal tracker for anything else.</p>
   <p class="meta"><span>Courier formats checked <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Runs in your browser; your number is not sent to us</span><a href="/semak-tracking-parcel/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
 
-  <div class="calc">
-    <form class="box" id="trackForm" novalidate aria-labelledby="track-h">
-      <h2 id="track-h">Track a parcel</h2>
-      <div class="field">
-        <label for="trackNo">Tracking number</label>
-        <div class="input"><input id="trackNo" name="n" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="e.g. ER123456789MY" aria-describedby="trackHelp"></div>
-        <p class="help" id="trackHelp">Find it in your order page, SMS or on the consignment note.</p>
-      </div>
-      <div class="track-actions">
-        <button type="submit" class="btn">Track parcel</button>
-        <button type="button" class="btn ghost" id="trackPaste" hidden>Paste</button>
-      </div>
-      <div class="saved" id="savedBox" hidden>
-        <p class="sub-h">Recent on this device</p>
-        <ul class="saved-list" id="savedList"></ul>
-        <button type="button" class="btn ghost sm" id="savedClear">Clear list</button>
-      </div>
-    </form>
-
-    <section class="box" aria-labelledby="track-result-h">
-      <h2 id="track-result-h">Courier and tracking link</h2>
-      <p class="note" id="trackMsg">Enter a number to see the matching courier. You can also choose a courier below.</p>
-      <ul class="matches" id="trackMatches"></ul>
-      <p class="sr-only" id="trackLive" aria-live="polite"></p>
-      <p class="note" id="trackCopied" hidden>The number is copied. If the courier page opens empty, paste it into its search box.</p>
-      <div class="tool-actions"></div>
-    </section>
-  </div>
-
-  <section aria-labelledby="couriers-h">
-    <h2 class="sub-h" id="couriers-h">All couriers ({{TR_COUNT}})</h2>
-    <ul class="couriers" id="courierGrid">
-{{TR_GRID}}
-    </ul>
-  </section>
+  {{TR_TOOL}}
 </div>
 {{AD_TOP}}
 <div class="container prose cv">
@@ -88,6 +54,15 @@
     <li><strong>Open the courier's page.</strong> The number is copied when you tap the link, so you can paste it if the page opens empty.</li>
     <li><strong>Not recognised?</strong> Pick the courier from the list, or use 17TRACK, which checks over a thousand couriers at once.</li>
   </ol>
+
+  <h2 id="guides-h">Tracking guides by courier</h2>
+  <div class="guides">
+    <a href="/pos-laju-tracking/">Pos Laju Tracking<small>Status meanings and post office collection</small></a>
+    <a href="/jnt-tracking/">J&amp;T Express Tracking<small>Waybill status and On Hold</small></a>
+    <a href="/ninja-van-tracking/">Ninja Van Tracking<small>Tracking ID and Ninja Points</small></a>
+    <a href="/gdex-tracking/">GDEX Tracking<small>Consignment note numbers</small></a>
+    <a href="/citylink-tracking/">City-Link Tracking<small>City-Link Express parcels</small></a>
+  </div>
 
   <h2 id="formats-h">Tracking number formats by courier</h2>
   <p>Most couriers use a recognisable pattern. The first letters are the strongest clue; plain digit numbers can belong to more than one courier, so the tool lists every possible match.</p>

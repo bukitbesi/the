@@ -1,0 +1,152 @@
+<!--page
+{
+  "path": "/citylink-tracking/",
+  "lang": "en",
+  "cat": "util",
+  "courier": "citylink",
+  "alternates": {
+    "ms": "/semak-tracking-citylink/"
+  },
+  "title": "City-Link Tracking: Track Your City-Link Express Parcel",
+  "description": "Track a City-Link Express parcel with your consignment number, see what each status means and what to do if delivery fails. Free, no signup.",
+  "llms": "City-Link Express tracking: opens City-Link's official tracking page for a consignment number, explains the number format, common statuses, what to do when a delivery fails, and background on City-Link Express, founded in 1979 as Malaysia's first locally owned courier.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Tools",
+      "/"
+    ],
+    [
+      "Utilities",
+      "/?cat=util#tools"
+    ],
+    [
+      "Parcel Tracking Malaysia",
+      "/parcel-tracking-malaysia/"
+    ],
+    [
+      "City-Link Tracking",
+      null
+    ]
+  ],
+  "about": [
+    "City-Link Express",
+    "Consignment number",
+    "Parcel tracking"
+  ],
+  "app": {
+    "name": "City-Link Tracking",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Opens City-Link's official tracking page",
+      "Checks the number matches the City-Link format",
+      "Copies the number for pasting",
+      "Optional status view on this page",
+      "Remembers recent numbers on this device only"
+    ]
+  },
+  "citations": [
+    [
+      "City-Link Express",
+      "https://www.citylinkexpress.com/"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "How do I track my City-Link parcel?",
+      "a": "Paste the consignment number into the box above and press Track parcel. The tool opens City-Link Express's official tracking page with the number copied, so you can paste it if the page asks."
+    },
+    {
+      "q": "How long is a City-Link tracking number?",
+      "a": "City-Link consignment numbers are often 15 letters and digits. Use the number exactly as printed on the consignment note, without spaces."
+    },
+    {
+      "q": "What should I do if my City-Link delivery failed?",
+      "a": "Check the reason and the branch on the tracking page, then contact City-Link through its official website with the consignment number to rearrange delivery or collect the parcel. Tell the seller for online orders."
+    },
+    {
+      "q": "Why does my City-Link tracking show no result?",
+      "a": "A new consignment often shows nothing until City-Link scans it at pick-up, which can take up to a day. Check the number for typos; if it still shows nothing after 2 working days, ask the sender to confirm it."
+    },
+    {
+      "q": "Is City-Link a Malaysian company?",
+      "a": "Yes. City-Link Express was founded in Malaysia in 1979 and is known as the country's first locally owned courier company. It is headquartered in Shah Alam, Selangor."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li><a href="/parcel-tracking-malaysia/">Parcel tracking</a></li><li aria-current="page">City-Link Express Tracking</li></ol></nav>
+  <h1>City-Link Express Tracking</h1>
+  <p class="answer">Enter your <strong>City-Link consignment number</strong> to open City-Link Express's official tracking page with the number copied. City-Link numbers are often <strong>15 letters and digits</strong>. Below: what City-Link statuses mean and what to do if a delivery fails.</p>
+  <p class="meta"><span>Courier formats checked <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Runs in your browser; your number is not sent to us</span><a href="/semak-tracking-citylink/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">City-Link consignment number</h2>
+  <ul>
+    <li>City-Link calls the tracking number a <strong>consignment number</strong>, printed on the consignment note and label.</li>
+    <li>It is often <strong>15 letters and digits</strong>. Because other couriers use similar lengths, the tracker does not guess City-Link from the format alone; on this page it opens City-Link directly.</li>
+    <li>Use the number exactly as printed, without spaces.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Common City-Link tracking statuses</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">What it means</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Shipment picked up</th><td>City-Link collected the parcel from the sender.</td></tr>
+        <tr><th scope="row">In transit</th><td>The parcel is moving between City-Link branches or hubs.</td></tr>
+        <tr><th scope="row">Arrived at delivery branch</th><td>The parcel reached the branch serving your address.</td></tr>
+        <tr><th scope="row">Out for delivery</th><td>A courier has the parcel for delivery.</td></tr>
+        <tr><th scope="row">Delivered</th><td>City-Link recorded the delivery.</td></tr>
+        <tr><th scope="row">Delivery unsuccessful / Returned</th><td>Delivery failed or the parcel is going back to the sender.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>City-Link's exact wording may differ; the order of events is what matters.</p>
+
+  <h2 id="failed">If a City-Link delivery fails</h2>
+  <ol>
+    <li>Check the tracking page for the reason and the branch holding the parcel.</li>
+    <li>Contact City-Link through its official website with the consignment number to rearrange delivery or collect from the branch.</li>
+    <li>For online orders, tell the seller as well.</li>
+  </ol>
+
+  <h2 id="about-citylink">About City-Link Express</h2>
+  <p>City-Link Express was founded in 1979 by Dato' David Tan and is known as Malaysia's first locally owned courier company. It was incorporated in 1980 and is headquartered in Shah Alam, Selangor.</p>
+
+  <h2 id="sources">Official sources</h2>
+  <ul>
+    <li><a href="https://www.citylinkexpress.com/" rel="noopener">City-Link Express</a></li>
+  </ul>
+  <div class="callout"><p><strong>Independent tool:</strong> The Bukit Besi is not affiliated with City-Link Express. Delivery status comes from City-Link Express's own website.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Track other couriers</h2>
+  <div class="guides">
+    <a href="/pos-laju-tracking/">Pos Laju Tracking<small>Pos Malaysia express parcels</small></a>
+    <a href="/jnt-tracking/">J&amp;T Express Tracking<small>Waybill status and On Hold</small></a>
+    <a href="/ninja-van-tracking/">Ninja Van Tracking<small>Tracking ID and Ninja Points</small></a>
+    <a href="/gdex-tracking/">GDEX Tracking<small>Consignment note numbers</small></a>
+    <a href="/parcel-tracking-malaysia/">All couriers<small>Detect any courier from the number</small></a>
+  </div>
+</section>

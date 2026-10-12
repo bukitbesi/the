@@ -1,0 +1,156 @@
+<!--page
+{
+  "path": "/semak-tracking-jnt/",
+  "lang": "ms",
+  "cat": "util",
+  "courier": "jnt",
+  "alternates": {
+    "en": "/jnt-tracking/"
+  },
+  "title": "Semak Tracking J&T Express: Status Parcel J&T Malaysia",
+  "description": "Semak tracking parcel J&T Express Malaysia dengan nombor waybill dan fahami maksud Picked Up, Departure, On Delivery dan On Hold, serta bila perlu bertindak.",
+  "llms": "Semak tracking J&T Express Malaysia: membuka laman tracking rasmi J&T Malaysia untuk nombor waybill (biasanya 12 digit), menerangkan status J&T seperti Picked Up, Arrival, Departure, On Delivery dan On Hold, kenapa ada jurang antara imbasan dan bila perlu menghubungi penjual atau J&T.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Alat",
+      "/"
+    ],
+    [
+      "Utiliti",
+      "/?cat=util#tools"
+    ],
+    [
+      "Semak Tracking Parcel",
+      "/semak-tracking-parcel/"
+    ],
+    [
+      "Semak Tracking J&T",
+      null
+    ]
+  ],
+  "about": [
+    "J&T Express",
+    "J&T Express Malaysia",
+    "Waybill",
+    "Tracking parcel"
+  ],
+  "app": {
+    "name": "Semak Tracking J&T",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Membuka laman tracking rasmi J&T",
+      "Menyemak nombor sepadan dengan format J&T",
+      "Menyalin nombor untuk ditampal",
+      "Paparan status pilihan di halaman ini",
+      "Menyimpan nombor terkini dalam peranti ini sahaja"
+    ]
+  },
+  "citations": [
+    [
+      "J&T Express Malaysia",
+      "https://www.jtexpress.my/"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "Bagaimana cara semak tracking J&T di Malaysia?",
+      "a": "Tampal nombor waybill dalam kotak di atas dan tekan Semak parcel. Alat ini membuka laman tracking rasmi J&T Express Malaysia dengan nombor telah disalin, jadi anda boleh menampalnya jika laman itu memintanya."
+    },
+    {
+      "q": "Apa maksud On Hold pada tracking J&T?",
+      "a": "Pergerakan parcel tertangguh, contohnya drop point di luar waktu operasi, cuaca buruk atau masalah alamat penghantaran. Jika masih on hold lebih satu hari bekerja, hubungi penjual atau J&T."
+    },
+    {
+      "q": "Kenapa parcel J&T saya tiada kemas kini beberapa hari?",
+      "a": "J&T hanya mengimbas pada titik utama, jadi jurang sehari adalah normal untuk laluan jauh. Jika tiada pergerakan lebih 48 jam, atau lebih lama selepas cuti umum dan jualan besar, semak alamat dan minta penjual membuat aduan kepada J&T."
+    },
+    {
+      "q": "Berapa digit nombor tracking J&T?",
+      "a": "Nombor waybill J&T Malaysia biasanya 12 digit. Jika nombor anda ada huruf atau panjangnya berbeza, semak nama kurier di halaman pesanan; parcel mungkin diserahkan kepada kurier lain."
+    },
+    {
+      "q": "Boleh semak parcel J&T tanpa nombor waybill?",
+      "a": "Tidak di laman tracking awam. Cari waybill di halaman pesanan, mesej penjual atau resit dari drop point, atau minta daripada penjual."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li><a href="/semak-tracking-parcel/">Semak tracking parcel</a></li><li aria-current="page">Semak Tracking J&amp;T Express</li></ol></nav>
+  <h1>Semak Tracking J&amp;T Express</h1>
+  <p class="answer">Masukkan <strong>nombor waybill J&amp;T</strong>, biasanya <strong>12 digit</strong>, untuk membuka laman tracking rasmi J&amp;T Express Malaysia dengan nombor telah disalin. Di bawah: maksud setiap status J&amp;T, kenapa ada jurang antara imbasan dan bila perlu mengejar parcel.</p>
+  <p class="meta"><span>Format kurier disemak <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Berjalan dalam pelayar anda; nombor tidak dihantar kepada kami</span><a href="/jnt-tracking/" hreflang="en" lang="en">Read in English</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">Format nombor waybill J&amp;T</h2>
+  <ul>
+    <li>J&amp;T memanggil nombor tracking sebagai <strong>nombor waybill</strong>. Setiap waybill untuk satu parcel.</li>
+    <li>Waybill J&amp;T Malaysia biasanya <strong>12 digit</strong> tanpa huruf.</li>
+    <li>FedEx juga menggunakan nombor 12 digit, jadi alat ini menunjukkan kedua-duanya. Untuk pesanan dalam talian tempatan, J&amp;T hampir pasti betul.</li>
+    <li>Di Shopee, Lazada atau TikTok Shop, waybill dipaparkan di bahagian maklumat penghantaran setelah penjual menghantar.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Maksud status tracking J&amp;T</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">Maksud</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Picked up</th><td>Penghantar mengambil parcel, atau penjual menghantarnya ke drop point J&amp;T.</td></tr>
+        <tr><th scope="row">Arrival</th><td>Parcel tiba di pusat transit atau gateway.</td></tr>
+        <tr><th scope="row">Departure</th><td>Parcel keluar dari pusat itu ke pusat seterusnya, atau ke drop point kawasan anda.</td></tr>
+        <tr><th scope="row">On delivery</th><td>Penghantar membawa parcel untuk dihantar kepada anda.</td></tr>
+        <tr><th scope="row">Delivered</th><td>J&amp;T merekodkan parcel telah dihantar.</td></tr>
+        <tr><th scope="row">On hold</th><td>Pergerakan tertangguh, contohnya drop point ditutup, cuaca buruk atau masalah alamat.</td></tr>
+        <tr><th scope="row">Return</th><td>Parcel sedang dipulangkan kepada penghantar.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="gaps">Kenapa tracking J&amp;T ada jurang</h2>
+  <p>J&amp;T mengimbas parcel pada titik utama seperti pengambilan, setiap pusat transit dan penghantaran, bukan secara berterusan. Sehari tanpa kemas kini untuk laluan jauh, atau antara Semenanjung dengan Malaysia Timur, adalah normal.</p>
+  <h2 id="chase">Bila perlu mengejar parcel J&amp;T</h2>
+  <ol>
+    <li>Tiada pergerakan lebih <strong>48 jam</strong> (lebih lama selepas cuti umum dan jualan seperti 11.11).</li>
+    <li>Semak waybill dan alamat anda di halaman pesanan dahulu.</li>
+    <li>Tanya penjual: penjual yang kerap menghantar selalunya ada hubungan terus dengan J&amp;T.</li>
+    <li>Kemudian hubungi J&amp;T melalui laman web atau aplikasi rasminya dengan nombor waybill.</li>
+  </ol>
+  <h2 id="about-jnt">Tentang J&amp;T Express Malaysia</h2>
+  <p>Menurut syarikat itu, J&amp;T Express memasuki pasaran Malaysia pada Januari 2018 dan dilancarkan secara rasmi pada Ogos 2018. Ia mempunyai rangkaian drop point di seluruh negara, tempat anda boleh menghantar parcel di kaunter, dan gateway transit.</p>
+
+  <h2 id="sources">Sumber rasmi</h2>
+  <ul>
+    <li><a href="https://www.jtexpress.my/" rel="noopener">J&amp;T Express Malaysia</a></li>
+  </ul>
+  <div class="callout"><p><strong>Alat bebas:</strong> The Bukit Besi tidak bergabung dengan J&amp;T Express. Status penghantaran datang daripada laman web J&amp;T Express sendiri.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Semak kurier lain</h2>
+  <div class="guides">
+    <a href="/semak-tracking-pos-laju/">Semak Tracking Pos Laju<small>Parcel ekspres Pos Malaysia</small></a>
+    <a href="/semak-tracking-ninja-van/">Semak Tracking Ninja Van<small>ID tracking dan Ninja Point</small></a>
+    <a href="/semak-tracking-gdex/">Semak Tracking GDEX<small>Nombor nota konsainan</small></a>
+    <a href="/semak-tracking-citylink/">Semak Tracking City-Link<small>Parcel City-Link Express</small></a>
+    <a href="/semak-tracking-parcel/">Semua kurier<small>Kenal pasti kurier daripada nombor</small></a>
+  </div>
+</section>

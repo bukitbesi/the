@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/gdex-tracking/",
+  "lang": "en",
+  "cat": "util",
+  "courier": "gdex",
+  "alternates": {
+    "ms": "/semak-tracking-gdex/"
+  },
+  "title": "GDEX Tracking: Track Your GDEX Parcel in Malaysia",
+  "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX number format. Free, no signup.",
+  "llms": "GDEX (GD Express) tracking: opens GDEX's official tracking page for a consignment note number, explains the number format, common GDEX statuses, what to do when a parcel is undelivered, and background on GD Express Carrier Bhd.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Tools",
+      "/"
+    ],
+    [
+      "Utilities",
+      "/?cat=util#tools"
+    ],
+    [
+      "Parcel Tracking Malaysia",
+      "/parcel-tracking-malaysia/"
+    ],
+    [
+      "GDEX Tracking",
+      null
+    ]
+  ],
+  "about": [
+    "GDEX",
+    "GD Express",
+    "Consignment note",
+    "Parcel tracking"
+  ],
+  "app": {
+    "name": "GDEX Tracking",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Opens GDEX's official tracking page",
+      "Checks the number matches the GDEX format",
+      "Copies the number for pasting",
+      "Optional status view on this page",
+      "Remembers recent numbers on this device only"
+    ]
+  },
+  "citations": [
+    [
+      "GDEX (GD Express)",
+      "https://gdexpress.com/"
+    ],
+    [
+      "GD Express Carrier Bhd: investor relations",
+      "https://ir.gdexpress.com/"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "How do I track my GDEX parcel?",
+      "a": "Paste the consignment note number into the box above and press Track parcel. The tool opens GDEX's official tracking page with the number copied, so you can paste it if the page asks."
+    },
+    {
+      "q": "What is a GDEX consignment note number?",
+      "a": "It is GDEX's tracking number, printed on the parcel label. Many recent ones are MY followed by 11 digits."
+    },
+    {
+      "q": "Can I track several GDEX parcels at once?",
+      "a": "Yes. GDEX's own tracking page accepts several consignment note numbers in one search, which helps when an order ships in more than one box."
+    },
+    {
+      "q": "What should I do if my GDEX parcel is undelivered?",
+      "a": "Check the reason on the tracking page, then contact GDEX through its official website with the consignment number to rearrange delivery or collect the parcel from the station. Tell the seller as well for online orders."
+    },
+    {
+      "q": "Is GDEX a Malaysian company?",
+      "a": "Yes. GDEX was established in Malaysia in 1997, and its holding company GD Express Carrier Bhd is listed on the Main Market of Bursa Malaysia."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li><a href="/parcel-tracking-malaysia/">Parcel tracking</a></li><li aria-current="page">GDEX Tracking</li></ol></nav>
+  <h1>GDEX Tracking</h1>
+  <p class="answer">Enter your <strong>GDEX consignment note number</strong> to open GDEX's official tracking page with the number copied. Many GDEX numbers are <strong>MY followed by 11 digits</strong>. Below: what GDEX statuses mean and what to do if a delivery fails.</p>
+  <p class="meta"><span>Courier formats checked <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Runs in your browser; your number is not sent to us</span><a href="/semak-tracking-gdex/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">GDEX consignment note number</h2>
+  <ul>
+    <li>GDEX calls the tracking number a <strong>consignment note number</strong>, printed on the label (the "CN").</li>
+    <li>Many recent GDEX numbers are <code>MY</code> followed by <strong>11 digits</strong>. The format is shared with other couriers' references, so the tracker marks it as a possible match; check the courier name on your receipt or order page.</li>
+    <li>GDEX's own tracking page accepts several consignment numbers at once, which helps when a seller sends an order in more than one box.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Common GDEX tracking statuses</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">What it means</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Picked up</th><td>GDEX collected the parcel from the sender.</td></tr>
+        <tr><th scope="row">In transit / Outbound from station</th><td>The parcel left a GDEX station for the next one.</td></tr>
+        <tr><th scope="row">Inbound at station</th><td>The parcel arrived at a station, usually the one serving your area.</td></tr>
+        <tr><th scope="row">Out for delivery</th><td>A courier has the parcel for delivery.</td></tr>
+        <tr><th scope="row">Delivered</th><td>GDEX recorded the delivery, often with the receiver's name.</td></tr>
+        <tr><th scope="row">Undelivered / Returned</th><td>Delivery failed or the parcel is going back to the sender.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>GDEX's exact wording may differ; the order of events is what matters.</p>
+
+  <h2 id="failed">If a GDEX delivery fails</h2>
+  <ol>
+    <li>Check the reason on the tracking page, such as nobody home or an incomplete address.</li>
+    <li>Contact GDEX through its official website with the consignment number to rearrange delivery or collect from the station.</li>
+    <li>For online orders, tell the seller too, so the order is not marked as completed.</li>
+  </ol>
+
+  <h2 id="about-gdex">About GDEX</h2>
+  <p>GDEX (GD Express) was established in 1997. Its holding company, GD Express Carrier Bhd, listed on Bursa Malaysia's ACE Market in 2005 and moved to the Main Market in 2013. It delivers through a network of branches, agents and lodge-in centres across Malaysia.</p>
+
+  <h2 id="sources">Official sources</h2>
+  <ul>
+    <li><a href="https://gdexpress.com/" rel="noopener">GDEX (GD Express)</a></li>
+    <li><a href="https://ir.gdexpress.com/" rel="noopener">GD Express Carrier Bhd: investor relations</a></li>
+  </ul>
+  <div class="callout"><p><strong>Independent tool:</strong> The Bukit Besi is not affiliated with GDEX. Delivery status comes from GDEX's own website.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Track other couriers</h2>
+  <div class="guides">
+    <a href="/pos-laju-tracking/">Pos Laju Tracking<small>Pos Malaysia express parcels</small></a>
+    <a href="/jnt-tracking/">J&amp;T Express Tracking<small>Waybill status and On Hold</small></a>
+    <a href="/ninja-van-tracking/">Ninja Van Tracking<small>Tracking ID and Ninja Points</small></a>
+    <a href="/citylink-tracking/">City-Link Tracking<small>City-Link Express parcels</small></a>
+    <a href="/parcel-tracking-malaysia/">All couriers<small>Detect any courier from the number</small></a>
+  </div>
+</section>

@@ -78,9 +78,19 @@
       "description": "Convert CGPA to percentage with your university's formula: CBSE × 9.5, VTU, AKTU, MAKAUT and SPPU (C"
     },
     {
+      "name": "City-Link Tracking",
+      "url": "/citylink-tracking/",
+      "description": "Track a City-Link Express parcel with your consignment number, see what each status means and what t"
+    },
+    {
       "name": "EPF Calculator Malaysia",
       "url": "/epf-calculator/",
       "description": "Free EPF calculator: project your KWSP savings to 55 or 60 with the latest 6.15% dividend, see all t"
+    },
+    {
+      "name": "GDEX Tracking",
+      "url": "/gdex-tracking/",
+      "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX"
     },
     {
       "name": "Home Loan Calculator Malaysia",
@@ -93,9 +103,24 @@
       "description": "Free Malaysia income tax calculator for YA2026 with all LHDN reliefs, rebates, zakat and a PCB refun"
     },
     {
+      "name": "J&T Tracking",
+      "url": "/jnt-tracking/",
+      "description": "Track a J&T Express Malaysia parcel with your waybill number and learn what Picked Up, Departure, On"
+    },
+    {
+      "name": "Ninja Van Tracking",
+      "url": "/ninja-van-tracking/",
+      "description": "Track a Ninja Van Malaysia parcel by tracking ID (NVMY, MYNJV) and learn what Pending Pickup, Re-att"
+    },
+    {
       "name": "Parcel Tracking Malaysia",
       "url": "/parcel-tracking-malaysia/",
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
+    },
+    {
+      "name": "Pos Laju Tracking",
+      "url": "/pos-laju-tracking/",
+      "description": "Track a Pos Laju parcel with its 13-character number and see what each status means, from posted ove"
     },
     {
       "name": "Malaysia Salary Calculator 2026",
