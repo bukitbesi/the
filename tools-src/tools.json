@@ -387,6 +387,15 @@
     "live": true
   },
   {
+    "name": "Home Loan Calculator Malaysia",
+    "desc": "Work out your monthly housing loan instalment, total interest, stamp duty and SRO 2023 legal fees, the first-home exemption and how much you can borrow. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/home-loan-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "home-loan-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "EPF Calculator (KWSP)",
     "desc": "Project your EPF savings to 55 or 60 with the latest 6.15% dividend, see Akaun Persaraan, Sejahtera and Fleksibel, and check EPF's retirement targets. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/epf-calculator/",
