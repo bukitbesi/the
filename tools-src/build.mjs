@@ -21,6 +21,7 @@ const epfCore = require('../assets/js/epf-core.js');
 const loanCore = require('../assets/js/loan-core.js');
 const carCore = require('../assets/js/carloan-core.js');
 const tracking = require('../assets/js/tracking-core.js');
+const cssCore = require('../assets/js/css-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -602,7 +603,30 @@ function nearMap(lang, p = {}) {
   </div>`
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap };
+// ---- CSS minifier: the sample result and every before/after example come from the shipped minifier
+const CSS_RULES = [
+  ['Comments and line breaks', '/* Header */\n.nav {\n  margin: 0;\n}'],
+  ['Spaces around { } : ; , and combinators', '.nav > li , .nav a { color : red ; }'],
+  ['Last semicolon in a rule', 'a{color:red;}'],
+  ['Long hex colours', 'a{color:#FFFFFF;background:#3366ff}'],
+  ['Leading and trailing zeros', 'a{margin:0.50em 1.0rem}'],
+  ['Units on zero lengths', 'a{padding:0px 16px}'],
+  ['Space before !important', 'a{color:red !important}'],
+  ['Empty rules', '.unused{}\n.b{color:red}'],
+  ['Licence comment (kept)', '/*! MIT */\n.b{color:red}'],
+  ['calc() spacing (kept)', 'a{width:calc(100% - 2rem)}']
+];
+function cssMap() {
+  const out = cssCore.minify(cssCore.SAMPLE).css, s = cssCore.saving(cssCore.SAMPLE, out);
+  const n = x => x.toLocaleString('en-US');
+  return {
+    CSS_IN: esc(cssCore.SAMPLE), CSS_OUT: esc(out), CSS_BEFORE: n(s.before), CSS_AFTER: n(s.after), CSS_PCT: s.percent,
+    CSS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="cssGz"></span>`,
+    CSS_EXAMPLES: CSS_RULES.map(([rule, css]) =>
+      `        <tr><th scope="row">${rule}</th><td><code>${esc(css).replace(/\n/g, '<br>')}</code></td><td><code>${esc(cssCore.minify(css).css)}</code></td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -624,7 +648,7 @@ function shareBlock(p, url) {
     ['x', 'X', `https://x.com/intent/post?url=${u}&text=${msg}`]
   ];
   return `<section class="container share" aria-labelledby="share-h">
-  <h2 id="share-h">${t.SHARE_H}</h2>
+  <h2 id="share-h">${esc(p.shareTitle || t.SHARE_H)}</h2>
   <div class="share-row">
 ${nets.map(([k, name, href]) => `    <a class="btn ghost sm share-${k}" href="${esc(href)}" target="_blank" rel="noopener nofollow">${shareIcon(k)}${name}</a>`).join('\n')}
     <button type="button" class="btn ghost sm" data-share="copy" data-url="${url}" data-done="${t.COPIED}">${shareIcon('link')}${t.COPY}</button>
@@ -713,7 +737,8 @@ const bundles = {
   'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js'],
   'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
-  'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js']
+  'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
+  'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

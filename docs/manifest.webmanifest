@@ -83,6 +83,11 @@
       "description": "Track a City-Link Express parcel with your consignment number, see what each status means and what t"
     },
     {
+      "name": "CSS Minifier",
+      "url": "/css-minifier/",
+      "description": "Free CSS minifier. Paste or upload CSS to remove comments and whitespace safely, see bytes saved and"
+    },
+    {
       "name": "EPF Calculator Malaysia",
       "url": "/epf-calculator/",
       "description": "Free EPF calculator: project your KWSP savings to 55 or 60 with the latest 6.15% dividend, see all t"

@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/css-minifier/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "CSS Minifier: Minify & Compress CSS Online Free",
+  "description": "Free CSS minifier. Paste or upload CSS to remove comments and whitespace safely, see bytes saved and gzip size, then copy or download. Also beautifies CSS.",
+  "llms": "Minifies CSS in the browser: removes comments (keeps /*! licence comments), whitespace and last semicolons, shortens colours (#ffffff to #fff), numbers (0.50em to .5em) and zero lengths (0px to 0), and drops empty rules, without touching strings, url() values, custom properties or spaces inside calc(). Shows original, minified and gzip size; can also beautify (unminify) CSS. Tested against Bootstrap 5.3.3: 281,046 to 232,701 bytes with identical rendering. CSS is never uploaded.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "css",
+  "shareTitle": "Share this CSS minifier",
+  "scripts": ["/assets/js/css-minifier.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["CSS Minifier", null]],
+  "about": ["CSS minification", "Cascading Style Sheets", "Web performance", "Core Web Vitals"],
+  "app": {
+    "name": "CSS Minifier",
+    "category": "DeveloperApplication",
+    "features": ["Removes comments, whitespace and last semicolons", "Keeps /*! licence comments (optional)", "Shortens colours, numbers and zero lengths safely", "Removes empty rules", "Leaves strings, url(), custom properties and calc() spacing untouched", "Shows bytes saved and gzip size", "CSS beautifier (unminify) mode", "Upload, drag and drop, copy and download .min.css", "Runs in the browser; works offline"]
+  },
+  "citations": [
+    ["W3C: CSS Syntax Module Level 3", "https://www.w3.org/TR/css-syntax-3/"],
+    ["W3C: CSS Custom Properties for Cascading Variables", "https://www.w3.org/TR/css-variables-1/"],
+    ["Chrome for Developers: Minify CSS (Lighthouse audit)", "https://developer.chrome.com/docs/lighthouse/performance/unminified-css"]
+  ],
+  "faq": [
+    { "q": "What does a CSS minifier do?", "a": "A CSS minifier deletes everything the browser does not need to read your styles: comments, line breaks, indentation, spaces around braces, colons and commas, and the last semicolon in each rule. A safe minifier can also shorten values, such as #ffffff to #fff and 0.50em to .5em. The page looks exactly the same; the file is just smaller." },
+    { "q": "Does minifying CSS improve page speed and Core Web Vitals?", "a": "Yes, a little. CSS is render-blocking, so the browser cannot paint the page until it has downloaded and parsed it; a smaller file shortens that wait, which helps First Contentful Paint and Largest Contentful Paint. Lighthouse flags unminified CSS under Minify CSS. The gain is largest on slow mobile connections and for CSS that is not gzipped." },
+    { "q": "Can minifying CSS break my website?", "a": "Not with this tool, as long as the original CSS is valid. It never changes strings, url() values, custom properties (--variables) or the spaces around + and - inside calc(), and it keeps units where a plain 0 would change the meaning, such as 0s, 0% and flex-basis. Keep your original file for editing and publish the minified copy." },
+    { "q": "What is the difference between minifying and gzip compression?", "a": "Minifying removes characters from the file itself; gzip or Brotli compression is applied by the web server while the file is sent. They work together. Bootstrap 5.3.3 is 281,046 bytes, 232,701 bytes minified, 32,929 bytes gzipped and 30,609 bytes minified and gzipped, so minifying still saves about 7% after compression." },
+    { "q": "Is my CSS uploaded to a server?", "a": "No. The minifier runs entirely in your browser with JavaScript, so your CSS never leaves your device. The page also works offline after one visit. Only your chosen options are remembered in your browser." },
+    { "q": "How do I unminify or beautify CSS?", "a": "Choose Beautify, paste the minified CSS and the tool rebuilds it with one declaration per line, two-space indentation, one selector per line and a blank line between rules. Comments removed during minification cannot be restored." },
+    { "q": "How do I minify CSS in Blogger?", "a": "In Theme, Edit HTML, minify only your own custom CSS and paste it back inside the b:skin CDATA section. Do not minify the Variable definitions comment at the top of the skin: Blogger reads the Variable tags inside it for the Theme Designer, and removing that comment breaks your theme settings." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">CSS Minifier</li></ol></nav>
+  <h1>CSS Minifier</h1>
+  <p class="answer">A <strong>CSS minifier removes comments, whitespace and other characters the browser does not need</strong>, so your stylesheet downloads faster without changing how the page looks. Paste or upload your CSS below: the example shrinks from {{CSS_BEFORE}} to {{CSS_AFTER}} bytes, <strong>{{CSS_PCT}}% smaller</strong>. Switch to Beautify to turn minified CSS back into readable code.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is uploaded</span><a href="#safe">What it never changes</a></p>
+
+  <form class="box code-tool" id="cssForm" novalidate aria-labelledby="css-h">
+    <h2 id="css-h" class="sr-only">Minify CSS</h2>
+    <div class="code-opts">
+      <fieldset class="seg" aria-label="Mode">
+        <label><input type="radio" name="mode" value="minify" checked> Minify</label>
+        <label><input type="radio" name="mode" value="beautify"> Beautify</label>
+      </fieldset>
+      <label class="check"><input type="checkbox" name="keepImportant" checked> <span>Keep <code>/*!</code> licence comments</span></label>
+      <label class="check"><input type="checkbox" name="optimize" checked> <span>Shorten colours, numbers and 0px</span></label>
+      <label class="check"><input type="checkbox" name="removeEmpty" checked> <span>Remove empty rules</span></label>
+    </div>
+    <div class="code-panes">
+      <div class="field">
+        <label for="cssIn">Your CSS</label>
+        <textarea class="code" id="cssIn" name="css" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="cssHelp">{{CSS_IN}}</textarea>
+        <p class="help" id="cssHelp">Paste, type, or drop a .css file here. Ctrl+Enter runs it.</p>
+        <div class="tool-actions" id="cssInActions">
+          <button type="submit" class="btn sm" id="cssGo">Minify CSS</button>
+          <label class="btn ghost sm file-btn">Upload .css<input type="file" id="cssFile" accept=".css,text/css" class="sr-only"></label>
+          <button type="button" class="btn ghost sm" id="cssSample">Sample</button>
+          <button type="button" class="btn ghost sm" id="cssClear">Clear</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="cssOut" id="cssOutLabel">Minified CSS</label>
+        <textarea class="code" id="cssOut" readonly spellcheck="false" aria-describedby="cssStats">{{CSS_OUT}}</textarea>
+        <p class="code-stats" id="cssStats">{{CSS_STATS}}</p>
+        <p class="error" id="cssWarn" role="alert" hidden></p>
+        <div class="tool-actions" id="cssOutActions">
+          <button type="button" class="btn sm" id="cssCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="cssDownload">Download</button>
+        </div>
+      </div>
+    </div>
+    <p class="sr-only" id="cssLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to minify CSS</h2>
+  <ol>
+    <li><strong>Paste your CSS</strong> into the left box, upload a .css file, or drop the file onto the box.</li>
+    <li><strong>Choose options.</strong> The defaults are safe for any valid CSS. Untick "Keep /*! licence comments" only if you have checked the licence allows it.</li>
+    <li><strong>Copy or download</strong> the result. Downloads are named <code>yourfile.min.css</code>.</li>
+    <li><strong>Keep the original</strong> for editing and publish only the minified copy. To edit a minified file later, switch to Beautify.</li>
+  </ol>
+
+  <h2 id="changes">What this CSS minifier removes and shortens</h2>
+  <p>Every example below is produced by the same code that runs in the tool.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="changes-cap">
+    <table class="data text"><caption id="changes-cap">Minification rules with before and after</caption>
+      <thead><tr><th scope="col">Rule</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+      <tbody>
+{{CSS_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="safe">What it never changes</h2>
+  <p>Aggressive minifiers save a few extra bytes by rewriting values, and that is where broken layouts come from. This tool reads your CSS as tokens, the way the <a href="https://www.w3.org/TR/css-syntax-3/" rel="noopener">CSS Syntax specification</a> describes, and leaves alone anything where a shorter form could behave differently:</p>
+  <ul>
+    <li><strong>Spaces around + and - in calc()</strong>: <code>calc(100% - 2rem)</code> stops working as <code>calc(100%-2rem)</code>.</li>
+    <li><strong>Units on 0 where they matter</strong>: <code>0s</code> in transitions, <code>0%</code>, <code>flex: 1 1 0px</code> and anything inside a function keep their unit.</li>
+    <li><strong>Custom properties</strong> such as <code>--brand: #FFFFFF</code> keep their value exactly, because they are only resolved where they are used. An empty <code>--x: ;</code> keeps its space, which older Safari versions need.</li>
+    <li><strong>Strings and url()</strong>: <code>content</code> text, font names and data URIs are copied byte for byte.</li>
+    <li><strong>Selectors</strong>: <code>div :first-child</code> keeps its space (it means something different from <code>div:first-child</code>), and an ID such as <code>#aabbcc</code> is never shortened like a colour.</li>
+    <li><strong>Rule order and shorthands</strong> are never merged or reordered, so the cascade stays the same.</li>
+  </ul>
+  <p>Tested on Bootstrap 5.3.3: the full stylesheet goes from 281,046 to 232,701 bytes, and a second, independent minifier (Lightning CSS) parses the original and the result into identical rules.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="gzip">Minify vs gzip and Brotli</h2>
+  <p>Your web host usually compresses CSS with gzip or Brotli while sending it. Minifying first still helps, because compression cannot remove comments or whitespace, only encode them more efficiently.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="gzip-cap">
+    <table class="data"><caption id="gzip-cap">Bootstrap 5.3.3 (bootstrap.css), bytes</caption>
+      <thead><tr><th scope="col">Version</th><th scope="col">Original</th><th scope="col">Minified</th><th scope="col">Saved</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Uncompressed</th><td>281,046</td><td>232,701</td><td>17.2%</td></tr>
+        <tr><th scope="row">gzip (level 9)</th><td>32,929</td><td>30,609</td><td>7.0%</td></tr>
+        <tr><th scope="row">Brotli</th><td>24,501</td><td>22,688</td><td>7.4%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The browser also parses the uncompressed size, so a smaller file is quicker to process on low-end phones. For the biggest win, remove CSS your pages do not use, then minify what is left.</p>
+
+  <h2 id="platforms">Using minified CSS on Blogger and WordPress</h2>
+  <h3>Blogger</h3>
+  <p>Go to <strong>Theme → Edit HTML</strong> and find <code>&lt;b:skin&gt;&lt;![CDATA[</code>. Keep the <strong>Variable definitions</strong> comment at the top unchanged, because Blogger reads its <code>&lt;Variable&gt;</code> tags for the Theme Designer. Minify only the CSS after it and paste the result back before <code>]]&gt;&lt;/b:skin&gt;</code>. Blogger placeholders such as <code>$(body.text.color)</code> pass through unchanged.</p>
+  <h3>WordPress</h3>
+  <p>In a child theme, keep the header comment (<code>Theme Name:</code>, <code>Template:</code>) at the top of <code>style.css</code>, since WordPress reads it to recognise the theme, and paste the minified CSS below it. For <strong>Appearance → Customize → Additional CSS</strong>, keep a readable copy elsewhere: minified CSS saved there is hard to edit later. Caching plugins that minify CSS do the same job automatically, so do not minify twice.</p>
+  <div class="callout"><p><strong>Tip:</strong> run <a href="https://pagespeed.web.dev/" rel="noopener">PageSpeed Insights</a> before and after. If "Minify CSS" is no longer listed under opportunities, the change worked.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="{{MAIN_SITE}}/p/javascript-minifier-obfuscator.html">JavaScript Minifier<small>Minify and obfuscate JS</small></a>
+    <a href="{{MAIN_SITE}}/p/html-beautifier-online.html">HTML Beautifier &amp; Minifier<small>Format or compress HTML</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free developer tools and calculators</small></a>
+  </div>
+</section>
+</div>
