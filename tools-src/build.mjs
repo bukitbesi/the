@@ -20,6 +20,7 @@ const taxes = require('../assets/js/tax-core.js');
 const epfCore = require('../assets/js/epf-core.js');
 const loanCore = require('../assets/js/loan-core.js');
 const carCore = require('../assets/js/carloan-core.js');
+const tracking = require('../assets/js/tracking-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -487,7 +488,22 @@ function carMap(lang) {
     K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap };
+// ---- Parcel tracking (EN + BM): courier directory and number-format table come from tracking-core.js
+function trackMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const grid = tracking.COURIERS.map(c =>
+    `<li><a class="courier" data-id="${c.id}" href="${esc(c.home)}" target="_blank" rel="noopener">${esc(c.name)}<small>${esc(c.format[L])}</small></a></li>`).join('\n');
+  const level = s => [L ? 'Ditentukan oleh huruf awalan' : 'Set by the prefix', L ? 'Format biasa' : 'Usual format', L ? 'Dikongsi dengan kurier lain' : 'Shared with other couriers'][3 - s];
+  const formats = tracking.COURIERS.map(c => {
+    const best = c.tests.reduce((m, t) => Math.max(m, t[1]), 0);
+    return `<tr><th scope="row"><a href="${esc(c.site)}" rel="noopener">${esc(c.name)}</a></th><td>${esc(c.format[L])}</td><td>${c.example ? `<code>${esc(c.example)}</code>` : '–'}</td><td>${best ? level(best) : (L ? 'Pilih kurier secara manual' : 'Choose the courier manually')}</td></tr>`;
+  }).join('\n');
+  return {
+    TR_GRID: grid, TR_FORMATS: formats, TR_COUNT: tracking.COURIERS.length,
+    TR_VERIFIED: longDate(tracking.FACTS.verified, lang), TR_VERIFIED_ISO: tracking.FACTS.verified
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -571,7 +587,7 @@ for (const p of pages) {
     HREFLANG: [...hreflang.map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${site.origin + u}">`),
       `<link rel="alternate" hreflang="x-default" href="${site.origin + xDefault}">`].join('\n'),
     JSONLD: ldJson(graph), PAGE_CSS: read('css/page.css').trim(),
-    NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=calc#tools">${catLabel('calc', p.lang)}</a>`,
+    NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=${p.cat || 'calc'}#tools">${catLabel(p.cat || 'calc', p.lang)}</a>`,
     HEADER_CTA: switcher || `    <a href="/" class="btn sm">${T[p.lang].ALL_TOOLS}</a>`,
     // Tool pages get a share bar after the article and a "Share result" button beside the calculator's actions.
     MAIN: p.app ? p.body.replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
@@ -596,7 +612,8 @@ const bundles = {
   'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js'],
   'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js'],
   'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js'],
-  'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js']
+  'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
+  'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

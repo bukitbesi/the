@@ -52,7 +52,7 @@ export const icons = {
   'free-privacy-policy-generator': file('PP') + p('m7 18 2 2 4-4'),
   'secure-link-generator': rect(5, 10, 14, 12) + p('M8 10V6a4 4 0 0 1 8 0v4M12 15v3'),
   'whatsapp-link-creator': chat + p('M7 8c1 5 3 7 8 7l2-2-3-2-2 1-2-2 1-2-2-2Z'),
-  'semak-tracking-semua-kurier-di-malaysia': p('m12 2 9 5v10l-9 5-9-5V7Zm-9 5 9 5 9-5M12 12v10M7 4l9 5') + circle(17, 17, 2),
+  'parcel-tracking-malaysia': p('m12 2 9 5v10l-9 5-9-5V7Zm-9 5 9 5 9-5M12 12v10M7 4l9 5') + circle(17, 17, 2),
   'pdf-converter': file('PDF') + p('M7 18h10'),
   'currency-converter-malaysia': circle(9, 9, 7) + p('M9 4v10m3-8H8a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H6M17 8a7 7 0 1 1-9 9'),
   'tm-speed-test': p('M3 15a9 9 0 0 1 18 0m-9-3 5-5M7 20h10M3 15h3m12 0h3M12 6v3'),

@@ -301,6 +301,27 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .btn svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .share-whatsapp svg{color:#1da851}.share-telegram svg{color:#229ed9}.share-facebook svg{color:#1877f2}
 @media print{.share{display:none}}
+/* Parcel tracking: result matches, recent numbers and the courier directory. */
+.track-actions{display:flex;flex-wrap:wrap;gap:10px}
+.matches{list-style:none;display:grid;gap:10px;margin-top:12px}
+.match{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg)}
+.match p{font-weight:700}
+.match.s3{border-color:var(--tint-b);background:var(--tint)}
+.match.any{justify-content:flex-start;border-style:dashed}
+.lvl{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:99px;font-size:.72rem;font-weight:700;background:var(--bg2);color:var(--text2);border:1px solid var(--border)}
+.s3 .lvl{color:var(--accent2);border-color:var(--tint-b)}
+.saved{border-top:1px solid var(--border);margin-top:18px;padding-top:12px}
+.saved-list{list-style:none;display:grid;gap:6px;margin-bottom:10px}
+.saved-list li{display:flex;align-items:center;gap:6px}
+.saved-n{flex:1;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 12px;border:1px solid var(--border2);border-radius:10px;font:inherit;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);text-align:left;overflow-wrap:anywhere}
+.saved-n small{color:var(--text3);font-weight:500}
+.saved-n:hover{border-color:var(--accent2)}
+.couriers{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:8px 0 20px}
+#couriers-h{margin-top:28px}
+#track-result-h{scroll-margin-top:84px}
+.courier{display:block;height:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-weight:700;color:var(--text);text-decoration:none}
+.courier:hover{border-color:var(--card-hover)}
+.courier small{display:block;margin-top:4px;font-weight:400;font-size:.78rem;color:var(--text3)}
 </style>
 
 </head>
@@ -554,12 +575,12 @@ select.input{max-width:100%;text-overflow:ellipsis}
       <nav aria-label="Popular tools">
         <h2>Popular tools</h2>
         <ul>
+          <li><a href="/parcel-tracking-malaysia/">Parcel Tracking Malaysia</a></li>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
           <li><a href="/car-loan-calculator-malaysia/">Car Loan Calculator Malaysia</a></li>
           <li><a href="/home-loan-calculator-malaysia/">Home Loan Calculator Malaysia</a></li>
           <li><a href="/epf-calculator/">EPF Calculator (KWSP)</a></li>
-          <li><a href="/cgpa-to-percentage/">CGPA to Percentage Calculator</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">
