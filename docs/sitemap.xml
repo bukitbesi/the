@@ -76,6 +76,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/home-loan-calculator-malaysia/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/parcel-tracking-malaysia/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/parcel-tracking-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-tracking-parcel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/parcel-tracking-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/privacy/</loc>
     <lastmod>2026-10-10</lastmod>
   </url>
@@ -85,6 +92,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-gaji/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/semak-tracking-parcel/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-tracking-parcel/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/parcel-tracking-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/parcel-tracking-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/terms/</loc>

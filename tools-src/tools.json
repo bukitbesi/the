@@ -324,12 +324,12 @@
     "live": true
   },
   {
-    "name": "Malaysia Courier Tracking",
-    "desc": "Find tracking destinations for Malaysian couriers including Pos Laju, J&T and DHL.",
-    "url": "https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html",
+    "name": "Parcel Tracking Malaysia",
+    "desc": "Paste any tracking number to identify the courier and open its official tracking page: Pos Laju, J&T, SPX, Ninja Van, DHL, GDEX and more. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/parcel-tracking-malaysia/",
     "cat": "util",
-    "icon": "semak-tracking-semua-kurier-di-malaysia",
-    "badge": "",
+    "icon": "parcel-tracking-malaysia",
+    "badge": "new",
     "live": true
   },
   {

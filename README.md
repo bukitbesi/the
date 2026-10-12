@@ -81,6 +81,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-loan-kereta/](https://tool.thebukitbesi.com/kalkulator-loan-kereta/) | Bahasa Melayu | kalkulator loan kereta, pinjaman kereta, EIR |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
+| [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
+| [/semak-tracking-parcel/](https://tool.thebukitbesi.com/semak-tracking-parcel/) | Bahasa Melayu | semak tracking parcel, semak tracking kurier, tracking pos laju / J&T / SPX |
 
 Both pages share one tested calculation core (`assets/js/salary-core.js`):
 EPF from the KWSP Third Schedule bands, SOCSO / EIS / LINDUNG 24 Jam from
@@ -95,6 +97,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (home loan):** after each OPR change, Budget or SRO revision, update `FACTS` in `loan-core.js` (`opr`, `oprSince`, `defaultRate`, stamp duty, legal fee bands, first-home rules, `verified`) and `tools-src/tests/loan.test.mjs`. When the Finance Act 2027 passes, relabel the Budget 2027 first-home option.
 
 **Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
+
+**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
 
 **Share buttons:** every page with an `app` block gets a share bar (WhatsApp, Telegram, Facebook, X, copy link, device share sheet) before the bottom ad, and a "Share result" button in its `.tool-actions`. Plain links and one small inline script; no third-party code.
 
@@ -128,6 +132,7 @@ assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/
 assets/js/loan-core.js      home loan: instalment, amortisation, stamp duty, SRO 2023 legal fees, first-home exemption, DSR
 assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 settlement
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
+assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/PWA/sw.js            service-worker source template
 ```
 
