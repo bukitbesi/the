@@ -2,7 +2,7 @@
   "origin": "https://tool.thebukitbesi.com",
   "mainSite": "https://www.thebukitbesi.com",
   "brand": "The Bukit Besi",
-  "dateModified": "2026-10-11",
+  "dateModified": "2026-10-12",
   "twitter": "@BukitBesiBlog",
   "icon": "/assets/favicon-image/bukit-besi-512.webp",
   "ogImage": {
@@ -38,7 +38,7 @@
     },
     "calc": {
       "label": "Calculators",
-      "blurb": "Work out Malaysian take-home pay and income tax, CGPA and CGPA-to-percentage, zakat, faraid, shoe sizes, BMI, calories and pregnancy dates."
+      "blurb": "Work out Malaysian take-home pay, income tax and EPF savings, CGPA and CGPA-to-percentage, zakat, faraid, BMI, calories and pregnancy dates."
     }
   },
   "faq": [

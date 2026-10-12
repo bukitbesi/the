@@ -1,10 +1,10 @@
 // Source template. tools-src/build.mjs writes the versioned root /sw.js.
 'use strict';
 const CACHE_PREFIX = 'bukit-tools-';
-const CACHE_NAME = CACHE_PREFIX + '724ac833bcbf0517';
-const PRECACHE = ["/","/cgpa-calculator/","/cgpa-to-percentage/","/income-tax-calculator-malaysia/","/kalkulator-cukai-pendapatan/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/js/salary.js","/assets/js/cgpa-percent.js","/assets/js/cgpa.js","/assets/js/tax.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
+const CACHE_NAME = CACHE_PREFIX + '54efeb258a294cb4';
+const PRECACHE = ["/","/cgpa-calculator/","/cgpa-to-percentage/","/epf-calculator/","/income-tax-calculator-malaysia/","/kalkulator-cukai-pendapatan/","/kalkulator-gaji/","/kalkulator-kwsp/","/privacy/","/salary-calculator-malaysia/","/terms/","/offline.html","/manifest.webmanifest","/assets/PWA/pwa.min.js","/assets/js/salary.js","/assets/js/cgpa-percent.js","/assets/js/cgpa.js","/assets/js/tax.js","/assets/js/epf.js","/assets/favicon-image/bukit-besi-72.webp","/assets/favicon-image/favicon.ico","/assets/favicon-image/apple-touch-icon.png","/assets/favicon-image/favicon-96x96.png","/assets/favicon-image/bukit-besi-192.webp","/assets/PWA/icons/icon-192.png","/assets/PWA/icons/icon-512.png","/assets/PWA/icons/icon-maskable-512.png"];
 // Pages are HTML routes (network first, saved copy offline); everything else is a static asset.
-const PAGES = new Set(["/","/cgpa-calculator/","/cgpa-to-percentage/","/income-tax-calculator-malaysia/","/kalkulator-cukai-pendapatan/","/kalkulator-gaji/","/privacy/","/salary-calculator-malaysia/","/terms/"]);
+const PAGES = new Set(["/","/cgpa-calculator/","/cgpa-to-percentage/","/epf-calculator/","/income-tax-calculator-malaysia/","/kalkulator-cukai-pendapatan/","/kalkulator-gaji/","/kalkulator-kwsp/","/privacy/","/salary-calculator-malaysia/","/terms/"]);
 const ASSETS = new Set(PRECACHE.filter(url => !PAGES.has(url)));
 
 self.addEventListener('install', event => {

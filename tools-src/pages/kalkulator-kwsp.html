@@ -1,0 +1,190 @@
+<!--page
+{
+  "path": "/kalkulator-kwsp/",
+  "lang": "ms",
+  "alternates": { "en": "/epf-calculator/" },
+  "title": "Kalkulator KWSP 2026: Dividen & Simpanan Persaraan",
+  "description": "Kalkulator KWSP percuma: unjur simpanan hingga umur 55 atau 60 dengan dividen terkini 6.15%, lihat Akaun Persaraan, Sejahtera dan Fleksibel serta sasaran KWSP.",
+  "llms": "Kalkulator KWSP (Bahasa Melayu): unjuran simpanan hingga umur 55 atau 60 berdasarkan umur, gaji, kenaikan gaji tahunan, baki semasa Akaun Persaraan, Sejahtera dan Fleksibel, kadar caruman sendiri dan caruman sukarela, mengikut Jadual Ketiga KWSP, pembahagian 75/15/10 dan kaedah dividen KWSP; membandingkan nilai selepas inflasi dengan tahap Asas (RM390,000), Mencukupi (RM650,000) dan Dipertingkat (RM1.3 juta). Termasuk sejarah dividen 2016–2025 (2025: 6.15%).",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "epf",
+  "scripts": ["/assets/js/epf.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator KWSP", null]],
+  "about": ["Kumpulan Wang Simpanan Pekerja (KWSP)", "Dividen KWSP", "Simpanan persaraan di Malaysia"],
+  "app": {
+    "name": "Kalkulator KWSP Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Unjuran hingga umur 55 atau 60", "Caruman Jadual Ketiga KWSP dengan kenaikan gaji tahunan", "Pembahagian Akaun Persaraan, Sejahtera dan Fleksibel", "Pilihan dividen: terkini, purata 10 tahun, konservatif atau sendiri", "Perbandingan selepas inflasi dengan sasaran persaraan KWSP", "Jadual tahun demi tahun", "Berfungsi di luar talian"]
+  },
+  "citations": [
+    ["Malay Mail: KWSP umum dividen 6.15% bagi 2025", "https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707"],
+    ["RinggitPlus: Sejarah kadar dividen KWSP", "https://ringgitplus.com/en/guides/historical-epf-dividend-rates/"],
+    ["NST: KWSP naikkan penanda aras simpanan asas kepada RM390,000", "https://www.nst.com.my/amp/business/corporate/2024/12/1147195/epf-raises-basic-retirement-income-benchmark-62pct-rm390k-bttv"],
+    ["KWSP: Caruman wajib majikan", "https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution"]
+  ],
+  "faq": [
+    { "q": "Berapakah dividen KWSP bagi 2025?", "a": "KWSP mengisytiharkan 6.15% bagi 2025 untuk simpanan konvensional dan syariah, diumumkan pada 28 Februari 2026. Kadar ini sedikit lebih rendah daripada 6.30% bagi 2024. Purata 2016–2025 bagi simpanan konvensional ialah kira-kira 5.88%." },
+    { "q": "Bagaimana dividen KWSP dikira?", "a": "KWSP mengira dividen berdasarkan baki harian dan mengkreditkannya sekali setahun. Wang yang berada dalam akaun sepanjang tahun mendapat kadar penuh, manakala setiap caruman bulanan hanya mendapat dividen bagi baki tahun selepas ia dimasukkan. Contohnya, RM100,000 sepanjang tahun pada 6.15% mendapat RM6,150." },
+    { "q": "Bagaimana caruman dibahagikan kepada tiga akaun?", "a": "Sejak 11 Mei 2024, caruman bulanan dibahagikan 75% kepada Akaun Persaraan, 15% kepada Akaun Sejahtera (perumahan, pendidikan, kesihatan dan pengeluaran lain yang dibenarkan) dan 10% kepada Akaun Fleksibel (boleh dikeluarkan pada bila-bila masa). Dividen dikreditkan kepada setiap akaun mengikut bakinya sendiri." },
+    { "q": "Berapa simpanan KWSP yang diperlukan untuk bersara?", "a": "Rangka Kerja Kecukupan Pendapatan Persaraan KWSP menetapkan tiga tahap pada umur 60 mengikut harga semasa: Asas RM390,000, Mencukupi RM650,000 dan Dipertingkat RM1.3 juta. Tahap Asas dilaksanakan secara berperingkat: RM290,000 pada 2026, RM340,000 pada 2027 dan RM390,000 mulai 2028. Kalkulator ini menyesuaikan unjuran anda dengan inflasi sebelum dibandingkan." },
+    { "q": "Berapa caruman saya dan majikan?", "a": "Pekerja di bawah 60 tahun mencarum 11% daripada gaji. Majikan mencarum 13% bagi gaji sehingga RM5,000 dan 12% melebihi jumlah itu. Amaun mengikut julat gaji dalam Jadual Ketiga KWSP, jadi boleh lebih sedikit daripada peratusan biasa." },
+    { "q": "Bolehkah saya menambah simpanan KWSP?", "a": "Boleh. Anda boleh memilih kadar caruman pekerja yang lebih tinggi melalui majikan, atau membuat caruman sukarela sendiri melalui aplikasi KWSP atau i-Akaun. Gunakan bahagian pilihan lain untuk melihat kesan caruman tambahan pada umur persaraan." },
+    { "q": "Adakah ini penyata rasmi KWSP?", "a": "Tidak. Ini ialah unjuran berdasarkan andaian yang anda pilih. Dividen akan datang tidak dijamin. Semak baki sebenar anda dalam aplikasi KWSP atau i-Akaun." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Laluan"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator KWSP</li></ol></nav>
+  <h1>Kalkulator KWSP Malaysia</h1>
+  <p class="answer">Pekerja berumur 30 tahun dengan <strong>gaji RM4,000 sebulan</strong> dan simpanan KWSP RM50,000 kini boleh memiliki kira-kira <strong>{{E_FINAL}} pada umur 60</strong>, atau {{E_REAL}} mengikut nilai wang hari ini, dengan andaian kenaikan gaji 3% setahun dan purata dividen {{E_AVG}}. Dividen KWSP terkini ialah <strong>{{E_LATEST}} bagi {{E_LATEST_YEAR}}</strong>. Masukkan maklumat anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/epf-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="epfForm" novalidate aria-labelledby="epf-h">
+      <h2 id="epf-h">Maklumat anda</h2>
+      <div class="field"><label for="age">Umur anda sekarang</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="16" max="59" step="1" value="{{E_AGE}}"></div></div>
+      <div class="field">
+        <label for="retireAge">Unjur simpanan hingga umur</label>
+        <select class="input" id="retireAge" name="retireAge"><option value="60" selected>60 (umur pengeluaran penuh)</option><option value="55">55</option></select>
+      </div>
+      <div class="field"><label for="salary">Gaji bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="1" value="{{E_SALARY}}"></div></div>
+      <div class="field"><label for="raise">Kenaikan gaji setahun</label><div class="input"><input id="raise" name="raise" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="{{E_RAISE}}"><span aria-hidden="true">%</span></div></div>
+      <div class="field">
+        <label for="divPreset">Andaian dividen</label>
+        <select class="input" id="divPreset" name="divPreset">{{E_DIV_OPTIONS}}</select>
+      </div>
+      <div class="field" id="divCustom" hidden><label for="dividend">Kadar dividen anda</label><div class="input"><input id="dividend" name="dividend" type="number" inputmode="decimal" min="0" max="15" step="0.05" value="6"><span aria-hidden="true">%</span></div></div>
+      <details class="more-opts" id="epfMore">
+        <summary>Baki semasa dan pilihan lain</summary>
+        <div class="field"><label for="persaraan">Akaun Persaraan (Akaun 1) kini</label><div class="input"><span aria-hidden="true">RM</span><input id="persaraan" name="persaraan" type="number" inputmode="decimal" min="0" step="1" value="{{E_PERSARAAN}}"></div></div>
+        <div class="field"><label for="sejahtera">Akaun Sejahtera (Akaun 2) kini</label><div class="input"><span aria-hidden="true">RM</span><input id="sejahtera" name="sejahtera" type="number" inputmode="decimal" min="0" step="1" value="{{E_SEJAHTERA}}"></div></div>
+        <div class="field"><label for="fleksibel">Akaun Fleksibel (Akaun 3) kini</label><div class="input"><span aria-hidden="true">RM</span><input id="fleksibel" name="fleksibel" type="number" inputmode="decimal" min="0" step="1" value="{{E_FLEKSIBEL}}"></div></div>
+        <div class="field"><label for="ownRate">Kadar caruman anda</label><div class="input"><input id="ownRate" name="ownRate" type="number" inputmode="decimal" min="11" max="40" step="1" value="11"><span aria-hidden="true">%</span></div><p class="help">11% ialah kadar berkanun. Anda boleh memilih kadar lebih tinggi melalui majikan.</p></div>
+        <div class="field"><label for="topUp">Caruman sukarela setiap bulan</label><div class="input"><span aria-hidden="true">RM</span><input id="topUp" name="topUp" type="number" inputmode="decimal" min="0" step="10" value="0"></div></div>
+        <div class="field"><label for="inflation">Inflasi, untuk nilai wang hari ini</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" max="10" step="0.5" value="{{E_INFLATION}}"><span aria-hidden="true">%</span></div></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="epf-result-h">
+      <h2 id="epf-result-h">KWSP anda pada umur <span id="eAge">{{E_RETIRE}}</span></h2>
+      <div class="net">
+        <p>Unjuran simpanan</p>
+        <output id="eFinal" for="salary">{{E_FINAL}}</output>
+        <p><strong id="eReal">{{E_REAL}}</strong> nilai wang hari ini · <span id="eMonthly">{{E_MONTHLY}}</span> sebulan selama 20 tahun (<span id="eRealMonthly">{{E_REAL_MONTHLY}}</span> nilai hari ini)</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <div class="meter" aria-hidden="true"><i id="eBar" style="width:{{E_BAR}}"></i><span style="left:30%">Asas</span><span style="left:50%">Mencukupi</span></div>
+      <p class="note" id="eTier">{{E_TIER}}</p>
+      <table class="rows">
+        <caption>Mengikut akaun</caption>
+        <tbody>
+          <tr><th scope="row">Akaun Persaraan (75%)</th><td id="ePersaraan">{{E_P}}</td></tr>
+          <tr><th scope="row">Akaun Sejahtera (15%)</th><td id="eSejahtera">{{E_S}}</td></tr>
+          <tr><th scope="row">Akaun Fleksibel (10%)</th><td id="eFleksibel">{{E_F}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Sumber simpanan</caption>
+        <tbody>
+          <tr><th scope="row">Baki hari ini</th><td id="eStart">{{E_START}}</td></tr>
+          <tr><th scope="row">Caruman anda</th><td id="eEmployee">{{E_EMPLOYEE}}</td></tr>
+          <tr><th scope="row">Caruman majikan</th><td id="eEmployer">{{E_EMPLOYER}}</td></tr>
+          <tr id="rowTopUp" hidden><th scope="row">Caruman sukarela</th><td id="eTopUp">{{E_TOPUP}}</td></tr>
+          <tr class="total"><th scope="row">Dividen</th><td id="eDividend">{{E_DIVIDEND}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Dividen tahun pertama anda: <strong id="eFirstDiv">{{E_FIRSTDIV}}</strong></p>
+      <details class="more-opts">
+        <summary>Unjuran tahun demi tahun</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Unjuran tahun demi tahun">
+          <table class="data"><thead><tr><th scope="col">Umur</th><th scope="col">Gaji</th><th scope="col">Caruman</th><th scope="col">Dividen</th><th scope="col">Baki</th></tr></thead><tbody id="eYears">{{E_YEARS}}</tbody></table>
+        </div>
+      </details>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="epfPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">Cara dividen KWSP dikira</h2>
+  <p>KWSP mengira dividen berdasarkan <strong>baki harian</strong> dan mengkreditkannya sekali setahun selepas kadar diumumkan (biasanya pada Februari atau Mac).</p>
+  <ul>
+    <li>Wang yang kekal dalam akaun sepanjang tahun mendapat kadar penuh: RM100,000 pada {{E_LATEST}} mendapat RM6,150.</li>
+    <li>Caruman setiap bulan hanya mendapat dividen bagi baki tahun. Caruman Januari mendapat kira-kira sebelas bulan, caruman Disember hampir tiada sehingga tahun berikutnya.</li>
+    <li>Dividen dikreditkan kepada Akaun Persaraan, Sejahtera dan Fleksibel mengikut baki setiap akaun.</li>
+  </ul>
+  <p>Kalkulator ini menggunakan kaedah yang sama bulan demi bulan, kemudian mengulanginya setiap tahun hingga umur pilihan anda sambil menaikkan gaji setiap tahun.</p>
+
+  <h2 id="history">Sejarah dividen KWSP</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Konvensional</th><th scope="col">Syariah</th></tr></thead>
+      <tbody>
+{{E_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+  <p>Purata sepuluh tahun bagi simpanan konvensional ialah {{E_AVG}}. Dividen lalu tidak menjamin kadar akan datang.</p>
+
+  <h2 id="accounts">Akaun Persaraan, Sejahtera dan Fleksibel</h2>
+  <p>Sejak 11 Mei 2024, setiap caruman bulanan dibahagikan kepada tiga:</p>
+  <ul>
+    <li><strong>Akaun Persaraan (75%)</strong> untuk persaraan, boleh dikeluarkan mulai umur 55.</li>
+    <li><strong>Akaun Sejahtera (15%)</strong> untuk pengeluaran yang dibenarkan seperti perumahan, pendidikan dan kesihatan.</li>
+    <li><strong>Akaun Fleksibel (10%)</strong> yang boleh dikeluarkan pada bila-bila masa.</li>
+  </ul>
+  <p>Bagi jumlah caruman RM1,000 sebulan, RM750 masuk ke Persaraan, RM150 ke Sejahtera dan RM100 ke Fleksibel. Mengeluarkan wang dari Akaun Fleksibel mengurangkan baki dan dividen yang sepatutnya diperoleh.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="targets">Berapa simpanan KWSP yang diperlukan untuk bersara?</h2>
+  <p>Rangka Kerja Kecukupan Pendapatan Persaraan KWSP menetapkan tiga tahap simpanan pada umur 60, mengikut harga semasa:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="targets">
+    <table class="data text">
+      <thead><tr><th scope="col">Tahap</th><th scope="col">Simpanan pada 60</th><th scope="col">Untuk</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Asas</th><td>RM390,000</td><td>Keperluan asas; RM290,000 pada 2026 dan RM340,000 pada 2027 semasa dilaksanakan berperingkat</td></tr>
+        <tr><th scope="row">Mencukupi</th><td>RM650,000</td><td>Taraf hidup yang munasabah</td></tr>
+        <tr><th scope="row">Dipertingkat</th><td>RM1,300,000</td><td>Keselamatan dan kebebasan kewangan yang lebih baik</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="examples-h">Simpanan KWSP mengikut gaji</h2>
+  <p>Bermula umur 25 tanpa simpanan, kenaikan gaji 3% setahun, purata dividen {{E_AVG}} dan caruman berkanun. Angka dalam nilai ringgit akan datang.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gaji permulaan</th><th scope="col">Pada 55</th><th scope="col">Pada 60</th><th scope="col">Sebulan selama 20 tahun</th></tr></thead>
+      <tbody>
+{{E_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707" rel="noopener">Malay Mail: KWSP umum dividen 6.15% bagi 2025</a></li>
+    <li><a href="https://ringgitplus.com/en/guides/historical-epf-dividend-rates/" rel="noopener">RinggitPlus: sejarah kadar dividen KWSP</a></li>
+    <li><a href="https://www.nst.com.my/amp/business/corporate/2024/12/1147195/epf-raises-basic-retirement-income-benchmark-62pct-rm390k-bttv" rel="noopener">NST: penanda aras simpanan asas RM390,000</a></li>
+    <li><a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution" rel="noopener">KWSP: kadar caruman</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Ini ialah unjuran, bukan penyata KWSP atau nasihat kewangan. Dividen, gaji dan inflasi akan datang ialah andaian. Semak baki sebenar dalam aplikasi KWSP atau i-Akaun.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>KWSP, PERKESO dan PCB bulanan</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai TT2026 dan pelepasan KWSP</small></a>
+    <a href="/">Semua alat {{BRAND}}<small>Kalkulator dan utiliti percuma</small></a>
+  </div>
+</section>

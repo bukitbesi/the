@@ -9,6 +9,7 @@ const image = rect(3, 4, 18, 16) + circle(8, 9, 1.5) + p('m3 17 5-5 4 4 3-3 6 6'
 const chat = p('M20 15a3 3 0 0 1-3 3H8l-5 3V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3Z');
 
 export const icons = {
+  'epf-calculator': p('M3 20h18') + rect(5, 12, 3, 8, 1) + rect(10.5, 8, 3, 12, 1) + rect(16, 4, 3, 16, 1),
   'income-tax-calculator-malaysia': p('M6 2h9l4 4v16H6Z') + p('M9 10h7M9 14h7M9 18h4') + p('M15 2v4h4'),
   'cgpa-to-percentage': circle(7, 7, 2.5) + circle(17, 17, 2.5) + p('M19 5 5 19'),
   'cgpa-calculator': p('M2 9l10-5 10 5-10 5Z') + p('M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5') + p('M22 9v6'),

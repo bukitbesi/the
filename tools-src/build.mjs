@@ -17,6 +17,7 @@ const require = createRequire(import.meta.url);
 const salary = require('../assets/js/salary-core.js');
 const grades = require('../assets/js/grade-core.js');
 const taxes = require('../assets/js/tax-core.js');
+const epfCore = require('../assets/js/epf-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -382,7 +383,47 @@ function taxMap(lang) {
     X_EX_TAX: rm(r.payable), X_EX_PROPOSAL: rm(p.payable), X_EX_SAVE: rm(r.payable - p.payable)
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap };
+// ---- EPF (KWSP) savings projection, EN + BM
+const EPF_EXAMPLE = { age: 30, retireAge: 60, salary: 4000, raise: 3, persaraan: 37500, sejahtera: 7500, fleksibel: 5000, ownRate: 11, topUp: 0, inflation: 2.5, dividend: epfCore.FACTS.average10 };
+function epfMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const r = epfCore.project(EPF_EXAMPLE);
+  const F = epfCore.FACTS;
+  const tier = {
+    below: [`Below the RM390,000 Basic Savings level by ${rm0(r.gapToBasic)}.`, `Di bawah Simpanan Asas RM390,000. Kurang ${rm0(r.gapToBasic)}.`],
+    basic: ['Reaches the Basic level (RM390,000).', 'Mencapai tahap Asas (RM390,000).'],
+    adequate: ['Reaches the Adequate level (RM650,000).', 'Mencapai tahap Mencukupi (RM650,000).'],
+    enhanced: ['Reaches the Enhanced level (RM1.3 million).', 'Mencapai tahap Dipertingkat (RM1.3 juta).']
+  }[r.tier][L];
+  const years = r.years.map(y => `<tr><th scope="row">${y.age}</th><td>${rm0(y.salary)}</td><td>${rm0(y.employee + y.employer + y.topUp)}</td><td>${rm0(y.dividend)}</td><td>${rm0(y.balance)}</td></tr>`).join('\n');
+  const history = epfCore.DIVIDENDS.slice().reverse().map(([y, c, sh]) => `<tr><th scope="row">${y}</th><td>${c.toFixed(2)}%</td><td>${sh == null ? '–' : sh.toFixed(2) + '%'}</td></tr>`).join('\n');
+  const examples = [2000, 3000, 4000, 5000, 7000, 10000].map(sal => {
+    const x = epfCore.project({ age: 25, retireAge: 60, salary: sal, raise: 3, dividend: F.average10 });
+    const y = epfCore.project({ age: 25, retireAge: 55, salary: sal, raise: 3, dividend: F.average10 });
+    return `<tr><th scope="row">${rm0(sal)}</th><td>${rm0(y.final)}</td><td>${rm0(x.final)}</td><td>${rm0(x.monthlyFor20Years)}</td></tr>`;
+  }).join('\n');
+  const preset = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  return {
+    E_AGE: EPF_EXAMPLE.age, E_SALARY: EPF_EXAMPLE.salary, E_RAISE: EPF_EXAMPLE.raise,
+    E_PERSARAAN: EPF_EXAMPLE.persaraan, E_SEJAHTERA: EPF_EXAMPLE.sejahtera, E_FLEKSIBEL: EPF_EXAMPLE.fleksibel,
+    E_DIV_OPTIONS: [
+      preset(F.average10, `10-year average, 2016–2025 (${F.average10}%)`, `Purata 10 tahun, 2016–2025 (${F.average10}%)`, true),
+      preset(F.latest, `Latest: ${F.latestYear} dividend (${F.latest}%)`, `Terkini: dividen ${F.latestYear} (${F.latest}%)`),
+      preset(5, 'Conservative (5.00%)', 'Konservatif (5.00%)'),
+      preset('custom', 'Custom rate', 'Kadar sendiri')
+    ].join(''),
+    E_FINAL: rm0(r.final), E_REAL: rm0(r.real), E_RETIRE: r.retireAge, E_MONTHLY: rm0(r.monthlyFor20Years), E_REAL_MONTHLY: rm0(r.realMonthlyFor20Years), E_INFLATION: EPF_EXAMPLE.inflation,
+    E_P: rm0(r.accounts.persaraan), E_S: rm0(r.accounts.sejahtera), E_F: rm0(r.accounts.fleksibel),
+    E_START: rm0(r.start), E_EMPLOYEE: rm0(r.totals.employee), E_EMPLOYER: rm0(r.totals.employer), E_TOPUP: rm0(r.totals.topUp),
+    E_DIVIDEND: rm0(r.totals.dividend), E_FIRSTDIV: money(r.firstYearDividend, lang), E_TIER: tier,
+    E_BAR: (Math.min(100, r.real / F.ria.enhanced * 100)).toFixed(1) + '%',
+    E_YEARS: years, E_HISTORY: history, E_EXAMPLES: examples,
+    E_LATEST: F.latest.toFixed(2) + '%', E_LATEST_YEAR: F.latestYear, E_AVG: F.average10 + '%',
+    E_VERIFIED: longDate(F.verified, lang), E_VERIFIED_ISO: F.verified
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap };
 
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
@@ -442,7 +483,8 @@ const bundles = {
   'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
-  'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js']
+  'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js'],
+  'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

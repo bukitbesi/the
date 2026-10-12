@@ -387,6 +387,15 @@
     "live": true
   },
   {
+    "name": "EPF Calculator (KWSP)",
+    "desc": "Project your EPF savings to 55 or 60 with the latest 6.15% dividend, see Akaun Persaraan, Sejahtera and Fleksibel, and check EPF's retirement targets. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/epf-calculator/",
+    "cat": "calc",
+    "icon": "epf-calculator",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "CGPA to Percentage Calculator",
     "desc": "Convert CGPA to percentage with your university's formula: CBSE, VTU, AKTU, MAKAUT, SPPU, GTU, Mumbai and Anna, plus a full conversion table.",
     "url": "https://tool.thebukitbesi.com/cgpa-to-percentage/",
