@@ -81,8 +81,21 @@ if (!c) return '';
 var n = normalize(input);
 return c.track && isValid(n) ? c.track.replace('{n}', encodeURIComponent(n)) : c.home;
 }
-var api = { FACTS: FACTS, COURIERS: COURIERS, UNIVERSAL: UNIVERSAL, byId: byId,
-normalize: normalize, isValid: isValid, detect: detect, trackUrl: trackUrl };
+var MAPS = {
+jnt: ['J&T Express', 'J&T Express drop point'],
+poslaju: ['Pos Malaysia', 'Pos Laju'],
+ninjavan: ['Ninja Point', 'Ninja Van']
+};
+function mapsUrl(query, where) {
+if (where && isFinite(where.lat) && isFinite(where.lng)) {
+return 'https://www.google.com/maps/search/' + encodeURIComponent(query) + '/@' +
+Number(where.lat).toFixed(2) + ',' + Number(where.lng).toFixed(2) + ',14z';
+}
+var area = where && typeof where === 'string' ? where.replace(/\s+/g, ' ').trim().slice(0, 60) : '';
+return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query + (area ? ' ' + area : ' near me'));
+}
+var api = { FACTS: FACTS, COURIERS: COURIERS, UNIVERSAL: UNIVERSAL, MAPS: MAPS, byId: byId,
+normalize: normalize, isValid: isValid, detect: detect, trackUrl: trackUrl, mapsUrl: mapsUrl };
 if (typeof module === 'object' && module.exports) module.exports = api;
 else root.TBBTracking = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

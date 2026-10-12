@@ -566,7 +566,43 @@ ${grid}
     TR_VERIFIED: longDate(tracking.FACTS.verified, lang), TR_VERIFIED_ISO: tracking.FACTS.verified
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap };
+// ---- "Near me" courier finder (EN + BM): location or area -> Google Maps search; no branch data to maintain
+const NEAR_TEXT = {
+  en: { h: c => `Find ${c} near you`, locate: 'Use my location', locHelp: 'Your browser asks first. Your location is not sent to this site.',
+    area: 'Or search an area', eg: 'e.g. Bangi or 43000', search: 'Search this area', result: 'Branches on Google Maps',
+    idle: 'Tap Use my location, or search an area. Links open Google Maps.', open: q => `Open ${q} near me in Google Maps`, track: c => `Track a ${c} parcel` },
+  ms: { h: c => `Cari ${c} berhampiran anda`, locate: 'Guna lokasi saya', locHelp: 'Pelayar anda akan bertanya dahulu. Lokasi anda tidak dihantar ke laman ini.',
+    area: 'Atau cari mengikut kawasan', eg: 'cth. Bangi atau 43000', search: 'Cari kawasan ini', result: 'Cawangan di Google Maps',
+    idle: 'Tekan Guna lokasi saya, atau cari kawasan. Pautan membuka Google Maps.', open: q => `Buka ${q} berhampiran di Google Maps`, track: c => `Semak tracking ${c}` }
+};
+function nearMap(lang, p = {}) {
+  const c = tracking.byId[p.courier], queries = tracking.MAPS[p.courier], t = NEAR_TEXT[lang];
+  if (!c || !queries) { console.error(`Unknown near-me courier "${p.courier}" on ${p.path}`); process.exit(1); }
+  return {
+    NR_TOOL: `<div class="calc">
+    <form class="box" id="nearForm" novalidate aria-labelledby="near-h" data-courier="${c.id}">
+      <h2 id="near-h">${esc(t.h(c.short))}</h2>
+      <button type="button" class="btn" id="nearLocate">${t.locate}</button>
+      <p class="help">${t.locHelp}</p>
+      <div class="field near-area">
+        <label for="nearArea">${t.area}</label>
+        <div class="input"><input id="nearArea" name="area" type="text" autocomplete="address-level2" maxlength="60" placeholder="${t.eg}"></div>
+      </div>
+      <button type="submit" class="btn ghost">${t.search}</button>
+    </form>
+
+    <section class="box" aria-labelledby="near-result-h">
+      <h2 id="near-result-h">${t.result}</h2>
+      <p class="note" id="nearMsg" aria-live="polite">${t.idle}</p>
+      <ul class="near-links" id="nearLinks">
+        <li><a class="btn ghost sm" href="${esc(tracking.mapsUrl(queries[0]))}" target="_blank" rel="noopener">${esc(t.open(queries[0]))}</a></li>
+      </ul>
+      <p class="note"><a href="${esc(p.trackPage)}">${esc(t.track(c.short))}</a></p>
+    </section>
+  </div>`
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -676,7 +712,8 @@ const bundles = {
   'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js'],
   'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js'],
   'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
-  'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js']
+  'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
+  'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

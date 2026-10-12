@@ -88,6 +88,9 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/ninja-van-tracking/](https://tool.thebukitbesi.com/ninja-van-tracking/) + [/semak-tracking-ninja-van/](https://tool.thebukitbesi.com/semak-tracking-ninja-van/) | English + BM | ninja van tracking parcel; semak tracking ninja van |
 | [/gdex-tracking/](https://tool.thebukitbesi.com/gdex-tracking/) + [/semak-tracking-gdex/](https://tool.thebukitbesi.com/semak-tracking-gdex/) | English + BM | gdex tracking parcel; semak tracking gdex |
 | [/citylink-tracking/](https://tool.thebukitbesi.com/citylink-tracking/) + [/semak-tracking-citylink/](https://tool.thebukitbesi.com/semak-tracking-citylink/) | English + BM | citylink tracking parcel; semak tracking city-link |
+| [/jnt-near-me/](https://tool.thebukitbesi.com/jnt-near-me/) + [/jnt-terdekat/](https://tool.thebukitbesi.com/jnt-terdekat/) | English + BM | j&t near me, j&t near me drop off / open now; j&t terdekat |
+| [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
+| [/ninja-van-near-me/](https://tool.thebukitbesi.com/ninja-van-near-me/) + [/ninja-van-terdekat/](https://tool.thebukitbesi.com/ninja-van-terdekat/) | English + BM | ninja van near me, ninja van near me drop off; ninja van terdekat |
 
 Both pages share one tested calculation core (`assets/js/salary-core.js`):
 EPF from the KWSP Third Schedule bands, SOCSO / EIS / LINDUNG 24 Jam from
@@ -103,7 +106,7 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
 
-**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
+**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
 
 **Share buttons:** every page with an `app` block gets a share bar (WhatsApp, Telegram, Facebook, X, copy link, device share sheet) before the bottom ad, and a "Share result" button in its `.tool-actions`. Plain links and one small inline script; no third-party code.
 
