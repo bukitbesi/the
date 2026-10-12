@@ -53,3 +53,12 @@ test('Tracking links carry the encoded number or fall back to the tracking page'
   assert.equal(T.trackUrl('any', 'LP123456789CN'), 'https://t.17track.net/en#nums=LP123456789CN');
   assert.equal(T.trackUrl('nope', 'LP123456789CN'), '');
 });
+
+test('Maps links: rounded coordinates, a typed area, or "near me"', () => {
+  assert.equal(T.mapsUrl('J&T Express', { lat: 3.139003, lng: 101.686855 }), 'https://www.google.com/maps/search/J%26T%20Express/@3.14,101.69,14z');
+  assert.equal(T.mapsUrl('Pos Malaysia', '  Bangi   43000 '), 'https://www.google.com/maps/search/?api=1&query=Pos%20Malaysia%20Bangi%2043000');
+  assert.equal(T.mapsUrl('Ninja Point'), 'https://www.google.com/maps/search/?api=1&query=Ninja%20Point%20near%20me');
+  assert.equal(T.mapsUrl('Ninja Point', ''), 'https://www.google.com/maps/search/?api=1&query=Ninja%20Point%20near%20me');
+  assert.ok(T.mapsUrl('X', 'a'.repeat(200)).length < 140, 'typed area is capped');
+  for (const [id, qs] of Object.entries(T.MAPS)) assert.ok(T.byId[id] && qs.length >= 1, id);
+});
