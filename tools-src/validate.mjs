@@ -102,6 +102,10 @@ for (const resource of precache) assert(fs.statSync(builtFile(resource)).size > 
 const workerPages = JSON.parse(worker.match(/const PAGES = new Set\((\[[^;]+\])\);/)[1]);
 assert.deepEqual(workerPages.sort(), ['/', ...pageDirs].sort(), 'Every page is available offline');
 assert(!worker.includes('__PAGES_JSON__'), 'Worker page list compiled');
+assert(!worker.includes('__LAZY_JSON__'), 'Worker lazy list compiled');
+const lazy = JSON.parse(worker.match(/const LAZY = new Set\((\[[^;]*\])\);/)[1]);
+for (const resource of lazy) assert(fs.statSync(path.join(pub, resource)).size > 0, `Missing lazy asset ${resource}`);
+assert(fs.statSync(path.join(pub, 'assets/vendor/LICENSES.txt')).size > 0, 'Vendor licences published');
 assert(precache.includes('/assets/PWA/pwa.min.js') && precache.includes('/offline.html'), 'Offline app assets');
 assert(precache.every(url => url.startsWith('/') && !url.startsWith('//')), 'Same-origin precache only');
 assert(!/<a\b[^>]*target="_blank"/.test(html), 'Directory links use the same tab');

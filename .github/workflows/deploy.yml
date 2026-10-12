@@ -30,9 +30,9 @@ jobs:
           node tools-src/validate.mjs
       - name: docs/ matches the sources
         run: |
-          if [ -n "$(git status --porcelain -- docs)" ]; then
-            git status --short -- docs
-            echo "::error::docs/ is out of date. Run 'node tools-src/build.mjs' and commit docs/."
+          if [ -n "$(git status --porcelain -- docs documentation/blogger-redirects.xml)" ]; then
+            git status --short -- docs documentation/blogger-redirects.xml
+            echo "::error::docs/ is out of date. Run 'node tools-src/build.mjs' and commit docs/ and documentation/blogger-redirects.xml."
             exit 1
           fi
       # Tell Bing/Yandex (and Bing-powered AI search) the site changed. Never fails the run.

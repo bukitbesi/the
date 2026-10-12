@@ -6,6 +6,8 @@ const PRECACHE = __PRECACHE_JSON__;
 // Pages are HTML routes (network first, saved copy offline); everything else is a static asset.
 const PAGES = new Set(__PAGES_JSON__);
 const ASSETS = new Set(PRECACHE.filter(url => !PAGES.has(url)));
+// Large libraries (code minifiers) are cached on first use, not on install.
+const LAZY = new Set(__LAZY_JSON__);
 
 self.addEventListener('install', event => {
   // Updates wait until the user chooses Update, or all old app tabs close.
@@ -86,7 +88,7 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET' || url.origin !== self.location.origin || url.pathname === '/sw.js') return;
   if (request.mode === 'navigate') {
     event.respondWith(navigate(event));
-  } else if (!url.search && ASSETS.has(url.pathname)) {
+  } else if (!url.search && (ASSETS.has(url.pathname) || LAZY.has(url.pathname))) {
     event.respondWith(asset(request));
   }
 });

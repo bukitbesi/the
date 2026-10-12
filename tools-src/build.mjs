@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { icons, renderIcon } from './icons.mjs';
 
@@ -22,6 +23,7 @@ const loanCore = require('../assets/js/loan-core.js');
 const carCore = require('../assets/js/carloan-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
+const jsCore = require('../assets/js/js-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -64,8 +66,11 @@ pages.forEach(p => {
     if (!other || !Object.values(other.alternates || {}).includes(p.path)) problems.push(`hreflang pair must be reciprocal: ${p.path} <-> ${alt}`);
   }
   if (p.description.length > 160) problems.push(`description over 160 characters on ${p.path}`);
+  if (p.bloggerFrom && !new RegExp('^' + site.mainSite.replace(/\./g, '\\.') + '/[a-z0-9/_.-]+\\.html$').test(p.bloggerFrom)) problems.push(`bloggerFrom must be a ${site.mainSite} .html URL on ${p.path}`);
 });
 if (new Set(catalog.map(t => t.url)).size !== catalog.length) problems.push('duplicate tool URLs');
+const froms = pages.filter(p => p.bloggerFrom).map(p => p.bloggerFrom);
+if (new Set(froms).size !== froms.length) problems.push('two pages share one bloggerFrom URL');
 if (!tools.length) problems.push('no live tools to publish');
 if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('published tools must have their own icon');
 if (new URL(site.origin).origin !== site.origin) problems.push('origin must be an origin without a trailing slash');
@@ -626,7 +631,39 @@ function cssMap() {
       `        <tr><th scope="row">${rule}</th><td><code>${esc(css).replace(/\n/g, '<br>')}</code></td><td><code>${esc(cssCore.minify(css).css)}</code></td></tr>`).join('\n')
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
+// ---- JavaScript minifier: sample output, examples and obfuscation sizes come from the vendored Terser
+// and javascript-obfuscator the page loads, run here in a VM (fixed seed, so the numbers are reproducible).
+const jsVm = { console, setTimeout, clearTimeout, setInterval, clearInterval };
+jsVm.globalThis = jsVm;
+jsVm.self = jsVm;
+vm.createContext(jsVm);
+for (const f of Object.values(jsCore.VENDOR)) vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), jsVm);
+const jsLibs = { terser: jsVm.Terser, obfuscator: jsVm.JavaScriptObfuscator };
+const JS_RULES = [
+  ['Comments and whitespace', '// Add two numbers\nfunction add(first, second) {\n  return first + second;\n}'],
+  ['Local names shortened', 'function greet(userName) {\n  const message = "Hi " + userName;\n  return message;\n}'],
+  ['Constants calculated in advance', 'var secondsPerDay = 60 * 60 * 24;'],
+  ['Unreachable code removed', 'function f() {\n  if (false) { console.log("never"); }\n  return 1;\n}'],
+  ['if/return shortened', 'function check(ok) {\n  if (!ok) {\n    return;\n  }\n  start();\n}'],
+  ['debugger removed', 'function f(a) {\n  debugger;\n  return a * 2;\n}'],
+  ['Licence comment kept', '/*! MyLib v1 | MIT */\nvar x = 1;']
+];
+const jsSample = await jsCore.run(jsLibs, jsCore.SAMPLE, {});
+const jsExamples = await Promise.all(JS_RULES.map(([, code]) => jsCore.run(jsLibs, code, {})));
+const jsObf = {};
+for (const level of ['low', 'medium', 'high']) jsObf[level] = jsCore.bytes((await jsCore.run(jsLibs, jsCore.SAMPLE, { mode: 'obfuscate', level, seed: 1 })).code);
+if (jsSample.error || jsExamples.some(r => r.error)) { console.error('JavaScript minifier examples failed'); process.exit(1); }
+function jsMap() {
+  const s = jsCore.saving(jsCore.SAMPLE, jsSample.code), n = x => x.toLocaleString('en-US');
+  const code = c => `<code>${esc(c).replace(/\n/g, '<br>')}</code>`;
+  return {
+    JS_IN: esc(jsCore.SAMPLE), JS_OUT: esc(jsSample.code), JS_BEFORE: n(s.before), JS_AFTER: n(s.after), JS_PCT: s.percent,
+    JS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="jsGz"></span>`,
+    JS_OBF_LOW: n(jsObf.low), JS_OBF_MEDIUM: n(jsObf.medium), JS_OBF_HIGH: n(jsObf.high),
+    JS_EXAMPLES: JS_RULES.map(([rule, src], i) => `        <tr><th scope="row">${rule}</th><td>${code(src)}</td><td>${code(jsExamples[i].code)}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -738,7 +775,9 @@ const bundles = {
   'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
-  'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js']
+  'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
+  'js-minifier.js': ['assets/js/js-core.js', 'assets/js/js-ui.js'],
+  'js-minifier-worker.js': ['assets/js/js-core.js', 'assets/js/js-worker.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
@@ -838,7 +877,12 @@ const precache = [...new Set([
 ])];
 // ---- static files: copied as-is so docs/ is self-contained
 const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub, to), { recursive: true });
-['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots'].forEach(f => copy(f));
+// Vendor libraries carry their version in the file name; a clean copy drops superseded versions.
+fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
+['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor'].forEach(f => copy(f));
+// Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
+// without making every visitor download them.
+const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f);
 fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
 // Serve files exactly as built; Jekyll processing is unnecessary and slower.
 fs.writeFileSync(path.join(pub, '.nojekyll'), '');
@@ -846,10 +890,23 @@ const fileFor = url => path.join(pub, url);
 const workerTemplate = fs.readFileSync(path.join(root, 'assets/PWA/sw.js'), 'utf8');
 const hash = createHash('sha256').update(workerTemplate).update(manifestJSON);
 for (const html of outputs.values()) hash.update(html);
-for (const resource of precache.filter(url => !pagePaths.includes(url))) hash.update(fs.readFileSync(fileFor(resource)));
+for (const resource of [...precache.filter(url => !pagePaths.includes(url)), ...lazy]) hash.update(fs.readFileSync(fileFor(resource)));
 const revision = hash.digest('hex').slice(0, 16);
 const worker = workerTemplate.replace('__CACHE_VERSION__', revision).replace('__PRECACHE_JSON__', JSON.stringify(precache))
-  .replace('__PAGES_JSON__', JSON.stringify(pagePaths));
+  .replace('__PAGES_JSON__', JSON.stringify(pagePaths)).replace('__LAZY_JSON__', JSON.stringify(lazy));
 fs.writeFileSync(path.join(pub, 'sw.js'), worker);
+
+// ---- Blogger redirects: one generated block for the blog theme, from "bloggerFrom" in page front matter.
+// Pasting the whole block again after each move replaces every earlier redirect at once.
+const moved = pages.filter(p => p.bloggerFrom).sort((a, b) => a.bloggerFrom.localeCompare(b.bloggerFrom));
+const redirectXml = `<!-- TBB tool redirects START: generated by tools-src/build.mjs. Replace everything from START to END. -->
+<b:switch var='data:blog.canonicalUrl'>
+${moved.map(p => `<b:case value='${p.bloggerFrom}'/>
+<meta content='0; url=${site.origin + p.path}' http-equiv='refresh'/>
+<script>location.replace("${site.origin + p.path}");</script>`).join('\n')}
+</b:switch>
+<!-- TBB tool redirects END -->
+`;
+fs.writeFileSync(path.join(root, 'documentation/blogger-redirects.xml'), redirectXml);
 console.log(`Built docs/: home (${(Buffer.byteLength(homeHtml) / 1024).toFixed(1)} KB), ${pages.length} pages, crawl files, manifest and sw.js (${revision})`);
 console.log(`${tools.length} published tools; ${catalog.length - tools.length} unpublished records retained in tools.json`);
