@@ -75,6 +75,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-cukai-pendapatan/](https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/) | Bahasa Melayu | kalkulator cukai pendapatan, pelepasan cukai TT2026 |
 | [/epf-calculator/](https://tool.thebukitbesi.com/epf-calculator/) | English | epf calculator, epf dividend 2025, epf retirement savings |
 | [/kalkulator-kwsp/](https://tool.thebukitbesi.com/kalkulator-kwsp/) | Bahasa Melayu | kalkulator kwsp, dividen kwsp, simpanan persaraan |
+| [/home-loan-calculator-malaysia/](https://tool.thebukitbesi.com/home-loan-calculator-malaysia/) | English | home loan calculator malaysia, loan calculator, stamp duty, DSR |
+| [/kalkulator-pinjaman-perumahan/](https://tool.thebukitbesi.com/kalkulator-pinjaman-perumahan/) | Bahasa Melayu | kalkulator pinjaman perumahan, kalkulator loan rumah, duti setem |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 
@@ -87,6 +89,8 @@ runs. They are linked as `hreflang` pairs, carry WebApplication, BreadcrumbList
 and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Yearly upkeep (EPF):** when the dividend is announced (February/March), add it to `DIVIDENDS` in `epf-core.js`, update `FACTS.latest`, `latestYear`, `verified` and the expectations in `tools-src/tests/epf.test.mjs`.
+
+**Upkeep (home loan):** after each OPR change, Budget or SRO revision, update `FACTS` in `loan-core.js` (`opr`, `oprSince`, `defaultRate`, stamp duty, legal fee bands, first-home rules, `verified`) and `tools-src/tests/loan.test.mjs`. When the Finance Act 2027 passes, relabel the Budget 2027 first-home option.
 
 **Yearly upkeep (tax):** after each Budget, add the new year to `YEARS` in `tax-core.js` (bands, individual relief) and update relief limits, labels in `build.mjs` (`TAX_LABELS`) and `tools-src/tests/tax.test.mjs`. When the Finance Act passes, drop the `proposal` flag.
 
@@ -115,6 +119,7 @@ tools-src/images.mjs        renders the social card and PWA screenshots (Playwri
 assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
 assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/10 split, dividend method, RIA benchmarks
+assets/js/loan-core.js      home loan: instalment, amortisation, stamp duty, SRO 2023 legal fees, first-home exemption, DSR
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/PWA/sw.js            service-worker source template
 ```

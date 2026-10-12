@@ -1,0 +1,196 @@
+<!--page
+{
+  "path": "/home-loan-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-pinjaman-perumahan/" },
+  "title": "Home Loan Calculator Malaysia 2026: Instalment, Stamp Duty & DSR",
+  "description": "Free home loan calculator: monthly instalment, total interest, stamp duty, SRO 2023 legal fees, first-home exemption and how much loan you can get.",
+  "llms": "Calculates the monthly instalment of a Malaysian housing loan (monthly rest), total interest, a yearly amortisation table and savings from extra monthly payments; estimates upfront costs: down payment, stamp duty on the transfer (1%/2%/3%/4% scale) and loan agreement (0.5%), SRO 2023 legal fees (1.25% of the first RM500,000, 1% after) plus 8% SST, and the first-home stamp duty exemption (current RM500,000 rule and the Budget 2027 RM750,000 proposal); checks the debt service ratio and the maximum loan for an income. OPR 2.75% since 9 July 2025.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "loan",
+  "scripts": ["/assets/js/loan.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Home Loan Calculator", null]],
+  "about": ["Housing loan", "Mortgage", "Stamp duty in Malaysia", "Debt service ratio"],
+  "app": {
+    "name": "Home Loan Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Monthly instalment with monthly rest", "Total interest and yearly amortisation table", "Extra monthly payment savings", "Stamp duty on transfer and loan agreement", "SRO 2023 legal fees with 8% SST", "First-home stamp duty exemption, current rule and Budget 2027 proposal", "Debt service ratio and maximum loan", "Rate rise check (+0.25% and +0.50%)", "Works offline"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Monetary Policy Statement, 3 September 2026", "https://www.bnm.gov.my/-/monetary-policy-statement-03092026"],
+    ["Malay Mail: Budget 2026 extends first-home stamp duty waivers to 2027", "https://www.malaymail.com/news/malaysia/2025/10/10/govt-budgets-rm672m-for-affordable-housing-first-time-homebuyers-get-stamp-duty-waivers-extended-to-2027/194149"],
+    ["RinggitPlus: Budget 2027 stamp duty exemption for first homes expanded to RM750,000", "https://ringgitplus.com/en/blog/budget-2027/budget-2027-stamp-duty-exemption-for-first-homes-expanded-to-rm750000.html"],
+    ["The Edge Property: SRO 2023 legal fees", "https://www.theedgeproperty.com.my/content/1906682/increase-legal-fees-will-however-be-set-legal-discounts"]
+  ],
+  "faq": [
+    { "q": "How is the monthly home loan instalment calculated?", "a": "Malaysian banks use monthly rest: instalment = loan × r ÷ (1 − (1 + r)^−n), where r is the yearly rate ÷ 12 and n is the number of months. A RM450,000 loan at 4.20% for 35 years costs RM2,046.83 a month." },
+    { "q": "How much is the monthly instalment for a RM500,000 house?", "a": "With a 10% down payment the loan is RM450,000. At 4.20% the instalment is about RM2,046.83 a month over 35 years or RM2,200.58 over 30 years. Over 35 years you pay about RM409,666 in interest." },
+    { "q": "What are the upfront costs of buying a house in Malaysia?", "a": "Budget for the down payment (usually 10%), stamp duty on the transfer (1% to 4% by price band) and on the loan agreement (0.5%), and legal fees for the sale and purchase agreement and the loan (1.25% of the first RM500,000 and 1% after, under SRO 2023) plus 8% SST. On a RM500,000 home with a 90% loan that is about RM74,075 including the down payment." },
+    { "q": "Do first-time home buyers pay stamp duty?", "a": "Malaysians buying their first home priced up to RM500,000 get full stamp duty exemption on the transfer and the loan agreement for sale and purchase agreements signed by 31 December 2027, a saving of up to RM11,250. Budget 2027 proposes extending it to agreements signed from 2027 to 2030 and to homes up to RM750,000, with half relief on the part above RM500,000." },
+    { "q": "How much housing loan can I get with my salary?", "a": "Banks check your debt service ratio (DSR): all monthly loan repayments divided by your net income. Most cap it at 60% to 70%. On RM6,000 net income with no other debts, a 70% DSR allows RM4,200 a month, which supports a loan of about RM923,000 at 4.20% over 35 years." },
+    { "q": "What is the maximum loan tenure and margin of financing?", "a": "Most banks lend for up to 35 years or until you turn 70, whichever is earlier. The usual margin of financing is 90% for your first and second home; Bank Negara caps it at 70% from the third housing loan." },
+    { "q": "How much more will I pay if the OPR goes up?", "a": "The OPR has been 2.75% since 9 July 2025, and floating home loan rates move with it. A 0.25% rise adds about RM68.91 a month on a RM450,000, 35-year loan at 4.20%, or about RM28,900 over the full term." },
+    { "q": "Is it worth paying extra every month?", "a": "Yes, on a flexi or semi-flexi loan extra payments go straight to principal. Paying RM300 more a month on a RM450,000, 35-year loan at 4.20% saves about RM112,702 in interest and ends the loan 8 years 5 months early." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Home loan calculator</li></ol></nav>
+  <h1>Home Loan Calculator Malaysia</h1>
+  <p class="answer">A <strong>RM500,000 house</strong> with 10% down payment (a {{L_LOAN}} loan) at {{L_DEFAULT_RATE}} over 35 years costs <strong>{{L_PAY}} a month</strong>, with {{L_INTEREST}} total interest. Expect about <strong>{{LC_TOTAL}} upfront</strong> for the down payment, stamp duty and legal fees. Enter your own figures below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{L_VERIFIED_ISO}}">{{L_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-pinjaman-perumahan/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="loanForm" novalidate aria-labelledby="loan-h">
+      <h2 id="loan-h">Your loan</h2>
+      <div class="field"><label for="price">Property price</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value="{{L_PRICE}}"></div></div>
+      <div class="field"><label for="downPct">Down payment</label><div class="input"><input id="downPct" name="downPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="{{L_DOWN}}"><span aria-hidden="true">%</span></div><p class="help">10% is usual for a first or second home; at least 30% from the third housing loan.</p></div>
+      <div class="field"><label for="rate">Interest rate (yearly)</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="15" step="0.05" value="{{L_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Check your bank's offer; floating rates are mostly 4.0% to 4.7% with the OPR at {{L_OPR}}.</p></div>
+      <div class="field"><label for="years">Loan tenure</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{L_TENURE}}"><span aria-hidden="true">years</span></div></div>
+      <details class="more-opts" id="loanMore">
+        <summary>Extra payments, first home and affordability</summary>
+        <div class="field"><label for="extra">Extra payment each month</label><div class="input"><span aria-hidden="true">RM</span><input id="extra" name="extra" type="number" inputmode="decimal" min="0" step="50" value="0"></div><p class="help">For flexi or semi-flexi loans; it reduces principal directly.</p></div>
+        <div class="field">
+          <label for="firstHome">First home stamp duty exemption</label>
+          <select class="input" id="firstHome" name="firstHome">{{L_FIRST_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="income">Net monthly income</label><div class="input"><span aria-hidden="true">RM</span><input id="income" name="income" type="number" inputmode="decimal" min="0" step="100" value=""></div><p class="help">After EPF, SOCSO and PCB. Add your spouse's if you apply jointly.</p></div>
+        <div class="field"><label for="commitments">Other monthly loan repayments</label><div class="input"><span aria-hidden="true">RM</span><input id="commitments" name="commitments" type="number" inputmode="decimal" min="0" step="50" value="0"></div><p class="help">Car loan, PTPTN, personal loans, credit card minimums.</p></div>
+        <div class="field">
+          <label for="dsrLimit">Bank's DSR limit</label>
+          <select class="input" id="dsrLimit" name="dsrLimit"><option value="70" selected>70%</option><option value="60">60%</option><option value="80">80%</option></select>
+        </div>
+        <div class="field"><label for="age">Your age</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="18" max="69" step="1" value=""></div><p class="help">Checks the loan ends by age 70.</p></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="loan-result-h">
+      <h2 id="loan-result-h">Your instalment</h2>
+      <div class="net">
+        <p>Monthly instalment</p>
+        <output id="lPay" for="price downPct rate years">{{L_PAY}}</output>
+        <p>Loan <strong id="lLoan">{{L_LOAN}}</strong> over <span id="lTerm">{{L_TERM}}</span> years</p>
+      </div>
+      <p class="sr-only" id="lLive" aria-live="polite"></p>
+      <p class="note" id="lSaved" hidden></p>
+      <p class="note" id="lAge" hidden></p>
+      <table class="rows">
+        <caption>Cost of the loan</caption>
+        <tbody>
+          <tr><th scope="row">Total interest</th><td id="lInterest">{{L_INTEREST}}</td></tr>
+          <tr class="total"><th scope="row">Total repaid</th><td id="lTotal">{{L_TOTAL}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>If rates rise</caption>
+        <tbody>
+          <tr><th scope="row">+0.25%</th><td id="lUp25">{{L_UP25}}</td></tr>
+          <tr><th scope="row">+0.50%</th><td id="lUp50">{{L_UP50}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Upfront costs</caption>
+        <tbody>
+          <tr><th scope="row">Down payment</th><td id="cDown">{{LC_DOWN}}</td></tr>
+          <tr><th scope="row">Stamp duty, transfer (MOT)</th><td id="cMot">{{LC_MOT}}</td></tr>
+          <tr><th scope="row">Stamp duty, loan agreement</th><td id="cLoanDuty">{{LC_LOAN_DUTY}}</td></tr>
+          <tr><th scope="row">Legal fee, sale and purchase<small>SRO 2023 scale, before discounts</small></th><td id="cLegalSpa">{{LC_LEGAL_SPA}}</td></tr>
+          <tr><th scope="row">Legal fee, loan agreement</th><td id="cLegalLoan">{{LC_LEGAL_LOAN}}</td></tr>
+          <tr><th scope="row">SST on legal fees (8%)</th><td id="cSst">{{LC_SST}}</td></tr>
+          <tr id="rowExempt" hidden><th scope="row">First-home exemption applied</th><td id="cExempt">{{LC_EXEMPT}}</td></tr>
+          <tr class="total"><th scope="row">Total upfront</th><td id="cTotal">{{LC_TOTAL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Excludes disbursements, valuation and MRTA/MLTA insurance.</p>
+      <p class="note" id="lDsr" hidden></p>
+      <details class="more-opts">
+        <summary>Yearly repayment schedule</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Yearly repayment schedule">
+          <table class="data"><thead><tr><th scope="col">Year</th><th scope="col">Principal paid</th><th scope="col">Interest paid</th><th scope="col">Balance</th></tr></thead><tbody id="lYears">{{L_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="loanPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How the home loan instalment is calculated</h2>
+  <p>Malaysian housing loans use <strong>monthly rest</strong>: interest is charged each month on the balance still owed, and every instalment is the same.</p>
+  <p><code>Instalment = P × r ÷ (1 − (1 + r)<sup>−n</sup>)</code>, where <strong>P</strong> is the loan, <strong>r</strong> the yearly rate ÷ 12 and <strong>n</strong> the number of months.</p>
+  <ul>
+    <li>RM450,000 at 4.20% for 35 years: r = 0.0035, n = 420, instalment {{L_PAY}}.</li>
+    <li>In the first month, RM1,575 of that is interest and only about RM472 reduces the loan.</li>
+    <li>Islamic home financing uses the same maths with a profit rate instead of an interest rate.</li>
+  </ul>
+
+  <h2 id="table-h">Monthly instalment table at {{L_DEFAULT_RATE}}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Loan amount</th><th scope="col">25 years</th><th scope="col">30 years</th><th scope="col">35 years</th></tr></thead>
+      <tbody>
+{{L_INSTALMENTS}}
+      </tbody>
+    </table>
+  </div>
+  <p>A longer tenure lowers the instalment but adds interest: RM300,000 over 30 instead of 35 years costs about RM103 more a month and saves about RM45,000 in interest.</p>
+
+  <h2 id="rates">Home loan interest rates and the OPR</h2>
+  <p>Bank Negara has kept the Overnight Policy Rate at <strong>{{L_OPR}}</strong> since {{L_OPR_SINCE}}. Most floating home loans are priced as the bank's Standardised Base Rate (SBR, which follows the OPR) plus a spread, giving effective rates of roughly <strong>4.0% to 4.7%</strong>. When the OPR moves by 0.25%, your instalment moves with it, usually from the next billing cycle.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="costs-h">Stamp duty and legal fees</h2>
+  <p>Stamp duty on the instrument of transfer (MOT) is charged on the price: <strong>1%</strong> on the first RM100,000, <strong>2%</strong> on RM100,001–500,000, <strong>3%</strong> on RM500,001–1 million and <strong>4%</strong> above that. The loan agreement is stamped at <strong>0.5%</strong> of the loan. Under the Solicitors' Remuneration Order 2023, legal fees for the sale and purchase agreement and for the loan agreement are each <strong>1.25%</strong> of the first RM500,000 and <strong>1%</strong> of the next RM7 million (minimum RM500), plus 8% SST.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="costs-h">
+    <table class="data">
+      <thead><tr><th scope="col">Price (90% loan)</th><th scope="col">Stamp duty, MOT</th><th scope="col">Stamp duty, loan</th><th scope="col">Legal fees</th><th scope="col">First-home saving now</th><th scope="col">Budget 2027 proposal</th></tr></thead>
+      <tbody>
+{{L_COST_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Developers often absorb legal fees for new projects, and lawyers may discount the scale fee by up to 25%, so treat these as the upper estimate.</p>
+
+  <h2 id="first-home">First-home stamp duty exemption</h2>
+  <ul>
+    <li><strong>Now:</strong> Malaysians buying their first home priced up to RM500,000 pay no stamp duty on the transfer or the loan agreement, for agreements signed by 31 December 2027. That saves up to RM11,250.</li>
+    <li><strong>Budget 2027 proposal:</strong> for agreements signed from 1 January 2027 to 31 December 2030, homes up to RM750,000 qualify, with full exemption on the first RM500,000 and half on the rest. It becomes law only when the Finance Act is passed.</li>
+  </ul>
+  <p>First-home buyers can also claim tax relief on housing loan interest; see the <a href="/income-tax-calculator-malaysia/">income tax calculator</a>.</p>
+
+  <h2 id="afford">How much housing loan can you get?</h2>
+  <p>Banks look at your <strong>debt service ratio (DSR)</strong>: all monthly repayments, including the new instalment, divided by your net income. Most approve up to <strong>60% to 70%</strong>, higher for high earners. They also check your CCRIS and CTOS record, the property's valuation and your age.</p>
+  <ul>
+    <li><strong>Margin of financing:</strong> up to 90% for your first two homes, capped at 70% from the third housing loan.</li>
+    <li><strong>Tenure:</strong> up to 35 years or age 70, whichever comes first.</li>
+    <li><strong>Net income:</strong> use take-home pay after EPF, SOCSO and PCB; the <a href="/salary-calculator-malaysia/">salary calculator</a> works it out.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/-/monetary-policy-statement-03092026" rel="noopener">Bank Negara Malaysia: Monetary Policy Statement, 3 September 2026</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2025/10/10/govt-budgets-rm672m-for-affordable-housing-first-time-homebuyers-get-stamp-duty-waivers-extended-to-2027/194149" rel="noopener">Malay Mail: first-home stamp duty waivers extended to 2027</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/budget-2027/budget-2027-stamp-duty-exemption-for-first-homes-expanded-to-rm750000.html" rel="noopener">RinggitPlus: Budget 2027 first-home exemption up to RM750,000</a></li>
+    <li><a href="https://www.theedgeproperty.com.my/content/1906682/increase-legal-fees-will-however-be-set-legal-discounts" rel="noopener">The Edge Property: SRO 2023 legal fees</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> These are estimates, not a loan offer or financial advice. Your bank's rate, approval and fees decide the actual figures, and Budget 2027 measures are proposals until passed.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Net pay for your DSR</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Akaun Sejahtera for your down payment</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>First-home loan interest relief</small></a>
+  </div>
+</section>

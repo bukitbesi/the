@@ -18,6 +18,7 @@ const salary = require('../assets/js/salary-core.js');
 const grades = require('../assets/js/grade-core.js');
 const taxes = require('../assets/js/tax-core.js');
 const epfCore = require('../assets/js/epf-core.js');
+const loanCore = require('../assets/js/loan-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -423,7 +424,38 @@ function epfMap(lang) {
     E_VERIFIED: longDate(F.verified, lang), E_VERIFIED_ISO: F.verified
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap };
+// ---- Home loan (pinjaman perumahan), EN + BM
+const LOAN_EXAMPLE = { price: 500000, downPct: 10, rate: loanCore.FACTS.defaultRate, years: 35, firstHome: 'none' };
+function loanMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const r = loanCore.calculate(LOAN_EXAMPLE), c = r.costs, F = loanCore.FACTS;
+  const pct = n => n.toFixed(2) + '%';
+  const schedule = r.schedule.map(y => `<tr><th scope="row">${y.year}</th><td>${rm0(y.principal)}</td><td>${rm0(y.interest)}</td><td>${rm0(y.balance)}</td></tr>`).join('\n');
+  const instalments = [200000, 300000, 400000, 500000, 600000, 800000, 1000000].map(loan =>
+    `<tr><th scope="row">${rm0(loan)}</th>${[25, 30, 35].map(y => `<td>${money(loanCore.instalment(loan, F.defaultRate, y), lang)}</td>`).join('')}</tr>`).join('\n');
+  const costRows = [300000, 500000, 700000, 1000000].map(price => {
+    const loan = price * 0.9, now = loanCore.exemption('current', price, loan), next = loanCore.exemption('budget2027', price, loan);
+    return `<tr><th scope="row">${rm0(price)}</th><td>${rm0(loanCore.stampDutyTransfer(price))}</td><td>${rm0(loanCore.stampDutyLoan(loan))}</td><td>${rm0(loanCore.legalFee(price) + loanCore.legalFee(loan))}</td><td>${rm0(now.mot + now.loan)}</td><td>${rm0(next.mot + next.loan)}</td></tr>`;
+  }).join('\n');
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  return {
+    L_PRICE: LOAN_EXAMPLE.price, L_DOWN: LOAN_EXAMPLE.downPct, L_RATE: LOAN_EXAMPLE.rate, L_TENURE: LOAN_EXAMPLE.years,
+    L_FIRST_OPTIONS: [
+      opt('none', 'No (or not eligible)', 'Tidak (atau tidak layak)', true),
+      opt('current', 'Yes, up to RM500,000 (current, SPA by 2027)', 'Ya, sehingga RM500,000 (semasa, SPA hingga 2027)'),
+      opt('budget2027', 'Yes, up to RM750,000 (Budget 2027 proposal, SPA 2027–2030)', 'Ya, sehingga RM750,000 (cadangan Bajet 2027, SPA 2027–2030)')
+    ].join(''),
+    L_PAY: money(r.instalment, lang), L_LOAN: rm0(r.loan), L_TERM: r.years, L_INTEREST: rm0(r.interest), L_TOTAL: rm0(r.totalPaid),
+    L_UP25: money(r.rateUp25, lang), L_UP50: money(r.rateUp50, lang),
+    LC_DOWN: rm0(c.downPayment), LC_MOT: rm0(c.stampTransfer), LC_LOAN_DUTY: rm0(c.stampLoan), LC_LEGAL_SPA: rm0(c.legalSpa),
+    LC_LEGAL_LOAN: rm0(c.legalLoan), LC_SST: rm0(c.sst), LC_TOTAL: rm0(c.total), LC_EXEMPT: rm0(c.exempted),
+    L_SCHEDULE: schedule, L_INSTALMENTS: instalments, L_COST_ROWS: costRows,
+    L_OPR: pct(F.opr), L_DEFAULT_RATE: pct(F.defaultRate), L_OPR_SINCE: longDate(F.oprSince, lang),
+    L_VERIFIED: longDate(F.verified, lang), L_VERIFIED_ISO: F.verified
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap };
 
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
@@ -484,7 +516,8 @@ const bundles = {
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
   'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js'],
-  'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js']
+  'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js'],
+  'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
