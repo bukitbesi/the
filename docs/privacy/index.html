@@ -286,6 +286,11 @@ fieldset{border:0}
 select.input{max-width:100%;text-overflow:ellipsis}
 .prose li a{display:inline-block;padding:3px 0}
 .prose ul>li+li{margin-top:10px}
+/* EPF benchmark meter: Basic sits at 30% and Adequate at 50% of the Enhanced level. */
+.meter{position:relative;height:10px;margin:22px 0 6px;border-radius:99px;background:var(--bg2);border:1px solid var(--border)}
+.meter i{display:block;height:100%;border-radius:99px;background:var(--grad)}
+.meter span{position:absolute;top:-20px;transform:translateX(-50%);font-size:.7rem;color:var(--text3);white-space:nowrap}
+.meter span::after{content:"";position:absolute;left:50%;top:18px;width:1px;height:14px;background:var(--border2)}
 </style>
 
 </head>
@@ -367,10 +372,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <ul>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
+          <li><a href="/epf-calculator/">EPF Calculator (KWSP)</a></li>
           <li><a href="/cgpa-to-percentage/">CGPA to Percentage Calculator</a></li>
           <li><a href="/cgpa-calculator/">CGPA Calculator</a></li>
           <li><a href="https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html">JavaScript Minifier &amp; Obfuscator</a></li>
-          <li><a href="https://www.thebukitbesi.com/p/css-minifier-tool.html">CSS Minifier</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

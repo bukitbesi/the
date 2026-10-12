@@ -1,0 +1,190 @@
+<!--page
+{
+  "path": "/epf-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-kwsp/" },
+  "title": "EPF Calculator Malaysia 2026: KWSP Dividend & Retirement",
+  "description": "Free EPF calculator: project your KWSP savings to 55 or 60 with the latest 6.15% dividend, see all three accounts and check EPF retirement targets.",
+  "llms": "Projects EPF (KWSP) savings to age 55 or 60 from age, salary, yearly raise, current balances in Akaun Persaraan, Sejahtera and Fleksibel, own contribution rate and voluntary top-ups, using the KWSP Third Schedule, the 75/15/10 account split and EPF's dividend method; compares the inflation-adjusted result with EPF's Basic (RM390,000), Adequate (RM650,000) and Enhanced (RM1.3 million) benchmarks. Includes dividend history 2016–2025 (2025: 6.15%).",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "epf",
+  "scripts": ["/assets/js/epf.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["EPF Calculator", null]],
+  "about": ["Employees Provident Fund (EPF / KWSP)", "EPF dividend", "Retirement savings in Malaysia"],
+  "app": {
+    "name": "EPF Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Projection to age 55 or 60", "KWSP Third Schedule contributions with yearly raises", "Akaun Persaraan, Sejahtera and Fleksibel split", "Dividend presets: latest, 10-year average, conservative or custom", "Inflation-adjusted comparison with EPF retirement benchmarks", "Year-by-year table", "Works offline"]
+  },
+  "citations": [
+    ["Malay Mail: EPF announces 6.15% dividend for 2025", "https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707"],
+    ["RinggitPlus: Historical EPF dividend rates", "https://ringgitplus.com/en/guides/historical-epf-dividend-rates/"],
+    ["NST: EPF raises basic retirement income benchmark to RM390,000", "https://www.nst.com.my/amp/business/corporate/2024/12/1147195/epf-raises-basic-retirement-income-benchmark-62pct-rm390k-bttv"],
+    ["KWSP: Employer mandatory contribution", "https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution"]
+  ],
+  "faq": [
+    { "q": "What is the EPF dividend for 2025?", "a": "EPF declared 6.15% for 2025 for both conventional and Shariah savings, announced on 28 February 2026. It was slightly lower than 6.30% for 2024. The average for 2016–2025 is about 5.88% for conventional savings." },
+    { "q": "How is the EPF dividend calculated?", "a": "EPF calculates dividend on your daily balance and credits it once a year. Money that was in your account all year earns the full rate, while each monthly contribution earns only for the part of the year after it arrived. For example, RM100,000 held all year at 6.15% earns RM6,150." },
+    { "q": "How are my contributions split between the three accounts?", "a": "Since 11 May 2024, monthly contributions go 75% to Akaun Persaraan (retirement), 15% to Akaun Sejahtera (housing, education, health and other approved withdrawals) and 10% to Akaun Fleksibel (withdraw any time). Dividend is credited to each account on its own balance." },
+    { "q": "How much EPF savings do I need to retire?", "a": "EPF's Retirement Income Adequacy framework sets three levels at age 60 in today's prices: Basic RM390,000, Adequate RM650,000 and Enhanced RM1.3 million. The Basic level phases in at RM290,000 in 2026, RM340,000 in 2027 and RM390,000 from 2028. This calculator adjusts your projection for inflation before comparing it with these levels." },
+    { "q": "How much do I and my employer contribute?", "a": "Employees under 60 contribute 11% of wages. Employers add 13% for wages up to RM5,000 and 12% above that. The amounts follow the KWSP Third Schedule wage bands, so they can be a little higher than the straight percentage." },
+    { "q": "Can I increase my EPF savings?", "a": "Yes. You can choose a higher employee contribution rate through your employer, or make voluntary top-ups yourself through the KWSP app or i-Akaun. Use the more options section to see how much a top-up adds by retirement." },
+    { "q": "Is this an official EPF statement?", "a": "No. It is a projection based on the assumptions you choose. Future dividends are not guaranteed. Check your actual balances in the KWSP app or i-Akaun." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">EPF calculator</li></ol></nav>
+  <h1>EPF Calculator Malaysia</h1>
+  <p class="answer">A 30-year-old earning <strong>RM4,000 a month</strong> with RM50,000 in EPF today could have about <strong>{{E_FINAL}} at 60</strong>, or {{E_REAL}} in today's money, assuming 3% yearly raises and the {{E_AVG}} average dividend. The latest EPF dividend is <strong>{{E_LATEST}} for {{E_LATEST_YEAR}}</strong>. Enter your own figures below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-kwsp/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="epfForm" novalidate aria-labelledby="epf-h">
+      <h2 id="epf-h">Your details</h2>
+      <div class="field"><label for="age">Your age now</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="16" max="59" step="1" value="{{E_AGE}}"></div></div>
+      <div class="field">
+        <label for="retireAge">Project savings to age</label>
+        <select class="input" id="retireAge" name="retireAge"><option value="60" selected>60 (full withdrawal age)</option><option value="55">55</option></select>
+      </div>
+      <div class="field"><label for="salary">Monthly salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="1" value="{{E_SALARY}}"></div></div>
+      <div class="field"><label for="raise">Yearly salary increase</label><div class="input"><input id="raise" name="raise" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="{{E_RAISE}}"><span aria-hidden="true">%</span></div></div>
+      <div class="field">
+        <label for="divPreset">Dividend assumption</label>
+        <select class="input" id="divPreset" name="divPreset">{{E_DIV_OPTIONS}}</select>
+      </div>
+      <div class="field" id="divCustom" hidden><label for="dividend">Your dividend rate</label><div class="input"><input id="dividend" name="dividend" type="number" inputmode="decimal" min="0" max="15" step="0.05" value="6"><span aria-hidden="true">%</span></div></div>
+      <details class="more-opts" id="epfMore">
+        <summary>Current balances and more options</summary>
+        <div class="field"><label for="persaraan">Akaun Persaraan (Account 1) now</label><div class="input"><span aria-hidden="true">RM</span><input id="persaraan" name="persaraan" type="number" inputmode="decimal" min="0" step="1" value="{{E_PERSARAAN}}"></div></div>
+        <div class="field"><label for="sejahtera">Akaun Sejahtera (Account 2) now</label><div class="input"><span aria-hidden="true">RM</span><input id="sejahtera" name="sejahtera" type="number" inputmode="decimal" min="0" step="1" value="{{E_SEJAHTERA}}"></div></div>
+        <div class="field"><label for="fleksibel">Akaun Fleksibel (Account 3) now</label><div class="input"><span aria-hidden="true">RM</span><input id="fleksibel" name="fleksibel" type="number" inputmode="decimal" min="0" step="1" value="{{E_FLEKSIBEL}}"></div></div>
+        <div class="field"><label for="ownRate">Your contribution rate</label><div class="input"><input id="ownRate" name="ownRate" type="number" inputmode="decimal" min="11" max="40" step="1" value="11"><span aria-hidden="true">%</span></div><p class="help">11% is the statutory rate. You can elect a higher rate through your employer.</p></div>
+        <div class="field"><label for="topUp">Voluntary top-up each month</label><div class="input"><span aria-hidden="true">RM</span><input id="topUp" name="topUp" type="number" inputmode="decimal" min="0" step="10" value="0"></div></div>
+        <div class="field"><label for="inflation">Inflation, for today's-money values</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" max="10" step="0.5" value="{{E_INFLATION}}"><span aria-hidden="true">%</span></div></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="epf-result-h">
+      <h2 id="epf-result-h">Your EPF at <span id="eAge">{{E_RETIRE}}</span></h2>
+      <div class="net">
+        <p>Projected savings</p>
+        <output id="eFinal" for="salary">{{E_FINAL}}</output>
+        <p><strong id="eReal">{{E_REAL}}</strong> in today's money · <span id="eMonthly">{{E_MONTHLY}}</span> a month over 20 years (<span id="eRealMonthly">{{E_REAL_MONTHLY}}</span> today)</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <div class="meter" aria-hidden="true"><i id="eBar" style="width:{{E_BAR}}"></i><span style="left:30%">Basic</span><span style="left:50%">Adequate</span></div>
+      <p class="note" id="eTier">{{E_TIER}}</p>
+      <table class="rows">
+        <caption>By account</caption>
+        <tbody>
+          <tr><th scope="row">Akaun Persaraan (75%)</th><td id="ePersaraan">{{E_P}}</td></tr>
+          <tr><th scope="row">Akaun Sejahtera (15%)</th><td id="eSejahtera">{{E_S}}</td></tr>
+          <tr><th scope="row">Akaun Fleksibel (10%)</th><td id="eFleksibel">{{E_F}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Where it comes from</caption>
+        <tbody>
+          <tr><th scope="row">Balance today</th><td id="eStart">{{E_START}}</td></tr>
+          <tr><th scope="row">Your contributions</th><td id="eEmployee">{{E_EMPLOYEE}}</td></tr>
+          <tr><th scope="row">Employer contributions</th><td id="eEmployer">{{E_EMPLOYER}}</td></tr>
+          <tr id="rowTopUp" hidden><th scope="row">Voluntary top-ups</th><td id="eTopUp">{{E_TOPUP}}</td></tr>
+          <tr class="total"><th scope="row">Dividends</th><td id="eDividend">{{E_DIVIDEND}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Dividend in your first year: <strong id="eFirstDiv">{{E_FIRSTDIV}}</strong></p>
+      <details class="more-opts">
+        <summary>Year-by-year projection</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Year-by-year projection">
+          <table class="data"><thead><tr><th scope="col">Age</th><th scope="col">Salary</th><th scope="col">Contributions</th><th scope="col">Dividend</th><th scope="col">Balance</th></tr></thead><tbody id="eYears">{{E_YEARS}}</tbody></table>
+        </div>
+      </details>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="epfPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How the EPF dividend is calculated</h2>
+  <p>EPF works out dividend on your <strong>daily balance</strong> and credits it once a year, after the rate is announced (usually in February or March).</p>
+  <ul>
+    <li>Money that stays in your account the whole year earns the full rate: RM100,000 at {{E_LATEST}} earns RM6,150.</li>
+    <li>Each month's contribution earns only for the rest of the year. January's contribution earns about eleven months, December's almost nothing until the next year.</li>
+    <li>Dividend is credited to Akaun Persaraan, Sejahtera and Fleksibel on each account's own balance.</li>
+  </ul>
+  <p>This calculator follows the same method month by month, then repeats it for every year until your chosen age, raising your salary each year.</p>
+
+  <h2 id="history">EPF dividend history</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history">
+    <table class="data">
+      <thead><tr><th scope="col">Year</th><th scope="col">Conventional</th><th scope="col">Shariah</th></tr></thead>
+      <tbody>
+{{E_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+  <p>The ten-year average for conventional savings is {{E_AVG}}. Past dividends do not guarantee future rates.</p>
+
+  <h2 id="accounts">Akaun Persaraan, Sejahtera and Fleksibel</h2>
+  <p>Since 11 May 2024, every monthly contribution is split three ways:</p>
+  <ul>
+    <li><strong>Akaun Persaraan (75%)</strong> for retirement, withdrawable from age 55.</li>
+    <li><strong>Akaun Sejahtera (15%)</strong> for approved withdrawals such as housing, education and health.</li>
+    <li><strong>Akaun Fleksibel (10%)</strong> that you can withdraw at any time.</li>
+  </ul>
+  <p>On RM1,000 of total monthly contributions, RM750 goes to Persaraan, RM150 to Sejahtera and RM100 to Fleksibel. Withdrawing from Fleksibel reduces both your balance and the dividend it would have earned.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="targets">How much EPF do you need to retire?</h2>
+  <p>EPF's Retirement Income Adequacy framework sets three savings levels at age 60, in today's prices:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="targets">
+    <table class="data text">
+      <thead><tr><th scope="col">Level</th><th scope="col">Savings at 60</th><th scope="col">What it supports</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Basic</th><td>RM390,000</td><td>Essential needs; RM290,000 in 2026 and RM340,000 in 2027 while it phases in</td></tr>
+        <tr><th scope="row">Adequate</th><td>RM650,000</td><td>A reasonable standard of living</td></tr>
+        <tr><th scope="row">Enhanced</th><td>RM1,300,000</td><td>Greater financial security and independence</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="examples-h">EPF savings by salary</h2>
+  <p>Starting at age 25 with no savings, 3% yearly raises, the {{E_AVG}} average dividend and statutory contributions. Figures are in future ringgit.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Starting salary</th><th scope="col">At 55</th><th scope="col">At 60</th><th scope="col">Monthly over 20 years</th></tr></thead>
+      <tbody>
+{{E_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707" rel="noopener">Malay Mail: EPF announces 6.15% dividend for 2025</a></li>
+    <li><a href="https://ringgitplus.com/en/guides/historical-epf-dividend-rates/" rel="noopener">RinggitPlus: historical EPF dividend rates</a></li>
+    <li><a href="https://www.nst.com.my/amp/business/corporate/2024/12/1147195/epf-raises-basic-retirement-income-benchmark-62pct-rm390k-bttv" rel="noopener">NST: EPF raises basic retirement benchmark to RM390,000</a></li>
+    <li><a href="https://www.kwsp.gov.my/en/employer/responsibilities/mandatory-contribution" rel="noopener">KWSP: contribution rates</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> This is a projection, not an EPF statement or financial advice. Future dividends, salaries and inflation are assumptions. Check your actual balances in the KWSP app or i-Akaun.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Monthly EPF, SOCSO and PCB</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>YA2026 tax and EPF relief</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free calculators and utilities</small></a>
+  </div>
+</section>
