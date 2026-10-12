@@ -8,32 +8,9 @@ Bahasa Melayu page, which links to the English one with hreflang:
 | --- | --- |
 | `/p/semak-tracking-semua-kurier-di-malaysia.html` | `https://tool.thebukitbesi.com/semak-tracking-parcel/` |
 
-Blogger cannot send a server-side 301 to another host. An instant meta refresh is the
-closest equivalent; Google treats a zero-second meta refresh as a permanent redirect.
-
-## Steps
-
-1. **Blogger → Theme → ⋮ → Backup** (download a copy first).
-2. **Theme → Customise → Edit HTML.** Find `<head>` and paste this directly after it:
-
-```xml
-<b:if cond='data:blog.canonicalUrl == "https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html"'>
-<meta content='0; url=https://tool.thebukitbesi.com/semak-tracking-parcel/' http-equiv='refresh'/>
-<script>location.replace("https://tool.thebukitbesi.com/semak-tracking-parcel/");</script>
-</b:if>
-```
-
-   `canonicalUrl` ignores `?m=1`, so the mobile version redirects too. No other page is affected.
-3. **Save**, then open the old URL in a private window: it should land on the new page at once.
-4. **Edit the old page itself** (Pages → the tracking page) and replace its body with one line,
-   for visitors whose browser blocks the refresh:
-   `Alat ini telah dipindahkan: <a href="https://tool.thebukitbesi.com/semak-tracking-parcel/">Semak Tracking Parcel</a>.`
-   Keep the page published; deleting it would turn old links into 404s.
-5. **Search Console** (property `thebukitbesi.com`): URL Inspection → the old URL → Request indexing.
-   Then in the `tool.thebukitbesi.com` property, request indexing for
-   `/parcel-tracking-malaysia/` and `/semak-tracking-parcel/`.
-6. Replace any internal links on the blog (menus, sidebar, posts) that point to the old URL with
-   the new one, so link equity no longer depends on the redirect.
+The redirect is part of the generated block for all moved tools: see
+[blogger-redirects.md](blogger-redirects.md). Its Blogger URL is set by `"bloggerFrom"` on
+`tools-src/pages/semak-tracking-parcel.html`.
 
 ## After deployment: click-test courier links
 

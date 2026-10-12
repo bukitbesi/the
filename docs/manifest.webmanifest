@@ -108,6 +108,11 @@
       "description": "Free Malaysia income tax calculator for YA2026 with all LHDN reliefs, rebates, zakat and a PCB refun"
     },
     {
+      "name": "JavaScript Minifier & Obfuscator",
+      "url": "/javascript-minifier/",
+      "description": "Free JavaScript minifier and obfuscator powered by Terser. Compress JS, remove console logs, create "
+    },
+    {
       "name": "J&T Near Me",
       "url": "/jnt-near-me/",
       "description": "Find the nearest J&T Express drop point with one tap, check if it is open now, and see what to bring"

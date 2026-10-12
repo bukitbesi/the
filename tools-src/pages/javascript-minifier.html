@@ -1,0 +1,226 @@
+<!--page
+{
+  "path": "/javascript-minifier/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "JavaScript Minifier & Obfuscator: Minify JS Online Free",
+  "description": "Free JavaScript minifier and obfuscator powered by Terser. Compress JS, remove console logs, create source maps or obfuscate code, all in your browser.",
+  "llms": "Minifies JavaScript with Terser 5 (the minifier used by webpack and Vite) in a Web Worker in the browser: compression passes, variable renaming, top-level renaming, ES module mode, drop console/debugger, keep licence comments, keep function and class names, output ECMAScript level, source maps. Also obfuscates with javascript-obfuscator (low, medium, high presets; optional domain lock) and beautifies minified code. Can wrap output in a CDATA script block for Blogger XML themes. Reports syntax errors with line and column. On jQuery 3.7.1 it produces 86,987 bytes against the official 87,533-byte jquery.min.js. Code is never uploaded.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html",
+  "render": "js",
+  "shareTitle": "Share this JavaScript minifier",
+  "scripts": ["/assets/js/js-minifier.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["JavaScript Minifier", null]],
+  "about": ["Minification (programming)", "JavaScript", "Obfuscation (software)", "Source map", "Web performance"],
+  "app": {
+    "name": "JavaScript Minifier & Obfuscator",
+    "category": "DeveloperApplication",
+    "features": ["Terser 5 compression and variable renaming", "Obfuscation with low, medium and high presets", "Optional domain lock for obfuscated code", "Remove console and debugger statements", "Keep licence comments, function and class names", "ES module mode and output ECMAScript level", "Source map download", "Beautify (unminify) mode", "Wrap output for Blogger XML themes", "Syntax errors with line and column", "Runs in a Web Worker; code never leaves the browser"]
+  },
+  "citations": [
+    ["Terser: JavaScript mangler and compressor", "https://terser.org/"],
+    ["javascript-obfuscator", "https://github.com/javascript-obfuscator/javascript-obfuscator"],
+    ["MDN: Minification", "https://developer.mozilla.org/en-US/docs/Glossary/Minification"],
+    ["Chrome for Developers: Minify JavaScript (Lighthouse audit)", "https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript"]
+  ],
+  "faq": [
+    { "q": "What does a JavaScript minifier do?", "a": "A JavaScript minifier makes a script smaller without changing what it does. It removes comments and whitespace, renames local variables to single letters, calculates constant expressions in advance, removes code that can never run, and rewrites statements into shorter equivalents. This tool uses Terser, the same minifier webpack and Vite use for production builds." },
+    { "q": "What is the difference between minifying and obfuscating JavaScript?", "a": "Minifying makes code as small and fast as possible; the result is hard to read but can be reformatted with a beautifier. Obfuscating deliberately makes code hard to understand by encoding strings, scrambling control flow and adding self-defending code. Obfuscated code is usually larger and slower than minified code, so use it only when hiding logic matters more than speed." },
+    { "q": "Is obfuscated JavaScript secure?", "a": "No. Obfuscation slows down someone reading or copying your code, but any code that runs in a browser can be reversed with enough effort. Never put passwords, API secrets or private keys in front-end JavaScript, obfuscated or not. Keep secrets on a server." },
+    { "q": "Will minifying break my JavaScript?", "a": "Not with the default options, as long as the original code is valid. Terser only applies transformations that keep behaviour the same. Two options need care: Rename top-level names breaks other scripts that call your global functions by name, and Remove console.* calls deletes logging you may rely on. If the result misbehaves, turn those off first." },
+    { "q": "Does minifying JavaScript help Core Web Vitals?", "a": "Yes. Smaller scripts download and parse faster, which helps Largest Contentful Paint when scripts block rendering and Interaction to Next Paint on slower phones. Lighthouse lists unminified scripts under Minify JavaScript. Minify, then load non-essential scripts with defer or async for the biggest gain." },
+    { "q": "How do I add minified JavaScript to Blogger?", "a": "In Theme, Edit HTML, tick Wrap for Blogger XML so the output comes inside a script tag with a CDATA section, then paste it just before the closing body tag. Blogger themes are XML, so a raw less-than sign or && in minified code would otherwise stop the theme from saving. In an HTML/JavaScript gadget you can paste a normal script tag without CDATA." },
+    { "q": "Is my code uploaded to a server?", "a": "No. Terser and the obfuscator are downloaded once and run in a Web Worker inside your browser, so your code never leaves your device. After the first use, the minifier also works offline." },
+    { "q": "Can I unminify JavaScript?", "a": "Partly. Choose Beautify to restore line breaks and indentation so the code is readable again. Original comments and the original names of renamed local variables cannot be recovered, because the minifier removed them. A source map, if you saved one when minifying, maps the minified code back to the original in browser developer tools." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">JavaScript Minifier</li></ol></nav>
+  <h1>JavaScript Minifier &amp; Obfuscator</h1>
+  <p class="answer">A <strong>JavaScript minifier shrinks a script without changing what it does</strong>: it removes comments and whitespace, renames local variables and rewrites code into shorter equivalents. This one runs <strong>Terser</strong>, the minifier behind webpack and Vite, in your browser. The example below drops from {{JS_BEFORE}} to {{JS_AFTER}} bytes, <strong>{{JS_PCT}}% smaller</strong>. Switch to Obfuscate to make code hard to read, or Beautify to make minified code readable again.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is uploaded</span><a href="#options">What each option does</a></p>
+
+  <form class="box code-tool" id="jsForm" novalidate aria-labelledby="js-h" data-worker="/assets/js/js-minifier-worker.js">
+    <h2 id="js-h" class="sr-only">Minify JavaScript</h2>
+    <div class="code-opts">
+      <fieldset class="seg seg3" aria-label="Mode">
+        <label><input type="radio" name="mode" value="minify" checked> Minify</label>
+        <label><input type="radio" name="mode" value="obfuscate"> Obfuscate</label>
+        <label><input type="radio" name="mode" value="beautify"> Beautify</label>
+      </fieldset>
+      <label class="check"><input type="checkbox" name="mangle" checked> <span>Rename local variables</span></label>
+      <label class="check"><input type="checkbox" name="toplevel"> <span>Rename top-level names</span></label>
+      <label class="check"><input type="checkbox" name="dropConsole"> <span>Remove <code>console.*</code> calls</span></label>
+      <label class="check"><input type="checkbox" name="dropDebugger" checked> <span>Remove <code>debugger</code></span></label>
+      <label class="check"><input type="checkbox" name="comments" checked> <span>Keep <code>/*!</code> licence comments</span></label>
+      <label class="check"><input type="checkbox" name="blogger"> <span>Wrap for Blogger XML</span></label>
+    </div>
+    <fieldset class="obf-opts" id="jsObf" hidden>
+      <legend>Obfuscation</legend>
+      <div class="field">
+        <label for="jsLevel">Strength</label>
+        <select class="input" id="jsLevel" name="level">
+          <option value="low" selected>Low: hides names, keeps speed</option>
+          <option value="medium">Medium: encodes strings, larger</option>
+          <option value="high">High: strongest, much larger and slower</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="jsDomains">Lock to domains <small>(optional)</small></label>
+        <div class="input"><input id="jsDomains" name="domains" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="www.example.com, .blogspot.com" aria-describedby="jsDomainsHelp"></div>
+        <p class="help" id="jsDomainsHelp">The code stops running on any other site. Start with a dot to include subdomains.</p>
+      </div>
+    </fieldset>
+    <details class="more-opts">
+      <summary>Advanced options</summary>
+      <div class="adv-grid">
+        <div class="field">
+          <label for="jsEcma">Output may use syntax up to</label>
+          <select class="input" id="jsEcma" name="ecma">
+            <option value="5">ES5 (very old browsers)</option>
+            <option value="2015" selected>ES2015 (all current browsers)</option>
+            <option value="2020">ES2020</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="jsPasses">Compression passes</label>
+          <select class="input" id="jsPasses" name="passes">
+            <option value="1">1 (fastest)</option>
+            <option value="2" selected>2 (recommended)</option>
+            <option value="3">3 (smallest)</option>
+          </select>
+        </div>
+        <label class="check"><input type="checkbox" name="module"> <span>ES module (<code>import</code>/<code>export</code>)</span></label>
+        <label class="check"><input type="checkbox" name="keepNames"> <span>Keep function and class names</span></label>
+        <label class="check"><input type="checkbox" name="sourceMap"> <span>Create a source map</span></label>
+      </div>
+    </details>
+    <div class="code-panes">
+      <div class="field">
+        <label for="jsIn">Your JavaScript</label>
+        <textarea class="code" id="jsIn" name="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="jsHelp">{{JS_IN}}</textarea>
+        <p class="help" id="jsHelp">Paste, type, or drop a .js file here. Ctrl+Enter runs it.</p>
+        <div class="tool-actions" id="jsInActions">
+          <button type="submit" class="btn sm" id="jsGo">Minify JavaScript</button>
+          <label class="btn ghost sm file-btn">Upload .js<input type="file" id="jsFile" accept=".js,.mjs,.cjs,text/javascript" class="sr-only"></label>
+          <button type="button" class="btn ghost sm" id="jsSample">Sample</button>
+          <button type="button" class="btn ghost sm" id="jsClear">Clear</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="jsOut" id="jsOutLabel">Minified JavaScript</label>
+        <textarea class="code" id="jsOut" readonly spellcheck="false" aria-describedby="jsStats">{{JS_OUT}}</textarea>
+        <p class="code-stats" id="jsStats">{{JS_STATS}}</p>
+        <div class="error code-err" id="jsErr" role="alert" hidden><span id="jsErrText"></span> <button type="button" class="link-btn" id="jsJump">Show in code</button></div>
+        <p class="error" id="jsCdata" hidden>The output contains <code>]]&gt;</code>, which ends a CDATA section. Load this script from a separate file instead of pasting it into the theme.</p>
+        <div class="tool-actions" id="jsOutActions">
+          <button type="button" class="btn sm" id="jsCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="jsDownload">Download</button>
+          <button type="button" class="btn ghost sm" id="jsMap" hidden>Source map</button>
+        </div>
+      </div>
+    </div>
+    <p class="sr-only" id="jsLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to minify JavaScript</h2>
+  <ol>
+    <li><strong>Paste your code</strong> into the left box, upload a .js file, or drop the file onto the box.</li>
+    <li><strong>Pick a mode.</strong> Minify for the smallest, fastest file; Obfuscate to hide your logic; Beautify to read minified code.</li>
+    <li><strong>Check the options.</strong> The defaults are safe for any script. If other scripts or inline <code>onclick</code> attributes call your functions, leave "Rename top-level names" off.</li>
+    <li><strong>Copy or download</strong> the result, and keep the original file for editing. Syntax errors show the line and column; select "Show in code" to jump there.</li>
+  </ol>
+
+  <h2 id="examples">What the minifier changes</h2>
+  <p>Every example below is produced by the same Terser build that runs in the tool, with the default options.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-cap">
+    <table class="data text"><caption id="examples-cap">Terser transformations with before and after</caption>
+      <thead><tr><th scope="col">Transformation</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+      <tbody>
+{{JS_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="options">What each option does</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="options-cap">
+    <table class="data text"><caption id="options-cap">Minifier options</caption>
+      <thead><tr><th scope="col">Option</th><th scope="col">Default</th><th scope="col">What it does and when to change it</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Rename local variables</th><td>On</td><td>Shortens names inside functions, the biggest single saving. Turn off only to debug the output.</td></tr>
+        <tr><th scope="row">Rename top-level names</th><td>Off</td><td>Also renames global functions and variables, and inlines them where possible. Safe only when no other script, inline handler or HTML attribute calls them by name.</td></tr>
+        <tr><th scope="row">Remove console.* calls</th><td>Off</td><td>Deletes logging for production. In Obfuscate mode it also silences the console, which the obfuscator otherwise does by default.</td></tr>
+        <tr><th scope="row">Remove debugger</th><td>On</td><td>Removes breakpoints left in the code.</td></tr>
+        <tr><th scope="row">Keep licence comments</th><td>On</td><td>Keeps comments that start with <code>/*!</code> or contain <code>@license</code> or <code>@preserve</code>, which many open-source licences require.</td></tr>
+        <tr><th scope="row">Wrap for Blogger XML</th><td>Off</td><td>Puts the output inside <code>&lt;script&gt;//&lt;![CDATA[ … //]]&gt;&lt;/script&gt;</code> so it can be pasted into a Blogger theme.</td></tr>
+        <tr><th scope="row">Output syntax level</th><td>ES2015</td><td>Lets Terser use newer, shorter syntax. It does not convert modern code for old browsers; use a transpiler such as Babel for that.</td></tr>
+        <tr><th scope="row">Compression passes</th><td>2</td><td>Each extra pass can find more savings, at the cost of time on large files.</td></tr>
+        <tr><th scope="row">ES module</th><td>Off</td><td>For files that use <code>import</code> or <code>export</code>. Enables strict mode and top-level renaming, which is always safe inside a module.</td></tr>
+        <tr><th scope="row">Keep function and class names</th><td>Off</td><td>Needed when code reads <code>fn.name</code> or <code>constructor.name</code>, for example some frameworks and error reporting.</td></tr>
+        <tr><th scope="row">Create a source map</th><td>Off</td><td>Adds a <code>.map</code> download so browser developer tools can show your original code when debugging the minified file.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="compare">Minify vs uglify vs obfuscate</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-cap">
+    <table class="data text"><caption id="compare-cap">Comparison</caption>
+      <thead><tr><th scope="col">Feature</th><th scope="col">Minify</th><th scope="col">Obfuscate</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Goal</th><td>Smallest, fastest file</td><td>Code that is hard to understand</td></tr>
+        <tr><th scope="row">File size</th><td>Much smaller</td><td>Larger than minified, often larger than the original</td></tr>
+        <tr><th scope="row">Speed</th><td>Same or faster</td><td>Slower, especially at high strength</td></tr>
+        <tr><th scope="row">Readable after Beautify?</th><td>Mostly (local names are lost)</td><td>No</td></tr>
+        <tr><th scope="row">Use it for</th><td>Every production script</td><td>Paid widgets, licence checks, logic you do not want copied easily</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>"Uglify" is the older name for minifying, after UglifyJS. Terser is its maintained successor and supports modern JavaScript, so "uglify JS" and "minify JS" mean the same thing here.</p>
+  <p>Obfuscation costs size. The sample script above is {{JS_BEFORE}} bytes; obfuscated it becomes {{JS_OBF_LOW}} bytes at low, {{JS_OBF_MEDIUM}} at medium and {{JS_OBF_HIGH}} at high strength. Obfuscation is not encryption: never put passwords or API secrets in browser code.</p>
+
+  <h2 id="benchmarks">Benchmarks: jQuery and Lodash</h2>
+  <p>Default options (Terser 5.51.2, two passes), compared with each project's official minified file:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bench-cap">
+    <table class="data"><caption id="bench-cap">Bytes, smaller is better</caption>
+      <thead><tr><th scope="col">Library</th><th scope="col">Original</th><th scope="col">Official .min.js</th><th scope="col">This tool</th><th scope="col">This tool, gzip</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">jQuery 3.7.1</th><td>285,314</td><td>87,533</td><td>86,987</td><td>30,354</td></tr>
+        <tr><th scope="row">Lodash 4.17.21</th><td>544,098</td><td>73,015</td><td>70,587</td><td>25,312</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The minified Lodash was run against the original on chunking, templates, deep merge, sorting, string case and deep equality, with identical results. Each library took about 1.2 seconds on a laptop; the work runs in a background worker, so the page stays responsive.</p>
+
+  <h2 id="platforms">Using minified JavaScript on Blogger and WordPress</h2>
+  <h3>Blogger</h3>
+  <p>Blogger themes are XML, so minified code containing <code>&lt;</code> or <code>&amp;&amp;</code> stops the theme from saving. Tick <strong>Wrap for Blogger XML</strong>, copy the result and paste it in <strong>Theme → Edit HTML</strong> just before <code>&lt;/body&gt;</code>. In a <strong>Layout → HTML/JavaScript</strong> gadget, paste a normal <code>&lt;script&gt;</code> block instead: gadgets are not parsed as XML.</p>
+  <h3>WordPress</h3>
+  <p>Upload the file to your child theme and load it with <code>wp_enqueue_script()</code> using the <code>defer</code> strategy, or paste the script into a header and footer plugin. If a caching or optimisation plugin already minifies JavaScript, do not minify the same file twice; turn one of them off.</p>
+  <div class="callout"><p><strong>Tip:</strong> minify, then add <code>defer</code> to scripts that do not need to run before the page appears. Check <a href="https://pagespeed.web.dev/" rel="noopener">PageSpeed Insights</a> before and after.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/css-minifier/">CSS Minifier<small>Minify or beautify CSS</small></a>
+    <a href="{{MAIN_SITE}}/p/html-beautifier-online.html">HTML Beautifier &amp; Minifier<small>Format or compress HTML</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free developer tools and calculators</small></a>
+  </div>
+  <p class="note">Built with <a href="https://terser.org/" rel="noopener">Terser</a> and <a href="https://github.com/javascript-obfuscator/javascript-obfuscator" rel="noopener">javascript-obfuscator</a> (BSD-2-Clause). <a href="/assets/vendor/LICENSES.txt">Licences</a>.</p>
+</section>
+</div>

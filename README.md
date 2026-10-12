@@ -90,6 +90,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/citylink-tracking/](https://tool.thebukitbesi.com/citylink-tracking/) + [/semak-tracking-citylink/](https://tool.thebukitbesi.com/semak-tracking-citylink/) | English + BM | citylink tracking parcel; semak tracking city-link |
 | [/jnt-near-me/](https://tool.thebukitbesi.com/jnt-near-me/) + [/jnt-terdekat/](https://tool.thebukitbesi.com/jnt-terdekat/) | English + BM | j&t near me, j&t near me drop off / open now; j&t terdekat |
 | [/css-minifier/](https://tool.thebukitbesi.com/css-minifier/) | English | css minifier, minify css online, css compressor, css beautifier / unminify |
+| [/javascript-minifier/](https://tool.thebukitbesi.com/javascript-minifier/) | English | javascript minifier, minify js online, javascript obfuscator, uglify js, js beautifier |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
 | [/ninja-van-near-me/](https://tool.thebukitbesi.com/ninja-van-near-me/) + [/ninja-van-terdekat/](https://tool.thebukitbesi.com/ninja-van-terdekat/) | English + BM | ninja van near me, ninja van near me drop off; ninja van terdekat |
 
@@ -107,9 +108,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
 
-**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
+**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect guide](documentation/blogger-redirects.md) and the [courier link checks](documentation/blogger-redirect-parcel-tracking.md).
 
-**CSS Minifier:** `css-core.js` tokenizes CSS (strings, url(), comments) before changing anything and is tested in `tools-src/tests/css.test.mjs`; every before/after example on the page is generated from it at build time. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-css-minifier.md).
+**CSS Minifier:** `css-core.js` tokenizes CSS (strings, url(), comments) before changing anything and is tested in `tools-src/tests/css.test.mjs`; every before/after example on the page is generated from it at build time. The old Blogger page redirects here.
+
+**JavaScript Minifier:** `js-core.js` maps the page options to [Terser](https://terser.org/) and [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator), which are vendored in `assets/vendor/` (licences in `assets/vendor/LICENSES.txt`) and run in a Web Worker loaded on first use, so the page itself ships no minifier code. The service worker caches them on first use (`LAZY` in `assets/PWA/sw.js`). The build and `tools-src/tests/js.test.mjs` load the same files, so the examples and obfuscation sizes on the page are real output. To update Terser, bundle it with its dependencies and keep the version in the file name:
+`echo "import { minify } from 'terser'; globalThis.Terser = { minify };" > entry.mjs && npx esbuild entry.mjs --bundle --format=iife --platform=browser --target=es2019 --minify --legal-comments=none --outfile=terser-X.Y.Z.js`, add the one-line licence header, update `VENDOR` in `js-core.js` and the licence texts, then rebuild and run the tests.
+
+**Moving a Blogger tool here:** set `"bloggerFrom"` to the old URL in the page front matter. The build writes one redirect block for every moved page to `documentation/blogger-redirects.xml`; paste it into the theme as described in [the redirect guide](documentation/blogger-redirects.md).
 
 **Share buttons:** every page with an `app` block gets a share bar (WhatsApp, Telegram, Facebook, X, copy link, device share sheet) before the bottom ad, and a "Share result" button in its `.tool-actions`. Plain links and one small inline script; no third-party code.
 
@@ -145,6 +151,8 @@ assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 se
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)
+assets/js/js-core.js        JavaScript minifier options and runner (Terser / javascript-obfuscator), shared by page, worker, build and tests
+assets/vendor/              Terser and javascript-obfuscator builds with their licences (loaded on demand)
 assets/PWA/sw.js            service-worker source template
 ```
 

@@ -351,6 +351,23 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .file-btn:focus-within{outline:3px solid var(--tint-b);outline-offset:2px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .check code{font-size:.85em}
+/* JavaScript minifier: three modes, obfuscation and advanced options, error with jump link. */
+.seg.seg3{grid-template-columns:repeat(3,1fr);min-width:0;width:min(100%,360px)}
+.obf-opts{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0 20px;margin:0 0 6px;padding:14px 16px 0;border:1px solid var(--tint-b);border-radius:var(--r);background:var(--tint)}
+.obf-opts legend{font-weight:700;font-size:.92rem;padding:0 6px}
+.obf-opts[hidden]{display:none}
+@media(min-width:720px){.obf-opts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.field label small{font-weight:400;color:var(--text3)}
+.code-tool .more-opts{margin:0 0 14px}
+.adv-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:4px 20px;align-items:center}
+@media(min-width:720px){.adv-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.adv-grid .check{min-height:44px;align-items:center}
+.check input:disabled+span{opacity:.55}
+.link-btn{min-height:44px;padding:0 4px;font:inherit;font-weight:700;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.code-err{display:flex;flex-wrap:wrap;align-items:center;gap:0 6px}
+.code-tool.is-busy #jsOut{opacity:.6}
+.data code{white-space:pre-wrap}
+@media(max-width:360px){.code-tool{padding:16px}.seg.seg3 label{gap:5px;font-size:.8rem}.seg.seg3 input{margin:0}}
 </style>
 
 </head>
@@ -562,12 +579,12 @@ select.input{max-width:100%;text-overflow:ellipsis}
       <nav aria-label="Popular tools">
         <h2>Popular tools</h2>
         <ul>
+          <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
           <li><a href="/css-minifier/">CSS Minifier</a></li>
           <li><a href="/parcel-tracking-malaysia/">Parcel Tracking Malaysia</a></li>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
           <li><a href="/car-loan-calculator-malaysia/">Car Loan Calculator Malaysia</a></li>
-          <li><a href="/home-loan-calculator-malaysia/">Home Loan Calculator Malaysia</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">
