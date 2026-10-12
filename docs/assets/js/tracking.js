@@ -28,7 +28,7 @@ format: ['Often MY + 11 digits', 'Selalunya MY + 11 digit'], example: 'MY1234567
 tests: [[/^MY\d{11}$/, 1]] },
 { id: 'citylink', name: 'City-Link Express', short: 'City-Link', site: 'https://www.citylinkexpress.com/',
 home: 'https://www.citylinkexpress.com/tracking-result/', track: 'https://www.citylinkexpress.com/tracking-result/?track0={n}',
-format: ['Digits printed on the consignment note', 'Digit pada nota konsainan'], example: '',
+format: ['Often 15 letters and digits', 'Selalunya 15 huruf dan digit'], example: '',
 tests: [] },
 { id: 'flash', name: 'Flash Express', short: 'Flash', site: 'https://www.flashexpress.my/',
 home: 'https://www.flashexpress.my/fle/tracking', track: 'https://www.flashexpress.my/fle/tracking?se={n}',
@@ -95,11 +95,16 @@ var ms = document.documentElement.lang === 'ms';
 var $ = function (id) { return document.getElementById(id); };
 var input = $('trackNo'), out = $('trackMatches'), msg = $('trackMsg'), live = $('trackLive');
 var STORE = 'tbb-parcels', MAX = 10;
+var preset = K.byId[form.getAttribute('data-courier')] || null;
+var current = '', yqState = '';
 var T = ms ? {
 invalid: 'Masukkan nombor tracking 8–30 huruf atau digit.',
 found: function (n, c) { return 'Nombor ' + n + ' sepadan dengan format ' + c + '.'; },
 unknown: function (n) { return 'Format ' + n + ' tidak dikenali. Pilih kurier anda di bawah atau guna 17TRACK.'; },
-level: { 3: 'Padanan tepat', 2: 'Kemungkinan besar', 1: 'Mungkin' },
+level: { 3: 'Padanan tepat', 2: 'Kemungkinan besar', 1: 'Mungkin', 0: 'Kurier dipilih' },
+preset: function (n, c) { return 'Semak ' + n + ' di laman rasmi ' + c + '.'; },
+other: function (n, a, b) { return n + ' kelihatan seperti nombor ' + a + ', bukan ' + b + '. Semak di ' + a + ' dahulu.'; },
+statusFail: 'Paparan status tidak dapat dimuatkan. Guna pautan kurier di atas.',
 track: function (c) { return 'Semak di ' + c; },
 any: 'Semak di 17TRACK (semua kurier)',
 copied: 'Nombor disalin. Tampal jika laman kurier memintanya.',
@@ -109,7 +114,10 @@ again: function (n) { return 'Semak semula ' + n; }
 invalid: 'Enter a tracking number of 8–30 letters or digits.',
 found: function (n, c) { return n + ' matches the ' + c + ' format.'; },
 unknown: function (n) { return 'The format of ' + n + ' is not recognised. Choose your courier below or use 17TRACK.'; },
-level: { 3: 'Exact match', 2: 'Likely', 1: 'Possible' },
+level: { 3: 'Exact match', 2: 'Likely', 1: 'Possible', 0: 'Selected courier' },
+preset: function (n, c) { return 'Track ' + n + ' on ' + c + "'s official page."; },
+other: function (n, a, b) { return n + ' matches the ' + a + ' format, not ' + b + '. Try ' + a + ' first.'; },
+statusFail: 'The status viewer could not load. Use the courier link above.',
 track: function (c) { return 'Track on ' + c; },
 any: 'Track on 17TRACK (all couriers)',
 copied: 'Number copied. Paste it if the courier page asks.',
@@ -130,11 +138,19 @@ out.textContent = '';
 if (!K.isValid(n)) {
 msg.textContent = T.invalid; msg.className = 'error'; live.textContent = T.invalid;
 input.setAttribute('aria-invalid', 'true');
+$('statusWrap').hidden = true; current = '';
 return;
 }
 input.removeAttribute('aria-invalid');
 input.value = n;
-var matches = K.detect(n);
+var matches = K.detect(n), note = '';
+if (preset) {
+var at = -1;
+matches.forEach(function (m, i) { if (m.id === preset.id) at = i; });
+if (at > 0) matches.unshift(matches.splice(at, 1)[0]);
+else if (at < 0 && matches.length && matches[0].score === 3) { note = T.other(n, matches[0].courier.short, preset.short); matches.push({ id: preset.id, courier: preset, score: 0 }); }
+else if (at < 0) { note = T.preset(n, preset.short); matches.unshift({ id: preset.id, courier: preset, score: 0 }); }
+}
 matches.forEach(function (m) {
 var li = document.createElement('li'), head = document.createElement('p'), tag = document.createElement('span');
 li.className = 'match s' + m.score;
@@ -150,7 +166,10 @@ any.className = 'match any';
 any.appendChild(link('btn ghost sm', K.trackUrl('any', n), T.any, n));
 out.appendChild(any);
 msg.className = 'note';
-msg.textContent = matches.length ? T.found(n, matches[0].courier.short) : T.unknown(n);
+msg.textContent = note || (matches.length ? T.found(n, matches[0].courier.short) : T.unknown(n));
+current = n;
+$('statusWrap').hidden = false;
+if (yqState === 'shown') { $('yqStatus').textContent = ''; yqState = 'ready'; }
 live.textContent = msg.textContent;
 document.querySelectorAll('#courierGrid a[data-id]').forEach(function (a) {
 a.href = K.trackUrl(a.getAttribute('data-id'), n);
@@ -182,6 +201,25 @@ ul.appendChild(li);
 });
 }
 var narrow = window.matchMedia ? matchMedia('(max-width: 899px)') : { matches: false };
+function showStatus() {
+var box = $('yqStatus');
+function fail() { yqState = ''; box.textContent = T.statusFail; }
+function run() {
+try {
+window.YQV5.trackSingle({ YQ_ContainerId: 'yqStatus', YQ_Height: 560, YQ_Fc: '0', YQ_Lang: 'en', YQ_Num: current });
+yqState = 'shown';
+} catch (e) { fail(); }
+}
+if (!current) return;
+if (window.YQV5) { run(); return; }
+if (yqState === 'loading') return;
+yqState = 'loading';
+var s = document.createElement('script');
+s.src = 'https://www.17track.net/externalcall.js'; s.async = true;
+s.onload = function () { if (window.YQV5) run(); else fail(); };
+s.onerror = fail;
+document.head.appendChild(s);
+}
 form.addEventListener('submit', function (e) {
 e.preventDefault(); show(input.value, true);
 if (narrow.matches) $('track-result-h').scrollIntoView({ block: 'start', behavior: 'smooth' });
@@ -191,10 +229,12 @@ $('trackPaste').addEventListener('click', function () {
 navigator.clipboard.readText().then(function (t) { input.value = t; show(t, true); }, function () { input.focus(); });
 });
 document.addEventListener('click', function (e) {
-var t = e.target.closest && e.target.closest('[data-copy],[data-n],[data-del],#savedClear');
+var t = e.target.closest && e.target.closest('[data-copy],[data-n],[data-del],#savedClear,#statusBtn');
 if (!t) return;
 if (t.hasAttribute('data-copy')) {
 if (navigator.clipboard) navigator.clipboard.writeText(t.getAttribute('data-copy')).then(function () { live.textContent = T.copied; $('trackCopied').hidden = false; }, function () {});
+} else if (t.id === 'statusBtn') {
+showStatus();
 } else if (t.hasAttribute('data-n')) {
 input.value = t.getAttribute('data-n'); show(input.value, false); input.scrollIntoView({ block: 'center' });
 } else if (t.hasAttribute('data-del')) {

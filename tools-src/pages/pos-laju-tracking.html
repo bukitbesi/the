@@ -1,0 +1,170 @@
+<!--page
+{
+  "path": "/pos-laju-tracking/",
+  "lang": "en",
+  "cat": "util",
+  "courier": "poslaju",
+  "alternates": {
+    "ms": "/semak-tracking-pos-laju/"
+  },
+  "title": "Pos Laju Tracking: Track Your Parcel & Status Meanings",
+  "description": "Track a Pos Laju parcel with its 13-character number and see what each status means, from posted over the counter to ready for collection.",
+  "llms": "Pos Laju (Pos Malaysia) tracking: opens the official Pos Malaysia tracking page for a 13-character S10 tracking number, explains the number format and its service letters, each Pos Laju status, and collecting a parcel from a post office.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Tools",
+      "/"
+    ],
+    [
+      "Utilities",
+      "/?cat=util#tools"
+    ],
+    [
+      "Parcel Tracking Malaysia",
+      "/parcel-tracking-malaysia/"
+    ],
+    [
+      "Pos Laju Tracking",
+      null
+    ]
+  ],
+  "about": [
+    "Pos Laju",
+    "Pos Malaysia",
+    "Parcel tracking",
+    "S10 tracking number"
+  ],
+  "app": {
+    "name": "Pos Laju Tracking",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Opens Pos Laju's official tracking page",
+      "Checks the number matches the Pos Laju format",
+      "Copies the number for pasting",
+      "Optional status view on this page",
+      "Remembers recent numbers on this device only"
+    ]
+  },
+  "citations": [
+    [
+      "Pos Malaysia",
+      "https://www.pos.com.my/"
+    ],
+    [
+      "Universal Postal Union: S10 identifier standard",
+      "https://www.upu.int/"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "How do I track my Pos Laju parcel?",
+      "a": "Paste the 13-character tracking number into the box above and press Track parcel. The tool checks the format and opens Pos Malaysia's official tracking page with the number copied, so you can paste it if the page asks."
+    },
+    {
+      "q": "What does Item dispatched out mean on Pos Laju?",
+      "a": "It means the parcel left a Pos Malaysia processing centre for the next stop on its route. It is a transfer update, not a delivery update, and it can appear several times on one journey."
+    },
+    {
+      "q": "Why does my Pos Laju tracking number show no result?",
+      "a": "A new label can show nothing until the parcel is first scanned, often up to 24 hours. Also check every character: Pos Laju numbers end in a check digit and MY, so one wrong digit returns no result."
+    },
+    {
+      "q": "What do I need to collect a Pos Laju parcel at the post office?",
+      "a": "Bring the tracking number, the collection notice if one was left, and your MyKad or passport. Someone collecting for you usually needs an authorisation letter and copies of both identity cards; check with the outlet first."
+    },
+    {
+      "q": "How long does Pos Laju delivery take?",
+      "a": "Most Pos Laju parcels within Peninsular Malaysia arrive in 1 to 3 working days. Parcels to or from Sabah, Sarawak and Labuan, rural areas and peak sale periods take longer. The tracking page shows the latest progress."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li><a href="/parcel-tracking-malaysia/">Parcel tracking</a></li><li aria-current="page">Pos Laju Tracking</li></ol></nav>
+  <h1>Pos Laju Tracking</h1>
+  <p class="answer">Enter your <strong>13-character Pos Laju tracking number</strong>, two or three letters, nine digits and <strong>MY</strong> at the end (such as ER123456789MY), to open Pos Malaysia's official tracking page with the number copied. Below: what each Pos Laju status means and what to do when your parcel waits at the post office.</p>
+  <p class="meta"><span>Courier formats checked <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Runs in your browser; your number is not sent to us</span><a href="/semak-tracking-pos-laju/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">Pos Laju tracking number format</h2>
+  <p>Pos Malaysia uses the Universal Postal Union's <strong>S10 standard</strong>, the same format postal services use worldwide:</p>
+  <ul>
+    <li><strong>2 letters</strong> for the service, then <strong>8 digits</strong> for the item, then <strong>1 check digit</strong>, then the <strong>country code</strong> <code>MY</code>.</li>
+    <li>Because the last digit is a check digit, one mistyped digit usually returns "no result" instead of someone else's parcel. Copy and paste the number rather than typing it.</li>
+    <li>Some Pos Laju labels use three letters at the start, such as <code>EHE108177925MY</code>; they track the same way.</li>
+  </ul>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="letters-h">
+    <table class="data text">
+      <caption id="letters-h">What the first letter usually means</caption>
+      <thead><tr><th scope="col">Starts with</th><th scope="col">Service</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">E</th><td>Express mail and courier (Pos Laju, EMS)</td></tr>
+        <tr><th scope="row">R</th><td>Registered mail</td></tr>
+        <tr><th scope="row">C</th><td>Parcel post</td></tr>
+        <tr><th scope="row">L</th><td>Tracked small packets, often from overseas sellers (for example <code>LP…CN</code>)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A number ending in another country code, such as <code>CN</code> or <code>SG</code>, was posted abroad. Pos Malaysia delivers it once it reaches Malaysia, so its Malaysian leg shows on Pos Malaysia's tracking page too.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Pos Laju tracking statuses explained</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">What it means</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Item posted over the counter</th><td>The sender handed the parcel in at a counter and paid postage. The journey starts here.</td></tr>
+        <tr><th scope="row">Item dispatched out</th><td>The parcel left a processing centre. It appears each time the parcel moves on, so you may see it several times.</td></tr>
+        <tr><th scope="row">Item arrived / processed at a centre</th><td>The parcel reached the next sorting centre on its route.</td></tr>
+        <tr><th scope="row">Item out for delivery</th><td>A courier has the parcel for delivery, usually that same day.</td></tr>
+        <tr><th scope="row">Ready for collection at the counter</th><td>Delivery was not completed, or your area is served by counter collection. The parcel waits at the named post office.</td></tr>
+        <tr><th scope="row">Item delivered</th><td>Pos Laju recorded the delivery.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Exact wording differs slightly between Pos Malaysia's website and app, but the order of events is the same.</p>
+
+  <h2 id="collect">Collecting a Pos Laju parcel from the post office</h2>
+  <ol>
+    <li>Check the tracking page for the post office holding your parcel.</li>
+    <li>Bring the tracking number, any collection notice left at your door and your <strong>MyKad</strong> or passport.</li>
+    <li>If someone collects for you, ask the outlet what it needs; usually an authorisation letter and copies of both identity cards.</li>
+    <li>Collect before the date on the notice. Uncollected parcels are returned to the sender.</li>
+  </ol>
+
+  <h2 id="sources">Official sources</h2>
+  <ul>
+    <li><a href="https://www.pos.com.my/" rel="noopener">Pos Malaysia</a></li>
+    <li><a href="https://www.upu.int/" rel="noopener">Universal Postal Union: S10 identifier standard</a></li>
+  </ul>
+  <div class="callout"><p><strong>Independent tool:</strong> The Bukit Besi is not affiliated with Pos Malaysia. Delivery status comes from Pos Malaysia's own website.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Track other couriers</h2>
+  <div class="guides">
+    <a href="/jnt-tracking/">J&amp;T Express Tracking<small>Waybill status and On Hold</small></a>
+    <a href="/ninja-van-tracking/">Ninja Van Tracking<small>Tracking ID and Ninja Points</small></a>
+    <a href="/gdex-tracking/">GDEX Tracking<small>Consignment note numbers</small></a>
+    <a href="/citylink-tracking/">City-Link Tracking<small>City-Link Express parcels</small></a>
+    <a href="/parcel-tracking-malaysia/">All couriers<small>Detect any courier from the number</small></a>
+  </div>
+</section>

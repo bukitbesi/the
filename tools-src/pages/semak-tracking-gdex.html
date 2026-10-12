@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/semak-tracking-gdex/",
+  "lang": "ms",
+  "cat": "util",
+  "courier": "gdex",
+  "alternates": {
+    "en": "/gdex-tracking/"
+  },
+  "title": "Semak Tracking GDEX: Status Parcel GDEX Malaysia",
+  "description": "Semak tracking parcel GDEX dengan nombor nota konsainan, fahami maksud setiap status dan format nombor GDEX. Percuma tanpa pendaftaran.",
+  "llms": "Semak tracking GDEX (GD Express): membuka laman tracking rasmi GDEX untuk nombor nota konsainan, menerangkan format nombor, status GDEX biasa, tindakan jika parcel gagal dihantar, dan latar belakang GD Express Carrier Bhd.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Alat",
+      "/"
+    ],
+    [
+      "Utiliti",
+      "/?cat=util#tools"
+    ],
+    [
+      "Semak Tracking Parcel",
+      "/semak-tracking-parcel/"
+    ],
+    [
+      "Semak Tracking GDEX",
+      null
+    ]
+  ],
+  "about": [
+    "GDEX",
+    "GD Express",
+    "Nota konsainan",
+    "Tracking parcel"
+  ],
+  "app": {
+    "name": "Semak Tracking GDEX",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Membuka laman tracking rasmi GDEX",
+      "Menyemak nombor sepadan dengan format GDEX",
+      "Menyalin nombor untuk ditampal",
+      "Paparan status pilihan di halaman ini",
+      "Menyimpan nombor terkini dalam peranti ini sahaja"
+    ]
+  },
+  "citations": [
+    [
+      "GDEX (GD Express)",
+      "https://gdexpress.com/"
+    ],
+    [
+      "GD Express Carrier Bhd: hubungan pelabur",
+      "https://ir.gdexpress.com/"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "Bagaimana cara semak tracking GDEX?",
+      "a": "Tampal nombor nota konsainan dalam kotak di atas dan tekan Semak parcel. Alat ini membuka laman tracking rasmi GDEX dengan nombor telah disalin, jadi anda boleh menampalnya jika laman itu memintanya."
+    },
+    {
+      "q": "Apa itu nombor nota konsainan GDEX?",
+      "a": "Ia nombor tracking GDEX yang tertera pada label parcel. Banyak nombor terkini ialah MY diikuti 11 digit."
+    },
+    {
+      "q": "Boleh semak beberapa parcel GDEX serentak?",
+      "a": "Ya. Laman tracking GDEX sendiri menerima beberapa nombor nota konsainan dalam satu carian, berguna apabila pesanan dihantar dalam lebih daripada satu kotak."
+    },
+    {
+      "q": "Apa perlu dibuat jika parcel GDEX gagal dihantar?",
+      "a": "Semak sebabnya di laman tracking, kemudian hubungi GDEX melalui laman web rasminya dengan nombor konsainan untuk menetapkan semula penghantaran atau ambil parcel di stesen. Maklumkan juga kepada penjual untuk pesanan dalam talian."
+    },
+    {
+      "q": "Adakah GDEX syarikat Malaysia?",
+      "a": "Ya. GDEX ditubuhkan di Malaysia pada 1997, dan syarikat induknya GD Express Carrier Bhd disenaraikan di Pasaran Utama Bursa Malaysia."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li><a href="/semak-tracking-parcel/">Semak tracking parcel</a></li><li aria-current="page">Semak Tracking GDEX</li></ol></nav>
+  <h1>Semak Tracking GDEX</h1>
+  <p class="answer">Masukkan <strong>nombor nota konsainan GDEX</strong> untuk membuka laman tracking rasmi GDEX dengan nombor telah disalin. Banyak nombor GDEX ialah <strong>MY diikuti 11 digit</strong>. Di bawah: maksud status GDEX dan tindakan jika penghantaran gagal.</p>
+  <p class="meta"><span>Format kurier disemak <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Berjalan dalam pelayar anda; nombor tidak dihantar kepada kami</span><a href="/gdex-tracking/" hreflang="en" lang="en">Read in English</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">Nombor nota konsainan GDEX</h2>
+  <ul>
+    <li>GDEX memanggil nombor tracking sebagai <strong>nombor nota konsainan</strong>, tertera pada label (CN).</li>
+    <li>Banyak nombor GDEX terkini ialah <code>MY</code> diikuti <strong>11 digit</strong>. Format ini dikongsi dengan rujukan kurier lain, jadi alat ini menandakannya sebagai padanan mungkin; semak nama kurier pada resit atau halaman pesanan.</li>
+    <li>Laman tracking GDEX sendiri menerima beberapa nombor konsainan serentak, berguna apabila penjual menghantar pesanan dalam lebih daripada satu kotak.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Status tracking GDEX biasa</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">Maksud</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Picked up</th><td>GDEX telah mengambil parcel daripada penghantar.</td></tr>
+        <tr><th scope="row">In transit / Outbound from station</th><td>Parcel keluar dari stesen GDEX ke stesen seterusnya.</td></tr>
+        <tr><th scope="row">Inbound at station</th><td>Parcel tiba di stesen, biasanya stesen yang melayani kawasan anda.</td></tr>
+        <tr><th scope="row">Out for delivery</th><td>Kurier membawa parcel untuk dihantar.</td></tr>
+        <tr><th scope="row">Delivered</th><td>GDEX merekodkan penghantaran, selalunya dengan nama penerima.</td></tr>
+        <tr><th scope="row">Undelivered / Returned</th><td>Penghantaran gagal atau parcel sedang dipulangkan kepada penghantar.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Perkataan tepat GDEX mungkin berbeza; yang penting ialah urutan peristiwanya.</p>
+
+  <h2 id="failed">Jika penghantaran GDEX gagal</h2>
+  <ol>
+    <li>Semak sebabnya di laman tracking, contohnya tiada orang di rumah atau alamat tidak lengkap.</li>
+    <li>Hubungi GDEX melalui laman web rasminya dengan nombor konsainan untuk menetapkan semula penghantaran atau ambil di stesen.</li>
+    <li>Untuk pesanan dalam talian, maklumkan juga kepada penjual supaya pesanan tidak ditanda selesai.</li>
+  </ol>
+
+  <h2 id="about-gdex">Tentang GDEX</h2>
+  <p>GDEX (GD Express) ditubuhkan pada tahun 1997. Syarikat induknya, GD Express Carrier Bhd, disenaraikan di Pasaran ACE Bursa Malaysia pada 2005 dan berpindah ke Pasaran Utama pada 2013. Ia menghantar melalui rangkaian cawangan, ejen dan pusat serahan di seluruh Malaysia.</p>
+
+  <h2 id="sources">Sumber rasmi</h2>
+  <ul>
+    <li><a href="https://gdexpress.com/" rel="noopener">GDEX (GD Express)</a></li>
+    <li><a href="https://ir.gdexpress.com/" rel="noopener">GD Express Carrier Bhd: hubungan pelabur</a></li>
+  </ul>
+  <div class="callout"><p><strong>Alat bebas:</strong> The Bukit Besi tidak bergabung dengan GDEX. Status penghantaran datang daripada laman web GDEX sendiri.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Semak kurier lain</h2>
+  <div class="guides">
+    <a href="/semak-tracking-pos-laju/">Semak Tracking Pos Laju<small>Parcel ekspres Pos Malaysia</small></a>
+    <a href="/semak-tracking-jnt/">Semak Tracking J&amp;T<small>Status waybill dan On Hold</small></a>
+    <a href="/semak-tracking-ninja-van/">Semak Tracking Ninja Van<small>ID tracking dan Ninja Point</small></a>
+    <a href="/semak-tracking-citylink/">Semak Tracking City-Link<small>Parcel City-Link Express</small></a>
+    <a href="/semak-tracking-parcel/">Semua kurier<small>Kenal pasti kurier daripada nombor</small></a>
+  </div>
+</section>

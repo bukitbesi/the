@@ -83,6 +83,11 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
 | [/semak-tracking-parcel/](https://tool.thebukitbesi.com/semak-tracking-parcel/) | Bahasa Melayu | semak tracking parcel, semak tracking kurier, tracking pos laju / J&T / SPX |
+| [/pos-laju-tracking/](https://tool.thebukitbesi.com/pos-laju-tracking/) + [/semak-tracking-pos-laju/](https://tool.thebukitbesi.com/semak-tracking-pos-laju/) | English + BM | pos laju tracking parcel, tracking parcel poslaju; semak tracking pos laju |
+| [/jnt-tracking/](https://tool.thebukitbesi.com/jnt-tracking/) + [/semak-tracking-jnt/](https://tool.thebukitbesi.com/semak-tracking-jnt/) | English + BM | tracking parcel jnt / j&t; semak tracking j&t |
+| [/ninja-van-tracking/](https://tool.thebukitbesi.com/ninja-van-tracking/) + [/semak-tracking-ninja-van/](https://tool.thebukitbesi.com/semak-tracking-ninja-van/) | English + BM | ninja van tracking parcel; semak tracking ninja van |
+| [/gdex-tracking/](https://tool.thebukitbesi.com/gdex-tracking/) + [/semak-tracking-gdex/](https://tool.thebukitbesi.com/semak-tracking-gdex/) | English + BM | gdex tracking parcel; semak tracking gdex |
+| [/citylink-tracking/](https://tool.thebukitbesi.com/citylink-tracking/) + [/semak-tracking-citylink/](https://tool.thebukitbesi.com/semak-tracking-citylink/) | English + BM | citylink tracking parcel; semak tracking city-link |
 
 Both pages share one tested calculation core (`assets/js/salary-core.js`):
 EPF from the KWSP Third Schedule bands, SOCSO / EIS / LINDUNG 24 Jam from
@@ -98,7 +103,7 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
 
-**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
+**Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. The old Blogger page redirects here; see [the redirect steps](documentation/blogger-redirect-parcel-tracking.md).
 
 **Share buttons:** every page with an `app` block gets a share bar (WhatsApp, Telegram, Facebook, X, copy link, device share sheet) before the bottom ad, and a "Share result" button in its `.tool-actions`. Plain links and one small inline script; no third-party code.
 

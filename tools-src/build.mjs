@@ -488,18 +488,81 @@ function carMap(lang) {
     K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified
   };
 }
-// ---- Parcel tracking (EN + BM): courier directory and number-format table come from tracking-core.js
-function trackMap(lang) {
-  const L = lang === 'ms' ? 1 : 0;
+// ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
+// tracking-core.js. Courier pages set "courier" in front matter to preset the tracker to that courier.
+const TRACK_TEXT = {
+  en: {
+    h: c => c ? `Track a ${c.short} parcel` : 'Track a parcel', label: 'Tracking number', eg: 'e.g.',
+    help: 'Find it in your order page, SMS or on the consignment note.', go: 'Track parcel', paste: 'Paste',
+    recent: 'Recent on this device', clear: 'Clear list', result: 'Courier and tracking link',
+    idle: c => c ? `Enter your ${c.short} tracking number to open ${c.short}'s official tracking page.` : 'Enter a number to see the matching courier. You can also choose a courier below.',
+    copied: 'The number is copied. If the courier page opens empty, paste it into its search box.',
+    status: 'Show status on this page', statusNote: 'Loads the free 17TRACK viewer, which sends this number to 17TRACK.',
+    all: n => `All couriers (${n})`
+  },
+  ms: {
+    h: c => c ? `Semak parcel ${c.short}` : 'Semak parcel', label: 'Nombor tracking', eg: 'cth.',
+    help: 'Ada di halaman pesanan, SMS atau pada nota konsainan.', go: 'Semak parcel', paste: 'Tampal',
+    recent: 'Terkini dalam peranti ini', clear: 'Kosongkan senarai', result: 'Kurier dan pautan tracking',
+    idle: c => c ? `Masukkan nombor tracking ${c.short} untuk membuka laman tracking rasmi ${c.short}.` : 'Masukkan nombor untuk melihat kurier yang sepadan. Anda juga boleh memilih kurier di bawah.',
+    copied: 'Nombor telah disalin. Jika laman kurier dibuka kosong, tampal ke dalam kotak cariannya.',
+    status: 'Papar status di halaman ini', statusNote: 'Memuatkan paparan percuma 17TRACK, yang menghantar nombor ini kepada 17TRACK.',
+    all: n => `Semua kurier (${n})`
+  }
+};
+function trackMap(lang, p = {}) {
+  const L = lang === 'ms' ? 1 : 0, t = TRACK_TEXT[lang];
+  const preset = p.courier ? tracking.byId[p.courier] : null;
+  if (p.courier && !preset) { console.error(`Unknown courier "${p.courier}" on ${p.path}`); process.exit(1); }
   const grid = tracking.COURIERS.map(c =>
     `<li><a class="courier" data-id="${c.id}" href="${esc(c.home)}" target="_blank" rel="noopener">${esc(c.name)}<small>${esc(c.format[L])}</small></a></li>`).join('\n');
   const level = s => [L ? 'Ditentukan oleh huruf awalan' : 'Set by the prefix', L ? 'Format biasa' : 'Usual format', L ? 'Dikongsi dengan kurier lain' : 'Shared with other couriers'][3 - s];
   const formats = tracking.COURIERS.map(c => {
-    const best = c.tests.reduce((m, t) => Math.max(m, t[1]), 0);
+    const best = c.tests.reduce((m, x) => Math.max(m, x[1]), 0);
     return `<tr><th scope="row"><a href="${esc(c.site)}" rel="noopener">${esc(c.name)}</a></th><td>${esc(c.format[L])}</td><td>${c.example ? `<code>${esc(c.example)}</code>` : '–'}</td><td>${best ? level(best) : (L ? 'Pilih kurier secara manual' : 'Choose the courier manually')}</td></tr>`;
   }).join('\n');
+  const tool = `<div class="calc">
+    <form class="box" id="trackForm" novalidate aria-labelledby="track-h"${preset ? ` data-courier="${preset.id}"` : ''}>
+      <h2 id="track-h">${esc(t.h(preset))}</h2>
+      <div class="field">
+        <label for="trackNo">${t.label}</label>
+        <div class="input"><input id="trackNo" name="n" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="${t.eg} ${esc((preset && preset.example) || 'ER123456789MY')}" aria-describedby="trackHelp"></div>
+        <p class="help" id="trackHelp">${t.help}</p>
+      </div>
+      <div class="track-actions">
+        <button type="submit" class="btn">${t.go}</button>
+        <button type="button" class="btn ghost" id="trackPaste" hidden>${t.paste}</button>
+      </div>
+      <div class="saved" id="savedBox" hidden>
+        <p class="sub-h">${t.recent}</p>
+        <ul class="saved-list" id="savedList"></ul>
+        <button type="button" class="btn ghost sm" id="savedClear">${t.clear}</button>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="track-result-h">
+      <h2 id="track-result-h">${t.result}</h2>
+      <p class="note" id="trackMsg">${esc(t.idle(preset))}</p>
+      <ul class="matches" id="trackMatches"></ul>
+      <p class="sr-only" id="trackLive" aria-live="polite"></p>
+      <p class="note" id="trackCopied" hidden>${t.copied}</p>
+      <div class="status-wrap" id="statusWrap" hidden>
+        <button type="button" class="btn ghost sm" id="statusBtn">${t.status}</button>
+        <p class="help">${t.statusNote}</p>
+        <div id="yqStatus" class="status-frame"></div>
+      </div>
+      <div class="tool-actions"></div>
+    </section>
+  </div>
+
+  <section aria-labelledby="couriers-h">
+    <h2 class="sub-h" id="couriers-h">${t.all(tracking.COURIERS.length)}</h2>
+    <ul class="couriers" id="courierGrid">
+${grid}
+    </ul>
+  </section>`;
   return {
-    TR_GRID: grid, TR_FORMATS: formats, TR_COUNT: tracking.COURIERS.length,
+    TR_TOOL: tool, TR_FORMATS: formats, TR_COUNT: tracking.COURIERS.length,
     TR_VERIFIED: longDate(tracking.FACTS.verified, lang), TR_VERIFIED_ISO: tracking.FACTS.verified
   };
 }
@@ -595,7 +658,7 @@ for (const p of pages) {
     PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n') + (p.app ? '\n' + shareScript : ''),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
     ...(p.salary ? salaryMap(p.lang) : {}),
-    ...(p.render ? RENDERERS[p.render](p.lang) : {})
+    ...(p.render ? RENDERERS[p.render](p.lang, p) : {})
   };
   const html = render(map);
   fs.mkdirSync(path.join(pub, p.path), { recursive: true });
@@ -629,9 +692,9 @@ const llms = [
   '',
   `> ${homeDescription}`,
   '',
-  `This site hosts its own calculators and a directory of free tools, most of which run on ${site.mainSite}/. Calculators on this site run in the browser and do not send inputs anywhere. Last updated ${site.dateModified}.`,
+  `This site hosts its own calculators and a directory of free tools, most of which run on ${site.mainSite}/. Tools on this site run in the browser and do not send inputs to this site. Last updated ${site.dateModified}.`,
   '',
-  '## Calculators on this site',
+  '## Tools and calculators on this site',
   '',
   ...hosted.map(p => `- [${p.title}](${site.origin + p.path}): ${p.llms}`),
   '',

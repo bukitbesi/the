@@ -1,0 +1,156 @@
+<!--page
+{
+  "path": "/ninja-van-tracking/",
+  "lang": "en",
+  "cat": "util",
+  "courier": "ninjavan",
+  "alternates": {
+    "ms": "/semak-tracking-ninja-van/"
+  },
+  "title": "Ninja Van Tracking Malaysia: Track Your Parcel & Ninja Points",
+  "description": "Track a Ninja Van Malaysia parcel by tracking ID (NVMY, MYNJV) and learn what Pending Pickup, Re-attempt and To Collect mean, plus Ninja Point pick-ups.",
+  "llms": "Ninja Van Malaysia tracking: opens Ninja Van's official tracking page for a tracking ID (usually starting NV, NVMY or MYNJV), explains statuses such as Pending Pickup, Re-attempt, To Collect and Returned to Sender, and how Ninja Point pick-up and drop-off locations work.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "track",
+  "scripts": [
+    "/assets/js/tracking.js"
+  ],
+  "breadcrumb": [
+    [
+      "Tools",
+      "/"
+    ],
+    [
+      "Utilities",
+      "/?cat=util#tools"
+    ],
+    [
+      "Parcel Tracking Malaysia",
+      "/parcel-tracking-malaysia/"
+    ],
+    [
+      "Ninja Van Tracking",
+      null
+    ]
+  ],
+  "about": [
+    "Ninja Van",
+    "Ninja Van Malaysia",
+    "Ninja Point",
+    "Parcel tracking"
+  ],
+  "app": {
+    "name": "Ninja Van Tracking",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Opens Ninja Van's official tracking page",
+      "Checks the number matches the Ninja Van format",
+      "Copies the number for pasting",
+      "Optional status view on this page",
+      "Remembers recent numbers on this device only"
+    ]
+  },
+  "citations": [
+    [
+      "Ninja Van Malaysia",
+      "https://www.ninjavan.co/en-my"
+    ],
+    [
+      "Ninja Van: Ninja Point partner programme",
+      "https://www.ninjavan.co/en-my/company/be-a-ninja-point"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "How do I track my Ninja Van parcel?",
+      "a": "Paste the tracking ID into the box above and press Track parcel. The tool opens Ninja Van Malaysia's official tracking page with the ID copied, so you can paste it if the page asks."
+    },
+    {
+      "q": "What does Pending Pickup mean on Ninja Van?",
+      "a": "The shipper has booked the delivery but Ninja Van has not collected the parcel yet. It usually changes within one or two working days, once the seller hands the parcel over."
+    },
+    {
+      "q": "What does To Collect mean on Ninja Van tracking?",
+      "a": "Delivery to your address did not happen and the parcel is waiting at a Ninja Point. The tracking page names the location; bring the tracking ID and your identity card to collect it."
+    },
+    {
+      "q": "What does Re-attempt mean on Ninja Van?",
+      "a": "The first delivery attempt failed, for example because nobody was home, and Ninja Van will try to deliver again. Keep your phone on so the driver can reach you."
+    },
+    {
+      "q": "What is a Ninja Point?",
+      "a": "A Ninja Point is a partner shop where you can drop off parcels, collect missed deliveries and send returns. Ninja Van says it has over 5,500 Ninja Points in Malaysia."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li><a href="/parcel-tracking-malaysia/">Parcel tracking</a></li><li aria-current="page">Ninja Van Tracking Malaysia</li></ol></nav>
+  <h1>Ninja Van Tracking Malaysia</h1>
+  <p class="answer">Enter your <strong>Ninja Van tracking ID</strong>, which usually starts with <strong>NV, NVMY or MYNJV</strong>, to open Ninja Van Malaysia's official tracking page with the number copied. Below: what each Ninja Van status means and how to collect a parcel from a Ninja Point.</p>
+  <p class="meta"><span>Courier formats checked <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Runs in your browser; your number is not sent to us</span><a href="/semak-tracking-ninja-van/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  {{TR_TOOL}}
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="format">Ninja Van tracking ID format</h2>
+  <ul>
+    <li>Malaysian Ninja Van tracking IDs usually start with <code>NV</code>, <code>NVMY</code> or <code>MYNJV</code>.</li>
+    <li>Length varies, typically 11 to 18 letters and digits, because part of the ID comes from the shipper.</li>
+    <li>Some marketplace orders show the seller's or platform's own reference instead; the Ninja Van ID is under the order's shipping information.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="status-h">Ninja Van tracking statuses explained</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="status-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Status</th><th scope="col">What it means</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Pending pickup</th><td>The shipper booked the delivery; Ninja Van has not collected the parcel yet.</td></tr>
+        <tr><th scope="row">In transit / At sorting hub</th><td>The parcel is moving between Ninja Van facilities.</td></tr>
+        <tr><th scope="row">On vehicle for delivery</th><td>A driver has the parcel and is delivering it today.</td></tr>
+        <tr><th scope="row">Delivered</th><td>Ninja Van recorded the delivery.</td></tr>
+        <tr><th scope="row">Re-attempt</th><td>The first delivery failed; Ninja Van will try again.</td></tr>
+        <tr><th scope="row">To collect</th><td>The parcel was left at a Ninja Point for you to collect.</td></tr>
+        <tr><th scope="row">Returned to sender</th><td>Delivery could not be completed and the parcel went back to the shipper.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ninja-points">Ninja Points: pick-up and drop-off</h2>
+  <p>Ninja Points are partner shops where you can drop off parcels, collect missed deliveries and send returns. Ninja Van says there are over 5,500 across Malaysia.</p>
+  <ol>
+    <li>When tracking shows <strong>To collect</strong>, the page names the Ninja Point holding your parcel.</li>
+    <li>Bring the tracking ID and your identity card, and go during the shop's opening hours.</li>
+    <li>Collect promptly; parcels left too long are returned to the sender.</li>
+  </ol>
+
+  <h2 id="sources">Official sources</h2>
+  <ul>
+    <li><a href="https://www.ninjavan.co/en-my" rel="noopener">Ninja Van Malaysia</a></li>
+    <li><a href="https://www.ninjavan.co/en-my/company/be-a-ninja-point" rel="noopener">Ninja Van: Ninja Point partner programme</a></li>
+  </ul>
+  <div class="callout"><p><strong>Independent tool:</strong> The Bukit Besi is not affiliated with Ninja Van. Delivery status comes from Ninja Van's own website.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Track other couriers</h2>
+  <div class="guides">
+    <a href="/pos-laju-tracking/">Pos Laju Tracking<small>Pos Malaysia express parcels</small></a>
+    <a href="/jnt-tracking/">J&amp;T Express Tracking<small>Waybill status and On Hold</small></a>
+    <a href="/gdex-tracking/">GDEX Tracking<small>Consignment note numbers</small></a>
+    <a href="/citylink-tracking/">City-Link Tracking<small>City-Link Express parcels</small></a>
+    <a href="/parcel-tracking-malaysia/">All couriers<small>Detect any courier from the number</small></a>
+  </div>
+</section>

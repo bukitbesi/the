@@ -32,7 +32,7 @@
     { "q": "Kenapa nombor tracking saya tiada keputusan?", "a": "Label baharu selalunya tidak menunjukkan apa-apa sehingga 24 jam, sehingga kurier mengimbas parcel semasa pengambilan atau penghantaran ke cawangan. Pastikan kurier betul dan nombor disalin tepat tanpa ruang. Jika masih tiada selepas 2 hari bekerja, minta penjual mengesahkan nombor dan kurier." },
     { "q": "Berapa lama tempoh penghantaran parcel di Malaysia?", "a": "Dalam Semenanjung Malaysia kebanyakan parcel biasa tiba dalam 1 hingga 3 hari bekerja. Antara Semenanjung dengan Sabah, Sarawak atau Labuan, jangkakan 3 hingga 7 hari bekerja. Kawasan luar bandar, cuti umum, musim jualan dan cuaca buruk boleh melambatkan penghantaran; laman tracking kurier memberi anggaran terkini." },
     { "q": "Apa maksud status Return to sender?", "a": "Kurier sedang memulangkan parcel kepada penjual, biasanya selepas cubaan penghantaran gagal, alamat salah atau tidak lengkap, atau parcel ditolak. Hubungi penjual segera; sesetengah kurier boleh menghantar semula jika anda menghubungi mereka sebelum pemulangan diproses." },
-    { "q": "Adakah alat semak tracking ini percuma dan selamat?", "a": "Ya. Percuma tanpa pendaftaran. Pengesanan berjalan dalam pelayar anda, nombor tidak dihantar ke laman ini, dan nombor terkini disimpan dalam peranti anda sahaja. Status penghantaran datang daripada laman web kurier sendiri." }
+    { "q": "Adakah alat semak tracking ini percuma dan selamat?", "a": "Ya. Percuma tanpa pendaftaran. Pengesanan berjalan dalam pelayar anda, nombor tidak dihantar ke laman ini, dan nombor terkini disimpan dalam peranti anda sahaja. Status penghantaran datang daripada laman web kurier sendiri, atau daripada 17TRACK hanya jika anda memilih Papar status di halaman ini." }
   ]
 }
 -->
@@ -43,41 +43,7 @@
   <p class="answer">Tampal mana-mana <strong>nombor tracking</strong> untuk mengetahui kuriernya dan buka <strong>laman tracking rasmi</strong> kurier tersebut. Menyokong <strong>Pos Laju, J&amp;T Express, SPX (Shopee), Ninja Van, DHL, GDEX, City-Link</strong> dan {{TR_COUNT}} kurier kesemuanya, serta penjejak sejagat untuk kurier lain.</p>
   <p class="meta"><span>Format kurier disemak <time datetime="{{TR_VERIFIED_ISO}}">{{TR_VERIFIED}}</time></span><span>Berjalan dalam pelayar anda; nombor tidak dihantar kepada kami</span><a href="/parcel-tracking-malaysia/" hreflang="en" lang="en">Read in English</a></p>
 
-  <div class="calc">
-    <form class="box" id="trackForm" novalidate aria-labelledby="track-h">
-      <h2 id="track-h">Semak parcel</h2>
-      <div class="field">
-        <label for="trackNo">Nombor tracking</label>
-        <div class="input"><input id="trackNo" name="n" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="cth. ER123456789MY" aria-describedby="trackHelp"></div>
-        <p class="help" id="trackHelp">Ada di halaman pesanan, SMS atau pada nota konsainan.</p>
-      </div>
-      <div class="track-actions">
-        <button type="submit" class="btn">Semak parcel</button>
-        <button type="button" class="btn ghost" id="trackPaste" hidden>Tampal</button>
-      </div>
-      <div class="saved" id="savedBox" hidden>
-        <p class="sub-h">Terkini dalam peranti ini</p>
-        <ul class="saved-list" id="savedList"></ul>
-        <button type="button" class="btn ghost sm" id="savedClear">Kosongkan senarai</button>
-      </div>
-    </form>
-
-    <section class="box" aria-labelledby="track-result-h">
-      <h2 id="track-result-h">Kurier dan pautan tracking</h2>
-      <p class="note" id="trackMsg">Masukkan nombor untuk melihat kurier yang sepadan. Anda juga boleh memilih kurier di bawah.</p>
-      <ul class="matches" id="trackMatches"></ul>
-      <p class="sr-only" id="trackLive" aria-live="polite"></p>
-      <p class="note" id="trackCopied" hidden>Nombor telah disalin. Jika laman kurier dibuka kosong, tampal ke dalam kotak cariannya.</p>
-      <div class="tool-actions"></div>
-    </section>
-  </div>
-
-  <section aria-labelledby="couriers-h">
-    <h2 class="sub-h" id="couriers-h">Semua kurier ({{TR_COUNT}})</h2>
-    <ul class="couriers" id="courierGrid">
-{{TR_GRID}}
-    </ul>
-  </section>
+  {{TR_TOOL}}
 </div>
 {{AD_TOP}}
 <div class="container prose cv">
@@ -88,6 +54,15 @@
     <li><strong>Buka laman kurier.</strong> Nombor disalin apabila anda menekan pautan, jadi anda boleh menampalnya jika laman itu dibuka kosong.</li>
     <li><strong>Tidak dikenali?</strong> Pilih kurier daripada senarai, atau guna 17TRACK yang menyemak lebih seribu kurier serentak.</li>
   </ol>
+
+  <h2 id="guides-h">Panduan tracking mengikut kurier</h2>
+  <div class="guides">
+    <a href="/semak-tracking-pos-laju/">Semak Tracking Pos Laju<small>Maksud status dan ambil di pejabat pos</small></a>
+    <a href="/semak-tracking-jnt/">Semak Tracking J&amp;T<small>Status waybill dan On Hold</small></a>
+    <a href="/semak-tracking-ninja-van/">Semak Tracking Ninja Van<small>ID tracking dan Ninja Point</small></a>
+    <a href="/semak-tracking-gdex/">Semak Tracking GDEX<small>Nombor nota konsainan</small></a>
+    <a href="/semak-tracking-citylink/">Semak Tracking City-Link<small>Parcel City-Link Express</small></a>
+  </div>
 
   <h2 id="formats-h">Format nombor tracking mengikut kurier</h2>
   <p>Kebanyakan kurier menggunakan corak yang boleh dikenali. Huruf awalan ialah petunjuk paling kuat; nombor yang hanya digit boleh dimiliki lebih daripada satu kurier, jadi alat ini menyenaraikan semua padanan.</p>

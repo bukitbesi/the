@@ -36,7 +36,7 @@
       tests: [[/^MY\d{11}$/, 1]] },
     { id: 'citylink', name: 'City-Link Express', short: 'City-Link', site: 'https://www.citylinkexpress.com/',
       home: 'https://www.citylinkexpress.com/tracking-result/', track: 'https://www.citylinkexpress.com/tracking-result/?track0={n}',
-      format: ['Digits printed on the consignment note', 'Digit pada nota konsainan'], example: '',
+      format: ['Often 15 letters and digits', 'Selalunya 15 huruf dan digit'], example: '',
       tests: [] },
     { id: 'flash', name: 'Flash Express', short: 'Flash', site: 'https://www.flashexpress.my/',
       home: 'https://www.flashexpress.my/fle/tracking', track: 'https://www.flashexpress.my/fle/tracking?se={n}',
