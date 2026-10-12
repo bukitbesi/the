@@ -105,3 +105,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .meter i{display:block;height:100%;border-radius:99px;background:var(--grad)}
 .meter span{position:absolute;top:-20px;transform:translateX(-50%);font-size:.7rem;color:var(--text3);white-space:nowrap}
 .meter span::after{content:"";position:absolute;left:50%;top:18px;width:1px;height:14px;background:var(--border2)}
+/* Share bar and share-result button: inline SVG icons, no third-party code. */
+.share{margin-top:40px}
+.share h2{font-size:1.1rem;margin-bottom:12px}
+.share-row{display:flex;flex-wrap:wrap;gap:10px}
+.btn svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-whatsapp svg{color:#1da851}.share-telegram svg{color:#229ed9}.share-facebook svg{color:#1877f2}
+@media print{.share{display:none}}

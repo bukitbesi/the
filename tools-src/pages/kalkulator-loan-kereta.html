@@ -1,0 +1,154 @@
+<!--page
+{
+  "path": "/kalkulator-loan-kereta/",
+  "lang": "ms",
+  "alternates": { "en": "/car-loan-calculator-malaysia/" },
+  "title": "Kalkulator Loan Kereta 2026: Ansuran Bulanan, EIR & Kadar Rata",
+  "description": "Kalkulator pinjaman kereta percuma ikut peraturan sewa beli 2026: ansuran bulanan, EIR vs kadar rata, jumlah faedah dan penyelesaian awal (Rule of 78).",
+  "llms": "Mengira ansuran pinjaman kereta (sewa beli) Malaysia dengan kaedah baki berkurangan dan kadar faedah efektif (EIR), diwajibkan oleh Akta Sewa Beli (Pindaan) mulai 1 Jun 2026 dengan peralihan hingga 31 Mac 2027, atau kaedah kadar rata lama; menukar kadar rata kepada EIR dan sebaliknya; menunjukkan jumlah faedah, jadual tahunan dan jumlah penyelesaian awal termasuk rebat Rule of 78 bagi perjanjian kadar rata lama.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "car",
+  "scripts": ["/assets/js/carloan.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Loan Kereta", null]],
+  "about": ["Pinjaman kereta", "Sewa beli di Malaysia", "Kadar faedah efektif", "Rule of 78"],
+  "app": {
+    "name": "Kalkulator Loan Kereta",
+    "category": "FinanceApplication",
+    "features": ["Ansuran bulanan dengan baki berkurangan (EIR) atau kadar rata", "Penukaran kadar rata kepada EIR", "Jumlah faedah dan jadual tahunan", "Jumlah penyelesaian awal dengan rebat Rule of 78", "Perbandingan Rule of 78 dengan baki berkurangan", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["The Edge Malaysia: Rule of 78 dimansuhkan bagi pinjaman sewa beli", "https://theedgemalaysia.com/node/773936"],
+    ["Persatuan Bank-bank Malaysia: Perubahan pembiayaan sewa beli dan diskaun penyelesaian awal", "https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/"],
+    ["Business Today: Peraturan sewa beli baharu untuk pembeli kereta", "https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/"],
+    ["Baker McKenzie: Pindaan Akta Sewa Beli", "https://www.bakermckenzie.com/en/insight/publications/alerts/2025/10/malaysia-amendments-to-the-hire-purchase-act"]
+  ],
+  "faq": [
+    { "q": "Berapa ansuran bulanan kereta RM100,000?", "a": "Dengan wang pendahuluan 10%, pinjaman ialah RM90,000. Pada EIR 4.50% selama 9 tahun, ansuran ialah RM1,014.98 sebulan dengan jumlah faedah RM19,618. Untuk 7 tahun, ansuran RM1,251.01 sebulan dan jimat faedah kira-kira RM4,533." },
+    { "q": "Apa yang berubah bagi loan kereta pada 2026?", "a": "Akta Sewa Beli (Pindaan) berkuat kuasa pada 1 Jun 2026. Pinjaman kereta baharu mesti menggunakan kaedah baki berkurangan dan menunjukkan kadar faedah efektif (EIR); kadar rata dan Rule of 78 dimansuhkan. Bank diberi tempoh hingga 31 Mac 2027 untuk menukar sistem, jadi semak kaedah dalam perjanjian anda." },
+    { "q": "Bagaimana menukar kadar rata (flat rate) kepada EIR?", "a": "Cari EIR yang memberi ansuran bulanan sama dengan kadar rata. Kadar rata 2.50% selama 9 tahun bersamaan kira-kira EIR 4.64%, 7 tahun kira-kira 4.69% dan 5 tahun kira-kira 4.73%. Secara kasar, EIR hampir dua kali kadar rata." },
+    { "q": "Bagaimana ansuran loan kereta kadar rata dikira?", "a": "Faedah = pinjaman × kadar rata × tahun, kemudian ansuran = (pinjaman + faedah) ÷ bulan. Bagi RM90,000 pada 2.50% selama 9 tahun: faedah RM20,250, ansuran RM110,250 ÷ 108 = RM1,020.83." },
+    { "q": "Apakah Rule of 78?", "a": "Ia kaedah perjanjian kadar rata lama untuk mengira rebat faedah apabila anda menyelesaikan pinjaman lebih awal. Ia meletakkan lebih banyak faedah pada bulan awal, jadi rebatnya lebih kecil berbanding baki berkurangan. Bagi pinjaman RM90,000, 9 tahun pada 2.50% kadar rata, selesai selepas 4 tahun kira-kira RM375 lebih mahal berbanding baki berkurangan." },
+    { "q": "Berapa perlu dibayar untuk selesaikan loan kereta lebih awal?", "a": "Bagi baki berkurangan, anda membayar baki prinsipal yang masih terhutang. Bagi perjanjian kadar rata, anda membayar baki ansuran tolak rebat Rule of 78. Bank juga menawarkan diskaun ihsan bagi penyelesaian awal pinjaman Rule of 78 yang layak, jadi minta surat penyelesaian daripada bank anda." },
+    { "q": "Berapa tempoh maksimum dan margin pembiayaan loan kereta?", "a": "Kebanyakan bank membiayai sehingga 90% harga untuk tempoh sehingga 9 tahun. Kereta terpakai dan rekond biasanya mendapat margin lebih rendah dan tempoh lebih pendek, bergantung pada usia kereta." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator loan kereta</li></ol></nav>
+  <h1>Kalkulator Loan Kereta (Pinjaman Kereta)</h1>
+  <p class="answer"><strong>Kereta RM100,000</strong> dengan wang pendahuluan 10% (pinjaman {{K_LOAN}}) pada EIR {{K_DEFAULT_RATE}} selama 9 tahun berharga <strong>{{K_PAY}} sebulan</strong>, dengan jumlah faedah {{K_INTEREST}}. Mulai <strong>1 Jun 2026</strong>, pinjaman sewa beli baharu menggunakan kaedah baki berkurangan dan menyatakan EIR, bukan kadar rata. Masukkan angka anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/car-loan-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="carForm" novalidate aria-labelledby="car-h">
+      <h2 id="car-h">Butiran pinjaman kereta</h2>
+      <div class="field"><label for="price">Harga kereta</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value="{{K_PRICE}}"></div></div>
+      <div class="field"><label for="downPct">Wang pendahuluan</label><div class="input"><input id="downPct" name="downPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="{{K_DOWN}}"><span aria-hidden="true">%</span></div><p class="help">Kebanyakan bank membiayai sehingga 90%.</p></div>
+      <div class="field"><label for="years">Tempoh pinjaman</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="9" step="1" value="{{K_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+      <div class="field">
+        <label for="method">Kaedah faedah</label>
+        <select class="input" id="method" name="method">{{K_METHOD_OPTIONS}}</select>
+      </div>
+      <div class="field"><label for="rate" id="rateLabel">{{K_RATE_LABEL}}</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{K_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Gunakan kadar dalam surat tawaran bank anda.</p></div>
+      <details class="more-opts" id="carMore">
+        <summary>Penyelesaian awal</summary>
+        <div class="field"><label for="settleAfter">Selesaikan selepas berapa bulan</label><div class="input"><input id="settleAfter" name="settleAfter" type="number" inputmode="numeric" min="0" max="107" step="1" value=""><span aria-hidden="true">bulan</span></div><p class="help">Menunjukkan jumlah penyelesaian dan, bagi pinjaman kadar rata, rebat Rule of 78.</p></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="car-result-h">
+      <h2 id="car-result-h">Ansuran anda</h2>
+      <div class="net">
+        <p>Ansuran bulanan</p>
+        <output id="kPay" for="price downPct years method rate">{{K_PAY}}</output>
+        <p>Pinjaman <strong id="kLoan">{{K_LOAN}}</strong> selama <span id="kTerm">{{K_TERM}}</span> tahun · <span id="kOther">{{K_OTHER}}</span></p>
+      </div>
+      <p class="sr-only" id="kLive" aria-live="polite"></p>
+      <p class="note" id="kSettle" hidden></p>
+      <table class="rows">
+        <caption>Kos pinjaman</caption>
+        <tbody>
+          <tr><th scope="row">Wang pendahuluan</th><td id="kDown">{{K_DOWN_RM}}</td></tr>
+          <tr><th scope="row">Jumlah faedah</th><td id="kInterest">{{K_INTEREST}}</td></tr>
+          <tr><th scope="row">Kadar faedah efektif (EIR)</th><td id="kEir">{{K_EIR}}</td></tr>
+          <tr><th scope="row">Bersamaan kadar rata</th><td id="kFlat">{{K_FLAT}}</td></tr>
+          <tr class="total"><th scope="row">Jumlah bayaran balik</th><td id="kTotal">{{K_TOTAL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Tidak termasuk insurans, cukai jalan dan duti setem RM10 atas perjanjian.</p>
+      <details class="more-opts">
+        <summary>Jadual bayaran balik tahunan</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Jadual bayaran balik tahunan">
+          <table class="data"><thead><tr><th scope="col">Tahun</th><th scope="col">Prinsipal dibayar</th><th scope="col">Faedah dibayar</th><th scope="col">Baki</th></tr></thead><tbody id="kYears">{{K_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="carPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rules">Peraturan sewa beli baharu mulai 1 Jun 2026</h2>
+  <p>Akta Sewa Beli (Pindaan) berkuat kuasa pada <strong>1 Jun 2026</strong>. Bank diberi tempoh hingga <strong>31 Mac 2027</strong> untuk mengemas kini sistem.</p>
+  <ul>
+    <li><strong>Baki berkurangan:</strong> faedah dikenakan hanya atas baki yang masih terhutang, jadi ia berkurang apabila anda membayar.</li>
+    <li><strong>Pendedahan EIR:</strong> tawaran mesti menyatakan kadar faedah efektif, yang boleh dibandingkan terus antara bank.</li>
+    <li><strong>Tiada lagi Rule of 78:</strong> penyelesaian awal memulangkan semua faedah yang belum dikenakan.</li>
+    <li><strong>Pinjaman sedia ada:</strong> perjanjian kadar rata yang lebih awal kekal; bank menawarkan diskaun ihsan untuk penyelesaian awal.</li>
+  </ul>
+
+  <h2 id="table-h">Jadual ansuran loan kereta pada EIR {{K_DEFAULT_RATE}}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Jumlah pinjaman</th><th scope="col">5 tahun</th><th scope="col">7 tahun</th><th scope="col">9 tahun</th></tr></thead>
+      <tbody>
+{{K_INSTALMENTS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Tempoh lebih pendek menaikkan ansuran tetapi mengurangkan faedah: bagi RM90,000, 7 tahun berbanding 9 tahun menjimatkan kira-kira RM4,533.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="convert-h">Penukaran kadar rata kepada EIR</h2>
+  <p>EIR ialah kadar baki berkurangan yang memberi ansuran sama dengan kadar rata. Kerana kadar rata mengenakan faedah atas keseluruhan pinjaman sepanjang tempoh, EIR hampir dua kali ganda.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="convert-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kadar rata</th><th scope="col">EIR, 5 tahun</th><th scope="col">EIR, 7 tahun</th><th scope="col">EIR, 9 tahun</th></tr></thead>
+      <tbody>
+{{K_CONVERT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="flat">Cara loan kereta kadar rata dan Rule of 78 berfungsi</h2>
+  <p>Bagi perjanjian yang masih menggunakan kadar rata: <code>faedah = pinjaman × kadar × tahun</code> dan <code>ansuran = (pinjaman + faedah) ÷ bulan</code>. RM90,000 pada kadar rata 2.50% selama 9 tahun berharga {{K_FLAT_PAY}} sebulan dengan faedah {{K_FLAT_INTEREST}}, bersamaan EIR {{K_FLAT_EIR}}.</p>
+  <p>Apabila diselesaikan awal, rebat Rule of 78 ialah <code>jumlah faedah × k(k + 1) ÷ n(n + 1)</code>, dengan <strong>k</strong> bulan berbaki dan <strong>n</strong> jumlah bulan. Menyelesaikan pinjaman itu selepas 4 tahun berharga {{K_R78_PAY}}, menjimatkan {{K_R78_SAVED}} daripada baki ansuran tetapi {{K_R78_EXTRA}} lebih mahal berbanding baki berkurangan.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://theedgemalaysia.com/node/773936" rel="noopener">The Edge Malaysia: Rule of 78 dimansuhkan</a></li>
+    <li><a href="https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/" rel="noopener">ABM: perubahan sewa beli dan diskaun penyelesaian awal</a></li>
+    <li><a href="https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/" rel="noopener">Business Today: peraturan sewa beli baharu</a></li>
+    <li><a href="https://www.bakermckenzie.com/en/insight/publications/alerts/2025/10/malaysia-amendments-to-the-hire-purchase-act" rel="noopener">Baker McKenzie: pindaan Akta Sewa Beli</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Ini anggaran, bukan tawaran pinjaman atau nasihat kewangan. Surat tawaran dan penyata penyelesaian bank anda menentukan angka sebenar.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan DSR</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP dan PCB</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>

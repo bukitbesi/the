@@ -139,5 +139,7 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .ad ins{display:block;min-height:280px}
 @media(min-width:768px){.ad ins{min-height:250px}}
 .ad:has(ins[data-ad-status=unfilled]){display:none}
+/* Google's documented rule for unfilled units; also collapses empty Auto ads containers that AdSense appends after the footer. */
+ins.adsbygoogle[data-ad-status=unfilled],.google-auto-placed:has(ins[data-ad-status=unfilled]){display:none!important}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}

@@ -9,6 +9,7 @@ const image = rect(3, 4, 18, 16) + circle(8, 9, 1.5) + p('m3 17 5-5 4 4 3-3 6 6'
 const chat = p('M20 15a3 3 0 0 1-3 3H8l-5 3V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3Z');
 
 export const icons = {
+  'car-loan-calculator-malaysia': p('M5 17H3v-5l2-5h11l3 5h2v5h-2') + circle(7.5, 17, 2) + circle(16.5, 17, 2) + p('M9.5 17h5M4 12h16'),
   'home-loan-calculator-malaysia': p('M3 11 12 3l9 8') + p('M5 9.5V21h14V9.5') + p('M10 21v-6h4v6'),
   'epf-calculator': p('M3 20h18') + rect(5, 12, 3, 8, 1) + rect(10.5, 8, 3, 12, 1) + rect(16, 4, 3, 16, 1),
   'income-tax-calculator-malaysia': p('M6 2h9l4 4v16H6Z') + p('M9 10h7M9 14h7M9 18h4') + p('M15 2v4h4'),

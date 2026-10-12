@@ -2,7 +2,7 @@
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-00cec9)](LICENSE)
+[![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
 directory of 48 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
@@ -77,6 +77,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-kwsp/](https://tool.thebukitbesi.com/kalkulator-kwsp/) | Bahasa Melayu | kalkulator kwsp, dividen kwsp, simpanan persaraan |
 | [/home-loan-calculator-malaysia/](https://tool.thebukitbesi.com/home-loan-calculator-malaysia/) | English | home loan calculator malaysia, loan calculator, stamp duty, DSR |
 | [/kalkulator-pinjaman-perumahan/](https://tool.thebukitbesi.com/kalkulator-pinjaman-perumahan/) | Bahasa Melayu | kalkulator pinjaman perumahan, kalkulator loan rumah, duti setem |
+| [/car-loan-calculator-malaysia/](https://tool.thebukitbesi.com/car-loan-calculator-malaysia/) | English | car loan calculator malaysia, flat rate to EIR, Rule of 78 |
+| [/kalkulator-loan-kereta/](https://tool.thebukitbesi.com/kalkulator-loan-kereta/) | Bahasa Melayu | kalkulator loan kereta, pinjaman kereta, EIR |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 
@@ -91,6 +93,10 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Yearly upkeep (EPF):** when the dividend is announced (February/March), add it to `DIVIDENDS` in `epf-core.js`, update `FACTS.latest`, `latestYear`, `verified` and the expectations in `tools-src/tests/epf.test.mjs`.
 
 **Upkeep (home loan):** after each OPR change, Budget or SRO revision, update `FACTS` in `loan-core.js` (`opr`, `oprSince`, `defaultRate`, stamp duty, legal fee bands, first-home rules, `verified`) and `tools-src/tests/loan.test.mjs`. When the Finance Act 2027 passes, relabel the Budget 2027 first-home option.
+
+**Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
+
+**Share buttons:** every page with an `app` block gets a share bar (WhatsApp, Telegram, Facebook, X, copy link, device share sheet) before the bottom ad, and a "Share result" button in its `.tool-actions`. Plain links and one small inline script; no third-party code.
 
 **Yearly upkeep (tax):** after each Budget, add the new year to `YEARS` in `tax-core.js` (bands, individual relief) and update relief limits, labels in `build.mjs` (`TAX_LABELS`) and `tools-src/tests/tax.test.mjs`. When the Finance Act passes, drop the `proposal` flag.
 
@@ -120,6 +126,7 @@ assets/js/salary-*.js       salary calculator core and UI (bundled to docs/asset
 assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/10 split, dividend method, RIA benchmarks
 assets/js/loan-core.js      home loan: instalment, amortisation, stamp duty, SRO 2023 legal fees, first-home exemption, DSR
+assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 settlement
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/PWA/sw.js            service-worker source template
 ```
@@ -163,4 +170,4 @@ this and copies `CNAME` into `docs/`. See [the domain migration](documentation/d
 
 ## License
 
-MIT
+Copyright © The Bukit Besi. All rights reserved. The code and content are proprietary; see [LICENSE](LICENSE). No permission is given to copy, host or adapt them.
