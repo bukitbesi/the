@@ -183,6 +183,8 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .ad ins{display:block;min-height:280px}
 @media(min-width:768px){.ad ins{min-height:250px}}
 .ad:has(ins[data-ad-status=unfilled]){display:none}
+/* Google's documented rule for unfilled units; also collapses empty Auto ads containers that AdSense appends after the footer. */
+ins.adsbygoogle[data-ad-status=unfilled],.google-auto-placed:has(ins[data-ad-status=unfilled]){display:none!important}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 /* Tool and policy pages. */
@@ -292,6 +294,13 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .meter i{display:block;height:100%;border-radius:99px;background:var(--grad)}
 .meter span{position:absolute;top:-20px;transform:translateX(-50%);font-size:.7rem;color:var(--text3);white-space:nowrap}
 .meter span::after{content:"";position:absolute;left:50%;top:18px;width:1px;height:14px;background:var(--border2)}
+/* Share bar and share-result button: inline SVG icons, no third-party code. */
+.share{margin-top:40px}
+.share h2{font-size:1.1rem;margin-bottom:12px}
+.share-row{display:flex;flex-wrap:wrap;gap:10px}
+.btn svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-whatsapp svg{color:#1da851}.share-telegram svg{color:#229ed9}.share-facebook svg{color:#1877f2}
+@media print{.share{display:none}}
 </style>
 
 </head>
@@ -370,7 +379,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <caption>Pelepasan yang dituntut</caption>
         <tbody id="reliefRows" data-self="Individu (automatik)"><tr><th scope="row">Individu (automatik)</th><td>RM 9,000.00</td></tr><tr><th scope="row">KWSP (bahagian anda)</th><td>RM 4,000.00</td></tr><tr><th scope="row">PERKESO dan SIP</th><td>RM 350.00</td></tr></tbody>
       </table>
-      <div class="tool-actions"><button type="button" class="btn ghost sm" id="taxPrint">Cetak atau simpan PDF</button></div>
+      <div class="tool-actions"><button type="button" class="btn sm" data-share="result" data-done="Pautan disalin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Kongsi keputusan</button><button type="button" class="btn ghost sm" id="taxPrint">Cetak atau simpan PDF</button></div>
     </section>
   </div>
 </div>
@@ -484,6 +493,17 @@ select.input{max-width:100%;text-overflow:ellipsis}
       <details><summary>Adakah maklumat saya disimpan atau dihantar?</summary><p>Tidak. Kalkulator ini berfungsi sepenuhnya dalam pelayar anda. Pautan yang disalin menyimpan input selepas tanda #, yang tidak dihantar oleh pelayar ke mana-mana pelayan.</p></details>
   </div>
 </section>
+<section class="container share" aria-labelledby="share-h">
+  <h2 id="share-h">Kongsi kalkulator ini</h2>
+  <div class="share-row">
+    <a class="btn ghost sm share-whatsapp" href="https://wa.me/?text=Kalkulator%20Cukai%20Pendapatan%20TT2026%20%26%20Bajet%202027%20https%3A%2F%2Ftool.thebukitbesi.com%2Fkalkulator-cukai-pendapatan%2F" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4Z M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1.2-.5-2.2-1.5-2.7-2.7l.8-1-1-2Z"/></svg>WhatsApp</a>
+    <a class="btn ghost sm share-telegram" href="https://t.me/share/url?url=https%3A%2F%2Ftool.thebukitbesi.com%2Fkalkulator-cukai-pendapatan%2F&amp;text=Kalkulator%20Cukai%20Pendapatan%20TT2026%20%26%20Bajet%202027" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 4 3 11l6 2 2 6 3-4 5 4Z M9 13l12-9"/></svg>Telegram</a>
+    <a class="btn ghost sm share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftool.thebukitbesi.com%2Fkalkulator-cukai-pendapatan%2F" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2Z"/></svg>Facebook</a>
+    <a class="btn ghost sm share-x" href="https://x.com/intent/post?url=https%3A%2F%2Ftool.thebukitbesi.com%2Fkalkulator-cukai-pendapatan%2F&amp;text=Kalkulator%20Cukai%20Pendapatan%20TT2026%20%26%20Bajet%202027" target="_blank" rel="noopener nofollow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4 4 20"/></svg>X</a>
+    <button type="button" class="btn ghost sm" data-share="copy" data-url="https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/" data-done="Pautan disalin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Salin pautan</button>
+    <button type="button" class="btn ghost sm" data-share="native" data-url="https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Pilihan lain</button>
+  </div>
+</section>
 <div class="ad"><p class="ad-label">Iklan</p><ins class="adsbygoogle" data-ad-client="ca-pub-0182550701431501" data-ad-slot="9686493684" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
 <section class="container prose" aria-labelledby="related-h">
   <h2 id="related-h">Alat berkaitan</h2>
@@ -509,10 +529,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <ul>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
+          <li><a href="/car-loan-calculator-malaysia/">Car Loan Calculator Malaysia</a></li>
           <li><a href="/home-loan-calculator-malaysia/">Home Loan Calculator Malaysia</a></li>
           <li><a href="/epf-calculator/">EPF Calculator (KWSP)</a></li>
           <li><a href="/cgpa-to-percentage/">CGPA to Percentage Calculator</a></li>
-          <li><a href="/cgpa-calculator/">CGPA Calculator</a></li>
         </ul>
       </nav>
       <nav aria-label="Kategori">
@@ -555,6 +575,20 @@ select.input{max-width:100%;text-overflow:ellipsis}
 </aside>
 <script src="/assets/PWA/pwa.min.js" defer></script>
 <script src="/assets/js/tax.js" defer></script>
+<script>
+(function(){
+  var native=!!navigator.share;
+  document.querySelectorAll('[data-share="native"]').forEach(function(b){b.hidden=!native});
+  function done(b){var t=b.lastChild,old=t.nodeValue;t.nodeValue=b.getAttribute("data-done");setTimeout(function(){t.nodeValue=old},2000)}
+  function copy(b,u){if(navigator.clipboard)navigator.clipboard.writeText(u).then(function(){done(b)},function(){})}
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-share]");if(!b)return;
+    var kind=b.getAttribute("data-share"),u=kind==="result"?location.href:b.getAttribute("data-url");
+    if(kind!=="copy"&&native){navigator.share({title:document.title,url:u}).catch(function(){});return}
+    copy(b,u);
+  });
+})();
+</script>
 <script>
 (function(){
   var root=document.documentElement,btn=document.getElementById("themeToggle"),meta=document.querySelector('meta[name="theme-color"]');

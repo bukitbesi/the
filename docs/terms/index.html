@@ -39,7 +39,7 @@
 <meta name="twitter:description" content="Terms for using The Bukit Besi Tools: free tools provided as is, calculator results are estimates and not financial, tax or legal advice, and external links.">
 <meta name="twitter:image" content="https://tool.thebukitbesi.com/assets/favicon-image/og-image.jpg">
 <meta name="twitter:image:alt" content="The Bukit Besi Tools: free online tools for developers, bloggers and creators">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.thebukitbesi.com/#organization","name":"The Bukit Besi","url":"https://www.thebukitbesi.com/","logo":{"@type":"ImageObject","url":"https://tool.thebukitbesi.com/assets/favicon-image/bukit-besi-512.webp","width":512,"height":512},"sameAs":["https://x.com/BukitBesiBlog"]},{"@type":"WebSite","@id":"https://tool.thebukitbesi.com/#website","url":"https://tool.thebukitbesi.com/","name":"The Bukit Besi Tools","alternateName":["Bukit Besi Tools","The Bukit Besi free online tools"],"inLanguage":["en","ms"],"publisher":{"@id":"https://www.thebukitbesi.com/#organization"}},{"@type":"WebPage","@id":"https://tool.thebukitbesi.com/terms/#webpage","url":"https://tool.thebukitbesi.com/terms/","name":"Terms of Use","description":"Terms for using The Bukit Besi Tools: free tools provided as is, calculator results are estimates and not financial, tax or legal advice, and external links.","inLanguage":"en-MY","isPartOf":{"@id":"https://tool.thebukitbesi.com/#website"},"breadcrumb":{"@id":"https://tool.thebukitbesi.com/terms/#breadcrumb"},"datePublished":"2026-10-10","dateModified":"2026-10-10","author":{"@id":"https://www.thebukitbesi.com/#organization"},"publisher":{"@id":"https://www.thebukitbesi.com/#organization"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://tool.thebukitbesi.com/assets/favicon-image/og-image.jpg","width":1200,"height":630}},{"@type":"BreadcrumbList","@id":"https://tool.thebukitbesi.com/terms/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://tool.thebukitbesi.com/"},{"@type":"ListItem","position":2,"name":"Terms of use"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.thebukitbesi.com/#organization","name":"The Bukit Besi","url":"https://www.thebukitbesi.com/","logo":{"@type":"ImageObject","url":"https://tool.thebukitbesi.com/assets/favicon-image/bukit-besi-512.webp","width":512,"height":512},"sameAs":["https://x.com/BukitBesiBlog"]},{"@type":"WebSite","@id":"https://tool.thebukitbesi.com/#website","url":"https://tool.thebukitbesi.com/","name":"The Bukit Besi Tools","alternateName":["Bukit Besi Tools","The Bukit Besi free online tools"],"inLanguage":["en","ms"],"publisher":{"@id":"https://www.thebukitbesi.com/#organization"}},{"@type":"WebPage","@id":"https://tool.thebukitbesi.com/terms/#webpage","url":"https://tool.thebukitbesi.com/terms/","name":"Terms of Use","description":"Terms for using The Bukit Besi Tools: free tools provided as is, calculator results are estimates and not financial, tax or legal advice, and external links.","inLanguage":"en-MY","isPartOf":{"@id":"https://tool.thebukitbesi.com/#website"},"breadcrumb":{"@id":"https://tool.thebukitbesi.com/terms/#breadcrumb"},"datePublished":"2026-10-10","dateModified":"2026-10-12","author":{"@id":"https://www.thebukitbesi.com/#organization"},"publisher":{"@id":"https://www.thebukitbesi.com/#organization"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://tool.thebukitbesi.com/assets/favicon-image/og-image.jpg","width":1200,"height":630}},{"@type":"BreadcrumbList","@id":"https://tool.thebukitbesi.com/terms/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://tool.thebukitbesi.com/"},{"@type":"ListItem","position":2,"name":"Terms of use"}]}]}</script>
 <style>
 /* Shared by every page: tokens (light + dark), header, sections, FAQ, footer, PWA notice, ads. */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -182,6 +182,8 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .ad ins{display:block;min-height:280px}
 @media(min-width:768px){.ad ins{min-height:250px}}
 .ad:has(ins[data-ad-status=unfilled]){display:none}
+/* Google's documented rule for unfilled units; also collapses empty Auto ads containers that AdSense appends after the footer. */
+ins.adsbygoogle[data-ad-status=unfilled],.google-auto-placed:has(ins[data-ad-status=unfilled]){display:none!important}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 /* Tool and policy pages. */
@@ -291,6 +293,13 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .meter i{display:block;height:100%;border-radius:99px;background:var(--grad)}
 .meter span{position:absolute;top:-20px;transform:translateX(-50%);font-size:.7rem;color:var(--text3);white-space:nowrap}
 .meter span::after{content:"";position:absolute;left:50%;top:18px;width:1px;height:14px;background:var(--border2)}
+/* Share bar and share-result button: inline SVG icons, no third-party code. */
+.share{margin-top:40px}
+.share h2{font-size:1.1rem;margin-bottom:12px}
+.share-row{display:flex;flex-wrap:wrap;gap:10px}
+.btn svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-whatsapp svg{color:#1da851}.share-telegram svg{color:#229ed9}.share-facebook svg{color:#1877f2}
+@media print{.share{display:none}}
 </style>
 
 </head>
@@ -314,7 +323,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
 <div class="container prose">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li aria-current="page">Terms of use</li></ol></nav>
   <h1>Terms of Use</h1>
-  <p class="meta"><span>Effective <time datetime="2026-10-10">10 October 2026</time></span></p>
+  <p class="meta"><span>Effective <time datetime="2026-10-12">12 October 2026</time></span></p>
 
   <p>By using <strong>https://tool.thebukitbesi.com</strong> ("this site"), operated by The Bukit Besi, you agree to these terms. If you do not agree, please do not use the site.</p>
 
@@ -331,7 +340,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
   <p>Do not attempt to disrupt the site, overload it with automated requests or use it for unlawful purposes.</p>
 
   <h2>Content and code</h2>
-  <p>Page text, design and branding belong to The Bukit Besi. The site's source code is published under the MIT License. Trademarks and agency names belong to their owners and are used only to describe the rules each tool applies.</p>
+  <p>Page text, design and branding belong to The Bukit Besi. The site's source code, calculators and data tables are proprietary; copying, republishing or hosting them elsewhere without written permission is not allowed. Trademarks and agency names belong to their owners and are used only to describe the rules each tool applies.</p>
 
   <h2>External links and advertising</h2>
   <p>This site links to other websites and may show advertisements. We are not responsible for the content, products or practices of third parties. See the <a href="/privacy/">privacy policy</a> for how advertising cookies work.</p>
@@ -356,10 +365,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <ul>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
+          <li><a href="/car-loan-calculator-malaysia/">Car Loan Calculator Malaysia</a></li>
           <li><a href="/home-loan-calculator-malaysia/">Home Loan Calculator Malaysia</a></li>
           <li><a href="/epf-calculator/">EPF Calculator (KWSP)</a></li>
           <li><a href="/cgpa-to-percentage/">CGPA to Percentage Calculator</a></li>
-          <li><a href="/cgpa-calculator/">CGPA Calculator</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

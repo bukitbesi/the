@@ -1,0 +1,154 @@
+<!--page
+{
+  "path": "/car-loan-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-loan-kereta/" },
+  "title": "Car Loan Calculator Malaysia 2026: Monthly Instalment, EIR & Flat",
+  "description": "Free car loan calculator under the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, total interest and early settlement (Rule of 78).",
+  "llms": "Calculates Malaysian car loan (hire purchase) instalments by the reducing-balance method with an effective interest rate (EIR), required by the Hire-Purchase (Amendment) Act from 1 June 2026 with a transition to 31 March 2027, or by the older flat-rate method; converts flat rate to EIR and back; shows total interest, a yearly schedule and the early settlement amount, including the Rule of 78 rebate for older flat-rate agreements.",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
+  "render": "car",
+  "scripts": ["/assets/js/carloan.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Car Loan Calculator", null]],
+  "about": ["Car loan", "Hire purchase in Malaysia", "Effective interest rate", "Rule of 78"],
+  "app": {
+    "name": "Car Loan Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Monthly instalment by reducing balance (EIR) or flat rate", "Flat rate to EIR conversion", "Total interest and yearly schedule", "Early settlement amount with Rule of 78 rebate", "Comparison of Rule of 78 with reducing balance", "Works offline"]
+  },
+  "citations": [
+    ["The Edge Malaysia: Rule of 78 scrapped for hire purchase loans", "https://theedgemalaysia.com/node/773936"],
+    ["Association of Banks in Malaysia: Changes to hire purchase financing with early settlement discounts", "https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/"],
+    ["Business Today: New hire purchase rules, what it means for car buyers", "https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/"],
+    ["Baker McKenzie: Amendments to the Hire-Purchase Act", "https://www.bakermckenzie.com/en/insight/publications/alerts/2025/10/malaysia-amendments-to-the-hire-purchase-act"]
+  ],
+  "faq": [
+    { "q": "How much is the monthly instalment for a RM100,000 car?", "a": "With a 10% down payment the loan is RM90,000. At 4.50% EIR over 9 years the instalment is RM1,014.98 a month, with RM19,618 total interest. Over 7 years it is RM1,251.01 a month and saves about RM4,533 in interest." },
+    { "q": "What changed for car loans in 2026?", "a": "The Hire-Purchase (Amendment) Act took effect on 1 June 2026. New car loans must use the reducing-balance method and show an effective interest rate (EIR), and the flat rate and Rule of 78 are abolished. Banks have until 31 March 2027 to move their systems, so check which method your agreement uses." },
+    { "q": "How do I convert a flat rate to EIR?", "a": "Find the EIR that gives the same monthly instalment as the flat rate. A 2.50% flat rate over 9 years equals about 4.64% EIR, over 7 years about 4.69% and over 5 years about 4.73%. As a rough guide, EIR is a little under twice the flat rate." },
+    { "q": "How is a flat-rate car loan instalment calculated?", "a": "Interest = loan × flat rate × years, then instalment = (loan + interest) ÷ months. For RM90,000 at 2.50% for 9 years: interest RM20,250, instalment RM110,250 ÷ 108 = RM1,020.83." },
+    { "q": "What is the Rule of 78?", "a": "It is the method older flat-rate agreements use to work out the interest rebate when you settle early. It assigns more interest to the early months, so you get back less than under reducing balance. On a RM90,000, 9-year loan at 2.50% flat, settling after 4 years costs about RM375 more than it would under reducing balance." },
+    { "q": "How much do I pay to settle my car loan early?", "a": "Under reducing balance you pay the principal still owed. Under a flat-rate agreement you pay the remaining instalments minus the Rule of 78 rebate. Banks are also offering goodwill discounts on early settlement of eligible Rule of 78 loans, so ask your bank for a settlement letter." },
+    { "q": "What is the maximum car loan tenure and margin of financing?", "a": "Most banks finance up to 90% of the price for up to 9 years. Used and recond cars often get a lower margin and a shorter tenure, depending on the car's age." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Car loan calculator</li></ol></nav>
+  <h1>Car Loan Calculator Malaysia</h1>
+  <p class="answer">A <strong>RM100,000 car</strong> with 10% down payment (a {{K_LOAN}} loan) at {{K_DEFAULT_RATE}} EIR over 9 years costs <strong>{{K_PAY}} a month</strong>, with {{K_INTEREST}} total interest. Since <strong>1 June 2026</strong>, new hire purchase loans use the reducing-balance method and quote an EIR instead of a flat rate. Enter your own figures below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-loan-kereta/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="carForm" novalidate aria-labelledby="car-h">
+      <h2 id="car-h">Your car loan</h2>
+      <div class="field"><label for="price">Car price</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value="{{K_PRICE}}"></div></div>
+      <div class="field"><label for="downPct">Down payment</label><div class="input"><input id="downPct" name="downPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="{{K_DOWN}}"><span aria-hidden="true">%</span></div><p class="help">Most banks finance up to 90%.</p></div>
+      <div class="field"><label for="years">Loan tenure</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="9" step="1" value="{{K_YEARS}}"><span aria-hidden="true">years</span></div></div>
+      <div class="field">
+        <label for="method">Interest method</label>
+        <select class="input" id="method" name="method">{{K_METHOD_OPTIONS}}</select>
+      </div>
+      <div class="field"><label for="rate" id="rateLabel">{{K_RATE_LABEL}}</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{K_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Use the rate in your bank's offer letter.</p></div>
+      <details class="more-opts" id="carMore">
+        <summary>Early settlement</summary>
+        <div class="field"><label for="settleAfter">Settle after this many months</label><div class="input"><input id="settleAfter" name="settleAfter" type="number" inputmode="numeric" min="0" max="107" step="1" value=""><span aria-hidden="true">months</span></div><p class="help">Shows the settlement amount and, for flat-rate loans, the Rule of 78 rebate.</p></div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="car-result-h">
+      <h2 id="car-result-h">Your instalment</h2>
+      <div class="net">
+        <p>Monthly instalment</p>
+        <output id="kPay" for="price downPct years method rate">{{K_PAY}}</output>
+        <p>Loan <strong id="kLoan">{{K_LOAN}}</strong> over <span id="kTerm">{{K_TERM}}</span> years · <span id="kOther">{{K_OTHER}}</span></p>
+      </div>
+      <p class="sr-only" id="kLive" aria-live="polite"></p>
+      <p class="note" id="kSettle" hidden></p>
+      <table class="rows">
+        <caption>Cost of the loan</caption>
+        <tbody>
+          <tr><th scope="row">Down payment</th><td id="kDown">{{K_DOWN_RM}}</td></tr>
+          <tr><th scope="row">Total interest</th><td id="kInterest">{{K_INTEREST}}</td></tr>
+          <tr><th scope="row">Effective interest rate (EIR)</th><td id="kEir">{{K_EIR}}</td></tr>
+          <tr><th scope="row">Flat rate equivalent</th><td id="kFlat">{{K_FLAT}}</td></tr>
+          <tr class="total"><th scope="row">Total repaid</th><td id="kTotal">{{K_TOTAL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Excludes insurance, road tax and the RM10 stamp duty on the agreement.</p>
+      <details class="more-opts">
+        <summary>Yearly repayment schedule</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Yearly repayment schedule">
+          <table class="data"><thead><tr><th scope="col">Year</th><th scope="col">Principal paid</th><th scope="col">Interest paid</th><th scope="col">Balance</th></tr></thead><tbody id="kYears">{{K_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="carPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rules">New hire purchase rules from 1 June 2026</h2>
+  <p>The Hire-Purchase (Amendment) Act took effect on <strong>1 June 2026</strong>. Banks have until <strong>31 March 2027</strong> to update their systems.</p>
+  <ul>
+    <li><strong>Reducing balance:</strong> interest is charged only on what you still owe, so it falls as you repay.</li>
+    <li><strong>EIR disclosure:</strong> offers must show the effective interest rate, which is directly comparable between banks.</li>
+    <li><strong>No more Rule of 78:</strong> settling early returns all the interest you have not yet been charged.</li>
+    <li><strong>Existing loans:</strong> flat-rate agreements signed earlier keep their terms; banks are offering goodwill discounts to settle them early.</li>
+  </ul>
+
+  <h2 id="table-h">Car loan instalment table at {{K_DEFAULT_RATE}} EIR</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Loan amount</th><th scope="col">5 years</th><th scope="col">7 years</th><th scope="col">9 years</th></tr></thead>
+      <tbody>
+{{K_INSTALMENTS}}
+      </tbody>
+    </table>
+  </div>
+  <p>A shorter tenure raises the instalment but cuts interest: on RM90,000, 7 years instead of 9 saves about RM4,533.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="convert-h">Flat rate to EIR conversion</h2>
+  <p>The EIR is the reducing-balance rate that gives the same instalment as a flat rate. Because a flat rate charges interest on the full loan for the whole term, the EIR is close to double.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="convert-h">
+    <table class="data">
+      <thead><tr><th scope="col">Flat rate</th><th scope="col">EIR, 5 years</th><th scope="col">EIR, 7 years</th><th scope="col">EIR, 9 years</th></tr></thead>
+      <tbody>
+{{K_CONVERT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="flat">How flat-rate car loans and the Rule of 78 work</h2>
+  <p>For agreements still on a flat rate: <code>interest = loan × rate × years</code> and <code>instalment = (loan + interest) ÷ months</code>. RM90,000 at 2.50% flat for 9 years costs {{K_FLAT_PAY}} a month and carries {{K_FLAT_INTEREST}} interest, equal to {{K_FLAT_EIR}} EIR.</p>
+  <p>When you settle early, the Rule of 78 rebate is <code>total interest × k(k + 1) ÷ n(n + 1)</code>, where <strong>k</strong> is the months left and <strong>n</strong> the total months. Settling that loan after 4 years costs {{K_R78_PAY}}, saving {{K_R78_SAVED}} of the remaining instalments but {{K_R78_EXTRA}} more than reducing balance would.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://theedgemalaysia.com/node/773936" rel="noopener">The Edge Malaysia: Rule of 78 scrapped</a></li>
+    <li><a href="https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/" rel="noopener">ABM: hire purchase changes and early settlement discounts</a></li>
+    <li><a href="https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/" rel="noopener">Business Today: new hire purchase rules for car buyers</a></li>
+    <li><a href="https://www.bakermckenzie.com/en/insight/publications/alerts/2025/10/malaysia-amendments-to-the-hire-purchase-act" rel="noopener">Baker McKenzie: amendments to the Hire-Purchase Act</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> These are estimates, not a loan offer or financial advice. Your bank's offer letter and settlement statement decide the actual figures.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

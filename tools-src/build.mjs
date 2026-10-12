@@ -19,6 +19,7 @@ const grades = require('../assets/js/grade-core.js');
 const taxes = require('../assets/js/tax-core.js');
 const epfCore = require('../assets/js/epf-core.js');
 const loanCore = require('../assets/js/loan-core.js');
+const carCore = require('../assets/js/carloan-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -83,14 +84,16 @@ const T = {
     FOOTER_BLURB: 'Free online tools and Malaysian calculators for developers, bloggers and everyday tasks.',
     POPULAR: 'Popular tools', CATEGORIES: 'Categories', RESOURCES: 'Resources', ABOUT: 'About', CONTACT: 'Contact',
     PRIVACY: 'Privacy policy', TERMS: 'Terms of use', RIGHTS: 'All rights reserved.', TAGLINE: 'Free tools for the creator community',
-    UPDATE: 'Update', OPEN_ANYWAY: 'Open tool anyway', DISMISS: 'Dismiss', AD: 'Advertisement', ALL_TOOLS: 'All tools', OG_LOCALE: 'en_US'
+    UPDATE: 'Update', OPEN_ANYWAY: 'Open tool anyway', DISMISS: 'Dismiss', AD: 'Advertisement', ALL_TOOLS: 'All tools', OG_LOCALE: 'en_US',
+    SHARE_H: 'Share this calculator', SHARE_RESULT: 'Share result', COPY: 'Copy link', COPIED: 'Link copied', MORE: 'More options'
   },
   ms: {
     SKIP: 'Langkau ke kandungan utama', NAV: 'Laman', DARK: 'Mod gelap', INSTALL: 'Pasang aplikasi',
     FOOTER_BLURB: 'Alat dalam talian percuma dan kalkulator Malaysia untuk pembangun, penulis blog dan urusan harian.',
     POPULAR: 'Alat popular', CATEGORIES: 'Kategori', RESOURCES: 'Sumber', ABOUT: 'Tentang kami', CONTACT: 'Hubungi',
     PRIVACY: 'Dasar privasi', TERMS: 'Terma penggunaan', RIGHTS: 'Hak cipta terpelihara.', TAGLINE: 'Alat percuma untuk komuniti pencipta',
-    UPDATE: 'Kemas kini', OPEN_ANYWAY: 'Buka juga', DISMISS: 'Tutup', AD: 'Iklan', ALL_TOOLS: 'Semua alat', OG_LOCALE: 'ms_MY'
+    UPDATE: 'Kemas kini', OPEN_ANYWAY: 'Buka juga', DISMISS: 'Tutup', AD: 'Iklan', ALL_TOOLS: 'Semua alat', OG_LOCALE: 'ms_MY',
+    SHARE_H: 'Kongsi kalkulator ini', SHARE_RESULT: 'Kongsi keputusan', COPY: 'Salin pautan', COPIED: 'Pautan disalin', MORE: 'Pilihan lain'
   }
 };
 const CAT_MS = { dev: 'Alat Pembangun', seo: 'Alat SEO', content: 'Alat Kandungan', design: 'Alat Reka Bentuk', ai: 'Alat AI', util: 'Utiliti', calc: 'Kalkulator' };
@@ -455,7 +458,80 @@ function loanMap(lang) {
     L_VERIFIED: longDate(F.verified, lang), L_VERIFIED_ISO: F.verified
   };
 }
-const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap };
+// ---- Car loan (hire purchase), EN + BM
+const CAR_EXAMPLE = { price: 100000, downPct: 10, years: 9, method: 'eir', rate: carCore.FACTS.defaultRate };
+function carMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const F = carCore.FACTS, r = carCore.calculate(CAR_EXAMPLE);
+  const flat = carCore.calculate({ ...CAR_EXAMPLE, method: 'flat', rate: F.defaultFlat, settleAfter: 48 });
+  const pct = n => n.toFixed(2) + '%';
+  const schedule = r.schedule.map(y => `<tr><th scope="row">${y.year}</th><td>${rm0(y.principal)}</td><td>${rm0(y.interest)}</td><td>${rm0(y.balance)}</td></tr>`).join('\n');
+  const instalments = [30000, 50000, 70000, 90000, 120000, 150000].map(loan =>
+    `<tr><th scope="row">${rm0(loan)}</th>${[5, 7, 9].map(y => `<td>${money(carCore.eirInstalment(loan, F.defaultRate, y), lang)}</td>`).join('')}</tr>`).join('\n');
+  const convert = [2.0, 2.5, 3.0, 3.5, 4.0].map(fr =>
+    `<tr><th scope="row">${pct(fr)}</th>${[5, 7, 9].map(y => `<td>${pct(carCore.flatToEir(fr, y))}</td>`).join('')}</tr>`).join('\n');
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  return {
+    K_PRICE: CAR_EXAMPLE.price, K_DOWN: CAR_EXAMPLE.downPct, K_YEARS: CAR_EXAMPLE.years, K_RATE: CAR_EXAMPLE.rate,
+    K_METHOD_OPTIONS: [
+      opt('eir', 'Reducing balance, EIR (new rules from 1 June 2026)', 'Baki berkurangan, EIR (peraturan baharu mulai 1 Jun 2026)', true),
+      opt('flat', 'Flat rate (Rule of 78, older agreements)', 'Kadar rata (Rule of 78, perjanjian lama)')
+    ].join(''),
+    K_RATE_LABEL: L ? 'Kadar faedah efektif (EIR) setahun' : 'Effective interest rate (EIR) a year',
+    K_PAY: money(r.monthly, lang), K_LOAN: rm0(r.loan), K_TERM: r.years, K_OTHER: L ? `Bersamaan kadar rata ${pct(r.flat)}` : `Equal to a ${pct(r.flat)} flat rate`,
+    K_INTEREST: rm0(r.interest), K_TOTAL: rm0(r.totalPaid), K_DOWN_RM: rm0(r.downPayment), K_EIR: pct(r.eir), K_FLAT: pct(r.flat),
+    K_SCHEDULE: schedule, K_INSTALMENTS: instalments, K_CONVERT: convert, K_DEFAULT_RATE: pct(F.defaultRate),
+    K_FLAT_PAY: money(flat.monthly, lang), K_FLAT_EIR: pct(flat.eir), K_FLAT_INTEREST: rm0(flat.interest),
+    K_R78_PAY: rm0(flat.settlement.amount), K_R78_EXTRA: rm0(flat.settlement.extraVsReducing), K_R78_SAVED: rm0(flat.settlement.saved),
+    K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified
+  };
+}
+const RENDERERS = { cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap };
+
+// ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
+// where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
+const SHARE_ICONS = {
+  whatsapp: 'M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4Z M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1.2-.5-2.2-1.5-2.7-2.7l.8-1-1-2Z',
+  telegram: 'M21 4 3 11l6 2 2 6 3-4 5 4Z M9 13l12-9',
+  facebook: 'M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2Z',
+  x: 'M4 4l16 16M20 4 4 20',
+  link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
+  more: 'M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13'
+};
+const shareIcon = k => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${SHARE_ICONS[k]}"/></svg>`;
+function shareBlock(p, url) {
+  const t = T[p.lang], u = encodeURIComponent(url), msg = encodeURIComponent(p.title);
+  const nets = [
+    ['whatsapp', 'WhatsApp', `https://wa.me/?text=${msg}%20${u}`],
+    ['telegram', 'Telegram', `https://t.me/share/url?url=${u}&text=${msg}`],
+    ['facebook', 'Facebook', `https://www.facebook.com/sharer/sharer.php?u=${u}`],
+    ['x', 'X', `https://x.com/intent/post?url=${u}&text=${msg}`]
+  ];
+  return `<section class="container share" aria-labelledby="share-h">
+  <h2 id="share-h">${t.SHARE_H}</h2>
+  <div class="share-row">
+${nets.map(([k, name, href]) => `    <a class="btn ghost sm share-${k}" href="${esc(href)}" target="_blank" rel="noopener nofollow">${shareIcon(k)}${name}</a>`).join('\n')}
+    <button type="button" class="btn ghost sm" data-share="copy" data-url="${url}" data-done="${t.COPIED}">${shareIcon('link')}${t.COPY}</button>
+    <button type="button" class="btn ghost sm" data-share="native" data-url="${url}" hidden>${shareIcon('more')}${t.MORE}</button>
+  </div>
+</section>`;
+}
+const shareResult = lang => `<button type="button" class="btn sm" data-share="result" data-done="${T[lang].COPIED}">${shareIcon('more')}${T[lang].SHARE_RESULT}</button>`;
+const shareScript = `<script>
+(function(){
+  var native=!!navigator.share;
+  document.querySelectorAll('[data-share="native"]').forEach(function(b){b.hidden=!native});
+  function done(b){var t=b.lastChild,old=t.nodeValue;t.nodeValue=b.getAttribute("data-done");setTimeout(function(){t.nodeValue=old},2000)}
+  function copy(b,u){if(navigator.clipboard)navigator.clipboard.writeText(u).then(function(){done(b)},function(){})}
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-share]");if(!b)return;
+    var kind=b.getAttribute("data-share"),u=kind==="result"?location.href:b.getAttribute("data-url");
+    if(kind!=="copy"&&native){navigator.share({title:document.title,url:u}).catch(function(){});return}
+    copy(b,u);
+  });
+})();
+</script>`;
 
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
@@ -497,8 +573,10 @@ for (const p of pages) {
     JSONLD: ldJson(graph), PAGE_CSS: read('css/page.css').trim(),
     NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=calc#tools">${catLabel('calc', p.lang)}</a>`,
     HEADER_CTA: switcher || `    <a href="/" class="btn sm">${T[p.lang].ALL_TOOLS}</a>`,
-    MAIN: p.body, FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
-    PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n'),
+    // Tool pages get a share bar after the article and a "Share result" button beside the calculator's actions.
+    MAIN: p.app ? p.body.replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
+    FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
+    PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n') + (p.app ? '\n' + shareScript : ''),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
     ...(p.salary ? salaryMap(p.lang) : {}),
     ...(p.render ? RENDERERS[p.render](p.lang) : {})
@@ -517,7 +595,8 @@ const bundles = {
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
   'tax.js': ['assets/js/tax-core.js', 'assets/js/tax-ui.js'],
   'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js'],
-  'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js']
+  'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js'],
+  'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

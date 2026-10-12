@@ -387,6 +387,15 @@
     "live": true
   },
   {
+    "name": "Car Loan Calculator Malaysia",
+    "desc": "Monthly car loan instalment under the 2026 hire purchase rules: EIR or flat rate, flat-to-EIR conversion, total interest and early settlement with the Rule of 78. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/car-loan-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "car-loan-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Home Loan Calculator Malaysia",
     "desc": "Work out your monthly housing loan instalment, total interest, stamp duty and SRO 2023 legal fees, the first-home exemption and how much you can borrow. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/home-loan-calculator-malaysia/",

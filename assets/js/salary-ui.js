@@ -15,15 +15,13 @@
       min: 'Enter a monthly salary of at least RM1,000.',
       live: function (r) { return 'Take-home pay ' + fmt.format(r.net) + ' a month.'; },
       zero: 'No PCB is deducted: your estimated chargeable income is below the level where monthly tax reaches RM10.',
-      tax: function (r) { return 'Estimated chargeable income ' + fmt.format(r.pcb.chargeable) + ' a year; top tax rate ' + Math.round(r.pcb.rate * 100) + '%.'; },
-      copied: 'Link copied', copy: 'Copy link to this result'
+      tax: function (r) { return 'Estimated chargeable income ' + fmt.format(r.pcb.chargeable) + ' a year; top tax rate ' + Math.round(r.pcb.rate * 100) + '%.'; }
     },
     ms: {
       min: 'Masukkan gaji bulanan sekurang-kurangnya RM1,000.',
       live: function (r) { return 'Gaji bersih ' + fmt.format(r.net) + ' sebulan.'; },
       zero: 'Tiada PCB dipotong: anggaran pendapatan bercukai anda di bawah paras PCB bulanan RM10.',
-      tax: function (r) { return 'Anggaran pendapatan bercukai ' + fmt.format(r.pcb.chargeable) + ' setahun; kadar cukai tertinggi ' + Math.round(r.pcb.rate * 100) + '%.'; },
-      copied: 'Pautan disalin', copy: 'Salin pautan keputusan ini'
+      tax: function (r) { return 'Anggaran pendapatan bercukai ' + fmt.format(r.pcb.chargeable) + ' setahun; kadar cukai tertinggi ' + Math.round(r.pcb.rate * 100) + '%.'; }
     }
   }[lang];
 
@@ -99,12 +97,6 @@
     frame = requestAnimationFrame(function () { render(true); });
   });
   form.addEventListener('submit', function (e) { e.preventDefault(); render(true); });
-  $('copyLink').addEventListener('click', function () {
-    var btn = this;
-    render(true);
-    var done = function () { btn.textContent = TEXT.copied; setTimeout(function () { btn.textContent = TEXT.copy; }, 2000); };
-    if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(done, function () {});
-  });
   $('printBtn').addEventListener('click', function () { window.print(); });
   fromHash();
   // The page ships with results for the default inputs; recalculate only for a shared link or
