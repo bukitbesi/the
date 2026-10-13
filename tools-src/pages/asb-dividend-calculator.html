@@ -1,0 +1,191 @@
+<!--page
+{
+  "path": "/asb-dividend-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-dividen-asb/" },
+  "title": "ASB Dividend Calculator 2026: Yearly Payout, Projection & Loan",
+  "description": "Free ASB dividend calculator: payout from your monthly lowest balance, a 10-year compounding projection and ASB financing profit at the latest 5.75 sen rate.",
+  "llms": "Calculates the Amanah Saham Bumiputera (ASB) income distribution (dividend plus bonus) from the average of each month's lowest balance, either from an opening balance and monthly saving or from twelve exact monthly lowest balances; projects the balance over up to 40 years with distributions reinvested and the RM200,000 input limit applied; and compares ASB financing instalments and interest with the distribution earned. Includes the ASB distribution history 2019–2025 (FY2025: 5.75 sen, 5.20 sen dividend + 0.55 sen bonus).",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "asb",
+  "scripts": ["/assets/js/asb.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["ASB Dividend Calculator", null]],
+  "about": ["Amanah Saham Bumiputera", "ASB dividend", "Unit trust income distribution", "ASB financing"],
+  "app": {
+    "name": "ASB Dividend Calculator",
+    "category": "FinanceApplication",
+    "features": ["Yearly dividend from the average monthly lowest balance", "Exact mode with twelve monthly lowest balances", "Latest, 5-year average or custom rate", "Compounding projection with the RM200,000 input limit", "ASB financing instalment, interest and net gain", "Works offline"]
+  },
+  "citations": [
+    ["Business Today: PNB declares 5.75 sen ASB distribution for 2025", "https://www.businesstoday.com.my/2025/12/19/pnb-declares-5-75-asb-dividend-for-2025-payout-hits-record-rm10-4-billion/"],
+    ["Malay Mail: PNB announces ASB dividend of 5.75 sen for 2024", "https://www.malaymail.com/news/money/2024/12/24/pnb-announces-asb-dividend-of-575-sen-a-unit-for-2024-its-strongest-delivery-in-five-years/160933"],
+    ["New Straits Times: ASNB declares 5.25 sen per unit for ASB (2023)", "https://www.nst.com.my/amp/news/nation/2023/12/992873/asnb-declares-income-525-sen-unit-asb"],
+    ["ASNB: Amanah Saham Bumiputera", "https://www.asnb.com.my/"]
+  ],
+  "faq": [
+    { "q": "How is the ASB dividend calculated?", "a": "ASNB takes the lowest balance in each month of the year, averages the twelve figures and multiplies the average by the total rate (dividend plus bonus). With RM10,000 at the start of the year and RM200 saved every month after the 1st, the average is RM11,100 and the 5.75 sen rate pays RM638.25." },
+    { "q": "What is the ASB dividend for 2025?", "a": "5.75 sen per unit in total: a 5.20 sen dividend and a 0.55 sen bonus, announced on 19 December 2025 and credited as new units around 1 January 2026. It equals 2024's 5.75 sen. On RM10,000 held all year, that is RM575." },
+    { "q": "When is the ASB dividend for 2026 announced?", "a": "PNB usually announces the ASB distribution in the second half of December, and the units are credited around 1 January. The 2026 rate is not known yet; use the 5-year average (5.27%) for a cautious estimate." },
+    { "q": "Does money deposited mid-month earn dividend?", "a": "Not for that month. The dividend uses each month's lowest balance, so a deposit made after the 1st only counts from the following month. Depositing on the 1st, and not withdrawing during the month, earns the most." },
+    { "q": "What is the maximum ASB investment?", "a": "RM200,000 per person. The limit applies to what you put in; reinvested dividends can take the account above RM200,000 and keep earning." },
+    { "q": "Is ASB financing worth it?", "a": "It depends on the gap between the ASB rate and the financing rate. RM50,000 over 20 years at 4.25% costs RM309.62 a month and RM24,309 interest, while 5.75 sen a year earns RM57,500 in distributions, a net gain of about RM33,191. The financing rate is variable and the distribution is not guaranteed, so check the break-even rate the calculator shows." },
+    { "q": "How much will RM500 a month in ASB grow to in 10 years?", "a": "About RM78,300 at the 5-year average of 5.27%, from RM60,000 of savings, if every dividend is reinvested and deposits are made after the 1st of each month. Starting earlier matters more than the rate." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">ASB dividend calculator</li></ol></nav>
+  <h1>ASB Dividend Calculator</h1>
+  <p class="answer">The ASB distribution for {{A_LATEST_YEAR}} is <strong>{{A_LATEST_SEN}} sen per unit</strong> ({{A_LATEST_DIV}} sen dividend + {{A_LATEST_BONUS}} sen bonus). It is paid on the <strong>average of each month's lowest balance</strong>, so RM10,000 at the start of the year plus RM200 a month earns <strong>{{A_PAY}}</strong>. Enter your own balance and savings below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-dividen-asb/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="asbForm" novalidate aria-labelledby="asb-h">
+      <h2 id="asb-h">Your ASB account</h2>
+      <div class="field"><label for="start">Balance on 1 January</label><div class="input"><span aria-hidden="true">RM</span><input id="start" name="start" type="number" inputmode="decimal" min="0" step="100" value="{{A_START}}"></div></div>
+      <div class="field"><label for="monthly">Monthly saving</label><div class="input"><span aria-hidden="true">RM</span><input id="monthly" name="monthly" type="number" inputmode="decimal" min="0" step="50" value="{{A_MONTHLY}}"></div></div>
+      <div class="field">
+        <label for="timing">When you deposit</label>
+        <select class="input" id="timing" name="timing">{{A_TIMING_OPTIONS}}</select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="rateSel">Rate</label>
+          <select class="input" id="rateSel" name="rateSel">{{A_RATE_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="rate">Sen per RM1</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{A_RATE}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field"><label for="years">Projection</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="40" step="1" value="{{A_YEARS}}"><span aria-hidden="true">years</span></div></div>
+      <details class="more-opts" id="asbExactBox">
+        <summary>Exact: enter each month's lowest balance</summary>
+        <p class="help">From your ASNB statement or myASNB. Leave all blank to use the balance and saving above.</p>
+        <div class="field-row">
+          {{A_MONTH_INPUTS}}
+        </div>
+      </details>
+      <details class="more-opts" id="asbFinBox">
+        <summary>ASB financing (loan)</summary>
+        <div class="field"><label for="finAmount">Financing amount</label><div class="input"><span aria-hidden="true">RM</span><input id="finAmount" name="finAmount" type="number" inputmode="decimal" min="0" step="1000" value="{{A_FIN_AMOUNT}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="finRate">Financing rate</label><div class="input"><input id="finRate" name="finRate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{A_FIN_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="finYears">Tenure</label><div class="input"><input id="finYears" name="finYears" type="number" inputmode="numeric" min="1" max="30" step="1" value="{{A_FIN_YEARS}}"><span aria-hidden="true">years</span></div></div>
+        </div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="asb-result-h">
+      <h2 id="asb-result-h">Your dividend</h2>
+      <div class="net">
+        <p>Dividend + bonus for the year</p>
+        <output id="aPay" for="start monthly timing rate">{{A_PAY}}</output>
+        <p>Average monthly lowest balance <strong id="aAvg">{{A_AVG}}</strong> × <span id="aRate">{{A_RATE_TXT}}</span> sen</p>
+      </div>
+      <p class="sr-only" id="aLive" aria-live="polite"></p>
+      <p class="note" id="aExact" hidden></p>
+      <table class="rows">
+        <caption>After <span id="aYearsN">{{A_YEARS}}</span> years, dividends reinvested</caption>
+        <tbody>
+          <tr><th scope="row">Total you put in</th><td id="aDeposits">{{A_DEPOSITS}}</td></tr>
+          <tr><th scope="row">Total dividends</th><td id="aDivs">{{A_DIVS}}</td></tr>
+          <tr class="total"><th scope="row">Balance after <span id="aYearsN2">{{A_YEARS}}</span> years</th><td id="aFinal">{{A_FINAL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note" id="aLimit" hidden></p>
+      <details class="more-opts">
+        <summary>Year-by-year projection</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Year-by-year projection">
+          <table class="data"><thead><tr><th scope="col">Year</th><th scope="col">Saved</th><th scope="col">Dividend</th><th scope="col">Balance</th></tr></thead><tbody id="aYears">{{A_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <table class="rows">
+        <caption>ASB financing</caption>
+        <tbody>
+          <tr><th scope="row">Monthly instalment</th><td id="fPay">{{AF_PAY}}</td></tr>
+          <tr><th scope="row">Total interest</th><td id="fInterest">{{AF_INTEREST}}</td></tr>
+          <tr><th scope="row">Dividend a year on the financed units</th><td id="fDiv">{{AF_DIV}}</td></tr>
+          <tr><th scope="row">Dividends over the tenure</th><td id="fDivs">{{AF_DIVS}}</td></tr>
+          <tr><th scope="row">Break-even ASB rate<small>Average yearly interest ÷ amount</small></th><td id="fBreak">{{AF_BREAK}}</td></tr>
+          <tr class="total"><th scope="row">Dividends − interest</th><td id="fNet">{{AF_NET}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Financing assumes the dividend is taken out each year at the rate above; excludes takaful (MRTT) and stamp duty. Rates are not guaranteed.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="asbPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How the ASB dividend is calculated</h2>
+  <p>ASB units are fixed at RM1, so the rate in sen per unit is also the percentage return. ASNB works the distribution out in three steps:</p>
+  <ol>
+    <li>Take the <strong>lowest balance in each month</strong> from January to December.</li>
+    <li>Add the twelve balances and divide by 12 to get the <strong>average monthly lowest balance</strong>.</li>
+    <li>Multiply by the total rate (dividend + bonus). The amount is credited as new units around <strong>1 January</strong>.</li>
+  </ol>
+  <p>Because each month counts its lowest point, a withdrawal on the 30th wipes out that month's earnings on the money withdrawn, and a deposit on the 2nd waits a month to count. Save on the 1st and withdraw, if you must, on the 1st of the next month.</p>
+
+  <h2 id="table-h">ASB dividend by balance</h2>
+  <p>Yearly dividend on a balance held unchanged for the whole year.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Balance</th><th scope="col">{{A_LATEST}} ({{A_LATEST_YEAR}})</th><th scope="col">{{A_AVG5}} (5-year average)</th><th scope="col">4.50% (conservative)</th></tr></thead>
+      <tbody>
+{{A_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="growth-h">How a monthly ASB saving grows</h2>
+  <p>Starting from zero, saving every month after the 1st, at the {{A_AVG5}} 5-year average with every dividend reinvested.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="growth-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly saving</th><th scope="col">5 years</th><th scope="col">10 years</th><th scope="col">20 years</th></tr></thead>
+      <tbody>
+{{A_GROWTH}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="history-h">ASB dividend history</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history-h">
+    <table class="data">
+      <thead><tr><th scope="col">Year</th><th scope="col">Dividend</th><th scope="col">Bonus</th><th scope="col">Total per unit</th></tr></thead>
+      <tbody>
+{{A_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+  <p>The {{A_NEXT_YEAR}} rate is usually announced in late December. This page is updated when PNB announces it.</p>
+
+  <h2 id="financing">ASB financing: when it pays</h2>
+  <p>With ASB financing, a bank lends you the money to buy units up front and holds the certificate as security. You pay interest on a falling loan balance, but earn the distribution on the full amount every year. It pays while the ASB rate stays above the <strong>break-even rate</strong> the calculator shows. The financing rate usually floats with the bank's base rate, and some banks require takaful (MRTT) cover, which adds to the cost.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.businesstoday.com.my/2025/12/19/pnb-declares-5-75-asb-dividend-for-2025-payout-hits-record-rm10-4-billion/" rel="noopener">Business Today: 5.75 sen ASB distribution for 2025</a></li>
+    <li><a href="https://www.malaymail.com/news/money/2024/12/24/pnb-announces-asb-dividend-of-575-sen-a-unit-for-2024-its-strongest-delivery-in-five-years/160933" rel="noopener">Malay Mail: ASB distribution for 2024</a></li>
+    <li><a href="https://www.nst.com.my/amp/news/nation/2023/12/992873/asnb-declares-income-525-sen-unit-asb" rel="noopener">New Straits Times: ASB distribution for 2023</a></li>
+    <li><a href="https://www.asnb.com.my/" rel="noopener">ASNB official site</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Estimates only, not financial advice. ASB distributions are declared yearly by PNB and are not guaranteed; past rates do not predict future ones.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings and dividend</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay to plan your saving</small></a>
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/prorated-salary-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-gaji-prorata/" },
+  "title": "Prorated Salary Calculator Malaysia: Joining, Leaving, Unpaid Leave",
+  "description": "Free prorated salary calculator for Malaysia: part-month pay when joining, resigning or on unpaid leave, by section 18A of the Employment Act and other methods.",
+  "llms": "Calculates prorated (partial-month) salary in Malaysia for a new joiner, a leaver or unpaid leave using section 18A of the Employment Act 1955 (monthly wages ÷ calendar days in the month × days eligible, in force since 1 January 2023), and compares it with the working-day method (Monday–Friday, Monday–Saturday, Sunday–Thursday or half-day Saturday) and the 26-day ordinary rate of pay; shows the daily rate and the deduction.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "prorate",
+  "scripts": ["/assets/js/prorate.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Prorated Salary Calculator", null]],
+  "about": ["Prorated salary", "Employment Act 1955 section 18A", "Unpaid leave deduction", "Payroll in Malaysia"],
+  "app": {
+    "name": "Prorated Salary Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Section 18A calendar-day formula", "New joiner, leaver or unpaid leave", "Working-day method with Malaysian work weeks", "26-day ordinary rate of pay comparison", "Daily rate and deduction", "Works offline"]
+  },
+  "citations": [
+    ["Employment Act 1955 (Act 265), updated text, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Lexology: Employment Act 1955 now protects all employees", "https://www.lexology.com/library/detail.aspx?g=623320a7-21d5-405b-b310-2463adcbce94"],
+    ["CCS & Co: Salary of an employee on unpaid leave for the month", "https://ccs-co.com/post/how-do-i-calculate-the-salary-of-an-employee-who-is-on-unpaid-leave-for-the-month/"]
+  ],
+  "faq": [
+    { "q": "How do I calculate prorated salary in Malaysia?", "a": "Under section 18A of the Employment Act 1955, divide the monthly salary by the number of calendar days in that month and multiply by the days the employee is entitled to be paid. Someone on RM3,000 who starts on 16 October 2026 is paid RM3,000 ÷ 31 × 16 = RM1,548.39." },
+    { "q": "Do weekends and public holidays count in a prorated salary?", "a": "Yes, under the section 18A formula. It counts calendar days, so rest days and public holidays inside the period of employment are paid. Only days before joining, after leaving or on unpaid leave are left out." },
+    { "q": "How much is deducted for unpaid leave?", "a": "Monthly salary ÷ calendar days in the month × days of unpaid leave. On RM6,200 in August (31 days), two days of unpaid leave cost RM6,200 ÷ 31 × 2 = RM400, so the pay is RM5,800." },
+    { "q": "Can my employer prorate salary using 26 days?", "a": "For an incomplete month, section 18A applies \"notwithstanding section 60I\", the section that sets the 26-day ordinary rate of pay used for overtime and rest-day work. Some contracts still prorate on 26 or working days, which usually pays a new joiner less: RM1,269.23 instead of RM1,548.39 in the October example. A contract cannot give less than the Act." },
+    { "q": "When did section 18A start?", "a": "On 1 January 2023, with the Employment (Amendment) Act 2022. It covers an employee who joins after the first day of the month, leaves before the last day, takes unpaid leave or is called up for national service." },
+    { "q": "What is my last month's salary if I resign mid-month?", "a": "Salary ÷ calendar days × days worked up to and including your last day. On RM4,500 with a last day of 10 September, that is RM4,500 ÷ 30 × 10 = RM1,500, plus any unused annual leave your employer pays out." },
+    { "q": "Are EPF and SOCSO paid on a prorated salary?", "a": "Yes. EPF, SOCSO, EIS and PCB are worked out on the wages actually paid for the month, so they are lower in a part month. Use the salary calculator with the prorated amount to see your take-home pay." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Prorated salary calculator</li></ol></nav>
+  <h1>Prorated Salary Calculator Malaysia</h1>
+  <p class="answer">Prorated salary = <strong>monthly salary ÷ calendar days in the month × days eligible</strong>, under section 18A of the Employment Act 1955. On RM3,000, someone who joins on 16 October 2026 is paid <strong>{{P_PAY}}</strong> for 16 of 31 days. Weekends and public holidays in that period count. Enter your own figures below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-gaji-prorata/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="proForm" novalidate aria-labelledby="pro-h">
+      <h2 id="pro-h">The month</h2>
+      <div class="field"><label for="salary">Monthly salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="50" value="{{P_SALARY}}"></div><p class="help">Basic salary plus any fixed monthly allowance that is prorated.</p></div>
+      <div class="field">
+        <label for="case">Situation</label>
+        <select class="input" id="case" name="case">{{P_CASE_OPTIONS}}</select>
+      </div>
+      <div class="field" id="proDateField"><label for="date" id="proDateLabel">First day of work</label><div class="input"><input id="date" name="date" type="date" value="{{P_DATE}}"></div></div>
+      <div class="field" id="proMonthField" hidden><label for="month">Month</label><div class="input"><input id="month" name="month" type="month" value="{{P_MONTH}}"></div></div>
+      <div class="field"><label for="unpaid">Unpaid leave in the period</label><div class="input"><input id="unpaid" name="unpaid" type="number" inputmode="decimal" min="0" max="31" step="0.5" value="{{P_UNPAID}}"><span aria-hidden="true">days</span></div></div>
+      <div class="field">
+        <label for="workdays">Work week (for the working-day method)</label>
+        <select class="input" id="workdays" name="workdays">{{P_WORKDAY_OPTIONS}}</select>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="pro-result-h">
+      <h2 id="pro-result-h">Prorated salary</h2>
+      <div class="net">
+        <p>Pay for <span id="pPeriod">{{P_PERIOD}}</span></p>
+        <output id="pPay" for="salary case date month unpaid">{{P_PAY}}</output>
+        <p><strong id="pDays">{{P_DAYS}}</strong> of <span id="pBase">{{P_BASE}}</span> calendar days · less than a full month by <span id="pDeduct">{{P_DEDUCT}}</span></p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>By method</caption>
+        <tbody id="pMethods">
+{{P_METHODS}}
+        </tbody>
+      </table>
+      <p class="note">Section 18A (calendar days) is the Employment Act formula. The other methods are shown because some contracts still use them; they cannot pay less than the Act.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="proPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="formula">The section 18A formula</h2>
+  <p>Section 18A was added by the Employment (Amendment) Act 2022 and has applied since <strong>1 January 2023</strong>. When a monthly-rated employee does not complete a whole month because they:</p>
+  <ul>
+    <li>start work after the first day of the month,</li>
+    <li>leave before the last day of the month,</li>
+    <li>take unpaid leave, or</li>
+    <li>are called up for national service,</li>
+  </ul>
+  <p>the pay for that month is <code>monthly wages ÷ days in the wage period × days eligible</code>. The days are calendar days: 28, 29, 30 or 31.</p>
+
+  <h2 id="examples">Worked examples</h2>
+  <ul>
+    <li><strong>New joiner:</strong> RM3,000, starts 16 October 2026: RM3,000 ÷ 31 × 16 = <strong>{{P_EX_JOIN}}</strong>.</li>
+    <li><strong>Resignation:</strong> RM4,500, last day 10 September: RM4,500 ÷ 30 × 10 = <strong>{{P_EX_LEAVE}}</strong>.</li>
+    <li><strong>Unpaid leave:</strong> RM6,200, two days in August: deduction RM6,200 ÷ 31 × 2 = {{P_EX_UNPAID}}, pay <strong>{{P_EX_UNPAID_PAY}}</strong>.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="daily-h">Daily rate by month length</h2>
+  <p>The same salary gives a different daily rate in a 28, 30 or 31-day month. The 26-day rate is the ordinary rate of pay used for overtime, rest-day and public holiday work.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="daily-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly salary</th><th scope="col">28 days</th><th scope="col">30 days</th><th scope="col">31 days</th><th scope="col">26 days (ORP)</th></tr></thead>
+      <tbody>
+{{P_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="methods">Calendar days, working days or 26 days?</h2>
+  <ul>
+    <li><strong>Calendar days (section 18A):</strong> the statutory formula. Rest days and public holidays inside the period are paid.</li>
+    <li><strong>Working days:</strong> counts only work days. It pays the same as calendar days on average, but can differ by month depending on how many weekends fall in the period.</li>
+    <li><strong>26 days:</strong> the ordinary rate of pay under section 60I, meant for overtime and rest-day pay. Applied to a part month it often underpays a new joiner.</li>
+  </ul>
+  <p>Employees in Sabah and Sarawak are covered by the Sabah and Sarawak Labour Ordinances, which have their own rules.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Employment Act 1955 (Act 265), JTKSM</a></li>
+    <li><a href="https://www.lexology.com/library/detail.aspx?g=623320a7-21d5-405b-b310-2463adcbce94" rel="noopener">Lexology: Employment Act 1955 now protects all employees</a></li>
+    <li><a href="https://ccs-co.com/post/how-do-i-calculate-the-salary-of-an-employee-who-is-on-unpaid-leave-for-the-month/" rel="noopener">CCS &amp; Co: salary for a month with unpaid leave</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A calculation aid, not legal advice. Your employment contract and the Labour Department (JTKSM) decide disputed cases.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Yearly tax and reliefs</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

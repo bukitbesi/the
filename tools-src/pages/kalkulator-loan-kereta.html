@@ -3,21 +3,23 @@
   "path": "/kalkulator-loan-kereta/",
   "lang": "ms",
   "alternates": { "en": "/car-loan-calculator-malaysia/" },
-  "title": "Kalkulator Loan Kereta 2026: Ansuran Bulanan, EIR & Kadar Rata",
-  "description": "Kalkulator pinjaman kereta percuma ikut peraturan sewa beli 2026: ansuran bulanan, EIR vs kadar rata, jumlah faedah dan penyelesaian awal (Rule of 78).",
-  "llms": "Mengira ansuran pinjaman kereta (sewa beli) Malaysia dengan kaedah baki berkurangan dan kadar faedah efektif (EIR), diwajibkan oleh Akta Sewa Beli (Pindaan) mulai 1 Jun 2026 dengan peralihan hingga 31 Mac 2027, atau kaedah kadar rata lama; menukar kadar rata kepada EIR dan sebaliknya; menunjukkan jumlah faedah, jadual tahunan dan jumlah penyelesaian awal termasuk rebat Rule of 78 bagi perjanjian kadar rata lama.",
+  "title": "Kalkulator Loan Kereta 2026: Ansuran, Cukai Jalan & Insurans",
+  "description": "Kalkulator pinjaman kereta percuma ikut peraturan sewa beli 2026: ansuran bulanan, EIR vs kadar rata, cukai jalan, anggaran insurans dan penyelesaian awal.",
+  "llms": "Mengira ansuran pinjaman kereta (sewa beli) Malaysia dengan kaedah baki berkurangan dan kadar faedah efektif (EIR), diwajibkan oleh Akta Sewa Beli (Pindaan) mulai 1 Jun 2026 dengan peralihan hingga 31 Mac 2027, atau kaedah kadar rata lama; menukar kadar rata kepada EIR dan sebaliknya; menunjukkan jumlah faedah, jadual tahunan dan jumlah penyelesaian awal termasuk rebat Rule of 78 bagi perjanjian kadar rata lama; turut menganggar cukai jalan JPJ mengikut cc enjin (Semenanjung, salun atau bukan salun) dan insurans komprehensif dengan NCD, SST 8% dan duti setem, serta jumlah kos bulanan memiliki kereta.",
   "datePublished": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "render": "car",
   "scripts": ["/assets/js/carloan.js"],
   "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Loan Kereta", null]],
-  "about": ["Pinjaman kereta", "Sewa beli di Malaysia", "Kadar faedah efektif", "Rule of 78"],
+  "about": ["Pinjaman kereta", "Sewa beli di Malaysia", "Kadar faedah efektif", "Rule of 78", "Cukai jalan di Malaysia", "Insurans motor"],
   "app": {
     "name": "Kalkulator Loan Kereta",
     "category": "FinanceApplication",
-    "features": ["Ansuran bulanan dengan baki berkurangan (EIR) atau kadar rata", "Penukaran kadar rata kepada EIR", "Jumlah faedah dan jadual tahunan", "Jumlah penyelesaian awal dengan rebat Rule of 78", "Perbandingan Rule of 78 dengan baki berkurangan", "Berfungsi luar talian"]
+    "features": ["Ansuran bulanan dengan baki berkurangan (EIR) atau kadar rata", "Penukaran kadar rata kepada EIR", "Jumlah faedah dan jadual tahunan", "Jumlah penyelesaian awal dengan rebat Rule of 78", "Perbandingan Rule of 78 dengan baki berkurangan", "Cukai jalan mengikut cc enjin, salun atau bukan salun", "Anggaran insurans komprehensif dengan NCD", "Jumlah kos bulanan memiliki kereta", "Berfungsi luar talian"]
   },
   "citations": [
+    ["JPJ: Kadar lesen kenderaan motor (cukai jalan)", "https://www.jpj.gov.my/"],
+    ["Bank Negara Malaysia: Liberalisasi berperingkat insurans motor", "https://www.bnm.gov.my/"],
     ["The Edge Malaysia: Rule of 78 dimansuhkan bagi pinjaman sewa beli", "https://theedgemalaysia.com/node/773936"],
     ["Persatuan Bank-bank Malaysia: Perubahan pembiayaan sewa beli dan diskaun penyelesaian awal", "https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/"],
     ["Business Today: Peraturan sewa beli baharu untuk pembeli kereta", "https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/"],
@@ -30,7 +32,9 @@
     { "q": "Bagaimana ansuran loan kereta kadar rata dikira?", "a": "Faedah = pinjaman × kadar rata × tahun, kemudian ansuran = (pinjaman + faedah) ÷ bulan. Bagi RM90,000 pada 2.50% selama 9 tahun: faedah RM20,250, ansuran RM110,250 ÷ 108 = RM1,020.83." },
     { "q": "Apakah Rule of 78?", "a": "Ia kaedah perjanjian kadar rata lama untuk mengira rebat faedah apabila anda menyelesaikan pinjaman lebih awal. Ia meletakkan lebih banyak faedah pada bulan awal, jadi rebatnya lebih kecil berbanding baki berkurangan. Bagi pinjaman RM90,000, 9 tahun pada 2.50% kadar rata, selesai selepas 4 tahun kira-kira RM375 lebih mahal berbanding baki berkurangan." },
     { "q": "Berapa perlu dibayar untuk selesaikan loan kereta lebih awal?", "a": "Bagi baki berkurangan, anda membayar baki prinsipal yang masih terhutang. Bagi perjanjian kadar rata, anda membayar baki ansuran tolak rebat Rule of 78. Bank juga menawarkan diskaun ihsan bagi penyelesaian awal pinjaman Rule of 78 yang layak, jadi minta surat penyelesaian daripada bank anda." },
-    { "q": "Berapa tempoh maksimum dan margin pembiayaan loan kereta?", "a": "Kebanyakan bank membiayai sehingga 90% harga untuk tempoh sehingga 9 tahun. Kereta terpakai dan rekond biasanya mendapat margin lebih rendah dan tempoh lebih pendek, bergantung pada usia kereta." }
+    { "q": "Berapa tempoh maksimum dan margin pembiayaan loan kereta?", "a": "Kebanyakan bank membiayai sehingga 90% harga untuk tempoh sehingga 9 tahun. Kereta terpakai dan rekond biasanya mendapat margin lebih rendah dan tempoh lebih pendek, bergantung pada usia kereta." },
+    { "q": "Berapa cukai jalan kereta 1.5 liter di Malaysia?", "a": "RM90 setahun bagi kereta persendirian di Semenanjung Malaysia dari 1,401 cc hingga 1,600 cc, salun atau SUV. Salun 1.8 liter (1,798 cc) membayar RM279.20 dan salun 2.0 liter (1,998 cc) RM379. Kereta bukan salun seperti SUV dan MPV menggunakan jadual berasingan: RM359.40 bagi 1,798 cc dan RM439.20 bagi 1,998 cc. Sabah, Sarawak, Labuan dan Langkawi membayar lebih rendah." },
+    { "q": "Berapa insurans kereta bernilai RM100,000?", "a": "Kira-kira RM3,120 setahun bagi kereta 1.5 liter tanpa NCD, atau kira-kira RM1,409 dengan NCD maksimum 55%. Ini berdasarkan tarif motor lama (RM305.50 bagi RM1,000 pertama dan RM26 bagi setiap RM1,000 seterusnya), SST 8% dan duti setem RM10. Syarikat insurans kini menetapkan premium sendiri, jadi bandingkan sebut harga." }
   ]
 }
 -->
@@ -38,7 +42,7 @@
 <div class="container">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator loan kereta</li></ol></nav>
   <h1>Kalkulator Loan Kereta (Pinjaman Kereta)</h1>
-  <p class="answer"><strong>Kereta RM100,000</strong> dengan wang pendahuluan 10% (pinjaman {{K_LOAN}}) pada EIR {{K_DEFAULT_RATE}} selama 9 tahun berharga <strong>{{K_PAY}} sebulan</strong>, dengan jumlah faedah {{K_INTEREST}}. Mulai <strong>1 Jun 2026</strong>, pinjaman sewa beli baharu menggunakan kaedah baki berkurangan dan menyatakan EIR, bukan kadar rata. Masukkan angka anda di bawah.</p>
+  <p class="answer"><strong>Kereta RM100,000</strong> dengan wang pendahuluan 10% (pinjaman {{K_LOAN}}) pada EIR {{K_DEFAULT_RATE}} selama 9 tahun berharga <strong>{{K_PAY}} sebulan</strong>, dengan jumlah faedah {{K_INTEREST}}. Mulai <strong>1 Jun 2026</strong>, pinjaman sewa beli baharu menggunakan kaedah baki berkurangan dan menyatakan EIR, bukan kadar rata. Dengan cukai jalan {{K_ROAD}} bagi kereta 1.5 liter dan insurans kira-kira {{K_INS}} setahun, kos memiliki kereta itu kira-kira <strong>{{K_ALL}} sebulan</strong>. Masukkan angka anda di bawah.</p>
   <p class="meta"><span>Peraturan disemak <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/car-loan-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
 
   <div class="calc">
@@ -52,6 +56,18 @@
         <select class="input" id="method" name="method">{{K_METHOD_OPTIONS}}</select>
       </div>
       <div class="field"><label for="rate" id="rateLabel">{{K_RATE_LABEL}}</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{K_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Gunakan kadar dalam surat tawaran bank anda.</p></div>
+      <fieldset class="field-group">
+        <legend>Cukai jalan dan insurans</legend>
+        <div class="field"><label for="cc">Kapasiti enjin</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" max="8000" step="1" value="{{K_CC}}"><span aria-hidden="true">cc</span></div><p class="help">Daripada brosur atau geran kereta, cth. 1,497 cc.</p></div>
+        <div class="field">
+          <label for="body">Jenis badan</label>
+          <select class="input" id="body" name="body">{{K_BODY_OPTIONS}}</select>
+        </div>
+        <div class="field">
+          <label for="ncd">Diskaun tanpa tuntutan (NCD)</label>
+          <select class="input" id="ncd" name="ncd">{{K_NCD_OPTIONS}}</select>
+        </div>
+      </fieldset>
       <details class="more-opts" id="carMore">
         <summary>Penyelesaian awal</summary>
         <div class="field"><label for="settleAfter">Selesaikan selepas berapa bulan</label><div class="input"><input id="settleAfter" name="settleAfter" type="number" inputmode="numeric" min="0" max="107" step="1" value=""><span aria-hidden="true">bulan</span></div><p class="help">Menunjukkan jumlah penyelesaian dan, bagi pinjaman kadar rata, rebat Rule of 78.</p></div>
@@ -77,7 +93,15 @@
           <tr class="total"><th scope="row">Jumlah bayaran balik</th><td id="kTotal">{{K_TOTAL}}</td></tr>
         </tbody>
       </table>
-      <p class="note">Tidak termasuk insurans, cukai jalan dan duti setem RM10 atas perjanjian.</p>
+      <table class="rows" id="kRun">
+        <caption>Kos tahunan</caption>
+        <tbody>
+          <tr><th scope="row">Cukai jalan (Semenanjung, persendirian)</th><td id="kRoad">{{K_ROAD}}</td></tr>
+          <tr><th scope="row">Insurans komprehensif (anggaran)</th><td id="kIns">{{K_INS}}</td></tr>
+          <tr class="total"><th scope="row">Ansuran + cukai jalan + insurans sebulan</th><td id="kAll">{{K_ALL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Insurans: jumlah diinsuranskan = harga kereta, kadar tarif motor lama, NCD, SST 8% dan duti setem RM10. Sebut harga berbeza mengikut syarikat insurans. Tidak termasuk duti setem RM10 bagi perjanjian pinjaman.</p>
       <details class="more-opts">
         <summary>Jadual bayaran balik tahunan</summary>
         <div class="table-wrap" tabindex="0" role="region" aria-label="Jadual bayaran balik tahunan">
@@ -109,6 +133,29 @@
     </table>
   </div>
   <p>Tempoh lebih pendek menaikkan ansuran tetapi mengurangkan faedah: bagi RM90,000, 7 tahun berbanding 9 tahun menjimatkan kira-kira RM4,533.</p>
+  <h2 id="road-tax">Cukai jalan mengikut saiz enjin (Semenanjung Malaysia, 2026)</h2>
+  <p>JPJ mengenakan kadar tetap sehingga 1,600 cc, kemudian kadar asas dan kadar bagi setiap cc melebihi had kumpulan. Kereta salun dan bukan salun (SUV, MPV, pikap) menggunakan jadual berbeza. Kadar bagi kereta milik individu; semak jumlah tepat di MyJPJ sebelum memperbaharui.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="road-tax">
+    <table class="data">
+      <thead><tr><th scope="col">Enjin</th><th scope="col">Salun</th><th scope="col">Bukan salun</th></tr></thead>
+      <tbody>
+{{K_ROAD_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kereta elektrik membayar cukai jalan mengikut kuasa motor (kW) mulai 1 Januari 2026, dan Sabah, Sarawak, Labuan serta Langkawi mempunyai kadar lebih rendah; kedua-duanya tidak dikira dalam kalkulator.</p>
+
+  <h2 id="insurance">Anggaran insurans kereta (kereta 1.5 liter)</h2>
+  <p>Premium komprehensif setahun termasuk SST 8% dan duti setem RM10, berdasarkan tarif motor lama yang masih dijadikan rujukan oleh syarikat insurans. NCD anda naik setiap tahun tanpa tuntutan hingga maksimum 55% dan kembali kepada sifar selepas tuntutan.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="insurance">
+    <table class="data">
+      <thead><tr><th scope="col">Jumlah diinsuranskan</th><th scope="col">Tanpa NCD</th><th scope="col">NCD 25%</th><th scope="col">NCD 55%</th></tr></thead>
+      <tbody>
+{{K_INS_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kos tahunan disemak {{K_RUN_VERIFIED}}.</p>
 </div>
 {{AD_MIDDLE}}
 <div class="container prose">
@@ -129,6 +176,7 @@
 
   <h2 id="sources">Sumber</h2>
   <ul>
+    <li><a href="https://www.jpj.gov.my/" rel="noopener">JPJ: lesen kenderaan motor (cukai jalan)</a></li>
     <li><a href="https://theedgemalaysia.com/node/773936" rel="noopener">The Edge Malaysia: Rule of 78 dimansuhkan</a></li>
     <li><a href="https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/" rel="noopener">ABM: perubahan sewa beli dan diskaun penyelesaian awal</a></li>
     <li><a href="https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/" rel="noopener">Business Today: peraturan sewa beli baharu</a></li>

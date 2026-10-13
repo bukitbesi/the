@@ -225,3 +225,9 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .removed-list{list-style:none;display:grid;gap:4px}
 .removed-list code{font-size:.85em;overflow-wrap:anywhere}
 .removed-list small{color:var(--text3)}
+/* Grouped calculator inputs (car running costs, ASB, prorated salary). */
+.field-group{min-width:0;margin:4px 0 0;padding-top:12px;border-top:1px solid var(--border)}
+.field-group legend{font-weight:700;font-size:.95rem;padding:0;margin-bottom:10px;float:left;width:100%}
+.field-group legend+*{clear:both}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.field-row .field{min-width:0}

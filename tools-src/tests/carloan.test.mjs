@@ -53,3 +53,34 @@ test('Schedule repays the loan and tenure is capped at 9 years', () => {
   const principal = r.schedule.reduce((s, y) => s + y.principal, 0);
   assert.ok(Math.abs(principal - r.loan) < 0.05);
 });
+
+test('Road tax: flat bands to 1,600 cc, then base plus a rate per cc', () => {
+  assert.equal(C.roadTax(998, 'saloon'), 20);
+  assert.equal(C.roadTax(1497, 'saloon'), 90);
+  assert.equal(C.roadTax(1798, 'saloon'), 279.2);
+  assert.equal(C.roadTax(1998, 'saloon'), 379);
+  assert.equal(C.roadTax(2487, 'saloon'), 867);
+  assert.equal(C.roadTax(1798, 'nonSaloon'), 359.4);
+  assert.equal(C.roadTax(2994, 'nonSaloon'), 1630.4);
+  assert.equal(C.roadTax(0, 'saloon'), 0);
+  // Each band starts where the one below ends.
+  for (const body of ['saloon', 'nonSaloon']) for (const [upper] of C.ROAD_TAX[body].slice(4, -1)) {
+    assert.ok(C.roadTax(upper + 1, body) - C.roadTax(upper, body) < 5, `${body} ${upper}`);
+  }
+});
+
+test('Insurance estimate: former tariff, NCD, 8% SST and RM10 stamp duty', () => {
+  const none = C.insurance(100000, 1497, 0);
+  assert.equal(none.gross, 2879.5);
+  assert.equal(none.total, 3119.86);
+  const max = C.insurance(100000, 1497, 55);
+  assert.equal(max.total, 1409.43);
+  assert.equal(C.insurance(0, 1497, 0).total, 0);
+});
+
+test('Running costs add to the monthly cost only when an engine size is given', () => {
+  const r = C.calculate({ price: 100000, downPct: 10, years: 9, method: 'eir', rate: 4.5, cc: 1497, body: 'saloon', ncd: 0 });
+  assert.equal(r.running.roadTax, 90);
+  assert.equal(r.running.monthly, Math.round((r.monthly + (90 + 3119.86) / 12) * 100) / 100);
+  assert.equal(C.calculate({ price: 100000, downPct: 10, years: 9, rate: 4.5 }).running, undefined);
+});
