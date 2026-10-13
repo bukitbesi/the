@@ -28,6 +28,8 @@ const otCore = require('../assets/js/ot-core.js');
 const landCore = require('../assets/js/land-core.js');
 const plCore = require('../assets/js/personal-core.js');
 const rpgtCore = require('../assets/js/rpgt-core.js');
+const bmiCore = require('../assets/js/bmi-core.js');
+const zakatCore = require('../assets/js/zakat-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -689,6 +691,82 @@ function rpgtMap(lang) {
     R_VERIFIED: longDate(F.verified, lang), R_VERIFIED_ISO: F.verified
   };
 }
+// ---- BMI (Malaysian CPG cut-offs), EN + BM
+const BMI_EXAMPLE = { unit: 'metric', cm: 165, kg: 65, waist: 85, sex: 'male' };
+function bmiMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, N = bmiCore.LABELS[lang], r = bmiCore.calculate(BMI_EXAMPLE), w = r.waist;
+  const nf = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: 1 }).format(n);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const change = r.direction === 'lose' ? (L ? `Turunkan ${nf(r.change)} kg untuk mencapai julat sihat.` : `Lose ${nf(r.change)} kg to reach the healthy range.`)
+    : r.direction === 'gain' ? (L ? `Naikkan ${nf(r.change)} kg untuk mencapai julat sihat.` : `Gain ${nf(r.change)} kg to reach the healthy range.`)
+    : (L ? 'Anda dalam julat berat sihat. Kekalkan.' : 'You are in the healthy weight range. Keep it up.');
+  const heights = [150, 155, 160, 165, 170, 175, 180, 185].map(cm => {
+    const x = bmiCore.range(cm), h2 = (cm / 100) ** 2;
+    return `<tr><th scope="row">${cm} cm</th><td>${nf(x.low)}–${nf(x.high)} kg</td><td>${nf(23 * h2)} kg</td><td>${nf(x.over)} kg</td></tr>`;
+  }).join('\n');
+  const cats = [['under', '< 18.5', '< 18.5'], ['normal', '18.5–22.9', '18.5–24.9'], ['over', '23.0–27.4', '25.0–29.9'], ['obese1', '27.5–34.9', '30.0–34.9'], ['obese2', '35.0–39.9', '35.0–39.9'], ['obese3', '≥ 40.0', '≥ 40.0']]
+    .map(([k, cpg, who]) => `<tr><th scope="row">${N[k]}</th><td>${cpg}</td><td>${who}</td></tr>`).join('\n');
+  return {
+    M_CM: BMI_EXAMPLE.cm, M_KG: BMI_EXAMPLE.kg, M_WAIST: BMI_EXAMPLE.waist,
+    M_UNIT_OPTIONS: [opt('metric', 'Metric (cm, kg)', 'Metrik (cm, kg)', true), opt('imperial', 'Imperial (ft, in, lb)', 'Imperial (kaki, inci, paun)')].join(''),
+    M_SEX_OPTIONS: [opt('male', 'Male', 'Lelaki', true), opt('female', 'Female', 'Perempuan')].join(''),
+    M_BMI: nf(r.bmi), M_CAT: N[r.category], M_CAT_CLASS: 'bmi-' + r.category, M_GAUGE: r.gauge.toFixed(1) + '%', M_WHO: N[r.who],
+    M_RANGE: `${nf(r.healthy.low)}–${nf(r.healthy.high)} kg`, M_CHANGE: change,
+    M_WAIST_TEXT: `${w.atRisk ? (L ? 'Melebihi' : 'Above') : (L ? 'Bawah' : 'Below')} ${w.limit} cm`,
+    M_RATIO: `${w.ratio.toFixed(2)} · ${N[w.ratioBand]}`,
+    M_HEIGHTS: heights, M_CATS: cats,
+    M_VERIFIED: longDate(bmiCore.FACTS.verified, lang), M_VERIFIED_ISO: bmiCore.FACTS.verified
+  };
+}
+// ---- Zakat pendapatan and zakat emas/simpanan, EN + BM (one core)
+const ZAKAT_EXAMPLE = { salary: 5000, period: 'monthly', other: 0, method: 'gross', adults: 1, others: 0, kids7: 0, kids6: 0, ipt: 0, tax: '' };
+function zakatMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, F = zakatCore.FACTS, K = F.kifayah, m = n => money(n, lang);
+  const r = zakatCore.income(ZAKAT_EXAMPLE), fam = zakatCore.income({ salary: 5000, method: 'net', adults: 1, others: 1, kids7: 1, kids6: 1 });
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const table = [3000, 3500, 4000, 5000, 6000, 8000, 10000].map(sal => {
+    const a = zakatCore.income({ salary: sal }), b = zakatCore.income({ salary: sal, method: 'net' });
+    return `<tr><th scope="row">${m(sal)}</th><td>${m(a.zakat)}</td><td>${m(a.monthly)}</td><td>${m(b.zakat)}</td></tr>`;
+  }).join('\n');
+  const kif = [['workingAdult', 'Working adult (including you)', 'Dewasa bekerja (termasuk anda)'], ['otherAdult', 'Non-working adult (e.g. spouse)', 'Dewasa tidak bekerja (cth. pasangan)'],
+    ['child7', 'Child aged 7–17', 'Anak 7–17 tahun'], ['child6', 'Child aged 6 and under', 'Anak 6 tahun ke bawah'], ['ipt', 'Dependant in higher education', 'Tanggungan di IPT']]
+    .map(([k, en, bm]) => `<tr><th scope="row">${L ? bm : en}</th><td>${m(K[k] / 12)}</td><td>${m(K[k])}</td></tr>`).join('\n');
+  return {
+    Z_SALARY: ZAKAT_EXAMPLE.salary, Z_NISAB_IN: F.nisab,
+    Z_PERIOD_OPTIONS: [opt('monthly', 'A month', 'Sebulan', true), opt('yearly', 'A year', 'Setahun')].join(''),
+    Z_METHOD_OPTIONS: [opt('gross', 'Gross (no deductions)', 'Tanpa tolakan (kasar)', true), opt('net', 'Net (had kifayah and EPF)', 'Dengan tolakan (had kifayah, KWSP)')].join(''),
+    Z_YEAR: m(r.zakat), Z_MONTH: m(r.monthly), Z_INCOME: m(r.yearly), Z_DEDUCTED: m(r.deducted), Z_BASE: m(r.base), Z_NISAB: m(r.nisab),
+    Z_STATUS: r.due ? (L ? 'Wajib zakat: pendapatan melebihi nisab.' : 'Zakat is due: your income is above the nisab.') : '',
+    Z_TABLE: table, Z_KIFAYAH: kif,
+    Z_FAM_DED: m(fam.deducted), Z_FAM_BASE: m(fam.base), Z_FAM_ZAKAT: m(fam.zakat), Z_FAM_MONTH: m(fam.monthly),
+    Z_NISAB_MONTH: m(F.nisab / 12), Z_GOLD: m(F.goldPrice),
+    Z_VERIFIED: longDate(F.verified, lang), Z_VERIFIED_ISO: F.verified
+  };
+}
+const GOLD_EXAMPLE = { kept: 100, worn: 900, uruf: 800, savings: 50000 };
+function goldMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, F = zakatCore.FACTS, m = n => money(n, lang);
+  const r = zakatCore.gold(GOLD_EXAMPLE), x = r.lines;
+  const g = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: 2 }).format(n);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const worn = [500, 800, 900, 1000, 1200, 1500].map(w => {
+    const a = zakatCore.gold({ worn: w, uruf: 800 }).lines.worn;
+    return `<tr><th scope="row">${g(w)} g</th><td>${g(a.excess)} g</td><td>${m(a.zakat)}</td></tr>`;
+  }).join('\n');
+  const kept = [50, 85, 100, 200, 500].map(k => {
+    const a = zakatCore.gold({ kept: k }).lines.kept;
+    return `<tr><th scope="row">${g(k)} g</th><td>${m(a.value)}</td><td>${a.due ? m(a.zakat) : (L ? 'Belum cukup nisab' : 'Below the nisab')}</td></tr>`;
+  }).join('\n');
+  return {
+    G_PRICE: F.goldPrice, G_KEPT: GOLD_EXAMPLE.kept, G_WORN: GOLD_EXAMPLE.worn, G_URUF: GOLD_EXAMPLE.uruf, G_SAVINGS: GOLD_EXAMPLE.savings,
+    G_STATE_OPTIONS: [opt('selangor', 'Selangor (800 g)', 'Selangor (800 g)', true), opt('wp', 'Federal Territories (800 g)', 'Wilayah Persekutuan (800 g)'),
+      opt('kelantan', 'Kelantan (600 g)', 'Kelantan (600 g)'), opt('other', 'Other state: enter its uruf', 'Negeri lain: masukkan uruf')].join(''),
+    G_TOTAL: m(r.total), G_NISAB: m(r.nisab), G_KEPT_Z: m(x.kept.zakat), G_KEPT_NOTE: `${g(x.kept.grams)} g × ${m(r.price)}`,
+    G_WORN_Z: m(x.worn.zakat), G_WORN_NOTE: `${g(x.worn.grams)} g − ${g(x.worn.uruf)} g uruf = ${g(x.worn.excess)} g`, G_SAV_Z: m(x.savings.zakat),
+    G_WORN_TABLE: worn, G_KEPT_TABLE: kept, G_PRICE_TXT: m(F.goldPrice),
+    G_VERIFIED: longDate(F.verified, lang), G_VERIFIED_ISO: F.verified
+  };
+}
 // ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
 // tracking-core.js. Courier pages set "courier" in front matter to preset the tracker to that courier.
 const TRACK_TEXT = {
@@ -916,7 +994,7 @@ function purgeMap() {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1032,6 +1110,9 @@ const bundles = {
   'land.js': ['assets/js/land-core.js', 'assets/js/land-ui.js'],
   'personal-loan.js': ['assets/js/carloan-core.js', 'assets/js/personal-core.js', 'assets/js/personal-ui.js'],
   'rpgt.js': ['assets/js/rpgt-core.js', 'assets/js/rpgt-ui.js'],
+  'bmi.js': ['assets/js/bmi-core.js', 'assets/js/bmi-ui.js'],
+  'zakat.js': ['assets/js/zakat-core.js', 'assets/js/zakat-ui.js'],
+  'zakat-emas.js': ['assets/js/zakat-core.js', 'assets/js/gold-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

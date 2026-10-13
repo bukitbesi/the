@@ -1,0 +1,169 @@
+<!--page
+{
+  "path": "/zakat-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-zakat-pendapatan/" },
+  "title": "Zakat Calculator Malaysia 2026: Income Zakat, Nisab, Tax Rebate",
+  "description": "Free income zakat calculator for Malaysia 2026: gross or net method with had kifayah and EPF, monthly salary deduction amount and the 100% income tax rebate.",
+  "llms": "Calculates income zakat (zakat pendapatan) in Malaysia at 2.5% once yearly income reaches the nisab (the value of 85 g of gold; default RM38,748, Lembaga Zakat Selangor July–December 2026), by the gross method or the net method after LZS 2026 had kifayah (working adult RM4,944, non-working adult RM2,004, child 7–17 RM4,896, child 6 and under RM2,100, dependant in higher education RM7,356 a year) and EPF contributions; gives the yearly and monthly salary-deduction amount and the 100% income tax rebate under section 6A(3) of the Income Tax Act 1967, capped at the tax charged.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "zakat",
+  "scripts": ["/assets/js/zakat.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Zakat Calculator", null]],
+  "about": ["Income zakat", "Zakat nisab", "Had kifayah", "Zakat tax rebate"],
+  "app": {
+    "name": "Zakat Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Gross or net (had kifayah) method", "LZS 2026 had kifayah and EPF deductions", "Nisab check", "Monthly salary deduction amount", "100% income tax rebate", "Works offline"]
+  },
+  "citations": [
+    ["Lembaga Zakat Selangor: Income zakat", "https://www.zakatselangor.com.my/"],
+    ["BayarZakat2u (LZS amil): Calculate and pay zakat on income in Selangor and KL 2026", "https://bayarzakat2u.com.my/calculate-zakat-on-income/"],
+    ["RinggitPlus: Income zakat nisab and had kifayah by state", "https://ringgitplus.com/ms/blog/sudut-pakar/anda-sudah-wajib-bayar-zakat-pendapatan-ini-cara-kira-nisab-dan-had-kifayah-mengikut-negeri.html"],
+    ["LHDN: Public ruling on the zakat rebate (section 6A(3))", "https://www.hasil.gov.my/wp-content/uploads/KU2_2005_Tam1.pdf"]
+  ],
+  "faq": [
+    { "q": "How is income zakat calculated in Malaysia?", "a": "Zakat = 2.5% of yearly income once it reaches the nisab. On a RM5,000 monthly salary (RM60,000 a year) by the gross method, zakat is RM1,500 a year or RM125 a month." },
+    { "q": "What is the income zakat nisab for 2026?", "a": "The nisab is the value of 85 g of gold, so it moves with the gold price. Lembaga Zakat Selangor set RM38,748 for July to December 2026 and RM42,047 for January to June 2026. By the gross method, that equals a salary of about RM3,229 a month. Other states set their own nisab." },
+    { "q": "What is the difference between the gross and net methods?", "a": "The gross method takes 2.5% of total income. The net method first deducts had kifayah (basic needs for you and your dependants) and EPF contributions. On RM5,000 a month with a non-working spouse and two children, deductions are RM20,544, leaving RM39,456 and zakat of RM986.40 a year." },
+    { "q": "What are the LZS had kifayah amounts for 2026?", "a": "A year: working adult RM4,944, non-working adult RM2,004, child aged 7 to 17 RM4,896, child aged 6 and under RM2,100, and a dependant studying in higher education RM7,356. These are Selangor's rates; other states differ." },
+    { "q": "Does zakat reduce my income tax?", "a": "Yes. Zakat paid to a state zakat body is a 100% tax rebate under section 6A(3) of the Income Tax Act 1967, taken straight off your tax up to the tax charged. With RM1,200 tax and RM1,500 zakat, the tax becomes zero, but the extra RM300 is not refunded." },
+    { "q": "Can zakat be deducted from my salary?", "a": "Yes. Under a salary deduction scheme your employer deducts monthly zakat, for example RM125 for RM1,500 a year, and your monthly PCB is reduced at the same time. Keep the receipt or statement for e-Filing." },
+    { "q": "When should I pay income zakat?", "a": "Monthly by salary deduction or as a lump sum. To claim the tax rebate for a year of assessment, pay by 31 December of that year." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Zakat calculator</li></ol></nav>
+  <h1>Zakat Calculator Malaysia</h1>
+  <p class="answer">Income zakat is <strong>2.5% of yearly income</strong> once it reaches the nisab, the value of 85 g of gold (<strong>{{Z_NISAB}}</strong> in Selangor, July–December 2026). A RM5,000 monthly salary pays <strong>{{Z_YEAR}} a year</strong> or {{Z_MONTH}} a month, and that zakat is a <strong>100% income tax rebate</strong>. Enter your income below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{Z_VERIFIED_ISO}}">{{Z_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-zakat-pendapatan/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="zakatForm" novalidate aria-labelledby="zakat-h">
+      <h2 id="zakat-h">Your income</h2>
+      <div class="field-row">
+        <div class="field"><label for="salary">Salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="100" value="{{Z_SALARY}}"></div></div>
+        <div class="field">
+          <label for="period">Per</label>
+          <select class="input" id="period" name="period">{{Z_PERIOD_OPTIONS}}</select>
+        </div>
+      </div>
+      <div class="field"><label for="other">Other income a year</label><div class="input"><span aria-hidden="true">RM</span><input id="other" name="other" type="number" inputmode="decimal" min="0" step="100" value="0"></div><p class="help">Bonus, allowances, rent, side business and other payments.</p></div>
+      <div class="field">
+        <label for="method">Method</label>
+        <select class="input" id="method" name="method">{{Z_METHOD_OPTIONS}}</select>
+      </div>
+      <fieldset class="field-group" id="zakatNet" hidden>
+        <legend>Had kifayah deductions (LZS 2026)</legend>
+        <p class="help">People in your household, counting yourself as a working adult.</p>
+        <div class="field-row">
+          <div class="field"><label for="adults">Working adults</label><div class="input"><input id="adults" name="adults" type="number" inputmode="numeric" min="0" step="1" value="1"></div></div>
+          <div class="field"><label for="others">Other adults</label><div class="input"><input id="others" name="others" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+        </div>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="kids7">Kids 7–17</label><div class="input"><input id="kids7" name="kids7" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+          <div class="field"><label for="kids6">Kids ≤ 6</label><div class="input"><input id="kids6" name="kids6" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+          <div class="field"><label for="ipt">At university</label><div class="input"><input id="ipt" name="ipt" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+        </div>
+        <div class="field"><label for="epf">EPF contributions a year</label><div class="input"><span aria-hidden="true">RM</span><input id="epf" name="epf" type="number" inputmode="decimal" min="0" step="100" value="" placeholder="Auto: 11% of salary"></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Nisab and tax</legend>
+        <div class="field"><label for="nisab">Your state's nisab</label><div class="input"><span aria-hidden="true">RM</span><input id="nisab" name="nisab" type="number" inputmode="decimal" min="0" step="1" value="{{Z_NISAB_IN}}"></div><p class="help">Default: Selangor (LZS), July–December 2026. Check your state zakat body's site.</p></div>
+        <div class="field"><label for="tax">Income tax for the year (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="tax" name="tax" type="number" inputmode="decimal" min="0" step="10" value=""></div><p class="help">From the <a href="/income-tax-calculator-malaysia/">income tax calculator</a>, to see the zakat rebate.</p></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="zakat-result-h">
+      <h2 id="zakat-result-h">Your zakat</h2>
+      <div class="net">
+        <p>Income zakat for the year</p>
+        <output id="zYear" for="salary period other method nisab">{{Z_YEAR}}</output>
+        <p><strong id="zMonth">{{Z_MONTH}}</strong> a month by salary deduction</p>
+      </div>
+      <p class="sr-only" id="zLive" aria-live="polite"></p>
+      <p class="note" id="zStatus">{{Z_STATUS}}</p>
+      <table class="rows">
+        <caption>Calculation</caption>
+        <tbody>
+          <tr><th scope="row">Yearly income</th><td id="zIncome">{{Z_INCOME}}</td></tr>
+        </tbody>
+        <tbody id="zDedRows"></tbody>
+        <tbody>
+          <tr id="zDedWrap" hidden><th scope="row">Total deductions</th><td id="zDeducted">{{Z_DEDUCTED}}</td></tr>
+          <tr><th scope="row">Income liable to zakat</th><td id="zBase">{{Z_BASE}}</td></tr>
+          <tr><th scope="row">Nisab</th><td id="zNisab">{{Z_NISAB}}</td></tr>
+        </tbody>
+        <tbody id="zTaxRows" hidden>
+          <tr><th scope="row">Tax rebate (100%)</th><td id="zRebate"></td></tr>
+          <tr class="total"><th scope="row">Tax after the zakat rebate</th><td id="zTaxAfter"></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Own gold or savings? Use the <a href="/gold-zakat-calculator-malaysia/">gold and savings zakat calculator</a>.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="zakatPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Income zakat by salary</h2>
+  <p>At a nisab of {{Z_NISAB}}. The net column assumes a single person: one working adult's had kifayah and 11% EPF.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly salary</th><th scope="col">Gross method, a year</th><th scope="col">A month</th><th scope="col">Net method, a year</th></tr></thead>
+      <tbody>
+{{Z_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="kifayah-h">Selangor had kifayah 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kifayah-h">
+    <table class="data">
+      <thead><tr><th scope="col">Dependant</th><th scope="col">A month</th><th scope="col">A year</th></tr></thead>
+      <tbody>
+{{Z_KIFAYAH}}
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Family example:</strong> RM5,000 a month, a non-working spouse, one child aged 10 and one aged 4. Deductions {{Z_FAM_DED}} (including RM6,600 EPF), leaving {{Z_FAM_BASE}}; zakat <strong>{{Z_FAM_ZAKAT}}</strong> a year or {{Z_FAM_MONTH}} a month.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">How to calculate income zakat</h2>
+  <ol>
+    <li><strong>Add up yearly income:</strong> salary, bonus, allowances and other income.</li>
+    <li><strong>Choose a method:</strong> gross (simpler, 2.5% of total income) or net, after had kifayah and EPF.</li>
+    <li><strong>Compare with the nisab:</strong> the value of 85 g of gold set by your state zakat body (Selangor's nisab implies {{Z_GOLD}} a gram).</li>
+    <li><strong>Take 2.5%:</strong> if you reach the nisab, zakat = 2.5% × income liable to zakat.</li>
+    <li><strong>Claim the rebate:</strong> enter the zakat in the rebate section of LHDN e-Filing, with the zakat body's receipt.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.zakatselangor.com.my/" rel="noopener">Lembaga Zakat Selangor</a></li>
+    <li><a href="https://bayarzakat2u.com.my/calculate-zakat-on-income/" rel="noopener">BayarZakat2u (LZS amil): nisab and had kifayah 2026</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/sudut-pakar/anda-sudah-wajib-bayar-zakat-pendapatan-ini-cara-kira-nisab-dan-had-kifayah-mengikut-negeri.html" rel="noopener">RinggitPlus: nisab and had kifayah by state</a></li>
+    <li><a href="https://www.hasil.gov.my/wp-content/uploads/KU2_2005_Tam1.pdf" rel="noopener">LHDN: the zakat rebate under section 6A(3)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. Your state zakat body decides the nisab, had kifayah and method; ask it or the state mufti about special cases.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/gold-zakat-calculator-malaysia/">Gold &amp; Savings Zakat Calculator<small>Kept gold, worn gold and savings</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Yearly tax and reliefs</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+  </div>
+</section>

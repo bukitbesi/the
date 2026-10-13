@@ -504,12 +504,21 @@
     "live": true
   },
   {
-    "name": "Kalkulator Zakat",
-    "desc": "Estimate zakat for income, savings, gold and other supported categories using the tool settings.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-zakat.html",
+    "name": "Kalkulator Zakat Pendapatan",
+    "desc": "Income zakat with the 2026 nisab: gross or had kifayah and EPF method, the monthly salary-deduction amount and the 100% income tax rebate. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/",
     "cat": "calc",
     "icon": "kalkulator-zakat",
-    "badge": "",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Zakat Emas & Simpanan",
+    "desc": "Zakat on kept gold from 85 g, worn gold above your state's uruf (Selangor 800 g) and savings above the nisab, with an editable gold price. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-zakat-emas/",
+    "cat": "calc",
+    "icon": "kalkulator-zakat-emas",
+    "badge": "new",
     "live": true
   },
   {
@@ -540,21 +549,12 @@
     "live": true
   },
   {
-    "name": "Kalkulator BMI (Bahasa Melayu)",
-    "desc": "Calculate BMI with a Malay-language interface and review the categories shown by the tool.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-bmi.html",
-    "cat": "calc",
-    "icon": "kalkulator-bmi",
-    "badge": "",
-    "live": true
-  },
-  {
-    "name": "BMI Calculator Malaysia (English)",
-    "desc": "Calculate BMI using metric or imperial measurements with an English-language interface.",
-    "url": "https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html",
+    "name": "BMI Calculator Malaysia",
+    "desc": "BMI with the Malaysian Ministry of Health (Asian) cut-offs and WHO comparison, healthy weight for your height, kg to lose or gain, and waist risk. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/bmi-calculator-malaysia/",
     "cat": "calc",
     "icon": "bmi-calculator-malaysia",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

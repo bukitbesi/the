@@ -421,6 +421,17 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
 .field-row .field{min-width:0}
 .field-row-3{grid-template-columns:1fr 1fr 1fr}
+/* BMI gauge: segments on a 15–40 scale (Malaysian CPG cut-offs); colours are decorative, the category is in text. */
+.gauge{position:relative;display:flex;height:12px;margin:16px 0 22px;border-radius:99px;overflow:visible}
+.gauge b{display:block;height:100%}
+.gauge b:first-child{border-radius:99px 0 0 99px}
+.gauge b:nth-child(4){border-radius:0 99px 99px 0}
+.g-under{width:14%;background:#60a5fa}.g-normal{width:18%;background:#22c55e}.g-over{width:18%;background:#f59e0b}.g-obese{width:50%;background:#ef4444}
+.gauge i{position:absolute;top:-5px;width:4px;height:22px;margin-left:-2px;border-radius:2px;background:var(--text);box-shadow:0 0 0 2px var(--surface)}
+.gauge-scale{position:relative;height:14px;font-size:.7rem;color:var(--text3);margin:-16px 0 10px}
+.gauge-scale span{position:absolute;transform:translateX(-50%)}
+.bmi-cat{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:99px;font-size:.85rem;font-weight:700;color:var(--text);border-left:4px solid var(--border2);background:var(--bg)}
+.bmi-under{border-left-color:#60a5fa}.bmi-normal{border-left-color:#22c55e}.bmi-over{border-left-color:#f59e0b}.bmi-obese1,.bmi-obese2,.bmi-obese3{border-left-color:#ef4444}
 </style>
 
 </head>

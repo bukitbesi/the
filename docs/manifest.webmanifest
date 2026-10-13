@@ -68,6 +68,11 @@
       "description": "Free ASB dividend calculator: payout from your monthly lowest balance, a 10-year compounding project"
     },
     {
+      "name": "BMI Calculator Malaysia",
+      "url": "/bmi-calculator-malaysia/",
+      "description": "Free BMI calculator with Malaysian Ministry of Health cut-offs (overweight from 23): your category, "
+    },
+    {
       "name": "Car Loan Calculator Malaysia",
       "url": "/car-loan-calculator-malaysia/",
       "description": "Free car loan calculator for the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, roa"
@@ -101,6 +106,11 @@
       "name": "GDEX Tracking",
       "url": "/gdex-tracking/",
       "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX"
+    },
+    {
+      "name": "Gold & Savings Zakat Calculator Malaysia",
+      "url": "/gold-zakat-calculator-malaysia/",
+      "description": "Free gold and savings zakat calculator for Malaysia: kept gold from 85 g, worn gold above your state"
     },
     {
       "name": "Home Loan Calculator Malaysia",
@@ -191,6 +201,11 @@
       "name": "Unused CSS Remover",
       "url": "/unused-css-remover/",
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
+    },
+    {
+      "name": "Zakat Calculator Malaysia",
+      "url": "/zakat-calculator-malaysia/",
+      "description": "Free income zakat calculator for Malaysia 2026: gross or net method with had kifayah and EPF, monthl"
     }
   ]
 }

@@ -85,6 +85,9 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
+| [/bmi-calculator-malaysia/](https://tool.thebukitbesi.com/bmi-calculator-malaysia/) + [/kalkulator-bmi/](https://tool.thebukitbesi.com/kalkulator-bmi/) | English + BM | bmi calculator malaysia, kalkulator bmi, berat ideal (moved from the blog) |
+| [/kalkulator-zakat-pendapatan/](https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/) + [/zakat-calculator-malaysia/](https://tool.thebukitbesi.com/zakat-calculator-malaysia/) | BM + English | kalkulator zakat pendapatan, nisab zakat 2026, had kifayah (moved from the blog) |
+| [/kalkulator-zakat-emas/](https://tool.thebukitbesi.com/kalkulator-zakat-emas/) + [/gold-zakat-calculator-malaysia/](https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/) | BM + English | kalkulator zakat emas, uruf emas pakai, zakat simpanan |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
@@ -127,6 +130,10 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (RPGT):** `rpgt-core.js` holds the Schedule 5 rates, the individual exemption and the retention rates. Check after each Budget and update `FACTS.verified` and `tools-src/tests/rpgt.test.mjs`.
 
 **Land converter:** `land-core.js` defines every unit in square feet (relung 30,976, orlong 57,600, jemba 64); no yearly upkeep.
+
+**Upkeep (zakat):** `zakat-core.js` holds the default nisab (LZS, changes twice a year with the gold price), the LZS had kifayah amounts and the uruf presets. Update `FACTS.nisab`, `nisabLabel`, `kifayah` and `verified` when LZS publishes new figures (January and July), with `tools-src/tests/zakat.test.mjs`.
+
+**BMI:** `bmi-core.js` follows the Malaysian CPG on Management of Obesity (2nd edition, 2023); review when a new edition is published.
 
 **Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect guide](documentation/blogger-redirects.md) and the [courier link checks](documentation/blogger-redirect-parcel-tracking.md).
 
@@ -178,6 +185,8 @@ assets/js/ot-core.js        overtime: ORP, hourly rate, 1.5×/2×/3× rates, res
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
+assets/js/bmi-core.js       BMI: Malaysian CPG and WHO categories, healthy range, waist and waist-to-height ratio
+assets/js/zakat-core.js     zakat: income (gross / LZS had kifayah), nisab, tax rebate; gold (kept, worn over uruf) and savings
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)

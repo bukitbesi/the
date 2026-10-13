@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/kalkulator-zakat-emas/",
+  "lang": "ms",
+  "alternates": { "en": "/gold-zakat-calculator-malaysia/" },
+  "title": "Kalkulator Zakat Emas & Simpanan 2026: Emas Pakai, Uruf, Nisab",
+  "description": "Kalkulator zakat emas dan simpanan percuma: emas simpan dari 85 g, emas pakai melebihi uruf negeri (Selangor 800 g) dan wang simpanan melebihi nisab.",
+  "llms": "Mengira zakat emas dan simpanan di Malaysia pada kadar 2.5%: emas simpan (jongkong, syiling, akaun emas) apabila beratnya mencapai nisab 85 g, emas pakai hanya atas berat yang melebihi uruf negeri (Selangor dan Wilayah Persekutuan 800 g, Kelantan 600 g, negeri lain dimasukkan sendiri), dan wang simpanan yang kekal melebihi nisab selama setahun (haul); harga emas segram boleh diubah (lalai RM455.86, tersirat daripada nisab Selangor RM38,748 Julai–Disember 2026) dan zakat yang dibayar layak rebat cukai pendapatan.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "gold",
+  "scripts": ["/assets/js/zakat-emas.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Zakat Emas", null]],
+  "about": ["Zakat emas", "Uruf emas perhiasan", "Zakat simpanan", "Nisab 85 gram"],
+  "app": {
+    "name": "Kalkulator Zakat Emas & Simpanan",
+    "category": "FinanceApplication",
+    "features": ["Emas simpan dengan nisab 85 g", "Emas pakai melebihi uruf negeri", "Zakat wang simpanan", "Harga emas segram boleh diubah", "Jumlah zakat sekali gus", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Lembaga Zakat Selangor: Zakat Emas", "https://www.zakatselangor.com.my/en/gold-zakat/"],
+    ["Pejabat Mufti Selangor: Zakat emas perhiasan", "https://emusykil.muftiselangor.gov.my/index.php/site/jawapan?id=441"],
+    ["Tunai Zakat: Kalkulator zakat emas Selangor", "https://tunaizakat.my/en/zakat-emas/"],
+    ["Wazan UPM: Zakat emas", "https://wazan.upm.edu.my/artikel/zakat_emas-78038"]
+  ],
+  "faq": [
+    { "q": "Bagaimana cara kira zakat emas simpan?", "a": "Jika emas yang disimpan (jongkong, syiling atau akaun emas) mencapai 85 gram dan cukup setahun, zakat = 2.5% × berat × harga emas segram. 100 g pada RM455.86 segram bernilai RM45,586, jadi zakatnya RM1,139.65." },
+    { "q": "Bagaimana cara kira zakat emas pakai?", "a": "Zakat hanya dikenakan atas berat yang melebihi uruf negeri. Di Selangor uruf ialah 800 g: emas pakai 900 g bermaksud 100 g dizakatkan, iaitu 100 × RM455.86 × 2.5% = RM1,139.65. Emas pakai 800 g atau kurang tidak dikenakan zakat." },
+    { "q": "Berapa uruf emas mengikut negeri?", "a": "Selangor dan Wilayah Persekutuan menetapkan 800 g, dan Kelantan 600 g. Negeri lain menetapkan kadar sendiri yang berbeza, jadi semak dengan majlis agama atau pusat zakat negeri anda dan masukkan uruf itu dalam kalkulator." },
+    { "q": "Bagaimana cara kira zakat simpanan?", "a": "Jika wang simpanan kekal mencapai nisab selama setahun, zakat ialah 2.5% daripadanya. Simpanan RM50,000 dikenakan zakat RM1,250. Pusat zakat negeri menentukan sama ada baki terendah atau baki akhir haul digunakan." },
+    { "q": "Harga emas mana yang perlu digunakan?", "a": "Gunakan harga emas segram yang diumumkan pusat zakat negeri anda pada tarikh cukup haul. Kalkulator ini menggunakan RM455.86 segram, iaitu nisab Selangor RM38,748 dibahagi 85 g, sebagai nilai lalai." },
+    { "q": "Apakah beza emas simpan dan emas pakai?", "a": "Emas simpan ialah emas untuk pelaburan atau simpanan, seperti jongkong, syiling, dinar dan akaun emas, dan dikenakan zakat atas keseluruhan berat apabila mencapai 85 g. Emas pakai ialah barang kemas yang dipakai, dan hanya bahagian yang melebihi uruf dizakatkan." },
+    { "q": "Adakah zakat emas dan simpanan layak rebat cukai?", "a": "Ya. Zakat yang dibayar kepada pusat zakat negeri layak rebat cukai pendapatan 100% sehingga jumlah cukai anda, sama seperti zakat pendapatan. Simpan resit untuk e-Filing LHDN." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator zakat emas</li></ol></nav>
+  <h1>Kalkulator Zakat Emas &amp; Simpanan</h1>
+  <p class="answer">Zakat emas ialah <strong>2.5%</strong>: emas simpan dizakatkan apabila mencapai <strong>85 g</strong>, emas pakai hanya atas berat <strong>melebihi uruf</strong> negeri (Selangor 800 g), dan wang simpanan apabila melebihi nisab ({{G_NISAB}}). 100 g emas simpan, 900 g emas pakai dan RM50,000 simpanan membayar <strong>{{G_TOTAL}}</strong>. Masukkan harta anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{G_VERIFIED_ISO}}">{{G_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/gold-zakat-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="goldForm" novalidate aria-labelledby="gold-h">
+      <h2 id="gold-h">Emas dan simpanan anda</h2>
+      <div class="field"><label for="price">Harga emas segram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{G_PRICE}}"></div><p class="help">Gunakan harga yang diumumkan pusat zakat negeri anda.</p></div>
+      <fieldset class="field-group">
+        <legend>Emas simpan</legend>
+        <div class="field"><label for="kept">Berat</label><div class="input"><input id="kept" name="kept" type="number" inputmode="decimal" min="0" step="0.1" value="{{G_KEPT}}"><span aria-hidden="true">g</span></div><p class="help">Jongkong, syiling, dinar, akaun emas. Nisab 85 g.</p></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Emas pakai</legend>
+        <div class="field"><label for="worn">Berat</label><div class="input"><input id="worn" name="worn" type="number" inputmode="decimal" min="0" step="0.1" value="{{G_WORN}}"><span aria-hidden="true">g</span></div></div>
+        <div class="field-row">
+          <div class="field">
+            <label for="state">Negeri</label>
+            <select class="input" id="state" name="state">{{G_STATE_OPTIONS}}</select>
+          </div>
+          <div class="field"><label for="uruf">Uruf</label><div class="input"><input id="uruf" name="uruf" type="number" inputmode="decimal" min="0" step="1" value="{{G_URUF}}"><span aria-hidden="true">g</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Wang simpanan</legend>
+        <div class="field"><label for="savings">Simpanan cukup setahun</label><div class="input"><span aria-hidden="true">RM</span><input id="savings" name="savings" type="number" inputmode="decimal" min="0" step="100" value="{{G_SAVINGS}}"></div><p class="help">Akaun bank, deposit tetap dan tunai yang kekal sepanjang haul.</p></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="gold-result-h">
+      <h2 id="gold-result-h">Zakat anda</h2>
+      <div class="net">
+        <p>Jumlah zakat</p>
+        <output id="gTotal" for="price kept worn uruf savings">{{G_TOTAL}}</output>
+        <p>Nisab 85 g = <strong id="gNisab">{{G_NISAB}}</strong></p>
+      </div>
+      <p class="sr-only" id="gLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody>
+          <tr><th scope="row">Emas simpan<small id="gKeptNote">{{G_KEPT_NOTE}}</small></th><td id="gKept">{{G_KEPT_Z}}</td></tr>
+          <tr><th scope="row">Emas pakai<small id="gWornNote">{{G_WORN_NOTE}}</small></th><td id="gWorn">{{G_WORN_Z}}</td></tr>
+          <tr><th scope="row">Wang simpanan</th><td id="gSavings">{{G_SAV_Z}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Ada gaji atau pendapatan lain? Kira di <a href="/kalkulator-zakat-pendapatan/">kalkulator zakat pendapatan</a>.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="goldPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="worn-h">Zakat emas pakai di Selangor (uruf 800 g)</h2>
+  <p>Pada {{G_PRICE_TXT}} segram.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="worn-h">
+    <table class="data">
+      <thead><tr><th scope="col">Emas pakai</th><th scope="col">Melebihi uruf</th><th scope="col">Zakat</th></tr></thead>
+      <tbody>
+{{G_WORN_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="kept-h">Zakat emas simpan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kept-h">
+    <table class="data">
+      <thead><tr><th scope="col">Berat</th><th scope="col">Nilai</th><th scope="col">Zakat</th></tr></thead>
+      <tbody>
+{{G_KEPT_TABLE}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">Cara kira zakat emas dan simpanan</h2>
+  <ol>
+    <li><strong>Asingkan emas:</strong> emas simpan (pelaburan) dan emas pakai (barang kemas yang dipakai).</li>
+    <li><strong>Emas simpan:</strong> jika 85 g atau lebih dan cukup setahun, zakat 2.5% atas keseluruhan nilai.</li>
+    <li><strong>Emas pakai:</strong> tolak uruf negeri; zakat 2.5% atas berat yang melebihinya sahaja.</li>
+    <li><strong>Simpanan:</strong> jika baki kekal mencapai nisab sepanjang haul, zakat 2.5%.</li>
+    <li><strong>Bayar dan tuntut rebat:</strong> bayar kepada pusat zakat negeri dan simpan resit untuk rebat cukai.</li>
+  </ol>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.zakatselangor.com.my/en/gold-zakat/" rel="noopener">Lembaga Zakat Selangor: zakat emas</a></li>
+    <li><a href="https://emusykil.muftiselangor.gov.my/index.php/site/jawapan?id=441" rel="noopener">Pejabat Mufti Selangor: zakat emas perhiasan</a></li>
+    <li><a href="https://tunaizakat.my/en/zakat-emas/" rel="noopener">Tunai Zakat: kalkulator zakat emas Selangor</a></li>
+    <li><a href="https://wazan.upm.edu.my/artikel/zakat_emas-78038" rel="noopener">Wazan UPM: zakat emas</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja. Uruf, harga emas dan kaedah simpanan ditetapkan oleh majlis agama dan pusat zakat negeri anda; rujuk mereka untuk kes khas.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-zakat-pendapatan/">Kalkulator Zakat Pendapatan<small>Nisab, had kifayah dan rebat cukai</small></a>
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>
