@@ -89,6 +89,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-zakat-pendapatan/](https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/) + [/zakat-calculator-malaysia/](https://tool.thebukitbesi.com/zakat-calculator-malaysia/) | BM + English | kalkulator zakat pendapatan, nisab zakat 2026, had kifayah (moved from the blog) |
 | [/kalkulator-zakat-emas/](https://tool.thebukitbesi.com/kalkulator-zakat-emas/) + [/gold-zakat-calculator-malaysia/](https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/) | BM + English | kalkulator zakat emas, uruf emas pakai, zakat simpanan |
 | [/harga-emas-hari-ini/](https://tool.thebukitbesi.com/harga-emas-hari-ini/) + [/gold-price-malaysia/](https://tool.thebukitbesi.com/gold-price-malaysia/) | BM + English | harga emas hari ini, harga emas 916, gold price malaysia today, Kijang Emas |
+| [/ai-prompt-generator/](https://tool.thebukitbesi.com/ai-prompt-generator/) + [/penjana-prompt-ai/](https://tool.thebukitbesi.com/penjana-prompt-ai/) | English + BM | ai prompt generator, midjourney prompt generator, ai video prompt; penjana prompt ai (moved from the blog, video prompt page merged) |
+| [/image-to-prompt/](https://tool.thebukitbesi.com/image-to-prompt/) + [/gambar-ke-prompt/](https://tool.thebukitbesi.com/gambar-ke-prompt/) | English + BM | image to prompt, photo to prompt; gambar ke prompt (moved from the blog) |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
@@ -135,6 +137,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (zakat):** `zakat-core.js` holds the default nisab (LZS, changes twice a year with the gold price), the LZS had kifayah amounts and the uruf presets. Update `FACTS.nisab`, `nisabLabel`, `kifayah` and `verified` when LZS publishes new figures (January and July), with `tools-src/tests/zakat.test.mjs`.
 
 **BMI:** `bmi-core.js` follows the Malaysian CPG on Management of Obesity (2nd edition, 2023); review when a new edition is published.
+
+**AI prompt tools:** `prompt-core.js` holds the style chips, the platform formats (Midjourney `--ar`/`--no`/`--stylize`, Stable Diffusion keywords with a separate negative and the ~75-token CLIP limit, sentence prompts for ChatGPT/DALL·E and Flux, Veo/Sora camera, dialogue and audio lines, Runway camera-first, Kling negative box), the three variations, the seeded Surprise me, the pixel palette analysis and the vision-answer parser; tested in `tools-src/tests/prompt.test.mjs`. `prompt-cards.js` (cards, copy, saved prompts in localStorage) is shared by both pages. Image to Prompt calls the Workers AI worker in `tools-src/vision-worker/` (`visionApi` in `site.json`; see [the worker guide](documentation/vision-worker.md)) and, only on the visitor's click, loads Transformers.js 3.8.1 from jsDelivr with `Xenova/vit-gpt2-image-captioning` as the in-browser fallback. Review the platform formats every six months (new Midjourney, Veo, Sora or Runway versions) and update `FACTS.verified`; if Cloudflare retires the vision model, change `MODEL` in the worker.
 
 **Gold price (live):** `gold-core.js` parses three free sources (BNM Kijang Emas and USD/MYR, gold-api.com spot) into one snapshot. The `Daily gold price` workflow (`.github/workflows/gold-daily.yml`, 10:35 and 17:35 Malaysia time) runs `tools-src/gold-fetch.mjs`, writes `tools-src/gold-data.json` (with price history for the chart), rebuilds and commits, so the HTML always carries the day's price. The page refreshes every minute from the Cloudflare Worker in `tools-src/gold-worker/` once its URL is set as `goldApi` in `site.json`; see [the worker guide](documentation/gold-worker.md).
 
@@ -192,6 +196,9 @@ assets/js/bmi-core.js       BMI: Malaysian CPG and WHO categories, healthy range
 assets/js/zakat-core.js     zakat: income (gross / LZS had kifayah), nisab, tax rebate; gold (kept, worn over uruf) and savings
 assets/js/gold-core.js      gold price: BNM/spot parsing, per-gram price by purity, Kijang Emas, jewellery check, chart
 tools-src/gold-worker/      Cloudflare Worker that serves the live gold price (deploy: documentation/gold-worker.md)
+assets/js/prompt-core.js    AI prompts: platform formats, variations, surprise ideas, image palette, vision parsing, URL state
+assets/js/prompt-cards.js   shared prompt cards, copy and saved prompts (AI Prompt Generator, Image to Prompt)
+tools-src/vision-worker/    Cloudflare Workers AI worker that describes uploaded pictures (deploy: documentation/vision-worker.md)
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)
