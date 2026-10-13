@@ -62,6 +62,8 @@ test('Road tax: flat bands to 1,600 cc, then base plus a rate per cc', () => {
   assert.equal(C.roadTax(2487, 'saloon'), 867);
   assert.equal(C.roadTax(1798, 'nonSaloon'), 359.4);
   assert.equal(C.roadTax(2994, 'nonSaloon'), 1630.4);
+  assert.equal(C.roadTax(1496, 'nonSaloon'), 120);
+  assert.equal(C.roadTax(1196, 'nonSaloon'), 85);
   assert.equal(C.roadTax(0, 'saloon'), 0);
   // Each band starts where the one below ends.
   for (const body of ['saloon', 'nonSaloon']) for (const [upper] of C.ROAD_TAX[body].slice(4, -1)) {

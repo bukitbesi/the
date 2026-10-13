@@ -24,6 +24,7 @@ const loanCore = require('../assets/js/loan-core.js');
 const carCore = require('../assets/js/carloan-core.js');
 const asbCore = require('../assets/js/asb-core.js');
 const prorateCore = require('../assets/js/prorate-core.js');
+const otCore = require('../assets/js/ot-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -543,7 +544,7 @@ function asbMap(lang) {
     A_FIN_AMOUNT: ASB_FIN.amount, A_FIN_RATE: ASB_FIN.rate, A_FIN_YEARS: ASB_FIN.years,
     AF_PAY: money(x.monthly, lang), AF_INTEREST: rm0(x.interest), AF_DIV: rm0(x.yearlyDividend), AF_DIVS: rm0(x.dividends),
     AF_NET: (L ? 'Untung bersih ' : 'Net gain ') + rm0(x.net), AF_BREAK: pct(x.breakEven),
-    A_HISTORY: asbCore.HISTORY.slice().reverse().map(([y, d, b, t]) => `<tr><th scope="row">${y}</th><td>${sen(d)}</td><td>${sen(b)}</td><td><strong>${sen(t)}</strong></td></tr>`).join('\n'),
+    A_HISTORY: asbCore.HISTORY.slice().reverse().map(([y, d, b, t, note]) => `<tr><th scope="row">${y}</th><td>${sen(d)}</td><td>${note === 'ehsan' ? `${sen(0.75)} + ${sen(0.75)} Ehsan<small>${L ? 'Ehsan bagi 30,000 unit pertama' : 'Ehsan on the first 30,000 units'}</small>` : sen(b)}</td><td><strong>${sen(t)}</strong></td></tr>`).join('\n'),
     A_EXAMPLES: [5000, 10000, 30000, 50000, 100000, 200000].map(b =>
       `<tr><th scope="row">${rm0(b)}</th><td>${money(asbCore.dividend(Array(12).fill(b), F.latest).amount, lang)}</td><td>${money(asbCore.dividend(Array(12).fill(b), F.average5).amount, lang)}</td><td>${money(asbCore.dividend(Array(12).fill(b), F.conservative).amount, lang)}</td></tr>`).join('\n'),
     A_GROWTH: [100, 200, 500, 1000].map(m => {
@@ -582,6 +583,30 @@ function prorateMap(lang) {
     P_EX_JOIN: ex(3000, 16, 31), P_EX_LEAVE: ex(4500, 10, 30), P_EX_UNPAID: money(prorateCore.prorate(6200, 2, 31) , lang), P_EX_UNPAID_PAY: ex(6200, 29, 31),
     P_TABLE: [2000, 3000, 4000, 5000, 8000].map(s => `<tr><th scope="row">${money(s, lang)}</th>${[28, 30, 31].map(b => `<td>${money(s / b, lang)}</td>`).join('')}<td>${money(s / 26, lang)}</td></tr>`).join('\n'),
     P_VERIFIED: longDate(F.verified, lang), P_VERIFIED_ISO: F.verified
+  };
+}
+// ---- Overtime (kerja lebih masa), EN + BM
+const OT_EXAMPLE = { wage: 2600, basis: 'monthly', hoursPerDay: 8, specified: 'no', normalOt: 10, restHalf: 0, restFull: 1, restOt: 0, holidayDays: 1, holidayOt: 0 };
+function otMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, F = otCore.FACTS, r = otCore.calculate(OT_EXAMPLE);
+  const m = n => money(n, lang);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const totalLabel = L ? 'Jumlah bayaran lebih masa' : 'Total overtime pay';
+  const lines = r.lines.filter(l => l.qty || l.key === 'normal').map(l =>
+    `<tr><th scope="row">${esc(otCore.LABELS[lang][l.key])}<small>${otCore.detail(l, lang, m)}</small></th><td>${m(l.amount)}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${totalLabel}</th><td>${m(r.total)}</td></tr>`);
+  const row = w => { const x = otCore.rates(w, 'monthly', 8); return `<tr><th scope="row">${m(w)}</th><td>${m(x.orp)}</td><td>${m(x.hrp)}</td><td>${m(x.hrp * 1.5)}</td><td>${m(x.hrp * 2)}</td><td>${m(x.hrp * 3)}</td></tr>`; };
+  const ex = otCore.rates(F.minimumWage, 'monthly', 8);
+  return {
+    O_WAGE: OT_EXAMPLE.wage, O_HOURS: OT_EXAMPLE.hoursPerDay, O_NORMAL: OT_EXAMPLE.normalOt, O_REST_HALF: OT_EXAMPLE.restHalf, O_REST_FULL: OT_EXAMPLE.restFull,
+    O_REST_OT: OT_EXAMPLE.restOt, O_PH: OT_EXAMPLE.holidayDays, O_PH_OT: OT_EXAMPLE.holidayOt,
+    O_BASIS_OPTIONS: [opt('monthly', 'Monthly-rated', 'Gaji bulanan', true), opt('daily', 'Daily-rated', 'Gaji harian')].join(''),
+    O_SPECIFIED_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes', 'Ya')].join(''),
+    O_WAGE_LABEL: L ? 'Gaji bulanan' : 'Monthly wages', O_TOTAL_LABEL: totalLabel,
+    O_TOTAL: m(r.total), O_ORP: m(r.orp), O_HRP: m(r.hrp), O_OT: m(r.lines[0].rate), O_LINES: lines.join('\n'),
+    O_TABLE: [1700, 2000, 2500, 3000, 3500, 4000].map(row).join('\n'),
+    O_MIN_ORP: m(ex.orp), O_MIN_HRP: m(ex.hrp), O_MIN_OT: m(ex.hrp * 1.5),
+    O_VERIFIED: longDate(F.verified, lang), O_VERIFIED_ISO: F.verified
   };
 }
 // ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
@@ -811,7 +836,7 @@ function purgeMap() {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -923,6 +948,7 @@ const bundles = {
   'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
   'asb.js': ['assets/js/asb-core.js', 'assets/js/asb-ui.js'],
   'prorate.js': ['assets/js/prorate-core.js', 'assets/js/prorate-ui.js'],
+  'overtime.js': ['assets/js/ot-core.js', 'assets/js/ot-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

@@ -10,14 +10,14 @@
     verified: '2026-10-12',
     newRulesFrom: '2026-06-01', transitionUntil: '2027-03-31',
     defaultRate: 4.5, defaultFlat: 2.5, maxYears: 9,
-    runningVerified: '2026-10-13', insuranceSst: 0.08, insuranceStamp: 10
+    runningVerified: '2026-10-14', insuranceSst: 0.08, insuranceStamp: 10
   };
 
   // [upper cc, base RM, RM per cc above the previous band's upper limit]
   var ROAD_TAX = {
     saloon: [[1000, 20, 0], [1200, 55, 0], [1400, 70, 0], [1600, 90, 0], [1800, 200, 0.4], [2000, 280, 0.5],
       [2500, 380, 1], [3000, 880, 2.5], [Infinity, 2130, 4.5]],
-    nonSaloon: [[1000, 20, 0], [1200, 55, 0], [1400, 70, 0], [1600, 90, 0], [1800, 300, 0.3], [2000, 360, 0.4],
+    nonSaloon: [[1000, 20, 0], [1200, 85, 0], [1400, 100, 0], [1600, 120, 0], [1800, 300, 0.3], [2000, 360, 0.4],
       [2500, 440, 0.8], [3000, 840, 1.6], [Infinity, 1640, 1.6]]
   };
   // Former tariff, Peninsular: premium for the first RM1,000 sum insured by engine size, then RM26 per RM1,000.

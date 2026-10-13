@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/overtime-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-ot/" },
+  "title": "Overtime Calculator Malaysia 2026: OT Pay by the Employment Act",
+  "description": "Free overtime calculator for Malaysia: OT, rest day and public holiday pay under the Employment Act 1955, with hourly rate, the RM4,000 rule and 104-hour cap.",
+  "llms": "Calculates overtime pay in Malaysia under the Employment Act 1955 as amended from 1 January 2023: ordinary rate of pay (monthly wages ÷ 26, or the daily wage), hourly rate (ORP ÷ normal daily hours), overtime on a normal day at 1.5×, rest-day work (half or one day's ORP for monthly-rated, one or two days for daily-rated) and rest-day overtime at 2×, public holiday work at two days' ORP and holiday overtime at 3×; flags the RM4,000 coverage threshold, manual and other First Schedule employees, and the 104-hour monthly overtime limit.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ot",
+  "scripts": ["/assets/js/overtime.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Overtime Calculator", null]],
+  "about": ["Overtime pay", "Employment Act 1955", "Ordinary rate of pay", "Public holiday pay in Malaysia"],
+  "app": {
+    "name": "Overtime Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Ordinary and hourly rate of pay", "Overtime on normal days at 1.5×", "Rest day pay and rest-day overtime at 2×", "Public holiday pay and overtime at 3×", "Monthly-rated or daily-rated", "RM4,000 coverage and 104-hour limit checks", "Works offline"]
+  },
+  "citations": [
+    ["Employment Act 1955 (Act 265), updated text, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Zul Rafique & Partners: Overtime under the 2022 amendment to the Employment Act 1955", "https://zulrafique.com.my/ckfinder/userfiles/files/Infographic%20-%20Overtime%20Pay%20under%20the%202022%20Amendment%20-%20Employment%20Act%201955(1).pdf"],
+    ["AltHR: How to calculate overtime pay for employees in Malaysia", "https://althr.my/resources/calculate-overtime-pay-employees-malaysia"]
+  ],
+  "faq": [
+    { "q": "How is overtime pay calculated in Malaysia?", "a": "Divide the monthly wages by 26 to get the ordinary rate of pay (ORP), divide that by the normal hours in a day to get the hourly rate, then pay at least 1.5 times the hourly rate for each overtime hour on a normal working day. On RM2,600 and an 8-hour day, ORP is RM100, the hourly rate RM12.50 and overtime RM18.75 an hour, so 10 hours is RM187.50." },
+    { "q": "Who is entitled to overtime pay under the Employment Act?", "a": "Since 1 January 2023 the Employment Act covers all employees in Peninsular Malaysia and Labuan, but the overtime, rest-day and public holiday rates are guaranteed only to those earning up to RM4,000 a month, and to manual workers, drivers, domestic employees and supervisors of manual workers whatever they earn. For others, the employment contract sets the overtime terms." },
+    { "q": "How much is rest day pay?", "a": "For a monthly-rated employee, working up to half the normal hours on a rest day pays half a day's ORP, and working more than half up to the normal hours pays one day's ORP. Hours beyond the normal hours pay at least twice the hourly rate. On RM2,600 that is RM50, RM100 and RM25 an hour. Daily-rated employees get one or two days' wages instead." },
+    { "q": "How much do I get for working on a public holiday?", "a": "Two days' wages at the ordinary rate of pay on top of the holiday pay you already receive, and at least three times the hourly rate for hours beyond the normal hours. On RM2,600 that is RM200 for the day plus RM37.50 for each overtime hour." },
+    { "q": "What is the overtime rate at the minimum wage?", "a": "At the RM1,700 minimum wage and an 8-hour day, the ordinary rate of pay is RM65.38, the hourly rate RM8.17 and overtime RM12.26 an hour on a normal day." },
+    { "q": "What is the maximum overtime allowed in a month?", "a": "104 hours a month under the Employment (Limitation of Overtime Work) Regulations 1980. Normal hours are capped at 8 a day and 45 a week since 1 January 2023." },
+    { "q": "Is overtime counted in the 26-day rate?", "a": "No. The ordinary rate of pay is based on wages, which exclude overtime payments, so overtime does not raise the rate used to pay further overtime. Fixed allowances that form part of wages are included." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Overtime calculator</li></ol></nav>
+  <h1>Overtime Calculator Malaysia</h1>
+  <p class="answer">Overtime pay = <strong>monthly wages ÷ 26 ÷ normal daily hours × 1.5</strong> for each extra hour on a normal day, under the Employment Act 1955. On RM2,600 with an 8-hour day the hourly rate is {{O_HRP}} and overtime is <strong>{{O_OT}} an hour</strong>. Rest days pay at 2× and public holidays at 3× for overtime hours. Enter your own figures below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{O_VERIFIED_ISO}}">{{O_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-ot/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="otForm" novalidate aria-labelledby="ot-h">
+      <h2 id="ot-h">Your pay and hours this month</h2>
+      <div class="field-row">
+        <div class="field">
+          <label for="basis">Paid by</label>
+          <select class="input" id="basis" name="basis">{{O_BASIS_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="hoursPerDay">Normal hours a day</label><div class="input"><input id="hoursPerDay" name="hoursPerDay" type="number" inputmode="decimal" min="1" max="12" step="0.5" value="{{O_HOURS}}"><span aria-hidden="true">h</span></div></div>
+      </div>
+      <div class="field"><label for="wage" id="wageLabel">{{O_WAGE_LABEL}}</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="50" value="{{O_WAGE}}"></div><p class="help">Basic pay plus fixed allowances that count as wages; not overtime.</p></div>
+      <div class="field">
+        <label for="specified">Manual work or other First Schedule job?</label>
+        <select class="input" id="specified" name="specified">{{O_SPECIFIED_OPTIONS}}</select>
+        <p class="help">Manual workers, drivers, domestic employees and supervisors of manual workers get the Act's rates at any wage.</p>
+      </div>
+      <fieldset class="field-group">
+        <legend>Normal working days</legend>
+        <div class="field"><label for="normalOt">Overtime hours</label><div class="input"><input id="normalOt" name="normalOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_NORMAL}}"><span aria-hidden="true">h</span></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Rest days</legend>
+        <div class="field-row">
+          <div class="field"><label for="restHalf">Days, up to half the normal hours</label><div class="input"><input id="restHalf" name="restHalf" type="number" inputmode="numeric" min="0" step="1" value="{{O_REST_HALF}}"><span aria-hidden="true">days</span></div></div>
+          <div class="field"><label for="restFull">Days, over half the normal hours</label><div class="input"><input id="restFull" name="restFull" type="number" inputmode="numeric" min="0" step="1" value="{{O_REST_FULL}}"><span aria-hidden="true">days</span></div></div>
+        </div>
+        <div class="field"><label for="restOt">Hours beyond the normal hours on rest days</label><div class="input"><input id="restOt" name="restOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_REST_OT}}"><span aria-hidden="true">h</span></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Public holidays</legend>
+        <div class="field-row">
+          <div class="field"><label for="holidayDays">Holidays worked</label><div class="input"><input id="holidayDays" name="holidayDays" type="number" inputmode="numeric" min="0" step="1" value="{{O_PH}}"><span aria-hidden="true">days</span></div></div>
+          <div class="field"><label for="holidayOt">Overtime hours</label><div class="input"><input id="holidayOt" name="holidayOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_PH_OT}}"><span aria-hidden="true">h</span></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="ot-result-h">
+      <h2 id="ot-result-h">Your overtime pay</h2>
+      <div class="net">
+        <p>Overtime, rest day and holiday pay</p>
+        <output id="oTotal" for="wage basis hoursPerDay normalOt restHalf restFull restOt holidayDays holidayOt">{{O_TOTAL}}</output>
+        <p>Daily rate (ORP) <strong id="oOrp">{{O_ORP}}</strong> · hourly <span id="oHrp">{{O_HRP}}</span> · overtime <span id="oOt">{{O_OT}}</span> an hour</p>
+      </div>
+      <p class="sr-only" id="oLive" aria-live="polite"></p>
+      <p class="callout" id="oCovered" hidden>Above RM4,000 a month, the Act's overtime rates are not guaranteed unless you do manual or other First Schedule work. Your contract decides; the figures show the statutory rates.</p>
+      <p class="callout" id="oCap" hidden>More than 104 overtime hours in a month exceeds the legal limit.</p>
+      <p class="callout" id="oMin" hidden>This is below the RM1,700 monthly minimum wage.</p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="oLines">
+{{O_LINES}}
+        </tbody>
+      </table>
+      <p class="sr-only" id="oTotalLabel">{{O_TOTAL_LABEL}}</p>
+      <p class="note">Paid on top of your normal monthly wages. The Act sets minimums; your contract can pay more.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="otPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="formula">The overtime formulas</h2>
+  <ol>
+    <li><strong>Ordinary rate of pay (ORP):</strong> monthly wages ÷ 26 (section 60I). Daily-rated employees use their daily wage.</li>
+    <li><strong>Hourly rate of pay:</strong> ORP ÷ normal hours of work in a day.</li>
+    <li><strong>Normal day overtime:</strong> at least 1.5 × the hourly rate for each hour (section 60A).</li>
+    <li><strong>Rest day:</strong> up to half the normal hours, ½ day's ORP; over half, 1 day's ORP; beyond the normal hours, 2 × the hourly rate (section 60). Daily-rated: 1 or 2 days' wages.</li>
+    <li><strong>Public holiday:</strong> 2 days' ORP on top of holiday pay; beyond the normal hours, 3 × the hourly rate (section 60D).</li>
+  </ol>
+  <p>At the RM1,700 minimum wage that works out to {{O_MIN_ORP}} a day, {{O_MIN_HRP}} an hour and <strong>{{O_MIN_OT}}</strong> for each overtime hour.</p>
+
+  <h2 id="table-h">Overtime rates by salary (8-hour day)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly wages</th><th scope="col">ORP (÷ 26)</th><th scope="col">Hourly</th><th scope="col">OT 1.5×</th><th scope="col">Rest day 2×</th><th scope="col">Holiday 3×</th></tr></thead>
+      <tbody>
+{{O_TABLE}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="who">Who gets these rates</h2>
+  <p>Since 1 January 2023 the Employment Act protects every employee in Peninsular Malaysia and Labuan. The overtime, rest-day and public holiday rates in the First Schedule apply to:</p>
+  <ul>
+    <li>employees earning <strong>up to RM4,000 a month</strong>, and</li>
+    <li>whatever they earn: manual workers, drivers and operators of mechanically propelled vehicles, supervisors of manual workers, and domestic employees.</li>
+  </ul>
+  <p>Normal hours are capped at <strong>8 a day and 45 a week</strong>, and overtime at <strong>104 hours a month</strong>. Sabah and Sarawak have their own Labour Ordinances.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Employment Act 1955 (Act 265), JTKSM</a></li>
+    <li><a href="https://zulrafique.com.my/ckfinder/userfiles/files/Infographic%20-%20Overtime%20Pay%20under%20the%202022%20Amendment%20-%20Employment%20Act%201955(1).pdf" rel="noopener">Zul Rafique &amp; Partners: overtime under the 2022 amendment</a></li>
+    <li><a href="https://althr.my/resources/calculate-overtime-pay-employees-malaysia" rel="noopener">AltHR: calculating overtime pay in Malaysia</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A calculation aid, not legal advice. Your employment contract and the Labour Department (JTKSM) decide disputed cases.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+    <a href="/prorated-salary-calculator-malaysia/">Prorated Salary Calculator<small>Pay for a part month or unpaid leave</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Yearly tax and reliefs</small></a>
+  </div>
+</section>
