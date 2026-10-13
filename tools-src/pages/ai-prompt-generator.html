@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/ai-prompt-generator/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/penjana-prompt-ai/" },
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html", ["https://www.thebukitbesi.com/p/ai-video-prompt.html", "#m=video"]],
+  "title": "AI Prompt Generator: Midjourney, Stable Diffusion, Veo, Sora",
+  "description": "Free AI image and video prompt generator: pick style, lighting and camera, get 3 ready-to-paste prompts for Midjourney, Stable Diffusion, Flux or Veo.",
+  "llms": "Builds AI image and video prompts from a subject plus style, lighting, framing, lens, mood, colour, camera movement and speed choices, and writes them in each platform's own format with three variations (as chosen, cinematic, artistic): Midjourney with --ar, --no and --stylize parameters; Stable Diffusion as comma keywords with a separate negative prompt and a CLIP token count (it reads about 75 tokens); ChatGPT/DALL·E and Flux as plain sentences without negative prompts; Google Veo and Sora with camera, dialogue and audio lines; Runway with the camera move first and no negative wording; Kling with its own negative prompt box. Includes a seeded 'Surprise me', shareable links, saved prompts kept in the browser, and a hand-off from the Image to Prompt tool.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "prompt",
+  "scripts": ["/assets/js/prompt-generator.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["AI Prompt Generator", null]],
+  "about": ["Prompt engineering", "Midjourney", "Stable Diffusion", "AI video generation"],
+  "app": {
+    "name": "AI Prompt Generator (Image & Video)",
+    "category": "DesignApplication",
+    "features": ["Image and video modes", "Formats for Midjourney, Stable Diffusion, ChatGPT/DALL·E, Flux, Veo, Sora, Kling and Runway", "Three variations per prompt", "Style, lighting, camera, mood and colour chips", "Negative prompt handling per platform", "Stable Diffusion token counter", "Surprise me idea generator", "Saved prompts and shareable links"]
+  },
+  "citations": [
+    ["Midjourney: Parameter list", "https://docs.midjourney.com/docs/parameter-list"],
+    ["Runway: AI video prompting guide", "https://runwayml.com/resources/ai-video-prompting-guide"],
+    ["Runway Help Center: Text to video prompting", "https://help.runwayml.com/hc/en-us/articles/39789879462419"],
+    ["Kling AI: Negative prompts", "https://kling.ai/blog/kling-ai-negative-prompts-fix-video-distortion"],
+    ["Replicate: Using and prompting Veo 3", "https://replicate.com/blog/using-and-prompting-veo-3"],
+    ["fal.ai: How to use Flux", "https://fal.ai/learn/tools/how-to-use-flux"],
+    ["Hugging Face Forums: Prompts longer than 77 tokens", "https://discuss.huggingface.co/t/how-to-enter-longer-prompt-words/135502"]
+  ],
+  "faq": [
+    { "q": "How do I write a good AI image prompt?", "a": "Put the subject first, then where it is, then the style, framing, lens, lighting, mood and colours. For example: a cat wearing a tiny songkok, a neon-lit Kuala Lumpur street at night, close-up portrait, 85mm portrait lens, neon glow, whimsical mood. Specific words beat long lists of vague ones such as 'beautiful' or '8k'." },
+    { "q": "What do --ar, --no and --stylize mean in Midjourney?", "a": "They are Midjourney parameters added after the prompt. --ar sets the aspect ratio (--ar 16:9 is wide, --ar 9:16 is a phone screen), --no lists things to leave out (--no text, watermark), and --stylize (0 to 1000) sets how much Midjourney's own artistic style is applied. This tool adds --stylize 150 to the cinematic version and 400 to the artistic one." },
+    { "q": "Which AI apps support negative prompts?", "a": "Stable Diffusion and Kling have a separate negative prompt box, and Midjourney uses --no. ChatGPT/DALL·E, Flux, Runway and Veo have no negative prompt syntax, so describe what you want instead; Runway notes that negative wording can even produce the opposite. The generator puts your negatives in the right place for each app, or leaves them out and tells you." },
+    { "q": "How long should a Stable Diffusion prompt be?", "a": "Stable Diffusion's CLIP text encoder reads 77 tokens, about 75 of them usable, and quietly drops the rest. That is roughly 50 to 60 words. The card shows an approximate token count for Stable Diffusion and warns past 75, so put the most important words first." },
+    { "q": "How do I write a prompt for AI video like Veo, Sora, Kling or Runway?", "a": "Describe one shot: the subject and one action, the setting, the camera movement (slow dolly in, orbit, drone flyover), then style, lighting and mood. For Veo and Sora add sound, and put spoken lines in quotes. For Runway start with the camera move, as in 'Slow dolly in: a chef tossing noodles in a flaming wok', and keep the wording positive." },
+    { "q": "Should I write prompts in English or Bahasa Melayu?", "a": "English. Most image and video models learned mainly from English captions, so they follow English prompts most closely. The style chips on this page are already in English; you can type the subject in Malay, but translating it to English usually gives a more accurate picture." },
+    { "q": "Is the AI Prompt Generator free, and are my prompts saved?", "a": "It is free with no sign-up and runs entirely in your browser; nothing you type is sent to this site. Prompts you save with the Save button stay in your browser's own storage on this device, and each prompt can be shared as a link that rebuilds it." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">AI prompt generator</li></ol></nav>
+  <h1>AI Prompt Generator for Images and Video</h1>
+  <p class="answer">Describe your idea once and get <strong>3 ready-to-paste prompts</strong> (as chosen, cinematic and artistic), written in the format each app reads best: <strong>Midjourney, Stable Diffusion, ChatGPT/DALL·E and Flux</strong> for images, <strong>Veo, Sora, Kling and Runway</strong> for video. Click the chips below or press <strong>Surprise me</strong>.</p>
+  <p class="meta"><span>Formats checked <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/penjana-prompt-ai/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="promptForm" novalidate aria-labelledby="prompt-h">
+      <h2 id="prompt-h">Your idea</h2>
+      <div class="seg" role="radiogroup" aria-label="What are you making?"><label><input type="radio" name="mode" value="image" checked> Image</label><label><input type="radio" name="mode" value="video"> Video</label></div>
+      <div class="field"><label for="subject">Subject</label><div class="input"><input id="subject" name="subject" type="text" autocomplete="off" value="{{P_SUBJECT}}" placeholder="a tiger cub, a vintage car, a girl in baju kurung…"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="action">Action</label><div class="input"><input id="action" name="action" type="text" autocomplete="off" value="" placeholder="running, smiling…"></div></div>
+        <div class="field"><label for="setting">Setting</label><div class="input"><input id="setting" name="setting" type="text" autocomplete="off" value="{{P_SETTING}}" placeholder="a rainforest, a night market…"></div></div>
+      </div>
+      <div class="field-row keep">
+        <div class="field"><label for="platform">App</label><select class="input" id="platform" name="platform" data-mode="image">{{P_PLATFORM_OPTIONS}}</select></div>
+        <div class="field"><label for="aspect">Aspect ratio</label><select class="input" id="aspect" name="aspect">{{P_ASPECT_OPTIONS}}</select></div>
+      </div>
+      <div class="pc-actions"><button type="button" class="btn sm" id="pSurprise">🎲 Surprise me</button><button type="button" class="btn ghost sm" id="pClear">Clear</button></div>
+{{P_CHIPS}}
+      <div class="field"><label for="details">Extra details</label><div class="input"><input id="details" name="details" type="text" autocomplete="off" value="" placeholder="rain puddles, steam rising…"></div></div>
+      <div class="field-row" data-only="video" hidden>
+        <div class="field"><label for="sound">Sound (Veo, Sora)</label><div class="input"><input id="sound" name="sound" type="text" autocomplete="off" value="" placeholder="birdsong, distant traffic"></div></div>
+        <div class="field"><label for="dialogue">Spoken line</label><div class="input"><input id="dialogue" name="dialogue" type="text" autocomplete="off" value="" placeholder="Jom makan!"></div></div>
+      </div>
+      <div class="field"><label for="negative">Leave out (negative prompt)</label><div class="input"><input id="negative" name="negative" type="text" autocomplete="off" value="{{P_NEGATIVE}}"></div><p class="help">Used only where the app supports it.</p></div>
+    </form>
+
+    <section class="box" id="promptOut" aria-labelledby="out-h" data-editor="/ai-prompt-generator/">
+      <h2 id="out-h">Your prompts for <span id="pPlatform">{{P_PLATFORM}}</span></h2>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <div class="pcards">
+{{P_CARDS}}
+      </div>
+      <ul class="pc-notes" id="pNotes"{{P_NOTES_HIDDEN}}>{{P_NOTES}}</ul>
+      <div class="tool-actions"><a class="btn ghost sm" href="https://www.thebukitbesi.com/p/free-ai-image-generator.html">Try it in the AI Image Generator</a><button type="button" class="btn ghost sm" id="pPrint">Print or save as PDF</button></div>
+      <p class="note">Have a picture instead? <a href="/image-to-prompt/">Turn an image into a prompt</a>.</p>
+      <div class="saved" id="savedBox" hidden><h3 class="sub-h">Saved prompts</h3><ul class="saved-list" id="savedList"></ul></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="examples-h">One idea, written for each app</h2>
+  <p>The same cat and the same hawker-stall video, as the generator writes them. Notice where the negative prompt goes and how the video prompts carry the camera move and sound.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data text">
+      <thead><tr><th scope="col">App</th><th scope="col">Prompt</th></tr></thead>
+      <tbody>
+{{P_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formats">How each app reads a prompt</h2>
+  <ul>
+    <li><strong>Midjourney:</strong> short comma phrases, then parameters: <code>--ar</code> for the shape, <code>--no</code> for things to leave out, <code>--stylize</code> (0–1000) for how artistic.</li>
+    <li><strong>Stable Diffusion:</strong> comma keywords, most important first, with a separate negative prompt. Only about the first 75 tokens are read.</li>
+    <li><strong>ChatGPT/DALL·E, Flux, Gemini:</strong> full sentences, subject first. There is no negative prompt; say what you want instead.</li>
+    <li><strong>Veo and Sora:</strong> one shot with the camera move, plus sound and any spoken line in quotes.</li>
+    <li><strong>Runway:</strong> the camera move first, then the scene; keep every instruction positive.</li>
+    <li><strong>Kling:</strong> a descriptive scene in the main box and short, specific negatives in its negative prompt box.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">How to use the AI Prompt Generator</h2>
+  <ol>
+    <li><strong>Pick Image or Video</strong> and the app you will paste into.</li>
+    <li><strong>Type the subject</strong>, and optionally the action and setting. Or press Surprise me for a random idea.</li>
+    <li><strong>Tap chips</strong> for style, lighting, framing, mood and colour (camera movement and speed for video).</li>
+    <li><strong>Compare the 3 versions</strong>, copy the one you like, and save favourites for later.</li>
+    <li><strong>Share the link</strong>: it rebuilds exactly the same prompt for anyone who opens it.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://docs.midjourney.com/docs/parameter-list" rel="noopener">Midjourney: parameter list</a></li>
+    <li><a href="https://runwayml.com/resources/ai-video-prompting-guide" rel="noopener">Runway: AI video prompting guide</a> and <a href="https://help.runwayml.com/hc/en-us/articles/39789879462419" rel="noopener">Runway Help Center</a></li>
+    <li><a href="https://kling.ai/blog/kling-ai-negative-prompts-fix-video-distortion" rel="noopener">Kling AI: negative prompts</a></li>
+    <li><a href="https://replicate.com/blog/using-and-prompting-veo-3" rel="noopener">Replicate: using and prompting Veo 3</a></li>
+    <li><a href="https://fal.ai/learn/tools/how-to-use-flux" rel="noopener">fal.ai: how to use Flux</a></li>
+    <li><a href="https://discuss.huggingface.co/t/how-to-enter-longer-prompt-words/135502" rel="noopener">Hugging Face forums: the 77-token CLIP limit</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> AI apps change their models often, so results vary between versions. Follow each app's content rules, and do not use prompts to copy a living artist's work or a real person's likeness without permission.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/image-to-prompt/">Image to Prompt<small>Turn a picture into a prompt</small></a>
+    <a href="https://www.thebukitbesi.com/p/free-ai-image-generator.html">AI Image Generator<small>Create images from your prompt</small></a>
+    <a href="https://www.thebukitbesi.com/p/ai-paraphraser-tool.html">AI Paraphraser<small>Rewrite and polish text</small></a>
+  </div>
+</section>

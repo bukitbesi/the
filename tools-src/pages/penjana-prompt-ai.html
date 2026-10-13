@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/penjana-prompt-ai/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/ai-prompt-generator/" },
+  "title": "Penjana Prompt AI Percuma: Gambar dan Video (Midjourney, Veo)",
+  "description": "Penjana prompt AI percuma untuk gambar dan video: pilih gaya, cahaya dan kamera, dapat 3 prompt sedia salin untuk Midjourney, Stable Diffusion, Flux atau Veo.",
+  "llms": "Penjana prompt AI dalam Bahasa Melayu yang membina prompt gambar dan video daripada subjek serta pilihan gaya, pencahayaan, sudut kamera, lensa, suasana, warna, pergerakan kamera dan kelajuan, lalu menulisnya dalam format setiap platform dengan tiga variasi (pilihan anda, sinematik, artistik): Midjourney dengan parameter --ar, --no dan --stylize; Stable Diffusion sebagai kata kunci berkoma dengan prompt negatif berasingan dan kiraan token CLIP (kira-kira 75 token dibaca); ChatGPT/DALL·E dan Flux sebagai ayat biasa tanpa prompt negatif; Google Veo dan Sora dengan baris kamera, dialog dan audio; Runway dengan pergerakan kamera di depan; Kling dengan kotak prompt negatifnya sendiri. Prompt kekal dalam bahasa Inggeris kerana model AI paling memahaminya.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "prompt",
+  "scripts": ["/assets/js/prompt-generator.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Penjana Prompt AI", null]],
+  "about": ["Kejuruteraan prompt", "Midjourney", "Stable Diffusion", "Penjanaan video AI"],
+  "app": {
+    "name": "Penjana Prompt AI (Gambar & Video)",
+    "category": "DesignApplication",
+    "features": ["Mod gambar dan video", "Format untuk Midjourney, Stable Diffusion, ChatGPT/DALL·E, Flux, Veo, Sora, Kling dan Runway", "Tiga variasi setiap prompt", "Cip gaya, cahaya, kamera, suasana dan warna", "Prompt negatif ikut platform", "Kiraan token Stable Diffusion", "Idea rawak (Cuba nasib)", "Simpan prompt dan pautan kongsi"]
+  },
+  "citations": [
+    ["Midjourney: Parameter list", "https://docs.midjourney.com/docs/parameter-list"],
+    ["Runway: AI video prompting guide", "https://runwayml.com/resources/ai-video-prompting-guide"],
+    ["Runway Help Center: Text to video prompting", "https://help.runwayml.com/hc/en-us/articles/39789879462419"],
+    ["Kling AI: Negative prompts", "https://kling.ai/blog/kling-ai-negative-prompts-fix-video-distortion"],
+    ["Replicate: Using and prompting Veo 3", "https://replicate.com/blog/using-and-prompting-veo-3"],
+    ["fal.ai: How to use Flux", "https://fal.ai/learn/tools/how-to-use-flux"],
+    ["Hugging Face Forums: Prompts longer than 77 tokens", "https://discuss.huggingface.co/t/how-to-enter-longer-prompt-words/135502"]
+  ],
+  "faq": [
+    { "q": "Bagaimana menulis prompt gambar AI yang bagus?", "a": "Letak subjek dahulu, kemudian tempat, gaya, sudut kamera, lensa, cahaya, suasana dan warna. Contoh: a cat wearing a tiny songkok, a neon-lit Kuala Lumpur street at night, close-up portrait, 85mm portrait lens, neon glow, whimsical mood. Perkataan khusus lebih berkesan daripada senarai panjang perkataan umum seperti 'beautiful' atau '8k'." },
+    { "q": "Apakah maksud --ar, --no dan --stylize dalam Midjourney?", "a": "Ia parameter Midjourney yang ditulis selepas prompt. --ar menetapkan nisbah aspek (--ar 16:9 lebar, --ar 9:16 skrin telefon), --no menyenaraikan perkara yang tidak mahu (--no text, watermark), dan --stylize (0 hingga 1000) menentukan sejauh mana gaya seni Midjourney sendiri digunakan. Alat ini menambah --stylize 150 pada versi sinematik dan 400 pada versi artistik." },
+    { "q": "Aplikasi AI mana yang ada prompt negatif?", "a": "Stable Diffusion dan Kling ada kotak prompt negatif berasingan, dan Midjourney guna --no. ChatGPT/DALL·E, Flux, Runway dan Veo tiada sintaks prompt negatif, jadi terangkan apa yang anda mahu; Runway menyatakan ayat negatif boleh menghasilkan perkara sebaliknya. Penjana ini meletakkan prompt negatif di tempat yang betul atau membuangnya dan memberitahu anda." },
+    { "q": "Berapa panjang prompt Stable Diffusion sepatutnya?", "a": "Pengekod teks CLIP Stable Diffusion membaca 77 token, kira-kira 75 boleh digunakan, dan selebihnya dibuang tanpa amaran. Itu lebih kurang 50 hingga 60 perkataan. Kad prompt menunjukkan anggaran token untuk Stable Diffusion dan memberi amaran melebihi 75, jadi letak perkataan paling penting di depan." },
+    { "q": "Bagaimana menulis prompt video AI untuk Veo, Sora, Kling atau Runway?", "a": "Terangkan satu syot: subjek dan satu aksi, latar, pergerakan kamera (slow dolly in, orbit, drone flyover), kemudian gaya, cahaya dan suasana. Untuk Veo dan Sora tambah bunyi, dan letak dialog dalam tanda petik. Untuk Runway mulakan dengan pergerakan kamera, contohnya 'Slow dolly in: a chef tossing noodles in a flaming wok', dan guna ayat positif sahaja." },
+    { "q": "Patutkah saya tulis prompt dalam bahasa Inggeris atau Bahasa Melayu?", "a": "Bahasa Inggeris. Kebanyakan model gambar dan video belajar daripada kapsyen bahasa Inggeris, jadi mereka paling tepat mengikut prompt bahasa Inggeris. Cip gaya di halaman ini sudah dalam bahasa Inggeris; anda boleh taip subjek dalam Bahasa Melayu, tetapi menterjemahnya ke bahasa Inggeris biasanya memberi gambar yang lebih tepat." },
+    { "q": "Adakah Penjana Prompt AI ini percuma dan adakah prompt saya disimpan?", "a": "Ia percuma tanpa daftar dan berjalan sepenuhnya dalam pelayar anda; apa yang anda taip tidak dihantar ke laman ini. Prompt yang anda simpan dengan butang Simpan kekal dalam storan pelayar anda pada peranti ini, dan setiap prompt boleh dikongsi sebagai pautan yang membina semula prompt yang sama." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Penjana prompt AI</li></ol></nav>
+  <h1>Penjana Prompt AI untuk Gambar dan Video</h1>
+  <p class="answer">Terangkan idea anda sekali dan dapatkan <strong>3 prompt sedia salin</strong> (pilihan anda, sinematik dan artistik) dalam format terbaik setiap aplikasi: <strong>Midjourney, Stable Diffusion, ChatGPT/DALL·E dan Flux</strong> untuk gambar, <strong>Veo, Sora, Kling dan Runway</strong> untuk video. Tekan cip di bawah atau <strong>Cuba nasib</strong>.</p>
+  <p class="meta"><span>Format disemak <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Berjalan dalam pelayar; tiada data dihantar</span><a href="/ai-prompt-generator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="promptForm" novalidate aria-labelledby="prompt-h">
+      <h2 id="prompt-h">Idea anda</h2>
+      <div class="seg" role="radiogroup" aria-label="Apa yang anda hasilkan?"><label><input type="radio" name="mode" value="image" checked> Gambar</label><label><input type="radio" name="mode" value="video"> Video</label></div>
+      <div class="field"><label for="subject">Subjek</label><div class="input"><input id="subject" name="subject" type="text" autocomplete="off" value="{{P_SUBJECT}}" placeholder="a tiger cub, a vintage car…"></div><p class="help">Tulis dalam bahasa Inggeris untuk hasil paling tepat.</p></div>
+      <div class="field-row">
+        <div class="field"><label for="action">Aksi</label><div class="input"><input id="action" name="action" type="text" autocomplete="off" value="" placeholder="running, smiling…"></div></div>
+        <div class="field"><label for="setting">Latar</label><div class="input"><input id="setting" name="setting" type="text" autocomplete="off" value="{{P_SETTING}}" placeholder="a rainforest, a night market…"></div></div>
+      </div>
+      <div class="field-row keep">
+        <div class="field"><label for="platform">Aplikasi</label><select class="input" id="platform" name="platform" data-mode="image">{{P_PLATFORM_OPTIONS}}</select></div>
+        <div class="field"><label for="aspect">Nisbah aspek</label><select class="input" id="aspect" name="aspect">{{P_ASPECT_OPTIONS}}</select></div>
+      </div>
+      <div class="pc-actions"><button type="button" class="btn sm" id="pSurprise">🎲 Cuba nasib</button><button type="button" class="btn ghost sm" id="pClear">Kosongkan</button></div>
+{{P_CHIPS}}
+      <div class="field"><label for="details">Butiran tambahan</label><div class="input"><input id="details" name="details" type="text" autocomplete="off" value="" placeholder="rain puddles, steam rising…"></div></div>
+      <div class="field-row" data-only="video" hidden>
+        <div class="field"><label for="sound">Bunyi (Veo, Sora)</label><div class="input"><input id="sound" name="sound" type="text" autocomplete="off" value="" placeholder="birdsong, distant traffic"></div></div>
+        <div class="field"><label for="dialogue">Dialog</label><div class="input"><input id="dialogue" name="dialogue" type="text" autocomplete="off" value="" placeholder="Jom makan!"></div></div>
+      </div>
+      <div class="field"><label for="negative">Elakkan (prompt negatif)</label><div class="input"><input id="negative" name="negative" type="text" autocomplete="off" value="{{P_NEGATIVE}}"></div><p class="help">Hanya digunakan jika aplikasi menyokongnya.</p></div>
+    </form>
+
+    <section class="box" id="promptOut" aria-labelledby="out-h" data-editor="/penjana-prompt-ai/">
+      <h2 id="out-h">Prompt anda untuk <span id="pPlatform">{{P_PLATFORM}}</span></h2>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <div class="pcards">
+{{P_CARDS}}
+      </div>
+      <ul class="pc-notes" id="pNotes"{{P_NOTES_HIDDEN}}>{{P_NOTES}}</ul>
+      <div class="tool-actions"><a class="btn ghost sm" href="https://www.thebukitbesi.com/p/free-ai-image-generator.html">Cuba dalam Penjana Gambar AI</a><button type="button" class="btn ghost sm" id="pPrint">Cetak atau simpan PDF</button></div>
+      <p class="note">Ada gambar? <a href="/gambar-ke-prompt/">Tukar gambar kepada prompt</a>.</p>
+      <div class="saved" id="savedBox" hidden><h3 class="sub-h">Prompt disimpan</h3><ul class="saved-list" id="savedList"></ul></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="examples-h">Satu idea, ditulis untuk setiap aplikasi</h2>
+  <p>Kucing dan video gerai penjaja yang sama, seperti yang ditulis oleh penjana ini. Perhatikan di mana prompt negatif diletakkan dan bagaimana prompt video membawa pergerakan kamera serta bunyi.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Aplikasi</th><th scope="col">Prompt</th></tr></thead>
+      <tbody>
+{{P_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formats">Cara setiap aplikasi membaca prompt</h2>
+  <ul>
+    <li><strong>Midjourney:</strong> frasa pendek berkoma, diikuti parameter: <code>--ar</code> untuk bentuk, <code>--no</code> untuk perkara yang dielakkan, <code>--stylize</code> (0–1000) untuk tahap artistik.</li>
+    <li><strong>Stable Diffusion:</strong> kata kunci berkoma, paling penting di depan, dengan prompt negatif berasingan. Hanya kira-kira 75 token pertama dibaca.</li>
+    <li><strong>ChatGPT/DALL·E, Flux, Gemini:</strong> ayat penuh, subjek dahulu. Tiada prompt negatif; nyatakan apa yang anda mahu.</li>
+    <li><strong>Veo dan Sora:</strong> satu syot dengan pergerakan kamera, serta bunyi dan dialog dalam tanda petik.</li>
+    <li><strong>Runway:</strong> pergerakan kamera dahulu, kemudian babak; guna arahan positif sahaja.</li>
+    <li><strong>Kling:</strong> babak terperinci dalam kotak utama dan prompt negatif yang pendek serta khusus dalam kotak negatif.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">Cara guna Penjana Prompt AI</h2>
+  <ol>
+    <li><strong>Pilih Gambar atau Video</strong> dan aplikasi yang anda guna.</li>
+    <li><strong>Taip subjek</strong>, serta aksi dan latar jika mahu. Atau tekan Cuba nasib untuk idea rawak.</li>
+    <li><strong>Tekan cip</strong> gaya, cahaya, sudut kamera, suasana dan warna (pergerakan kamera dan kelajuan untuk video).</li>
+    <li><strong>Banding 3 versi</strong>, salin yang anda suka, dan simpan kegemaran.</li>
+    <li><strong>Kongsi pautan</strong>: ia membina semula prompt yang sama untuk sesiapa yang membukanya.</li>
+  </ol>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://docs.midjourney.com/docs/parameter-list" rel="noopener">Midjourney: senarai parameter</a></li>
+    <li><a href="https://runwayml.com/resources/ai-video-prompting-guide" rel="noopener">Runway: panduan prompt video AI</a> dan <a href="https://help.runwayml.com/hc/en-us/articles/39789879462419" rel="noopener">Pusat Bantuan Runway</a></li>
+    <li><a href="https://kling.ai/blog/kling-ai-negative-prompts-fix-video-distortion" rel="noopener">Kling AI: prompt negatif</a></li>
+    <li><a href="https://replicate.com/blog/using-and-prompting-veo-3" rel="noopener">Replicate: menggunakan dan menulis prompt Veo 3</a></li>
+    <li><a href="https://fal.ai/learn/tools/how-to-use-flux" rel="noopener">fal.ai: cara guna Flux</a></li>
+    <li><a href="https://discuss.huggingface.co/t/how-to-enter-longer-prompt-words/135502" rel="noopener">Forum Hugging Face: had 77 token CLIP</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Aplikasi AI kerap menukar model, jadi hasil berbeza antara versi. Patuhi peraturan kandungan setiap aplikasi, dan jangan guna prompt untuk meniru karya pelukis yang masih hidup atau wajah orang sebenar tanpa izin.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/gambar-ke-prompt/">Gambar ke Prompt<small>Tukar gambar kepada prompt</small></a>
+    <a href="https://www.thebukitbesi.com/p/free-ai-image-generator.html">Penjana Gambar AI<small>Hasilkan gambar daripada prompt</small></a>
+    <a href="https://www.thebukitbesi.com/p/ai-paraphraser-tool.html">Parafrasa AI<small>Tulis semula dan kemaskan teks</small></a>
+  </div>
+</section>

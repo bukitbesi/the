@@ -63,6 +63,11 @@
       "description": "Browse all published tools"
     },
     {
+      "name": "AI Prompt Generator (Image & Video)",
+      "url": "/ai-prompt-generator/",
+      "description": "Free AI image and video prompt generator: pick style, lighting and camera, get 3 ready-to-paste prom"
+    },
+    {
       "name": "ASB Dividend Calculator",
       "url": "/asb-dividend-calculator/",
       "description": "Free ASB dividend calculator: payout from your monthly lowest balance, a 10-year compounding project"
@@ -126,6 +131,11 @@
       "name": "HTML Beautifier, Formatter & Minifier",
       "url": "/html-beautifier/",
       "description": "Free HTML beautifier, formatter and minifier. Format or compress HTML with presets for websites, Blo"
+    },
+    {
+      "name": "Image to Prompt",
+      "url": "/image-to-prompt/",
+      "description": "Upload a picture and get 3 AI prompts for Midjourney, Stable Diffusion, ChatGPT, Flux, Veo or Sora: "
     },
     {
       "name": "Income Tax Calculator Malaysia YA2026",

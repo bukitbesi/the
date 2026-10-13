@@ -445,6 +445,32 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .rows thead th{font-size:.8rem;font-weight:600;color:var(--text3)}
 .rows thead th:not(:first-child){text-align:right}
 .rows th+td,.rows td+td,.rows thead th+th{padding-left:12px}
+.chipset{display:flex;flex-wrap:wrap;gap:6px}
+.chipset label{position:relative;display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border:1px solid var(--border2);border-radius:99px;font-size:.8rem;cursor:pointer;color:var(--text2)}
+.chipset input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.chipset label:has(input:checked){border-color:var(--accent2);background:var(--tint);color:var(--text);font-weight:600}
+.chipset label:has(input:focus-visible){outline:3px solid var(--tint-b);outline-offset:1px}
+.pc-actions{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px}
+.pcard .pc-actions{margin:0}
+.pcards{display:grid;gap:12px}
+.pcard{padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
+.pcard h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 8px;font-size:.92rem}
+.pcard h3 small{font-size:.75rem;font-weight:500;color:var(--text3)}
+.pc-text{margin:0 0 10px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;overflow-wrap:anywhere}
+.pc-neg{margin:0 0 10px;font-size:.82rem;color:var(--text2);overflow-wrap:anywhere}
+.pc-notes{margin:12px 0 0;padding-left:18px;font-size:.82rem;color:var(--text2)}
+.drop{display:grid;place-items:center;gap:8px;min-height:170px;margin-bottom:10px;padding:14px;border:2px dashed var(--border2);border-radius:14px;text-align:center;cursor:pointer}
+.drop:hover,.drop.over{border-color:var(--accent2);background:var(--tint)}
+.drop:has(input:focus-visible){outline:3px solid var(--tint-b)}
+.drop img{max-width:100%;max-height:240px;border-radius:10px;object-fit:contain}
+.drop small{display:block;margin-top:4px;font-size:.78rem;color:var(--text3)}
+#iLocal{margin-bottom:12px}
+.swatches{display:flex;flex-wrap:wrap;gap:6px 12px;margin-bottom:14px}
+.swatches span{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text2)}
+.swatches i{width:18px;height:18px;border-radius:50%;border:1px solid var(--border2)}
+#promptForm .seg,#imgForm .seg{margin-bottom:14px}
+.data.text td{overflow-wrap:anywhere}
+@media(max-width:560px){#promptForm .field-row:not(.keep),#imgForm .field-row:not(.keep){grid-template-columns:1fr}}
 </style>
 
 </head>
@@ -676,8 +702,8 @@ select.input{max-width:100%;text-overflow:ellipsis}
           <li><a href="/css-minifier/">CSS Minifier</a></li>
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
-          <li><a href="/parcel-tracking-malaysia/">Parcel Tracking Malaysia</a></li>
-          <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
+          <li><a href="/ai-prompt-generator/">AI Prompt Generator (Image &amp; Video)</a></li>
+          <li><a href="/image-to-prompt/">Image to Prompt</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

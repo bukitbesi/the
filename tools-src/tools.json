@@ -252,11 +252,11 @@
     "live": true
   },
   {
-    "name": "AI Art Prompt Generator",
-    "desc": "Build image prompts from a subject, art style, details and negative prompts.",
-    "url": "https://www.thebukitbesi.com/p/ai-art-prompt-optimizer-create-perfect.html",
+    "name": "AI Prompt Generator (Image & Video)",
+    "desc": "Build prompts for Midjourney, Stable Diffusion, ChatGPT, Flux, Veo, Sora, Kling and Runway, with style chips and 3 variations.",
+    "url": "https://tool.thebukitbesi.com/ai-prompt-generator/",
     "cat": "ai",
-    "icon": "ai-art-prompt-optimizer-create-perfect",
+    "icon": "ai-prompt-generator",
     "badge": "hot",
     "live": true
   },
@@ -270,21 +270,12 @@
     "live": true
   },
   {
-    "name": "AI Video Prompt Generator",
-    "desc": "Compose detailed prompts for image and video generation models.",
-    "url": "https://www.thebukitbesi.com/p/ai-video-prompt.html",
-    "cat": "ai",
-    "icon": "ai-video-prompt",
-    "badge": "",
-    "live": true
-  },
-  {
     "name": "Image to Prompt",
-    "desc": "Use an image as a starting point for a prompt and refine the resulting text.",
-    "url": "https://www.thebukitbesi.com/p/image-to-prompt.html",
+    "desc": "Upload a picture and get AI prompts describing its subject, style, lighting, camera angle, mood and colours.",
+    "url": "https://tool.thebukitbesi.com/image-to-prompt/",
     "cat": "ai",
     "icon": "image-to-prompt",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

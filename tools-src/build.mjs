@@ -31,6 +31,7 @@ const rpgtCore = require('../assets/js/rpgt-core.js');
 const bmiCore = require('../assets/js/bmi-core.js');
 const zakatCore = require('../assets/js/zakat-core.js');
 const goldCore = require('../assets/js/gold-core.js');
+const promptCore = require('../assets/js/prompt-core.js');
 const goldData = JSON.parse(read('gold-data.json'));
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
@@ -64,6 +65,8 @@ const pageByPath = new Map(pages.map(p => [p.path, p]));
 
 // ---- validate inputs
 const problems = [];
+// "bloggerFrom": one old Blogger URL, or a list of URLs and [url, "#hash"] pairs (a merged tool opens in the right mode).
+const redirectsOf = p => [].concat(p.bloggerFrom || []).map(r => Array.isArray(r) ? { from: r[0], hash: r[1] || '', path: p.path } : { from: r, hash: '', path: p.path });
 catalog.forEach(t => {
   if (!site.categories[t.cat]) problems.push(`unknown category "${t.cat}" on ${t.name}`);
   if (!/^https:\/\//.test(t.url)) problems.push(`non-absolute url on ${t.name}: ${t.url}`);
@@ -79,10 +82,13 @@ pages.forEach(p => {
     if (!other || !Object.values(other.alternates || {}).includes(p.path)) problems.push(`hreflang pair must be reciprocal: ${p.path} <-> ${alt}`);
   }
   if (p.description.length > 160) problems.push(`description over 160 characters on ${p.path}`);
-  if (p.bloggerFrom && !new RegExp('^' + site.mainSite.replace(/\./g, '\\.') + '/[a-z0-9/_.-]+\\.html$').test(p.bloggerFrom)) problems.push(`bloggerFrom must be a ${site.mainSite} .html URL on ${p.path}`);
+  for (const r of redirectsOf(p)) {
+    if (!new RegExp('^' + site.mainSite.replace(/\./g, '\\.') + '/[a-z0-9/_.-]+\\.html$').test(r.from)) problems.push(`bloggerFrom must be a ${site.mainSite} .html URL on ${p.path}`);
+    if (r.hash && !/^#[a-z0-9=&-]+$/i.test(r.hash)) problems.push(`bloggerFrom hash must look like #key=value on ${p.path}`);
+  }
 });
 if (new Set(catalog.map(t => t.url)).size !== catalog.length) problems.push('duplicate tool URLs');
-const froms = pages.filter(p => p.bloggerFrom).map(p => p.bloggerFrom);
+const froms = pages.flatMap(redirectsOf).map(r => r.from);
 if (new Set(froms).size !== froms.length) problems.push('two pages share one bloggerFrom URL');
 if (!tools.length) problems.push('no live tools to publish');
 if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('published tools must have their own icon');
@@ -1030,10 +1036,70 @@ function purgeMap() {
       : 'Many sites, including Blogger blogs, block other sites from reading them. If a page is blocked, use the capture below.'
   };
 }
+// ---- AI Prompt Generator and Image to Prompt, EN + BM (one core). Prompt terms stay in English on both pages.
+const PROMPT_EXAMPLE = { mode: 'image', platform: 'midjourney', aspect: '4:5', subject: 'a cat wearing a tiny songkok', setting: 'a neon-lit Kuala Lumpur street at night', lighting: 'neon glow', shot: 'close-up portrait', lens: '85mm portrait lens', mood: 'whimsical', negative: 'blurry, text, watermark' };
+const VIDEO_EXAMPLE = { mode: 'video', platform: 'veo', subject: 'a chef tossing noodles in a flaming wok', setting: 'a busy hawker stall at night', motion: 'slow dolly in', shot: 'medium shot', lighting: 'neon glow', sound: 'sizzling wok, crowd chatter', dialogue: 'Siap!', negative: 'blurry' };
+// What a vision model returns for a typical upload: the page's example before a picture is chosen.
+const IMG_EXAMPLE = { mode: 'image', platform: 'midjourney', aspect: '3:2', subject: 'a red vintage scooter', setting: 'a quiet street lined with old shophouses', style: 'photo', lighting: 'warm afternoon sunlight', shot: 'eye-level side view', mood: 'nostalgic', color: 'red, cream and teal', details: 'potted plants by the doors, long shadows on the pavement' };
+const PROMPT_UI = {
+  en: { any: 'Any', words: n => `${n} words`, tokens: n => `~${n} tokens`, copy: 'Copy', copyNeg: 'Copy negative', save: '☆ Save', neg: 'Negative prompt:',
+    groups: { style: 'Style', lighting: 'Lighting', shot: 'Framing', lens: 'Lens', mood: 'Mood', color: 'Colour', quality: 'Finish', motion: 'Camera movement', pace: 'Speed' } },
+  ms: { any: 'Bebas', words: n => `${n} patah perkataan`, tokens: n => `~${n} token`, copy: 'Salin', copyNeg: 'Salin negatif', save: '☆ Simpan', neg: 'Prompt negatif:',
+    groups: { style: 'Gaya', lighting: 'Pencahayaan', shot: 'Sudut kamera', lens: 'Lensa', mood: 'Suasana', color: 'Warna', quality: 'Kemasan', motion: 'Pergerakan kamera', pace: 'Kelajuan' } }
+};
+const ONLY = { lens: 'image', quality: 'image', motion: 'video', pace: 'video' };
+function promptCards(state, lang) {
+  const U = PROMPT_UI[lang], s = promptCore.normalize(state), all = promptCore.buildAll(s, lang);
+  const card = r => `        <article class="pcard">
+          <h3>${esc(r.label)}<small id="pm-${r.kind}">${s.platform === 'sd' ? U.tokens(r.tokens) : U.words(r.words)}</small></h3>
+          <p class="pc-text" id="pt-${r.kind}">${esc(r.prompt)}</p>
+          <p class="pc-neg" id="pn-${r.kind}"${r.negative ? '' : ' hidden'}><strong>${U.neg}</strong> <span id="pnt-${r.kind}">${esc(r.negative)}</span></p>
+          <div class="pc-actions"><button type="button" class="btn sm" data-copy="${r.kind}">${U.copy}</button><button type="button" class="btn ghost sm" data-copy="${r.kind}-neg" id="pcn-${r.kind}"${r.negative ? '' : ' hidden'}>${U.copyNeg}</button><button type="button" class="btn ghost sm" data-save="${r.kind}">${U.save}</button></div>
+        </article>`;
+  return {
+    P_CARDS: all.map(card).join('\n'), P_PLATFORM: esc(promptCore.PLATFORMS[s.mode][s.platform].name),
+    P_NOTES: all[0].notes.map(n => `<li>${esc(n)}</li>`).join(''), P_NOTES_HIDDEN: all[0].notes.length ? '' : ' hidden'
+  };
+}
+const platformOptions = (mode, sel) => Object.entries(promptCore.PLATFORMS[mode]).map(([k, v]) => `<option value="${k}"${k === sel ? ' selected' : ''}>${esc(v.name)}</option>`).join('');
+const aspectOptions = sel => promptCore.ASPECTS.map(a => `<option value="${a}"${a === sel ? ' selected' : ''}>${a}</option>`).join('');
+function chipGroups(state, lang) {
+  const U = PROMPT_UI[lang];
+  return Object.keys(promptCore.GROUPS).map(g => {
+    const only = ONLY[g], hidden = only && only !== state.mode;
+    const chips = ['', ...promptCore.GROUPS[g]].map(v => `<label><input type="radio" name="${g}" value="${esc(v)}"${(state[g] || '') === v ? ' checked' : ''}>${v ? esc(v) : U.any}</label>`).join('');
+    return `      <fieldset class="field-group"${only ? ` data-only="${only}"` : ''}${hidden ? ' hidden' : ''}><legend>${U.groups[g]}</legend><div class="chipset" data-group="${g}">${chips}</div></fieldset>`;
+  }).join('\n');
+}
+function promptExamples(lang) {
+  const rows = [[PROMPT_EXAMPLE, 'midjourney'], [PROMPT_EXAMPLE, 'sd'], [PROMPT_EXAMPLE, 'dalle'], [PROMPT_EXAMPLE, 'flux'], [VIDEO_EXAMPLE, 'veo'], [VIDEO_EXAMPLE, 'runway'], [VIDEO_EXAMPLE, 'kling']];
+  return rows.map(([ex, platform]) => {
+    const r = promptCore.build({ ...ex, platform }, 'main', lang);
+    return `<tr><th scope="row">${esc(r.platform)}</th><td>${esc(r.prompt)}${r.negative ? `<small>${PROMPT_UI[lang].neg} ${esc(r.negative)}</small>` : ''}</td></tr>`;
+  }).join('\n');
+}
+function promptMap(lang) {
+  const s = promptCore.normalize(PROMPT_EXAMPLE), mj = promptCore.build(s, 'main', lang);
+  return {
+    ...promptCards(s, lang), P_CHIPS: chipGroups(s, lang), P_PLATFORM_OPTIONS: platformOptions('image', s.platform), P_ASPECT_OPTIONS: aspectOptions(s.aspect),
+    P_SUBJECT: esc(s.subject), P_SETTING: esc(s.setting), P_NEGATIVE: esc(s.negative), P_EXAMPLES: promptExamples(lang), P_MJ: esc(mj.prompt),
+    P_VEO: esc(promptCore.build(VIDEO_EXAMPLE, 'main', lang).prompt), P_HASH: promptCore.toHash(s),
+    P_VERIFIED: longDate(promptCore.FACTS.verified, lang), P_VERIFIED_ISO: promptCore.FACTS.verified
+  };
+}
+function imgMap(lang) {
+  const s = promptCore.normalize(IMG_EXAMPLE);
+  return {
+    ...promptCards(s, lang), P_PLATFORM_OPTIONS: platformOptions('image', s.platform), P_ASPECT_OPTIONS: aspectOptions(s.aspect),
+    ...Object.fromEntries(['subject', 'action', 'setting', 'style', 'lighting', 'shot', 'mood', 'color', 'details'].map(k => ['I_' + k.toUpperCase(), esc(s[k])])),
+    P_HASH: promptCore.toHash(s), I_API: esc(site.visionApi || ''), P_MJ: esc(promptCore.build(s, 'main', lang).prompt),
+    P_VERIFIED: longDate(promptCore.FACTS.verified, lang), P_VERIFIED_ISO: promptCore.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1155,6 +1221,8 @@ const bundles = {
   'zakat.js': ['assets/js/zakat-core.js', 'assets/js/zakat-ui.js'],
   'zakat-emas.js': ['assets/js/zakat-core.js', 'assets/js/gold-ui.js'],
   'harga-emas.js': ['assets/js/gold-core.js', 'assets/js/goldprice-ui.js'],
+  'prompt-generator.js': ['assets/js/prompt-core.js', 'assets/js/prompt-cards.js', 'assets/js/prompt-ui.js'],
+  'image-to-prompt.js': ['assets/js/prompt-core.js', 'assets/js/prompt-cards.js', 'assets/js/img2prompt-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
@@ -1283,12 +1351,12 @@ fs.writeFileSync(path.join(pub, 'sw.js'), worker);
 
 // ---- Blogger redirects: one generated block for the blog theme, from "bloggerFrom" in page front matter.
 // Pasting the whole block again after each move replaces every earlier redirect at once.
-const moved = pages.filter(p => p.bloggerFrom).sort((a, b) => a.bloggerFrom.localeCompare(b.bloggerFrom));
+const moved = pages.flatMap(redirectsOf).sort((a, b) => a.from.localeCompare(b.from));
 const redirectXml = `<!-- TBB tool redirects START: generated by tools-src/build.mjs. Replace everything from START to END. -->
 <b:switch var='data:blog.canonicalUrl'>
-${moved.map(p => `<b:case value='${p.bloggerFrom}'/>
-<meta content='0; url=${site.origin + p.path}' http-equiv='refresh'/>
-<script>location.replace("${site.origin + p.path}");</script>`).join('\n')}
+${moved.map(r => `<b:case value='${r.from}'/>
+<meta content='0; url=${site.origin + r.path + r.hash}' http-equiv='refresh'/>
+<script>location.replace("${site.origin + r.path + r.hash}");</script>`).join('\n')}
 </b:switch>
 <!-- TBB tool redirects END -->
 `;
