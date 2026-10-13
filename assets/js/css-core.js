@@ -277,6 +277,17 @@
     return { css: pretty ? css + (css ? '\n' : '') : css, warnings: tk.warnings.concat(parsed.warnings) };
   }
 
+  // The parsed tree, for tools that edit CSS structurally (the unused CSS remover): blocks are
+  // { prelude: [selector, …], items }, declarations { prop, value }, statements { statement, text }, comments { comment }.
+  function tree(src, opts) {
+    var o = { keepImportant: true, keepComments: false, optimize: false, removeEmpty: false };
+    for (var k in opts || {}) o[k] = opts[k];
+    var tk = tokenize(String(src || ''));
+    var parsed = parse(tk.tokens, o);
+    return { items: build(parsed.tree, o), warnings: tk.warnings.concat(parsed.warnings) };
+  }
+  var print = function (items) { return serialize(items, 0, false); };
+
   var minify = function (src, opts) { return process(src, opts, false); };
   var beautify = function (src, opts) { return process(src, Object.assign({ optimize: false, removeEmpty: false, keepComments: true }, opts), true); };
   var bytes = function (s) {
@@ -314,7 +325,7 @@
     ''
   ].join('\n');
 
-  var api = { minify: minify, beautify: beautify, bytes: bytes, saving: saving, SAMPLE: SAMPLE };
+  var api = { minify: minify, beautify: beautify, tree: tree, print: print, bytes: bytes, saving: saving, SAMPLE: SAMPLE };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.TBBCss = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

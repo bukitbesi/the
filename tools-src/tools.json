@@ -18,6 +18,15 @@
     "live": true
   },
   {
+    "name": "Unused CSS Remover",
+    "desc": "Remove CSS that no page uses: compare stylesheets with pages, files, URLs or live captures, including Blogger themes.",
+    "url": "https://tool.thebukitbesi.com/unused-css-remover/",
+    "cat": "dev",
+    "icon": "unused-css-remover",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "HTML Beautifier & Minifier",
     "desc": "Format messy HTML for readability or minify it for a smaller file in one tool.",
     "url": "https://tool.thebukitbesi.com/html-beautifier/",

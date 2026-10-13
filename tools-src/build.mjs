@@ -7,6 +7,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import vm from 'node:vm';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { icons, renderIcon } from './icons.mjs';
 
@@ -25,6 +26,7 @@ const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
 const htmlCore = require('../assets/js/html-core.js');
+const purgeCore = require('../assets/js/purge-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -77,6 +79,7 @@ if (new Set(tools.map(t => t.icon)).size !== tools.length) problems.push('publis
 if (new URL(site.origin).origin !== site.origin) problems.push('origin must be an origin without a trailing slash');
 if (fs.readFileSync(path.join(root, 'CNAME'), 'utf8').trim() !== new URL(site.origin).hostname) problems.push('CNAME and canonical host differ');
 if (!/^[0-9a-f]{32}$/.test(site.indexNowKey || '')) problems.push('indexNowKey must be 32 lowercase hex characters');
+if (site.corsProxy && !/^https:\/\/[^\s"<>]+=$/.test(site.corsProxy)) problems.push('corsProxy must be empty or an https URL ending in "=" (for example https://name.workers.dev/?url=)');
 const ads = site.adsense || { client: '', slots: {} };
 if (ads.client) {
   if (!/^ca-pub-\d{16}$/.test(ads.client)) problems.push('adsense.client must look like ca-pub-0000000000000000');
@@ -627,7 +630,7 @@ function cssMap() {
   const n = x => x.toLocaleString('en-US');
   return {
     CSS_IN: esc(cssCore.SAMPLE), CSS_OUT: esc(out), CSS_BEFORE: n(s.before), CSS_AFTER: n(s.after), CSS_PCT: s.percent,
-    CSS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="cssGz"></span>`,
+    CSS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="cssGz">${gzText(out)}</span>`,
     CSS_EXAMPLES: CSS_RULES.map(([rule, css]) =>
       `        <tr><th scope="row">${rule}</th><td><code>${esc(css).replace(/\n/g, '<br>')}</code></td><td><code>${esc(cssCore.minify(css).css)}</code></td></tr>`).join('\n')
   };
@@ -659,7 +662,7 @@ function jsMap() {
   const code = c => `<code>${esc(c).replace(/\n/g, '<br>')}</code>`;
   return {
     JS_IN: esc(jsCore.SAMPLE), JS_OUT: esc(jsSample.code), JS_BEFORE: n(s.before), JS_AFTER: n(s.after), JS_PCT: s.percent,
-    JS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="jsGz"></span>`,
+    JS_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.percent}% smaller)<span id="jsGz">${gzText(jsSample.code)}</span>`,
     JS_OBF_LOW: n(jsObf.low), JS_OBF_MEDIUM: n(jsObf.medium), JS_OBF_HIGH: n(jsObf.high),
     JS_EXAMPLES: JS_RULES.map(([rule, src], i) => `        <tr><th scope="row">${rule}</th><td>${code(src)}</td><td>${code(jsExamples[i].code)}</td></tr>`).join('\n')
   };
@@ -697,13 +700,32 @@ function htmlMap() {
   const issues = htmlCore.check(htmlCore.SAMPLE), sum = htmlCore.summarize(issues), safe = htmlCore.PRESETS.safe;
   return {
     HTML_IN: esc(htmlCore.SAMPLE), HTML_OUT: esc(htmlSample.code), HTML_BEFORE: n(s.before),
-    HTML_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.saved >= 0 ? s.percent + '% smaller' : Math.abs(s.percent) + '% larger'})<span id="htmlGz"></span>`,
+    HTML_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.saved >= 0 ? s.percent + '% smaller' : Math.abs(s.percent) + '% larger'})<span id="htmlGz">${gzText(htmlSample.code)}</span>`,
     HTML_SAFE: n(htmlPresetSize.safe), HTML_MAX: n(htmlPresetSize.max), HTML_XML: n(htmlPresetSize.xml), HTML_EMAIL: n(htmlPresetSize.email),
     HTML_ISSUE_SUM: esc(sum.text), HTML_ISSUE_STATE: sum.state, HTML_ISSUE_LIST: htmlCore.issuesHtml(issues),
     HTML_MIN_CHECKS: htmlCore.MINIFY_KEYS.map(k => `          <label class="check"><input type="checkbox" name="${k}"${safe[k] ? ' checked' : ''}> <span>${esc(HTML_LABELS[k])}</span></label>`).join('\n')
   };
 }
-const RENDERERS = { html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
+// ---- Unused CSS remover: the sample is cleaned with the shipped core. Keyword matching runs without a DOM and,
+// for this sample, keeps exactly what the page's exact mode keeps (the browser tests check both).
+function purgeMap() {
+  const r = purgeCore.purge([{ name: 'Stylesheet 1', css: purgeCore.SAMPLE_CSS }],
+    { match: purgeCore.keywordMatcher(purgeCore.keywords([purgeCore.SAMPLE_HTML])), safePresets: ['state'] });
+  const out = cssCore.minify(r.files[0].css).css, s = cssCore.saving(purgeCore.SAMPLE_CSS, out), rep = purgeCore.reportHtml(r.report);
+  const box = (kind, name, text) => `            <div class="src" data-name="${name}"><div class="src-head"><label for="src-${kind}-0">${name}</label><button type="button" class="link-btn src-del" aria-label="Remove ${name}">Remove</button></div><textarea class="code code-sm" id="src-${kind}-0" spellcheck="false" autocomplete="off" autocapitalize="off">${esc(text)}</textarea></div>`;
+  return {
+    PURGE_CSS_SRC: box('css', 'Stylesheet 1', purgeCore.SAMPLE_CSS), PURGE_HTML_SRC: box('html', 'Page 1', purgeCore.SAMPLE_HTML),
+    PURGE_OUT: esc(out), PURGE_STATS: purgeCore.statsHtml(purgeCore.SAMPLE_CSS, out, r.report, 1, gzText(out)), PURGE_PCT: s.percent,
+    PURGE_REMOVED: r.report.selectorsRemoved, PURGE_REPORT_SUM: esc(rep.summary), PURGE_REPORT_BODY: rep.body,
+    PURGE_PROXY: esc(site.corsProxy || ''),
+    PURGE_URL_HELP: site.corsProxy ? 'Sites that block other sites from reading them are loaded through a read-only proxy.'
+      : 'Many sites, including Blogger blogs, block other sites from reading them. If a page is blocked, use the capture below.'
+  };
+}
+// Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
+const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
+const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -819,13 +841,14 @@ const bundles = {
   'js-minifier.js': ['assets/js/js-core.js', 'assets/js/js-ui.js'],
   'js-minifier-worker.js': ['assets/js/js-core.js', 'assets/js/js-worker.js'],
   'html-beautifier.js': ['assets/js/html-core.js', 'assets/js/html-ui.js'],
-  'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js']
+  'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js'],
+  'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
-  // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.
-  const code = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n')
-    .replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('//')).join('\n');
-  fs.writeFileSync(path.join(pub, 'assets/js', name), code + '\n');
+  // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
+  const source = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
+  const out = await jsLibs.terser.minify(source, { ecma: 2015, compress: { passes: 2 }, mangle: true, format: { comments: false } });
+  fs.writeFileSync(path.join(pub, 'assets/js', name), out.code + '\n');
 }
 
 // ---- llms.txt (plain-text summary for LLM crawlers; llmstxt.org format)

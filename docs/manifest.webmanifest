@@ -156,6 +156,11 @@
       "name": "Malaysia Salary Calculator 2026",
       "url": "/salary-calculator-malaysia/",
       "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"
+    },
+    {
+      "name": "Unused CSS Remover",
+      "url": "/unused-css-remover/",
+      "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
     }
   ]
 }

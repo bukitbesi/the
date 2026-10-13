@@ -387,6 +387,33 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .issue-error .lvl{color:#b42318;border-color:rgba(180,35,24,.35)}
 :root[data-theme=dark] .issue-error .lvl{color:#ff9b8f}
 .issue .link-btn{min-height:32px;padding:0 2px;color:var(--accent2)}
+/* Unused CSS remover: source lists, URL status, capture steps and report. */
+.purge-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+@media(min-width:1000px){.purge-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.src-group{min-width:0;margin-bottom:14px}
+.src-group legend{font-weight:700;font-size:.95rem;margin-bottom:8px}
+.src-list{display:grid;gap:10px;margin-bottom:10px}
+.src-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;min-width:0}
+.src-head label{font-weight:600;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.src-head .link-btn{font-size:.82rem;font-weight:600;color:var(--text3);flex-shrink:0}
+.code.code-sm{height:170px}
+.code.code-xs{height:96px}
+.src-more{margin:0 0 6px}
+.src-more>*:not(summary){margin-top:10px}
+.steps{padding-left:20px;font-size:.9rem;color:var(--text2);display:grid;gap:8px;list-style:decimal}
+.cap-link{cursor:grab;vertical-align:middle;margin:2px 0}
+.url-status{list-style:none;display:grid;gap:4px;font-size:.84rem;color:var(--text2);margin-top:10px}
+.url-status li{overflow-wrap:anywhere}
+.url-status .url-blocked .lvl{color:#b42318}
+:root[data-theme=dark] .url-status .url-blocked .lvl{color:#ff9b8f}
+.out-fmt{max-width:260px;margin:0 0 14px}
+.purge-col .code{height:300px}
+.purge-report{margin-top:14px}
+.report-body{padding:0 14px 12px;max-height:340px;overflow:auto;font-size:.88rem;color:var(--text2)}
+.report-body .sub-h{font-size:.9rem;margin:10px 0 6px}
+.removed-list{list-style:none;display:grid;gap:4px}
+.removed-list code{font-size:.85em;overflow-wrap:anywhere}
+.removed-list small{color:var(--text3)}
 </style>
 
 </head>
@@ -615,10 +642,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <ul>
           <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
           <li><a href="/css-minifier/">CSS Minifier</a></li>
+          <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
           <li><a href="/parcel-tracking-malaysia/">Parcel Tracking Malaysia</a></li>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
-          <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
         </ul>
       </nav>
       <nav aria-label="Kategori">

@@ -1,0 +1,255 @@
+<!--page
+{
+  "path": "/unused-css-remover/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "Unused CSS Remover: Remove Unused CSS Online Free",
+  "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes and fonts no page uses. Works with Blogger and WordPress.",
+  "llms": "Removes unused CSS in the browser. Inputs: any number of HTML pages, CSS files and JavaScript files (pasted or uploaded), page URLs (stylesheets on each page are discovered automatically, with an optional same-site crawl), and captures of live pages made with a bookmarklet, which include classes added by JavaScript. Exact mode parses each page and tests every selector with querySelector after removing state pseudo-classes such as :hover and pseudo-elements; keyword mode works like PurgeCSS, keeping a selector when all its class, id and tag names appear in the content. Also removes unused selectors from selector lists, unused @keyframes and @font-face rules and, optionally, unused CSS custom properties. Safelist by name or regular expression, with presets for JavaScript state classes, Blogger, WordPress and Bootstrap. Output is minified or formatted, per file or combined, with a report of everything removed. Code is not uploaded.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "purge",
+  "shareTitle": "Share this unused CSS remover",
+  "scripts": ["/assets/js/unused-css.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["Unused CSS Remover", null]],
+  "about": ["Cascading Style Sheets", "Unused CSS", "Web performance", "Core Web Vitals", "Render-blocking resources"],
+  "app": {
+    "name": "Unused CSS Remover",
+    "category": "DeveloperApplication",
+    "features": ["Any number of HTML, CSS and JavaScript sources", "Load pages by URL with automatic stylesheet discovery", "Optional crawl of linked pages on the same site", "Capture bookmarklet for live pages, including JavaScript-added classes", "Exact (DOM) and keyword (PurgeCSS-style) matching", "Removes unused selectors from selector lists", "Removes unused @keyframes, @font-face and CSS variables", "Safelist with presets for JavaScript states, Blogger, WordPress and Bootstrap", "Minified or formatted output, per file or combined", "Report of every removed selector", "Runs in the browser; code is not uploaded"]
+  },
+  "citations": [
+    ["Chrome for Developers: Reduce unused CSS (Lighthouse audit)", "https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules"],
+    ["Chrome for Developers: Coverage panel", "https://developer.chrome.com/docs/devtools/coverage"],
+    ["PurgeCSS documentation", "https://purgecss.com/"],
+    ["W3C: Selectors Level 4", "https://www.w3.org/TR/selectors-4/"]
+  ],
+  "faq": [
+    { "q": "What is unused CSS?", "a": "Unused CSS is any style rule whose selector matches no element on your pages, such as styles for a slider you removed or the parts of a framework like Bootstrap you never use. The browser still downloads and parses it before it can show the page, so unused CSS slows down rendering without changing how anything looks." },
+    { "q": "How do I remove unused CSS?", "a": "Paste your CSS and the HTML of your pages into this tool, or load the pages by URL. It tests every selector against the pages, removes the ones that match nothing, and gives you a cleaned stylesheet and a report of what was removed. Test the cleaned CSS on a copy of your site before replacing the original." },
+    { "q": "Does removing unused CSS improve Core Web Vitals?", "a": "Usually, yes. CSS blocks rendering, so a smaller stylesheet lets the browser paint sooner, which improves First Contentful Paint and Largest Contentful Paint, especially on mobile. Lighthouse reports it as Reduce unused CSS. The gain is largest when a framework or theme ships far more CSS than a page uses." },
+    { "q": "Why did it remove styles for my menu, slider or popup?", "a": "Those classes are often added by JavaScript after the page loads, so they are not in the page HTML. Use the capture bookmarklet after opening the menu or popup, add the JavaScript files that add the classes, turn on the JavaScript states safelist, or add the class names to the safelist yourself." },
+    { "q": "What is the difference between exact and keyword matching?", "a": "Exact matching builds each page like a browser and tests every selector on it, so it removes the most CSS but needs every page type you use. Keyword matching keeps a selector whenever its class, id and tag names appear anywhere in your pages or scripts, like PurgeCSS. It keeps more CSS but is safer for templates and sites that build HTML with JavaScript." },
+    { "q": "Can I remove unused CSS from a Blogger theme?", "a": "Yes. Capture your home page, a post, a static page, a label page and a search results page with the bookmarklet, then paste the CSS from inside b:skin in your theme as the stylesheet. Keep the Variable definitions comment at the top of b:skin separately, paste it back above the cleaned CSS, and keep a backup of the theme." },
+    { "q": "Is my code uploaded?", "a": "No. Pages and stylesheets are compared in your browser, and URLs are fetched by your own browser too. If a site blocks that, the tool may use a read-only proxy that fetches only the public page you asked for, or you can capture the page with the bookmarklet instead." },
+    { "q": "What is the difference between unused CSS and critical CSS?", "a": "Removing unused CSS deletes styles no page needs. Critical CSS is the small part of the remaining CSS needed to show the first screen, inlined in the page so it can render before the full stylesheet loads. Remove unused CSS first, then extract critical CSS from what is left." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">Unused CSS Remover</li></ol></nav>
+  <h1>Unused CSS Remover</h1>
+  <p class="answer">An <strong>unused CSS remover deletes the style rules no element on your pages uses</strong>, so the browser downloads and parses less CSS before it can show the page. Add your CSS and your pages (paste them, upload files, load URLs or capture a live page), and the tool tests every selector against them. The example below removes {{PURGE_REMOVED}} unused selectors and shrinks the stylesheet by <strong>{{PURGE_PCT}}%</strong>.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is uploaded</span><a href="#blogger">Blogger guide</a></p>
+
+  <form class="box code-tool" id="purgeForm" novalidate aria-labelledby="purge-h" data-proxy="{{PURGE_PROXY}}">
+    <h2 id="purge-h" class="sr-only">Remove unused CSS</h2>
+    <div class="code-opts">
+      <fieldset class="seg" aria-label="Matching">
+        <label><input type="radio" name="match" value="exact" checked> Exact</label>
+        <label><input type="radio" name="match" value="keyword"> Keyword</label>
+      </fieldset>
+      <label class="check"><input type="checkbox" name="partial" checked> <span>Remove unused selectors from lists</span></label>
+      <label class="check"><input type="checkbox" name="keyframes" checked> <span>Remove unused <code>@keyframes</code></span></label>
+      <label class="check"><input type="checkbox" name="fontFace" checked> <span>Remove unused <code>@font-face</code></span></label>
+      <label class="check"><input type="checkbox" name="variables"> <span>Remove unused CSS variables</span></label>
+    </div>
+    <div class="purge-grid">
+      <div class="purge-col">
+        <fieldset class="src-group">
+          <legend>Stylesheets (CSS)</legend>
+          <div class="src-list" id="src-css">
+{{PURGE_CSS_SRC}}
+          </div>
+          <div class="tool-actions">
+            <button type="button" class="btn ghost sm" data-add="css">Add CSS</button>
+            <label class="btn ghost sm file-btn">Upload .css<input type="file" id="fileCss" accept=".css,text/css" multiple class="sr-only"></label>
+          </div>
+        </fieldset>
+        <fieldset class="src-group">
+          <legend>Pages (HTML)</legend>
+          <div class="src-list" id="src-html">
+{{PURGE_HTML_SRC}}
+          </div>
+          <div class="tool-actions">
+            <button type="button" class="btn ghost sm" data-add="html">Add page</button>
+            <label class="btn ghost sm file-btn">Upload .html<input type="file" id="fileHtml" accept=".html,.htm,.php,.xml,text/html" multiple class="sr-only"></label>
+          </div>
+        </fieldset>
+        <details class="more-opts src-more" id="urlSources">
+          <summary>Load pages from URLs</summary>
+          <div class="field">
+            <label for="urlList">Page addresses, one per line</label>
+            <textarea class="code code-xs" id="urlList" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="https://www.example.com/&#10;https://www.example.com/blog/first-post.html" aria-describedby="urlHelp"></textarea>
+            <p class="help" id="urlHelp">{{PURGE_URL_HELP}}</p>
+          </div>
+          <div class="adv-grid">
+            <label class="check"><input type="checkbox" name="discover" checked> <span>Also load the stylesheets these pages use</span></label>
+            <div class="field">
+              <label for="crawl">Also scan linked pages on the same site</label>
+              <select class="input" id="crawl" name="crawl"><option value="0" selected>No</option><option value="5">Up to 5</option><option value="10">Up to 10</option><option value="25">Up to 25</option></select>
+            </div>
+          </div>
+          <button type="button" class="btn sm" id="urlGo">Load pages</button>
+          <ul class="url-status" id="urlStatus" aria-live="polite"></ul>
+        </details>
+        <details class="more-opts src-more" id="capSources">
+          <summary>Capture a live page (best for Blogger and JavaScript menus)</summary>
+          <ol class="steps">
+            <li>Drag <a class="btn ghost sm cap-link" id="capLink" href="#capSources">Capture CSS</a> to your bookmarks bar, or <button type="button" class="link-btn" id="capCopy">Copy console code</button> to paste into the browser console (F12).</li>
+            <li>Open a page of your site, open menus or popups you use, then click the bookmark. It copies the page as shown and its CSS.</li>
+            <li>Paste here. Repeat for each page type: home, post, static page, label or category page, search.</li>
+          </ol>
+          <div class="field">
+            <label for="capIn">Paste a capture</label>
+            <textarea class="code code-xs" id="capIn" spellcheck="false" autocomplete="off" aria-describedby="capNote"></textarea>
+            <p class="help" id="capNote" hidden></p>
+          </div>
+          <label class="btn ghost sm file-btn">Upload css-capture.json<input type="file" id="fileCap" accept=".json,application/json" multiple class="sr-only"></label>
+        </details>
+        <details class="more-opts src-more" id="jsSources">
+          <summary>JavaScript that adds classes (optional)</summary>
+          <p class="help">Class names found in these scripts count as used, for menus, sliders and popups that add classes after the page loads.</p>
+          <div class="src-list" id="src-js"></div>
+          <div class="tool-actions">
+            <button type="button" class="btn ghost sm" data-add="js">Add JavaScript</button>
+            <label class="btn ghost sm file-btn">Upload .js<input type="file" id="fileJs" accept=".js,.mjs,text/javascript" multiple class="sr-only"></label>
+          </div>
+        </details>
+        <details class="more-opts src-more">
+          <summary>Safelist: always keep</summary>
+          <div class="adv-grid">
+            <label class="check"><input type="checkbox" name="safeState" checked> <span>JavaScript states (active, open, show, is-*)</span></label>
+            <label class="check"><input type="checkbox" name="safeBlogger"> <span>Blogger widgets</span></label>
+            <label class="check"><input type="checkbox" name="safeWordpress"> <span>WordPress (wp-*, align*)</span></label>
+            <label class="check"><input type="checkbox" name="safeBootstrap"> <span>Bootstrap components</span></label>
+          </div>
+          <div class="field">
+            <label for="safelist">Your names</label>
+            <textarea class="code code-xs" id="safelist" name="safelist" spellcheck="false" autocomplete="off" placeholder="menu-open slick-active /^swiper-/" aria-describedby="safeHelp"></textarea>
+            <p class="help" id="safeHelp">Class, id, tag, @keyframes or font names, separated by spaces. Use /regex/ for patterns.</p>
+          </div>
+        </details>
+      </div>
+      <div class="purge-col">
+        <div class="field" id="purgeFileField" hidden>
+          <label for="purgeFile">Show</label>
+          <select class="input" id="purgeFile"><option value="all">All files combined</option></select>
+        </div>
+        <div class="field">
+          <label for="purgeOut">Cleaned CSS</label>
+          <textarea class="code" id="purgeOut" readonly spellcheck="false" aria-describedby="purgeStats">{{PURGE_OUT}}</textarea>
+          <p class="code-stats" id="purgeStats">{{PURGE_STATS}}</p>
+        </div>
+        <fieldset class="seg out-fmt" aria-label="Output format">
+          <label><input type="radio" name="format" value="min" checked> Minified</label>
+          <label><input type="radio" name="format" value="pretty"> Formatted</label>
+        </fieldset>
+        <div class="tool-actions" id="purgeActions">
+          <button type="submit" class="btn sm">Remove unused CSS</button>
+          <button type="button" class="btn ghost sm" id="purgeCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="purgeDownload">Download</button>
+          <button type="button" class="btn ghost sm" id="purgeSample">Sample</button>
+          <button type="button" class="btn ghost sm" id="purgeClear">Clear all</button>
+        </div>
+        <details class="issues purge-report" id="purgeReport" open>
+          <summary id="purgeReportSum">{{PURGE_REPORT_SUM}}</summary>
+          <div class="report-body" id="purgeReportBody">{{PURGE_REPORT_BODY}}</div>
+        </details>
+      </div>
+    </div>
+    <p class="sr-only" id="purgeLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to remove unused CSS</h2>
+  <ol>
+    <li><strong>Add your CSS</strong>: paste it, upload files, or let the tool load the stylesheets of the pages you add.</li>
+    <li><strong>Add every type of page</strong> your CSS serves: home, article, product, category, search, contact. A rule used only on one page type is removed if that page is missing.</li>
+    <li><strong>Add what JavaScript changes</strong>: capture pages with menus and popups open, add the scripts that add classes, or keep the JavaScript states safelist on.</li>
+    <li><strong>Check the report</strong>, copy or download the cleaned CSS, and test it on a copy of your site before replacing the original.</li>
+  </ol>
+
+  <h2 id="matching">Exact or keyword matching?</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="matching-cap">
+    <table class="data text"><caption id="matching-cap">Matching modes</caption>
+      <thead><tr><th scope="col">Mode</th><th scope="col">How it decides</th><th scope="col">Best for</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Exact</th><td>Builds each page like a browser and runs every selector with <code>querySelector</code>. States the page cannot show by itself (<code>:hover</code>, <code>:focus</code>, <code>::before</code>, <code>:checked</code>) are ignored while matching, so <code>.btn:hover</code> stays whenever <code>.btn</code> exists. Selectors this browser cannot parse are kept.</td><td>Finished HTML pages and captures. Removes the most.</td></tr>
+        <tr><th scope="row">Keyword</th><td>Keeps a selector when every class, id and tag name in it appears anywhere in your pages or scripts, as PurgeCSS does. Structure such as <code>.a &gt; .b</code> is not checked.</td><td>Templates, PHP or Blogger theme code and pages built by JavaScript. Safest.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>In exact mode, class names that appear in the JavaScript you add also count as used, so styles for states that scripts switch on are kept.</p>
+
+  <h2 id="benchmark">Tested on Bootstrap 5.3.3</h2>
+  <p>A test page with a navbar, cards, an alert, a list group, a table, pagination, form controls, buttons and a spinner, cleaned against the full <code>bootstrap.css</code> with the default options. Each result was rendered next to the original at 390 px and 1280 px wide and compared pixel by pixel.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bench-cap">
+    <table class="data"><caption id="bench-cap">bootstrap.css, bytes</caption>
+      <thead><tr><th scope="col">Version</th><th scope="col">Size</th><th scope="col">Gzip</th><th scope="col">Smaller</th><th scope="col">Renders the same</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Original</th><td>281,043</td><td>33,308</td><td>–</td><td>–</td></tr>
+        <tr><th scope="row">Exact mode</th><td>34,031</td><td>6,963</td><td>87.9%</td><td>Yes</td></tr>
+        <tr><th scope="row">Keyword mode</th><td>35,602</td><td>7,203</td><td>87.3%</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Both modes kept the styles Bootstrap's JavaScript switches on for elements that exist on the page, such as <code>.form-control.is-invalid</code> and <code>.navbar-nav .nav-link.show</code>, and removed those for components the page does not have, such as dropdowns and modals.</p>
+
+  <h2 id="removes">What else it removes, and what it never touches</h2>
+  <ul>
+    <li><strong>Selector lists</strong>: in <code>.btn-danger, .alert-danger { … }</code> only the unused names are removed; the rule stays if one is used.</li>
+    <li><strong>@media, @supports and @container blocks</strong> are cleaned inside and dropped when nothing is left.</li>
+    <li><strong>@keyframes</strong> are removed when no remaining rule names them in <code>animation</code>.</li>
+    <li><strong>@font-face</strong> rules are removed when no remaining rule uses that font family, which also stops the browser downloading the font.</li>
+    <li><strong>CSS variables</strong> (optional) are removed when nothing reads them with <code>var()</code>, in the CSS, inline styles or scripts you add.</li>
+    <li><strong>Always kept</strong>: <code>*</code>, <code>html</code>, <code>body</code>, <code>:root</code>, <code>::selection</code>, scrollbar styles, <code>@import</code>, <code>@layer</code> order, <code>@property</code>, <code>@page</code>, nested rules and licence comments.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="blogger">Removing unused CSS from a Blogger theme</h2>
+  <ol>
+    <li><strong>Back up the theme</strong>: Theme → ⋮ → Backup.</li>
+    <li><strong>Capture each page type</strong> with the bookmarklet: home page, a post, a static page, a label page (<code>/search/label/…</code>) and a search result (<code>/search?q=…</code>). Open the mobile menu and any popups before capturing. Blogger blogs block other sites from reading them, so URL loading needs the capture instead.</li>
+    <li><strong>Use the theme's own CSS</strong>: in Edit HTML, copy the CSS inside <code>&lt;b:skin&gt;&lt;![CDATA[ … ]]&gt;</code> and paste it as the stylesheet, replacing the captured inline CSS. That keeps Theme Designer variables such as <code>$(body.text.color)</code> instead of their current values.</li>
+    <li><strong>Turn on the Blogger widgets safelist</strong> if you sometimes add gadgets that are not on the captured pages.</li>
+    <li><strong>Paste back</strong>: keep the <code>Variable definitions</code> comment block at the top of <code>&lt;b:skin&gt;</code> exactly as it was, and paste the cleaned CSS below it.</li>
+  </ol>
+  <p>Blogger also loads its own widget stylesheet. With <code>b:css='false'</code> on the <code>&lt;html&gt;</code> tag it is not loaded, but then every widget needs styles in your theme, so only change it if your theme was built for that.</p>
+
+  <h2 id="wordpress">WordPress</h2>
+  <p>Clean your theme or child theme stylesheet, with pages captured for each template (front page, single post, page, archive, search, 404, and WooCommerce pages if you use it). Turn on the WordPress safelist so block-editor classes such as <code>alignwide</code> and <code>has-text-align-center</code> stay. Plugin stylesheets are best handled by a performance plugin's "remove unused CSS" feature, because they change with every plugin update.</p>
+
+  <h2 id="compare">This tool, Chrome Coverage and PurgeCSS</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-cap">
+    <table class="data text"><caption id="compare-cap">Ways to find unused CSS</caption>
+      <thead><tr><th scope="col">Method</th><th scope="col">Gives you</th><th scope="col">Limit</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">This tool</th><td>A cleaned stylesheet for many pages at once, with a report and safelists.</td><td>Only knows the pages and scripts you add.</td></tr>
+        <tr><th scope="row">Chrome DevTools Coverage</th><td>Used and unused bytes for one page as you click through it.</td><td>Shows unused code but does not write a cleaned file.</td></tr>
+        <tr><th scope="row">PurgeCSS in a build</th><td>Automatic cleaning on every build of a code project.</td><td>Needs Node.js and a build step; not for Blogger or theme editors.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Tip:</strong> after replacing your CSS, check "Reduce unused CSS" in <a href="https://pagespeed.web.dev/" rel="noopener">PageSpeed Insights</a>. Then minify the result with the <a href="/css-minifier/">CSS Minifier</a> if you chose formatted output.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/css-minifier/">CSS Minifier<small>Minify or beautify CSS</small></a>
+    <a href="/html-beautifier/">HTML Beautifier &amp; Minifier<small>Format, compress and check HTML</small></a>
+    <a href="/javascript-minifier/">JavaScript Minifier<small>Minify, obfuscate or beautify JS</small></a>
+  </div>
+</section>
+</div>

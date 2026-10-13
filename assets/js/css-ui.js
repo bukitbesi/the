@@ -129,7 +129,6 @@
 
   restore();
   sync();
-  // The page ships with the sample already minified; only redo it when stored options differ.
+  // The page ships with the sample already minified and its gzip size; only redo it when stored options differ.
   if (form.elements.mode.value !== 'minify' || !form.elements.optimize.checked || !form.elements.keepImportant.checked || !form.elements.removeEmpty.checked) run(false);
-  else gzip(output.value, gzRun);
 })();
