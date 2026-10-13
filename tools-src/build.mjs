@@ -512,7 +512,11 @@ function carMap(lang) {
     K_ROAD: money(r.running.roadTax, lang), K_INS: money(r.running.insurance.total, lang), K_ALL: money(r.running.monthly, lang),
     K_ROAD_TABLE: [[998, 'Perodua Axia / Bezza 1.0'], [1329, 'Perodua Myvi 1.3'], [1497, 'Honda City / Civic 1.5'], [1798, '1.8-litre'],
       [1998, '2.0-litre'], [2487, 'Toyota Camry 2.5'], [2994, '3.0-litre'], [3456, '3.5-litre']].map(([cc, eg]) =>
-      `<tr><th scope="row">${cc.toLocaleString('en-MY')} cc <small>${esc(eg)}</small></th><td>${money(carCore.roadTax(cc, 'saloon'), lang)}</td><td>${money(carCore.roadTax(cc, 'nonSaloon'), lang)}</td></tr>`).join('\n'),
+      `<tr><th scope="row">${cc.toLocaleString('en-MY')} cc <small>${esc(eg)}</small></th><td>${money(carCore.roadTax(cc, 'saloon'), lang)}</td><td>${money(carCore.roadTax(cc, 'nonSaloon'), lang)}</td><td>${money(carCore.roadTax(cc, 'saloon', 'east'), lang)}</td></tr>`).join('\n'),
+    K_EV_TABLE: [[50, ''], [70, ''], [100, ''], [150, 'BYD Atto 3, Proton e.MAS 7 (160 kW)'], [160, ''], [208, 'Tesla Model 3 RWD'], [225, ''], [250, ''], [310, '']].map(([kw, eg]) =>
+      `<tr><th scope="row">${kw} kW${eg ? ` <small>${esc(eg)}</small>` : ''}</th><td>${money(carCore.evRoadTax(kw), lang)}</td></tr>`).join('\n'),
+    K_FUEL_OPTIONS: [opt('ice', 'Petrol or hybrid', 'Petrol atau hibrid', true), opt('ev', 'Electric (EV)', 'Elektrik (EV)')].join(''),
+    K_REGION_OPTIONS: [opt('peninsular', 'Peninsular Malaysia', 'Semenanjung Malaysia', true), opt('east', 'Sabah or Sarawak', 'Sabah atau Sarawak')].join(''),
     K_INS_TABLE: [50000, 80000, 100000, 150000, 200000].map(si => `<tr><th scope="row">${rm0(si)}</th>${[0, 25, 55].map(n => `<td>${rm0(carCore.insurance(si, 1497, n).total)}</td>`).join('')}</tr>`).join('\n'),
     K_RUN_VERIFIED: longDate(F.runningVerified, lang)
   };

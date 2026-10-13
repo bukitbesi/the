@@ -5,7 +5,7 @@
   'use strict';
   var C = typeof module === 'object' && module.exports ? require('./carloan-core.js') : root.TBBCarLoan;
 
-  var FACTS = { verified: '2026-10-14', flatBanFrom: '2027-01-01', stampDuty: 0.005, maxYears: 10, defaultFlat: 6, unsecuredCap: 18, securedCap: 12 };
+  var FACTS = { verified: '2026-10-15', flatBanFrom: '2027-01-01', stampDuty: 0.005, maxYears: 10, defaultFlat: 6, unsecuredCap: 18, securedCap: 12 };
 
   var cents = function (n) { return Math.round((n + Number.EPSILON) * 100) / 100; };
   var num = function (v, d) { v = Number(v); return v !== '' && isFinite(v) && v >= 0 ? v : (d || 0); };

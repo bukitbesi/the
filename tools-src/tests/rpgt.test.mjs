@@ -45,3 +45,12 @@ test('A loss pays no tax', () => {
   assert.equal(r.tax, 0);
   assert.equal(r.exemption, 0);
 });
+
+test('Retention: 5% for a company selling within 3 years, 3% after', () => {
+  const early = R.calculate({ owner: 'company', acquired: '2024-01-01', disposed: '2026-01-01', purchase: 400000, sale: 500000 });
+  assert.equal(early.retentionPct, 5);
+  assert.equal(early.retention, 25000);
+  const later = R.calculate({ owner: 'company', acquired: '2020-01-01', disposed: '2026-01-01', purchase: 400000, sale: 500000 });
+  assert.equal(later.retentionPct, 3);
+  assert.equal(R.calculate({ owner: 'citizen', acquired: '2025-01-01', disposed: '2026-01-01', sale: 100000 }).retentionPct, 3);
+});

@@ -5,9 +5,9 @@
   "alternates": { "ms": "/kalkulator-loan-kereta/" },
   "title": "Car Loan Calculator Malaysia 2026: Instalment, Road Tax, Insurance",
   "description": "Free car loan calculator for the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, road tax, insurance estimate and early settlement.",
-  "llms": "Calculates Malaysian car loan (hire purchase) instalments by the reducing-balance method with an effective interest rate (EIR), required by the Hire-Purchase (Amendment) Act from 1 June 2026 with a transition to 31 March 2027, or by the older flat-rate method; converts flat rate to EIR and back; shows total interest, a yearly schedule and the early settlement amount, including the Rule of 78 rebate for older flat-rate agreements; also estimates JPJ road tax by engine cc (Peninsular, saloon or non-saloon) and comprehensive insurance with NCD, 8% SST and stamp duty, and the total monthly cost of owning the car.",
+  "llms": "Calculates Malaysian car loan (hire purchase) instalments by the reducing-balance method with an effective interest rate (EIR), required by the Hire-Purchase (Amendment) Act from 1 June 2026 with a transition to 31 March 2027, or by the older flat-rate method; converts flat rate to EIR and back; shows total interest, a yearly schedule and the early settlement amount, including the Rule of 78 rebate for older flat-rate agreements; also estimates JPJ road tax by engine cc (Peninsular saloon or non-saloon, Sabah and Sarawak saloon) or by motor power for electric cars up to 310 kW and comprehensive insurance with NCD, 8% SST and stamp duty, and the total monthly cost of owning the car.",
   "datePublished": "2026-10-12",
-  "dateModified": "2026-10-14",
+  "dateModified": "2026-10-15",
   "render": "car",
   "scripts": ["/assets/js/carloan.js"],
   "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Car Loan Calculator", null]],
@@ -15,10 +15,11 @@
   "app": {
     "name": "Car Loan Calculator Malaysia",
     "category": "FinanceApplication",
-    "features": ["Monthly instalment by reducing balance (EIR) or flat rate", "Flat rate to EIR conversion", "Total interest and yearly schedule", "Early settlement amount with Rule of 78 rebate", "Comparison of Rule of 78 with reducing balance", "Road tax by engine cc, saloon or non-saloon", "Comprehensive insurance estimate with NCD", "Total monthly cost of ownership", "Works offline"]
+    "features": ["Monthly instalment by reducing balance (EIR) or flat rate", "Flat rate to EIR conversion", "Total interest and yearly schedule", "Early settlement amount with Rule of 78 rebate", "Comparison of Rule of 78 with reducing balance", "Road tax by engine cc or EV motor power, Peninsular or Sabah and Sarawak", "Comprehensive insurance estimate with NCD", "Total monthly cost of ownership", "Works offline"]
   },
   "citations": [
     ["JPJ: Motor vehicle licence (road tax) fees", "https://www.jpj.gov.my/"],
+    ["paultan.org: Road tax prices for all EV models in Malaysia from 1 January 2026", "https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/"],
     ["Bank Negara Malaysia: Phased liberalisation of motor insurance", "https://www.bnm.gov.my/"],
     ["The Edge Malaysia: Rule of 78 scrapped for hire purchase loans", "https://theedgemalaysia.com/node/773936"],
     ["Association of Banks in Malaysia: Changes to hire purchase financing with early settlement discounts", "https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/"],
@@ -33,7 +34,7 @@
     { "q": "What is the Rule of 78?", "a": "It is the method older flat-rate agreements use to work out the interest rebate when you settle early. It assigns more interest to the early months, so you get back less than under reducing balance. On a RM90,000, 9-year loan at 2.50% flat, settling after 4 years costs about RM375 more than it would under reducing balance." },
     { "q": "How much do I pay to settle my car loan early?", "a": "Under reducing balance you pay the principal still owed. Under a flat-rate agreement you pay the remaining instalments minus the Rule of 78 rebate. Banks are also offering goodwill discounts on early settlement of eligible Rule of 78 loans, so ask your bank for a settlement letter." },
     { "q": "What is the maximum car loan tenure and margin of financing?", "a": "Most banks finance up to 90% of the price for up to 9 years. Used and recond cars often get a lower margin and a shorter tenure, depending on the car's age." },
-    { "q": "How much is road tax for a 1.5-litre car in Malaysia?", "a": "RM90 a year for a private saloon in Peninsular Malaysia from 1,401 cc to 1,600 cc, or RM120 for a non-saloon such as an SUV or MPV. A 1.8-litre (1,798 cc) saloon pays RM279.20 and a 2.0-litre (1,998 cc) saloon RM379. Non-saloons such as SUVs and MPVs use a separate table: RM359.40 for 1,798 cc and RM439.20 for 1,998 cc. Sabah, Sarawak, Labuan and Langkawi pay less." },
+    { "q": "How much is road tax for a 1.5-litre car in Malaysia?", "a": "RM90 a year for a private saloon in Peninsular Malaysia from 1,401 cc to 1,600 cc, or RM120 for a non-saloon such as an SUV or MPV. A 1.8-litre (1,798 cc) saloon pays RM279.20 and a 2.0-litre (1,998 cc) saloon RM379. Non-saloons such as SUVs and MPVs use a separate table: RM359.40 for 1,798 cc and RM439.20 for 1,998 cc. A 1.5-litre saloon in Sabah or Sarawak pays RM72. Electric cars pay by motor power: RM160 for a 150 kW car such as the BYD Atto 3." },
     { "q": "How much is car insurance for a RM100,000 car?", "a": "About RM3,120 a year for a 1.5-litre car with no NCD, or about RM1,409 with the maximum 55% NCD. That uses the former motor tariff (RM305.50 for the first RM1,000 plus RM26 per RM1,000 after), 8% SST and RM10 stamp duty. Insurers now set their own premiums, so compare quotes." }
   ]
 }
@@ -58,7 +59,16 @@
       <div class="field"><label for="rate" id="rateLabel">{{K_RATE_LABEL}}</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{K_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Use the rate in your bank's offer letter.</p></div>
       <fieldset class="field-group">
         <legend>Road tax and insurance</legend>
-        <div class="field"><label for="cc">Engine capacity</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" max="8000" step="1" value="{{K_CC}}"><span aria-hidden="true">cc</span></div><p class="help">From the brochure or registration card, e.g. 1,497 cc.</p></div>
+        <div class="field">
+          <label for="fuel">Engine</label>
+          <select class="input" id="fuel" name="fuel">{{K_FUEL_OPTIONS}}</select>
+        </div>
+        <div class="field">
+          <label for="region">Registered in</label>
+          <select class="input" id="region" name="region">{{K_REGION_OPTIONS}}</select>
+        </div>
+        <div class="field" id="ccField"><label for="cc">Engine capacity</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" max="8000" step="1" value="{{K_CC}}"><span aria-hidden="true">cc</span></div><p class="help">From the brochure or registration card, e.g. 1,497 cc.</p></div>
+        <div class="field" id="kwField" hidden><label for="kw">Motor power</label><div class="input"><input id="kw" name="kw" type="number" inputmode="decimal" min="0" max="1000" step="1" value="150"><span aria-hidden="true">kW</span></div><p class="help">Total power of all motors, from the brochure or registration card.</p></div>
         <div class="field">
           <label for="body">Body type</label>
           <select class="input" id="body" name="body">{{K_BODY_OPTIONS}}</select>
@@ -96,7 +106,7 @@
       <table class="rows" id="kRun">
         <caption>Running costs a year</caption>
         <tbody>
-          <tr><th scope="row">Road tax (Peninsular, private)</th><td id="kRoad">{{K_ROAD}}</td></tr>
+          <tr><th scope="row" id="kRoadLabel">Road tax (private car)</th><td id="kRoad">{{K_ROAD}}</td></tr>
           <tr><th scope="row">Comprehensive insurance (estimate)</th><td id="kIns">{{K_INS}}</td></tr>
           <tr class="total"><th scope="row">Instalment + road tax + insurance a month</th><td id="kAll">{{K_ALL}}</td></tr>
         </tbody>
@@ -133,17 +143,28 @@
     </table>
   </div>
   <p>A shorter tenure raises the instalment but cuts interest: on RM90,000, 7 years instead of 9 saves about RM4,533.</p>
-  <h2 id="road-tax">Road tax by engine size (Peninsular Malaysia, 2026)</h2>
+  <h2 id="road-tax">Road tax by engine size (2026)</h2>
   <p>JPJ charges a flat fee up to 1,600 cc, then a base fee plus a rate for every cc above the band. Saloons and non-saloons (SUV, MPV, pickup) use different tables. Rates for cars registered to individuals; check the exact amount on MyJPJ before renewal.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-labelledby="road-tax">
     <table class="data">
-      <thead><tr><th scope="col">Engine</th><th scope="col">Saloon</th><th scope="col">Non-saloon</th></tr></thead>
+      <thead><tr><th scope="col">Engine</th><th scope="col">Saloon, Peninsular</th><th scope="col">Non-saloon, Peninsular</th><th scope="col">Saloon, Sabah and Sarawak</th></tr></thead>
       <tbody>
 {{K_ROAD_TABLE}}
       </tbody>
     </table>
   </div>
-  <p>Electric cars pay road tax by motor power (kW) since 1 January 2026, and Sabah, Sarawak, Labuan and Langkawi have lower rates; neither is included in the calculator.</p>
+  <p>Sabah and Sarawak saloons pay about 20% to 50% less. Non-saloon rates there are not included yet; check MyJPJ.</p>
+
+  <h2 id="ev-tax">Electric car road tax by motor power (2026)</h2>
+  <p>Since 1 January 2026 electric cars pay by total motor power instead of engine size: RM20 up to 50 kW, then RM10 for every 10 kW to 100 kW; RM80 from 100 kW plus RM20 for every 10 kW above 110 kW; and RM305 from 210 kW plus RM30 for every 10 kW above 220 kW. Cars above 310 kW pay more; check MyJPJ.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ev-tax">
+    <table class="data">
+      <thead><tr><th scope="col">Motor power</th><th scope="col">Road tax a year (Peninsular)</th></tr></thead>
+      <tbody>
+{{K_EV_TABLE}}
+      </tbody>
+    </table>
+  </div>
 
   <h2 id="insurance">Car insurance estimate (1.5-litre car)</h2>
   <p>A yearly comprehensive premium with 8% SST and RM10 stamp duty, from the former motor tariff that insurers still use as a reference. Your NCD rises each claim-free year to a maximum of 55% and resets after a claim.</p>
@@ -177,6 +198,7 @@
   <h2 id="sources">Sources</h2>
   <ul>
     <li><a href="https://www.jpj.gov.my/" rel="noopener">JPJ: motor vehicle licence (road tax)</a></li>
+    <li><a href="https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/" rel="noopener">paultan.org: EV road tax from 1 January 2026</a></li>
     <li><a href="https://theedgemalaysia.com/node/773936" rel="noopener">The Edge Malaysia: Rule of 78 scrapped</a></li>
     <li><a href="https://www.abm.org.my/press-releases/banks-in-malaysia-introduce-changes-to-hire-purchase-financing-with-early-settlement-discounts/" rel="noopener">ABM: hire purchase changes and early settlement discounts</a></li>
     <li><a href="https://www.businesstoday.com.my/2026/03/24/new-hire-purchase-rules-what-it-means-for-car-buyers/" rel="noopener">Business Today: new hire purchase rules for car buyers</a></li>

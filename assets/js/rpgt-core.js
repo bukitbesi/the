@@ -1,7 +1,8 @@
 /* Real Property Gains Tax (RPGT, cukai keuntungan harta tanah) under the Real Property Gains Tax Act 1976, Schedule 5
    rates in force since 1 January 2022 and unchanged for 2026. Individuals deduct RM10,000 or 10% of the gain, whichever
-   is greater; a citizen or PR may exempt one private residence once in a lifetime. The buyer retains 3% of the price
-   (7% when the seller is not a citizen or PR) for LHDN. Verified 14 October 2026. */
+   is greater; a citizen or PR may exempt one private residence once in a lifetime. The buyer retains 3% of the price for
+   LHDN (5% for a company selling within 3 years, 7% for a seller who is not a citizen or PR). Self-assessed since
+   1 January 2025. Verified 15 October 2026. */
 (function (root) {
   'use strict';
 
@@ -11,7 +12,7 @@
     foreigner: [30, 30, 30, 30, 30, 10],
     company: [30, 30, 30, 20, 15, 10]
   };
-  var FACTS = { verified: '2026-10-14', since: '2022-01-01', exemptionMin: 10000, exemptionPct: 10, retention: 3, retentionForeigner: 7 };
+  var FACTS = { verified: '2026-10-15', since: '2022-01-01', selfAssessed: '2025-01-01', exemptionMin: 10000, exemptionPct: 10, retention: 3, retentionCompanyEarly: 5, retentionForeigner: 7 };
 
   var cents = function (n) { return Math.round((n + Number.EPSILON) * 100) / 100; };
   var num = function (v) { v = Number(v); return v !== '' && isFinite(v) && v >= 0 ? v : 0; };
@@ -44,7 +45,8 @@
     var residence = owner === 'citizen' && (input.residence === 'yes' || input.residence === true);
     var chargeable = residence ? 0 : cents(Math.max(0, gain - exemption));
     var rate = rateFor(owner, year), tax = cents(chargeable * rate / 100);
-    var retentionPct = owner === 'foreigner' ? FACTS.retentionForeigner : FACTS.retention, retention = cents(sale * retentionPct / 100);
+    var retentionPct = owner === 'foreigner' ? FACTS.retentionForeigner : owner === 'company' && year <= 3 ? FACTS.retentionCompanyEarly : FACTS.retention;
+    var retention = cents(sale * retentionPct / 100);
     return {
       owner: owner, year: year, rate: rate, sale: sale, cost: cents(cost), net: cents(net), gain: gain,
       exemption: residence ? Math.max(0, gain) : Math.min(exemption, Math.max(0, gain)), residence: residence,
