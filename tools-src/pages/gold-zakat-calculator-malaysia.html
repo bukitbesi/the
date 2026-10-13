@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/gold-zakat-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-zakat-emas/" },
+  "title": "Gold Zakat Calculator Malaysia 2026: Worn Gold, Uruf, Savings",
+  "description": "Free gold and savings zakat calculator for Malaysia: kept gold from 85 g, worn gold above your state's uruf (Selangor 800 g) and savings above the nisab.",
+  "llms": "Calculates zakat on gold and savings in Malaysia at 2.5%: kept gold (bars, coins, gold accounts) once it reaches the 85 g nisab, worn gold only on the weight above the state's uruf (Selangor and the Federal Territories 800 g, Kelantan 600 g, other states entered by the user), and savings that stay at or above the nisab for a full year (haul); the gold price per gram is editable (default RM455.86, implied by Selangor's RM38,748 nisab for July–December 2026) and zakat paid qualifies for the income tax rebate.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "gold",
+  "scripts": ["/assets/js/zakat-emas.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Gold Zakat Calculator", null]],
+  "about": ["Gold zakat", "Uruf for worn gold", "Zakat on savings", "85 gram nisab"],
+  "app": {
+    "name": "Gold & Savings Zakat Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Kept gold with the 85 g nisab", "Worn gold above the state uruf", "Zakat on savings", "Editable gold price per gram", "Combined zakat total", "Works offline"]
+  },
+  "citations": [
+    ["Lembaga Zakat Selangor: Gold zakat", "https://www.zakatselangor.com.my/en/gold-zakat/"],
+    ["Selangor Mufti Office: Zakat on gold jewellery", "https://emusykil.muftiselangor.gov.my/index.php/site/jawapan?id=441"],
+    ["Tunai Zakat: Selangor gold zakat calculator", "https://tunaizakat.my/en/zakat-emas/"],
+    ["Wazan UPM: Gold zakat", "https://wazan.upm.edu.my/artikel/zakat_emas-78038"]
+  ],
+  "faq": [
+    { "q": "How is zakat on kept gold calculated?", "a": "If gold you keep (bars, coins or a gold account) reaches 85 grams for a full year, zakat = 2.5% × weight × gold price per gram. 100 g at RM455.86 a gram is worth RM45,586, so the zakat is RM1,139.65." },
+    { "q": "How is zakat on worn gold calculated?", "a": "Zakat applies only to the weight above your state's uruf. In Selangor the uruf is 800 g: 900 g of worn gold means 100 g is zakatable, so 100 × RM455.86 × 2.5% = RM1,139.65. Worn gold of 800 g or less owes no zakat." },
+    { "q": "What is the uruf in each state?", "a": "Selangor and the Federal Territories set 800 g, and Kelantan 600 g. Other states set their own, different figures, so check with your state religious council or zakat body and enter that uruf in the calculator." },
+    { "q": "How is zakat on savings calculated?", "a": "If your savings stay at or above the nisab for a full year, zakat is 2.5% of them. RM50,000 of savings owes RM1,250. Your state zakat body decides whether the lowest balance or the balance at the end of the year is used." },
+    { "q": "Which gold price should I use?", "a": "Use the gold price per gram announced by your state zakat body on the date your year completes. This calculator defaults to RM455.86 a gram: Selangor's RM38,748 nisab divided by 85 g." },
+    { "q": "What is the difference between kept and worn gold?", "a": "Kept gold is held as investment or savings, such as bars, coins, dinar and gold accounts, and is zakatable on its full weight once it reaches 85 g. Worn gold is jewellery that is actually worn, and only the part above the uruf is zakatable." },
+    { "q": "Does gold and savings zakat get a tax rebate?", "a": "Yes. Zakat paid to a state zakat body qualifies for the 100% income tax rebate up to your tax, the same as income zakat. Keep the receipt for LHDN e-Filing." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Gold zakat calculator</li></ol></nav>
+  <h1>Gold &amp; Savings Zakat Calculator</h1>
+  <p class="answer">Zakat on gold is <strong>2.5%</strong>: kept gold once it reaches <strong>85 g</strong>, worn gold only on the weight <strong>above your state's uruf</strong> (Selangor 800 g), and savings above the nisab ({{G_NISAB}}). 100 g of kept gold, 900 g of worn gold and RM50,000 of savings owe <strong>{{G_TOTAL}}</strong>. Enter your own below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{G_VERIFIED_ISO}}">{{G_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-zakat-emas/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="goldForm" novalidate aria-labelledby="gold-h">
+      <h2 id="gold-h">Your gold and savings</h2>
+      <div class="field"><label for="price">Gold price per gram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{G_PRICE}}"></div><p class="help">Use the price announced by your state zakat body.</p></div>
+      <fieldset class="field-group">
+        <legend>Kept gold</legend>
+        <div class="field"><label for="kept">Weight</label><div class="input"><input id="kept" name="kept" type="number" inputmode="decimal" min="0" step="0.1" value="{{G_KEPT}}"><span aria-hidden="true">g</span></div><p class="help">Bars, coins, dinar, gold accounts. Nisab 85 g.</p></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Worn gold</legend>
+        <div class="field"><label for="worn">Weight</label><div class="input"><input id="worn" name="worn" type="number" inputmode="decimal" min="0" step="0.1" value="{{G_WORN}}"><span aria-hidden="true">g</span></div></div>
+        <div class="field-row">
+          <div class="field">
+            <label for="state">State</label>
+            <select class="input" id="state" name="state">{{G_STATE_OPTIONS}}</select>
+          </div>
+          <div class="field"><label for="uruf">Uruf</label><div class="input"><input id="uruf" name="uruf" type="number" inputmode="decimal" min="0" step="1" value="{{G_URUF}}"><span aria-hidden="true">g</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Savings</legend>
+        <div class="field"><label for="savings">Savings held for a full year</label><div class="input"><span aria-hidden="true">RM</span><input id="savings" name="savings" type="number" inputmode="decimal" min="0" step="100" value="{{G_SAVINGS}}"></div><p class="help">Bank accounts, fixed deposits and cash kept throughout the year.</p></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="gold-result-h">
+      <h2 id="gold-result-h">Your zakat</h2>
+      <div class="net">
+        <p>Total zakat</p>
+        <output id="gTotal" for="price kept worn uruf savings">{{G_TOTAL}}</output>
+        <p>Nisab of 85 g = <strong id="gNisab">{{G_NISAB}}</strong></p>
+      </div>
+      <p class="sr-only" id="gLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody>
+          <tr><th scope="row">Kept gold<small id="gKeptNote">{{G_KEPT_NOTE}}</small></th><td id="gKept">{{G_KEPT_Z}}</td></tr>
+          <tr><th scope="row">Worn gold<small id="gWornNote">{{G_WORN_NOTE}}</small></th><td id="gWorn">{{G_WORN_Z}}</td></tr>
+          <tr><th scope="row">Savings</th><td id="gSavings">{{G_SAV_Z}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Have a salary or other income? Use the <a href="/zakat-calculator-malaysia/">income zakat calculator</a>.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="goldPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="worn-h">Worn gold zakat in Selangor (uruf 800 g)</h2>
+  <p>At {{G_PRICE_TXT}} a gram.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="worn-h">
+    <table class="data">
+      <thead><tr><th scope="col">Worn gold</th><th scope="col">Above uruf</th><th scope="col">Zakat</th></tr></thead>
+      <tbody>
+{{G_WORN_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="kept-h">Kept gold zakat</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kept-h">
+    <table class="data">
+      <thead><tr><th scope="col">Weight</th><th scope="col">Value</th><th scope="col">Zakat</th></tr></thead>
+      <tbody>
+{{G_KEPT_TABLE}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">How to calculate gold and savings zakat</h2>
+  <ol>
+    <li><strong>Separate your gold:</strong> kept gold (investment) and worn gold (jewellery you wear).</li>
+    <li><strong>Kept gold:</strong> at 85 g or more held for a year, zakat is 2.5% of the full value.</li>
+    <li><strong>Worn gold:</strong> deduct your state's uruf; zakat is 2.5% on the weight above it only.</li>
+    <li><strong>Savings:</strong> if the balance stays at or above the nisab for the full year, zakat is 2.5%.</li>
+    <li><strong>Pay and claim the rebate:</strong> pay your state zakat body and keep the receipt for the tax rebate.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.zakatselangor.com.my/en/gold-zakat/" rel="noopener">Lembaga Zakat Selangor: gold zakat</a></li>
+    <li><a href="https://emusykil.muftiselangor.gov.my/index.php/site/jawapan?id=441" rel="noopener">Selangor Mufti Office: zakat on gold jewellery</a></li>
+    <li><a href="https://tunaizakat.my/en/zakat-emas/" rel="noopener">Tunai Zakat: Selangor gold zakat calculator</a></li>
+    <li><a href="https://wazan.upm.edu.my/artikel/zakat_emas-78038" rel="noopener">Wazan UPM: gold zakat</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. The uruf, gold price and savings method are set by your state religious council and zakat body; ask them about special cases.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/zakat-calculator-malaysia/">Income Zakat Calculator<small>Nisab, had kifayah and tax rebate</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

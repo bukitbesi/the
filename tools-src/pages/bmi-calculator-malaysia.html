@@ -1,0 +1,160 @@
+<!--page
+{
+  "path": "/bmi-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-bmi/" },
+  "title": "BMI Calculator Malaysia: Asian Cut-offs, Healthy Weight, Waist",
+  "description": "Free BMI calculator with Malaysian Ministry of Health cut-offs (overweight from 23): your category, healthy weight range, kg to lose or gain, and waist risk.",
+  "llms": "Calculates adult body mass index (BMI) in metric or imperial units and classifies it with the Malaysian Clinical Practice Guidelines on Management of Obesity (Asian cut-offs: underweight below 18.5, healthy 18.5–22.9, overweight 23.0–27.4, obese class I 27.5–34.9, class II 35.0–39.9, class III 40 and above) alongside the WHO international categories; gives the healthy weight range for the height and the kilograms to lose or gain, and checks waist circumference (risk from 90 cm in men and 80 cm in women) and waist-to-height ratio (NICE: keep the waist below half the height).",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/bmi-calculator-malaysia.html",
+  "render": "bmi",
+  "scripts": ["/assets/js/bmi.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["BMI Calculator", null]],
+  "about": ["Body mass index", "Obesity in Malaysia", "Healthy weight", "Waist circumference"],
+  "app": {
+    "name": "BMI Calculator Malaysia",
+    "category": "HealthApplication",
+    "features": ["Malaysian CPG (Asian) BMI categories", "WHO international category for comparison", "Healthy weight range and kg to lose or gain", "Waist circumference and waist-to-height ratio", "Metric or imperial units", "Works offline"]
+  },
+  "citations": [
+    ["Ministry of Health Malaysia: Clinical Practice Guidelines, Management of Obesity (2nd edition, 2023)", "https://medic.usm.my/images/Anaesthesiology%20and%20Intensive%20Care%20Unit/Guidelines/CPG%20Management%20of%20Obesity%20230518.pdf"],
+    ["JAFES: Summary of the Malaysian Clinical Practice Guidelines on Management of Obesity", "https://asean-endocrinejournal.org/index.php/JAFES/article/download/77/378?inline=1"],
+    ["World Obesity: Malaysia country data and cut-offs", "https://data.worldobesity.org/country/malaysia-130/"],
+    ["NICE NG246: Identifying and assessing overweight, obesity and central adiposity", "https://www.nice.org.uk/guidance/NG246/chapter/Identifying-and-assessing-overweight-obesity-and-central-adiposity"]
+  ],
+  "faq": [
+    { "q": "What is a healthy BMI in Malaysia?", "a": "18.5 to 22.9. The Malaysian Clinical Practice Guidelines use Asian cut-offs: overweight from 23.0 and obese from 27.5, lower than the WHO international cut-offs of 25 and 30, because Asians face higher diabetes and heart risk at the same BMI." },
+    { "q": "How do I calculate BMI?", "a": "Divide your weight in kilograms by your height in metres squared. For 65 kg and 1.65 m: 65 ÷ (1.65 × 1.65) = 23.9, which is overweight under the Malaysian guidelines but normal under the WHO international categories." },
+    { "q": "What is the healthy weight for my height?", "a": "Multiply your height in metres squared by 18.5 and 22.9. At 165 cm the healthy range is 50.4 to 62.3 kg; at 160 cm it is 47.4 to 58.6 kg; at 170 cm it is 53.5 to 66.2 kg." },
+    { "q": "What waist size is a health risk?", "a": "For Asian adults, 90 cm or more in men and 80 cm or more in women is linked to higher risk of diabetes and heart disease. A second check is to keep your waist below half your height: a waist-to-height ratio of 0.5 or more is increased risk." },
+    { "q": "Why is my BMI 'overweight' here but 'normal' elsewhere?", "a": "Many calculators use the WHO international cut-off of 25. Malaysia's Ministry of Health uses 23 for Asians. A BMI between 23 and 24.9 is overweight in Malaysia but normal internationally; this calculator shows both." },
+    { "q": "Is BMI accurate for everyone?", "a": "No. BMI does not separate muscle from fat, so very muscular people can score high, and it is not used for children, who need age and sex percentile charts. Waist measurements add information about belly fat, which carries more risk." },
+    { "q": "Can I enter my height in feet and weight in pounds?", "a": "Yes. Switch to imperial units and enter feet, inches and pounds; the calculator converts them. For example, 5 ft 7 in and 150 lb is a BMI of 23.5." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">BMI calculator</li></ol></nav>
+  <h1>BMI Calculator Malaysia</h1>
+  <p class="answer">A <strong>healthy BMI in Malaysia is 18.5 to 22.9</strong>. The Ministry of Health uses Asian cut-offs, so <strong>overweight starts at 23</strong> and obese at 27.5, not 25 and 30. At 165 cm and 65 kg your BMI is {{M_BMI}}: overweight here, though "normal" on WHO charts. Check yours below.</p>
+  <p class="meta"><span>Guidelines verified <time datetime="{{M_VERIFIED_ISO}}">{{M_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-bmi/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="bmiForm" novalidate aria-labelledby="bmi-h">
+      <h2 id="bmi-h">Your measurements</h2>
+      <div class="field">
+        <label for="unit">Units</label>
+        <select class="input" id="unit" name="unit">{{M_UNIT_OPTIONS}}</select>
+      </div>
+      <div id="bmiMetric" class="field-row">
+        <div class="field"><label for="cm">Height</label><div class="input"><input id="cm" name="cm" type="number" inputmode="decimal" min="50" max="250" step="0.5" value="{{M_CM}}"><span aria-hidden="true">cm</span></div></div>
+        <div class="field"><label for="kg">Weight</label><div class="input"><input id="kg" name="kg" type="number" inputmode="decimal" min="10" max="400" step="0.1" value="{{M_KG}}"><span aria-hidden="true">kg</span></div></div>
+      </div>
+      <div id="bmiImperial" hidden>
+        <div class="field-row">
+          <div class="field"><label for="ft">Height, feet</label><div class="input"><input id="ft" name="ft" type="number" inputmode="numeric" min="1" max="8" step="1" value="5"><span aria-hidden="true">ft</span></div></div>
+          <div class="field"><label for="inch">Inches</label><div class="input"><input id="inch" name="inch" type="number" inputmode="decimal" min="0" max="11.9" step="0.5" value="5"><span aria-hidden="true">in</span></div></div>
+        </div>
+        <div class="field"><label for="lb">Weight</label><div class="input"><input id="lb" name="lb" type="number" inputmode="decimal" min="20" max="900" step="0.5" value="143"><span aria-hidden="true">lb</span></div></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Waist (optional)</legend>
+        <div class="field-row">
+          <div class="field"><label for="waist">Waist</label><div class="input"><input id="waist" name="waist" type="number" inputmode="decimal" min="0" max="250" step="0.5" value="{{M_WAIST}}"><span aria-hidden="true" id="waistUnit">cm</span></div></div>
+          <div class="field">
+            <label for="sex">Sex</label>
+            <select class="input" id="sex" name="sex">{{M_SEX_OPTIONS}}</select>
+          </div>
+        </div>
+        <p class="help">Measure around the belly at the navel, after breathing out.</p>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="bmi-result-h">
+      <h2 id="bmi-result-h">Your BMI</h2>
+      <div class="net">
+        <p>Body mass index</p>
+        <output id="bValue" for="cm kg ft inch lb">{{M_BMI}}</output>
+        <span id="bCat" class="bmi-cat {{M_CAT_CLASS}}">{{M_CAT}}</span>
+      </div>
+      <div class="gauge" aria-hidden="true"><b class="g-under"></b><b class="g-normal"></b><b class="g-over"></b><b class="g-obese"></b><i id="bMarker" style="left:{{M_GAUGE}}"></i></div>
+      <div class="gauge-scale" aria-hidden="true"><span style="left:14%">18.5</span><span style="left:32%">23</span><span style="left:50%">27.5</span><span style="left:80%">35</span></div>
+      <p class="sr-only" id="bLive" aria-live="polite"></p>
+      <p class="note" id="bChange">{{M_CHANGE}}</p>
+      <table class="rows">
+        <caption>Details</caption>
+        <tbody>
+          <tr><th scope="row">Healthy weight for your height</th><td id="bRange">{{M_RANGE}}</td></tr>
+          <tr><th scope="row">WHO international category</th><td id="bWho">{{M_WHO}}</td></tr>
+        </tbody>
+        <tbody id="bWaistRows">
+          <tr><th scope="row">Waist<small>Risk from 90 cm (men), 80 cm (women)</small></th><td id="bWaist">{{M_WAIST_TEXT}}</td></tr>
+          <tr><th scope="row">Waist-to-height ratio<small>Keep below 0.5</small></th><td id="bRatio">{{M_RATIO}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">For adults aged 18 and over. Not a diagnosis; see a doctor about your weight and health.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="bmiPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cats-h">BMI categories: Malaysia vs WHO</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cats-h">
+    <table class="data">
+      <thead><tr><th scope="col">Category</th><th scope="col">Malaysia (MOH CPG)</th><th scope="col">WHO international</th></tr></thead>
+      <tbody>
+{{M_CATS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Malaysian adults develop type 2 diabetes, high blood pressure and heart disease at a lower BMI than Europeans, which is why the Ministry of Health's Clinical Practice Guidelines on Management of Obesity set the Asian cut-offs at 23 and 27.5.</p>
+
+  <h2 id="heights-h">Healthy weight by height</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="heights-h">
+    <table class="data">
+      <thead><tr><th scope="col">Height</th><th scope="col">Healthy weight</th><th scope="col">Overweight from</th><th scope="col">Obese from</th></tr></thead>
+      <tbody>
+{{M_HEIGHTS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="how">How to use your result</h2>
+  <ol>
+    <li><strong>BMI:</strong> weight in kg ÷ (height in m)². It screens for weight risk; it does not measure body fat directly.</li>
+    <li><strong>Waist:</strong> belly fat carries the most risk. Aim for under 90 cm (men) or 80 cm (women), and a waist under half your height.</li>
+    <li><strong>Target:</strong> losing 5% to 10% of body weight already lowers blood sugar and blood pressure for people who are overweight.</li>
+    <li><strong>Check-ups:</strong> adults with a BMI of 23 or more should have their blood pressure, blood sugar and cholesterol checked at a clinic.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://medic.usm.my/images/Anaesthesiology%20and%20Intensive%20Care%20Unit/Guidelines/CPG%20Management%20of%20Obesity%20230518.pdf" rel="noopener">Ministry of Health Malaysia: CPG Management of Obesity (2nd edition, 2023)</a></li>
+    <li><a href="https://asean-endocrinejournal.org/index.php/JAFES/article/download/77/378?inline=1" rel="noopener">JAFES: summary of the Malaysian CPG on obesity</a></li>
+    <li><a href="https://data.worldobesity.org/country/malaysia-130/" rel="noopener">World Obesity: Malaysia cut-offs and data</a></li>
+    <li><a href="https://www.nice.org.uk/guidance/NG246/chapter/Identifying-and-assessing-overweight-obesity-and-central-adiposity" rel="noopener">NICE NG246: waist-to-height ratio</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> General health information, not medical advice. BMI is a screening tool; pregnant women, children and athletes need other assessments.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/kalkulator-kalori.html">Calorie Calculator<small>Daily calories to lose or keep weight</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

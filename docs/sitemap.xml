@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://tool.thebukitbesi.com/</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/asb-dividend-calculator/</loc>
@@ -10,6 +10,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-dividen-asb/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/bmi-calculator-malaysia/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/bmi-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-bmi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/bmi-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/car-loan-calculator-malaysia/</loc>
@@ -52,6 +59,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gdex-tracking/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-zakat-emas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/home-loan-calculator-malaysia/</loc>
     <lastmod>2026-10-12</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/home-loan-calculator-malaysia/"/>
@@ -64,7 +78,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/income-tax-calculator-malaysia/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
@@ -95,8 +109,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/jnt-tracking/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-bmi/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-bmi/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/bmi-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/bmi-calculator-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
@@ -117,7 +138,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-gaji/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-gaji/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
@@ -170,6 +191,20 @@
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/land-size-converter-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/land-size-converter-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-zakat-emas/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-zakat-emas/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/zakat-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/zakat-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/land-size-converter-malaysia/</loc>
@@ -261,7 +296,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/salary-calculator-malaysia/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-gaji/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/salary-calculator-malaysia/"/>
@@ -315,5 +350,12 @@
   <url>
     <loc>https://tool.thebukitbesi.com/unused-css-remover/</loc>
     <lastmod>2026-10-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/zakat-calculator-malaysia/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/zakat-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/zakat-calculator-malaysia/"/>
   </url>
 </urlset>

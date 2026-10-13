@@ -1,0 +1,160 @@
+<!--page
+{
+  "path": "/kalkulator-bmi/",
+  "lang": "ms",
+  "alternates": { "en": "/bmi-calculator-malaysia/" },
+  "title": "Kalkulator BMI Malaysia: Had Asia KKM, Berat Ideal, Pinggang",
+  "description": "Kalkulator BMI percuma ikut had KKM (berlebihan berat badan dari 23): kategori anda, julat berat sihat, kg perlu turun atau naik, dan risiko lilitan pinggang.",
+  "llms": "Mengira indeks jisim badan (BMI) dewasa dalam unit metrik atau imperial dan mengelaskannya mengikut Garis Panduan Amalan Klinikal Pengurusan Obesiti Malaysia (had Asia: kurang berat badan di bawah 18.5, sihat 18.5–22.9, berlebihan berat badan 23.0–27.4, obes kelas I 27.5–34.9, kelas II 35.0–39.9, kelas III 40 dan ke atas) bersama kategori antarabangsa WHO; memberi julat berat sihat bagi ketinggian dan berapa kilogram perlu diturunkan atau dinaikkan, serta menyemak lilitan pinggang (risiko dari 90 cm lelaki dan 80 cm wanita) dan nisbah pinggang kepada ketinggian (pinggang kurang daripada separuh ketinggian).",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/kalkulator-bmi.html",
+  "render": "bmi",
+  "scripts": ["/assets/js/bmi.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator BMI", null]],
+  "about": ["Indeks jisim badan", "Obesiti di Malaysia", "Berat badan sihat", "Lilitan pinggang"],
+  "app": {
+    "name": "Kalkulator BMI",
+    "category": "HealthApplication",
+    "features": ["Kategori BMI ikut CPG Malaysia (had Asia)", "Kategori antarabangsa WHO sebagai perbandingan", "Julat berat sihat dan kg perlu turun atau naik", "Lilitan pinggang dan nisbah pinggang kepada ketinggian", "Unit metrik atau imperial", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Kementerian Kesihatan Malaysia: Garis Panduan Amalan Klinikal, Pengurusan Obesiti (edisi ke-2, 2023)", "https://medic.usm.my/images/Anaesthesiology%20and%20Intensive%20Care%20Unit/Guidelines/CPG%20Management%20of%20Obesity%20230518.pdf"],
+    ["JAFES: Ringkasan Garis Panduan Amalan Klinikal Pengurusan Obesiti Malaysia", "https://asean-endocrinejournal.org/index.php/JAFES/article/download/77/378?inline=1"],
+    ["World Obesity: Data dan had BMI Malaysia", "https://data.worldobesity.org/country/malaysia-130/"],
+    ["NICE NG246: Nisbah pinggang kepada ketinggian", "https://www.nice.org.uk/guidance/NG246/chapter/Identifying-and-assessing-overweight-obesity-and-central-adiposity"]
+  ],
+  "faq": [
+    { "q": "Berapa BMI yang sihat di Malaysia?", "a": "18.5 hingga 22.9. Garis Panduan Amalan Klinikal Malaysia menggunakan had Asia: berlebihan berat badan dari 23.0 dan obes dari 27.5, lebih rendah daripada had antarabangsa WHO iaitu 25 dan 30, kerana orang Asia menghadapi risiko diabetes dan penyakit jantung lebih tinggi pada BMI yang sama." },
+    { "q": "Bagaimana mengira BMI?", "a": "Bahagikan berat dalam kilogram dengan ketinggian dalam meter kuasa dua. Bagi 65 kg dan 1.65 m: 65 ÷ (1.65 × 1.65) = 23.9, iaitu berlebihan berat badan mengikut garis panduan Malaysia tetapi normal mengikut kategori antarabangsa WHO." },
+    { "q": "Berapa berat ideal untuk ketinggian saya?", "a": "Darab ketinggian dalam meter kuasa dua dengan 18.5 dan 22.9. Pada 165 cm julat sihat ialah 50.4 hingga 62.3 kg; pada 160 cm 47.4 hingga 58.6 kg; pada 170 cm 53.5 hingga 66.2 kg." },
+    { "q": "Berapa saiz pinggang yang berisiko?", "a": "Bagi orang dewasa Asia, 90 cm atau lebih bagi lelaki dan 80 cm atau lebih bagi wanita dikaitkan dengan risiko diabetes dan penyakit jantung yang lebih tinggi. Semakan kedua ialah pastikan pinggang kurang daripada separuh ketinggian: nisbah 0.5 atau lebih bermaksud risiko meningkat." },
+    { "q": "Kenapa BMI saya 'berlebihan' di sini tetapi 'normal' di tempat lain?", "a": "Banyak kalkulator menggunakan had antarabangsa WHO iaitu 25. Kementerian Kesihatan Malaysia menggunakan 23 bagi orang Asia. BMI antara 23 dan 24.9 ialah berlebihan berat badan di Malaysia tetapi normal di peringkat antarabangsa; kalkulator ini menunjukkan kedua-duanya." },
+    { "q": "Adakah BMI tepat untuk semua orang?", "a": "Tidak. BMI tidak membezakan otot dan lemak, jadi orang yang sangat berotot boleh mendapat bacaan tinggi, dan ia tidak digunakan untuk kanak-kanak yang memerlukan carta persentil umur dan jantina. Ukuran pinggang menambah maklumat tentang lemak perut yang lebih berisiko." },
+    { "q": "Bolehkah saya memasukkan ketinggian dalam kaki dan berat dalam paun?", "a": "Boleh. Tukar ke unit imperial dan masukkan kaki, inci dan paun; kalkulator menukarnya. Contohnya, 5 kaki 7 inci dan 150 paun ialah BMI 23.5." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator BMI</li></ol></nav>
+  <h1>Kalkulator BMI</h1>
+  <p class="answer"><strong>BMI sihat di Malaysia ialah 18.5 hingga 22.9</strong>. Kementerian Kesihatan menggunakan had Asia, jadi <strong>berlebihan berat badan bermula pada 23</strong> dan obes pada 27.5, bukan 25 dan 30. Pada 165 cm dan 65 kg, BMI anda {{M_BMI}}: berlebihan berat badan di sini, walaupun "normal" dalam carta WHO. Semak BMI anda di bawah.</p>
+  <p class="meta"><span>Garis panduan disemak <time datetime="{{M_VERIFIED_ISO}}">{{M_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/bmi-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="bmiForm" novalidate aria-labelledby="bmi-h">
+      <h2 id="bmi-h">Ukuran anda</h2>
+      <div class="field">
+        <label for="unit">Unit</label>
+        <select class="input" id="unit" name="unit">{{M_UNIT_OPTIONS}}</select>
+      </div>
+      <div id="bmiMetric" class="field-row">
+        <div class="field"><label for="cm">Tinggi</label><div class="input"><input id="cm" name="cm" type="number" inputmode="decimal" min="50" max="250" step="0.5" value="{{M_CM}}"><span aria-hidden="true">cm</span></div></div>
+        <div class="field"><label for="kg">Berat</label><div class="input"><input id="kg" name="kg" type="number" inputmode="decimal" min="10" max="400" step="0.1" value="{{M_KG}}"><span aria-hidden="true">kg</span></div></div>
+      </div>
+      <div id="bmiImperial" hidden>
+        <div class="field-row">
+          <div class="field"><label for="ft">Tinggi, kaki</label><div class="input"><input id="ft" name="ft" type="number" inputmode="numeric" min="1" max="8" step="1" value="5"><span aria-hidden="true">kaki</span></div></div>
+          <div class="field"><label for="inch">Inci</label><div class="input"><input id="inch" name="inch" type="number" inputmode="decimal" min="0" max="11.9" step="0.5" value="5"><span aria-hidden="true">inci</span></div></div>
+        </div>
+        <div class="field"><label for="lb">Berat</label><div class="input"><input id="lb" name="lb" type="number" inputmode="decimal" min="20" max="900" step="0.5" value="143"><span aria-hidden="true">paun</span></div></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Pinggang (pilihan)</legend>
+        <div class="field-row">
+          <div class="field"><label for="waist">Lilitan pinggang</label><div class="input"><input id="waist" name="waist" type="number" inputmode="decimal" min="0" max="250" step="0.5" value="{{M_WAIST}}"><span aria-hidden="true" id="waistUnit">cm</span></div></div>
+          <div class="field">
+            <label for="sex">Jantina</label>
+            <select class="input" id="sex" name="sex">{{M_SEX_OPTIONS}}</select>
+          </div>
+        </div>
+        <p class="help">Ukur di sekeliling perut pada paras pusat, selepas menghembus nafas.</p>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="bmi-result-h">
+      <h2 id="bmi-result-h">BMI anda</h2>
+      <div class="net">
+        <p>Indeks jisim badan</p>
+        <output id="bValue" for="cm kg ft inch lb">{{M_BMI}}</output>
+        <span id="bCat" class="bmi-cat {{M_CAT_CLASS}}">{{M_CAT}}</span>
+      </div>
+      <div class="gauge" aria-hidden="true"><b class="g-under"></b><b class="g-normal"></b><b class="g-over"></b><b class="g-obese"></b><i id="bMarker" style="left:{{M_GAUGE}}"></i></div>
+      <div class="gauge-scale" aria-hidden="true"><span style="left:14%">18.5</span><span style="left:32%">23</span><span style="left:50%">27.5</span><span style="left:80%">35</span></div>
+      <p class="sr-only" id="bLive" aria-live="polite"></p>
+      <p class="note" id="bChange">{{M_CHANGE}}</p>
+      <table class="rows">
+        <caption>Butiran</caption>
+        <tbody>
+          <tr><th scope="row">Berat sihat bagi ketinggian anda</th><td id="bRange">{{M_RANGE}}</td></tr>
+          <tr><th scope="row">Kategori antarabangsa WHO</th><td id="bWho">{{M_WHO}}</td></tr>
+        </tbody>
+        <tbody id="bWaistRows">
+          <tr><th scope="row">Pinggang<small>Risiko dari 90 cm (lelaki), 80 cm (wanita)</small></th><td id="bWaist">{{M_WAIST_TEXT}}</td></tr>
+          <tr><th scope="row">Nisbah pinggang kepada tinggi<small>Kekalkan di bawah 0.5</small></th><td id="bRatio">{{M_RATIO}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Untuk orang dewasa berumur 18 tahun ke atas. Bukan diagnosis; jumpa doktor tentang berat dan kesihatan anda.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="bmiPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cats-h">Kategori BMI: Malaysia vs WHO</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cats-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kategori</th><th scope="col">Malaysia (CPG KKM)</th><th scope="col">Antarabangsa WHO</th></tr></thead>
+      <tbody>
+{{M_CATS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Orang dewasa Malaysia menghidap diabetes jenis 2, darah tinggi dan penyakit jantung pada BMI yang lebih rendah berbanding orang Eropah. Sebab itu Garis Panduan Amalan Klinikal Pengurusan Obesiti Kementerian Kesihatan menetapkan had Asia pada 23 dan 27.5.</p>
+
+  <h2 id="heights-h">Berat sihat mengikut ketinggian</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="heights-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tinggi</th><th scope="col">Berat sihat</th><th scope="col">Berlebihan dari</th><th scope="col">Obes dari</th></tr></thead>
+      <tbody>
+{{M_HEIGHTS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="how">Cara menggunakan keputusan anda</h2>
+  <ol>
+    <li><strong>BMI:</strong> berat dalam kg ÷ (tinggi dalam m)². Ia saringan risiko berat badan; ia tidak mengukur lemak badan secara langsung.</li>
+    <li><strong>Pinggang:</strong> lemak perut paling berisiko. Sasarkan bawah 90 cm (lelaki) atau 80 cm (wanita), dan pinggang kurang daripada separuh ketinggian.</li>
+    <li><strong>Sasaran:</strong> menurunkan 5% hingga 10% berat badan sudah merendahkan gula dan tekanan darah bagi mereka yang berlebihan berat badan.</li>
+    <li><strong>Pemeriksaan:</strong> orang dewasa dengan BMI 23 atau lebih patut memeriksa tekanan darah, gula darah dan kolesterol di klinik.</li>
+  </ol>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://medic.usm.my/images/Anaesthesiology%20and%20Intensive%20Care%20Unit/Guidelines/CPG%20Management%20of%20Obesity%20230518.pdf" rel="noopener">KKM: CPG Pengurusan Obesiti (edisi ke-2, 2023)</a></li>
+    <li><a href="https://asean-endocrinejournal.org/index.php/JAFES/article/download/77/378?inline=1" rel="noopener">JAFES: ringkasan CPG obesiti Malaysia</a></li>
+    <li><a href="https://data.worldobesity.org/country/malaysia-130/" rel="noopener">World Obesity: had dan data Malaysia</a></li>
+    <li><a href="https://www.nice.org.uk/guidance/NG246/chapter/Identifying-and-assessing-overweight-obesity-and-central-adiposity" rel="noopener">NICE NG246: nisbah pinggang kepada ketinggian</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Maklumat kesihatan umum, bukan nasihat perubatan. BMI ialah alat saringan; wanita hamil, kanak-kanak dan atlet memerlukan penilaian lain.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/kalkulator-kalori.html">Kalkulator Kalori<small>Kalori harian untuk turun atau kekal berat</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP dan PCB</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>
