@@ -108,6 +108,11 @@
       "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX"
     },
     {
+      "name": "Gold Price Malaysia Today",
+      "url": "/gold-price-malaysia/",
+      "description": "Today's gold price in Malaysia per gram for 999, 916, 750 and more, updated every minute, with Bank "
+    },
+    {
       "name": "Gold & Savings Zakat Calculator Malaysia",
       "url": "/gold-zakat-calculator-malaysia/",
       "description": "Free gold and savings zakat calculator for Malaysia: kept gold from 85 g, worn gold above your state"

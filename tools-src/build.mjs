@@ -30,6 +30,8 @@ const plCore = require('../assets/js/personal-core.js');
 const rpgtCore = require('../assets/js/rpgt-core.js');
 const bmiCore = require('../assets/js/bmi-core.js');
 const zakatCore = require('../assets/js/zakat-core.js');
+const goldCore = require('../assets/js/gold-core.js');
+const goldData = JSON.parse(read('gold-data.json'));
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -767,6 +769,43 @@ function goldMap(lang) {
     G_VERIFIED: longDate(F.verified, lang), G_VERIFIED_ISO: F.verified
   };
 }
+// ---- Gold price today (harga emas hari ini), EN + BM. Today's figures come from tools-src/gold-data.json, written by
+// the Daily gold price workflow; the page then refreshes live from the Cloudflare Worker in site.goldApi.
+const goldDate = (goldData.kijang && goldData.kijang.date) || (goldData.fetchedAt || '').slice(0, 10);
+function goldPriceMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, G = goldCore, m = n => money(n, lang);
+  const pure = G.pureGram(goldData), rows = pure ? G.table(pure.rm) : [], k = goldData.kijang, kg = G.kijangGram(k);
+  const nf = (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d, minimumFractionDigits: d }).format(n);
+  const purityName = { 999: L ? 'Emas tulen' : 'Pure gold', 916: L ? 'Barang kemas biasa' : 'Common jewellery', 835: L ? 'Barang kemas' : 'Jewellery', 750: L ? 'Emas putih, barang kemas' : 'White gold, jewellery', 585: L ? 'Barang kemas ringan' : 'Light jewellery', 375: L ? 'Barang kemas murah' : 'Budget jewellery' };
+  const table = rows.map(r => `<tr><th scope="row">${r.fineness} <small>${r.karat}K · ${purityName[r.fineness]}</small></th><td id="hp-${r.fineness}">${m(r.gram)}</td><td id="hp10-${r.fineness}">${m(r.tenGram)}</td></tr>`).join('\n');
+  const coin = (label, x, id) => `<tr><th scope="row">${label}</th><td id="hk-${id}-s">${x ? m(x.sell) : '–'}</td><td id="hk-${id}-b">${x ? m(x.buy) : '–'}</td></tr>`;
+  const ch = G.chart(goldData.history.slice(-60), 600, 160);
+  const updated = goldData.fetchedAt ? new Date(goldData.fetchedAt).toLocaleString(L ? 'ms-MY' : 'en-GB', { timeZone: 'Asia/Kuala_Lumpur', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+  const change = pure && goldData.prev && goldData.prev.pure ? (pure.rm - goldData.prev.pure) / goldData.prev.pure * 100 : null;
+  const opt = (v, label, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${label}</option>`;
+  // Snapshot for the page script, without the history.
+  const snap = { fetchedAt: goldData.fetchedAt, spot: goldData.spot, fx: goldData.fx, kijang: goldData.kijang, prev: goldData.prev };
+  return {
+    H_PURE: pure ? m(pure.rm) : '–', H_916: rows.length ? m(rows[1].gram) : '–',
+    H_BASIS: pure ? (pure.basis === 'spot' ? (L ? 'Harga spot antarabangsa, ditukar ke ringgit' : 'International spot price in ringgit') : (L ? 'Harga belian Kijang Emas Bank Negara' : "Bank Negara's Kijang Emas buying price")) : '',
+    H_UPDATED: updated, H_DATE: longDate(goldDate, lang), H_DATE_ISO: goldDate,
+    H_CHANGE: change === null ? '' : ` · ${change >= 0 ? '▲' : '▼'} ${nf(Math.abs(change))}% ${L ? 'berbanding semalam' : 'since yesterday'}`,
+    H_CHANGE_CLASS: change === null ? '' : change >= 0 ? 'up' : 'down',
+    H_TABLE: table,
+    H_KIJANG: [coin('1 oz', k && k.oneOz, 'one'), coin('½ oz', k && k.halfOz, 'half'), coin('¼ oz', k && k.quarterOz, 'quarter')].join('\n'),
+    H_KG_SELL: kg ? m(kg.sell) : '–', H_KG_BUY: kg ? m(kg.buy) : '–', H_KG_SPREAD: kg ? nf(kg.spread) + '%' : '–', H_KG_DATE: k ? longDate(k.date, lang) : '–',
+    H_CHART: ch ? `<svg class="gold-chart" viewBox="0 0 600 160" preserveAspectRatio="none" role="img" aria-label="${L ? 'Harga jualan Kijang Emas segram' : 'Kijang Emas selling price per gram'}, ${longDate(ch.first, lang)}–${longDate(ch.last, lang)}"><polyline points="${ch.points}" /></svg>
+      <p class="chart-legend"><span>${longDate(ch.first, lang)}</span><span>${L ? 'Rendah' : 'Low'} ${m(ch.min)} · ${L ? 'Tinggi' : 'High'} ${m(ch.max)} · ${ch.change >= 0 ? '+' : ''}${nf(ch.change)}%</span><span>${longDate(ch.last, lang)}</span></p>`
+      : `<p class="note">${L ? 'Carta dipaparkan selepas beberapa hari harga dikumpul.' : 'The chart appears once a few days of prices are collected.'}</p>`,
+    H_ZAKAT: pure ? (pure.rm * 0.999).toFixed(2) : '',
+    H_PURITY_OPTIONS: G.PURITIES.map(([f, kk]) => opt(f, `${f} (${kk}K)`, f === 916)).join(''),
+    H_API: esc(site.goldApi || ''), H_SNAPSHOT: JSON.stringify(snap).replace(/</g, '\\u003c'),
+    H_JEWEL: pure ? m(G.jewellery({ weight: 10, fineness: 916, making: 30 }, pure.rm).fair) : '–',
+    H_JMETAL: pure ? m(G.jewellery({ weight: 10, fineness: 916, making: 30 }, pure.rm).metal) : '–',
+    H_JLABOUR: m(300),
+    H_VERIFIED: longDate(G.FACTS.verified, lang), H_VERIFIED_ISO: G.FACTS.verified
+  };
+}
 // ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
 // tracking-core.js. Courier pages set "courier" in front matter to preset the tracker to that courier.
 const TRACK_TEXT = {
@@ -994,7 +1033,7 @@ function purgeMap() {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1043,6 +1082,8 @@ const shareScript = `<script>
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
+  // The gold price pages change every day with the price.
+  if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
   const url = site.origin + p.path;
   const pageId = url + '#webpage';
   const alternates = Object.entries(p.alternates || {});
@@ -1113,6 +1154,7 @@ const bundles = {
   'bmi.js': ['assets/js/bmi-core.js', 'assets/js/bmi-ui.js'],
   'zakat.js': ['assets/js/zakat-core.js', 'assets/js/zakat-ui.js'],
   'zakat-emas.js': ['assets/js/zakat-core.js', 'assets/js/gold-ui.js'],
+  'harga-emas.js': ['assets/js/gold-core.js', 'assets/js/goldprice-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

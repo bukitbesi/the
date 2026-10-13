@@ -17,6 +17,7 @@ export const icons = {
   'personal-loan-calculator-malaysia': rect(2, 6, 20, 13) + circle(12, 12.5, 3) + p('M5 9.5h1M18 15.5h1'),
   'rpgt-calculator-malaysia': p('M3 11 12 3l9 8') + p('M5 9.5V21h14V9.5') + p('m9 17 6-6') + circle(9.5, 11.5, 1) + circle(14.5, 16.5, 1),
   'kalkulator-zakat-emas': p('M4 18h16l-2-5H6Z') + p('M7 13l2-5h6l2 5') + p('M3 21h18'),
+  'harga-emas-hari-ini': p('M3 20 7 9h10l4 11Z') + p('M3 20h18') + p('M12 3v3M8.5 4.5l1.5 2M15.5 4.5 14 6.5'),
   'home-loan-calculator-malaysia': p('M3 11 12 3l9 8') + p('M5 9.5V21h14V9.5') + p('M10 21v-6h4v6'),
   'epf-calculator': p('M3 20h18') + rect(5, 12, 3, 8, 1) + rect(10.5, 8, 3, 12, 1) + rect(16, 4, 3, 16, 1),
   'income-tax-calculator-malaysia': p('M6 2h9l4 4v16H6Z') + p('M9 10h7M9 14h7M9 18h4') + p('M15 2v4h4'),

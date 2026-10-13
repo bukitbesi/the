@@ -433,6 +433,18 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .gauge-scale span{position:absolute;transform:translateX(-50%)}
 .bmi-cat{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:99px;font-size:.85rem;font-weight:700;color:var(--text);border-left:4px solid var(--border2);background:var(--bg)}
 .bmi-under{border-left-color:#60a5fa}.bmi-normal{border-left-color:#22c55e}.bmi-over{border-left-color:#f59e0b}.bmi-obese1,.bmi-obese2,.bmi-obese3{border-left-color:#ef4444}
+/* Gold price: live status, chart */
+.live{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text3)}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--border2)}
+.live.on::before{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.gold-chart{display:block;width:100%;height:160px;margin-top:12px;border-bottom:1px solid var(--border)}
+.gold-chart polyline{fill:none;stroke:var(--accent2);stroke-width:2;vector-effect:non-scaling-stroke}
+.chart-legend{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--text3);margin-top:6px}
+.up{color:#15803d}.down{color:#b42318}
+:root[data-theme=dark] .up{color:#4ade80}:root[data-theme=dark] .down{color:#ff9b8f}
+.rows thead th{font-size:.8rem;font-weight:600;color:var(--text3)}
+.rows thead th:not(:first-child){text-align:right}
+.rows th+td,.rows td+td,.rows thead th+th{padding-left:12px}
 </style>
 
 </head>
@@ -462,7 +474,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
   <div class="calc">
     <form class="box" id="goldForm" novalidate aria-labelledby="gold-h">
       <h2 id="gold-h">Emas dan simpanan anda</h2>
-      <div class="field"><label for="price">Harga emas segram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="455.86"></div><p class="help">Gunakan harga yang diumumkan pusat zakat negeri anda.</p></div>
+      <div class="field"><label for="price">Harga emas segram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="455.86"></div><p class="help">Gunakan harga yang diumumkan pusat zakat negeri anda, atau <a href="/harga-emas-hari-ini/">harga emas hari ini</a>.</p></div>
       <fieldset class="field-group">
         <legend>Emas simpan</legend>
         <div class="field"><label for="kept">Berat</label><div class="input"><input id="kept" name="kept" type="number" inputmode="decimal" min="0" step="0.1" value="100"><span aria-hidden="true">g</span></div><p class="help">Jongkong, syiling, dinar, akaun emas. Nisab 85 g.</p></div>
@@ -585,6 +597,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
 <section class="container prose" aria-labelledby="related-h">
   <h2 id="related-h">Alat berkaitan</h2>
   <div class="related">
+    <a href="/harga-emas-hari-ini/">Harga Emas Hari Ini<small>Harga emas segram, dikemas kini setiap minit</small></a>
     <a href="/kalkulator-zakat-pendapatan/">Kalkulator Zakat Pendapatan<small>Nisab, had kifayah dan rebat cukai</small></a>
     <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
     <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>

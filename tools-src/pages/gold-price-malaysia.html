@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/gold-price-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/harga-emas-hari-ini/" },
+  "title": "Gold Price Malaysia Today: 999 & 916 per Gram (Live), Kijang Emas",
+  "description": "Today's gold price in Malaysia per gram for 999, 916, 750 and more, updated every minute, with Bank Negara Kijang Emas prices and a jewellery price check.",
+  "llms": "Shows today's gold price in Malaysia in ringgit per gram for 999 (24K), 916 (22K), 835 (20K), 750 (18K), 585 (14K) and 375 (9K) gold, worked out from the international spot price (USD per troy ounce) × USD/MYR ÷ 31.1034768 and refreshed every minute, alongside Bank Negara Malaysia's official Kijang Emas gold coin buying and selling prices (1 oz, ½ oz, ¼ oz), a Kijang Emas price chart, a jewellery price check (weight × purity price + making charge, against the shop's price) and a link to the gold zakat calculator.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "goldprice",
+  "scripts": ["/assets/js/harga-emas.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Gold Price Malaysia", null]],
+  "about": ["Gold price", "916 gold", "Kijang Emas", "Gold investment in Malaysia"],
+  "app": {
+    "name": "Gold Price Malaysia Today",
+    "category": "FinanceApplication",
+    "features": ["Gold price per gram updated every minute", "999, 916, 835, 750, 585 and 375 purities", "Bank Negara Kijang Emas official prices", "Kijang Emas price chart", "Jewellery price check with making charge", "One-tap link to the gold zakat calculator"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Kijang Emas prices", "https://www.bnm.gov.my/kijang-emas-prices"],
+    ["Bank Negara Malaysia: BNM OpenAPI", "https://www.bnm.gov.my/-/bnm-openapi"],
+    ["Bank Negara Malaysia: FAQs on the Kijang Emas gold bullion coin", "https://www.bnm.gov.my/-/faqs-on-the-kijang-emas-gold-bullion-coin"],
+    ["Gold API: Spot gold price (XAU)", "https://gold-api.com/"]
+  ],
+  "faq": [
+    { "q": "What is the difference between 999 and 916 gold?", "a": "999 gold is 99.9% pure (24 karat) and is used for bars, coins and savings. 916 gold is 91.6% gold (22 karat) and is the most common jewellery gold in Malaysia because it is harder. The price of 916 gold per gram is about 91.6% of the pure gold price." },
+    { "q": "How is the gold price per gram worked out?", "a": "The world spot price in USD per troy ounce is multiplied by the USD/MYR rate and divided by 31.1035 grams. For example, USD4,000 an ounce at RM4.20 to the dollar is RM540.15 a gram of pure gold. 916 gold is that × 0.916." },
+    { "q": "Why do gold shops charge more?", "a": "Shops add a premium and a making charge (upah) on top of the gold value, and they buy back below their selling price. Use the jewellery price check on this page to see what percentage above the gold value you are paying." },
+    { "q": "What is Kijang Emas?", "a": "Kijang Emas is Malaysia's official gold bullion coin, issued by Bank Negara Malaysia in 999.9 gold in 1 oz, ½ oz and ¼ oz sizes. Bank Negara announces its buying and selling prices every working day, and this page shows those official prices." },
+    { "q": "How often is the gold price on this page updated?", "a": "The spot price refreshes every minute while the page is open. Kijang Emas prices follow Bank Negara's daily announcement on working days. The time of the last update is shown under the price." },
+    { "q": "How do I check the price of 916 jewellery?", "a": "Gold value = weight × pure gold price × 0.916, then add the making charge per gram. If pure gold is RM500 a gram, a 10 g 916 chain holds RM4,580 of gold, and with a RM30 a gram making charge the estimate is RM4,880. Compare that with the shop's price." },
+    { "q": "How do I work out gold zakat with today's price?", "a": "The gold zakat nisab is 85 grams, so its value is 85 × today's gold price per gram. The zakat button on this page opens the gold zakat calculator with today's price filled in." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Gold price Malaysia</li></ol></nav>
+  <h1>Gold Price Malaysia Today</h1>
+  <p class="answer">Today's price of 999 gold is <strong>{{H_PURE}} a gram</strong> and 916 gold <strong>{{H_916}} a gram</strong> ({{H_DATE}}). Bank Negara's official Kijang Emas price: selling {{H_KG_SELL}}, buying {{H_KG_BUY}} a gram. The prices below refresh every minute.</p>
+  <p class="meta"><span>Data from Bank Negara Malaysia and the international gold market</span><span>Worked out in your browser</span><a href="/harga-emas-hari-ini/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc" id="goldLive" data-api="{{H_API}}">
+    <section class="box" aria-labelledby="price-h">
+      <h2 id="price-h">Gold price per gram</h2>
+      <div class="net">
+        <p id="hBasis">{{H_BASIS}}</p>
+        <output id="hPure">{{H_PURE}}</output>
+        <p>999 gold<span id="hChange" class="{{H_CHANGE_CLASS}}">{{H_CHANGE}}</span></p>
+        <p id="hStatus" class="live">Daily price · {{H_UPDATED}}</p>
+      </div>
+      <p class="sr-only" aria-live="polite">916 gold: <span id="h916">{{H_916}}</span></p>
+      <table class="rows">
+        <caption>By purity</caption>
+        <thead><tr><th scope="col">Purity</th><th scope="col">Per gram</th><th scope="col">10 grams</th></tr></thead>
+        <tbody>
+{{H_TABLE}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Bank Negara Kijang Emas (<span id="hKgDate">{{H_KG_DATE}}</span>)</caption>
+        <thead><tr><th scope="col">Coin</th><th scope="col">Selling</th><th scope="col">Buying</th></tr></thead>
+        <tbody>
+{{H_KIJANG}}
+        </tbody>
+      </table>
+      <p class="note">Reference prices for gold content, not shop prices. Shops add a premium and a making charge.</p>
+      <div class="tool-actions"><a class="btn ghost sm" id="hZakat" href="/gold-zakat-calculator-malaysia/#price={{H_ZAKAT}}">Work out gold zakat at this price</a></div>
+    </section>
+
+    <form class="box" id="jewelForm" novalidate aria-labelledby="jewel-h">
+      <h2 id="jewel-h">Jewellery price check</h2>
+      <div class="field-row">
+        <div class="field"><label for="weight">Weight</label><div class="input"><input id="weight" name="weight" type="number" inputmode="decimal" min="0" step="0.01" value="10"></div></div>
+        <div class="field">
+          <label for="unit">Unit</label>
+          <select class="input" id="unit" name="unit"><option value="g" selected>grams</option><option value="oz">troy ounces</option><option value="kg">kg</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="fineness">Purity</label>
+          <select class="input" id="fineness" name="fineness">{{H_PURITY_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="making">Making charge a gram</label><div class="input"><span aria-hidden="true">RM</span><input id="making" name="making" type="number" inputmode="decimal" min="0" step="1" value="30"></div></div>
+      </div>
+      <div class="field"><label for="shop">Shop's price (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="shop" name="shop" type="number" inputmode="decimal" min="0" step="1" value=""></div></div>
+      <table class="rows">
+        <caption>Estimate</caption>
+        <tbody>
+          <tr><th scope="row">Gold value</th><td id="jMetal">{{H_JMETAL}}</td></tr>
+          <tr><th scope="row">Making charge</th><td id="jLabour">{{H_JLABOUR}}</td></tr>
+          <tr class="total"><th scope="row">Estimated price</th><td id="jFair">{{H_JEWEL}}</td></tr>
+        </tbody>
+        <tbody id="jShopRows" hidden>
+          <tr><th scope="row">Shop's premium over gold value</th><td id="jPremium"></td></tr>
+          <tr><th scope="row" colspan="2" id="jVerdict"></th></tr>
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="goldPrint">Print or save as PDF</button></div>
+    </form>
+  </div>
+  <script type="application/json" id="goldData">{{H_SNAPSHOT}}</script>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="chart-h">Kijang Emas price per gram</h2>
+  <p>Bank Negara's daily selling price for the 1 oz Kijang Emas coin, divided by 31.1035 grams.</p>
+  {{H_CHART}}
+
+  <h2 id="why">Why are there three gold prices?</h2>
+  <ul>
+    <li><strong>Spot price:</strong> the world market price of pure gold in USD, converted to ringgit. It moves every minute and underlies every other price.</li>
+    <li><strong>Kijang Emas:</strong> Bank Negara's official price for its 999.9 gold coins, announced every working day. The gap between its selling and buying prices is your cost if you buy and later sell back.</li>
+    <li><strong>Shop price:</strong> the gold value plus a premium and a making charge. Shops buy back below what they sell for.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">How to use today's gold price</h2>
+  <ol>
+    <li><strong>Pick the purity:</strong> 999 for bars and coins, 916 for most jewellery.</li>
+    <li><strong>Multiply by the weight:</strong> weight in grams × the price per gram for that purity = gold value.</li>
+    <li><strong>Add the making charge:</strong> shops charge per gram or by design.</li>
+    <li><strong>Compare:</strong> enter the shop's price to see the premium you are paying.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/kijang-emas-prices" rel="noopener">Bank Negara Malaysia: Kijang Emas prices</a></li>
+    <li><a href="https://www.bnm.gov.my/-/bnm-openapi" rel="noopener">Bank Negara Malaysia: OpenAPI (Kijang Emas prices, exchange rates)</a></li>
+    <li><a href="https://www.bnm.gov.my/-/faqs-on-the-kijang-emas-gold-bullion-coin" rel="noopener">Bank Negara Malaysia: Kijang Emas FAQs</a></li>
+    <li><a href="https://gold-api.com/" rel="noopener">Gold API: spot gold price</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Reference prices only, not an offer to buy or sell gold or investment advice. Banks and gold shops set the actual prices.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/gold-zakat-calculator-malaysia/">Gold &amp; Savings Zakat Calculator<small>Kept gold, worn gold and savings</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

@@ -59,11 +59,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gdex-tracking/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/gold-price-malaysia/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/gold-price-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/harga-emas-hari-ini/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gold-price-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/</loc>
     <lastmod>2026-10-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-zakat-emas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/harga-emas-hari-ini/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/harga-emas-hari-ini/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/gold-price-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/gold-price-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/home-loan-calculator-malaysia/</loc>
