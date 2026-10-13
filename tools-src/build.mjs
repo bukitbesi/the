@@ -22,6 +22,8 @@ const taxes = require('../assets/js/tax-core.js');
 const epfCore = require('../assets/js/epf-core.js');
 const loanCore = require('../assets/js/loan-core.js');
 const carCore = require('../assets/js/carloan-core.js');
+const asbCore = require('../assets/js/asb-core.js');
+const prorateCore = require('../assets/js/prorate-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -470,7 +472,7 @@ function loanMap(lang) {
   };
 }
 // ---- Car loan (hire purchase), EN + BM
-const CAR_EXAMPLE = { price: 100000, downPct: 10, years: 9, method: 'eir', rate: carCore.FACTS.defaultRate };
+const CAR_EXAMPLE = { price: 100000, downPct: 10, years: 9, method: 'eir', rate: carCore.FACTS.defaultRate, cc: 1497, body: 'saloon', ncd: 0 };
 function carMap(lang) {
   const L = lang === 'ms' ? 1 : 0;
   const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
@@ -495,7 +497,91 @@ function carMap(lang) {
     K_SCHEDULE: schedule, K_INSTALMENTS: instalments, K_CONVERT: convert, K_DEFAULT_RATE: pct(F.defaultRate),
     K_FLAT_PAY: money(flat.monthly, lang), K_FLAT_EIR: pct(flat.eir), K_FLAT_INTEREST: rm0(flat.interest),
     K_R78_PAY: rm0(flat.settlement.amount), K_R78_EXTRA: rm0(flat.settlement.extraVsReducing), K_R78_SAVED: rm0(flat.settlement.saved),
-    K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified
+    K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified,
+    K_CC: CAR_EXAMPLE.cc,
+    K_BODY_OPTIONS: [
+      opt('saloon', 'Saloon (sedan, hatchback)', 'Salun (sedan, hatchback)', true),
+      opt('nonSaloon', 'Non-saloon (SUV, MPV, pickup)', 'Bukan salun (SUV, MPV, pikap)')
+    ].join(''),
+    K_NCD_OPTIONS: carCore.NCD.map((n, i) => opt(n, i ? `${n}% (${i} claim-free year${i > 1 ? 's' : ''}${i === 5 ? ' or more' : ''})` : '0% (new driver or recent claim)',
+      i ? `${n}% (${i} tahun tanpa tuntutan${i === 5 ? ' atau lebih' : ''})` : '0% (pemandu baharu atau baru membuat tuntutan)', i === 0)).join(''),
+    K_ROAD: money(r.running.roadTax, lang), K_INS: money(r.running.insurance.total, lang), K_ALL: money(r.running.monthly, lang),
+    K_ROAD_TABLE: [[998, 'Perodua Axia / Bezza 1.0'], [1329, 'Perodua Myvi 1.3'], [1497, 'Honda City / Civic 1.5'], [1798, '1.8-litre'],
+      [1998, '2.0-litre'], [2487, 'Toyota Camry 2.5'], [2994, '3.0-litre'], [3456, '3.5-litre']].map(([cc, eg]) =>
+      `<tr><th scope="row">${cc.toLocaleString('en-MY')} cc <small>${esc(eg)}</small></th><td>${money(carCore.roadTax(cc, 'saloon'), lang)}</td><td>${money(carCore.roadTax(cc, 'nonSaloon'), lang)}</td></tr>`).join('\n'),
+    K_INS_TABLE: [50000, 80000, 100000, 150000, 200000].map(si => `<tr><th scope="row">${rm0(si)}</th>${[0, 25, 55].map(n => `<td>${rm0(carCore.insurance(si, 1497, n).total)}</td>`).join('')}</tr>`).join('\n'),
+    K_RUN_VERIFIED: longDate(F.runningVerified, lang)
+  };
+}
+// ---- ASB dividend (Amanah Saham Bumiputera), EN + BM
+const ASB_EXAMPLE = { start: 10000, monthly: 200, timing: 'late', rate: asbCore.FACTS.latest, years: 10 };
+const ASB_FIN = { amount: 50000, rate: asbCore.FACTS.defaultFinancingRate, years: asbCore.FACTS.defaultFinancingYears };
+function asbMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const F = asbCore.FACTS, r = asbCore.project(ASB_EXAMPLE), x = asbCore.financing({ ...ASB_FIN, divRate: F.latest });
+  const pct = n => n.toFixed(2) + '%';
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const months = L ? ['Jan', 'Feb', 'Mac', 'Apr', 'Mei', 'Jun', 'Jul', 'Ogo', 'Sep', 'Okt', 'Nov', 'Dis'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const sen = n => n == null ? '–' : n.toFixed(2) + (L ? ' sen' : ' sen');
+  return {
+    A_START: ASB_EXAMPLE.start, A_MONTHLY: ASB_EXAMPLE.monthly, A_YEARS: ASB_EXAMPLE.years, A_RATE: F.latest,
+    A_TIMING_OPTIONS: [
+      opt('late', 'After the 1st (from next month)', 'Selepas 1hb (bulan berikutnya)', true),
+      opt('early', 'On the 1st (same month)', 'Pada 1hb (bulan yang sama)')
+    ].join(''),
+    A_RATE_OPTIONS: [
+      opt(F.latest, `${F.latestYear}: ${pct(F.latest)}`, `${F.latestYear}: ${pct(F.latest)}`, true),
+      opt(F.average5, `5-yr avg: ${pct(F.average5)}`, `Purata 5 thn: ${pct(F.average5)}`),
+      opt(F.conservative, `Low: ${pct(F.conservative)}`, `Rendah: ${pct(F.conservative)}`),
+      opt('custom', 'Custom', 'Sendiri')
+    ].join(''),
+    A_MONTH_INPUTS: months.map((m, i) => `<div class="field"><label for="m${i + 1}">${m}</label><div class="input"><span aria-hidden="true">RM</span><input id="m${i + 1}" name="m${i + 1}" type="number" inputmode="decimal" min="0" step="1" value=""></div></div>`).join('\n          '),
+    A_PAY: money(r.firstDividend, lang), A_AVG: rm0(r.firstAverage), A_RATE_TXT: F.latest.toFixed(2),
+    A_DEPOSITS: rm0(r.start + r.totalDeposits), A_DIVS: rm0(r.totalDividends), A_FINAL: rm0(r.final),
+    A_SCHEDULE: r.rows.map(y => `<tr><th scope="row">${y.year}</th><td>${rm0(y.deposits)}</td><td>${rm0(y.dividend)}</td><td>${rm0(y.balance)}</td></tr>`).join('\n'),
+    A_FIN_AMOUNT: ASB_FIN.amount, A_FIN_RATE: ASB_FIN.rate, A_FIN_YEARS: ASB_FIN.years,
+    AF_PAY: money(x.monthly, lang), AF_INTEREST: rm0(x.interest), AF_DIV: rm0(x.yearlyDividend), AF_DIVS: rm0(x.dividends),
+    AF_NET: (L ? 'Untung bersih ' : 'Net gain ') + rm0(x.net), AF_BREAK: pct(x.breakEven),
+    A_HISTORY: asbCore.HISTORY.slice().reverse().map(([y, d, b, t]) => `<tr><th scope="row">${y}</th><td>${sen(d)}</td><td>${sen(b)}</td><td><strong>${sen(t)}</strong></td></tr>`).join('\n'),
+    A_EXAMPLES: [5000, 10000, 30000, 50000, 100000, 200000].map(b =>
+      `<tr><th scope="row">${rm0(b)}</th><td>${money(asbCore.dividend(Array(12).fill(b), F.latest).amount, lang)}</td><td>${money(asbCore.dividend(Array(12).fill(b), F.average5).amount, lang)}</td><td>${money(asbCore.dividend(Array(12).fill(b), F.conservative).amount, lang)}</td></tr>`).join('\n'),
+    A_GROWTH: [100, 200, 500, 1000].map(m => {
+      const g = n => asbCore.project({ start: 0, monthly: m, rate: F.average5, years: n });
+      return `<tr><th scope="row">${rm0(m)}</th>${[5, 10, 20].map(n => `<td>${rm0(g(n).final)}</td>`).join('')}</tr>`;
+    }).join('\n'),
+    A_LATEST: pct(F.latest), A_LATEST_SEN: F.latest.toFixed(2), A_LATEST_YEAR: F.latestYear, A_LATEST_DIV: F.latestDividend.toFixed(2), A_LATEST_BONUS: F.latestBonus.toFixed(2),
+    A_AVG5: pct(F.average5), A_NEXT_YEAR: F.latestYear + 1,
+    A_VERIFIED: longDate(F.verified, lang), A_VERIFIED_ISO: F.verified
+  };
+}
+// ---- Prorated salary (gaji prorata), EN + BM
+const PRORATE_EXAMPLE = { salary: 3000, case: 'join', month: '2026-10', date: '2026-10-16', unpaid: 0, workdays: 'mon-fri' };
+function prorateMap(lang) {
+  const L = lang === 'ms' ? 1 : 0;
+  const F = prorateCore.FACTS, r = prorateCore.calculate(PRORATE_EXAMPLE);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const method = k => ({ calendar: L ? 'Hari kalendar (seksyen 18A)' : 'Calendar days (section 18A)', working: L ? 'Hari bekerja' : 'Working days', fixed26: L ? '26 hari (kadar gaji biasa)' : '26 days (ordinary rate of pay)' })[k];
+  const mrow = m => `<tr${m.key === 'calendar' ? ' class="total"' : ''}><th scope="row">${method(m.key)}<small>${m.days} / ${m.base} ${L ? 'hari' : 'days'} · ${money(m.daily, lang)} ${L ? 'sehari' : 'a day'}</small></th><td>${money(m.pay, lang)}</td></tr>`;
+  const ex = (salary, days, base) => money(prorateCore.prorate(salary, days, base), lang);
+  return {
+    P_SALARY: PRORATE_EXAMPLE.salary, P_MONTH: PRORATE_EXAMPLE.month, P_DATE: PRORATE_EXAMPLE.date, P_UNPAID: PRORATE_EXAMPLE.unpaid,
+    P_CASE_OPTIONS: [
+      opt('join', 'Joined during the month', 'Mula bekerja pada pertengahan bulan', true),
+      opt('leave', 'Last day during the month', 'Hari terakhir bekerja pada pertengahan bulan'),
+      opt('full', 'Worked the whole month (unpaid leave only)', 'Bekerja sebulan penuh (cuti tanpa gaji sahaja)')
+    ].join(''),
+    P_WORKDAY_OPTIONS: [
+      opt('mon-fri', 'Monday to Friday', 'Isnin hingga Jumaat', true),
+      opt('mon-sat', 'Monday to Saturday', 'Isnin hingga Sabtu'),
+      opt('sun-thu', 'Sunday to Thursday (Kedah, Kelantan, Terengganu)', 'Ahad hingga Khamis (Kedah, Kelantan, Terengganu)'),
+      opt('half-sat', 'Monday to Friday + half-day Saturday', 'Isnin hingga Jumaat + separuh hari Sabtu')
+    ].join(''),
+    P_PAY: money(r.pay, lang), P_DAYS: r.days, P_BASE: r.calendarDays, P_PERIOD: r.label[L ? 'ms' : 'en'],
+    P_METHODS: r.methods.map(mrow).join('\n'), P_DEDUCT: money(r.deduction, lang),
+    P_EX_JOIN: ex(3000, 16, 31), P_EX_LEAVE: ex(4500, 10, 30), P_EX_UNPAID: money(prorateCore.prorate(6200, 2, 31) , lang), P_EX_UNPAID_PAY: ex(6200, 29, 31),
+    P_TABLE: [2000, 3000, 4000, 5000, 8000].map(s => `<tr><th scope="row">${money(s, lang)}</th>${[28, 30, 31].map(b => `<td>${money(s / b, lang)}</td>`).join('')}<td>${money(s / 26, lang)}</td></tr>`).join('\n'),
+    P_VERIFIED: longDate(F.verified, lang), P_VERIFIED_ISO: F.verified
   };
 }
 // ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
@@ -725,7 +811,7 @@ function purgeMap() {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -835,6 +921,8 @@ const bundles = {
   'epf.js': ['assets/js/salary-core.js', 'assets/js/epf-core.js', 'assets/js/epf-ui.js'],
   'loan.js': ['assets/js/loan-core.js', 'assets/js/loan-ui.js'],
   'carloan.js': ['assets/js/carloan-core.js', 'assets/js/carloan-ui.js'],
+  'asb.js': ['assets/js/asb-core.js', 'assets/js/asb-ui.js'],
+  'prorate.js': ['assets/js/prorate-core.js', 'assets/js/prorate-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

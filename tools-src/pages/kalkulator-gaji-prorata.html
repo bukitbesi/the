@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/kalkulator-gaji-prorata/",
+  "lang": "ms",
+  "alternates": { "en": "/prorated-salary-calculator-malaysia/" },
+  "title": "Kalkulator Gaji Prorata: Mula Kerja, Berhenti & Cuti Tanpa Gaji",
+  "description": "Kalkulator gaji prorata percuma bagi bulan tidak lengkap: mula bekerja, berhenti atau cuti tanpa gaji, ikut seksyen 18A Akta Kerja 1955 dan kaedah lain.",
+  "llms": "Mengira gaji prorata (bulan tidak lengkap) di Malaysia bagi pekerja baharu, pekerja yang berhenti atau cuti tanpa gaji menggunakan seksyen 18A Akta Kerja 1955 (gaji bulanan ÷ hari kalendar dalam bulan × hari layak, berkuat kuasa sejak 1 Januari 2023), dan membandingkannya dengan kaedah hari bekerja (Isnin–Jumaat, Isnin–Sabtu, Ahad–Khamis atau separuh hari Sabtu) serta kadar gaji biasa 26 hari; menunjukkan kadar harian dan potongan.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "prorate",
+  "scripts": ["/assets/js/prorate.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Gaji Prorata", null]],
+  "about": ["Gaji prorata", "Seksyen 18A Akta Kerja 1955", "Potongan cuti tanpa gaji", "Penggajian di Malaysia"],
+  "app": {
+    "name": "Kalkulator Gaji Prorata",
+    "category": "BusinessApplication",
+    "features": ["Formula hari kalendar seksyen 18A", "Pekerja baharu, berhenti atau cuti tanpa gaji", "Kaedah hari bekerja dengan minggu kerja Malaysia", "Perbandingan kadar gaji biasa 26 hari", "Kadar harian dan potongan", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Akta Kerja 1955 (Akta 265), teks dikemas kini, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Lexology: Akta Kerja 1955 kini melindungi semua pekerja", "https://www.lexology.com/library/detail.aspx?g=623320a7-21d5-405b-b310-2463adcbce94"],
+    ["CCS & Co: Gaji pekerja yang mengambil cuti tanpa gaji", "https://ccs-co.com/post/how-do-i-calculate-the-salary-of-an-employee-who-is-on-unpaid-leave-for-the-month/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira gaji prorata di Malaysia?", "a": "Mengikut seksyen 18A Akta Kerja 1955, bahagikan gaji bulanan dengan bilangan hari kalendar dalam bulan itu dan darab dengan hari yang layak dibayar. Pekerja bergaji RM3,000 yang mula bekerja pada 16 Oktober 2026 dibayar RM3,000 ÷ 31 × 16 = RM1,548.39." },
+    { "q": "Adakah hujung minggu dan cuti umum dikira dalam gaji prorata?", "a": "Ya, mengikut formula seksyen 18A. Ia mengira hari kalendar, jadi hari rehat dan cuti umum dalam tempoh pekerjaan dibayar. Hanya hari sebelum mula bekerja, selepas berhenti atau cuti tanpa gaji ditolak." },
+    { "q": "Berapa potongan bagi cuti tanpa gaji?", "a": "Gaji bulanan ÷ hari kalendar dalam bulan × hari cuti tanpa gaji. Bagi gaji RM6,200 pada bulan Ogos (31 hari), dua hari cuti tanpa gaji dipotong RM6,200 ÷ 31 × 2 = RM400, jadi gajinya RM5,800." },
+    { "q": "Bolehkah majikan mengira gaji prorata dengan 26 hari?", "a": "Bagi bulan tidak lengkap, seksyen 18A terpakai \"walau apa pun seksyen 60I\", iaitu seksyen yang menetapkan kadar gaji biasa 26 hari untuk kerja lebih masa dan hari rehat. Sesetengah kontrak masih mengira prorata ikut 26 hari atau hari bekerja, yang biasanya membayar pekerja baharu lebih rendah: RM1,269.23 dan bukan RM1,548.39 dalam contoh Oktober. Kontrak tidak boleh memberi kurang daripada Akta." },
+    { "q": "Bilakah seksyen 18A berkuat kuasa?", "a": "Pada 1 Januari 2023, melalui Akta Kerja (Pindaan) 2022. Ia meliputi pekerja yang mula bekerja selepas hari pertama bulan, berhenti sebelum hari terakhir, mengambil cuti tanpa gaji atau dipanggil menjalani perkhidmatan negara." },
+    { "q": "Berapa gaji bulan terakhir jika saya berhenti di pertengahan bulan?", "a": "Gaji ÷ hari kalendar × hari bekerja hingga dan termasuk hari terakhir. Bagi gaji RM4,500 dengan hari terakhir 10 September, gajinya RM4,500 ÷ 30 × 10 = RM1,500, ditambah bayaran cuti tahunan yang belum diambil jika majikan membayarnya." },
+    { "q": "Adakah KWSP dan PERKESO dikenakan atas gaji prorata?", "a": "Ya. KWSP, PERKESO, SIP dan PCB dikira atas gaji sebenar yang dibayar bagi bulan itu, jadi jumlahnya lebih rendah bagi bulan tidak lengkap. Gunakan kalkulator gaji dengan jumlah prorata untuk melihat gaji bersih anda." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator gaji prorata</li></ol></nav>
+  <h1>Kalkulator Gaji Prorata</h1>
+  <p class="answer">Gaji prorata = <strong>gaji bulanan ÷ hari kalendar dalam bulan × hari layak</strong>, mengikut seksyen 18A Akta Kerja 1955. Bagi gaji RM3,000, pekerja yang mula bekerja pada 16 Oktober 2026 dibayar <strong>{{P_PAY}}</strong> bagi 16 daripada 31 hari. Hujung minggu dan cuti umum dalam tempoh itu turut dikira. Masukkan angka anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/prorated-salary-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="proForm" novalidate aria-labelledby="pro-h">
+      <h2 id="pro-h">Bulan berkenaan</h2>
+      <div class="field"><label for="salary">Gaji bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="50" value="{{P_SALARY}}"></div><p class="help">Gaji pokok dan elaun bulanan tetap yang turut diprorata.</p></div>
+      <div class="field">
+        <label for="case">Situasi</label>
+        <select class="input" id="case" name="case">{{P_CASE_OPTIONS}}</select>
+      </div>
+      <div class="field" id="proDateField"><label for="date" id="proDateLabel">Tarikh mula bekerja</label><div class="input"><input id="date" name="date" type="date" value="{{P_DATE}}"></div></div>
+      <div class="field" id="proMonthField" hidden><label for="month">Bulan</label><div class="input"><input id="month" name="month" type="month" value="{{P_MONTH}}"></div></div>
+      <div class="field"><label for="unpaid">Cuti tanpa gaji dalam tempoh itu</label><div class="input"><input id="unpaid" name="unpaid" type="number" inputmode="decimal" min="0" max="31" step="0.5" value="{{P_UNPAID}}"><span aria-hidden="true">hari</span></div></div>
+      <div class="field">
+        <label for="workdays">Minggu kerja (bagi kaedah hari bekerja)</label>
+        <select class="input" id="workdays" name="workdays">{{P_WORKDAY_OPTIONS}}</select>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="pro-result-h">
+      <h2 id="pro-result-h">Gaji prorata</h2>
+      <div class="net">
+        <p>Gaji bagi <span id="pPeriod">{{P_PERIOD}}</span></p>
+        <output id="pPay" for="salary case date month unpaid">{{P_PAY}}</output>
+        <p><strong id="pDays">{{P_DAYS}}</strong> daripada <span id="pBase">{{P_BASE}}</span> hari kalendar · kurang daripada gaji penuh sebanyak <span id="pDeduct">{{P_DEDUCT}}</span></p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Mengikut kaedah</caption>
+        <tbody id="pMethods">
+{{P_METHODS}}
+        </tbody>
+      </table>
+      <p class="note">Seksyen 18A (hari kalendar) ialah formula Akta Kerja. Kaedah lain ditunjukkan kerana sesetengah kontrak masih menggunakannya; ia tidak boleh membayar kurang daripada Akta.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="proPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="formula">Formula seksyen 18A</h2>
+  <p>Seksyen 18A ditambah melalui Akta Kerja (Pindaan) 2022 dan terpakai sejak <strong>1 Januari 2023</strong>. Apabila pekerja bergaji bulanan tidak melengkapkan sebulan penuh kerana:</p>
+  <ul>
+    <li>mula bekerja selepas hari pertama bulan,</li>
+    <li>berhenti sebelum hari terakhir bulan,</li>
+    <li>mengambil cuti tanpa gaji, atau</li>
+    <li>dipanggil menjalani perkhidmatan negara,</li>
+  </ul>
+  <p>gaji bagi bulan itu ialah <code>gaji bulanan ÷ hari dalam tempoh gaji × hari layak</code>. Hari yang dikira ialah hari kalendar: 28, 29, 30 atau 31.</p>
+
+  <h2 id="examples">Contoh pengiraan</h2>
+  <ul>
+    <li><strong>Pekerja baharu:</strong> RM3,000, mula 16 Oktober 2026: RM3,000 ÷ 31 × 16 = <strong>{{P_EX_JOIN}}</strong>.</li>
+    <li><strong>Berhenti kerja:</strong> RM4,500, hari terakhir 10 September: RM4,500 ÷ 30 × 10 = <strong>{{P_EX_LEAVE}}</strong>.</li>
+    <li><strong>Cuti tanpa gaji:</strong> RM6,200, dua hari pada bulan Ogos: potongan RM6,200 ÷ 31 × 2 = {{P_EX_UNPAID}}, gaji <strong>{{P_EX_UNPAID_PAY}}</strong>.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="daily-h">Kadar harian mengikut panjang bulan</h2>
+  <p>Gaji yang sama memberi kadar harian berbeza dalam bulan 28, 30 atau 31 hari. Kadar 26 hari ialah kadar gaji biasa untuk kerja lebih masa, hari rehat dan cuti umum.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="daily-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gaji bulanan</th><th scope="col">28 hari</th><th scope="col">30 hari</th><th scope="col">31 hari</th><th scope="col">26 hari (ORP)</th></tr></thead>
+      <tbody>
+{{P_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="methods">Hari kalendar, hari bekerja atau 26 hari?</h2>
+  <ul>
+    <li><strong>Hari kalendar (seksyen 18A):</strong> formula statutori. Hari rehat dan cuti umum dalam tempoh itu dibayar.</li>
+    <li><strong>Hari bekerja:</strong> hanya mengira hari bekerja. Secara purata sama dengan hari kalendar, tetapi boleh berbeza mengikut bilangan hujung minggu dalam tempoh itu.</li>
+    <li><strong>26 hari:</strong> kadar gaji biasa di bawah seksyen 60I, untuk bayaran kerja lebih masa dan hari rehat. Jika digunakan bagi bulan tidak lengkap, ia sering membayar pekerja baharu lebih rendah.</li>
+  </ul>
+  <p>Pekerja di Sabah dan Sarawak tertakluk kepada Ordinan Buruh Sabah dan Sarawak yang mempunyai peraturan sendiri.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Akta Kerja 1955 (Akta 265), JTKSM</a></li>
+    <li><a href="https://www.lexology.com/library/detail.aspx?g=623320a7-21d5-405b-b310-2463adcbce94" rel="noopener">Lexology: Akta Kerja 1955 kini melindungi semua pekerja</a></li>
+    <li><a href="https://ccs-co.com/post/how-do-i-calculate-the-salary-of-an-employee-who-is-on-unpaid-leave-for-the-month/" rel="noopener">CCS &amp; Co: gaji bagi bulan dengan cuti tanpa gaji</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Alat bantuan pengiraan, bukan nasihat undang-undang. Kontrak pekerjaan anda dan Jabatan Tenaga Kerja (JTKSM) menentukan kes yang dipertikaikan.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai tahunan dan pelepasan</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>

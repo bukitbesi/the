@@ -1,0 +1,191 @@
+<!--page
+{
+  "path": "/kalkulator-dividen-asb/",
+  "lang": "ms",
+  "alternates": { "en": "/asb-dividend-calculator/" },
+  "title": "Kalkulator Dividen ASB 2026: Dividen Tahunan, Unjuran & Loan ASB",
+  "description": "Kalkulator dividen ASB percuma: dividen daripada baki terendah bulanan, unjuran 10 tahun dengan dividen dilabur semula dan untung loan ASB pada kadar 5.75 sen.",
+  "llms": "Mengira agihan pendapatan Amanah Saham Bumiputera (ASB), iaitu dividen dan bonus, daripada purata baki terendah setiap bulan, sama ada daripada baki awal dan simpanan bulanan atau dua belas baki terendah bulanan yang tepat; mengunjurkan baki sehingga 40 tahun dengan dividen dilabur semula dan had pelaburan RM200,000; serta membandingkan ansuran dan faedah pembiayaan ASB dengan dividen yang diperoleh. Termasuk sejarah agihan ASB 2019–2025 (TK2025: 5.75 sen, dividen 5.20 sen + bonus 0.55 sen).",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "render": "asb",
+  "scripts": ["/assets/js/asb.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Dividen ASB", null]],
+  "about": ["Amanah Saham Bumiputera", "Dividen ASB", "Agihan pendapatan unit amanah", "Pembiayaan ASB"],
+  "app": {
+    "name": "Kalkulator Dividen ASB",
+    "category": "FinanceApplication",
+    "features": ["Dividen tahunan daripada purata baki terendah bulanan", "Mod tepat dengan dua belas baki terendah bulanan", "Kadar terkini, purata 5 tahun atau kadar sendiri", "Unjuran kompaun dengan had pelaburan RM200,000", "Ansuran, faedah dan untung bersih pembiayaan ASB", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Business Today: PNB umum agihan ASB 5.75 sen bagi 2025", "https://www.businesstoday.com.my/2025/12/19/pnb-declares-5-75-asb-dividend-for-2025-payout-hits-record-rm10-4-billion/"],
+    ["Malay Mail: PNB umum dividen ASB 5.75 sen bagi 2024", "https://www.malaymail.com/news/money/2024/12/24/pnb-announces-asb-dividend-of-575-sen-a-unit-for-2024-its-strongest-delivery-in-five-years/160933"],
+    ["New Straits Times: ASNB umum 5.25 sen seunit bagi ASB (2023)", "https://www.nst.com.my/amp/news/nation/2023/12/992873/asnb-declares-income-525-sen-unit-asb"],
+    ["ASNB: Amanah Saham Bumiputera", "https://www.asnb.com.my/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana dividen ASB dikira?", "a": "ASNB mengambil baki terendah dalam setiap bulan sepanjang tahun, mencari purata dua belas angka itu dan mendarabkannya dengan jumlah kadar (dividen dan bonus). Dengan RM10,000 pada awal tahun dan simpanan RM200 setiap bulan selepas 1hb, puratanya RM11,100 dan kadar 5.75 sen memberi RM638.25." },
+    { "q": "Berapa dividen ASB 2025?", "a": "Jumlah 5.75 sen seunit: dividen 5.20 sen dan bonus 0.55 sen, diumumkan pada 19 Disember 2025 dan dikreditkan sebagai unit baharu sekitar 1 Januari 2026. Kadar ini sama dengan 5.75 sen bagi 2024. Bagi RM10,000 yang disimpan sepanjang tahun, dividennya RM575." },
+    { "q": "Bilakah dividen ASB 2026 diumumkan?", "a": "PNB biasanya mengumumkan agihan ASB pada separuh kedua Disember, dan unit dikreditkan sekitar 1 Januari. Kadar 2026 belum diketahui; gunakan purata 5 tahun (5.27%) untuk anggaran berhati-hati." },
+    { "q": "Adakah simpanan pada pertengahan bulan mendapat dividen?", "a": "Tidak bagi bulan itu. Dividen menggunakan baki terendah setiap bulan, jadi simpanan selepas 1hb hanya dikira mulai bulan berikutnya. Simpan pada 1hb dan elakkan pengeluaran dalam bulan itu untuk dividen maksimum." },
+    { "q": "Berapakah had maksimum pelaburan ASB?", "a": "RM200,000 seorang. Had ini bagi wang yang anda masukkan; dividen yang dilabur semula boleh menjadikan baki melebihi RM200,000 dan terus mendapat dividen." },
+    { "q": "Adakah loan ASB berbaloi?", "a": "Bergantung pada beza antara kadar ASB dan kadar pembiayaan. RM50,000 selama 20 tahun pada 4.25% berharga RM309.62 sebulan dan faedah RM24,309, manakala 5.75 sen setahun memberi dividen RM57,500, untung bersih kira-kira RM33,191. Kadar pembiayaan berubah-ubah dan dividen tidak dijamin, jadi semak kadar pulang modal dalam kalkulator." },
+    { "q": "Berapa simpanan RM500 sebulan dalam ASB selepas 10 tahun?", "a": "Kira-kira RM78,300 pada purata 5 tahun 5.27%, daripada simpanan RM60,000, jika setiap dividen dilabur semula dan simpanan dibuat selepas 1hb setiap bulan. Mula awal lebih penting daripada kadar." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator dividen ASB</li></ol></nav>
+  <h1>Kalkulator Dividen ASB</h1>
+  <p class="answer">Agihan ASB bagi {{A_LATEST_YEAR}} ialah <strong>{{A_LATEST_SEN}} sen seunit</strong> (dividen {{A_LATEST_DIV}} sen + bonus {{A_LATEST_BONUS}} sen). Ia dibayar atas <strong>purata baki terendah setiap bulan</strong>, jadi RM10,000 pada awal tahun ditambah RM200 sebulan memberi <strong>{{A_PAY}}</strong>. Masukkan baki dan simpanan anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/asb-dividend-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="asbForm" novalidate aria-labelledby="asb-h">
+      <h2 id="asb-h">Akaun ASB anda</h2>
+      <div class="field"><label for="start">Baki pada 1 Januari</label><div class="input"><span aria-hidden="true">RM</span><input id="start" name="start" type="number" inputmode="decimal" min="0" step="100" value="{{A_START}}"></div></div>
+      <div class="field"><label for="monthly">Simpanan bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="monthly" name="monthly" type="number" inputmode="decimal" min="0" step="50" value="{{A_MONTHLY}}"></div></div>
+      <div class="field">
+        <label for="timing">Bila anda menyimpan</label>
+        <select class="input" id="timing" name="timing">{{A_TIMING_OPTIONS}}</select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="rateSel">Kadar</label>
+          <select class="input" id="rateSel" name="rateSel">{{A_RATE_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="rate">Sen bagi RM1</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{A_RATE}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field"><label for="years">Unjuran</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="40" step="1" value="{{A_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+      <details class="more-opts" id="asbExactBox">
+        <summary>Tepat: masukkan baki terendah setiap bulan</summary>
+        <p class="help">Daripada penyata ASNB atau myASNB. Biarkan kosong untuk menggunakan baki dan simpanan di atas.</p>
+        <div class="field-row">
+          {{A_MONTH_INPUTS}}
+        </div>
+      </details>
+      <details class="more-opts" id="asbFinBox">
+        <summary>Pembiayaan ASB (loan ASB)</summary>
+        <div class="field"><label for="finAmount">Jumlah pembiayaan</label><div class="input"><span aria-hidden="true">RM</span><input id="finAmount" name="finAmount" type="number" inputmode="decimal" min="0" step="1000" value="{{A_FIN_AMOUNT}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="finRate">Kadar pembiayaan</label><div class="input"><input id="finRate" name="finRate" type="number" inputmode="decimal" min="0" max="20" step="0.01" value="{{A_FIN_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="finYears">Tempoh</label><div class="input"><input id="finYears" name="finYears" type="number" inputmode="numeric" min="1" max="30" step="1" value="{{A_FIN_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+        </div>
+      </details>
+    </form>
+
+    <section class="box" aria-labelledby="asb-result-h">
+      <h2 id="asb-result-h">Dividen anda</h2>
+      <div class="net">
+        <p>Dividen + bonus setahun</p>
+        <output id="aPay" for="start monthly timing rate">{{A_PAY}}</output>
+        <p>Purata baki terendah bulanan <strong id="aAvg">{{A_AVG}}</strong> × <span id="aRate">{{A_RATE_TXT}}</span> sen</p>
+      </div>
+      <p class="sr-only" id="aLive" aria-live="polite"></p>
+      <p class="note" id="aExact" hidden></p>
+      <table class="rows">
+        <caption>Selepas <span id="aYearsN">{{A_YEARS}}</span> tahun, dividen dilabur semula</caption>
+        <tbody>
+          <tr><th scope="row">Jumlah simpanan anda</th><td id="aDeposits">{{A_DEPOSITS}}</td></tr>
+          <tr><th scope="row">Jumlah dividen</th><td id="aDivs">{{A_DIVS}}</td></tr>
+          <tr class="total"><th scope="row">Baki selepas <span id="aYearsN2">{{A_YEARS}}</span> tahun</th><td id="aFinal">{{A_FINAL}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note" id="aLimit" hidden></p>
+      <details class="more-opts">
+        <summary>Unjuran tahun demi tahun</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Unjuran tahun demi tahun">
+          <table class="data"><thead><tr><th scope="col">Tahun</th><th scope="col">Simpanan</th><th scope="col">Dividen</th><th scope="col">Baki</th></tr></thead><tbody id="aYears">{{A_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <table class="rows">
+        <caption>Pembiayaan ASB</caption>
+        <tbody>
+          <tr><th scope="row">Ansuran bulanan</th><td id="fPay">{{AF_PAY}}</td></tr>
+          <tr><th scope="row">Jumlah faedah</th><td id="fInterest">{{AF_INTEREST}}</td></tr>
+          <tr><th scope="row">Dividen setahun atas unit dibiayai</th><td id="fDiv">{{AF_DIV}}</td></tr>
+          <tr><th scope="row">Dividen sepanjang tempoh</th><td id="fDivs">{{AF_DIVS}}</td></tr>
+          <tr><th scope="row">Kadar ASB pulang modal<small>Purata faedah setahun ÷ jumlah</small></th><td id="fBreak">{{AF_BREAK}}</td></tr>
+          <tr class="total"><th scope="row">Dividen − faedah</th><td id="fNet">{{AF_NET}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Pembiayaan menganggap dividen dikeluarkan setiap tahun pada kadar di atas; tidak termasuk takaful (MRTT) dan duti setem. Kadar tidak dijamin.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="asbPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">Cara dividen ASB dikira</h2>
+  <p>Harga unit ASB tetap RM1, jadi kadar dalam sen seunit juga ialah peratus pulangan. ASNB mengira agihan dalam tiga langkah:</p>
+  <ol>
+    <li>Ambil <strong>baki terendah dalam setiap bulan</strong> dari Januari hingga Disember.</li>
+    <li>Jumlahkan dua belas baki itu dan bahagi 12 untuk mendapat <strong>purata baki terendah bulanan</strong>.</li>
+    <li>Darab dengan jumlah kadar (dividen + bonus). Jumlah itu dikreditkan sebagai unit baharu sekitar <strong>1 Januari</strong>.</li>
+  </ol>
+  <p>Oleh sebab setiap bulan mengira baki terendahnya, pengeluaran pada 30hb menghapuskan dividen bulan itu bagi wang yang dikeluarkan, dan simpanan pada 2hb perlu menunggu sebulan untuk dikira. Simpan pada 1hb dan, jika perlu, keluarkan pada 1hb bulan berikutnya.</p>
+
+  <h2 id="table-h">Dividen ASB mengikut baki</h2>
+  <p>Dividen setahun bagi baki yang tidak berubah sepanjang tahun.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Baki</th><th scope="col">{{A_LATEST}} ({{A_LATEST_YEAR}})</th><th scope="col">{{A_AVG5}} (purata 5 tahun)</th><th scope="col">4.50% (konservatif)</th></tr></thead>
+      <tbody>
+{{A_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="growth-h">Pertumbuhan simpanan ASB bulanan</h2>
+  <p>Bermula daripada sifar, menyimpan setiap bulan selepas 1hb, pada purata 5 tahun {{A_AVG5}} dengan setiap dividen dilabur semula.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="growth-h">
+    <table class="data">
+      <thead><tr><th scope="col">Simpanan bulanan</th><th scope="col">5 tahun</th><th scope="col">10 tahun</th><th scope="col">20 tahun</th></tr></thead>
+      <tbody>
+{{A_GROWTH}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="history-h">Sejarah dividen ASB</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Dividen</th><th scope="col">Bonus</th><th scope="col">Jumlah seunit</th></tr></thead>
+      <tbody>
+{{A_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kadar {{A_NEXT_YEAR}} biasanya diumumkan pada akhir Disember. Halaman ini dikemas kini sebaik PNB mengumumkannya.</p>
+
+  <h2 id="financing">Loan ASB: bila ia menguntungkan</h2>
+  <p>Dengan pembiayaan ASB, bank meminjamkan wang untuk membeli unit sekali gus dan memegang sijil sebagai cagaran. Anda membayar faedah atas baki pinjaman yang semakin berkurang, tetapi mendapat dividen atas jumlah penuh setiap tahun. Ia menguntungkan selagi kadar ASB kekal di atas <strong>kadar pulang modal</strong> dalam kalkulator. Kadar pembiayaan biasanya berubah mengikut kadar asas bank, dan sesetengah bank mewajibkan perlindungan takaful (MRTT) yang menambah kos.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.businesstoday.com.my/2025/12/19/pnb-declares-5-75-asb-dividend-for-2025-payout-hits-record-rm10-4-billion/" rel="noopener">Business Today: agihan ASB 5.75 sen bagi 2025</a></li>
+    <li><a href="https://www.malaymail.com/news/money/2024/12/24/pnb-announces-asb-dividend-of-575-sen-a-unit-for-2024-its-strongest-delivery-in-five-years/160933" rel="noopener">Malay Mail: agihan ASB bagi 2024</a></li>
+    <li><a href="https://www.nst.com.my/amp/news/nation/2023/12/992873/asnb-declares-income-525-sen-unit-asb" rel="noopener">New Straits Times: agihan ASB bagi 2023</a></li>
+    <li><a href="https://www.asnb.com.my/" rel="noopener">Laman rasmi ASNB</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja, bukan nasihat kewangan. Agihan ASB diisytiharkan setiap tahun oleh PNB dan tidak dijamin; kadar lepas tidak meramalkan kadar akan datang.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Simpanan persaraan dan dividen</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih untuk merancang simpanan</small></a>
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan DSR</small></a>
+  </div>
+</section>

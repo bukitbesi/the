@@ -63,9 +63,14 @@
       "description": "Browse all published tools"
     },
     {
+      "name": "ASB Dividend Calculator",
+      "url": "/asb-dividend-calculator/",
+      "description": "Free ASB dividend calculator: payout from your monthly lowest balance, a 10-year compounding project"
+    },
+    {
       "name": "Car Loan Calculator Malaysia",
       "url": "/car-loan-calculator-malaysia/",
-      "description": "Free car loan calculator under the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, t"
+      "description": "Free car loan calculator for the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, roa"
     },
     {
       "name": "CGPA Calculator",
@@ -151,6 +156,11 @@
       "name": "Pos Laju Tracking",
       "url": "/pos-laju-tracking/",
       "description": "Track a Pos Laju parcel with its 13-character number and see what each status means, from posted ove"
+    },
+    {
+      "name": "Prorated Salary Calculator Malaysia",
+      "url": "/prorated-salary-calculator-malaysia/",
+      "description": "Free prorated salary calculator for Malaysia: part-month pay when joining, resigning or on unpaid le"
     },
     {
       "name": "Malaysia Salary Calculator 2026",

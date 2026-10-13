@@ -1,4 +1,4 @@
-/* Car loan calculator UI (EN + BM). Inputs map to TBBCarLoan.calculate(); state is kept in the URL hash. */
+/* Car loan calculator UI (EN + BM). Inputs map to TBBCarLoan.calculate(), including road tax and insurance; state is kept in the URL hash. */
 (function () {
   'use strict';
   var C = window.TBBCarLoan;
@@ -17,7 +17,7 @@
       return 'Selesai selepas ' + s.after + ' bulan: bayar ' + fmt2.format(s.amount) + ' (baki ansuran ' + fmt.format(s.remaining) + ', jimat ' + fmt.format(s.saved) + ').' +
         (s.extraVsReducing > 0 ? ' Rule of 78 mengenakan ' + fmt.format(s.extraVsReducing) + ' lebih daripada kaedah baki berkurangan.' : '');
     },
-    live: function (r) { return 'Ansuran bulanan ' + fmt2.format(r.monthly) + '.'; }
+    live: function (r) { return 'Ansuran bulanan ' + fmt2.format(r.monthly) + '.' + (r.running ? ' Termasuk cukai jalan dan insurans: ' + fmt2.format(r.running.monthly) + ' sebulan.' : ''); }
   } : {
     rate: { eir: 'Effective interest rate (EIR) a year', flat: 'Flat rate a year' },
     other: { eir: function (r) { return 'Equal to a ' + r.flat.toFixed(2) + '% flat rate'; }, flat: function (r) { return 'Equal to ' + r.eir.toFixed(2) + '% EIR'; } },
@@ -25,12 +25,12 @@
       return 'Settling after ' + s.after + ' months: pay ' + fmt2.format(s.amount) + ' (instalments left ' + fmt.format(s.remaining) + ', you save ' + fmt.format(s.saved) + ').' +
         (s.extraVsReducing > 0 ? ' Rule of 78 costs ' + fmt.format(s.extraVsReducing) + ' more than the reducing-balance method.' : '');
     },
-    live: function (r) { return 'Monthly instalment ' + fmt2.format(r.monthly) + '.'; }
+    live: function (r) { return 'Monthly instalment ' + fmt2.format(r.monthly) + '.' + (r.running ? ' With road tax and insurance: ' + fmt2.format(r.running.monthly) + ' a month.' : ''); }
   };
 
   function read() {
     var o = {};
-    ['price', 'downPct', 'years', 'method', 'rate', 'settleAfter'].forEach(function (k) { o[k] = f(k).value; });
+    ['price', 'downPct', 'years', 'method', 'rate', 'settleAfter', 'cc', 'body', 'ncd'].forEach(function (k) { o[k] = f(k).value; });
     return o;
   }
 
@@ -46,6 +46,13 @@
     $('kDown').textContent = fmt.format(r.downPayment);
     $('kEir').textContent = r.eir.toFixed(2) + '%';
     $('kFlat').textContent = r.flat.toFixed(2) + '%';
+    var run = r.running;
+    $('kRun').hidden = !run;
+    if (run) {
+      $('kRoad').textContent = fmt2.format(run.roadTax);
+      $('kIns').textContent = fmt2.format(run.insurance.total);
+      $('kAll').textContent = fmt2.format(run.monthly);
+    }
     $('kSettle').hidden = !r.settlement;
     $('kSettle').textContent = r.settlement ? T.settle(r, r.settlement) : '';
     $('kLive').textContent = T.live(r);

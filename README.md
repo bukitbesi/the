@@ -77,8 +77,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-kwsp/](https://tool.thebukitbesi.com/kalkulator-kwsp/) | Bahasa Melayu | kalkulator kwsp, dividen kwsp, simpanan persaraan |
 | [/home-loan-calculator-malaysia/](https://tool.thebukitbesi.com/home-loan-calculator-malaysia/) | English | home loan calculator malaysia, loan calculator, stamp duty, DSR |
 | [/kalkulator-pinjaman-perumahan/](https://tool.thebukitbesi.com/kalkulator-pinjaman-perumahan/) | Bahasa Melayu | kalkulator pinjaman perumahan, kalkulator loan rumah, duti setem |
-| [/car-loan-calculator-malaysia/](https://tool.thebukitbesi.com/car-loan-calculator-malaysia/) | English | car loan calculator malaysia, flat rate to EIR, Rule of 78 |
-| [/kalkulator-loan-kereta/](https://tool.thebukitbesi.com/kalkulator-loan-kereta/) | Bahasa Melayu | kalkulator loan kereta, pinjaman kereta, EIR |
+| [/car-loan-calculator-malaysia/](https://tool.thebukitbesi.com/car-loan-calculator-malaysia/) | English | car loan calculator malaysia, flat rate to EIR, Rule of 78, road tax, car insurance |
+| [/kalkulator-loan-kereta/](https://tool.thebukitbesi.com/kalkulator-loan-kereta/) | Bahasa Melayu | kalkulator loan kereta, pinjaman kereta, EIR, cukai jalan, insurans kereta |
+| [/asb-dividend-calculator/](https://tool.thebukitbesi.com/asb-dividend-calculator/) + [/kalkulator-dividen-asb/](https://tool.thebukitbesi.com/kalkulator-dividen-asb/) | English + BM | asb dividend calculator, asb financing calculator; kalkulator dividen asb, loan asb |
+| [/prorated-salary-calculator-malaysia/](https://tool.thebukitbesi.com/prorated-salary-calculator-malaysia/) + [/kalkulator-gaji-prorata/](https://tool.thebukitbesi.com/kalkulator-gaji-prorata/) | English + BM | prorated salary calculator malaysia, unpaid leave deduction; kalkulator gaji prorata |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
@@ -108,7 +110,11 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (home loan):** after each OPR change, Budget or SRO revision, update `FACTS` in `loan-core.js` (`opr`, `oprSince`, `defaultRate`, stamp duty, legal fee bands, first-home rules, `verified`) and `tools-src/tests/loan.test.mjs`. When the Finance Act 2027 passes, relabel the Budget 2027 first-home option.
 
-**Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move.
+**Upkeep (car loan):** `carloan-core.js` models both the reducing-balance EIR method (Hire-Purchase (Amendment) Act, from 1 June 2026) and older flat-rate / Rule of 78 agreements. After 31 March 2027 (end of the transition) review the page copy; update `FACTS.defaultRate` when typical offers move. Road tax (`ROAD_TAX`, Peninsular, individual owners) and the insurance estimate (`INSURANCE_BASE`, former motor tariff, `insuranceSst`) also live in `carloan-core.js`; check them against MyJPJ after each Budget and update `runningVerified`.
+
+**Yearly upkeep (ASB):** when PNB announces the distribution (late December), add a row to `HISTORY` in `asb-core.js` (dividend, bonus, total), update `verified` and the expectations in `tools-src/tests/asb.test.mjs`, and the latest-year FAQ answers on both pages.
+
+**Upkeep (prorated salary):** `prorate-core.js` follows section 18A of the Employment Act 1955 (calendar days). Recheck after any Employment Act amendment and update `FACTS.verified`.
 
 **Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect guide](documentation/blogger-redirects.md) and the [courier link checks](documentation/blogger-redirect-parcel-tracking.md).
 
@@ -153,7 +159,9 @@ assets/js/salary-*.js       salary calculator core and UI (bundled to docs/asset
 assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/10 split, dividend method, RIA benchmarks
 assets/js/loan-core.js      home loan: instalment, amortisation, stamp duty, SRO 2023 legal fees, first-home exemption, DSR
-assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 settlement
+assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 settlement, road tax, insurance estimate
+assets/js/asb-core.js       ASB: dividend on monthly lowest balances, projection with the RM200,000 limit, financing
+assets/js/prorate-core.js   prorated salary: section 18A calendar days, working days, 26-day rate
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)

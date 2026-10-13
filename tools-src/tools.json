@@ -405,6 +405,24 @@
     "live": true
   },
   {
+    "name": "ASB Dividend Calculator",
+    "desc": "Work out your ASB dividend and bonus from each month's lowest balance, project 10+ years of compounding and test whether ASB financing pays. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/asb-dividend-calculator/",
+    "cat": "calc",
+    "icon": "asb-dividend-calculator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Prorated Salary Calculator Malaysia",
+    "desc": "Pay for a part month when joining, resigning or taking unpaid leave, by section 18A of the Employment Act, with working-day and 26-day comparisons. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/prorated-salary-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "prorated-salary-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Home Loan Calculator Malaysia",
     "desc": "Work out your monthly housing loan instalment, total interest, stamp duty and SRO 2023 legal fees, the first-home exemption and how much you can borrow. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/home-loan-calculator-malaysia/",
