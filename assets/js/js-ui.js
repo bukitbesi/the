@@ -205,5 +205,4 @@
   sync();
   // The page ships with the sample already minified with the default options.
   if (changed) run(false);
-  else gzip(output.value, gzRun);
 })();

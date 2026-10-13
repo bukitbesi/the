@@ -216,5 +216,4 @@
   sync();
   // The page ships with the sample already beautified and checked with the default options.
   if (changed) run(false);
-  else gzip(output.value, gzRun);
 })();

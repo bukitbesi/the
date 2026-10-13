@@ -1,6 +1,6 @@
 # The Bukit Besi Tools
 
-> 55 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
+> 56 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
 
 This site hosts its own calculators and a directory of free tools, most of which run on https://www.thebukitbesi.com/. Tools on this site run in the browser and do not send inputs to this site. Last updated 2026-10-12.
 
@@ -39,6 +39,7 @@ This site hosts its own calculators and a directory of free tools, most of which
 - [Semak Tracking Ninja Van: Status Parcel & Ninja Point](https://tool.thebukitbesi.com/semak-tracking-ninja-van/): Semak tracking Ninja Van Malaysia: membuka laman tracking rasmi Ninja Van untuk ID tracking (biasanya bermula NV, NVMY atau MYNJV), menerangkan status seperti Pending Pickup, Re-attempt, To Collect dan Returned to Sender, serta cara Ninja Point berfungsi.
 - [Semak Tracking Parcel: Semua Kurier Malaysia (Pos Laju, J&T, SPX)](https://tool.thebukitbesi.com/semak-tracking-parcel/): Versi Bahasa Melayu: mengenal pasti kurier Malaysia daripada format nombor tracking (Pos Laju, J&T Express, SPX Express, Ninja Van, DHL, GDEX, City-Link, Flash Express, Lazada LEX, Skynet, Line Clear, Aramex, FedEx, UPS) dan membuka laman tracking rasmi kurier dengan nombor telah disalin; menerangkan format nombor tracking, maksud status tracking dan tindakan jika parcel tidak bergerak.
 - [Semak Tracking Pos Laju: Status Parcel & Maksudnya](https://tool.thebukitbesi.com/semak-tracking-pos-laju/): Semak tracking Pos Laju (Pos Malaysia): membuka laman tracking rasmi Pos Malaysia untuk nombor S10 13 aksara, menerangkan format nombor, maksud huruf perkhidmatan, setiap status Pos Laju dan cara mengambil parcel di pejabat pos.
+- [Unused CSS Remover: Remove Unused CSS Online Free](https://tool.thebukitbesi.com/unused-css-remover/): Removes unused CSS in the browser. Inputs: any number of HTML pages, CSS files and JavaScript files (pasted or uploaded), page URLs (stylesheets on each page are discovered automatically, with an optional same-site crawl), and captures of live pages made with a bookmarklet, which include classes added by JavaScript. Exact mode parses each page and tests every selector with querySelector after removing state pseudo-classes such as :hover and pseudo-elements; keyword mode works like PurgeCSS, keeping a selector when all its class, id and tag names appear in the content. Also removes unused selectors from selector lists, unused @keyframes and @font-face rules and, optionally, unused CSS custom properties. Safelist by name or regular expression, with presets for JavaScript state classes, Blogger, WordPress and Bootstrap. Output is minified or formatted, per file or combined, with a report of everything removed. Code is not uploaded.
 
 ## Directory
 
@@ -48,6 +49,7 @@ This site hosts its own calculators and a directory of free tools, most of which
 
 - [JavaScript Minifier & Obfuscator](https://tool.thebukitbesi.com/javascript-minifier/): Minify JavaScript and configure obfuscation options to reduce file size and transform your code.
 - [CSS Minifier](https://tool.thebukitbesi.com/css-minifier/): Compress CSS by removing unnecessary whitespace and comments, then copy or download the result.
+- [Unused CSS Remover](https://tool.thebukitbesi.com/unused-css-remover/): Remove CSS that no page uses: compare stylesheets with pages, files, URLs or live captures, including Blogger themes.
 - [HTML Beautifier & Minifier](https://tool.thebukitbesi.com/html-beautifier/): Format messy HTML for readability or minify it for a smaller file in one tool.
 - [Parse HTML Online](https://www.thebukitbesi.com/p/parse-html.html): Escape HTML and AdSense snippets for use in Blogger XML templates.
 - [HTML Table Generator](https://www.thebukitbesi.com/p/html-table-generator.html): Build HTML tables with customizable styles and copy the generated markup.

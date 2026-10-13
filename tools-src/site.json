@@ -3,6 +3,7 @@
   "mainSite": "https://www.thebukitbesi.com",
   "brand": "The Bukit Besi",
   "dateModified": "2026-10-12",
+  "corsProxy": "",
   "twitter": "@BukitBesiBlog",
   "icon": "/assets/favicon-image/bukit-besi-512.webp",
   "ogImage": {
@@ -14,7 +15,7 @@
   "categories": {
     "dev": {
       "label": "Developer Tools",
-      "blurb": "Minify JavaScript and CSS, format HTML and JSON, generate tables and convert developer data."
+      "blurb": "Minify JavaScript, CSS and HTML, remove unused CSS, format HTML and JSON, generate tables and convert developer data."
     },
     "seo": {
       "label": "SEO Tools",

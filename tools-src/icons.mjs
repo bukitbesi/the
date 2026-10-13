@@ -18,6 +18,7 @@ export const icons = {
   'salary-calculator-malaysia': rect(2, 6, 20, 13) + p('M2 10h20') + text('RM', 6.5).replace('y="15"', 'y="17"'),
   'javascript-minifier-obfuscator': p('m12 2 8 3v6c0 5-4 8-8 11-4-3-8-6-8-11V5Z') + text('JS'),
   'css-minifier-tool': file('CSS'),
+  'unused-css-remover': p('m15 3 6 6-10 10H5v-6Z') + p('m9 9 6 6') + p('M13 21h8'),
   'html-beautifier-online': p('m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18'),
   'parse-html': p('m7 4-4 8 4 8m10-16 4 8-4 8M9 9h6m-6 6h6'),
   'html-table-generator': rect(3, 3, 18, 18) + p('M3 9h18M9 3v18M15 9v12M3 15h18'),
