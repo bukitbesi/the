@@ -1,0 +1,169 @@
+<!--page
+{
+  "path": "/rpgt-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-rpgt/" },
+  "title": "RPGT Calculator Malaysia 2026: Real Property Gains Tax",
+  "description": "Free RPGT calculator 2026: tax on the gain when you sell property in Malaysia, by holding year and seller, with the RM10,000 exemption and 3% retention.",
+  "llms": "Calculates Malaysian Real Property Gains Tax (RPGT) for 2026 under Schedule 5 of the Real Property Gains Tax Act 1976 (rates since 1 January 2022): citizens and PRs 30% within 3 years, 20% in year 4, 15% in year 5 and 0% from year 6; non-citizens 30% within 5 years then 10%; companies 30%, 20%, 15% then 10%. Works out the holding year from the acquisition and disposal dates, deducts acquisition, enhancement and disposal costs, applies the individual exemption of RM10,000 or 10% of the gain (whichever is greater) and the once-in-a-lifetime private residence exemption, and compares the tax with the buyer's 3% retention (7% for non-citizen sellers).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "rpgt",
+  "scripts": ["/assets/js/rpgt.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["RPGT Calculator", null]],
+  "about": ["Real Property Gains Tax", "Selling property in Malaysia", "RPGT exemption", "RPGT retention sum"],
+  "app": {
+    "name": "RPGT Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Holding year from acquisition and disposal dates", "Rates for citizens, non-citizens and companies", "Acquisition, enhancement and disposal costs", "RM10,000 or 10% individual exemption", "Once-in-a-lifetime residence exemption", "3% or 7% retention and refund", "Works offline"]
+  },
+  "citations": [
+    ["LHDN (HASiL): Real Property Gains Tax", "https://www.hasil.gov.my/en/rpgt/"],
+    ["StashAway: RPGT Malaysia 2026 rates and exemptions", "https://www.stashaway.my/r/real-property-gains-tax-rpgt-malaysia"],
+    ["DNH: Increased tax retention for foreign sellers", "https://dnh.com.my/increased-tax-retention-for-foreign-sellers/"],
+    ["CCS & Co: A comprehensive guide to RPGT in Malaysia", "https://ccs-co.com/post/rpgt-a-comprehensive-guide-to-real-property-gains-tax-in-malaysia/"]
+  ],
+  "faq": [
+    { "q": "What are the RPGT rates in 2026?", "a": "For Malaysian citizens and permanent residents: 30% if sold within 3 years, 20% in the 4th year, 15% in the 5th year and 0% from the 6th year. Companies pay 30%, 20%, 15% and then 10%. Non-citizens pay 30% within 5 years and 10% after. These rates have applied since 1 January 2022 and Budget 2026 did not change them." },
+    { "q": "How is RPGT calculated?", "a": "Gain = (sale price − disposal costs) − (purchase price + acquisition costs + enhancement costs). Individuals then deduct RM10,000 or 10% of the gain, whichever is greater, and pay the rate for the holding year. Bought for RM500,000 with RM15,000 costs and sold in the 4th year for RM600,000 with RM12,000 costs: gain RM73,000, minus RM10,000, × 20% = RM12,600." },
+    { "q": "Do I pay RPGT if I sell after 5 years?", "a": "Not if you are a Malaysian citizen or PR: the rate is 0% from the 6th year. You must still file the RPGT return (CKHT 1A) through e-CKHT within 60 days of the sale. Companies and non-citizens pay 10%." },
+    { "q": "What is the once-in-a-lifetime RPGT exemption?", "a": "A citizen or PR can exempt the whole gain on the sale of one private residence once in their lifetime, by electing it in the RPGT return. Keep it for the sale with the largest taxable gain." },
+    { "q": "What is the 3% RPGT retention?", "a": "The buyer, through their lawyer, holds back 3% of the price (7% if the seller is a non-citizen individual) and pays it to LHDN within 60 days. If your RPGT is lower, LHDN refunds the difference after assessment." },
+    { "q": "Which costs reduce RPGT?", "a": "Legal fees, stamp duty, valuation fees and agent commission on the purchase and the sale, and enhancement costs that add value to the property, such as an extension, with receipts. Ordinary repairs, maintenance and loan interest do not count." },
+    { "q": "Is RPGT charged on inherited or gifted property?", "a": "Inheritance is not a disposal. Gifts between husband and wife, parent and child, or grandparent and grandchild are treated as no gain, no loss. When the property is later sold, the RPGT is worked out from the deceased's or giver's position as the rules provide, so keep the old documents." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">RPGT calculator</li></ol></nav>
+  <h1>RPGT Calculator Malaysia</h1>
+  <p class="answer">Malaysians pay <strong>RPGT of 30%</strong> on a property sold within 3 years, <strong>20%</strong> in the 4th year, <strong>15%</strong> in the 5th and <strong>0%</strong> from the 6th, after deducting RM10,000 or 10% of the gain. A RM500,000 house sold for RM600,000 in its 4th year owes <strong>{{R_TAX}}</strong>. Enter your own sale below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-rpgt/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="rpgtForm" novalidate aria-labelledby="rpgt-h">
+      <h2 id="rpgt-h">Your property sale</h2>
+      <div class="field">
+        <label for="owner">Seller</label>
+        <select class="input" id="owner" name="owner">{{R_OWNER_OPTIONS}}</select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="acquired">Bought on</label><div class="input"><input id="acquired" name="acquired" type="date" value="{{R_ACQ}}"></div></div>
+        <div class="field"><label for="disposed">Sold on</label><div class="input"><input id="disposed" name="disposed" type="date" value="{{R_DISP}}"></div></div>
+      </div>
+      <p class="help">Use the dates of the sale and purchase agreements.</p>
+      <fieldset class="field-group">
+        <legend>Buying</legend>
+        <div class="field"><label for="purchase">Purchase price</label><div class="input"><span aria-hidden="true">RM</span><input id="purchase" name="purchase" type="number" inputmode="decimal" min="0" step="1000" value="{{R_PURCHASE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="acqCosts">Buying costs</label><div class="input"><span aria-hidden="true">RM</span><input id="acqCosts" name="acqCosts" type="number" inputmode="decimal" min="0" step="100" value="{{R_ACQ_COSTS}}"></div></div>
+          <div class="field"><label for="enhance">Improvements</label><div class="input"><span aria-hidden="true">RM</span><input id="enhance" name="enhance" type="number" inputmode="decimal" min="0" step="100" value="{{R_ENHANCE}}"></div></div>
+        </div>
+        <p class="help">Buying costs: legal fees, stamp duty, valuation. Improvements: extensions and renovations that add value, with receipts.</p>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Selling</legend>
+        <div class="field-row">
+          <div class="field"><label for="sale">Sale price</label><div class="input"><span aria-hidden="true">RM</span><input id="sale" name="sale" type="number" inputmode="decimal" min="0" step="1000" value="{{R_SALE}}"></div></div>
+          <div class="field"><label for="saleCosts">Selling costs</label><div class="input"><span aria-hidden="true">RM</span><input id="saleCosts" name="saleCosts" type="number" inputmode="decimal" min="0" step="100" value="{{R_SALE_COSTS}}"></div></div>
+        </div>
+        <p class="help">Selling costs: agent commission and legal fees.</p>
+      </fieldset>
+      <div class="field" id="rResidenceField">
+        <label for="residence">Exempt as your once-in-a-lifetime residence?</label>
+        <select class="input" id="residence" name="residence">{{R_RES_OPTIONS}}</select>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="rpgt-result-h">
+      <h2 id="rpgt-result-h">Your RPGT</h2>
+      <div class="net">
+        <p>Real property gains tax</p>
+        <output id="rTax" for="owner acquired disposed purchase acqCosts enhance sale saleCosts residence">{{R_TAX}}</output>
+        <p><span id="rYear">{{R_YEAR}}</span></p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>How it is worked out</caption>
+        <tbody>
+          <tr><th scope="row">Sale price less selling costs</th><td id="rNet">{{R_NET}}</td></tr>
+          <tr><th scope="row">Purchase price, buying costs and improvements</th><td id="rCost">{{R_COST}}</td></tr>
+          <tr><th scope="row">Gain</th><td id="rGain">{{R_GAIN}}</td></tr>
+          <tr><th scope="row">Exemption</th><td id="rExempt">{{R_EXEMPT}}</td></tr>
+          <tr class="total"><th scope="row">Chargeable gain</th><td id="rCharge">{{R_CHARGE}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Retention by the buyer</caption>
+        <tbody>
+          <tr><th scope="row">Retained (<span id="rRetPct">{{R_RET_PCT}}</span>% of the price)</th><td id="rRet">{{R_RET}}</td></tr>
+          <tr class="total"><th scope="row" id="rRefundLabel">{{R_REFUND_LABEL}}</th><td id="rRefund">{{R_REFUND}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">The lawyer handling the sale confirms the retention; company sellers should check the rate that applies to them. File CKHT 1A through e-CKHT within 60 days, even when the tax is zero.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rpgtPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">RPGT rates 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Year of sale</th><th scope="col">Citizen or PR</th><th scope="col">Non-citizen</th><th scope="col">Company</th></tr></thead>
+      <tbody>
+{{R_RATES}}
+      </tbody>
+    </table>
+  </div>
+  <p>The year counts from the date of the purchase agreement to the date of the sale agreement. Selling 3 years and a day after buying moves you into the 4th year.</p>
+
+  <h2 id="examples-h">RPGT on a RM100,000 gain</h2>
+  <p>Bought for RM400,000 and sold for RM500,000, with no other costs.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Year of sale</th><th scope="col">Citizen or PR</th><th scope="col">Non-citizen</th><th scope="col">Company</th></tr></thead>
+      <tbody>
+{{R_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">How RPGT works, step by step</h2>
+  <ol>
+    <li><strong>Net sale:</strong> sale price minus agent commission and legal fees.</li>
+    <li><strong>Total cost:</strong> purchase price plus legal fees, stamp duty and valuation, plus improvements that add value. For property bought before 2000, the market value on 1 January 2000 replaces the price.</li>
+    <li><strong>Gain:</strong> net sale minus total cost. A loss can be set against other gains.</li>
+    <li><strong>Exemption:</strong> individuals deduct RM10,000 or 10% of the gain, whichever is greater. A citizen or PR may instead exempt one private residence once in a lifetime.</li>
+    <li><strong>Tax:</strong> chargeable gain × the rate for the year of sale.</li>
+    <li><strong>Retention and filing:</strong> the buyer's lawyer pays 3% of the price (7% for a non-citizen seller) to LHDN; you file CKHT 1A and the buyer files CKHT 2A within 60 days.</li>
+  </ol>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.hasil.gov.my/en/rpgt/" rel="noopener">LHDN (HASiL): Real Property Gains Tax</a></li>
+    <li><a href="https://www.stashaway.my/r/real-property-gains-tax-rpgt-malaysia" rel="noopener">StashAway: RPGT 2026 rates and exemptions</a></li>
+    <li><a href="https://dnh.com.my/increased-tax-retention-for-foreign-sellers/" rel="noopener">DNH: retention for foreign sellers</a></li>
+    <li><a href="https://ccs-co.com/post/rpgt-a-comprehensive-guide-to-real-property-gains-tax-in-malaysia/" rel="noopener">CCS &amp; Co: guide to RPGT</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate, not tax advice. LHDN's assessment decides the tax; special cases such as inherited, gifted or pre-2000 property have their own rules.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+    <a href="/land-size-converter-malaysia/">Land Size Converter<small>Acres, relung, sq ft and price per sq ft</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Yearly tax and reliefs</small></a>
+  </div>
+</section>

@@ -25,6 +25,9 @@ const carCore = require('../assets/js/carloan-core.js');
 const asbCore = require('../assets/js/asb-core.js');
 const prorateCore = require('../assets/js/prorate-core.js');
 const otCore = require('../assets/js/ot-core.js');
+const landCore = require('../assets/js/land-core.js');
+const plCore = require('../assets/js/personal-core.js');
+const rpgtCore = require('../assets/js/rpgt-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -609,6 +612,79 @@ function otMap(lang) {
     O_VERIFIED: longDate(F.verified, lang), O_VERIFIED_ISO: F.verified
   };
 }
+// ---- Land size converter (ukuran tanah), EN + BM
+const LAND_EXAMPLE = { value: 1, unit: 'relung' };
+function landMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, N = landCore.NAMES[lang], loc = L ? 'ms-MY' : 'en-MY';
+  const fmt = n => new Intl.NumberFormat(loc, { maximumFractionDigits: n >= 1000 ? 0 : n >= 100 ? 2 : 4 }).format(n);
+  const s = landCore.convert(LAND_EXAMPLE.value, LAND_EXAMPLE.unit), all = landCore.all(s), arp = landCore.toArp(s);
+  const opt = (v, label, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${label}</option>`;
+  const lower = t => L ? t.toLowerCase() : t.toLowerCase();
+  const link = (u, v) => `<a href="#landForm" data-land="${u}:${v}">${fmt(v)} ${lower(N[u])}</a>`;
+  const cheat = [['acre', 1], ['hectare', 1], ['relung', 1], ['orlong', 1], ['rood', 1], ['pole', 1], ['jemba', 1], ['sqm', 1000], ['sqft', 10000]].map(([u, v]) => {
+    const a = landCore.all(landCore.convert(v, u));
+    return `<tr><th scope="row">${link(u, v)}</th><td>${fmt(a.sqft)}</td><td>${fmt(a.sqm)}</td><td>${fmt(a.acre)}</td><td>${fmt(a.relung)}</td></tr>`;
+  }).join('\n');
+  const lots = [[20, 70], [22, 75], [24, 80], [40, 80], [50, 100], [60, 120]].map(([l, w]) => {
+    const a = landCore.all(landCore.rect(l, w, 'ft'));
+    return `<tr><th scope="row">${l} × ${w} ft</th><td>${fmt(a.sqft)}</td><td>${fmt(a.sqm)}</td><td>${fmt(a.acre)}</td></tr>`;
+  }).join('\n');
+  return {
+    D_VALUE: LAND_EXAMPLE.value,
+    D_UNIT_OPTIONS: landCore.ORDER.map(u => opt(u, N[u], u === LAND_EXAMPLE.unit)).join(''),
+    D_MODE_OPTIONS: [opt('area', L ? 'Nilai dan unit' : 'A value and unit', true), opt('arp', L ? 'Ekar, rod dan pole (geran lama)' : 'Acres, roods and poles (old title)'), opt('rect', L ? 'Panjang × lebar lot' : 'Lot length × width')].join(''),
+    D_SIDE_OPTIONS: [opt('ft', L ? 'kaki' : 'feet', true), opt('m', L ? 'meter' : 'metres')].join(''),
+    D_MAIN: fmt(all.sqft) + ' sq ft', D_SUB: `${fmt(all.acre)} ${lower(N.acre)} · ${fmt(all.sqm)} m² · ${fmt(all.relung)} relung`,
+    D_ROWS: landCore.ORDER.map(u => `<tr><th scope="row">${N[u]}</th><td id="lu-${u}">${fmt(all[u])}</td></tr>`).join('\n'),
+    D_ARP: `${arp.a}a ${arp.r}r ${arp.p}p`, D_CHEAT: cheat, D_LOTS: lots,
+    D_VERIFIED: longDate(landCore.FACTS.verified, lang), D_VERIFIED_ISO: landCore.FACTS.verified
+  };
+}
+// ---- Personal loan (pinjaman peribadi), EN + BM
+const PL_EXAMPLE = { amount: 30000, years: 5, method: 'flat', rate: plCore.FACTS.defaultFlat, stamp: 'deducted' };
+function personalMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, F = plCore.FACTS, r = plCore.calculate(PL_EXAMPLE);
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const pct = n => n.toFixed(2) + '%';
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const at = (amount, years, rate) => plCore.calculate({ amount, years, rate });
+  return {
+    Q_AMOUNT: PL_EXAMPLE.amount, Q_YEARS: PL_EXAMPLE.years, Q_RATE: PL_EXAMPLE.rate,
+    Q_METHOD_OPTIONS: [opt('flat', 'Flat rate (most bank offers in 2026)', 'Kadar rata (kebanyakan tawaran bank 2026)', true), opt('eir', 'Reducing balance (EIR)', 'Baki berkurangan (EIR)')].join(''),
+    Q_STAMP_OPTIONS: [opt('deducted', 'Deducted from the loan', 'Ditolak daripada pinjaman', true), opt('separate', 'Paid separately', 'Dibayar berasingan')].join(''),
+    Q_RATE_LABEL: L ? 'Kadar rata (flat) setahun' : 'Flat rate a year',
+    Q_PAY: money(r.monthly, lang), Q_AMT: rm0(r.amount), Q_TERM: r.years, Q_OTHER: L ? `Bersamaan EIR ${pct(r.eir)}` : `Equal to ${pct(r.eir)} EIR`,
+    Q_INTEREST: rm0(r.interest), Q_EIR: pct(r.eir), Q_FLAT: pct(r.flat), Q_STAMP: money(r.stamp, lang), Q_RECEIVED: money(r.received, lang), Q_COST: rm0(r.cost),
+    Q_SCHEDULE: r.schedule.map(y => `<tr><th scope="row">${y.year}</th><td>${rm0(y.principal)}</td><td>${rm0(y.interest)}</td><td>${rm0(y.balance)}</td></tr>`).join('\n'),
+    Q_TABLE: [10000, 20000, 30000, 50000, 100000].map(a => `<tr><th scope="row">${rm0(a)}</th>${[3, 5, 7, 10].map(y => `<td>${money(at(a, y, F.defaultFlat).monthly, lang)}</td>`).join('')}</tr>`).join('\n'),
+    Q_CONVERT: [4, 5, 6, 7, 8].map(fr => `<tr><th scope="row">${pct(fr)}</th>${[3, 5, 7, 10].map(y => `<td>${pct(at(10000, y, fr).eir)}</td>`).join('')}</tr>`).join('\n'),
+    Q_DEFAULT: pct(F.defaultFlat), Q_BAN: longDate(F.flatBanFrom, lang),
+    Q_VERIFIED: longDate(F.verified, lang), Q_VERIFIED_ISO: F.verified
+  };
+}
+// ---- RPGT (cukai keuntungan harta tanah), EN + BM
+const RPGT_EXAMPLE = { owner: 'citizen', acquired: '2023-03-01', disposed: '2026-06-01', purchase: 500000, acqCosts: 15000, enhance: 0, sale: 600000, saleCosts: 12000, residence: 'no' };
+function rpgtMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, F = rpgtCore.FACTS, r = rpgtCore.calculate(RPGT_EXAMPLE);
+  const m = n => money(n, lang);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const yearText = r.year <= 3 ? (L ? 'Dalam 3 tahun' : 'Within 3 years') : (L ? `Tahun ke-${r.year}` : `Year ${r.year}`) + (r.year >= 6 ? (L ? ' dan seterusnya' : ' or later') : '');
+  const owners = [['citizen', 'Citizen or PR', 'Warganegara atau PR'], ['foreigner', 'Non-citizen', 'Bukan warganegara'], ['company', 'Company', 'Syarikat']];
+  const years = [[1, '1–3'], [4, '4'], [5, '5'], [6, L ? '6 dan seterusnya' : '6 and later']];
+  const gainTax = (owner, year) => rpgtCore.calculate({ owner, acquired: '2020-01-01', disposed: `${2020 + year - 1}-06-01`, purchase: 400000, sale: 500000 }).tax;
+  return {
+    R_OWNER_OPTIONS: owners.map(([v, en, bm], i) => opt(v, en, bm, i === 0)).join(''),
+    R_RES_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes, use my once-in-a-lifetime exemption', 'Ya, guna pengecualian sekali seumur hidup')].join(''),
+    R_ACQ: RPGT_EXAMPLE.acquired, R_DISP: RPGT_EXAMPLE.disposed, R_PURCHASE: RPGT_EXAMPLE.purchase, R_ACQ_COSTS: RPGT_EXAMPLE.acqCosts,
+    R_ENHANCE: RPGT_EXAMPLE.enhance, R_SALE: RPGT_EXAMPLE.sale, R_SALE_COSTS: RPGT_EXAMPLE.saleCosts,
+    R_TAX: m(r.tax), R_YEAR: `${yearText} · ${r.rate}%`, R_NET: m(r.net), R_COST: m(r.cost), R_GAIN: m(r.gain), R_EXEMPT: m(r.exemption),
+    R_CHARGE: m(r.chargeable), R_RET_PCT: r.retentionPct, R_RET: m(r.retention), R_REFUND: m(Math.abs(r.refund)),
+    R_REFUND_LABEL: r.refund >= 0 ? (L ? 'Baki tahanan dipulangkan' : 'Retention refunded to you') : (L ? 'Baki cukai perlu dibayar' : 'Tax still to pay'),
+    R_RATES: years.map(([y, label]) => `<tr><th scope="row">${label}</th>${owners.map(([o]) => `<td>${rpgtCore.rateFor(o, y)}%</td>`).join('')}</tr>`).join('\n'),
+    R_EXAMPLES: years.map(([y, label]) => `<tr><th scope="row">${label}</th>${owners.map(([o]) => `<td>${m(gainTax(o, y))}</td>`).join('')}</tr>`).join('\n'),
+    R_VERIFIED: longDate(F.verified, lang), R_VERIFIED_ISO: F.verified
+  };
+}
 // ---- Parcel tracking (EN + BM): the tracker box, courier directory and number-format table come from
 // tracking-core.js. Courier pages set "courier" in front matter to preset the tracker to that courier.
 const TRACK_TEXT = {
@@ -836,7 +912,7 @@ function purgeMap() {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -949,6 +1025,9 @@ const bundles = {
   'asb.js': ['assets/js/asb-core.js', 'assets/js/asb-ui.js'],
   'prorate.js': ['assets/js/prorate-core.js', 'assets/js/prorate-ui.js'],
   'overtime.js': ['assets/js/ot-core.js', 'assets/js/ot-ui.js'],
+  'land.js': ['assets/js/land-core.js', 'assets/js/land-ui.js'],
+  'personal-loan.js': ['assets/js/carloan-core.js', 'assets/js/personal-core.js', 'assets/js/personal-ui.js'],
+  'rpgt.js': ['assets/js/rpgt-core.js', 'assets/js/rpgt-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

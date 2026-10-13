@@ -82,6 +82,9 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/asb-dividend-calculator/](https://tool.thebukitbesi.com/asb-dividend-calculator/) + [/kalkulator-dividen-asb/](https://tool.thebukitbesi.com/kalkulator-dividen-asb/) | English + BM | asb dividend calculator, asb financing calculator; kalkulator dividen asb, loan asb |
 | [/prorated-salary-calculator-malaysia/](https://tool.thebukitbesi.com/prorated-salary-calculator-malaysia/) + [/kalkulator-gaji-prorata/](https://tool.thebukitbesi.com/kalkulator-gaji-prorata/) | English + BM | prorated salary calculator malaysia, unpaid leave deduction; kalkulator gaji prorata |
 | [/overtime-calculator-malaysia/](https://tool.thebukitbesi.com/overtime-calculator-malaysia/) + [/kalkulator-ot/](https://tool.thebukitbesi.com/kalkulator-ot/) | English + BM | overtime calculator malaysia, public holiday pay; kalkulator OT akta kerja, kira gaji OT |
+| [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
+| [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
+| [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
@@ -118,6 +121,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (prorated salary):** `prorate-core.js` follows section 18A of the Employment Act 1955 (calendar days). Recheck after any Employment Act amendment and update `FACTS.verified`.
 
 **Upkeep (overtime):** `ot-core.js` holds the Employment Act rates, the RM4,000 First Schedule threshold, the 104-hour limit and the minimum wage (`FACTS`). Update them after any Employment Act amendment or minimum wage order, then `FACTS.verified` and `tools-src/tests/ot.test.mjs`.
+
+**Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
+
+**Upkeep (RPGT):** `rpgt-core.js` holds the Schedule 5 rates, the individual exemption and the retention rates. Check after each Budget and update `FACTS.verified` and `tools-src/tests/rpgt.test.mjs`.
+
+**Land converter:** `land-core.js` defines every unit in square feet (relung 30,976, orlong 57,600, jemba 64); no yearly upkeep.
 
 **Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect guide](documentation/blogger-redirects.md) and the [courier link checks](documentation/blogger-redirect-parcel-tracking.md).
 
@@ -166,6 +175,9 @@ assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 se
 assets/js/asb-core.js       ASB: dividend on monthly lowest balances, projection with the RM200,000 limit, financing
 assets/js/prorate-core.js   prorated salary: section 18A calendar days, working days, 26-day rate
 assets/js/ot-core.js        overtime: ORP, hourly rate, 1.5×/2×/3× rates, rest day and public holiday pay
+assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
+assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
+assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)
