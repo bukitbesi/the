@@ -4,10 +4,10 @@
 (function (root) {
   'use strict';
 
-  // [year, dividend sen, bonus sen, total sen]; null where the split was not confirmed.
+  // [year, dividend sen, bonus sen, total sen, note]. 2020's bonus includes a 0.75 sen Ehsan bonus on the first 30,000 units.
   var HISTORY = [
     [2019, 5.00, 0.50, 5.50],
-    [2020, null, null, 5.00],
+    [2020, 3.50, 1.50, 5.00, 'ehsan'],
     [2021, 4.25, 0.75, 5.00],
     [2022, 3.35, 1.25, 4.60],
     [2023, 4.25, 1.00, 5.25],
@@ -17,7 +17,7 @@
   var last = HISTORY[HISTORY.length - 1];
   var five = HISTORY.slice(-5);
   var FACTS = {
-    verified: '2026-10-13', inputLimit: 200000,
+    verified: '2026-10-14', inputLimit: 200000,
     latest: last[3], latestYear: last[0], latestDividend: last[1], latestBonus: last[2],
     average5: Math.round(five.reduce(function (s, h) { return s + h[3]; }, 0) / five.length * 100) / 100,
     conservative: 4.5, defaultFinancingRate: 4.25, defaultFinancingYears: 20

@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://tool.thebukitbesi.com/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/asb-dividend-calculator/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-dividen-asb/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/car-loan-calculator-malaysia/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/car-loan-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-loan-kereta/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/car-loan-calculator-malaysia/"/>
@@ -103,7 +103,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-dividen-asb/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-dividen-asb/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
@@ -131,10 +131,17 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-loan-kereta/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-loan-kereta/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/car-loan-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/car-loan-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-ot/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-ot/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/overtime-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/overtime-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-pinjaman-perumahan/</loc>
@@ -163,6 +170,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ninja-van-tracking/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-tracking-ninja-van/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ninja-van-tracking/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/overtime-calculator-malaysia/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/overtime-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-ot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/overtime-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/parcel-tracking-malaysia/</loc>

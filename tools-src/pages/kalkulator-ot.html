@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/kalkulator-ot/",
+  "lang": "ms",
+  "alternates": { "en": "/overtime-calculator-malaysia/" },
+  "title": "Kalkulator OT 2026: Kira Gaji Lebih Masa Ikut Akta Kerja 1955",
+  "description": "Kalkulator OT percuma: kira bayaran kerja lebih masa, hari rehat dan cuti umum ikut Akta Kerja 1955, dengan kadar sejam, had RM4,000 dan had 104 jam sebulan.",
+  "llms": "Mengira bayaran kerja lebih masa (OT) di Malaysia mengikut Akta Kerja 1955 seperti dipinda mulai 1 Januari 2023: kadar gaji biasa (gaji bulanan ÷ 26, atau gaji harian), kadar gaji sejam (ORP ÷ waktu kerja biasa sehari), OT hari biasa 1.5×, kerja hari rehat (setengah atau satu hari ORP bagi gaji bulanan, satu atau dua hari bagi gaji harian) dan OT hari rehat 2×, kerja cuti umum dua hari ORP dan OT cuti umum 3×; menandakan had liputan RM4,000, pekerja manual dan Jadual Pertama lain, serta had OT 104 jam sebulan.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ot",
+  "scripts": ["/assets/js/overtime.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator OT", null]],
+  "about": ["Kerja lebih masa", "Akta Kerja 1955", "Kadar gaji biasa", "Bayaran cuti umum di Malaysia"],
+  "app": {
+    "name": "Kalkulator OT",
+    "category": "BusinessApplication",
+    "features": ["Kadar gaji biasa dan kadar gaji sejam", "OT hari biasa 1.5×", "Bayaran hari rehat dan OT hari rehat 2×", "Bayaran cuti umum dan OT 3×", "Gaji bulanan atau gaji harian", "Semakan had RM4,000 dan 104 jam", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Akta Kerja 1955 (Akta 265), teks dikemas kini, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Zul Rafique & Partners: Kerja lebih masa di bawah pindaan 2022 Akta Kerja 1955", "https://zulrafique.com.my/ckfinder/userfiles/files/Infographic%20-%20Overtime%20Pay%20under%20the%202022%20Amendment%20-%20Employment%20Act%201955(1).pdf"],
+    ["AltHR: Cara mengira bayaran kerja lebih masa di Malaysia", "https://althr.my/resources/calculate-overtime-pay-employees-malaysia"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira gaji OT di Malaysia?", "a": "Bahagikan gaji bulanan dengan 26 untuk mendapat kadar gaji biasa (ORP), bahagikan dengan waktu kerja biasa sehari untuk mendapat kadar sejam, kemudian bayar sekurang-kurangnya 1.5 kali kadar sejam bagi setiap jam OT pada hari kerja biasa. Bagi gaji RM2,600 dan 8 jam sehari, ORP ialah RM100, kadar sejam RM12.50 dan OT RM18.75 sejam, jadi 10 jam bernilai RM187.50." },
+    { "q": "Siapa layak mendapat bayaran OT di bawah Akta Kerja?", "a": "Mulai 1 Januari 2023 Akta Kerja meliputi semua pekerja di Semenanjung Malaysia dan Labuan, tetapi kadar OT, hari rehat dan cuti umum hanya dijamin bagi pekerja bergaji sehingga RM4,000 sebulan, serta pekerja manual, pemandu, pekerja domestik dan penyelia pekerja manual tanpa mengira gaji. Bagi pekerja lain, kontrak pekerjaan menentukan syarat OT." },
+    { "q": "Berapa bayaran bekerja pada hari rehat?", "a": "Bagi pekerja bergaji bulanan, bekerja hingga separuh waktu biasa pada hari rehat dibayar setengah hari ORP, dan melebihi separuh hingga waktu biasa dibayar satu hari ORP. Jam melebihi waktu biasa dibayar sekurang-kurangnya dua kali kadar sejam. Bagi gaji RM2,600, jumlahnya RM50, RM100 dan RM25 sejam. Pekerja bergaji harian mendapat satu atau dua hari gaji." },
+    { "q": "Berapa bayaran bekerja pada cuti umum?", "a": "Dua hari gaji pada kadar gaji biasa sebagai tambahan kepada gaji cuti yang sudah diterima, dan sekurang-kurangnya tiga kali kadar sejam bagi jam melebihi waktu biasa. Bagi gaji RM2,600, jumlahnya RM200 untuk hari itu dan RM37.50 bagi setiap jam OT." },
+    { "q": "Berapa kadar OT bagi gaji minimum?", "a": "Pada gaji minimum RM1,700 dan 8 jam sehari, kadar gaji biasa ialah RM65.38, kadar sejam RM8.17 dan OT RM12.26 sejam pada hari biasa." },
+    { "q": "Berapa had maksimum OT sebulan?", "a": "104 jam sebulan di bawah Peraturan-Peraturan Kerja (Had Kerja Lebih Masa) 1980. Waktu kerja biasa dihadkan kepada 8 jam sehari dan 45 jam seminggu mulai 1 Januari 2023." },
+    { "q": "Adakah bayaran OT dikira dalam kadar 26 hari?", "a": "Tidak. Kadar gaji biasa berdasarkan upah, yang tidak termasuk bayaran OT, jadi OT tidak menaikkan kadar yang digunakan untuk membayar OT seterusnya. Elaun tetap yang menjadi sebahagian daripada upah turut dikira." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator OT</li></ol></nav>
+  <h1>Kalkulator OT (Kerja Lebih Masa)</h1>
+  <p class="answer">Gaji OT = <strong>gaji bulanan ÷ 26 ÷ waktu kerja biasa sehari × 1.5</strong> bagi setiap jam tambahan pada hari biasa, mengikut Akta Kerja 1955. Bagi gaji RM2,600 dengan 8 jam sehari, kadar sejam ialah {{O_HRP}} dan OT <strong>{{O_OT}} sejam</strong>. OT hari rehat dibayar 2× dan cuti umum 3×. Masukkan angka anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{O_VERIFIED_ISO}}">{{O_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/overtime-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="otForm" novalidate aria-labelledby="ot-h">
+      <h2 id="ot-h">Gaji dan jam anda bulan ini</h2>
+      <div class="field-row">
+        <div class="field">
+          <label for="basis">Jenis gaji</label>
+          <select class="input" id="basis" name="basis">{{O_BASIS_OPTIONS}}</select>
+        </div>
+        <div class="field"><label for="hoursPerDay">Waktu biasa sehari</label><div class="input"><input id="hoursPerDay" name="hoursPerDay" type="number" inputmode="decimal" min="1" max="12" step="0.5" value="{{O_HOURS}}"><span aria-hidden="true">jam</span></div></div>
+      </div>
+      <div class="field"><label for="wage" id="wageLabel">{{O_WAGE_LABEL}}</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="50" value="{{O_WAGE}}"></div><p class="help">Gaji pokok dan elaun tetap yang dikira sebagai upah; bukan OT.</p></div>
+      <div class="field">
+        <label for="specified">Kerja manual atau pekerjaan Jadual Pertama lain?</label>
+        <select class="input" id="specified" name="specified">{{O_SPECIFIED_OPTIONS}}</select>
+        <p class="help">Pekerja manual, pemandu, pekerja domestik dan penyelia pekerja manual mendapat kadar Akta pada sebarang gaji.</p>
+      </div>
+      <fieldset class="field-group">
+        <legend>Hari kerja biasa</legend>
+        <div class="field"><label for="normalOt">Jam OT</label><div class="input"><input id="normalOt" name="normalOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_NORMAL}}"><span aria-hidden="true">jam</span></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Hari rehat</legend>
+        <div class="field-row">
+          <div class="field"><label for="restHalf">Hari, hingga separuh waktu biasa</label><div class="input"><input id="restHalf" name="restHalf" type="number" inputmode="numeric" min="0" step="1" value="{{O_REST_HALF}}"><span aria-hidden="true">hari</span></div></div>
+          <div class="field"><label for="restFull">Hari, melebihi separuh waktu biasa</label><div class="input"><input id="restFull" name="restFull" type="number" inputmode="numeric" min="0" step="1" value="{{O_REST_FULL}}"><span aria-hidden="true">hari</span></div></div>
+        </div>
+        <div class="field"><label for="restOt">Jam melebihi waktu biasa pada hari rehat</label><div class="input"><input id="restOt" name="restOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_REST_OT}}"><span aria-hidden="true">jam</span></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Cuti umum</legend>
+        <div class="field-row">
+          <div class="field"><label for="holidayDays">Cuti umum bekerja</label><div class="input"><input id="holidayDays" name="holidayDays" type="number" inputmode="numeric" min="0" step="1" value="{{O_PH}}"><span aria-hidden="true">hari</span></div></div>
+          <div class="field"><label for="holidayOt">Jam OT</label><div class="input"><input id="holidayOt" name="holidayOt" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_PH_OT}}"><span aria-hidden="true">jam</span></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="ot-result-h">
+      <h2 id="ot-result-h">Bayaran OT anda</h2>
+      <div class="net">
+        <p>Bayaran OT, hari rehat dan cuti umum</p>
+        <output id="oTotal" for="wage basis hoursPerDay normalOt restHalf restFull restOt holidayDays holidayOt">{{O_TOTAL}}</output>
+        <p>Kadar sehari (ORP) <strong id="oOrp">{{O_ORP}}</strong> · sejam <span id="oHrp">{{O_HRP}}</span> · OT <span id="oOt">{{O_OT}}</span> sejam</p>
+      </div>
+      <p class="sr-only" id="oLive" aria-live="polite"></p>
+      <p class="callout" id="oCovered" hidden>Melebihi RM4,000 sebulan, kadar OT Akta tidak dijamin kecuali anda melakukan kerja manual atau pekerjaan Jadual Pertama lain. Kontrak anda menentukan; angka di sini ialah kadar statutori.</p>
+      <p class="callout" id="oCap" hidden>Lebih daripada 104 jam OT sebulan melebihi had undang-undang.</p>
+      <p class="callout" id="oMin" hidden>Ini di bawah gaji minimum RM1,700 sebulan.</p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="oLines">
+{{O_LINES}}
+        </tbody>
+      </table>
+      <p class="sr-only" id="oTotalLabel">{{O_TOTAL_LABEL}}</p>
+      <p class="note">Dibayar sebagai tambahan kepada gaji bulanan biasa. Akta menetapkan kadar minimum; kontrak anda boleh membayar lebih.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="otPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="formula">Formula kira OT</h2>
+  <ol>
+    <li><strong>Kadar gaji biasa (ORP):</strong> gaji bulanan ÷ 26 (seksyen 60I). Pekerja bergaji harian menggunakan gaji harian.</li>
+    <li><strong>Kadar gaji sejam:</strong> ORP ÷ waktu kerja biasa sehari.</li>
+    <li><strong>OT hari biasa:</strong> sekurang-kurangnya 1.5 × kadar sejam bagi setiap jam (seksyen 60A).</li>
+    <li><strong>Hari rehat:</strong> hingga separuh waktu biasa, ½ hari ORP; melebihi separuh, 1 hari ORP; melebihi waktu biasa, 2 × kadar sejam (seksyen 60). Gaji harian: 1 atau 2 hari gaji.</li>
+    <li><strong>Cuti umum:</strong> 2 hari ORP sebagai tambahan kepada gaji cuti; melebihi waktu biasa, 3 × kadar sejam (seksyen 60D).</li>
+  </ol>
+  <p>Pada gaji minimum RM1,700, kadarnya ialah {{O_MIN_ORP}} sehari, {{O_MIN_HRP}} sejam dan <strong>{{O_MIN_OT}}</strong> bagi setiap jam OT.</p>
+
+  <h2 id="table-h">Kadar OT mengikut gaji (8 jam sehari)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gaji bulanan</th><th scope="col">ORP (÷ 26)</th><th scope="col">Sejam</th><th scope="col">OT 1.5×</th><th scope="col">Hari rehat 2×</th><th scope="col">Cuti umum 3×</th></tr></thead>
+      <tbody>
+{{O_TABLE}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="who">Siapa layak menerima kadar ini</h2>
+  <p>Mulai 1 Januari 2023 Akta Kerja melindungi semua pekerja di Semenanjung Malaysia dan Labuan. Kadar OT, hari rehat dan cuti umum dalam Jadual Pertama terpakai kepada:</p>
+  <ul>
+    <li>pekerja bergaji <strong>sehingga RM4,000 sebulan</strong>, dan</li>
+    <li>tanpa mengira gaji: pekerja manual, pemandu dan pengendali kenderaan bermotor, penyelia pekerja manual, serta pekerja domestik.</li>
+  </ul>
+  <p>Waktu kerja biasa dihadkan kepada <strong>8 jam sehari dan 45 jam seminggu</strong>, dan OT kepada <strong>104 jam sebulan</strong>. Sabah dan Sarawak mempunyai Ordinan Buruh sendiri.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Akta Kerja 1955 (Akta 265), JTKSM</a></li>
+    <li><a href="https://zulrafique.com.my/ckfinder/userfiles/files/Infographic%20-%20Overtime%20Pay%20under%20the%202022%20Amendment%20-%20Employment%20Act%201955(1).pdf" rel="noopener">Zul Rafique &amp; Partners: OT di bawah pindaan 2022</a></li>
+    <li><a href="https://althr.my/resources/calculate-overtime-pay-employees-malaysia" rel="noopener">AltHR: cara mengira bayaran OT di Malaysia</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Alat bantuan pengiraan, bukan nasihat undang-undang. Kontrak pekerjaan anda dan Jabatan Tenaga Kerja (JTKSM) menentukan kes yang dipertikaikan.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+    <a href="/kalkulator-gaji-prorata/">Kalkulator Gaji Prorata<small>Gaji bulan tidak lengkap atau cuti tanpa gaji</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai tahunan dan pelepasan</small></a>
+  </div>
+</section>
