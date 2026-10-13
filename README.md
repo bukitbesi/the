@@ -91,6 +91,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/jnt-near-me/](https://tool.thebukitbesi.com/jnt-near-me/) + [/jnt-terdekat/](https://tool.thebukitbesi.com/jnt-terdekat/) | English + BM | j&t near me, j&t near me drop off / open now; j&t terdekat |
 | [/css-minifier/](https://tool.thebukitbesi.com/css-minifier/) | English | css minifier, minify css online, css compressor, css beautifier / unminify |
 | [/javascript-minifier/](https://tool.thebukitbesi.com/javascript-minifier/) | English | javascript minifier, minify js online, javascript obfuscator, uglify js, js beautifier |
+| [/html-beautifier/](https://tool.thebukitbesi.com/html-beautifier/) | English | html beautifier, html formatter, html minifier, find unclosed tags, minify blogger template |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
 | [/ninja-van-near-me/](https://tool.thebukitbesi.com/ninja-van-near-me/) + [/ninja-van-terdekat/](https://tool.thebukitbesi.com/ninja-van-terdekat/) | English + BM | ninja van near me, ninja van near me drop off; ninja van terdekat |
 
@@ -112,8 +113,10 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **CSS Minifier:** `css-core.js` tokenizes CSS (strings, url(), comments) before changing anything and is tested in `tools-src/tests/css.test.mjs`; every before/after example on the page is generated from it at build time. The old Blogger page redirects here.
 
-**JavaScript Minifier:** `js-core.js` maps the page options to [Terser](https://terser.org/) and [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator), which are vendored in `assets/vendor/` (licences in `assets/vendor/LICENSES.txt`) and run in a Web Worker loaded on first use, so the page itself ships no minifier code. The service worker caches them on first use (`LAZY` in `assets/PWA/sw.js`). The build and `tools-src/tests/js.test.mjs` load the same files, so the examples and obfuscation sizes on the page are real output. To update Terser, bundle it with its dependencies and keep the version in the file name:
+**JavaScript Minifier:** `js-core.js` maps the page options to [Terser](https://terser.org/) and [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator), which are vendored in `assets/vendor/` (licences in `assets/vendor/LICENSES.txt`) and run in a Web Worker loaded on first use, so the page itself ships no minifier code. The service worker caches them on first use (`LAZY` in `assets/PWA/sw.js`). The build and `tools-src/tests/js.test.mjs` load the same files, so the examples and obfuscation sizes on the page are real output. Vendored libraries are rebuilt with `tools-src/vendor/build-vendor.mjs` (versions pinned in its `package.json`; see the comment at the top), which also rewrites `assets/vendor/LICENSES.txt`.
 `echo "import { minify } from 'terser'; globalThis.Terser = { minify };" > entry.mjs && npx esbuild entry.mjs --bundle --format=iife --platform=browser --target=es2019 --minify --legal-comments=none --outfile=terser-X.Y.Z.js`, add the one-line licence header, update `VENDOR` in `js-core.js` and the licence texts, then rebuild and run the tests.
+
+**HTML Beautifier & Minifier:** `html-core.js` maps options and presets (Safe, Maximum, Blogger/XML, Email) to [js-beautify](https://github.com/beautifier/js-beautify) and [html-minifier-terser](https://github.com/terser/html-minifier-terser), and holds the HTML checker, a string-based tag scanner that reports unclosed tags, duplicate ids, images without alt or dimensions and similar problems with line numbers (tested in `tools-src/tests/html.test.mjs`). Scripts wrapped in CDATA are unwrapped before minifying and re-wrapped in the Blogger/XML preset.
 
 **Moving a Blogger tool here:** set `"bloggerFrom"` to the old URL in the page front matter. The build writes one redirect block for every moved page to `documentation/blogger-redirects.xml`; paste it into the theme as described in [the redirect guide](documentation/blogger-redirects.md).
 
@@ -152,7 +155,9 @@ assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)
 assets/js/js-core.js        JavaScript minifier options and runner (Terser / javascript-obfuscator), shared by page, worker, build and tests
-assets/vendor/              Terser and javascript-obfuscator builds with their licences (loaded on demand)
+assets/js/html-core.js      HTML beautify/minify options, presets and the HTML checker
+assets/vendor/              Terser, javascript-obfuscator, js-beautify and html-minifier-terser builds with licences (loaded on demand)
+tools-src/vendor/           pinned versions and the script that rebuilds assets/vendor
 assets/PWA/sw.js            service-worker source template
 ```
 

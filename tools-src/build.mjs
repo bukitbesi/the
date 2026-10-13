@@ -24,6 +24,7 @@ const carCore = require('../assets/js/carloan-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
+const htmlCore = require('../assets/js/html-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -663,7 +664,46 @@ function jsMap() {
     JS_EXAMPLES: JS_RULES.map(([rule, src], i) => `        <tr><th scope="row">${rule}</th><td>${code(src)}</td><td>${code(jsExamples[i].code)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
+// ---- HTML beautifier: the sample result, its check and the preset sizes come from the vendored libraries.
+const htmlVm = { console, setTimeout, clearTimeout };
+htmlVm.globalThis = htmlVm;
+htmlVm.self = htmlVm;
+vm.createContext(htmlVm);
+for (const f of Object.values(htmlCore.VENDOR)) vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), htmlVm);
+const htmlLibs = { minifier: htmlVm.HTMLMinifier, beautifier: htmlVm.jsBeautify };
+const htmlSample = await htmlCore.run(htmlLibs, htmlCore.SAMPLE, {});
+const htmlPresetSize = {};
+for (const preset of Object.keys(htmlCore.PRESETS)) {
+  const r = await htmlCore.run(htmlLibs, htmlCore.SAMPLE, { mode: 'minify', preset });
+  if (r.error) { console.error(`HTML minifier preset ${preset} failed: ${r.error.message}`); process.exit(1); }
+  htmlPresetSize[preset] = htmlCore.bytes(r.code);
+}
+if (htmlSample.error) { console.error('HTML beautifier sample failed'); process.exit(1); }
+const HTML_LABELS = {
+  collapseWhitespace: 'Collapse whitespace', conservativeCollapse: 'Keep one space where there was whitespace',
+  preserveLineBreaks: 'Keep a line break where there was one', removeComments: 'Remove comments (keeps <!--! licence --> comments)',
+  keepConditional: 'Keep conditional comments (<!--[if …]>)', minifyCSS: 'Minify inline CSS', minifyJS: 'Minify inline JavaScript',
+  removeRedundantAttributes: 'Remove default attributes (method="get", type="text")', removeScriptTypeAttributes: 'Remove type="text/javascript"',
+  removeStyleLinkTypeAttributes: 'Remove type="text/css"', collapseBooleanAttributes: 'Shorten boolean attributes (disabled="disabled" to disabled)',
+  useShortDoctype: 'Use <!doctype html>', removeEmptyAttributes: 'Remove empty class, id and style attributes',
+  removeAttributeQuotes: 'Remove attribute quotes where allowed', removeOptionalTags: 'Remove optional tags (</p>, </li>, <head>)',
+  sortAttributes: 'Sort attributes (better gzip)', sortClassName: 'Sort class names (better gzip)',
+  decodeEntities: 'Use characters instead of entities where safe', keepClosingSlash: 'Keep closing slashes (<br/>) for XML',
+  caseSensitive: 'Keep tag and attribute case (XML)', protectTemplates: 'Protect template tags and CDATA'
+};
+if (htmlCore.MINIFY_KEYS.some(k => !HTML_LABELS[k])) { console.error('Missing HTML minifier option label'); process.exit(1); }
+function htmlMap() {
+  const s = htmlCore.saving(htmlCore.SAMPLE, htmlSample.code), n = x => x.toLocaleString('en-US');
+  const issues = htmlCore.check(htmlCore.SAMPLE), sum = htmlCore.summarize(issues), safe = htmlCore.PRESETS.safe;
+  return {
+    HTML_IN: esc(htmlCore.SAMPLE), HTML_OUT: esc(htmlSample.code), HTML_BEFORE: n(s.before),
+    HTML_STATS: `<strong>${s.before} B → ${s.after} B</strong> (${s.saved >= 0 ? s.percent + '% smaller' : Math.abs(s.percent) + '% larger'})<span id="htmlGz"></span>`,
+    HTML_SAFE: n(htmlPresetSize.safe), HTML_MAX: n(htmlPresetSize.max), HTML_XML: n(htmlPresetSize.xml), HTML_EMAIL: n(htmlPresetSize.email),
+    HTML_ISSUE_SUM: esc(sum.text), HTML_ISSUE_STATE: sum.state, HTML_ISSUE_LIST: htmlCore.issuesHtml(issues),
+    HTML_MIN_CHECKS: htmlCore.MINIFY_KEYS.map(k => `          <label class="check"><input type="checkbox" name="${k}"${safe[k] ? ' checked' : ''}> <span>${esc(HTML_LABELS[k])}</span></label>`).join('\n')
+  };
+}
+const RENDERERS = { html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -777,7 +817,9 @@ const bundles = {
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
   'js-minifier.js': ['assets/js/js-core.js', 'assets/js/js-ui.js'],
-  'js-minifier-worker.js': ['assets/js/js-core.js', 'assets/js/js-worker.js']
+  'js-minifier-worker.js': ['assets/js/js-core.js', 'assets/js/js-worker.js'],
+  'html-beautifier.js': ['assets/js/html-core.js', 'assets/js/html-ui.js'],
+  'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Light minification: drop comments and indentation. Sources keep no '//' inside strings; validate.mjs compiles the result.

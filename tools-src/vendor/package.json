@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "description": "Pinned sources for /assets/vendor. Not used by the build or CI; run build-vendor.mjs only to update a library.",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "html-minifier-terser": "7.2.0",
+    "javascript-obfuscator": "5.9.0",
+    "js-beautify": "2.0.3",
+    "os-browserify": "0.3.0",
+    "path-browserify": "1.0.1",
+    "terser": "5.51.2",
+    "url": "0.11.4"
+  }
+}
