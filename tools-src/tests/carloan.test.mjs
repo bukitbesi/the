@@ -86,3 +86,25 @@ test('Running costs add to the monthly cost only when an engine size is given', 
   assert.equal(r.running.monthly, Math.round((r.monthly + (90 + 3119.86) / 12) * 100) / 100);
   assert.equal(C.calculate({ price: 100000, downPct: 10, years: 9, rate: 4.5 }).running, undefined);
 });
+
+test('Sabah and Sarawak saloons; non-saloons there are not modelled', () => {
+  assert.equal(C.roadTax(1497, 'saloon', 'east'), 72);
+  assert.equal(C.roadTax(1999, 'saloon', 'east'), 273.75);
+  assert.equal(C.roadTax(3000, 'saloon', 'east'), 1024);
+  assert.equal(C.roadTax(1497, 'nonSaloon', 'east'), null);
+});
+
+test('EV road tax by motor power (published examples)', () => {
+  assert.equal(C.evRoadTax(50), 20);
+  assert.equal(C.evRoadTax(100), 70);
+  assert.equal(C.evRoadTax(150), 160);
+  assert.equal(C.evRoadTax(160), 180);
+  assert.equal(C.evRoadTax(208), 280);
+  assert.equal(C.evRoadTax(225), 335);
+  assert.equal(C.evRoadTax(378), null);
+  const r = C.calculate({ price: 150000, downPct: 10, years: 9, rate: 4.5, fuel: 'ev', kw: 150, ncd: 0 });
+  assert.equal(r.running.roadTax, 160);
+  const unknown = C.calculate({ price: 150000, downPct: 10, years: 9, rate: 4.5, fuel: 'ev', kw: 400, ncd: 0 });
+  assert.equal(unknown.running.roadTax, null);
+  assert.equal(unknown.running.yearly, unknown.running.insurance.total);
+});

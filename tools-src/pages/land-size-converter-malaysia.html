@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/land-size-converter-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-ukuran-tanah/" },
+  "title": "Land Size Converter Malaysia: Acre, Relung, Sq Ft, Hectare",
+  "description": "Free land area converter for Malaysia: acres, square feet, square metres, hectares, relung, orlong and acre-rood-pole titles, plus price per sq ft.",
+  "llms": "Converts land area between square feet, square metres, square yards, hectares, acres, roods, poles and the traditional Malaysian units relung (30,976 sq ft, used in Kedah, Perlis and Seberang Perai), jemba (64 sq ft) and orlong (57,600 sq ft, Penang Island and Melaka); reads old land titles written in acres, roods and poles (e.g. 2a 1r 20p), works out the area of a rectangular lot from its length and width, and gives the price per square foot, square metre, acre and relung.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "land",
+  "scripts": ["/assets/js/land.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Land Size Converter", null]],
+  "about": ["Land area units", "Relung", "Acre", "Land titles in Malaysia"],
+  "app": {
+    "name": "Land Size Converter Malaysia",
+    "category": "UtilitiesApplication",
+    "features": ["Acres, hectares, square feet, square metres and square yards", "Relung, jemba and orlong", "Acre-rood-pole titles (2a 1r 20p)", "Lot size from length × width", "Price per square foot, square metre, acre and relung", "Works offline"]
+  },
+  "citations": [
+    ["Penang Industrial: Land unit converter (relung and orlong)", "https://penangindustrial.com/calculators/land-unit-converter/"],
+    ["Sizes.com: The relong", "https://www.sizes.com/units/relong.htm"],
+    ["NIST: International foot (0.3048 m) and acre definitions", "https://www.nist.gov/pml/us-surveyfoot/revised-unit-conversion-factors"]
+  ],
+  "faq": [
+    { "q": "How many square feet are in 1 relung?", "a": "1 relung = 30,976 square feet = 2,877.76 square metres = 0.7111 acres. A relung is 484 jemba of 64 square feet each. It is used in Kedah, Perlis and Seberang Perai." },
+    { "q": "How many square feet are in 1 acre?", "a": "1 acre = 43,560 square feet = 4,046.86 square metres = 0.4047 hectares = 1.40625 relung." },
+    { "q": "How many acres is 1 hectare?", "a": "1 hectare = 2.4711 acres = 10,000 square metres = 107,639 square feet. Newer Malaysian titles show land in hectares or square metres." },
+    { "q": "What is an orlong?", "a": "A traditional unit used on Penang Island and in Melaka: 1 orlong = 57,600 square feet = 1.3223 acres = 5,351.22 square metres. It appears mainly on old grants." },
+    { "q": "What does 2a 1r 20p mean on a land title?", "a": "2 acres, 1 rood and 20 poles. One acre is 4 roods or 160 poles, so 2a 1r 20p = 2.375 acres = 103,455 square feet." },
+    { "q": "How big is a 20 × 70 ft house lot?", "a": "1,400 square feet = 130.06 square metres = 0.0321 acres. A 22 × 75 ft lot is 1,650 square feet." },
+    { "q": "How do I convert square feet to square metres?", "a": "Multiply by 0.092903, or divide by 10.7639. For example, 1,000 square feet = 92.90 square metres." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Land size converter</li></ol></nav>
+  <h1>Land Size Converter Malaysia</h1>
+  <p class="answer"><strong>1 relung = 30,976 sq ft = 0.7111 acres</strong>, and <strong>1 acre = 43,560 sq ft = 4,046.86 m²</strong>. Convert any land area between acres, hectares, square feet, square metres and the traditional relung and orlong, read old acre-rood-pole titles, and get the price per square foot.</p>
+  <p class="meta"><span>Units verified <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-ukuran-tanah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="landForm" novalidate aria-labelledby="land-h">
+      <h2 id="land-h">Your land</h2>
+      <div class="field">
+        <label for="mode">Enter the area as</label>
+        <select class="input" id="mode" name="mode">{{D_MODE_OPTIONS}}</select>
+      </div>
+      <div id="landBy-area" class="field-row">
+        <div class="field"><label for="value">Area</label><div class="input"><input id="value" name="value" type="number" inputmode="decimal" min="0" step="any" value="{{D_VALUE}}"></div></div>
+        <div class="field">
+          <label for="unit">Unit</label>
+          <select class="input" id="unit" name="unit">{{D_UNIT_OPTIONS}}</select>
+        </div>
+      </div>
+      <div id="landBy-arp" class="field-row field-row-3" hidden>
+        <div class="field"><label for="a">Acres</label><div class="input"><input id="a" name="a" type="number" inputmode="numeric" min="0" step="1" value=""><span aria-hidden="true">a</span></div></div>
+        <div class="field"><label for="r">Roods</label><div class="input"><input id="r" name="r" type="number" inputmode="numeric" min="0" max="3" step="1" value=""><span aria-hidden="true">r</span></div></div>
+        <div class="field"><label for="p">Poles</label><div class="input"><input id="p" name="p" type="number" inputmode="decimal" min="0" max="40" step="any" value=""><span aria-hidden="true">p</span></div></div>
+      </div>
+      <div id="landBy-rect" hidden>
+        <div class="field-row">
+          <div class="field"><label for="len">Length</label><div class="input"><input id="len" name="len" type="number" inputmode="decimal" min="0" step="any" value=""></div></div>
+          <div class="field"><label for="wid">Width</label><div class="input"><input id="wid" name="wid" type="number" inputmode="decimal" min="0" step="any" value=""></div></div>
+        </div>
+        <div class="field">
+          <label for="side">Measured in</label>
+          <select class="input" id="side" name="side">{{D_SIDE_OPTIONS}}</select>
+        </div>
+      </div>
+      <div class="field"><label for="price">Asking price (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value=""></div><p class="help">Shows the price per square foot, square metre, acre and relung.</p></div>
+    </form>
+
+    <section class="box" aria-labelledby="land-result-h">
+      <h2 id="land-result-h">Converted area</h2>
+      <div class="net">
+        <p>Area</p>
+        <output id="lMain" for="value unit a r p len wid side">{{D_MAIN}}</output>
+        <p id="lSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="lLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>In every unit</caption>
+        <tbody>
+{{D_ROWS}}
+          <tr><th scope="row">Acres, roods, poles</th><td id="lArp">{{D_ARP}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows" id="lPriceRows" hidden>
+        <caption>Price</caption>
+        <tbody>
+          <tr><th scope="row">Per square foot</th><td id="lp-sqft"></td></tr>
+          <tr><th scope="row">Per square metre</th><td id="lp-sqm"></td></tr>
+          <tr><th scope="row">Per acre</th><td id="lp-acre"></td></tr>
+          <tr><th scope="row">Per relung</th><td id="lp-relung"></td></tr>
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="landPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cheat-h">Land unit conversion table</h2>
+  <p>Select a unit to load it into the converter.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cheat-h">
+    <table class="data">
+      <thead><tr><th scope="col">Unit</th><th scope="col">Square feet</th><th scope="col">Square metres</th><th scope="col">Acres</th><th scope="col">Relung</th></tr></thead>
+      <tbody>
+{{D_CHEAT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="units">Malaysian land units explained</h2>
+  <ul>
+    <li><strong>Relung</strong> (also relong): 30,976 sq ft, the traditional unit in Kedah, Perlis and Seberang Perai, still common for padi and kampung land. 1 relung = 484 jemba.</li>
+    <li><strong>Jemba</strong>: 64 sq ft, the small unit inside a relung.</li>
+    <li><strong>Orlong</strong>: 57,600 sq ft, found on old grants on Penang Island and in Melaka.</li>
+    <li><strong>Acre, rood, pole</strong>: the imperial units on older titles. 1 acre = 4 roods = 160 poles, and 1 pole = 272.25 sq ft.</li>
+    <li><strong>Hectare and square metre</strong>: the metric units on newer titles and in JUPEM survey plans. 1 hectare = 10,000 m².</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="lots-h">Common house lot sizes</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="lots-h">
+    <table class="data">
+      <thead><tr><th scope="col">Lot</th><th scope="col">Square feet</th><th scope="col">Square metres</th><th scope="col">Acres</th></tr></thead>
+      <tbody>
+{{D_LOTS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Built-up area is the floor area of the house; land area is the lot. Listings quote both, and price per square foot usually refers to the built-up area for houses and the land area for vacant land.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://penangindustrial.com/calculators/land-unit-converter/" rel="noopener">Penang Industrial: land unit converter (relung and orlong)</a></li>
+    <li><a href="https://www.sizes.com/units/relong.htm" rel="noopener">Sizes.com: the relong</a></li>
+    <li><a href="https://www.nist.gov/pml/us-surveyfoot/revised-unit-conversion-factors" rel="noopener">NIST: international foot and acre definitions</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> For a sale, transfer or survey, the area on the registered title and the JUPEM certified plan is final. Traditional units can vary slightly in old local use.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+    <a href="/rpgt-calculator-malaysia/">RPGT Calculator<small>Tax on the gain when you sell</small></a>
+    <a href="/personal-loan-calculator-malaysia/">Personal Loan Calculator<small>Flat rate, EIR and monthly instalment</small></a>
+  </div>
+</section>

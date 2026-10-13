@@ -1,8 +1,9 @@
 /* Malaysian car loan (hire purchase) maths. Since 1 June 2026 the Hire-Purchase (Amendment) Act requires the
    reducing-balance method quoted as an effective interest rate (EIR); banks have until 31 March 2027 to switch,
    and older agreements keep the flat rate with Rule of 78 rebates. Both are modelled. Verified 12 October 2026.
-   Running costs: JPJ road tax (LKM) for petrol and hybrid cars registered to individuals in Peninsular Malaysia,
-   and a comprehensive insurance estimate from the former motor tariff (premiums are now set by each insurer). */
+   Running costs: JPJ road tax (LKM) for cars registered to individuals: petrol and hybrid by engine cc (Peninsular, and
+   Sabah/Sarawak saloons), electric cars by motor power up to 310 kW (from 1 January 2026); and a comprehensive insurance
+   estimate from the former motor tariff (premiums are now set by each insurer). */
 (function (root) {
   'use strict';
 
@@ -10,7 +11,7 @@
     verified: '2026-10-12',
     newRulesFrom: '2026-06-01', transitionUntil: '2027-03-31',
     defaultRate: 4.5, defaultFlat: 2.5, maxYears: 9,
-    runningVerified: '2026-10-14', insuranceSst: 0.08, insuranceStamp: 10
+    runningVerified: '2026-10-15', insuranceSst: 0.08, insuranceStamp: 10
   };
 
   // [upper cc, base RM, RM per cc above the previous band's upper limit]
@@ -18,8 +19,13 @@
     saloon: [[1000, 20, 0], [1200, 55, 0], [1400, 70, 0], [1600, 90, 0], [1800, 200, 0.4], [2000, 280, 0.5],
       [2500, 380, 1], [3000, 880, 2.5], [Infinity, 2130, 4.5]],
     nonSaloon: [[1000, 20, 0], [1200, 85, 0], [1400, 100, 0], [1600, 120, 0], [1800, 300, 0.3], [2000, 360, 0.4],
-      [2500, 440, 0.8], [3000, 840, 1.6], [Infinity, 1640, 1.6]]
+      [2500, 440, 0.8], [3000, 840, 1.6], [Infinity, 1640, 1.6]],
+    eastSaloon: [[1000, 20, 0], [1200, 44, 0], [1400, 56, 0], [1600, 72, 0], [1800, 160, 0.32], [2000, 224, 0.25],
+      [2500, 274, 0.5], [3000, 524, 1], [Infinity, 1024, 1.35]]
   };
+  // EV bands to 310 kW: [upper kW, base RM, start of the first charged 10 kW block, RM per block]. Higher bands not modelled.
+  var EV_TAX = [[50, 20, 50, 0], [100, 20, 50, 10], [210, 80, 110, 20], [310, 305, 220, 30]];
+  var EV_MAX_KW = 310;
   // Former tariff, Peninsular: premium for the first RM1,000 sum insured by engine size, then RM26 per RM1,000.
   var INSURANCE_BASE = [[1400, 273.8], [1650, 305.5], [2200, 339.1], [3050, 372.6], [4100, 404.3], [4250, 436], [4400, 469.6], [Infinity, 501.3]];
   var NCD = [0, 25, 30, 38.33, 45, 55];
@@ -69,15 +75,29 @@
     return n > 0 && k > 0 ? totalInterest * k * (k + 1) / (n * (n + 1)) : 0;
   }
 
-  function roadTax(cc, body) {
+  // null when the rate is not modelled (East Malaysia non-saloons, EVs above 310 kW).
+  function roadTax(cc, body, region) {
     cc = Math.round(num(cc));
     if (!cc) return 0;
-    var bands = ROAD_TAX[body === 'nonSaloon' ? 'nonSaloon' : 'saloon'], prev = 0;
+    var east = region === 'east';
+    if (east && body === 'nonSaloon') return null;
+    var bands = ROAD_TAX[east ? 'eastSaloon' : body === 'nonSaloon' ? 'nonSaloon' : 'saloon'], prev = 0;
     for (var i = 0; i < bands.length; i++) {
       if (cc <= bands[i][0]) return cents(bands[i][1] + bands[i][2] * Math.max(0, cc - prev));
       prev = bands[i][0];
     }
     return 0;
+  }
+
+  function evRoadTax(kw) {
+    kw = num(kw);
+    if (!(kw > 0)) return 0;
+    if (kw > EV_MAX_KW) return null;
+    for (var i = 0; i < EV_TAX.length; i++) {
+      var b = EV_TAX[i];
+      if (kw <= b[0]) return b[1] + b[3] * Math.max(0, Math.ceil((kw - b[2]) / 10 - 1e-9));
+    }
+    return null;
   }
 
   function insurance(sumInsured, cc, ncdPct) {
@@ -114,10 +134,16 @@
       var before = balanceAfter(loan, eir, years, (y - 1) * 12), after = y === years ? 0 : balanceAfter(loan, eir, years, y * 12);
       out.schedule.push({ year: y, principal: cents(before - after), interest: cents(monthly * 12 - (before - after)), balance: cents(after) });
     }
-    if (input.cc !== undefined && input.cc !== '') {
-      var tax = roadTax(input.cc, input.body), ins = insurance(input.sumInsured === undefined || input.sumInsured === '' ? price : input.sumInsured, input.cc, input.ncd);
-      out.running = { cc: Math.round(num(input.cc)), body: input.body === 'nonSaloon' ? 'nonSaloon' : 'saloon', roadTax: tax, insurance: ins,
-        yearly: cents(tax + ins.total), monthly: cents(monthly + (tax + ins.total) / 12) };
+    var ev = input.fuel === 'ev';
+    if (ev ? input.kw !== undefined && input.kw !== '' : input.cc !== undefined && input.cc !== '') {
+      var region = input.region === 'east' ? 'east' : 'peninsular';
+      // EV rates apply to Peninsular registrations here; East Malaysia EV rates are not modelled.
+      var tax = ev ? (region === 'east' ? null : evRoadTax(input.kw)) : roadTax(input.cc, input.body, region);
+      // EVs have no engine size; the estimate uses the lowest engine band, the smallest part of the premium.
+      var ins = insurance(input.sumInsured === undefined || input.sumInsured === '' ? price : input.sumInsured, ev ? 1000 : input.cc, input.ncd);
+      var known = tax === null ? 0 : tax;
+      out.running = { fuel: ev ? 'ev' : 'ice', region: region, cc: Math.round(num(input.cc)), kw: num(input.kw), body: input.body === 'nonSaloon' ? 'nonSaloon' : 'saloon',
+        roadTax: tax, insurance: ins, yearly: cents(known + ins.total), monthly: cents(monthly + (known + ins.total) / 12) };
     }
     var settleAfter = Math.round(num(input.settleAfter));
     if (settleAfter > 0 && settleAfter < n) {
@@ -133,7 +159,7 @@
   }
 
   var api = { FACTS: FACTS, flatInstalment: flatInstalment, eirInstalment: eirInstalment, flatToEir: flatToEir,
-    eirToFlat: eirToFlat, balanceAfter: balanceAfter, rule78Rebate: rule78Rebate, roadTax: roadTax, insurance: insurance,
+    eirToFlat: eirToFlat, balanceAfter: balanceAfter, rule78Rebate: rule78Rebate, roadTax: roadTax, evRoadTax: evRoadTax, insurance: insurance, EV_MAX_KW: EV_MAX_KW,
     NCD: NCD, ROAD_TAX: ROAD_TAX, calculate: calculate };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.TBBCarLoan = api;

@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/kalkulator-ukuran-tanah/",
+  "lang": "ms",
+  "alternates": { "en": "/land-size-converter-malaysia/" },
+  "title": "Kalkulator Ukuran Tanah: Relung, Ekar, Kaki Persegi & Hektar",
+  "description": "Tukar keluasan tanah percuma: relung ke ekar, ekar ke kaki persegi, hektar, meter persegi, orlong dan geran ekar-rod-pole, serta harga sekaki persegi.",
+  "llms": "Menukar keluasan tanah antara kaki persegi, meter persegi, ela persegi, hektar, ekar, rod, pole dan unit tradisional Malaysia iaitu relung (30,976 kaki persegi, digunakan di Kedah, Perlis dan Seberang Perai), jemba (64 kaki persegi) dan orlong (57,600 kaki persegi, Pulau Pinang dan Melaka); membaca geran lama dalam ekar, rod dan pole (cth. 2a 1r 20p), mengira keluasan lot segi empat daripada panjang dan lebar, dan memberi harga sekaki persegi, semeter persegi, seekar dan serelung.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "land",
+  "scripts": ["/assets/js/land.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Ukuran Tanah", null]],
+  "about": ["Unit keluasan tanah", "Relung", "Ekar", "Geran tanah di Malaysia"],
+  "app": {
+    "name": "Kalkulator Ukuran Tanah",
+    "category": "UtilitiesApplication",
+    "features": ["Ekar, hektar, kaki persegi, meter persegi dan ela persegi", "Relung, jemba dan orlong", "Geran ekar-rod-pole (2a 1r 20p)", "Saiz lot daripada panjang × lebar", "Harga sekaki persegi, semeter persegi, seekar dan serelung", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Penang Industrial: Penukar unit tanah (relung dan orlong)", "https://penangindustrial.com/calculators/land-unit-converter/"],
+    ["Sizes.com: Relong", "https://www.sizes.com/units/relong.htm"],
+    ["NIST: Takrif kaki antarabangsa (0.3048 m) dan ekar", "https://www.nist.gov/pml/us-surveyfoot/revised-unit-conversion-factors"]
+  ],
+  "faq": [
+    { "q": "1 relung berapa kaki persegi?", "a": "1 relung = 30,976 kaki persegi = 2,877.76 meter persegi = 0.7111 ekar. Satu relung ialah 484 jemba, setiap satu 64 kaki persegi. Unit ini digunakan di Kedah, Perlis dan Seberang Perai." },
+    { "q": "1 ekar berapa kaki persegi?", "a": "1 ekar = 43,560 kaki persegi = 4,046.86 meter persegi = 0.4047 hektar = 1.40625 relung." },
+    { "q": "1 hektar berapa ekar?", "a": "1 hektar = 2.4711 ekar = 10,000 meter persegi = 107,639 kaki persegi. Geran baharu di Malaysia menunjukkan keluasan dalam hektar atau meter persegi." },
+    { "q": "Apakah orlong?", "a": "Unit tradisional di Pulau Pinang dan Melaka: 1 orlong = 57,600 kaki persegi = 1.3223 ekar = 5,351.22 meter persegi. Ia kebanyakannya terdapat pada geran lama." },
+    { "q": "Apa maksud 2a 1r 20p pada geran tanah?", "a": "2 ekar, 1 rod dan 20 pole. Satu ekar ialah 4 rod atau 160 pole, jadi 2a 1r 20p = 2.375 ekar = 103,455 kaki persegi." },
+    { "q": "Berapa keluasan lot rumah 20 × 70 kaki?", "a": "1,400 kaki persegi = 130.06 meter persegi = 0.0321 ekar. Lot 22 × 75 kaki ialah 1,650 kaki persegi." },
+    { "q": "Bagaimana menukar kaki persegi ke meter persegi?", "a": "Darab dengan 0.092903, atau bahagi dengan 10.7639. Contohnya, 1,000 kaki persegi = 92.90 meter persegi." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator ukuran tanah</li></ol></nav>
+  <h1>Kalkulator Ukuran Tanah</h1>
+  <p class="answer"><strong>1 relung = 30,976 kaki persegi = 0.7111 ekar</strong>, dan <strong>1 ekar = 43,560 kaki persegi = 4,046.86 m²</strong>. Tukar keluasan tanah antara ekar, hektar, kaki persegi, meter persegi serta relung dan orlong, baca geran lama ekar-rod-pole, dan dapatkan harga sekaki persegi.</p>
+  <p class="meta"><span>Unit disemak <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/land-size-converter-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="landForm" novalidate aria-labelledby="land-h">
+      <h2 id="land-h">Tanah anda</h2>
+      <div class="field">
+        <label for="mode">Masukkan keluasan sebagai</label>
+        <select class="input" id="mode" name="mode">{{D_MODE_OPTIONS}}</select>
+      </div>
+      <div id="landBy-area" class="field-row">
+        <div class="field"><label for="value">Keluasan</label><div class="input"><input id="value" name="value" type="number" inputmode="decimal" min="0" step="any" value="{{D_VALUE}}"></div></div>
+        <div class="field">
+          <label for="unit">Unit</label>
+          <select class="input" id="unit" name="unit">{{D_UNIT_OPTIONS}}</select>
+        </div>
+      </div>
+      <div id="landBy-arp" class="field-row field-row-3" hidden>
+        <div class="field"><label for="a">Ekar</label><div class="input"><input id="a" name="a" type="number" inputmode="numeric" min="0" step="1" value=""><span aria-hidden="true">a</span></div></div>
+        <div class="field"><label for="r">Rod</label><div class="input"><input id="r" name="r" type="number" inputmode="numeric" min="0" max="3" step="1" value=""><span aria-hidden="true">r</span></div></div>
+        <div class="field"><label for="p">Pole</label><div class="input"><input id="p" name="p" type="number" inputmode="decimal" min="0" max="40" step="any" value=""><span aria-hidden="true">p</span></div></div>
+      </div>
+      <div id="landBy-rect" hidden>
+        <div class="field-row">
+          <div class="field"><label for="len">Panjang</label><div class="input"><input id="len" name="len" type="number" inputmode="decimal" min="0" step="any" value=""></div></div>
+          <div class="field"><label for="wid">Lebar</label><div class="input"><input id="wid" name="wid" type="number" inputmode="decimal" min="0" step="any" value=""></div></div>
+        </div>
+        <div class="field">
+          <label for="side">Diukur dalam</label>
+          <select class="input" id="side" name="side">{{D_SIDE_OPTIONS}}</select>
+        </div>
+      </div>
+      <div class="field"><label for="price">Harga jualan (pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value=""></div><p class="help">Menunjukkan harga sekaki persegi, semeter persegi, seekar dan serelung.</p></div>
+    </form>
+
+    <section class="box" aria-labelledby="land-result-h">
+      <h2 id="land-result-h">Keluasan ditukar</h2>
+      <div class="net">
+        <p>Keluasan</p>
+        <output id="lMain" for="value unit a r p len wid side">{{D_MAIN}}</output>
+        <p id="lSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="lLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Dalam semua unit</caption>
+        <tbody>
+{{D_ROWS}}
+          <tr><th scope="row">Ekar, rod, pole</th><td id="lArp">{{D_ARP}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows" id="lPriceRows" hidden>
+        <caption>Harga</caption>
+        <tbody>
+          <tr><th scope="row">Sekaki persegi</th><td id="lp-sqft"></td></tr>
+          <tr><th scope="row">Semeter persegi</th><td id="lp-sqm"></td></tr>
+          <tr><th scope="row">Seekar</th><td id="lp-acre"></td></tr>
+          <tr><th scope="row">Serelung</th><td id="lp-relung"></td></tr>
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="landPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cheat-h">Jadual tukaran unit tanah</h2>
+  <p>Pilih unit untuk memasukkannya ke dalam kalkulator.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cheat-h">
+    <table class="data">
+      <thead><tr><th scope="col">Unit</th><th scope="col">Kaki persegi</th><th scope="col">Meter persegi</th><th scope="col">Ekar</th><th scope="col">Relung</th></tr></thead>
+      <tbody>
+{{D_CHEAT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="units">Unit tanah di Malaysia</h2>
+  <ul>
+    <li><strong>Relung</strong> (juga relong): 30,976 kaki persegi, unit tradisional di Kedah, Perlis dan Seberang Perai, masih lazim bagi tanah sawah dan kampung. 1 relung = 484 jemba.</li>
+    <li><strong>Jemba</strong>: 64 kaki persegi, unit kecil dalam satu relung.</li>
+    <li><strong>Orlong</strong>: 57,600 kaki persegi, terdapat pada geran lama di Pulau Pinang dan Melaka.</li>
+    <li><strong>Ekar, rod, pole</strong>: unit imperial pada geran lama. 1 ekar = 4 rod = 160 pole, dan 1 pole = 272.25 kaki persegi.</li>
+    <li><strong>Hektar dan meter persegi</strong>: unit metrik pada geran baharu dan pelan ukur JUPEM. 1 hektar = 10,000 m².</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="lots-h">Saiz lot rumah biasa</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="lots-h">
+    <table class="data">
+      <thead><tr><th scope="col">Lot</th><th scope="col">Kaki persegi</th><th scope="col">Meter persegi</th><th scope="col">Ekar</th></tr></thead>
+      <tbody>
+{{D_LOTS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Keluasan binaan (built-up) ialah keluasan lantai rumah; keluasan tanah ialah lot. Iklan menyatakan kedua-duanya, dan harga sekaki persegi biasanya merujuk keluasan binaan bagi rumah dan keluasan tanah bagi tanah kosong.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://penangindustrial.com/calculators/land-unit-converter/" rel="noopener">Penang Industrial: penukar unit tanah (relung dan orlong)</a></li>
+    <li><a href="https://www.sizes.com/units/relong.htm" rel="noopener">Sizes.com: relong</a></li>
+    <li><a href="https://www.nist.gov/pml/us-surveyfoot/revised-unit-conversion-factors" rel="noopener">NIST: takrif kaki antarabangsa dan ekar</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Bagi jual beli, pindah milik atau ukur, keluasan pada geran berdaftar dan pelan akui JUPEM adalah muktamad. Unit tradisional mungkin sedikit berbeza mengikut amalan setempat lama.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan DSR</small></a>
+    <a href="/kalkulator-rpgt/">Kalkulator RPGT<small>Cukai atas keuntungan jualan hartanah</small></a>
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Kadar rata, EIR dan ansuran bulanan</small></a>
+  </div>
+</section>

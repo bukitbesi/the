@@ -12,6 +12,7 @@
   var f = function (n) { return form.elements[n]; };
   var T = ms ? {
     rate: { eir: 'Kadar faedah efektif (EIR) setahun', flat: 'Kadar rata (flat) setahun' },
+    myjpj: 'Semak MyJPJ',
     other: { eir: function (r) { return 'Bersamaan kadar rata ' + r.flat.toFixed(2) + '%'; }, flat: function (r) { return 'Bersamaan EIR ' + r.eir.toFixed(2) + '%'; } },
     settle: function (r, s) {
       return 'Selesai selepas ' + s.after + ' bulan: bayar ' + fmt2.format(s.amount) + ' (baki ansuran ' + fmt.format(s.remaining) + ', jimat ' + fmt.format(s.saved) + ').' +
@@ -20,6 +21,7 @@
     live: function (r) { return 'Ansuran bulanan ' + fmt2.format(r.monthly) + '.' + (r.running ? ' Termasuk cukai jalan dan insurans: ' + fmt2.format(r.running.monthly) + ' sebulan.' : ''); }
   } : {
     rate: { eir: 'Effective interest rate (EIR) a year', flat: 'Flat rate a year' },
+    myjpj: 'Check MyJPJ',
     other: { eir: function (r) { return 'Equal to a ' + r.flat.toFixed(2) + '% flat rate'; }, flat: function (r) { return 'Equal to ' + r.eir.toFixed(2) + '% EIR'; } },
     settle: function (r, s) {
       return 'Settling after ' + s.after + ' months: pay ' + fmt2.format(s.amount) + ' (instalments left ' + fmt.format(s.remaining) + ', you save ' + fmt.format(s.saved) + ').' +
@@ -30,7 +32,7 @@
 
   function read() {
     var o = {};
-    ['price', 'downPct', 'years', 'method', 'rate', 'settleAfter', 'cc', 'body', 'ncd'].forEach(function (k) { o[k] = f(k).value; });
+    ['price', 'downPct', 'years', 'method', 'rate', 'settleAfter', 'fuel', 'region', 'cc', 'kw', 'body', 'ncd'].forEach(function (k) { o[k] = f(k).value; });
     return o;
   }
 
@@ -46,10 +48,14 @@
     $('kDown').textContent = fmt.format(r.downPayment);
     $('kEir').textContent = r.eir.toFixed(2) + '%';
     $('kFlat').textContent = r.flat.toFixed(2) + '%';
+    var ev = f('fuel').value === 'ev';
+    $('ccField').hidden = ev;
+    $('kwField').hidden = !ev;
+    f('body').disabled = ev;
     var run = r.running;
     $('kRun').hidden = !run;
     if (run) {
-      $('kRoad').textContent = fmt2.format(run.roadTax);
+      $('kRoad').textContent = run.roadTax === null ? T.myjpj : fmt2.format(run.roadTax);
       $('kIns').textContent = fmt2.format(run.insurance.total);
       $('kAll').textContent = fmt2.format(run.monthly);
     }

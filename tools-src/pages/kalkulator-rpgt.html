@@ -1,0 +1,171 @@
+<!--page
+{
+  "path": "/kalkulator-rpgt/",
+  "lang": "ms",
+  "alternates": { "en": "/rpgt-calculator-malaysia/" },
+  "title": "Kalkulator RPGT 2026: Cukai Keuntungan Harta Tanah (CKHT)",
+  "description": "Kalkulator RPGT 2026 percuma: cukai atas keuntungan jualan hartanah mengikut tahun pemilikan dan penjual, dengan pengecualian RM10,000 dan tahanan 3%.",
+  "llms": "Mengira Cukai Keuntungan Harta Tanah (RPGT/CKHT) Malaysia bagi 2026 di bawah Jadual 5 Akta Cukai Keuntungan Harta Tanah 1976 (kadar sejak 1 Januari 2022): warganegara dan PR 30% dalam 3 tahun, 20% tahun ke-4, 15% tahun ke-5 dan 0% mulai tahun ke-6; bukan warganegara 30% dalam 5 tahun kemudian 10%; syarikat 30%, 20%, 15% kemudian 10%. Mengira tahun pemilikan daripada tarikh perolehan dan pelupusan, menolak kos perolehan, penambahbaikan dan pelupusan, menggunakan pengecualian individu RM10,000 atau 10% keuntungan (mana lebih tinggi) dan pengecualian rumah kediaman sekali seumur hidup, serta membandingkan cukai dengan wang tahanan oleh pembeli (3%; 5% bagi syarikat yang menjual dalam 3 tahun; 7% bagi penjual bukan warganegara). RPGT ditaksir sendiri sejak 1 Januari 2025.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-15",
+  "render": "rpgt",
+  "scripts": ["/assets/js/rpgt.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator RPGT", null]],
+  "about": ["Cukai Keuntungan Harta Tanah", "Menjual hartanah di Malaysia", "Pengecualian RPGT", "Wang tahanan RPGT"],
+  "app": {
+    "name": "Kalkulator RPGT",
+    "category": "FinanceApplication",
+    "features": ["Tahun pemilikan daripada tarikh beli dan jual", "Kadar warganegara, bukan warganegara dan syarikat", "Kos perolehan, penambahbaikan dan pelupusan", "Pengecualian individu RM10,000 atau 10%", "Pengecualian rumah kediaman sekali seumur hidup", "Tahanan 3%, 5% atau 7% dan bayaran balik", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["LHDN (HASiL): Cukai Keuntungan Harta Tanah", "https://www.hasil.gov.my/en/rpgt/"],
+    ["StashAway: Kadar dan pengecualian RPGT Malaysia 2026", "https://www.stashaway.my/r/real-property-gains-tax-rpgt-malaysia"],
+    ["Malaysian Bar: Real Property Gains Tax (retention sums)", "https://www.malaysianbar.org.my/cms/upload_files/document/301.pdf"],
+    ["DNH: Tahanan cukai lebih tinggi bagi penjual asing", "https://dnh.com.my/increased-tax-retention-for-foreign-sellers/"],
+    ["CCS & Co: Panduan lengkap RPGT di Malaysia", "https://ccs-co.com/post/rpgt-a-comprehensive-guide-to-real-property-gains-tax-in-malaysia/"]
+  ],
+  "faq": [
+    { "q": "Berapa kadar RPGT 2026?", "a": "Bagi warganegara Malaysia dan pemastautin tetap: 30% jika dijual dalam 3 tahun, 20% pada tahun ke-4, 15% pada tahun ke-5 dan 0% mulai tahun ke-6. Syarikat membayar 30%, 20%, 15% dan kemudian 10%. Bukan warganegara membayar 30% dalam 5 tahun dan 10% selepasnya. Kadar ini terpakai sejak 1 Januari 2022 dan tidak diubah oleh Bajet 2026." },
+    { "q": "Bagaimana RPGT dikira?", "a": "Keuntungan = (harga jualan − kos jualan) − (harga belian + kos perolehan + kos penambahbaikan). Individu kemudian menolak RM10,000 atau 10% keuntungan, mana lebih tinggi, dan membayar kadar bagi tahun pemilikan. Dibeli RM500,000 dengan kos RM15,000 dan dijual pada tahun ke-4 dengan harga RM600,000 dan kos RM12,000: keuntungan RM73,000, tolak RM10,000, × 20% = RM12,600." },
+    { "q": "Adakah saya perlu bayar RPGT jika jual selepas 5 tahun?", "a": "Tidak jika anda warganegara Malaysia atau PR: kadarnya 0% mulai tahun ke-6. Anda masih perlu menghantar borang RPGT (CKHT 1A) melalui e-CKHT dalam tempoh 60 hari selepas jualan; RPGT ditaksir sendiri sejak 1 Januari 2025. Syarikat dan bukan warganegara membayar 10%." },
+    { "q": "Apakah pengecualian RPGT sekali seumur hidup?", "a": "Warganegara atau PR boleh mengecualikan keseluruhan keuntungan atas penjualan satu rumah kediaman persendirian sekali seumur hidup, dengan memilihnya dalam borang RPGT. Simpan untuk jualan dengan keuntungan bercukai terbesar." },
+    { "q": "Apakah wang tahanan RPGT 3%?", "a": "Pembeli, melalui peguamnya, menahan 3% daripada harga dan membayarnya kepada LHDN dalam 60 hari. Kadarnya 5% apabila syarikat menjual dalam 3 tahun selepas membeli dan 7% apabila penjual bukan warganegara atau PR. Di bawah taksiran sendiri anda menghantar borang RPGT sendiri, dan wang tahanan yang melebihi cukai dipulangkan." },
+    { "q": "Kos apa yang mengurangkan RPGT?", "a": "Yuran guaman, duti setem, yuran penilaian dan komisen ejen semasa membeli dan menjual, serta kos penambahbaikan yang menambah nilai hartanah seperti pengubahsuaian besar, dengan resit. Pembaikan biasa, penyelenggaraan dan faedah pinjaman tidak dikira." },
+    { "q": "Adakah RPGT dikenakan atas hartanah warisan atau hadiah?", "a": "Pewarisan bukan pelupusan. Hadiah antara suami dan isteri, ibu bapa dan anak, atau datuk nenek dan cucu dianggap tiada untung dan tiada rugi. Apabila hartanah itu dijual kemudian, RPGT dikira daripada kedudukan si mati atau pemberi mengikut peraturan, jadi simpan dokumen lama." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator RPGT</li></ol></nav>
+  <h1>Kalkulator RPGT</h1>
+  <p class="answer">Rakyat Malaysia membayar <strong>RPGT 30%</strong> bagi hartanah yang dijual dalam 3 tahun, <strong>20%</strong> pada tahun ke-4, <strong>15%</strong> pada tahun ke-5 dan <strong>0%</strong> mulai tahun ke-6, selepas menolak RM10,000 atau 10% keuntungan. Rumah RM500,000 yang dijual RM600,000 pada tahun ke-4 dikenakan <strong>{{R_TAX}}</strong>. Masukkan jualan anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Dikira dalam pelayar anda; tiada data dihantar</span><a href="/rpgt-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="rpgtForm" novalidate aria-labelledby="rpgt-h">
+      <h2 id="rpgt-h">Jualan hartanah anda</h2>
+      <div class="field">
+        <label for="owner">Penjual</label>
+        <select class="input" id="owner" name="owner">{{R_OWNER_OPTIONS}}</select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="acquired">Tarikh beli</label><div class="input"><input id="acquired" name="acquired" type="date" value="{{R_ACQ}}"></div></div>
+        <div class="field"><label for="disposed">Tarikh jual</label><div class="input"><input id="disposed" name="disposed" type="date" value="{{R_DISP}}"></div></div>
+      </div>
+      <p class="help">Gunakan tarikh perjanjian jual beli.</p>
+      <fieldset class="field-group">
+        <legend>Pembelian</legend>
+        <div class="field"><label for="purchase">Harga belian</label><div class="input"><span aria-hidden="true">RM</span><input id="purchase" name="purchase" type="number" inputmode="decimal" min="0" step="1000" value="{{R_PURCHASE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="acqCosts">Kos pembelian</label><div class="input"><span aria-hidden="true">RM</span><input id="acqCosts" name="acqCosts" type="number" inputmode="decimal" min="0" step="100" value="{{R_ACQ_COSTS}}"></div></div>
+          <div class="field"><label for="enhance">Penambahbaikan</label><div class="input"><span aria-hidden="true">RM</span><input id="enhance" name="enhance" type="number" inputmode="decimal" min="0" step="100" value="{{R_ENHANCE}}"></div></div>
+        </div>
+        <p class="help">Kos pembelian: yuran guaman, duti setem, penilaian. Penambahbaikan: pengubahsuaian yang menambah nilai, dengan resit.</p>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Penjualan</legend>
+        <div class="field-row">
+          <div class="field"><label for="sale">Harga jualan</label><div class="input"><span aria-hidden="true">RM</span><input id="sale" name="sale" type="number" inputmode="decimal" min="0" step="1000" value="{{R_SALE}}"></div></div>
+          <div class="field"><label for="saleCosts">Kos jualan</label><div class="input"><span aria-hidden="true">RM</span><input id="saleCosts" name="saleCosts" type="number" inputmode="decimal" min="0" step="100" value="{{R_SALE_COSTS}}"></div></div>
+        </div>
+        <p class="help">Kos jualan: komisen ejen dan yuran guaman.</p>
+      </fieldset>
+      <div class="field" id="rResidenceField">
+        <label for="residence">Kecualikan sebagai rumah kediaman sekali seumur hidup?</label>
+        <select class="input" id="residence" name="residence">{{R_RES_OPTIONS}}</select>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="rpgt-result-h">
+      <h2 id="rpgt-result-h">RPGT anda</h2>
+      <div class="net">
+        <p>Cukai keuntungan harta tanah</p>
+        <output id="rTax" for="owner acquired disposed purchase acqCosts enhance sale saleCosts residence">{{R_TAX}}</output>
+        <p><span id="rYear">{{R_YEAR}}</span></p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Cara pengiraan</caption>
+        <tbody>
+          <tr><th scope="row">Harga jualan tolak kos jualan</th><td id="rNet">{{R_NET}}</td></tr>
+          <tr><th scope="row">Harga belian, kos pembelian dan penambahbaikan</th><td id="rCost">{{R_COST}}</td></tr>
+          <tr><th scope="row">Keuntungan</th><td id="rGain">{{R_GAIN}}</td></tr>
+          <tr><th scope="row">Pengecualian</th><td id="rExempt">{{R_EXEMPT}}</td></tr>
+          <tr class="total"><th scope="row">Keuntungan boleh dikenakan cukai</th><td id="rCharge">{{R_CHARGE}}</td></tr>
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Wang tahanan oleh pembeli</caption>
+        <tbody>
+          <tr><th scope="row">Ditahan (<span id="rRetPct">{{R_RET_PCT}}</span>% daripada harga)</th><td id="rRet">{{R_RET}}</td></tr>
+          <tr class="total"><th scope="row" id="rRefundLabel">{{R_REFUND_LABEL}}</th><td id="rRefund">{{R_REFUND}}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Mulai 1 Januari 2025 RPGT ditaksir sendiri: hantar CKHT 1A dan bayar baki melalui e-CKHT dalam 60 hari, walaupun cukai sifar. Peguam yang mengendalikan jualan mengesahkan wang tahanan.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rpgtPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">Kadar RPGT 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun jualan</th><th scope="col">Warganegara atau PR</th><th scope="col">Bukan warganegara</th><th scope="col">Syarikat</th></tr></thead>
+      <tbody>
+{{R_RATES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Tahun dikira dari tarikh perjanjian belian hingga tarikh perjanjian jualan. Menjual 3 tahun dan sehari selepas membeli membawa anda ke tahun ke-4.</p>
+
+  <h2 id="examples-h">RPGT atas keuntungan RM100,000</h2>
+  <p>Dibeli RM400,000 dan dijual RM500,000, tanpa kos lain.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun jualan</th><th scope="col">Warganegara atau PR</th><th scope="col">Bukan warganegara</th><th scope="col">Syarikat</th></tr></thead>
+      <tbody>
+{{R_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="steps">Cara RPGT berfungsi, langkah demi langkah</h2>
+  <ol>
+    <li><strong>Jualan bersih:</strong> harga jualan tolak komisen ejen dan yuran guaman.</li>
+    <li><strong>Jumlah kos:</strong> harga belian ditambah yuran guaman, duti setem dan penilaian, serta penambahbaikan yang menambah nilai. Bagi hartanah dibeli sebelum 2000, nilai pasaran pada 1 Januari 2000 menggantikan harga.</li>
+    <li><strong>Keuntungan:</strong> jualan bersih tolak jumlah kos. Kerugian boleh ditolak daripada keuntungan lain.</li>
+    <li><strong>Pengecualian:</strong> individu menolak RM10,000 atau 10% keuntungan, mana lebih tinggi. Warganegara atau PR boleh sebaliknya mengecualikan satu rumah kediaman sekali seumur hidup.</li>
+    <li><strong>Cukai:</strong> keuntungan boleh dikenakan cukai × kadar bagi tahun jualan.</li>
+    <li><strong>Wang tahanan dan borang:</strong> peguam pembeli membayar 3% harga kepada LHDN (5% bagi syarikat yang menjual dalam 3 tahun, 7% bagi penjual bukan warganegara); di bawah taksiran sendiri anda menghantar CKHT 1A dan membayar baki, dan pembeli menghantar CKHT 2A, dalam 60 hari.</li>
+  </ol>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.hasil.gov.my/en/rpgt/" rel="noopener">LHDN (HASiL): Cukai Keuntungan Harta Tanah</a></li>
+    <li><a href="https://www.stashaway.my/r/real-property-gains-tax-rpgt-malaysia" rel="noopener">StashAway: kadar dan pengecualian RPGT 2026</a></li>
+    <li><a href="https://www.malaysianbar.org.my/cms/upload_files/document/301.pdf" rel="noopener">Majlis Peguam: RPGT dan wang tahanan</a></li>
+    <li><a href="https://dnh.com.my/increased-tax-retention-for-foreign-sellers/" rel="noopener">DNH: wang tahanan bagi penjual asing</a></li>
+    <li><a href="https://ccs-co.com/post/rpgt-a-comprehensive-guide-to-real-property-gains-tax-in-malaysia/" rel="noopener">CCS &amp; Co: panduan RPGT</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran, bukan nasihat cukai. Taksiran LHDN menentukan cukai; kes khas seperti hartanah warisan, hadiah atau dibeli sebelum 2000 mempunyai peraturan sendiri.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan DSR</small></a>
+    <a href="/kalkulator-ukuran-tanah/">Kalkulator Ukuran Tanah<small>Ekar, relung, kaki persegi dan harga</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai tahunan dan pelepasan</small></a>
+  </div>
+</section>

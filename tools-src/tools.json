@@ -432,6 +432,33 @@
     "live": true
   },
   {
+    "name": "Land Size Converter Malaysia",
+    "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
+    "cat": "calc",
+    "icon": "land-size-converter-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Personal Loan Calculator Malaysia",
+    "desc": "Monthly instalment, total interest and the real EIR behind a flat rate, with 0.5% stamp duty and the amount you receive, before flat rates end in 2027. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "personal-loan-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "RPGT Calculator Malaysia",
+    "desc": "Real property gains tax when you sell: holding-year rates for citizens, non-citizens and companies, the RM10,000 or 10% exemption and the 3% retention. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/rpgt-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "rpgt-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Home Loan Calculator Malaysia",
     "desc": "Work out your monthly housing loan instalment, total interest, stamp duty and SRO 2023 legal fees, the first-home exemption and how much you can borrow. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/home-loan-calculator-malaysia/",

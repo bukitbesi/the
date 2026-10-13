@@ -1,0 +1,151 @@
+<!--page
+{
+  "path": "/personal-loan-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-pinjaman-peribadi/" },
+  "title": "Personal Loan Calculator Malaysia 2026: Flat Rate to EIR",
+  "description": "Free personal loan calculator: monthly instalment, total interest, the real EIR behind a flat rate, 0.5% stamp duty and what you receive.",
+  "llms": "Calculates Malaysian personal loan instalments by the flat-rate method most banks still quote in 2026 or by reducing balance (EIR), converts a flat rate to its effective interest rate (for example 6% flat over 5 years is about 10.85% EIR), adds the 0.5% stamp duty on the loan agreement and shows the amount received, total interest, total cost and a yearly balance schedule; notes Bank Negara Malaysia's ban on flat-rate pricing and the Rule of 78 for new personal financing from 1 January 2027 the treatment of home loan top-ups and loans on fully paid property for personal use as personal financing (10-year maximum tenure) from the same date, and the licensed moneylender caps of 12% (secured) and 18% (unsecured) a year.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-15",
+  "render": "personal",
+  "scripts": ["/assets/js/personal-loan.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Personal Loan Calculator", null]],
+  "about": ["Personal loan", "Flat rate", "Effective interest rate", "Personal financing in Malaysia"],
+  "app": {
+    "name": "Personal Loan Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Monthly instalment by flat rate or reducing balance", "Flat rate to EIR conversion", "0.5% stamp duty and amount received", "Total interest and total cost", "Yearly balance schedule", "Works offline"]
+  },
+  "citations": [
+    ["New Straits Times: BNM's fair treatment policy revision ends flat-rate loans from 2027", "https://www.nst.com.my/amp/business/economy/2025/11/1313005/bnms-ftfc-policy-revision-ensure-fairer-deals-financial-consumers"],
+    ["RinggitPlus: What the effective interest rate tells you about a personal loan", "https://ringgitplus.com/en/guides/what-the-effective-interest-rate-tells-you-about-a-personal-loan/"],
+    ["Malay Mail: Financial education module for personal loans over RM100,000 from 2027", "https://malaymail.com/news/money/2025/11/11/borrowing-over-rm100000-from-jan-2027-bnm-says-youll-need-to-pass-a-15-minute-financial-education-module-first/198021"],
+    ["Bank Negara Malaysia: Policy Document on Personal Financing (30 September 2025)", "https://www.bnm.gov.my/-/pd-pf-925"],
+    ["Skrine: Bank Negara Malaysia issues new Policy Document on Personal Financing", "https://www.skrine.com/insights/alerts/october-2025/bank-negara-malaysia-issues-new-policy-document-on"]
+  ],
+  "faq": [
+    { "q": "What is the monthly instalment for a RM30,000 personal loan?", "a": "At 6% flat over 5 years, interest is RM30,000 × 6% × 5 = RM9,000, so the instalment is RM39,000 ÷ 60 = RM650 a month. That flat rate equals about 10.85% EIR." },
+    { "q": "Why is the EIR almost double the flat rate?", "a": "A flat rate charges interest on the full loan for the whole tenure, even though you repay part of it every month. The EIR charges only on what you still owe, so it takes a higher EIR to give the same instalment. 6% flat equals about 11.08% EIR over 3 years and 10.85% over 5 years." },
+    { "q": "What changes for personal loans in 2027?", "a": "Under Bank Negara Malaysia's revised fair treatment policy, new personal financing cannot be priced at a flat rate or use the Rule of 78 from 1 January 2027. Loans move to reducing balance, with the effective rate disclosed." },
+    { "q": "How much is the stamp duty on a personal loan?", "a": "0.5% of the loan amount, so RM150 on a RM30,000 loan. Most banks deduct it from the amount paid out." },
+    { "q": "What is the maximum interest a licensed moneylender can charge?", "a": "12% a year for a secured loan and 18% a year for an unsecured loan under the Moneylenders (Control and Licensing) Regulations 2003. Check the lender is licensed by KPKT before borrowing." },
+    { "q": "How much personal loan can I get?", "a": "Banks look at your debt service ratio, all monthly repayments divided by net income, and your credit record in CCRIS and CTOS. From January 2027, borrowers taking more than RM100,000 must first complete a short financial education module." },
+    { "q": "Can I settle a personal loan early?", "a": "Yes. A reducing-balance loan is settled by paying the principal still owed plus any fee in your agreement. Older flat-rate loans may use the Rule of 78, which returns less interest, so ask the bank for a settlement letter." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Personal loan calculator</li></ol></nav>
+  <h1>Personal Loan Calculator Malaysia</h1>
+  <p class="answer">A <strong>RM30,000 personal loan</strong> at {{Q_DEFAULT}} flat over 5 years costs <strong>{{Q_PAY}} a month</strong> and {{Q_INTEREST}} in interest. That flat rate is really about <strong>{{Q_EIR}} EIR</strong>. Flat-rate pricing for new personal loans ends on {{Q_BAN}}. Enter your own offer below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{Q_VERIFIED_ISO}}">{{Q_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-pinjaman-peribadi/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="plForm" novalidate aria-labelledby="pl-h">
+      <h2 id="pl-h">Your loan offer</h2>
+      <div class="field"><label for="amount">Loan amount</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="1000" value="{{Q_AMOUNT}}"></div></div>
+      <div class="field"><label for="years">Tenure</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="10" step="1" value="{{Q_YEARS}}"><span aria-hidden="true">years</span></div></div>
+      <div class="field">
+        <label for="method">Interest method</label>
+        <select class="input" id="method" name="method">{{Q_METHOD_OPTIONS}}</select>
+      </div>
+      <div class="field"><label for="rate" id="plRateLabel">{{Q_RATE_LABEL}}</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="30" step="0.01" value="{{Q_RATE}}"><span aria-hidden="true">%</span></div><p class="help">Use the rate in your offer letter.</p></div>
+      <div class="field">
+        <label for="stamp">Stamp duty (0.5%)</label>
+        <select class="input" id="stamp" name="stamp">{{Q_STAMP_OPTIONS}}</select>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="pl-result-h">
+      <h2 id="pl-result-h">Your instalment</h2>
+      <div class="net">
+        <p>Monthly instalment</p>
+        <output id="pPay" for="amount years method rate">{{Q_PAY}}</output>
+        <p>Loan <strong id="pAmt">{{Q_AMT}}</strong> over <span id="pTerm">{{Q_TERM}}</span> years · <span id="pOther">{{Q_OTHER}}</span></p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Cost of the loan</caption>
+        <tbody>
+          <tr><th scope="row">Total interest</th><td id="pInterest">{{Q_INTEREST}}</td></tr>
+          <tr><th scope="row">Effective interest rate (EIR)</th><td id="pEir">{{Q_EIR}}</td></tr>
+          <tr><th scope="row">Flat rate equivalent</th><td id="pFlat">{{Q_FLAT}}</td></tr>
+          <tr><th scope="row">Stamp duty</th><td id="pStamp">{{Q_STAMP}}</td></tr>
+          <tr><th scope="row">Amount you receive</th><td id="pReceived">{{Q_RECEIVED}}</td></tr>
+          <tr class="total"><th scope="row">Total cost (interest + stamp duty)</th><td id="pCost">{{Q_COST}}</td></tr>
+        </tbody>
+      </table>
+      <details class="more-opts">
+        <summary>Yearly balance schedule</summary>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Yearly balance schedule">
+          <table class="data"><thead><tr><th scope="col">Year</th><th scope="col">Principal paid</th><th scope="col">Interest paid</th><th scope="col">Balance</th></tr></thead><tbody id="pYears">{{Q_SCHEDULE}}</tbody></table>
+        </div>
+      </details>
+      <p class="note">Excludes processing fees, takaful and late charges in your agreement.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="plPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Personal loan instalment table at {{Q_DEFAULT}} flat</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Loan</th><th scope="col">3 years</th><th scope="col">5 years</th><th scope="col">7 years</th><th scope="col">10 years</th></tr></thead>
+      <tbody>
+{{Q_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="convert-h">Flat rate to EIR</h2>
+  <p>Compare offers by their EIR, not the flat rate. A longer tenure lowers the EIR slightly but raises the total interest.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="convert-h">
+    <table class="data">
+      <thead><tr><th scope="col">Flat rate</th><th scope="col">EIR, 3 years</th><th scope="col">EIR, 5 years</th><th scope="col">EIR, 7 years</th><th scope="col">EIR, 10 years</th></tr></thead>
+      <tbody>
+{{Q_CONVERT}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Personal loan rules in Malaysia</h2>
+  <ul>
+    <li><strong>Flat rate ends {{Q_BAN}}:</strong> Bank Negara's revised fair treatment policy bans flat-rate pricing and the Rule of 78 for new personal financing; loans move to reducing balance with the effective rate disclosed.</li>
+    <li><strong>Stamp duty:</strong> 0.5% of the loan amount on the agreement.</li>
+    <li><strong>Licensed moneylenders:</strong> capped at 12% a year secured and 18% a year unsecured. Check the KPKT licence first.</li>
+    <li><strong>Above RM100,000:</strong> from January 2027, a short financial education module comes before approval.</li>
+    <li><strong>Home loan top-ups count as personal loans:</strong> from 1 January 2027, extra financing above the original home loan amount, or secured on a fully paid property, for personal use is treated as personal financing, with a maximum tenure of 10 years and the same DSR checks.</li>
+  </ul>
+  <p>The formulas: flat-rate interest = <code>loan × rate × years</code> and instalment = <code>(loan + interest) ÷ months</code>; a reducing-balance instalment uses the standard annuity formula at the EIR.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.nst.com.my/amp/business/economy/2025/11/1313005/bnms-ftfc-policy-revision-ensure-fairer-deals-financial-consumers" rel="noopener">New Straits Times: flat-rate loans end from 2027</a></li>
+    <li><a href="https://ringgitplus.com/en/guides/what-the-effective-interest-rate-tells-you-about-a-personal-loan/" rel="noopener">RinggitPlus: the EIR on a personal loan</a></li>
+    <li><a href="https://malaymail.com/news/money/2025/11/11/borrowing-over-rm100000-from-jan-2027-bnm-says-youll-need-to-pass-a-15-minute-financial-education-module-first/198021" rel="noopener">Malay Mail: loans over RM100,000 from 2027</a></li>
+    <li><a href="https://www.bnm.gov.my/-/pd-pf-925" rel="noopener">Bank Negara Malaysia: Policy Document on Personal Financing</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/october-2025/bank-negara-malaysia-issues-new-policy-document-on" rel="noopener">Skrine: summary of the new personal financing rules</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Estimates only, not a loan offer or financial advice. Your offer letter decides the actual figures.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/car-loan-calculator-malaysia/">Car Loan Calculator<small>EIR, road tax and insurance</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Net income for your DSR</small></a>
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+  </div>
+</section>
