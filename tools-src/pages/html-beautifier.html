@@ -1,0 +1,214 @@
+<!--page
+{
+  "path": "/html-beautifier/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "HTML Beautifier, Formatter & Minifier Online Free",
+  "description": "Free HTML beautifier, formatter and minifier. Format or compress HTML with presets for websites, Blogger themes and emails, and find unclosed tags by line.",
+  "llms": "Beautifies HTML with js-beautify (indent size or tabs, line wrap, attribute wrapping, inline CSS and JavaScript formatting, template-aware) and minifies it with html-minifier-terser using four presets: Safe (renders identically, keeps one space between inline elements), Maximum (removes optional tags and attribute quotes, sorts attributes for gzip), Blogger and XML templates (keeps case and closing slashes, re-wraps scripts containing < or & in CDATA) and Email (keeps Outlook conditional comments). Every option can be fine-tuned. Also checks HTML and reports unclosed and mismatched tags, duplicate ids, images without alt or width and height (layout shift), empty links and buttons, unlabeled form fields, obsolete tags and missing title, viewport, lang or h1, each with its line number. Includes a sandboxed preview. Runs in a Web Worker; code is never uploaded.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/html-beautifier-online.html",
+  "render": "html",
+  "shareTitle": "Share this HTML beautifier",
+  "scripts": ["/assets/js/html-beautifier.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["HTML Beautifier & Minifier", null]],
+  "about": ["HTML", "Pretty-printing", "Minification (programming)", "Web accessibility", "Cumulative Layout Shift"],
+  "app": {
+    "name": "HTML Beautifier, Formatter & Minifier",
+    "category": "DeveloperApplication",
+    "features": ["Beautify HTML with indent, line wrap and attribute wrapping options", "Formats inline CSS and JavaScript", "Keeps template tags (PHP, Handlebars, Jinja, Liquid, ERB) untouched", "Minify presets: Safe, Maximum, Blogger and XML templates, Email", "21 individual minifier options", "HTML checker: unclosed and mismatched tags with line numbers", "Finds duplicate ids, images without alt or dimensions, empty links and unlabeled fields", "Sandboxed live preview", "Upload, drag and drop, copy and download", "Runs in a Web Worker; code never leaves the browser"]
+  },
+  "citations": [
+    ["WHATWG HTML Living Standard: Optional tags", "https://html.spec.whatwg.org/multipage/syntax.html#optional-tags"],
+    ["js-beautify", "https://github.com/beautifier/js-beautify"],
+    ["html-minifier-terser", "https://github.com/terser/html-minifier-terser"],
+    ["web.dev: Optimize Cumulative Layout Shift", "https://web.dev/articles/optimize-cls"]
+  ],
+  "faq": [
+    { "q": "What does an HTML beautifier do?", "a": "An HTML beautifier rewrites code with consistent indentation and line breaks so nested elements are easy to follow. It does not change what the page shows. This one also formats CSS inside style tags and JavaScript inside script tags, and leaves template tags such as PHP, Handlebars and Jinja untouched." },
+    { "q": "What is the difference between an HTML formatter, beautifier and minifier?", "a": "Formatter and beautifier mean the same thing: they add indentation and line breaks to make HTML readable. A minifier does the opposite: it removes comments, whitespace and optional characters to make the file smaller and faster to download. Keep the beautified version for editing and publish the minified one." },
+    { "q": "Does minifying HTML improve page speed?", "a": "Yes, a little. Minified HTML downloads and parses faster, which helps First Contentful Paint and Largest Contentful Paint, especially on slow mobile connections. Savings are usually 10 to 25 percent before compression and smaller after gzip. Large images, render-blocking scripts and unused CSS usually matter more, so fix those too." },
+    { "q": "Can minifying HTML break my layout?", "a": "It can, if spaces between inline elements are removed: two links or inline-block buttons can end up touching. The Safe preset avoids that by keeping one space wherever there was whitespace, so the page renders exactly as before. The Maximum preset removes those spaces and optional tags too, so check the page after using it." },
+    { "q": "How do I find unclosed tags in HTML?", "a": "Paste the HTML and read the HTML check under the result. It lists every element that is never closed, every end tag that closes the wrong element and every end tag without an opening tag, each with its line number. Select the line number to jump to that place in your code. Elements whose end tag HTML allows you to leave out, such as p and li, are not reported." },
+    { "q": "Can I minify a Blogger theme?", "a": "Yes, with the Blogger and XML templates preset. It keeps tag case, closing slashes and quotes so the theme stays valid XML, keeps CDATA sections, and wraps any script containing a less-than sign or && in CDATA so Blogger can save it. Back up the theme first, and keep the Variable definitions comment in b:skin unminified because the Theme Designer reads it." },
+    { "q": "Is my HTML uploaded to a server?", "a": "No. The beautifier and minifier run in a Web Worker in your browser, so your code never leaves your device. The preview is a sandboxed frame with scripts disabled, so pasted code cannot run. After the first use, the tool also works offline." },
+    { "q": "Can I minify HTML emails?", "a": "Yes. The Email preset keeps Outlook conditional comments, keeps attribute quotes and does not touch scripts. Gmail clips messages larger than about 102 KB, so minifying a long newsletter can keep it from being cut off." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">HTML Beautifier &amp; Minifier</li></ol></nav>
+  <h1>HTML Beautifier, Formatter &amp; Minifier</h1>
+  <p class="answer">An <strong>HTML beautifier adds consistent indentation and line breaks</strong> so code is easy to read; an <strong>HTML minifier removes everything the browser does not need</strong> so pages load faster. This tool does both, with presets for websites, Blogger themes and emails, and <strong>checks your HTML</strong> for unclosed tags, missing alt text and other problems, with line numbers. The sample below minifies from {{HTML_BEFORE}} to {{HTML_SAFE}} bytes with the Safe preset.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Runs in your browser; nothing is uploaded</span><a href="#checks">What the checker finds</a></p>
+
+  <form class="box code-tool" id="htmlForm" novalidate aria-labelledby="html-h" data-worker="/assets/js/html-beautifier-worker.js">
+    <h2 id="html-h" class="sr-only">Beautify or minify HTML</h2>
+    <div class="code-opts">
+      <fieldset class="seg" aria-label="Mode">
+        <label><input type="radio" name="mode" value="beautify" checked> Beautify</label>
+        <label><input type="radio" name="mode" value="minify"> Minify</label>
+      </fieldset>
+    </div>
+    <div class="adv-grid opt-panel" id="htmlBeautyOpts">
+      <div class="field">
+        <label for="hIndent">Indent</label>
+        <select class="input" id="hIndent" name="indent"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="8">8 spaces</option><option value="tab">Tabs</option></select>
+      </div>
+      <div class="field">
+        <label for="hWrap">Wrap lines at</label>
+        <select class="input" id="hWrap" name="wrap"><option value="0" selected>Never</option><option value="80">80 characters</option><option value="120">120 characters</option><option value="160">160 characters</option></select>
+      </div>
+      <div class="field">
+        <label for="hWrapAttr">Attributes</label>
+        <select class="input" id="hWrapAttr" name="wrapAttributes">
+          <option value="auto" selected>Wrap only when too long</option>
+          <option value="force">One per line</option>
+          <option value="force-aligned">One per line, aligned</option>
+          <option value="force-expand-multiline">One per line, closing bracket on its own line</option>
+          <option value="aligned-multiple">Wrap and align</option>
+          <option value="preserve">Keep as written</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="hScripts">Script and style content</label>
+        <select class="input" id="hScripts" name="indentScripts"><option value="normal" selected>Indent with the tag</option><option value="keep">Keep its indentation</option><option value="separate">Start at the left edge</option></select>
+      </div>
+      <div class="field">
+        <label for="hNewlines">Blank lines to keep</label>
+        <select class="input" id="hNewlines" name="maxNewlines"><option value="0">None</option><option value="1" selected>Up to 1</option><option value="2">Up to 2</option></select>
+      </div>
+      <div class="check-col">
+        <label class="check"><input type="checkbox" name="preserveNewlines" checked> <span>Keep existing line breaks</span></label>
+        <label class="check"><input type="checkbox" name="innerHtml"> <span>Indent inside &lt;head&gt; and &lt;body&gt;</span></label>
+        <label class="check"><input type="checkbox" name="endNewline" checked> <span>End with a newline</span></label>
+      </div>
+    </div>
+    <div class="opt-panel" id="htmlMinOpts" hidden>
+      <div class="field preset-field">
+        <label for="hPreset">Preset</label>
+        <select class="input" id="hPreset" name="preset" aria-describedby="hPresetHelp">
+          <option value="safe" selected>Safe: renders exactly the same</option>
+          <option value="max">Maximum: smallest valid HTML</option>
+          <option value="xml">Blogger theme and XML templates</option>
+          <option value="email">HTML email</option>
+        </select>
+        <p class="help" id="hPresetHelp">A preset sets the options below; you can change any of them.</p>
+      </div>
+      <details class="more-opts">
+        <summary>Fine-tune minifier options</summary>
+        <div class="adv-grid">
+{{HTML_MIN_CHECKS}}
+        </div>
+      </details>
+    </div>
+    <div class="code-panes">
+      <div class="field">
+        <label for="htmlIn">Your HTML</label>
+        <textarea class="code" id="htmlIn" name="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="htmlHelp">{{HTML_IN}}</textarea>
+        <p class="help" id="htmlHelp">Paste, type, or drop a .html file here. Ctrl+Enter runs it.</p>
+        <div class="tool-actions" id="htmlInActions">
+          <button type="submit" class="btn sm" id="htmlGo">Beautify HTML</button>
+          <label class="btn ghost sm file-btn">Upload file<input type="file" id="htmlFile" accept=".html,.htm,.xml,.php,.txt,text/html" class="sr-only"></label>
+          <button type="button" class="btn ghost sm" id="htmlSample">Sample</button>
+          <button type="button" class="btn ghost sm" id="htmlClear">Clear</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="htmlOut" id="htmlOutLabel">Beautified HTML</label>
+        <textarea class="code" id="htmlOut" readonly spellcheck="false" aria-describedby="htmlStats">{{HTML_OUT}}</textarea>
+        <p class="code-stats" id="htmlStats">{{HTML_STATS}}</p>
+        <div class="error code-err" id="htmlErr" role="alert" hidden><span id="htmlErrText"></span> <button type="button" class="link-btn" id="htmlJump">Show in code</button></div>
+        <div class="tool-actions" id="htmlOutActions">
+          <button type="button" class="btn sm" id="htmlCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="htmlDownload">Download</button>
+          <button type="button" class="btn ghost sm" id="htmlPreview" aria-expanded="false" aria-controls="htmlFrame">Preview</button>
+        </div>
+      </div>
+    </div>
+    <iframe class="preview-frame" id="htmlFrame" title="Preview of the HTML result" sandbox="" hidden></iframe>
+    <details class="issues" id="htmlIssues" data-state="{{HTML_ISSUE_STATE}}" open>
+      <summary id="htmlIssuesSum">{{HTML_ISSUE_SUM}}</summary>
+      <ul class="issue-list" id="htmlIssueList">{{HTML_ISSUE_LIST}}</ul>
+    </details>
+    <p class="sr-only" id="htmlLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to beautify or minify HTML</h2>
+  <ol>
+    <li><strong>Paste your HTML</strong> into the left box, upload a file, or drop it onto the box. Whole pages, fragments and templates all work.</li>
+    <li><strong>Choose Beautify</strong> to make code readable, or <strong>Minify</strong> to make it small. For minifying, start with the preset that matches where the HTML will go.</li>
+    <li><strong>Read the HTML check</strong> under the result and select a line number to jump to each problem.</li>
+    <li><strong>Copy, download or preview</strong> the result. The preview runs with scripts disabled.</li>
+  </ol>
+
+  <h2 id="presets">Minifier presets compared</h2>
+  <p>Sizes are for the sample page above ({{HTML_BEFORE}} bytes), produced by the same minifier that runs in the tool.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="presets-cap">
+    <table class="data text"><caption id="presets-cap">What each preset does</caption>
+      <thead><tr><th scope="col">Preset</th><th scope="col">Sample size</th><th scope="col">What it changes</th><th scope="col">Use it for</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Safe</th><td>{{HTML_SAFE}} B</td><td>Removes comments, collapses whitespace to one space, minifies inline CSS and JS, drops default attributes such as <code>type="text/javascript"</code>.</td><td>Any website. The page renders exactly as before.</td></tr>
+        <tr><th scope="row">Maximum</th><td>{{HTML_MAX}} B</td><td>Also removes spaces between tags, optional tags such as <code>&lt;/p&gt;</code> and <code>&lt;head&gt;</code>, and attribute quotes; sorts attributes and classes so gzip compresses better.</td><td>Static pages you test after minifying.</td></tr>
+        <tr><th scope="row">Blogger and XML</th><td>{{HTML_XML}} B</td><td>Keeps tag case, closing slashes, quotes, the doctype and CDATA; puts scripts containing <code>&lt;</code> or <code>&amp;&amp;</code> back inside CDATA.</td><td>Blogger themes, XHTML and other XML templates.</td></tr>
+        <tr><th scope="row">Email</th><td>{{HTML_EMAIL}} B</td><td>Keeps Outlook conditional comments (<code>&lt;!--[if mso]&gt;</code>) and quotes; leaves scripts alone.</td><td>Newsletters and transactional emails.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Template tags are protected in every preset: <code>&lt;?php … ?&gt;</code>, <code>&lt;% … %&gt;</code>, <code>{{ … }}</code> and <code>{% … %}</code> reach the output unchanged.</p>
+
+  <h2 id="checks">What the HTML checker finds</h2>
+  <p>The checker reads your code as written, so every problem comes with the line where it starts. It follows the HTML rules browsers use: a new <code>&lt;li&gt;</code> closes the previous one, and <code>&lt;p&gt;</code>, <code>&lt;td&gt;</code> and similar elements may leave out their end tag without an error.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="checks-cap">
+    <table class="data text"><caption id="checks-cap">HTML checks</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Why it matters</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Unclosed, mismatched and stray end tags</th><td>Browsers guess where the element ends, which shifts layout and nesting in ways that differ between pages.</td></tr>
+        <tr><th scope="row"><code>&lt;div /&gt;</code> and other non-void self-closing tags</th><td>HTML ignores the slash, so the element stays open and swallows the content after it.</td></tr>
+        <tr><th scope="row">Duplicate <code>id</code></th><td>Breaks anchor links, labels, ARIA references and <code>getElementById</code>.</td></tr>
+        <tr><th scope="row">Images without <code>alt</code></th><td>Screen readers and Google Images rely on it.</td></tr>
+        <tr><th scope="row">Images without <code>width</code> and <code>height</code></th><td>The browser cannot reserve space, so content jumps when the image loads: a Cumulative Layout Shift problem in Core Web Vitals.</td></tr>
+        <tr><th scope="row">Links and buttons with no text</th><td>They have no accessible name, and an empty link passes no anchor text to search engines.</td></tr>
+        <tr><th scope="row">Form fields without a label</th><td>Screen reader users cannot tell what to type.</td></tr>
+        <tr><th scope="row">Missing <code>&lt;title&gt;</code>, viewport, <code>lang</code>, <code>&lt;h1&gt;</code> or description</th><td>Search results, mobile layout and accessibility depend on them. Skipped for Blogger templates, which add them when the page is built.</td></tr>
+        <tr><th scope="row">Obsolete tags, inline handlers, many inline styles</th><td><code>&lt;center&gt;</code> and <code>&lt;font&gt;</code> are not part of HTML any more; <code>onclick</code> attributes block a strict Content Security Policy.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="whitespace">Why the Safe preset keeps one space</h2>
+  <p>Whitespace between inline elements is visible. In <code>&lt;a&gt;Home&lt;/a&gt; &lt;a&gt;Blog&lt;/a&gt;</code> the space separates the links; remove it and they run together as "HomeBlog". The same happens between inline-block buttons and images. A minifier cannot know your CSS, so Safe collapses every run of whitespace to a single space instead of deleting it. That saves almost as much and never changes the layout. Maximum deletes it, which is only safe when your CSS uses flexbox or grid for those gaps.</p>
+
+  <h2 id="platforms">Using it with Blogger, WordPress and email</h2>
+  <h3>Blogger</h3>
+  <p>To read a theme, go to <strong>Theme → ⋮ → Edit HTML</strong>, copy everything and choose Beautify. To minify, choose the <strong>Blogger and XML</strong> preset, back up the theme first (<strong>Theme → ⋮ → Backup</strong>), then paste the result back and save. Keep the <code>Variable definitions</code> comment inside <code>&lt;b:skin&gt;</code>: the Theme Designer reads its <code>&lt;Variable&gt;</code> tags, so CSS inside CDATA is left unminified on purpose. For post HTML, Blogger's own editor reformats code when you switch views, so paste minified HTML in HTML view and publish without switching back.</p>
+  <h3>WordPress</h3>
+  <p>Beautify is useful for reading a theme template or the HTML of a block. To minify a live WordPress site, use your caching plugin's HTML minify option rather than editing theme files, so updates do not overwrite your changes.</p>
+  <h3>Email</h3>
+  <p>Gmail clips messages larger than about 102 KB and hides the rest behind "View entire message". The Email preset keeps Outlook's conditional comments and quoted attributes, which many email clients need.</p>
+  <div class="callout"><p><strong>Tip:</strong> fix every image the checker lists without width and height. It is one of the most common causes of a poor CLS score in <a href="https://pagespeed.web.dev/" rel="noopener">PageSpeed Insights</a>.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/css-minifier/">CSS Minifier<small>Minify or beautify CSS</small></a>
+    <a href="/javascript-minifier/">JavaScript Minifier<small>Minify, obfuscate or beautify JS</small></a>
+    <a href="/">All {{BRAND}} tools<small>Free developer tools and calculators</small></a>
+  </div>
+  <p class="note">Built with <a href="https://github.com/beautifier/js-beautify" rel="noopener">js-beautify</a> and <a href="https://github.com/terser/html-minifier-terser" rel="noopener">html-minifier-terser</a> (MIT). <a href="/assets/vendor/LICENSES.txt">Licences</a>.</p>
+</section>
+</div>

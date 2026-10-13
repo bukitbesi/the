@@ -87,7 +87,7 @@ color-scheme:dark;
 --c-ai:#b9b3ff;--c-ai-bg:rgba(162,155,254,.14);--c-util:#81ecec;--c-util-bg:rgba(129,236,236,.12);
 --c-calc:#fdcb6e;--c-calc-bg:rgba(253,203,110,.12);
 }
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:76px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:76px;scrollbar-gutter:stable}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
@@ -368,6 +368,25 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .code-tool.is-busy #jsOut{opacity:.6}
 .data code{white-space:pre-wrap}
 @media(max-width:360px){.code-tool{padding:16px}.seg.seg3 label{gap:5px;font-size:.8rem}.seg.seg3 input{margin:0}}
+/* HTML beautifier: option panels, HTML check list, sandboxed preview. */
+.opt-panel{margin-bottom:12px}
+.opt-panel[hidden]{display:none}
+.check-col{display:grid;gap:2px;align-content:center}
+.check-col .check{min-height:40px;align-items:center}
+.preset-field{max-width:520px}
+.preview-frame{display:block;width:100%;height:420px;margin-top:16px;border:1px solid var(--border2);border-radius:12px;background:#fff}
+.preview-frame[hidden]{display:none}
+.issues{margin-top:16px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg)}
+.issues summary{min-height:48px;display:flex;align-items:center;padding:0 14px;font-weight:700;cursor:pointer}
+.issues[data-state=error] summary{color:#b42318}
+.issues[data-state=ok] summary{color:var(--accent3)}
+:root[data-theme=dark] .issues[data-state=error] summary{color:#ff9b8f}
+.issue-list{list-style:none;padding:0 14px 12px;display:grid;gap:6px;font-size:.88rem;color:var(--text2);max-height:320px;overflow:auto}
+.issue{display:block;line-height:1.55}
+.issue .lvl{margin:0 6px 0 0;text-transform:capitalize}
+.issue-error .lvl{color:#b42318;border-color:rgba(180,35,24,.35)}
+:root[data-theme=dark] .issue-error .lvl{color:#ff9b8f}
+.issue .link-btn{min-height:32px;padding:0 2px;color:var(--accent2)}
 </style>
 
 </head>
@@ -596,10 +615,10 @@ select.input{max-width:100%;text-overflow:ellipsis}
         <ul>
           <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
           <li><a href="/css-minifier/">CSS Minifier</a></li>
+          <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
           <li><a href="/parcel-tracking-malaysia/">Parcel Tracking Malaysia</a></li>
           <li><a href="/salary-calculator-malaysia/">Malaysia Salary Calculator</a></li>
           <li><a href="/income-tax-calculator-malaysia/">Income Tax Calculator Malaysia</a></li>
-          <li><a href="/car-loan-calculator-malaysia/">Car Loan Calculator Malaysia</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

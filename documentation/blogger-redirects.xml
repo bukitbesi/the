@@ -3,6 +3,9 @@
 <b:case value='https://www.thebukitbesi.com/p/css-minifier-tool.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/css-minifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/css-minifier/");</script>
+<b:case value='https://www.thebukitbesi.com/p/html-beautifier-online.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/html-beautifier/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/html-beautifier/");</script>
 <b:case value='https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/javascript-minifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/javascript-minifier/");</script>
