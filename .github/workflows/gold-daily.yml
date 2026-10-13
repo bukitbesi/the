@@ -1,0 +1,38 @@
+name: Daily gold price
+
+# Bakes the day's BNM Kijang Emas and spot gold prices into the gold price pages so search engines see today's
+# figure. The live price on the page comes from the Cloudflare Worker (documentation/gold-worker.md).
+on:
+  schedule:
+    - cron: '35 2 * * *'   # 10:35 Malaysia time, after BNM's morning Kijang Emas price
+    - cron: '35 9 * * *'   # 17:35 Malaysia time
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gold-daily
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch prices, build and validate
+        run: |
+          node tools-src/gold-fetch.mjs
+          node tools-src/build.mjs
+          node tools-src/validate.mjs
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No change."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A tools-src/gold-data.json docs
+          git commit -m "Update gold price $(date -u +%Y-%m-%d)"
+          git push

@@ -1,0 +1,15 @@
+{
+  "fetchedAt": "2026-10-09T02:35:00.000Z",
+  "spot": null,
+  "fx": null,
+  "kijang": {
+    "date": "2026-10-09",
+    "oneOz": { "buy": 17301, "sell": 18001 },
+    "halfOz": null,
+    "quarterOz": null
+  },
+  "history": [
+    { "date": "2026-10-09", "buy": 17301, "sell": 18001 }
+  ],
+  "prev": null
+}

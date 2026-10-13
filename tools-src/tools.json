@@ -513,6 +513,15 @@
     "live": true
   },
   {
+    "name": "Harga Emas Hari Ini",
+    "desc": "Today's gold price per gram for 999, 916, 750 and more, refreshed every minute, with Bank Negara's Kijang Emas prices, a chart and a jewellery price check. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/harga-emas-hari-ini/",
+    "cat": "calc",
+    "icon": "harga-emas-hari-ini",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Kalkulator Zakat Emas & Simpanan",
     "desc": "Zakat on kept gold from 85 g, worn gold above your state's uruf (Selangor 800 g) and savings above the nisab, with an editable gold price. Bahasa Melayu and English.",
     "url": "https://tool.thebukitbesi.com/kalkulator-zakat-emas/",

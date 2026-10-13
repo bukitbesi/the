@@ -88,6 +88,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/bmi-calculator-malaysia/](https://tool.thebukitbesi.com/bmi-calculator-malaysia/) + [/kalkulator-bmi/](https://tool.thebukitbesi.com/kalkulator-bmi/) | English + BM | bmi calculator malaysia, kalkulator bmi, berat ideal (moved from the blog) |
 | [/kalkulator-zakat-pendapatan/](https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/) + [/zakat-calculator-malaysia/](https://tool.thebukitbesi.com/zakat-calculator-malaysia/) | BM + English | kalkulator zakat pendapatan, nisab zakat 2026, had kifayah (moved from the blog) |
 | [/kalkulator-zakat-emas/](https://tool.thebukitbesi.com/kalkulator-zakat-emas/) + [/gold-zakat-calculator-malaysia/](https://tool.thebukitbesi.com/gold-zakat-calculator-malaysia/) | BM + English | kalkulator zakat emas, uruf emas pakai, zakat simpanan |
+| [/harga-emas-hari-ini/](https://tool.thebukitbesi.com/harga-emas-hari-ini/) + [/gold-price-malaysia/](https://tool.thebukitbesi.com/gold-price-malaysia/) | BM + English | harga emas hari ini, harga emas 916, gold price malaysia today, Kijang Emas |
 | [/cgpa-to-percentage/](https://tool.thebukitbesi.com/cgpa-to-percentage/) | English | cgpa to percentage (+ VTU, AKTU, SPPU, GTU, MAKAUT, Mumbai, CBSE variants) |
 | [/cgpa-calculator/](https://tool.thebukitbesi.com/cgpa-calculator/) | English | cgpa calculator, sgpa to cgpa, gpa calculator malaysia |
 | [/parcel-tracking-malaysia/](https://tool.thebukitbesi.com/parcel-tracking-malaysia/) | English | parcel tracking malaysia, track parcel malaysia, courier tracking, tracking number format |
@@ -134,6 +135,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (zakat):** `zakat-core.js` holds the default nisab (LZS, changes twice a year with the gold price), the LZS had kifayah amounts and the uruf presets. Update `FACTS.nisab`, `nisabLabel`, `kifayah` and `verified` when LZS publishes new figures (January and July), with `tools-src/tests/zakat.test.mjs`.
 
 **BMI:** `bmi-core.js` follows the Malaysian CPG on Management of Obesity (2nd edition, 2023); review when a new edition is published.
+
+**Gold price (live):** `gold-core.js` parses three free sources (BNM Kijang Emas and USD/MYR, gold-api.com spot) into one snapshot. The `Daily gold price` workflow (`.github/workflows/gold-daily.yml`, 10:35 and 17:35 Malaysia time) runs `tools-src/gold-fetch.mjs`, writes `tools-src/gold-data.json` (with price history for the chart), rebuilds and commits, so the HTML always carries the day's price. The page refreshes every minute from the Cloudflare Worker in `tools-src/gold-worker/` once its URL is set as `goldApi` in `site.json`; see [the worker guide](documentation/gold-worker.md).
 
 **Upkeep (parcel tracking):** `tracking-core.js` holds each courier's tracking page and number formats. Click-test the courier links after deploys and every few months, update `FACTS.verified`, and keep `tools-src/tests/tracking.test.mjs` in step. Courier pages set `"courier"` in front matter to preset the tracker and share the tracker box rendered by `trackMap` in `build.mjs`. The optional "Show status on this page" button loads 17TRACK's public widget only on click. Near-me pages (`"render": "near"`) turn the visitor's location or a typed area into a Google Maps search (`mapsUrl` in `tracking-core.js`, queries in `MAPS`), so there is no branch data to maintain. The old Blogger page redirects here; see [the redirect guide](documentation/blogger-redirects.md) and the [courier link checks](documentation/blogger-redirect-parcel-tracking.md).
 
@@ -187,6 +190,8 @@ assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
 assets/js/bmi-core.js       BMI: Malaysian CPG and WHO categories, healthy range, waist and waist-to-height ratio
 assets/js/zakat-core.js     zakat: income (gross / LZS had kifayah), nisab, tax rebate; gold (kept, worn over uruf) and savings
+assets/js/gold-core.js      gold price: BNM/spot parsing, per-gram price by purity, Kijang Emas, jewellery check, chart
+tools-src/gold-worker/      Cloudflare Worker that serves the live gold price (deploy: documentation/gold-worker.md)
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)

@@ -44,7 +44,7 @@
   <div class="calc">
     <form class="box" id="goldForm" novalidate aria-labelledby="gold-h">
       <h2 id="gold-h">Your gold and savings</h2>
-      <div class="field"><label for="price">Gold price per gram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{G_PRICE}}"></div><p class="help">Use the price announced by your state zakat body.</p></div>
+      <div class="field"><label for="price">Gold price per gram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{G_PRICE}}"></div><p class="help">Use the price announced by your state zakat body, or <a href="/gold-price-malaysia/">today's gold price</a>.</p></div>
       <fieldset class="field-group">
         <legend>Kept gold</legend>
         <div class="field"><label for="kept">Weight</label><div class="input"><input id="kept" name="kept" type="number" inputmode="decimal" min="0" step="0.1" value="{{G_KEPT}}"><span aria-hidden="true">g</span></div><p class="help">Bars, coins, dinar, gold accounts. Nisab 85 g.</p></div>
@@ -141,6 +141,7 @@
 <section class="container prose" aria-labelledby="related-h">
   <h2 id="related-h">Related tools</h2>
   <div class="related">
+    <a href="/gold-price-malaysia/">Gold Price Malaysia Today<small>Gold price per gram, updated every minute</small></a>
     <a href="/zakat-calculator-malaysia/">Income Zakat Calculator<small>Nisab, had kifayah and tax rebate</small></a>
     <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
     <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
