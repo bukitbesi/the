@@ -55,6 +55,10 @@ const sspnCore = require('../assets/js/sspn-core.js');
 const unittrustCore = require('../assets/js/unittrust-core.js');
 const eduCore = require('../assets/js/edu-core.js');
 const waterCore = require('../assets/js/water-core.js');
+const qiblaCore = require('../assets/js/qibla-core.js');
+const nesteggCore = require('../assets/js/nestegg-core.js');
+const leaveCore = require('../assets/js/leave-core.js');
+const terminationCore = require('../assets/js/termination-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1618,10 +1622,77 @@ function waterMap(lang) {
     W_VERIFIED: longDate(W.FACTS.verified, lang), W_VERIFIED_ISO: W.FACTS.verified
   };
 }
+// ---- batch 5: qibla, retirement savings, annual leave, termination benefits
+function qiblaMap(lang) {
+  const { L, nf, tr } = b3(lang), Q = qiblaCore, r = Q.calculate({ place: 'kl' });
+  const opts = Q.PLACES.map(p => `<option value="${p[0]}"${p[0] === 'kl' ? ' selected' : ''}>${p[1]}</option>`).join('') + `<option value="custom">${L ? 'Koordinat sendiri' : 'My own coordinates'}</option>`;
+  const lines = [tr(L ? 'Arah kiblat (darjah)' : 'Qibla bearing (degrees)', nf(r.bearing, 2) + '°', 'total'), tr(L ? 'Dari arah barat' : 'From due west', L ? `${nf(r.fromWest, 2)}° ke utara dari barat` : `${nf(r.fromWest, 2)}° north of west`),
+    tr(L ? 'Mata angin' : 'Compass point', Q.point(r.bearing, lang)), tr(L ? 'Jarak ke Kaabah' : 'Distance to the Kaaba', nf(r.km, 0) + ' km'), tr(L ? 'Koordinat' : 'Coordinates', `${nf(r.lat, 4)}, ${nf(r.lon, 4)}`)].join('\n');
+  const table = Q.PLACES.map(p => { const x = Q.calculate({ place: p[0] }); return `<tr><th scope="row">${p[1]}</th><td>${x.dm}</td><td>${nf(x.bearing, 2)}°</td><td>${nf(x.km, 0)} km</td></tr>`; }).join('\n');
+  const b = k => Q.calculate({ place: k });
+  return {
+    Q_PLACE_OPTIONS: opts, Q_LAT: r.lat, Q_LON: r.lon, Q_DM: r.dm, Q_DEG: nf(r.bearing, 2), Q_KM: nf(r.km, 0), Q_ROT: r.bearing.toFixed(2), Q_WEST: nf(r.fromWest, 2),
+    Q_SUB: L ? `${nf(r.bearing, 2)}° dari utara benar · ${Q.point(r.bearing, 'ms')} · ${nf(r.km, 0)} km ke Kaabah` : `${nf(r.bearing, 2)}° from true north · ${Q.point(r.bearing, 'en')} · ${nf(r.km, 0)} km to the Kaaba`,
+    Q_LINES: lines, Q_TABLE: table, Q_JB: b('jb').dm, Q_KK: b('kk').dm, Q_KUCHING: b('kuching').dm, Q_PENANG: b('georgetown').dm, Q_KB: b('kotabharu').dm,
+    Q_VERIFIED: longDate(Q.FACTS.verified, lang), Q_VERIFIED_ISO: Q.FACTS.verified
+  };
+}
+const NEST_EXAMPLE = { age: 35, retire: 60, until: 85, expense: 3000, inflation: 2.5, pre: 5, post: 4, saved: 80000, monthly: 1000 };
+function nesteggMap(lang) {
+  const { L, m, nf, tr } = b3(lang), N = nesteggCore, r = N.calculate(NEST_EXAMPLE);
+  const lines = [tr(L ? 'Tahun sebelum bersara' : 'Years until retirement', r.years), tr(L ? 'Perbelanjaan sebulan semasa bersara' : 'Monthly expenses at retirement', m(r.first)), tr(L ? 'Simpanan diperlukan semasa bersara' : 'Savings needed at retirement', m(r.need), 'total'),
+    tr(L ? 'Diperlukan (nilai hari ini)' : 'Needed (in today\'s money)', m(r.needToday)), tr(L ? 'Simpanan dijangka semasa bersara' : 'Projected savings at retirement', m(r.projected)), tr(L ? 'Kekurangan' : 'Shortfall', m(r.gap)),
+    tr(L ? 'Simpanan tambahan sebulan' : 'Extra saving a month', m(r.extra), 'total'), tr(L ? 'Wang bertahan hingga' : 'Money lasts until', (L ? 'Umur ' : 'Age ') + nf(r.runsOutAge, 1))].join('\n');
+  const byExp = [2000, 3000, 4000, 5000, 8000].map(e => { const x = N.calculate({ ...NEST_EXAMPLE, expense: e }); return `<tr><th scope="row">${m(e)}</th><td>${m(x.first)}</td><td>${m(x.need)}</td><td>${m(x.needToday)}</td></tr>`; }).join('\n');
+  const lasts = [1500, 2000, 3000, 4000].map(e => `<tr><th scope="row">${m(e)}</th>${[N.FACTS.basic, N.FACTS.adequate, N.FACTS.enhanced].map(bal => { const d = N.drawdown(bal, e, 0.025, 0.04, 50 * 12); return `<td>${d.runsOut === null ? (L ? 'Melepasi 110' : 'Past 110') : nf(60 + d.runsOut / 12, 1)}</td>`; }).join('')}</tr>`).join('\n');
+  const phase = N.FACTS.basicPhase.map(([y, v]) => `<tr><th scope="row">${y}</th><td>${m(v)}</td></tr>`).join('\n');
+  return {
+    N_AGE: NEST_EXAMPLE.age, N_RETIRE: NEST_EXAMPLE.retire, N_UNTIL: NEST_EXAMPLE.until, N_EXPENSE: NEST_EXAMPLE.expense, N_INFL: NEST_EXAMPLE.inflation, N_PRE: NEST_EXAMPLE.pre, N_POST: NEST_EXAMPLE.post, N_SAVED: NEST_EXAMPLE.saved, N_MONTHLY: NEST_EXAMPLE.monthly,
+    N_NEED: m(r.need), N_PROJ: m(r.projected), N_GAP: m(r.gap), N_EXTRA: m(r.extra), N_FIRST: m(r.first), N_TODAY: m(r.needToday), N_RUNS: nf(r.runsOutAge, 1),
+    N_SUB: L ? `Dijangka ${m(r.projected)}: kurang ${m(r.gap)}` : `Projected ${m(r.projected)}: short by ${m(r.gap)}`,
+    N_LINES: lines, N_BYEXP: byExp, N_LASTS: lasts, N_PHASE: phase,
+    N_BASIC_LASTS: nf(60 + N.drawdown(390000, 2000, 0.025, 0.04, 600).runsOut / 12, 1),
+    N_VERIFIED: longDate(N.FACTS.verified, lang), N_VERIFIED_ISO: N.FACTS.verified
+  };
+}
+const LEAVE_EXAMPLE = { start: '2022-03-01', end: '2026-06-30', leaving: 'yes', taken: 3, wage: 3900 };
+function leaveMap(lang) {
+  const { L, m, tr, opt } = b3(lang), Lv = leaveCore, r = Lv.calculate(LEAVE_EXAMPLE), d = n => L ? `${n} hari` : `${n} days`, ym = mo => L ? `${Math.floor(mo / 12)} tahun ${mo % 12} bulan` : `${Math.floor(mo / 12)} years ${mo % 12} months`;
+  const lines = [tr(L ? 'Tempoh perkhidmatan' : 'Length of service', ym(r.months)), tr(L ? 'Cuti tahunan penuh' : 'Full annual leave', d(r.full)), tr(L ? 'Bulan dikira tahun ini' : 'Months counted this year', r.counted),
+    tr(L ? 'Cuti tahunan layak' : 'Annual leave earned', d(r.earned), 'total'), tr(L ? 'Sudah diambil' : 'Already taken', d(r.taken)), tr(L ? 'Baki' : 'Balance', d(r.balance), 'total'),
+    tr(L ? 'Kadar gaji harian (gaji ÷ 26)' : 'Daily rate (wage ÷ 26)', m(r.orp)), tr(L ? 'Bayaran cuti tidak diambil' : 'Pay for unused leave', m(r.payout), 'total')].join('\n');
+  const other = [tr(L ? 'Cuti sakit setahun' : 'Sick leave a year', d(r.sick)), tr(L ? 'Cuti hospital setahun' : 'Hospitalisation leave a year', d(r.hospital)), tr(L ? 'Cuti bersalin' : 'Maternity leave', d(r.maternity)), tr(L ? 'Cuti paterniti' : 'Paternity leave', d(r.paternity))].join('\n');
+  const tiers = [[L ? 'Bawah 2 tahun' : 'Under 2 years', 0], [L ? '2 hingga bawah 5 tahun' : '2 to under 5 years', 1], [L ? '5 tahun atau lebih' : '5 years or more', 2]].map(([n, t]) => `<tr><th scope="row">${n}</th><td>${d(Lv.FACTS.annual[t])}</td><td>${d(Lv.FACTS.sick[t])}</td><td>${d(Lv.FACTS.hospital)}</td></tr>`).join('\n');
+  const pro = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(mo => `<tr><th scope="row">${mo}</th>${[1, 3, 6].map(y => `<td>${Lv.annual(y, mo)}</td>`).join('')}</tr>`).join('\n');
+  return {
+    L_START: LEAVE_EXAMPLE.start, L_END: LEAVE_EXAMPLE.end, L_TAKEN: LEAVE_EXAMPLE.taken, L_WAGE: LEAVE_EXAMPLE.wage,
+    L_LEAVING_OPTIONS: [opt('yes', 'Yes, this is my last day', 'Ya, ini hari terakhir saya', true), opt('no', 'No, still working (this year\'s leave)', 'Tidak, masih bekerja (cuti tahun ini)')].join(''),
+    L_DAYS: d(r.earned), L_SUB: L ? `daripada ${r.full} hari setahun (2 hingga 5 tahun berkhidmat)` : `of ${r.full} days a year (2 to 5 years of service)`, L_PAY: m(r.payout),
+    L_LINES: lines, L_OTHER: other, L_TIERS: tiers, L_PRO: pro, L_JOIN: Lv.calculate({ start: '2026-04-01', end: '2026-10-14' }).earned,
+    L_VERIFIED: longDate(Lv.FACTS.verified, lang), L_VERIFIED_ISO: Lv.FACTS.verified
+  };
+}
+const TERM_EXAMPLE = { start: '2019-01-01', end: '2026-06-30', wage: 3500, reason: 'retrench', manual: 'no', contract: 0 };
+function terminationMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), Tm = terminationCore, r = Tm.calculate(TERM_EXAMPLE), w = n => L ? `${n} minggu` : `${n} weeks`, ym = mo => L ? `${Math.floor(mo / 12)} tahun ${mo % 12} bulan` : `${Math.floor(mo / 12)} years ${mo % 12} months`;
+  const lines = [tr(L ? 'Tempoh perkhidmatan' : 'Length of service', ym(r.months)), tr(L ? 'Tempoh notis' : 'Notice period', w(r.notice)), tr(L ? 'Gaji ganti notis' : 'Pay in lieu of notice', m(r.inLieu), 'total'),
+    tr(L ? 'Hari gaji setahun' : 'Days\' wages a year', r.daysPerYear), tr(L ? 'Tahun dikira (ke bulan terdekat)' : 'Years counted (to the nearest month)', nf(r.rounded / 12, 2)), tr(L ? 'Hari faedah' : 'Benefit days', nf(r.benefitDays, 2)),
+    tr(L ? 'Kadar gaji harian (gaji ÷ 26)' : 'Daily rate (wage ÷ 26)', m(r.orp)), tr(L ? 'Faedah penamatan minimum' : 'Minimum termination benefit', m(r.benefit), 'total')].join('\n');
+  const byYears = [1, 2, 3, 5, 7, 10, 15, 20].map(y => { const x = Tm.calculate({ start: `${2026 - y}-07-01`, end: '2026-06-30', wage: 3000 }); return `<tr><th scope="row">${y}</th><td>${w(x.notice)}</td><td>${x.daysPerYear}</td><td>${nf(x.benefitDays, 0)}</td><td>${m(x.benefit)}</td></tr>`; }).join('\n');
+  return {
+    T_START: TERM_EXAMPLE.start, T_END: TERM_EXAMPLE.end, T_WAGE: TERM_EXAMPLE.wage,
+    T_REASON_OPTIONS: [opt('retrench', 'Retrenchment or lay-off', 'Pemberhentian (retrenchment)', true), opt('terminate', 'Terminated by the employer', 'Ditamatkan oleh majikan'), opt('resign', 'I resigned', 'Saya meletak jawatan')].join(''),
+    T_MANUAL_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes (manual or supervising manual work)', 'Ya (kerja manual atau menyelia kerja manual)')].join(''),
+    T_BENEFIT: m(r.benefit), T_NOTICE: r.notice, T_LIEU: m(r.inLieu), T_DAYS: nf(r.benefitDays, 0), T_ORP: m(r.orp),
+    T_SUB: L ? `Notis ${r.notice} minggu · ${m(r.inLieu)} gaji ganti notis` : `${r.notice} weeks' notice · ${m(r.inLieu)} in lieu`, T_LINES: lines, T_BYYEARS: byYears,
+    T_THREE: m(Tm.calculate({ start: '2023-01-01', end: '2025-12-31', wage: 2600 }).benefit),
+    T_VERIFIED: longDate(Tm.FACTS.verified, lang), T_VERIFIED_ISO: Tm.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1774,6 +1845,10 @@ const bundles = {
   'unit-trust.js': ['assets/js/unittrust-core.js', 'assets/js/unittrust-ui.js'],
   'education-cost.js': ['assets/js/edu-core.js', 'assets/js/edu-ui.js'],
   'water-bill.js': ['assets/js/water-core.js', 'assets/js/water-ui.js'],
+  'qibla.js': ['assets/js/qibla-core.js', 'assets/js/qibla-ui.js'],
+  'retirement-savings.js': ['assets/js/nestegg-core.js', 'assets/js/nestegg-ui.js'],
+  'annual-leave.js': ['assets/js/leave-core.js', 'assets/js/leave-ui.js'],
+  'termination-benefits.js': ['assets/js/termination-core.js', 'assets/js/termination-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

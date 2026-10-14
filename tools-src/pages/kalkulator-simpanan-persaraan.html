@@ -1,0 +1,151 @@
+<!--page
+{
+  "path": "/kalkulator-simpanan-persaraan/",
+  "lang": "ms",
+  "alternates": { "en": "/retirement-savings-calculator-malaysia/" },
+  "title": "Kalkulator Simpanan Persaraan: Berapa Simpanan Cukup untuk Bersara?",
+  "description": "Kalkulator simpanan persaraan: berapa perlu ada pada umur 60 untuk perbelanjaan bulanan dengan inflasi, adakah KWSP anda cukup dan berapa lama ia bertahan.",
+  "llms": "Mengira kecukupan simpanan persaraan di Malaysia: perbelanjaan bulanan hari ini meningkat dengan inflasi hingga bersara, simpanan diperlukan semasa bersara = nilai kini perbelanjaan yang meningkat itu dibayar setiap bulan hingga umur yang dirancang (didiskaun pada pulangan selepas bersara), simpanan dijangka = simpanan KWSP dan lain-lain sekarang campur caruman bulanan berkembang pada pulangan sebelum bersara, dan kekurangan memberi simpanan tambahan bulanan dan umur wang habis. Contoh: umur 35, RM3,000 sebulan hari ini, bersara pada 60 dan merancang hingga 85, inflasi 2.5%, pulangan 5% sebelum dan 4% selepas bersara, RM80,000 disimpan dan RM1,000 sebulan: perbelanjaan pada 60 ialah RM5,562 sebulan, simpanan diperlukan RM1,399,967 (RM755,129 nilai hari ini), simpanan dijangka RM859,029, jadi wang habis kira-kira umur 74 dan tambahan RM919.77 sebulan menutup jurang. Penanda aras Kecukupan Pendapatan Persaraan KWSP: simpanan asas RM390,000 (berperingkat hingga 2028), mencukupi RM650,000 dan dipertingkatkan RM1.3 juta. RM390,000 dibelanjakan RM2,000 sebulan dari umur 60 (naik 2.5% setahun, pulangan 4%) bertahan hingga kira-kira umur 78.5.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "nestegg",
+  "scripts": ["/assets/js/retirement-savings.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Simpanan Persaraan", null]],
+  "about": ["Perancangan persaraan", "KWSP", "Simpanan persaraan", "Inflasi"],
+  "app": {
+    "name": "Kalkulator Simpanan Persaraan",
+    "category": "FinanceApplication",
+    "features": ["Simpanan diperlukan semasa bersara", "Inflasi kos sara hidup", "Unjuran KWSP dan simpanan lain", "Kekurangan dan simpanan tambahan bulanan", "Umur wang habis", "Penanda aras KWSP RM390,000, RM650,000 dan RM1.3 juta", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Utusan: KWSP perkenal tiga tahap simpanan persaraan", "https://www.utusan.com.my/ekonomi/2024/12/kwsp-perkenal-tiga-tahap-simpanan-persaraan/"],
+    ["Utusan: KWSP naikkan penanda aras simpanan asas kepada RM390,000", "https://www.utusan.com.my/ekonomi/2024/12/kwsp-naikkan-penanda-aras-simpanan-asas-kepada-rm390000/"],
+    ["RTM: KWSP umum penambahbaikan dasar, produk berkuat kuasa esok", "https://berita.rtm.gov.my/niaga/senarai-berita-niaga/senarai-artikel/kwsp-umum-penambahbaikan-dasar-produk-berkuat-kuasa-esok/"],
+    ["Malay Mail: KWSP umum dividen 6.15% bagi 2025", "https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707"]
+  ],
+  "faq": [
+    { "q": "Berapa simpanan diperlukan untuk bersara di Malaysia?", "a": "Bergantung pada perbelanjaan anda. Pada umur 35 dengan perbelanjaan RM3,000 sebulan hari ini, bersara pada 60 dan merancang hingga 85, dengan inflasi 2.5% dan pulangan 4% semasa bersara, anda perlukan kira-kira {{N_NEED}} pada umur 60, atau {{N_TODAY}} nilai hari ini." },
+    { "q": "Cukupkah RM390,000 dalam KWSP untuk bersara?", "a": "Ia penanda aras simpanan asas KWSP pada umur 55 untuk keperluan asas. Jika dibelanjakan RM2,000 sebulan dari umur 60, naik 2.5% setahun dan mendapat pulangan 4%, ia bertahan hingga kira-kira umur {{N_BASIC_LASTS}}. Tahap mencukupi KWSP ialah RM650,000 dan tahap dipertingkatkan RM1.3 juta." },
+    { "q": "Apakah penanda aras simpanan persaraan KWSP?", "a": "Di bawah rangka kerja Kecukupan Pendapatan Persaraan: simpanan asas RM390,000 (naik daripada RM240,000 dan dilaksanakan berperingkat hingga 2028), simpanan mencukupi RM650,000 dan simpanan dipertingkatkan RM1.3 juta. KWSP akan menyemaknya setiap tiga tahun mulai 2029." },
+    { "q": "Berapa lama simpanan persaraan saya akan bertahan?", "a": "Sehingga baki tidak cukup untuk perbelanjaan sebulan. Dalam contoh, simpanan dijangka {{N_PROJ}} habis kira-kira umur {{N_RUNS}}; menyimpan tambahan {{N_EXTRA}} sebulan membolehkannya bertahan hingga 85." },
+    { "q": "Kadar inflasi apa patut digunakan?", "a": "Ia andaian. Inflasi utama Malaysia sekitar 2% kebelakangan ini, tetapi kos kesihatan dan kos persaraan lain sering naik lebih cepat, jadi ramai perancang menggunakan 2.5% hingga 3%." },
+    { "q": "Pulangan berapa patut diandaikan?", "a": "KWSP mengisytiharkan 6.15% bagi 2025, tetapi pelan jangka panjang patut berhati-hati: kalkulator ini menggunakan 5% sebelum bersara dan 4% selepas sebagai contoh. Pulangan lebih rendah memerlukan simpanan lebih besar." },
+    { "q": "Apa yang dikira sebagai simpanan persaraan?", "a": "KWSP (semua akaun), PRS, ASB, unit amanah, simpanan tetap dan pelaburan lain yang akan digunakan untuk sara hidup. Jangan masukkan rumah anda melainkan anda bercadang menjual atau menyewakannya." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator simpanan persaraan</li></ol></nav>
+  <h1>Kalkulator Simpanan Persaraan</h1>
+  <p class="answer">Untuk berbelanja RM3,000 sebulan (nilai hari ini) dari umur 60 hingga 85, anda perlukan kira-kira <strong>{{N_NEED}}</strong> pada umur 60 ({{N_TODAY}} nilai hari ini), dengan andaian inflasi 2.5% dan pulangan 4% semasa bersara. Individu berumur 35 dengan RM80,000 simpanan dan RM1,000 sebulan akan mencapai {{N_PROJ}}, yang habis kira-kira umur {{N_RUNS}}; menyimpan <strong>{{N_EXTRA}} lagi sebulan</strong> menutup jurang. Masukkan angka anda di bawah.</p>
+  <p class="meta"><span>Penanda aras disemak <time datetime="{{N_VERIFIED_ISO}}">{{N_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/retirement-savings-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="nestForm" novalidate aria-labelledby="ne-h">
+      <h2 id="ne-h">Pelan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="age">Umur sekarang</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="18" max="80" step="1" value="{{N_AGE}}"><span aria-hidden="true">tahun</span></div></div>
+        <div class="field"><label for="retire">Bersara pada umur</label><div class="input"><input id="retire" name="retire" type="number" inputmode="numeric" min="40" max="80" step="1" value="{{N_RETIRE}}"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="until">Rancang hingga umur</label><div class="input"><input id="until" name="until" type="number" inputmode="numeric" min="50" max="110" step="1" value="{{N_UNTIL}}"><span aria-hidden="true">tahun</span></div></div>
+        <div class="field"><label for="expense">Perbelanjaan sebulan hari ini</label><div class="input"><span aria-hidden="true">RM</span><input id="expense" name="expense" type="number" inputmode="decimal" min="0" step="100" value="{{N_EXPENSE}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="saved">Simpanan sekarang (KWSP dan lain-lain)</label><div class="input"><span aria-hidden="true">RM</span><input id="saved" name="saved" type="number" inputmode="decimal" min="0" step="1000" value="{{N_SAVED}}"></div></div>
+        <div class="field"><label for="monthly">Disimpan sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="monthly" name="monthly" type="number" inputmode="decimal" min="0" step="100" value="{{N_MONTHLY}}"></div></div>
+      </div>
+      <p class="help">Disimpan sebulan: KWSP anda dan majikan serta simpanan lain.</p>
+      <div class="field"><label for="inflation">Inflasi setahun</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" max="20" step="0.1" value="{{N_INFL}}"><span aria-hidden="true">%</span></div></div>
+      <div class="field-row">
+        <div class="field"><label for="pre">Pulangan sebelum bersara</label><div class="input"><input id="pre" name="pre" type="number" inputmode="decimal" min="0" max="20" step="0.1" value="{{N_PRE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="post">Pulangan selepas bersara</label><div class="input"><input id="post" name="post" type="number" inputmode="decimal" min="0" max="20" step="0.1" value="{{N_POST}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="ne-result-h">
+      <h2 id="ne-result-h">Persaraan anda</h2>
+      <div class="net">
+        <p>Simpanan diperlukan semasa bersara</p>
+        <output id="nNeed" for="age retire until expense saved monthly inflation pre post">{{N_NEED}}</output>
+        <p id="nSub">{{N_SUB}}</p>
+      </div>
+      <p class="sr-only" id="nLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pelan</caption>
+        <tbody id="nLines">
+{{N_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Inflasi dan pulangan ialah andaian; semak setiap tahun.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="nestPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="need-h">Simpanan diperlukan pada umur 60 ikut perbelanjaan bulanan (umur 35, bersara 60, rancang hingga 85)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="need-h">
+    <table class="data">
+      <thead><tr><th scope="col">Perbelanjaan hari ini</th><th scope="col">Sebulan pada 60</th><th scope="col">Diperlukan pada 60</th><th scope="col">Nilai hari ini</th></tr></thead>
+      <tbody>
+{{N_BYEXP}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara simpanan persaraan dikira</h2>
+  <ol>
+    <li><strong>Perbelanjaan semasa bersara</strong> = perbelanjaan bulanan hari ini × (1 + inflasi)^tahun hingga bersara.</li>
+    <li><strong>Simpanan diperlukan</strong> = nilai semasa bersara bagi perbelanjaan itu, meningkat dengan inflasi, dibayar setiap bulan hingga umur yang dirancang, dengan baki mendapat pulangan selepas bersara.</li>
+    <li><strong>Simpanan dijangka</strong> = simpanan sekarang dan simpanan bulanan berkembang pada pulangan sebelum bersara.</li>
+    <li><strong>Simpanan tambahan</strong> = kekurangan dibahagi atas bulan yang tinggal.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="lasts-h">Berapa lama penanda aras KWSP bertahan dari umur 60</h2>
+  <p>Perbelanjaan naik 2.5% setahun dan baki mendapat pulangan 4%.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="lasts-h">
+    <table class="data">
+      <thead><tr><th scope="col">Belanja sebulan pada 60</th><th scope="col">RM390,000 (asas)</th><th scope="col">RM650,000 (mencukupi)</th><th scope="col">RM1.3 juta (dipertingkatkan)</th></tr></thead>
+      <tbody>
+{{N_LASTS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ria">Tahap simpanan persaraan KWSP</h2>
+  <ul>
+    <li><strong>Simpanan asas:</strong> RM390,000, naik daripada RM240,000 dan dilaksanakan berperingkat hingga 2028.</li>
+    <li><strong>Simpanan mencukupi:</strong> RM650,000.</li>
+    <li><strong>Simpanan dipertingkatkan:</strong> RM1.3 juta.</li>
+    <li><strong>Semakan:</strong> setiap tiga tahun mulai 2029, berdasarkan kajian Belanjawanku.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.utusan.com.my/ekonomi/2024/12/kwsp-perkenal-tiga-tahap-simpanan-persaraan/" rel="noopener">Utusan: Tiga tahap simpanan persaraan</a></li>
+    <li><a href="https://www.utusan.com.my/ekonomi/2024/12/kwsp-naikkan-penanda-aras-simpanan-asas-kepada-rm390000/" rel="noopener">Utusan: Penanda aras simpanan asas RM390,000</a></li>
+    <li><a href="https://berita.rtm.gov.my/niaga/senarai-berita-niaga/senarai-artikel/kwsp-umum-penambahbaikan-dasar-produk-berkuat-kuasa-esok/" rel="noopener">RTM: Penambahbaikan dasar KWSP</a></li>
+    <li><a href="https://www.malaymail.com/amp/news/malaysia/2026/02/28/epf-announces-615pc-dividend-for-both-conventional-shariah-savings-for-2025/210707" rel="noopener">Malay Mail: Dividen KWSP 6.15% bagi 2025</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran perancangan, bukan nasihat kewangan. Pulangan, inflasi dan jangka hayat tidak pasti.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Baki KWSP pada umur 55 dan 60</small></a>
+    <a href="/kalkulator-umur-bersara/">Kalkulator Umur Bersara<small>Tarikh bersara dan umur KWSP</small></a>
+    <a href="/kalkulator-unit-trust/">Kalkulator Unit Trust<small>Pulangan selepas caj dan yuran</small></a>
+  </div>
+</section>

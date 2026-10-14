@@ -288,3 +288,5 @@ select.input{max-width:100%;text-overflow:ellipsis}
 #promptForm .seg,#imgForm .seg{margin-bottom:14px}
 .data.text td{overflow-wrap:anywhere}
 @media(max-width:560px){#promptForm .field-row:not(.keep),#imgForm .field-row:not(.keep){grid-template-columns:1fr}}
+.compass{display:block;width:160px;height:160px;margin:0 auto 12px;color:var(--text2)}
+.compass .needle{fill:var(--accent)}

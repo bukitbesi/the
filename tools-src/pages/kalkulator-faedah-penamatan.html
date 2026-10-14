@@ -1,0 +1,136 @@
+<!--page
+{
+  "path": "/kalkulator-faedah-penamatan/",
+  "lang": "ms",
+  "alternates": { "en": "/termination-benefits-calculator-malaysia/" },
+  "title": "Kalkulator Faedah Penamatan: Pampasan Diberhentikan dan Notis",
+  "description": "Kalkulator faedah penamatan kerja: pampasan minimum diberhentikan (10, 15 atau 20 hari setahun), tempoh notis dan gaji ganti notis ikut Akta Kerja 1955.",
+  "llms": "Mengira hak penamatan kerja di bawah Akta Kerja 1955: notis penamatan sekurang-kurangnya 4 minggu bagi perkhidmatan kurang 2 tahun, 6 minggu bagi 2 hingga kurang 5 tahun dan 8 minggu bagi 5 tahun atau lebih, melainkan kontrak memberi lebih lama (s.12(2)), dengan indemniti ganti notis kira-kira gaji mingguan (bulanan × 12 ÷ 52); dan faedah penamatan atau rentikerja sementara minimum di bawah Peraturan-Peraturan Kerja (Faedah-Faedah Penamatan dan Rentikerja Sementara) 1980 bagi pekerja dengan sekurang-kurangnya 12 bulan perkhidmatan berterusan: 10 hari gaji bagi setiap tahun perkhidmatan jika bekerja kurang 2 tahun, 15 hari bagi 2 hingga kurang 5 tahun dan 20 hari bagi 5 tahun atau lebih, dengan tahun tidak lengkap dikira prorata ke bulan terdekat, pada kadar gaji biasa (gaji bulanan ÷ 26). Ia tidak dibayar jika meletak jawatan, dan Akta tidak menjaminnya bagi pekerja bukan manual bergaji melebihi RM4,000 sebulan. Contoh: 7 tahun 6 bulan dengan gaji RM3,500: notis 8 minggu (RM6,461.54 ganti notis) dan 20 × 7.5 = 150 hari × RM134.62 = RM20,192.31.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "termination",
+  "scripts": ["/assets/js/termination-benefits.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Faedah Penamatan", null]],
+  "about": ["Faedah penamatan", "Pemberhentian pekerja", "Tempoh notis", "Akta Kerja 1955"],
+  "app": {
+    "name": "Kalkulator Faedah Penamatan",
+    "category": "BusinessApplication",
+    "features": ["Faedah penamatan dan rentikerja sementara minimum", "Tempoh notis ikut perkhidmatan", "Gaji ganti notis", "Tahun tidak lengkap ke bulan terdekat", "Had gaji RM4,000 dan pekerja manual", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["JTKSM: Peraturan-Peraturan Kerja (Faedah-Faedah Penamatan dan Rentikerja Sementara) 1980", "https://jtksm.mohr.gov.my/sites/default/files/2023-03/8.%20EMPLOYMENT%20%28TERMINATION%20%26%20LAY%20OFF%20BENEFITS%29%20REGULATIONS%201980.pdf"],
+    ["Parlimen Malaysia: Jawapan mengenai faedah penamatan minimum (2018)", "https://pardocs.sinarproject.org/documents/2018-march-april-parliamentary-session/oral-questions-soalan-lisan/2018-03-27-parliamentary-replies/soalan-60.pdf"],
+    ["Akta Kerja 1955 (Akta 265), teks dikemas kini, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Conventus Law: Perintah Kerja (Pindaan Jadual Pertama) 2022", "https://conventuslaw.com/report/malaysia-employment-amendment-of-first-schedule-order-2022/"],
+    ["WageIndicator Malaysia: Notis dan pemberhentian", "https://wageindicator.org/ms-my/bekerja-di-malaysia/undang-undang-buruh/kontrak-dan-pemecatan/notis-dan-pemisahan"]
+  ],
+  "faq": [
+    { "q": "Berapa faedah penamatan jika diberhentikan kerja?", "a": "Sekurang-kurangnya 10 hari gaji bagi setiap tahun perkhidmatan jika bekerja kurang 2 tahun, 15 hari jika 2 hingga kurang 5 tahun dan 20 hari jika 5 tahun atau lebih. 7 tahun 6 bulan dengan gaji RM3,500 sebulan memberi 20 × 7.5 = 150 hari × RM134.62 = {{T_BENEFIT}}." },
+    { "q": "Siapa layak mendapat faedah penamatan?", "a": "Pekerja dengan sekurang-kurangnya 12 bulan perkhidmatan berterusan yang ditamatkan atau diberhentikan, contohnya dalam pemberhentian pekerja (retrenchment). Ia tidak dibayar jika anda meletak jawatan atau dibuang kerja kerana salah laku. Pekerja bukan manual bergaji melebihi RM4,000 sebulan mendapat apa yang dinyatakan dalam kontrak, kerana Akta tidak menetapkan minimum bagi mereka." },
+    { "q": "Berapa tempoh notis di bawah Akta Kerja?", "a": "Melainkan kontrak menyatakan lebih lama: 4 minggu bagi perkhidmatan kurang 2 tahun, 6 minggu bagi 2 hingga kurang 5 tahun dan 8 minggu bagi 5 tahun atau lebih. Ia terpakai kepada majikan dan pekerja." },
+    { "q": "Apakah gaji ganti notis?", "a": "Mana-mana pihak boleh menamatkan kontrak tanpa notis dengan membayar gaji bagi tempoh notis. Dengan notis 8 minggu atas gaji RM3,500 sebulan, jumlahnya kira-kira {{T_LIEU}} (RM3,500 × 12 ÷ 52 seminggu)." },
+    { "q": "Bagaimana tahun tidak lengkap dikira?", "a": "Prorata ke bulan terdekat. 7 tahun 6 bulan dikira 7.5 tahun; baki bulan 15 hari atau lebih dikira sebulan di sini." },
+    { "q": "Apakah gaji sehari bagi faedah penamatan?", "a": "Kadar gaji biasa: gaji bulanan ÷ 26. Atas gaji RM3,500 sebulan, ia {{T_ORP}} sehari. Kerja lebih masa dan kebanyakan elaun tidak dimasukkan." },
+    { "q": "Berapa faedah selepas 3 tahun?", "a": "15 hari gaji setahun. 3 tahun dengan gaji RM2,600 sebulan memberi 15 × 3 = 45 hari × RM100 = {{T_THREE}}." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator faedah penamatan</li></ol></nav>
+  <h1>Kalkulator Faedah Penamatan</h1>
+  <p class="answer">Faedah penamatan minimum di Malaysia ialah <strong>10, 15 atau 20 hari gaji bagi setiap tahun perkhidmatan</strong> (kurang 2, 2 hingga 5, dan 5 tahun atau lebih). Pekerja yang diberhentikan selepas 7 tahun 6 bulan dengan gaji RM3,500 sebulan mendapat sekurang-kurangnya <strong>{{T_BENEFIT}}</strong>, serta notis {{T_NOTICE}} minggu atau {{T_LIEU}} ganti notis. Masukkan tarikh dan gaji anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/termination-benefits-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="termForm" novalidate aria-labelledby="tm-h">
+      <h2 id="tm-h">Pekerjaan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="start">Tarikh mula bekerja</label><input class="input" id="start" name="start" type="date" min="1960-01-01" max="2030-12-31" value="{{T_START}}"></div>
+        <div class="field"><label for="end">Hari terakhir bekerja</label><input class="input" id="end" name="end" type="date" min="1960-01-01" max="2030-12-31" value="{{T_END}}"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="wage">Gaji bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="100" value="{{T_WAGE}}"></div></div>
+        <div class="field"><label for="contract">Notis dalam kontrak</label><div class="input"><input id="contract" name="contract" type="number" inputmode="numeric" min="0" max="52" step="1" value="0"><span aria-hidden="true">minggu</span></div></div>
+      </div>
+      <div class="field"><label for="reason">Cara pekerjaan tamat</label><select class="input" id="reason" name="reason">{{T_REASON_OPTIONS}}</select></div>
+      <div class="field"><label for="manual">Kerja manual?</label><select class="input" id="manual" name="manual">{{T_MANUAL_OPTIONS}}</select></div>
+      <p class="help">Gaji bulanan: gaji pokok tanpa kerja lebih masa. Biarkan notis kontrak 0 untuk menggunakan minimum Akta.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tm-result-h">
+      <h2 id="tm-result-h">Hak anda</h2>
+      <div class="net">
+        <p>Faedah penamatan minimum</p>
+        <output id="tBenefit" for="start end wage reason manual">{{T_BENEFIT}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="tWhy" hidden></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="termPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="years-h">Faedah penamatan dan notis ikut tahun perkhidmatan (gaji RM3,000)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Notis</th><th scope="col">Hari setahun</th><th scope="col">Hari faedah</th><th scope="col">Faedah</th></tr></thead>
+      <tbody>
+{{T_BYYEARS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara faedah penamatan dikira</h2>
+  <ol>
+    <li><strong>Perkhidmatan</strong> dari tarikh mula bekerja hingga hari terakhir, dengan tahun tidak lengkap ke bulan terdekat.</li>
+    <li><strong>Hari setahun</strong>: 10 (kurang 2 tahun), 15 (2 hingga kurang 5) atau 20 (5 atau lebih).</li>
+    <li><strong>Gaji sehari</strong> = gaji bulanan ÷ 26 (kadar gaji biasa).</li>
+    <li><strong>Faedah</strong> = hari setahun × tahun perkhidmatan × gaji sehari.</li>
+    <li><strong>Notis</strong>: 4, 6 atau 8 minggu (atau tempoh lebih panjang dalam kontrak); ganti notis ≈ bulanan × 12 ÷ 52 seminggu.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Peraturan penamatan di Malaysia</h2>
+  <ul>
+    <li><strong>Kelayakan:</strong> sekurang-kurangnya 12 bulan perkhidmatan berterusan, ditamatkan oleh majikan (penamatan, pemberhentian, rentikerja sementara atau penutupan).</li>
+    <li><strong>Tidak dibayar</strong> jika meletak jawatan, bersara pada umur dipersetujui, atau dibuang kerja kerana salah laku selepas siasatan wajar.</li>
+    <li><strong>Had RM4,000:</strong> mulai 1 Januari 2023 Akta meliputi semua pekerja, tetapi faedah penamatan minimum hanya dijamin bagi mereka bergaji hingga RM4,000 sebulan dan pekerja manual; yang lain ikut kontrak.</li>
+    <li><strong>Hilang pekerjaan:</strong> Sistem Insurans Pekerjaan PERKESO mungkin membayar elaun mencari pekerjaan selepas diberhentikan; tuntut daripada PERKESO.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-03/8.%20EMPLOYMENT%20%28TERMINATION%20%26%20LAY%20OFF%20BENEFITS%29%20REGULATIONS%201980.pdf" rel="noopener">JTKSM: Peraturan Faedah Penamatan dan Rentikerja Sementara 1980</a></li>
+    <li><a href="https://pardocs.sinarproject.org/documents/2018-march-april-parliamentary-session/oral-questions-soalan-lisan/2018-03-27-parliamentary-replies/soalan-60.pdf" rel="noopener">Parlimen Malaysia: Jawapan mengenai faedah penamatan</a></li>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Akta Kerja 1955 (Akta 265), JTKSM</a></li>
+    <li><a href="https://conventuslaw.com/report/malaysia-employment-amendment-of-first-schedule-order-2022/" rel="noopener">Conventus Law: Perintah Jadual Pertama 2022</a></li>
+    <li><a href="https://wageindicator.org/ms-my/bekerja-di-malaysia/undang-undang-buruh/kontrak-dan-pemecatan/notis-dan-pemisahan" rel="noopener">WageIndicator Malaysia: Notis dan pemberhentian</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Minimum berkanun. Kontrak atau perjanjian kolektif anda mungkin membayar lebih; bagi pertikaian, hubungi JTKSM atau Jabatan Perhubungan Perusahaan.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-cuti-tahunan/">Kalkulator Cuti Tahunan<small>Cuti prorata dan bayaran cuti tidak diambil</small></a>
+    <a href="/kalkulator-gaji-prorata/">Kalkulator Gaji Prorata<small>Gaji bulan terakhir anda</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP dan PCB</small></a>
+  </div>
+</section>

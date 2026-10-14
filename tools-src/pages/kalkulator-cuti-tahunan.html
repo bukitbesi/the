@@ -1,0 +1,149 @@
+<!--page
+{
+  "path": "/kalkulator-cuti-tahunan/",
+  "lang": "ms",
+  "alternates": { "en": "/annual-leave-calculator-malaysia/" },
+  "title": "Kalkulator Cuti Tahunan: Cuti Prorata Ikut Akta Kerja 1955",
+  "description": "Kalkulator cuti tahunan: cuti anda ikut Akta Kerja (8, 12 atau 16 hari), prorata bagi pekerja baharu dan yang berhenti, serta bayaran cuti tidak diambil.",
+  "llms": "Mengira cuti bergaji di bawah Akta Kerja 1955 seperti dipinda mulai 1 Januari 2023 (meliputi semua pekerja): cuti tahunan 8 hari setahun bagi perkhidmatan kurang 2 tahun, 12 hari bagi 2 hingga kurang 5 tahun dan 16 hari bagi 5 tahun atau lebih (s.60E); pada tahun mula bekerja atau berhenti, cuti dikira prorata ikut bulan lengkap (kelayakan × bulan ÷ 12), dengan pecahan kurang setengah hari diabaikan dan setengah hari atau lebih dikira sehari; cuti tidak diambil semasa berhenti dibayar pada kadar gaji biasa (gaji bulanan ÷ 26). Cuti sakit 14, 18 atau 22 hari setahun ikut tempoh perkhidmatan yang sama, serta 60 hari cuti hospital (s.60F); cuti bersalin 98 hari dan cuti paterniti 7 hari bagi suami yang berkhidmat 12 bulan, hingga lima kelahiran. Contoh: berhenti pada 30 Jun 2026 selepas 4 tahun 4 bulan memberi 12 × 6 ÷ 12 = 6 hari; dengan 3 hari diambil, 3 hari atas gaji RM3,900 sebulan dibayar RM450 (RM150 sehari). Mula bekerja 1 April 2026 memberi 8 × 9 ÷ 12 = 6 hari bagi 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "leave",
+  "scripts": ["/assets/js/annual-leave.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Cuti Tahunan", null]],
+  "about": ["Cuti tahunan", "Akta Kerja 1955", "Cuti sakit", "Cuti bersalin dan paterniti"],
+  "app": {
+    "name": "Kalkulator Cuti Tahunan",
+    "category": "BusinessApplication",
+    "features": ["Cuti tahunan ikut tempoh perkhidmatan", "Cuti prorata bagi pekerja baharu dan yang berhenti", "Peraturan pembundaran setengah hari", "Bayaran cuti tidak diambil pada kadar gaji biasa", "Cuti sakit, hospital, bersalin dan paterniti", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Akta Kerja 1955 (Akta 265), teks dikemas kini, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Rahmat Lim & Partners: Akta Kerja dipinda meliputi semua pekerja mulai 1 Januari 2023", "https://www.rahmatlim.com/publication/articles/22319/all-employees-irrespective-of-wages-to-be-covered-under-amended-employment-act-1955-from-1-january-2023"],
+    ["HSF Kramer: Kelayakan cuti sakit di Singapura dan Malaysia", "https://www.hsfkramer.com/notes/employment/2026-posts/compliance-check-sick-leave-entitlements-in-singapore-and-malaysia"],
+    ["Talenox: Cuti tahunan di Malaysia", "https://help.talenox.com/en/articles/3522203-annual-leave-malaysia"],
+    ["Payroll Panda: Kelayakan cuti di Malaysia", "https://www.payrollpanda.my/article/leave-entitlement/"]
+  ],
+  "faq": [
+    { "q": "Berapa hari cuti tahunan di Malaysia?", "a": "Sekurang-kurangnya 8 hari setahun bagi perkhidmatan kurang 2 tahun, 12 hari bagi 2 hingga kurang 5 tahun dan 16 hari bagi 5 tahun atau lebih, di bawah seksyen 60E Akta Kerja 1955. Kontrak anda boleh memberi lebih tetapi tidak kurang." },
+    { "q": "Bagaimana cuti tahunan prorata dikira?", "a": "Kelayakan × bulan lengkap ÷ 12, dengan pecahan kurang setengah hari diabaikan dan setengah hari atau lebih dikira sehari. Mula bekerja 1 April dengan kelayakan 8 hari memberi 8 × 9 ÷ 12 = {{L_JOIN}} hari bagi tahun itu." },
+    { "q": "Berapa cuti tahunan bila saya berhenti kerja?", "a": "Cuti bagi bulan lengkap dalam tahun terakhir anda. Berhenti pada 30 Jun selepas 4 tahun dengan kelayakan 12 hari memberi 12 × 6 ÷ 12 = 6 hari, tolak hari yang sudah diambil." },
+    { "q": "Adakah cuti tahunan tidak diambil dibayar semasa berhenti?", "a": "Biasanya ya: cuti yang layak tetapi belum diambil apabila kontrak tamat dibayar pada kadar gaji biasa (gaji bulanan ÷ 26), melainkan anda mengambilnya dalam tempoh notis; pemecatan kerana salah laku ialah pengecualian. 3 hari tidak diambil atas gaji RM3,900 sebulan ialah {{L_PAY}}." },
+    { "q": "Berapa hari cuti sakit?", "a": "14 hari setahun bagi perkhidmatan kurang 2 tahun, 18 hari bagi 2 hingga kurang 5 tahun dan 22 hari bagi 5 tahun atau lebih, serta 60 hari cuti hospital setahun apabila perlu dimasukkan ke hospital, di bawah seksyen 60F." },
+    { "q": "Berapa lama cuti bersalin dan paterniti?", "a": "Cuti bersalin ialah 98 hari berturut-turut. Suami mendapat 7 hari berturut-turut cuti paterniti bergaji bagi setiap kelahiran, hingga lima kelahiran, selepas 12 bulan dengan majikan yang sama." },
+    { "q": "Adakah Akta Kerja meliputi pekerja bergaji lebih RM4,000?", "a": "Ya. Mulai 1 Januari 2023 Akta meliputi semua pekerja tanpa mengira gaji, dan peraturan cuti tahunan, sakit, bersalin dan paterniti terpakai kepada semua; hanya sebahagian peruntukan kerja lebih masa, hari rehat dan faedah penamatan terhad kepada mereka bergaji hingga RM4,000." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator cuti tahunan</li></ol></nav>
+  <h1>Kalkulator Cuti Tahunan</h1>
+  <p class="answer">Di bawah Akta Kerja, anda layak sekurang-kurangnya <strong>8, 12 atau 16 hari</strong> cuti tahunan bergaji setahun (kurang 2, 2 hingga 5, dan 5 tahun atau lebih berkhidmat), dikira prorata pada tahun mula bekerja atau berhenti. Berhenti pada 30 Jun selepas 4 tahun memberi 12 × 6 ÷ 12 = <strong>{{L_DAYS}}</strong>; dengan 3 hari diambil, baki 3 hari dibayar {{L_PAY}} atas gaji RM3,900 sebulan. Masukkan tarikh anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{L_VERIFIED_ISO}}">{{L_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/annual-leave-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="leaveForm" novalidate aria-labelledby="lv-h">
+      <h2 id="lv-h">Perkhidmatan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="start">Tarikh mula bekerja</label><input class="input" id="start" name="start" type="date" min="1970-01-01" max="2030-12-31" value="{{L_START}}"></div>
+        <div class="field"><label for="end">Hari terakhir atau hari ini</label><input class="input" id="end" name="end" type="date" min="1970-01-01" max="2030-12-31" value="{{L_END}}"></div>
+      </div>
+      <div class="field"><label for="leaving">Berhenti kerja?</label><select class="input" id="leaving" name="leaving">{{L_LEAVING_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="taken">Cuti diambil tahun ini</label><div class="input"><input id="taken" name="taken" type="number" inputmode="numeric" min="0" max="60" step="1" value="{{L_TAKEN}}"><span aria-hidden="true">hari</span></div></div>
+        <div class="field"><label for="wage">Gaji bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="100" value="{{L_WAGE}}"></div></div>
+      </div>
+      <p class="help">Tahun cuti di sini ialah tahun kalendar; sesetengah majikan menggunakan ulang tahun mula bekerja.</p>
+    </form>
+
+    <section class="box" aria-labelledby="lv-result-h">
+      <h2 id="lv-result-h">Cuti anda</h2>
+      <div class="net">
+        <p>Cuti tahunan layak</p>
+        <output id="lDays" for="start end leaving taken">{{L_DAYS}}</output>
+        <p id="lSub">{{L_SUB}}</p>
+      </div>
+      <p class="sr-only" id="lLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Cuti tahunan</caption>
+        <tbody id="lLines">
+{{L_LINES}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>Cuti lain</caption>
+        <tbody id="lOther">
+{{L_OTHER}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="leavePrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="tiers-h">Kelayakan cuti ikut tempoh perkhidmatan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tiers-h">
+    <table class="data">
+      <thead><tr><th scope="col">Perkhidmatan</th><th scope="col">Cuti tahunan</th><th scope="col">Cuti sakit</th><th scope="col">Cuti hospital</th></tr></thead>
+      <tbody>
+{{L_TIERS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara cuti tahunan dikira</h2>
+  <ol>
+    <li><strong>Kelayakan</strong> ikut perkhidmatan: 8 hari (kurang 2 tahun), 12 hari (2 hingga kurang 5) atau 16 hari (5 atau lebih).</li>
+    <li><strong>Prorata</strong> bagi tahun tidak penuh: kelayakan × bulan lengkap ÷ 12.</li>
+    <li><strong>Pembundaran:</strong> kurang setengah hari diabaikan; setengah hari atau lebih dikira sehari penuh.</li>
+    <li><strong>Cuti tidak diambil semasa berhenti</strong> × kadar gaji biasa (gaji bulanan ÷ 26).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="pro-h">Cuti tahunan prorata ikut bulan lengkap</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pro-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bulan</th><th scope="col">Kelayakan 8 hari</th><th scope="col">Kelayakan 12 hari</th><th scope="col">Kelayakan 16 hari</th></tr></thead>
+      <tbody>
+{{L_PRO}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Peraturan cuti dalam Akta Kerja</h2>
+  <ul>
+    <li><strong>Liputan:</strong> semua pekerja mulai 1 Januari 2023, tanpa mengira gaji.</li>
+    <li><strong>Cuti hospital:</strong> 60 hari setahun, berasingan daripada cuti sakit biasa sejak pindaan 2022.</li>
+    <li><strong>Bersalin:</strong> 98 hari berturut-turut; <strong>paterniti:</strong> 7 hari berturut-turut bagi suami selepas 12 bulan berkhidmat, hingga lima kelahiran.</li>
+    <li><strong>Kontrak anda</strong> boleh memberi cuti lebih, tidak kurang daripada Akta.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Akta Kerja 1955 (Akta 265), JTKSM</a></li>
+    <li><a href="https://www.rahmatlim.com/publication/articles/22319/all-employees-irrespective-of-wages-to-be-covered-under-amended-employment-act-1955-from-1-january-2023" rel="noopener">Rahmat Lim &amp; Partners: Pindaan Akta Kerja mulai 1 Januari 2023</a></li>
+    <li><a href="https://www.hsfkramer.com/notes/employment/2026-posts/compliance-check-sick-leave-entitlements-in-singapore-and-malaysia" rel="noopener">HSF Kramer: Kelayakan cuti sakit</a></li>
+    <li><a href="https://help.talenox.com/en/articles/3522203-annual-leave-malaysia" rel="noopener">Talenox: Cuti tahunan di Malaysia</a></li>
+    <li><a href="https://www.payrollpanda.my/article/leave-entitlement/" rel="noopener">Payroll Panda: Kelayakan cuti</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Minimum di bawah Akta. Kontrak atau perjanjian kolektif anda mungkin memberi lebih; semak dengan majikan atau JTKSM.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-faedah-penamatan/">Kalkulator Faedah Penamatan<small>Notis dan bayaran penamatan</small></a>
+    <a href="/kalkulator-hari-bekerja/">Kalkulator Hari Bekerja<small>Hari bekerja ikut negeri</small></a>
+    <a href="/kalkulator-gaji-prorata/">Kalkulator Gaji Prorata<small>Gaji bulan tidak lengkap</small></a>
+  </div>
+</section>

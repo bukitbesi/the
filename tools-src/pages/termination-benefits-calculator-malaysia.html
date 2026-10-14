@@ -1,0 +1,136 @@
+<!--page
+{
+  "path": "/termination-benefits-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-faedah-penamatan/" },
+  "title": "Termination Benefits Calculator Malaysia: Notice and Retrenchment Pay",
+  "description": "Termination benefits calculator for Malaysia: minimum retrenchment or termination pay (10, 15 or 20 days a year), notice period and pay in lieu of notice.",
+  "llms": "Calculates termination entitlements under Malaysia's Employment Act 1955: notice of termination of at least 4 weeks with under 2 years' service, 6 weeks with 2 to under 5 years and 8 weeks with 5 years or more, unless the contract gives longer (s.12(2)), with indemnity in lieu at about the weekly wage (monthly × 12 ÷ 52); and the minimum termination or lay-off benefit under the Employment (Termination and Lay-Off Benefits) Regulations 1980 for employees with at least 12 months' continuous service: 10 days' wages for each year of service if employed under 2 years, 15 days for 2 to under 5 years and 20 days for 5 years or more, with an incomplete year counted pro rata to the nearest month, at the ordinary rate of pay (monthly wages ÷ 26). It is not paid on resignation, and the Act does not guarantee it for non-manual employees earning above RM4,000 a month. Example: 7 years 6 months on RM3,500: 8 weeks' notice (RM6,461.54 in lieu) and 20 × 7.5 = 150 days × RM134.62 = RM20,192.31.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "termination",
+  "scripts": ["/assets/js/termination-benefits.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Termination Benefits Calculator", null]],
+  "about": ["Termination benefits", "Retrenchment", "Notice period", "Employment Act 1955"],
+  "app": {
+    "name": "Termination Benefits Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Minimum termination and lay-off benefits", "Notice period by length of service", "Pay in lieu of notice", "Incomplete years to the nearest month", "RM4,000 wage threshold and manual workers", "Works offline"]
+  },
+  "citations": [
+    ["JTKSM: Employment (Termination and Lay-Off Benefits) Regulations 1980", "https://jtksm.mohr.gov.my/sites/default/files/2023-03/8.%20EMPLOYMENT%20%28TERMINATION%20%26%20LAY%20OFF%20BENEFITS%29%20REGULATIONS%201980.pdf"],
+    ["Parliament of Malaysia: Reply on minimum termination benefits (2018)", "https://pardocs.sinarproject.org/documents/2018-march-april-parliamentary-session/oral-questions-soalan-lisan/2018-03-27-parliamentary-replies/soalan-60.pdf"],
+    ["Employment Act 1955 (Act 265), updated text, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Conventus Law: Employment (Amendment of First Schedule) Order 2022", "https://conventuslaw.com/report/malaysia-employment-amendment-of-first-schedule-order-2022/"],
+    ["Panda HRMS: Notice period under section 12", "https://pandahrms.com/?p=8553"]
+  ],
+  "faq": [
+    { "q": "How much termination benefit will I get in Malaysia?", "a": "At least 10 days' wages for each year of service if you worked under 2 years, 15 days if 2 to under 5 years and 20 days if 5 years or more. 7 years 6 months on RM3,500 a month gives 20 × 7.5 = 150 days × RM134.62 = {{T_BENEFIT}}." },
+    { "q": "Who is entitled to termination benefits?", "a": "Employees with at least 12 months' continuous service who are terminated or laid off, for example in a retrenchment. It is not paid when you resign or are dismissed for misconduct. Non-manual employees earning above RM4,000 a month get what their contract says, as the Act does not set a minimum for them." },
+    { "q": "What is the notice period under the Employment Act?", "a": "Unless your contract says longer: 4 weeks with under 2 years of service, 6 weeks with 2 to under 5 years and 8 weeks with 5 years or more. It applies to both employer and employee." },
+    { "q": "What is pay in lieu of notice?", "a": "Either side can end the contract without serving notice by paying wages for the notice period. With 8 weeks' notice on RM3,500 a month, that is about {{T_LIEU}} (RM3,500 × 12 ÷ 52 per week)." },
+    { "q": "How is a part year counted?", "a": "Pro rata to the nearest month. 7 years and 6 months counts as 7.5 years; a part month of 15 days or more counts as a month here." },
+    { "q": "What is a day's wages for termination benefits?", "a": "The ordinary rate of pay: monthly wages ÷ 26. On RM3,500 a month it is {{T_ORP}} a day. Overtime and most allowances are not included." },
+    { "q": "What is the benefit after 3 years?", "a": "15 days' wages a year. 3 years on RM2,600 a month gives 15 × 3 = 45 days × RM100 = {{T_THREE}}." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Termination benefits calculator</li></ol></nav>
+  <h1>Termination Benefits Calculator Malaysia</h1>
+  <p class="answer">The minimum termination benefit in Malaysia is <strong>10, 15 or 20 days' wages for each year of service</strong> (under 2, 2 to 5, and 5 or more years). An employee retrenched after 7 years 6 months on RM3,500 a month gets at least <strong>{{T_BENEFIT}}</strong>, plus {{T_NOTICE}} weeks' notice or {{T_LIEU}} in lieu. Enter your dates and wage below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-faedah-penamatan/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="termForm" novalidate aria-labelledby="tm-h">
+      <h2 id="tm-h">Your job</h2>
+      <div class="field-row">
+        <div class="field"><label for="start">Date you joined</label><input class="input" id="start" name="start" type="date" min="1960-01-01" max="2030-12-31" value="{{T_START}}"></div>
+        <div class="field"><label for="end">Last day of work</label><input class="input" id="end" name="end" type="date" min="1960-01-01" max="2030-12-31" value="{{T_END}}"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="wage">Monthly wage</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="100" value="{{T_WAGE}}"></div></div>
+        <div class="field"><label for="contract">Notice in contract</label><div class="input"><input id="contract" name="contract" type="number" inputmode="numeric" min="0" max="52" step="1" value="0"><span aria-hidden="true">weeks</span></div></div>
+      </div>
+      <div class="field"><label for="reason">How the job ends</label><select class="input" id="reason" name="reason">{{T_REASON_OPTIONS}}</select></div>
+      <div class="field"><label for="manual">Manual work?</label><select class="input" id="manual" name="manual">{{T_MANUAL_OPTIONS}}</select></div>
+      <p class="help">Monthly wage: basic pay without overtime. Leave contract notice at 0 to use the Act's minimum.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tm-result-h">
+      <h2 id="tm-result-h">Your entitlement</h2>
+      <div class="net">
+        <p>Minimum termination benefit</p>
+        <output id="tBenefit" for="start end wage reason manual">{{T_BENEFIT}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="tWhy" hidden></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="termPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="years-h">Termination benefit and notice by years of service (RM3,000 a month)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Years</th><th scope="col">Notice</th><th scope="col">Days a year</th><th scope="col">Benefit days</th><th scope="col">Benefit</th></tr></thead>
+      <tbody>
+{{T_BYYEARS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How termination benefits are worked out</h2>
+  <ol>
+    <li><strong>Service</strong> from the date you joined to your last day, with a part year to the nearest month.</li>
+    <li><strong>Days a year</strong>: 10 (under 2 years), 15 (2 to under 5) or 20 (5 or more).</li>
+    <li><strong>A day's wages</strong> = monthly wages ÷ 26 (ordinary rate of pay).</li>
+    <li><strong>Benefit</strong> = days a year × years of service × a day's wages.</li>
+    <li><strong>Notice</strong>: 4, 6 or 8 weeks (or your contract's longer period); pay in lieu ≈ monthly × 12 ÷ 52 per week.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Termination rules in Malaysia</h2>
+  <ul>
+    <li><strong>Eligibility:</strong> at least 12 months' continuous service, ended by the employer (termination, retrenchment, lay-off or closure).</li>
+    <li><strong>Not paid</strong> on resignation, on retirement at the agreed age, or on dismissal for misconduct after due inquiry.</li>
+    <li><strong>RM4,000 threshold:</strong> from 1 January 2023 the Act covers all employees, but the minimum termination benefit is guaranteed only to those earning up to RM4,000 a month and to manual workers; others follow their contract.</li>
+    <li><strong>Loss of job:</strong> PERKESO's Employment Insurance System may pay job search allowances after retrenchment; claim with PERKESO.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-03/8.%20EMPLOYMENT%20%28TERMINATION%20%26%20LAY%20OFF%20BENEFITS%29%20REGULATIONS%201980.pdf" rel="noopener">JTKSM: Termination and Lay-Off Benefits Regulations 1980</a></li>
+    <li><a href="https://pardocs.sinarproject.org/documents/2018-march-april-parliamentary-session/oral-questions-soalan-lisan/2018-03-27-parliamentary-replies/soalan-60.pdf" rel="noopener">Parliament of Malaysia: Reply on termination benefits</a></li>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Employment Act 1955 (Act 265), JTKSM</a></li>
+    <li><a href="https://conventuslaw.com/report/malaysia-employment-amendment-of-first-schedule-order-2022/" rel="noopener">Conventus Law: First Schedule Order 2022</a></li>
+    <li><a href="https://pandahrms.com/?p=8553" rel="noopener">Panda HRMS: Notice period under section 12</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> The statutory minimum. Your contract or collective agreement may pay more; for disputes, contact JTKSM or the Industrial Relations Department.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/annual-leave-calculator-malaysia/">Annual Leave Calculator<small>Pro rata leave and unused leave pay</small></a>
+    <a href="/prorated-salary-calculator-malaysia/">Prorated Salary Calculator<small>Pay for your final part month</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF and PCB</small></a>
+  </div>
+</section>

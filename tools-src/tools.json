@@ -612,6 +612,42 @@
     "live": true
   },
   {
+    "name": "Arah Kiblat (Qibla Direction)",
+    "desc": "Qibla bearing from true north for 18 Malaysian towns or your GPS location, with a compass, degrees and minutes, and distance to the Kaaba. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/arah-kiblat/",
+    "cat": "calc",
+    "icon": "arah-kiblat",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Simpanan Persaraan (Retirement Savings)",
+    "desc": "How much you need at retirement for your monthly expenses with inflation, whether your EPF savings are enough and how long they last. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-simpanan-persaraan/",
+    "cat": "calc",
+    "icon": "kalkulator-simpanan-persaraan",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Cuti Tahunan (Annual Leave)",
+    "desc": "Annual leave under the Employment Act (8, 12 or 16 days), pro rata for joiners and leavers, unused leave pay, sick, maternity and paternity leave. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/",
+    "cat": "calc",
+    "icon": "kalkulator-cuti-tahunan",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Faedah Penamatan (Termination Benefits)",
+    "desc": "Minimum termination or retrenchment benefit (10, 15 or 20 days a year), notice period and pay in lieu of notice. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-faedah-penamatan/",
+    "cat": "calc",
+    "icon": "kalkulator-faedah-penamatan",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
