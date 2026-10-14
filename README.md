@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 79 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 83 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -99,6 +99,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-caj-freelance/](https://tool.thebukitbesi.com/kalkulator-caj-freelance/) + [/freelance-rate-calculator-malaysia/](https://tool.thebukitbesi.com/freelance-rate-calculator-malaysia/) | BM + English | caj freelance sejam; freelance rate calculator malaysia |
 | [/kalkulator-hari-bekerja/](https://tool.thebukitbesi.com/kalkulator-hari-bekerja/) + [/working-days-calculator-malaysia/](https://tool.thebukitbesi.com/working-days-calculator-malaysia/) | BM + English | kira hari bekerja, hari bekerja 2027 selangor; working days calculator malaysia |
 | [/kalkulator-umur-bersara/](https://tool.thebukitbesi.com/kalkulator-umur-bersara/) + [/retirement-age-calculator-malaysia/](https://tool.thebukitbesi.com/retirement-age-calculator-malaysia/) | BM + English | kalkulator umur bersara, kira pencen; retirement age calculator malaysia |
+| [/kalkulator-sspn/](https://tool.thebukitbesi.com/kalkulator-sspn/) + [/sspn-calculator/](https://tool.thebukitbesi.com/sspn-calculator/) | BM + English | kalkulator sspn, dividen sspn 2025, pelepasan cukai sspn; sspn calculator |
+| [/kalkulator-bil-air/](https://tool.thebukitbesi.com/kalkulator-bil-air/) + [/water-bill-calculator-malaysia/](https://tool.thebukitbesi.com/water-bill-calculator-malaysia/) | BM + English | kira bil air, tarif air selangor 2025; water bill calculator malaysia |
+| [/kalkulator-unit-trust/](https://tool.thebukitbesi.com/kalkulator-unit-trust/) + [/unit-trust-calculator-malaysia/](https://tool.thebukitbesi.com/unit-trust-calculator-malaysia/) | BM + English | kalkulator unit trust, caj jualan; unit trust calculator malaysia |
+| [/kalkulator-kos-pendidikan-anak/](https://tool.thebukitbesi.com/kalkulator-kos-pendidikan-anak/) + [/education-cost-calculator-malaysia/](https://tool.thebukitbesi.com/education-cost-calculator-malaysia/) | BM + English | kos pendidikan anak, simpanan universiti; education cost calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -172,6 +176,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (retirement age):** `retire-core.js` holds the retirement ages, the pension formula (1/600, 360 months, 60%) and gratuity rate. Update if JPA raises the compulsory age (65 is under study) or the non-pensionable scheme for new civil servants starts.
 
 **Upkeep (freelance rate, profit margin, ROAS):** `freelance-core.js` uses the YA2026 rates in `salary-core.js`; when Budget 2027 rates (RM12,000 self relief) take effect for YA2027, update `FACTS.self` and both pages. `roas-core.js` holds the 8% service tax; `margin-core.js` has no rates to maintain.
+
+**Upkeep (SSPN, education cost):** `sspn-core.js` holds the dividend history (`FACTS.dividends`, add each year's rate when PTPTN announces it, usually around May) and the RM8,000 relief (until YA2027; update after each Budget). `edu-core.js` uses the SSPN dividend only in page copy; its inflation and return are user inputs.
+
+**Upkeep (water bill):** `water-core.js` `STATES` holds each operator's block rates, minimum charge and effective date. Recheck after each SPAN tariff review (about every three years) and add Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah and Sarawak once their full tables are confirmed from two sources.
+
+**Upkeep (unit trust):** `unittrust-core.js` holds the EPF i-Invest sales charge cap (0.5%); everything else is user input.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -251,6 +261,10 @@ assets/js/roas-core.js      ROAS: ROI, break-even ROAS, ACoS, CPA, 8% service ta
 assets/js/freelance-core.js freelance rate: revenue for a take-home target after EPF and tax, hourly and day rate
 assets/js/workdays-core.js  working days: 2026–2027 federal and state holidays, weekends by state, deadlines
 assets/js/retire-core.js    retirement: date at 60, EPF ages, civil service pension and gratuity
+assets/js/sspn-core.js      SSPN: balance with yearly dividend, RM8,000 relief and tax saved (uses salary-core.js)
+assets/js/water-core.js     water bill: domestic block tariffs and minimum charge by state
+assets/js/unittrust-core.js unit trust: sales charge, yearly fees, net return (IRR), EPF i-Invest comparison
+assets/js/edu-core.js       education cost: inflated yearly costs and monthly saving needed
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

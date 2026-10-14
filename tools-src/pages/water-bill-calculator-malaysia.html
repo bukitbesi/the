@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/water-bill-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-bil-air/" },
+  "title": "Water Bill Calculator Malaysia 2026: Tariff by State",
+  "description": "Water bill calculator for Malaysia: your domestic bill from m³ used in Selangor, KL, Johor, Penang, Melaka, Kedah, Kelantan or Terengganu at current tariffs.",
+  "llms": "Calculates the domestic water bill (individual meter) in Malaysia by state with block tariffs: each band's rate applies only to the water in that band (0–20 m³, 20–35 m³, above 35 m³ a month), with a monthly minimum charge, and no SST on domestic water. Current rates per m³: Selangor, Kuala Lumpur and Putrajaya (Air Selangor, from 1 September 2025) RM0.65 / RM1.62 / RM3.51, minimum RM6.50; Johor (Ranhill SAJ, 1 August 2025) RM1.05 / RM2.35 / RM3.50, minimum RM10.50; Penang (PBAPP, 1 July 2026) RM0.65 / RM1.30 / RM2.21, minimum RM6.50; Melaka (SAMB, 1 August 2025) RM0.94 / RM1.69 / RM2.26, minimum RM9.40; Kedah (SADA, 1 August 2025) RM0.81 / RM1.48 / RM2.00, minimum RM8.10; Kelantan (Air Kelantan, 10 September 2025) RM0.80 / RM1.55 / RM2.10, minimum RM8.00; Terengganu (SATU, 1 August 2025) RM0.66 / RM1.69 / RM2.25, minimum RM6.60. Example bills for 30 m³: Selangor RM29.20, Johor RM44.50, Penang RM26.00, Melaka RM35.70, Kedah RM31.00, Kelantan RM31.50, Terengganu RM30.10. Penang 35 m³ = RM32.50 (PBAPP's own example).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "water",
+  "scripts": ["/assets/js/water-bill.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Water Bill Calculator", null]],
+  "about": ["Water tariff", "Water bill", "Air Selangor", "SPAN"],
+  "app": {
+    "name": "Water Bill Calculator Malaysia",
+    "category": "UtilitiesApplication",
+    "features": ["Domestic block tariffs by state", "Minimum charge", "Bill breakdown by band", "Average cost per m³", "Bills by usage for every state", "Works offline"]
+  },
+  "citations": [
+    ["Air Selangor: Domestic water tariff rates from 1 September 2025 (Appendix A)", "https://content.airselangor.com/cmi-prod-blobstorageanon-001-sea/media/netdevbr/appendix-a.pdf"],
+    ["The Star: Higher water rate in Selangor, KL and Putrajaya from Sept 1", "https://www.thestar.com.my/news/nation/2025/08/02/higher-water-rate-in-sgor-kl-and-putrajaya-from-sept-1"],
+    ["Ranhill SAJ: Water tariff", "https://www.ranhillsaj.com.my/water-tariff"],
+    ["Bernama: Johor water tariff adjustment", "https://www.bernama.com/en/news.php/?id=2452512"],
+    ["PBAPP: Penang water rates from 1 July 2026", "https://pba.com.my/pdf/news/2026/04062026_Pg-Water-Rates-01072026_YB-Zairil-KJ_BM-Lampiran.pdf"],
+    ["Bernama: Penang water tariffs from 1 July 2026", "https://bernama.com/en/general/news.php?id=2564621"],
+    ["Bernama: SAMB new water tariff from 1 August", "https://www.bernama.com/en/general/news.php?id=2452259"],
+    ["SADA: Kadar tarif", "https://www.sada.com.my/KadarTarif"],
+    ["Air Kelantan: Kadar tarif", "https://airkelantan.com.my/maklumat-pengguna/kadar-tarif/"],
+    ["SATU: Kadar tarif", "https://www.satuwater.com.my/v4/index.php/bisnes/kadar-tarif"],
+    ["Malay Mail: Water users exempted from SST", "https://www.malaymail.com/news/malaysia/2024/03/01/energy-transition-ministry-eight-million-water-supply-users-exempted-from-sst-hike/120913"]
+  ],
+  "faq": [
+    { "q": "How is a water bill calculated in Malaysia?", "a": "By blocks: the first 20 m³ at the band 1 rate, the next 15 m³ at the band 2 rate and the rest at the band 3 rate, with a minimum charge. In Selangor, 30 m³ = 20 × RM0.65 + 10 × RM1.62 = {{W_BILL}}." },
+    { "q": "What is the water tariff in Selangor?", "a": "From 1 September 2025 Air Selangor charges RM0.65 per m³ for the first 20 m³, RM1.62 for 20 to 35 m³ and RM3.51 above 35 m³, with a RM6.50 minimum. Kuala Lumpur and Putrajaya pay the same. 20 m³ costs {{W_SEL20}} and 50 m³ {{W_SEL50}}." },
+    { "q": "How much is the water bill in Johor?", "a": "Ranhill SAJ charges RM1.05 per m³ up to 20 m³, RM2.35 for 20 to 35 m³ and RM3.50 above 35 m³ (from 1 August 2025), with a RM10.50 minimum. 30 m³ costs {{W_JOH30}}." },
+    { "q": "What is the new water tariff in Penang?", "a": "From 1 July 2026 PBAPP charges RM0.65 per m³ up to 20 m³, RM1.30 for 20 to 35 m³ and RM2.21 above 35 m³, with a RM6.50 minimum. 35 m³ a month costs {{W_PNG35}}, up from RM29.95." },
+    { "q": "What is 1 m³ of water?", "a": "1,000 litres. A household using 30 m³ a month uses about 1,000 litres a day. Your bill shows the m³ used between two meter readings." },
+    { "q": "Is there SST on water bills?", "a": "No. Domestic water supply is exempt from service tax; the government confirmed that water users stayed exempt when SST rose to 8% in March 2024." },
+    { "q": "Why are some states not in the calculator?", "a": "Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah and Sarawak are left out because their current full tariff tables could not be confirmed from two sources. Check your operator's latest bill or website." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Water bill calculator</li></ol></nav>
+  <h1>Water Bill Calculator Malaysia</h1>
+  <p class="answer">30 m³ of water a month costs <strong>{{W_BILL}}</strong> in Selangor, KL and Putrajaya (20 m³ × RM0.65 + 10 m³ × RM1.62). The same 30 m³ costs {{W_JOH30}} in Johor, {{W_PNG30}} in Penang and {{W_MLK30}} in Melaka at the current block tariffs, with no SST. Choose your state and enter the m³ on your bill below.</p>
+  <p class="meta"><span>Tariffs verified <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-bil-air/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="waterForm" novalidate aria-labelledby="wt-h">
+      <h2 id="wt-h">Your usage</h2>
+      <div class="field"><label for="state">State</label><select class="input" id="state" name="state">{{W_STATE_OPTIONS}}</select></div>
+      <div class="field"><label for="m3">Water used a month</label><div class="input"><input id="m3" name="m3" type="number" inputmode="decimal" min="0" max="1000" step="1" value="{{W_M3}}"><span aria-hidden="true">m³</span></div></div>
+      <p class="help">1 m³ = 1,000 litres. Penang bills every two months; enter one month's usage.</p>
+    </form>
+
+    <section class="box" aria-labelledby="wt-result-h">
+      <h2 id="wt-result-h">Your bill</h2>
+      <div class="net">
+        <p>Bill a month</p>
+        <output id="wBill" for="state m3">{{W_BILL}}</output>
+        <p id="wSub">{{W_SUB}}</p>
+      </div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Breakdown</caption>
+        <tbody id="wLines">
+{{W_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Domestic individual meter. Rebates and free-water schemes are not deducted.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="waterPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="bills-h">Monthly water bill by state and usage</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bills-h">
+    <table class="data">
+      <thead><tr><th scope="col">State</th><th scope="col">10 m³</th><th scope="col">20 m³</th><th scope="col">30 m³</th><th scope="col">35 m³</th><th scope="col">50 m³</th></tr></thead>
+      <tbody>
+{{W_BILLS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the water bill is worked out</h2>
+  <ol>
+    <li><strong>Band 1:</strong> the first 20 m³ at the band 1 rate.</li>
+    <li><strong>Band 2:</strong> water from 20 to 35 m³ at the band 2 rate.</li>
+    <li><strong>Band 3:</strong> water above 35 m³ at the band 3 rate.</li>
+    <li><strong>Minimum charge:</strong> if the total is lower, you pay the minimum.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tariff-h">Domestic water tariffs by state (RM per m³)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tariff-h">
+    <table class="data">
+      <thead><tr><th scope="col">State</th><th scope="col">Operator</th><th scope="col">0–20 m³</th><th scope="col">20–35 m³</th><th scope="col">Above 35 m³</th><th scope="col">Minimum</th><th scope="col">From</th></tr></thead>
+      <tbody>
+{{W_TARIFFS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">What to know about water tariffs</h2>
+  <ul>
+    <li><strong>SPAN review:</strong> the national water regulator reviews tariffs under its tariff-setting mechanism; the latest round took effect from August 2025 (Penang deferred to July 2026).</li>
+    <li><strong>Free water:</strong> some states give eligible households free water, such as Selangor's Skim Air Darul Ehsan (20 m³ a month) and Terengganu for B40 households; it is not deducted here.</li>
+    <li><strong>Not included:</strong> Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah and Sarawak, because their current full tables could not be confirmed.</li>
+    <li><strong>Save water:</strong> staying within 20 m³ a month keeps you in the cheapest band.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://content.airselangor.com/cmi-prod-blobstorageanon-001-sea/media/netdevbr/appendix-a.pdf" rel="noopener">Air Selangor: tariff from 1 September 2025</a></li>
+    <li><a href="https://www.thestar.com.my/news/nation/2025/08/02/higher-water-rate-in-sgor-kl-and-putrajaya-from-sept-1" rel="noopener">The Star: Selangor, KL and Putrajaya rates</a></li>
+    <li><a href="https://www.ranhillsaj.com.my/water-tariff" rel="noopener">Ranhill SAJ: water tariff</a> and <a href="https://www.bernama.com/en/news.php/?id=2452512" rel="noopener">Bernama: Johor adjustment</a></li>
+    <li><a href="https://pba.com.my/pdf/news/2026/04062026_Pg-Water-Rates-01072026_YB-Zairil-KJ_BM-Lampiran.pdf" rel="noopener">PBAPP: Penang rates from 1 July 2026</a> and <a href="https://bernama.com/en/general/news.php?id=2564621" rel="noopener">Bernama</a></li>
+    <li><a href="https://www.bernama.com/en/general/news.php?id=2452259" rel="noopener">Bernama: Melaka (SAMB)</a></li>
+    <li><a href="https://www.sada.com.my/KadarTarif" rel="noopener">SADA (Kedah)</a>, <a href="https://airkelantan.com.my/maklumat-pengguna/kadar-tarif/" rel="noopener">Air Kelantan</a> and <a href="https://www.satuwater.com.my/v4/index.php/bisnes/kadar-tarif" rel="noopener">SATU (Terengganu)</a> tariff tables</li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2024/03/01/energy-transition-ministry-eight-million-water-supply-users-exempted-from-sst-hike/120913" rel="noopener">Malay Mail: water exempt from SST</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for domestic individual meters. Your bill may include adjustments, arrears or rebates; your operator's bill is final.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/tnb-bill-calculator/">TNB Bill Calculator<small>Electricity bill from kWh</small></a>
+    <a href="/fuel-cost-calculator-malaysia/">Fuel Cost Calculator<small>Trip cost and RM per km</small></a>
+    <a href="/rent-vs-buy-calculator-malaysia/">Rent vs Buy Calculator<small>Renting against buying a home</small></a>
+  </div>
+</section>

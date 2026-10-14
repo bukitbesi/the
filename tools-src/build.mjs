@@ -51,6 +51,10 @@ const roasCore = require('../assets/js/roas-core.js');
 const freelanceCore = require('../assets/js/freelance-core.js');
 const workdaysCore = require('../assets/js/workdays-core.js');
 const retireCore = require('../assets/js/retire-core.js');
+const sspnCore = require('../assets/js/sspn-core.js');
+const unittrustCore = require('../assets/js/unittrust-core.js');
+const eduCore = require('../assets/js/edu-core.js');
+const waterCore = require('../assets/js/water-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1541,10 +1545,83 @@ function retireMap(lang) {
     RT_VERIFIED: longDate(R.FACTS.verified, lang), RT_VERIFIED_ISO: R.FACTS.verified
   };
 }
+// ---- batch 4: SSPN, unit trust, education cost, water bill
+const SSPN_EXAMPLE = { balance: 0, monthly: 200, lump: 0, years: 18, rate: 4.1, income: 60000 };
+function sspnMap(lang) {
+  const { L, m, nf, tr } = b3(lang), r = sspnCore.calculate(SSPN_EXAMPLE), yr = y => L ? `Tahun ${y}` : `Year ${y}`;
+  const lines = [tr(L ? 'Jumlah simpanan' : 'Total deposits', m(r.deposits)), tr(L ? 'Jumlah dividen' : 'Total dividends', m(r.dividends)), tr(L ? 'Baki akhir' : 'Final balance', m(r.balance), 'total'),
+    tr(L ? 'Simpanan tahun ini' : 'Deposits this year', m(r.yearDeposit)), tr(L ? 'Pelepasan cukai (had RM8,000)' : 'Tax relief (RM8,000 cap)', m(r.relief)), tr(L ? 'Cukai dijimat setahun' : 'Tax saved a year', m(r.taxSaved), 'total'),
+    tr(L ? 'Baki had pelepasan belum guna' : 'Relief cap left unused', m(r.unused))].join('\n');
+  const rowsT = r.rows.map(x => `<tr><th scope="row">${yr(x.year)}</th><td>${m(x.deposits)}</td><td>${m(x.dividends)}</td><td>${m(x.balance)}</td></tr>`).join('\n');
+  const grid = [50, 100, 200, 300, 500, 667].map(mo => `<tr><th scope="row">${m(mo)}</th>${[5, 10, 15, 18].map(y => `<td>${m(sspnCore.calculate({ monthly: mo, years: y, rate: 4.1 }).balance)}</td>`).join('')}</tr>`).join('\n');
+  const tax = [30000, 50000, 70000, 100000, 150000].map(ci => `<tr><th scope="row">${m(ci)}</th>${[2400, 6000, 8000].map(d => `<td>${m(sspnCore.taxSaved(ci, d))}</td>`).join('')}</tr>`).join('\n');
+  const divs = sspnCore.FACTS.dividends.map(([y, d]) => `<tr><th scope="row">${y}</th><td>${nf(d, 2)}%</td></tr>`).join('\n');
+  const mx = sspnCore.calculate({ monthly: 667, years: 1, rate: 4.1, income: 60000 }), hi = sspnCore.calculate({ monthly: 667, years: 1, rate: 4.1, income: 120000 });
+  return {
+    S_MONTHLY: SSPN_EXAMPLE.monthly, S_YEARS: SSPN_EXAMPLE.years, S_RATE: SSPN_EXAMPLE.rate, S_INCOME: SSPN_EXAMPLE.income,
+    S_BALANCE: m(r.balance), S_DEPOSITS: m(r.deposits), S_DIVIDENDS: m(r.dividends), S_SAVED: m(r.taxSaved), S_RELIEF: m(r.relief),
+    S_SUB: L ? `${m(r.deposits)} simpanan + ${m(r.dividends)} dividen` : `${m(r.deposits)} deposits + ${m(r.dividends)} dividends`,
+    S_LINES: lines, S_ROWS: rowsT, S_GRID: grid, S_TAX: tax, S_DIVS: divs, S_MAX_SAVED: m(sspnCore.taxSaved(60000, 8000)), S_HI_SAVED: m(sspnCore.taxSaved(120000, 8000)),
+    S_ONE_YEAR: m(sspnCore.calculate({ monthly: 200, years: 1, rate: 4.1 }).balance),
+    S_VERIFIED: longDate(sspnCore.FACTS.verified, lang), S_VERIFIED_ISO: sspnCore.FACTS.verified
+  };
+}
+const UT_EXAMPLE = { lump: 10000, monthly: 300, years: 10, gross: 7, charge: 3, fee: 1.6 };
+function unittrustMap(lang) {
+  const { L, m, nf, tr } = b3(lang), r = unittrustCore.calculate(UT_EXAMPLE), yr = y => L ? `Tahun ${y}` : `Year ${y}`;
+  const lines = [tr(L ? 'Jumlah dilabur' : 'Total invested', m(r.paid)), tr(L ? 'Caj jualan' : 'Sales charges', '− ' + m(r.charges)), tr(L ? 'Yuran tahunan' : 'Yearly fees', '− ' + m(r.fees)),
+    tr(L ? 'Nilai akhir' : 'Final value', m(r.value), 'total'), tr(L ? 'Untung' : 'Profit', m(r.profit)), tr(L ? 'Pulangan bersih setahun' : 'Net return a year', nf(r.net, 2) + '%'),
+    tr(L ? 'Melalui KWSP i-Invest (caj 0.5%)' : 'Through EPF i-Invest (0.5% charge)', m(r.iInvest)), tr(L ? 'Tanpa caj dan yuran' : 'With no charges or fees', m(r.noCost)), tr(L ? 'Kos caj dan yuran' : 'Cost of charges and fees', m(r.costOfFees), 'total')].join('\n');
+  const rowsT = r.rows.map(x => `<tr><th scope="row">${yr(x.year)}</th><td>${m(x.paid)}</td><td>${m(x.value)}</td><td>${m(x.value - x.paid)}</td></tr>`).join('\n');
+  const grid = [0, 0.5, 1, 2, 3, 5, 5.5].map(c => { const x = unittrustCore.calculate({ ...UT_EXAMPLE, charge: c }); return `<tr><th scope="row">${nf(c, 1)}%</th><td>${m(x.charges)}</td><td>${m(x.value)}</td><td>${nf(x.net, 2)}%</td></tr>`; }).join('\n');
+  const fees = [0.5, 1, 1.5, 1.6, 1.85, 2].map(fe => { const x = unittrustCore.calculate({ ...UT_EXAMPLE, fee: fe }); return `<tr><th scope="row">${nf(fe, 2)}%</th><td>${m(x.fees)}</td><td>${m(x.value)}</td><td>${nf(x.net, 2)}%</td></tr>`; }).join('\n');
+  const lump = unittrustCore.calculate({ lump: 10000, years: 1, gross: 7, charge: 5 });
+  return {
+    U_LUMP: UT_EXAMPLE.lump, U_MONTHLY: UT_EXAMPLE.monthly, U_YEARS: UT_EXAMPLE.years, U_GROSS: UT_EXAMPLE.gross, U_CHARGE: UT_EXAMPLE.charge, U_FEE: UT_EXAMPLE.fee,
+    U_VALUE: m(r.value), U_PAID: m(r.paid), U_NET: nf(r.net, 2), U_CHARGES: m(r.charges), U_FEES: m(r.fees), U_IINVEST: m(r.iInvest), U_NOCOST: m(r.noCost), U_COST: m(r.costOfFees),
+    U_SUB: L ? `${m(r.paid)} dilabur · pulangan bersih ${nf(r.net, 2)}% setahun` : `${m(r.paid)} invested · net return ${nf(r.net, 2)}% a year`,
+    U_LINES: lines, U_ROWS: rowsT, U_GRID: grid, U_FEETABLE: fees, U_LUMP5: m(10000 - 10000 / 1.05), U_LUMP5_VALUE: m(lump.value),
+    U_VERIFIED: longDate(unittrustCore.FACTS.verified, lang), U_VERIFIED_ISO: unittrustCore.FACTS.verified
+  };
+}
+const EDU_EXAMPLE = { age: 5, start: 18, study: 4, cost: 25000, inflation: 5, ret: 4.1, saved: 5000 };
+function eduMap(lang) {
+  const { L, m, tr } = b3(lang), r = eduCore.calculate(EDU_EXAMPLE);
+  const lines = [tr(L ? 'Tahun sebelum masuk universiti' : 'Years until university', r.years), tr(L ? 'Kos pada harga hari ini' : 'Cost at today\'s prices', m(r.today)), tr(L ? 'Kos pada harga masa depan' : 'Cost at future prices', m(r.total)),
+    tr(L ? 'Perlu ada pada hari pertama' : 'Needed on day one', m(r.need)), tr(L ? 'Simpanan sedia ada (bertambah)' : 'Existing savings (grown)', '− ' + m(r.grown)), tr(L ? 'Kekurangan' : 'Shortfall', m(r.gap)), tr(L ? 'Simpan sebulan' : 'Save a month', m(r.monthly), 'total')].join('\n');
+  const yrs = r.list.map(x => tr(L ? `Tahun ${x.year} (umur ${x.age})` : `Year ${x.year} (age ${x.age})`, m(x.cost))).join('\n');
+  const byAge = [0, 3, 5, 7, 10, 12, 15].map(a => { const x = eduCore.calculate({ ...EDU_EXAMPLE, age: a, saved: 0 }); return `<tr><th scope="row">${a}</th><td>${x.years}</td><td>${m(x.total)}</td><td><strong>${m(x.monthly)}</strong></td></tr>`; }).join('\n');
+  const byCost = [10000, 15000, 25000, 40000, 60000].map(c => { const x = eduCore.calculate({ ...EDU_EXAMPLE, cost: c, saved: 0 }); return `<tr><th scope="row">${m(c)}</th><td>${m(c * 4)}</td><td>${m(x.total)}</td><td>${m(x.monthly)}</td></tr>`; }).join('\n');
+  const z = eduCore.calculate({ ...EDU_EXAMPLE, age: 0, saved: 0 }), t = eduCore.calculate({ ...EDU_EXAMPLE, age: 12, saved: 0 }), n = eduCore.calculate({ ...EDU_EXAMPLE, inflation: 0, ret: 0, saved: 0 });
+  return {
+    D_AGE: EDU_EXAMPLE.age, D_START: EDU_EXAMPLE.start, D_STUDY: EDU_EXAMPLE.study, D_COST: EDU_EXAMPLE.cost, D_INFL: EDU_EXAMPLE.inflation, D_RET: EDU_EXAMPLE.ret, D_SAVED: EDU_EXAMPLE.saved,
+    D_MONTHLY: m(r.monthly), D_TOTAL: m(r.total), D_FIRST: m(r.list[0].cost), D_NEED: m(r.need),
+    D_SUB: L ? `Jumlah ${m(r.total)} untuk ${r.study} tahun dari umur ${r.startAge}` : `Total ${m(r.total)} for ${r.study} years from age ${r.startAge}`,
+    D_LINES: lines, D_YEARS: yrs, D_BYAGE: byAge, D_BYCOST: byCost, D_BIRTH: m(z.monthly), D_TWELVE: m(t.monthly), D_FLAT: m(n.monthly),
+    D_VERIFIED: longDate(eduCore.FACTS.verified, lang), D_VERIFIED_ISO: eduCore.FACTS.verified
+  };
+}
+const WATER_EXAMPLE = { state: 'selangor', m3: 30 };
+function waterMap(lang) {
+  const { L, m, nf, tr } = b3(lang), W = waterCore, r = W.calculate(WATER_EXAMPLE), n = W.name(r.state, lang);
+  const band = L ? ['0–20 m³', '20–35 m³', 'Melebihi 35 m³'] : ['0–20 m³', '20–35 m³', 'Above 35 m³'];
+  const lines = [...r.lines.map((l, i) => l.m3 || i === 0 ? tr(`${band[i]}: ${nf(l.m3)} m³ × ${m(l.rate)}`, m(l.amount)) : '').filter(Boolean),
+    tr(L ? 'Caj penggunaan' : 'Usage charge', m(r.usage)), tr(L ? 'Bil sebulan' : 'Bill a month', m(r.total), 'total'), tr(L ? 'Purata setiap m³' : 'Average per m³', m(r.perM3)), tr(L ? 'Liter sehari' : 'Litres a day', nf(r.daily, 0))].join('\n');
+  const opts = W.STATES.map(s => `<option value="${s[0]}"${s[0] === r.state ? ' selected' : ''}>${W.name(s[0], lang)}</option>`).join('');
+  const tariffs = W.STATES.map(s => `<tr><th scope="row">${W.name(s[0], lang)}</th><td>${s[2]}</td><td>${m(s[4][0])}</td><td>${m(s[4][1])}</td><td>${m(s[4][2])}</td><td>${m(s[5])}</td><td>${longDate(s[3], lang)}</td></tr>`).join('\n');
+  const bills = W.STATES.map(s => `<tr><th scope="row">${W.name(s[0], lang)}</th>${[10, 20, 30, 35, 50].map(q => `<td>${m(W.calculate({ state: s[0], m3: q }).total)}</td>`).join('')}</tr>`).join('\n');
+  const b = (k, q) => m(W.calculate({ state: k, m3: q }).total);
+  return {
+    W_STATE_OPTIONS: opts, W_M3: WATER_EXAMPLE.m3, W_BILL: m(r.total), W_SUB: L ? `${nf(r.m3)} m³ di ${n} · ${r.operator}` : `${nf(r.m3)} m³ in ${n} · ${r.operator}`,
+    W_LINES: lines, W_TARIFFS: tariffs, W_BILLS: bills,
+    W_SEL20: b('selangor', 20), W_SEL50: b('selangor', 50), W_JOH30: b('johor', 30), W_PNG35: b('penang', 35), W_PNG30: b('penang', 30), W_MLK30: b('melaka', 30), W_KDH30: b('kedah', 30), W_KEL30: b('kelantan', 30), W_TRG30: b('terengganu', 30),
+    W_VERIFIED: longDate(W.FACTS.verified, lang), W_VERIFIED_ISO: W.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1693,6 +1770,10 @@ const bundles = {
   'freelance-rate.js': ['assets/js/salary-core.js', 'assets/js/freelance-core.js', 'assets/js/freelance-ui.js'],
   'working-days.js': ['assets/js/workdays-core.js', 'assets/js/workdays-ui.js'],
   'retirement-age.js': ['assets/js/retire-core.js', 'assets/js/retire-ui.js'],
+  'sspn.js': ['assets/js/salary-core.js', 'assets/js/sspn-core.js', 'assets/js/sspn-ui.js'],
+  'unit-trust.js': ['assets/js/unittrust-core.js', 'assets/js/unittrust-ui.js'],
+  'education-cost.js': ['assets/js/edu-core.js', 'assets/js/edu-ui.js'],
+  'water-bill.js': ['assets/js/water-core.js', 'assets/js/water-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

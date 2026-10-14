@@ -576,6 +576,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator SSPN (SSPN Calculator)",
+    "desc": "Simpan SSPN balance with the 4.10% dividend for 2025, the RM8,000 tax relief and the tax you save at your income. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-sspn/",
+    "cat": "calc",
+    "icon": "kalkulator-sspn",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Bil Air (Water Bill)",
+    "desc": "Domestic water bill from m³ at the current block tariffs for Selangor, KL, Putrajaya, Johor, Penang, Melaka, Kedah, Kelantan and Terengganu. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-bil-air/",
+    "cat": "calc",
+    "icon": "kalkulator-bil-air",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Unit Trust (Unit Trust Returns)",
+    "desc": "Unit trust value after the sales charge and yearly fees, net return a year, and the same plan through EPF i-Invest at 0.5%. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-unit-trust/",
+    "cat": "calc",
+    "icon": "kalkulator-unit-trust",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Kos Pendidikan Anak (Education Cost)",
+    "desc": "Your child's university cost at future prices and the monthly saving needed, with education inflation and a savings return. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-kos-pendidikan-anak/",
+    "cat": "calc",
+    "icon": "kalkulator-kos-pendidikan-anak",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/kalkulator-bil-air/",
+  "lang": "ms",
+  "alternates": { "en": "/water-bill-calculator-malaysia/" },
+  "title": "Kalkulator Bil Air 2026: Tarif Air Domestik Ikut Negeri",
+  "description": "Kalkulator bil air: kira bil air domestik daripada m³ di Selangor, KL, Johor, Pulau Pinang, Melaka, Kedah, Kelantan atau Terengganu ikut tarif semasa.",
+  "llms": "Mengira bil air domestik (meter individu) di Malaysia ikut negeri dengan tarif blok: kadar setiap blok hanya untuk air dalam blok itu (0–20 m³, 20–35 m³, melebihi 35 m³ sebulan), dengan caj minimum bulanan, dan tiada SST atas air domestik. Kadar semasa setiap m³: Selangor, Kuala Lumpur dan Putrajaya (Air Selangor, mulai 1 September 2025) RM0.65 / RM1.62 / RM3.51, minimum RM6.50; Johor (Ranhill SAJ, 1 Ogos 2025) RM1.05 / RM2.35 / RM3.50, minimum RM10.50; Pulau Pinang (PBAPP, 1 Julai 2026) RM0.65 / RM1.30 / RM2.21, minimum RM6.50; Melaka (SAMB, 1 Ogos 2025) RM0.94 / RM1.69 / RM2.26, minimum RM9.40; Kedah (SADA, 1 Ogos 2025) RM0.81 / RM1.48 / RM2.00, minimum RM8.10; Kelantan (Air Kelantan, 10 September 2025) RM0.80 / RM1.55 / RM2.10, minimum RM8.00; Terengganu (SATU, 1 Ogos 2025) RM0.66 / RM1.69 / RM2.25, minimum RM6.60. Contoh bil 30 m³: Selangor RM29.20, Johor RM44.50, Pulau Pinang RM26.00, Melaka RM35.70, Kedah RM31.00, Kelantan RM31.50, Terengganu RM30.10. Pulau Pinang 35 m³ = RM32.50 (contoh PBAPP sendiri).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "water",
+  "scripts": ["/assets/js/water-bill.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Bil Air", null]],
+  "about": ["Tarif air", "Bil air", "Air Selangor", "SPAN"],
+  "app": {
+    "name": "Kalkulator Bil Air",
+    "category": "UtilitiesApplication",
+    "features": ["Tarif blok domestik ikut negeri", "Caj minimum", "Pecahan bil ikut blok", "Purata kos setiap m³", "Bil ikut penggunaan bagi setiap negeri", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Air Selangor: Kadar tarif air domestik mulai 1 September 2025 (Lampiran A)", "https://content.airselangor.com/cmi-prod-blobstorageanon-001-sea/media/netdevbr/appendix-a.pdf"],
+    ["Utusan: Tarif air baharu Selangor bermula 1 September", "https://www.utusan.com.my/nasional/2025/08/tarif-air-baharu-selangor-bermula-1-september-ini/"],
+    ["Ranhill SAJ: Tarif air", "https://www.ranhillsaj.com.my/water-tariff"],
+    ["Bernama: Pelarasan tarif air Johor", "https://www.bernama.com/en/news.php/?id=2452512"],
+    ["PBAPP: Kadar air Pulau Pinang mulai 1 Julai 2026", "https://pba.com.my/pdf/news/2026/04062026_Pg-Water-Rates-01072026_YB-Zairil-KJ_BM-Lampiran.pdf"],
+    ["Kosmo: Tarif baharu air di Pulau Pinang mulai 1 Julai", "https://www.kosmo.com.my/2026/06/04/tarif-baharu-air-di-pulau-pinang-mulai-1-julai/"],
+    ["Bernama: SAMB laksana tarif air baharu mulai 1 Ogos", "https://www.bernama.com/en/general/news.php?id=2452259"],
+    ["SADA: Kadar tarif", "https://www.sada.com.my/KadarTarif"],
+    ["Air Kelantan: Kadar tarif", "https://airkelantan.com.my/maklumat-pengguna/kadar-tarif/"],
+    ["SATU: Kadar tarif", "https://www.satuwater.com.my/v4/index.php/bisnes/kadar-tarif"],
+    ["Malay Mail: Pengguna air dikecualikan SST", "https://www.malaymail.com/news/malaysia/2024/03/01/energy-transition-ministry-eight-million-water-supply-users-exempted-from-sst-hike/120913"]
+  ],
+  "faq": [
+    { "q": "Bagaimana bil air dikira?", "a": "Ikut blok: 20 m³ pertama pada kadar blok 1, 15 m³ seterusnya pada kadar blok 2 dan bakinya pada kadar blok 3, dengan caj minimum. Di Selangor, 30 m³ = 20 × RM0.65 + 10 × RM1.62 = {{W_BILL}}." },
+    { "q": "Berapa tarif air di Selangor?", "a": "Mulai 1 September 2025 Air Selangor mengenakan RM0.65 setiap m³ bagi 20 m³ pertama, RM1.62 bagi 20 hingga 35 m³ dan RM3.51 melebihi 35 m³, dengan caj minimum RM6.50. Kuala Lumpur dan Putrajaya membayar kadar yang sama. 20 m³ berharga {{W_SEL20}} dan 50 m³ {{W_SEL50}}." },
+    { "q": "Berapa bil air di Johor?", "a": "Ranhill SAJ mengenakan RM1.05 setiap m³ hingga 20 m³, RM2.35 bagi 20 hingga 35 m³ dan RM3.50 melebihi 35 m³ (mulai 1 Ogos 2025), dengan caj minimum RM10.50. 30 m³ berharga {{W_JOH30}}." },
+    { "q": "Berapa tarif air baharu di Pulau Pinang?", "a": "Mulai 1 Julai 2026 PBAPP mengenakan RM0.65 setiap m³ hingga 20 m³, RM1.30 bagi 20 hingga 35 m³ dan RM2.21 melebihi 35 m³, dengan caj minimum RM6.50. 35 m³ sebulan berharga {{W_PNG35}}, naik daripada RM29.95." },
+    { "q": "Berapa liter dalam 1 m³ air?", "a": "1,000 liter. Isi rumah yang menggunakan 30 m³ sebulan menggunakan kira-kira 1,000 liter sehari. Bil anda menunjukkan m³ yang digunakan antara dua bacaan meter." },
+    { "q": "Adakah SST dikenakan atas bil air?", "a": "Tidak. Bekalan air domestik dikecualikan daripada cukai perkhidmatan; kerajaan mengesahkan pengguna air kekal dikecualikan apabila SST naik ke 8% pada Mac 2024." },
+    { "q": "Kenapa sesetengah negeri tiada dalam kalkulator?", "a": "Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah dan Sarawak tidak dimasukkan kerana jadual tarif penuh terkini tidak dapat disahkan daripada dua sumber. Semak bil atau laman web pengendali air anda." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator bil air</li></ol></nav>
+  <h1>Kalkulator Bil Air</h1>
+  <p class="answer">Penggunaan 30 m³ air sebulan berharga <strong>{{W_BILL}}</strong> di Selangor, KL dan Putrajaya (20 m³ × RM0.65 + 10 m³ × RM1.62). Penggunaan sama berharga {{W_JOH30}} di Johor, {{W_PNG30}} di Pulau Pinang dan {{W_MLK30}} di Melaka ikut tarif blok semasa, tanpa SST. Pilih negeri dan masukkan m³ dalam bil anda di bawah.</p>
+  <p class="meta"><span>Tarif disemak <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/water-bill-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="waterForm" novalidate aria-labelledby="wt-h">
+      <h2 id="wt-h">Penggunaan anda</h2>
+      <div class="field"><label for="state">Negeri</label><select class="input" id="state" name="state">{{W_STATE_OPTIONS}}</select></div>
+      <div class="field"><label for="m3">Air digunakan sebulan</label><div class="input"><input id="m3" name="m3" type="number" inputmode="decimal" min="0" max="1000" step="1" value="{{W_M3}}"><span aria-hidden="true">m³</span></div></div>
+      <p class="help">1 m³ = 1,000 liter. Pulau Pinang membil setiap dua bulan; masukkan penggunaan sebulan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="wt-result-h">
+      <h2 id="wt-result-h">Bil anda</h2>
+      <div class="net">
+        <p>Bil sebulan</p>
+        <output id="wBill" for="state m3">{{W_BILL}}</output>
+        <p id="wSub">{{W_SUB}}</p>
+      </div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Pecahan</caption>
+        <tbody id="wLines">
+{{W_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Meter individu domestik. Rebat dan skim air percuma tidak ditolak.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="waterPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="bills-h">Bil air sebulan ikut negeri dan penggunaan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bills-h">
+    <table class="data">
+      <thead><tr><th scope="col">Negeri</th><th scope="col">10 m³</th><th scope="col">20 m³</th><th scope="col">30 m³</th><th scope="col">35 m³</th><th scope="col">50 m³</th></tr></thead>
+      <tbody>
+{{W_BILLS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara bil air dikira</h2>
+  <ol>
+    <li><strong>Blok 1:</strong> 20 m³ pertama pada kadar blok 1.</li>
+    <li><strong>Blok 2:</strong> air dari 20 hingga 35 m³ pada kadar blok 2.</li>
+    <li><strong>Blok 3:</strong> air melebihi 35 m³ pada kadar blok 3.</li>
+    <li><strong>Caj minimum:</strong> jika jumlah lebih rendah, anda membayar caj minimum.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tariff-h">Tarif air domestik ikut negeri (RM setiap m³)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tariff-h">
+    <table class="data">
+      <thead><tr><th scope="col">Negeri</th><th scope="col">Pengendali</th><th scope="col">0–20 m³</th><th scope="col">20–35 m³</th><th scope="col">Melebihi 35 m³</th><th scope="col">Minimum</th><th scope="col">Mulai</th></tr></thead>
+      <tbody>
+{{W_TARIFFS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Perkara penting tentang tarif air</h2>
+  <ul>
+    <li><strong>Semakan SPAN:</strong> kawal selia air negara menyemak tarif di bawah mekanisme penetapan tarif; pusingan terkini berkuat kuasa mulai Ogos 2025 (Pulau Pinang ditangguhkan ke Julai 2026).</li>
+    <li><strong>Air percuma:</strong> sesetengah negeri memberi air percuma kepada isi rumah layak, seperti Skim Air Darul Ehsan Selangor (20 m³ sebulan) dan Terengganu bagi isi rumah B40; ia tidak ditolak di sini.</li>
+    <li><strong>Tidak dimasukkan:</strong> Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah dan Sarawak, kerana jadual penuh terkini tidak dapat disahkan.</li>
+    <li><strong>Jimat air:</strong> kekal dalam 20 m³ sebulan untuk kadar blok paling murah.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://content.airselangor.com/cmi-prod-blobstorageanon-001-sea/media/netdevbr/appendix-a.pdf" rel="noopener">Air Selangor: tarif mulai 1 September 2025</a></li>
+    <li><a href="https://www.utusan.com.my/nasional/2025/08/tarif-air-baharu-selangor-bermula-1-september-ini/" rel="noopener">Utusan: Tarif air baharu Selangor</a></li>
+    <li><a href="https://www.ranhillsaj.com.my/water-tariff" rel="noopener">Ranhill SAJ: tarif air</a> dan <a href="https://www.bernama.com/en/news.php/?id=2452512" rel="noopener">Bernama: pelarasan Johor</a></li>
+    <li><a href="https://pba.com.my/pdf/news/2026/04062026_Pg-Water-Rates-01072026_YB-Zairil-KJ_BM-Lampiran.pdf" rel="noopener">PBAPP: kadar Pulau Pinang mulai 1 Julai 2026</a> dan <a href="https://www.kosmo.com.my/2026/06/04/tarif-baharu-air-di-pulau-pinang-mulai-1-julai/" rel="noopener">Kosmo</a></li>
+    <li><a href="https://www.bernama.com/en/general/news.php?id=2452259" rel="noopener">Bernama: Melaka (SAMB)</a></li>
+    <li>Jadual tarif <a href="https://www.sada.com.my/KadarTarif" rel="noopener">SADA (Kedah)</a>, <a href="https://airkelantan.com.my/maklumat-pengguna/kadar-tarif/" rel="noopener">Air Kelantan</a> dan <a href="https://www.satuwater.com.my/v4/index.php/bisnes/kadar-tarif" rel="noopener">SATU (Terengganu)</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2024/03/01/energy-transition-ministry-eight-million-water-supply-users-exempted-from-sst-hike/120913" rel="noopener">Malay Mail: air dikecualikan SST</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran bagi meter individu domestik. Bil anda mungkin termasuk pelarasan, tunggakan atau rebat; bil pengendali adalah muktamad.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-bil-elektrik-tnb/">Kalkulator Bil Elektrik TNB<small>Bil elektrik daripada kWj</small></a>
+    <a href="/kalkulator-minyak/">Kalkulator Minyak<small>Kos perjalanan dan RM sekilometer</small></a>
+    <a href="/kalkulator-sewa-atau-beli-rumah/">Kalkulator Sewa atau Beli Rumah<small>Sewa berbanding beli rumah</small></a>
+  </div>
+</section>
