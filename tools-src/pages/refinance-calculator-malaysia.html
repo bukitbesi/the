@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/refinance-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-refinance-rumah/" },
+  "title": "Refinance Calculator Malaysia 2026: Is Refinancing Worth It?",
+  "description": "Home loan refinance calculator for Malaysia: compare old and new instalments, interest saved, costs (stamp duty, legal fees, lock-in penalty) and break-even.",
+  "llms": "Works out whether refinancing a home loan in Malaysia pays off: the remaining balance's instalment at the current rate against the new rate (same balance), interest saved, refinancing costs (0.5% stamp duty on the new loan with no refinancing exemption, SRO 2023 legal fees of 1.25% on the first RM500,000 and 1% above, minimum RM500, plus 8% SST, lock-in penalty, valuation and other fees), net saving, break-even months and cash-out. Example: RM300,000 over 25 years from 4.5% to 3.9% cuts the instalment from RM1,667.50 to RM1,566.99, saving RM30,150.24 in interest; costs RM7,350 and the net saving is RM22,800.24, breaking even in 74 months. OPR 2.75% (held on 3 September 2026).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "refi",
+  "scripts": ["/assets/js/refinance.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Refinance Calculator", null]],
+  "about": ["Home loan refinancing", "Mortgage refinance in Malaysia", "Loan stamp duty", "SRO 2023 legal fees"],
+  "app": {
+    "name": "Refinance Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Old against new instalment", "Interest saved", "0.5% stamp duty and SRO 2023 legal fees + SST", "Lock-in penalty", "Cash-out", "Break-even months", "Works offline"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Monetary Policy Statement (OPR 2.75%)", "https://www.bnm.gov.my/-/monetary-policy-statement-09072026"],
+    ["PropertyGuru: The ultimate guide to refinancing", "https://www.propertyguru.com.my/property-guides/the-ultimate-guide-to-refinancing-9507"],
+    ["iProperty: How to refinance a housing loan (2026)", "https://www.iproperty.com.my/guides/what-is-home-loan-refinancing-how-can-i-do-it-12748"]
+  ],
+  "faq": [
+    { "q": "Is refinancing a home loan worth it?", "a": "Usually, if the rate falls by at least 0.5% and you will keep the house longer than the break-even period. RM300,000 over 25 years from 4.5% to 3.9% saves {{R_SAVE}} a month and {{R_SAVED}} in interest; after {{R_COSTS}} in costs, the net saving is {{R_NET}}." },
+    { "q": "How much does refinancing cost?", "a": "0.5% stamp duty on the new loan amount, SRO 2023 legal fees (1.25% on the first RM500,000, minimum RM500) plus 8% SST, a valuation fee, the cost of discharging the old charge and a lock-in penalty if you are still within it. For a RM300,000 loan, stamp duty is RM1,500 and legal fees RM3,750 + RM300 SST." },
+    { "q": "Is stamp duty exempted for refinancing?", "a": "No. The 0.5% stamp duty is charged again on the new loan agreement. The first-home stamp duty exemption applies to purchases, not refinancing." },
+    { "q": "How do I work out the refinancing break-even?", "a": "Divide the total refinancing cost by the monthly instalment saving. RM7,350 in costs ÷ RM100.51 a month = {{R_BE}} months. If you sell or refinance again before then, refinancing loses money." },
+    { "q": "What is a lock-in penalty?", "a": "Most home loans have a lock-in period of 3 to 5 years. Settling the loan within it carries a penalty, usually 2% to 3% of the balance or original loan under the agreement. Check your loan agreement." },
+    { "q": "Can I cash out when I refinance?", "a": "Yes, a cash-out refinance borrows more than the current balance, subject to the home's value and your DSR. Stamp duty and legal fees are worked out on the new loan amount, and the instalment rises because the loan is bigger." },
+    { "q": "What is the current OPR?", "a": "Bank Negara held the OPR at 2.75% on 3 September 2026. Variable home loan rates follow each bank's Standardised Base Rate (SBR), which moves with the OPR." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Refinance calculator</li></ol></nav>
+  <h1>Refinance Calculator Malaysia</h1>
+  <p class="answer">Refinancing pays off when the interest saved beats the costs. RM300,000 over 25 years from 4.5% to 3.9% cuts the instalment from {{R_OLD}} to <strong>{{R_NEW}}</strong> and saves {{R_SAVED}} in interest. After {{R_COSTS}} in costs (0.5% stamp duty, legal fees, valuation), the net saving is <strong>{{R_NET}}</strong>, breaking even in {{R_BE}} months. Enter your loan below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-refinance-rumah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="refiForm" novalidate aria-labelledby="refi-h">
+      <h2 id="refi-h">Your loan</h2>
+      <fieldset class="field-group">
+        <legend>Current loan</legend>
+        <div class="field"><label for="balance">Loan balance</label><div class="input"><span aria-hidden="true">RM</span><input id="balance" name="balance" type="number" inputmode="decimal" min="0" step="1000" value="{{R_BALANCE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="rate">Current rate</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.05" value="{{R_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="yearsLeft">Years left</label><div class="input"><input id="yearsLeft" name="yearsLeft" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{R_LEFT}}"><span aria-hidden="true">years</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>New loan</legend>
+        <div class="field-row">
+          <div class="field"><label for="newRate">New rate</label><div class="input"><input id="newRate" name="newRate" type="number" inputmode="decimal" min="0" step="0.05" value="{{R_NEW_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="newYears">New tenure</label><div class="input"><input id="newYears" name="newYears" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{R_NEW_YEARS}}"><span aria-hidden="true">years</span></div></div>
+        </div>
+        <div class="field"><label for="cashOut">Cash-out (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="cashOut" name="cashOut" type="number" inputmode="decimal" min="0" step="1000" value="0"></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Costs</legend>
+        <div class="field-row">
+          <div class="field"><label for="lockPct">Lock-in penalty</label><div class="input"><input id="lockPct" name="lockPct" type="number" inputmode="decimal" min="0" max="10" step="0.5" value="0"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="valuation">Valuation fee</label><div class="input"><span aria-hidden="true">RM</span><input id="valuation" name="valuation" type="number" inputmode="decimal" min="0" step="50" value="{{R_VALUATION}}"></div></div>
+        </div>
+        <div class="field"><label for="other">Other costs (discharge, registration)</label><div class="input"><span aria-hidden="true">RM</span><input id="other" name="other" type="number" inputmode="decimal" min="0" step="50" value="{{R_OTHER}}"></div></div>
+        <div class="field"><label for="finance">How costs are paid</label><select class="input" id="finance" name="finance">{{R_FINANCE_OPTIONS}}</select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="refi-result-h">
+      <h2 id="refi-result-h">Comparison</h2>
+      <div class="net">
+        <p id="rHead">{{R_HEAD}}</p>
+        <output id="rNet" for="balance rate yearsLeft newRate newYears cashOut lockPct valuation other finance">{{R_NET}}</output>
+        <p id="rSub">{{R_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Summary</caption>
+        <tbody id="rLines">
+{{R_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Refinancing costs</caption>
+        <tbody id="rCosts">
+{{R_COST_LINES}}
+        </tbody>
+      </table>
+      <p class="note">The saving compares the same balance for fairness; cash-out raises the new instalment separately.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="refiPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cut-h">Saving by new rate (RM300,000 balance, 25 years, from 4.5%)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cut-h">
+    <table class="data">
+      <thead><tr><th scope="col">New rate</th><th scope="col">Saved a month</th><th scope="col">Interest saved</th><th scope="col">Net of costs</th><th scope="col">Break-even</th></tr></thead>
+      <tbody>
+{{R_CUT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How refinancing is worked out</h2>
+  <ol>
+    <li><strong>Instalment</strong> = loan × r ÷ (1 − (1 + r)<sup>−n</sup>), where r = rate ÷ 12 and n = months.</li>
+    <li><strong>Interest saved</strong> = total interest on the old loan − interest on the new loan for the same balance.</li>
+    <li><strong>Costs</strong> = 0.5% stamp duty + SRO 2023 legal fees + 8% SST + penalty + valuation + other.</li>
+    <li><strong>Break-even</strong> = costs ÷ monthly instalment saving.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cost-h">Refinancing stamp duty and legal fees</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cost-h">
+    <table class="data">
+      <thead><tr><th scope="col">New loan</th><th scope="col">Stamp duty 0.5%</th><th scope="col">Legal fees + SST</th><th scope="col">Total</th></tr></thead>
+      <tbody>
+{{R_COST_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="when">When refinancing pays off</h2>
+  <ul>
+    <li>The new rate is at least 0.5% below your current rate.</li>
+    <li>You are past the lock-in period, or the penalty is small next to the saving.</li>
+    <li>You will keep the house longer than the break-even period.</li>
+    <li>A longer tenure lowers the instalment but adds interest; compare total interest, not just the instalment.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/-/monetary-policy-statement-09072026" rel="noopener">Bank Negara Malaysia: monetary policy statement (OPR)</a></li>
+    <li><a href="https://www.propertyguru.com.my/property-guides/the-ultimate-guide-to-refinancing-9507" rel="noopener">PropertyGuru: refinancing guide</a></li>
+    <li><a href="https://www.iproperty.com.my/guides/what-is-home-loan-refinancing-how-can-i-do-it-12748" rel="noopener">iProperty: how to refinance a housing loan</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only, not financial advice. The bank sets the rate, fees and approval, and the actual legal fees follow your lawyer's quotation.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+    <a href="/rent-vs-buy-calculator-malaysia/">Rent vs Buy Calculator<small>Which leaves you better off</small></a>
+    <a href="/rpgt-calculator-malaysia/">RPGT Calculator<small>Real property gains tax</small></a>
+  </div>
+</section>

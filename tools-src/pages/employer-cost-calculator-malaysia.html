@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/employer-cost-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-kos-pekerja/" },
+  "title": "Employer Cost Calculator Malaysia 2026: EPF, SOCSO, EIS and HRD",
+  "description": "Employer cost calculator for Malaysia: what an employee really costs a month and a year, with employer EPF, SOCSO, EIS, HRD levy, bonus and foreign workers.",
+  "llms": "Calculates what an employee really costs an employer in Malaysia: wages and fixed allowances, employer EPF (13% for wages up to RM5,000, 12% above; 4% from age 60; 2% for foreign workers from October 2025), employer SOCSO 1.75% (1.25% from age 60) and EIS 0.2% (not for foreign workers) by the contribution schedules, the HRD Corp levy of 1% for employers with 10 or more Malaysian employees in covered sectors or 0.5% voluntary for 5 to 9 (on Malaysian employees' wages only), and EPF on bonus. Example: RM3,000 salary with the 1% HRD levy: EPF RM390, SOCSO RM51.65, EIS RM5.90, HRD RM30, total RM3,477.55 a month (15.9% on top of pay) and RM41,730.60 a year.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "employer",
+  "scripts": ["/assets/js/employer-cost.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Employer Cost Calculator", null]],
+  "about": ["Employer cost", "Employer EPF contribution", "SOCSO and EIS", "HRD Corp levy"],
+  "app": {
+    "name": "Employer Cost Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Employer EPF by the Third Schedule", "SOCSO and EIS by the contribution schedules", "HRD Corp levy at 1% or 0.5%", "Foreign workers (2% EPF, no EIS)", "Employees aged 60 and above", "Bonus and yearly cost", "Works offline"]
+  },
+  "citations": [
+    ["KWSP (EPF): Contribution rates", "https://www.kwsp.gov.my/ms/majikan/caruman"],
+    ["PERKESO (SOCSO): Contribution schedules", "https://www.perkeso.gov.my/"],
+    ["HRD Corp: Levy", "https://hrdcorp.gov.my/"],
+    ["BoardRoom Malaysia: Employee statutory contributions EPF, SOCSO, EIS and HRD", "https://www.boardroomlimited.com/my/2025/10/07/employee-statutory-contributions-epf-socso-eis-hrd/"]
+  ],
+  "faq": [
+    { "q": "How much does an employee on RM3,000 cost the employer?", "a": "About {{E_TOTAL}} a month with the 1% HRD Corp levy: RM3,000 salary, RM390 employer EPF (13%), RM51.65 SOCSO, RM5.90 EIS and a RM30 HRD levy. That is {{E_ONTOP}} ({{E_PCT}}%) on top of pay, or {{E_YEARLY}} a year." },
+    { "q": "What is the employer EPF contribution?", "a": "13% for employees earning RM5,000 or less and 12% above RM5,000, worked out on the Third Schedule wage band and rounded up to the next ringgit. For employees aged 60 and above, 4%. For foreign workers, 2% from October 2025." },
+    { "q": "Who must pay the HRD Corp levy?", "a": "Employers in covered sectors with 10 or more Malaysian employees must pay 1% of monthly wages. Employers with 5 to 9 employees can register voluntarily at 0.5%. The levy is worked out on Malaysian employees' wages only." },
+    { "q": "What does a foreign worker cost the employer?", "a": "For a foreign worker on RM3,000: 2% employer EPF (RM60) and RM51.65 SOCSO, with no EIS or HRD levy, {{E_FOREIGN}} a month. The yearly foreign worker levy and immigration permit costs are paid separately." },
+    { "q": "Does a bonus attract EPF?", "a": "Yes, a bonus counts as wages for EPF. A one-month bonus on RM3,000 takes that month's wages to RM6,000, so employer EPF is 12% and the extra EPF on the bonus is {{E_BONUS_EPF}}. The yearly cost with that bonus is {{E_BONUS_YEARLY}}." },
+    { "q": "How much are employer SOCSO and EIS?", "a": "Employer SOCSO is about 1.75% (Employment Injury and Invalidity) and EIS 0.2%, by banded contribution schedules up to the RM6,000 wage ceiling. On RM3,000, SOCSO is RM51.65 and EIS RM5.90." },
+    { "q": "What other costs come with hiring?", "a": "Beyond statutory contributions: allowances, overtime, paid leave, medical insurance, training, equipment and recruitment. This calculator covers wages, statutory contributions, the HRD levy and bonus." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Employer cost calculator</li></ol></nav>
+  <h1>Employer Cost Calculator Malaysia</h1>
+  <p class="answer">An employee on RM3,000 costs the employer <strong>{{E_TOTAL}}</strong> a month: 13% employer EPF (RM390), RM51.65 SOCSO, RM5.90 EIS and the 1% HRD Corp levy (RM30), which is {{E_ONTOP}} or {{E_PCT}}% on top of pay, and <strong>{{E_YEARLY}}</strong> a year. Enter your employee's pay below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-kos-pekerja/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="empForm" novalidate aria-labelledby="emp-h">
+      <h2 id="emp-h">Employee</h2>
+      <div class="field-row">
+        <div class="field"><label for="salary">Basic salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="100" value="{{E_SALARY}}"></div></div>
+        <div class="field"><label for="allowances">Fixed allowances</label><div class="input"><span aria-hidden="true">RM</span><input id="allowances" name="allowances" type="number" inputmode="decimal" min="0" step="50" value="0"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="foreign">Citizenship</label><select class="input" id="foreign" name="foreign">{{E_FOREIGN_OPTIONS}}</select></div>
+        <div class="field"><label for="age60">Age</label><select class="input" id="age60" name="age60">{{E_AGE_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="hrd">HRD Corp levy</label><select class="input" id="hrd" name="hrd">{{E_HRD_OPTIONS}}</select></div>
+      <div class="field"><label for="bonus">Bonus a year</label><div class="input"><input id="bonus" name="bonus" type="number" inputmode="decimal" min="0" step="0.5" value="0"><span aria-hidden="true">months' pay</span></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="emp-result-h">
+      <h2 id="emp-result-h">Cost to the employer</h2>
+      <div class="net">
+        <p>Cost a month</p>
+        <output id="eTotal" for="salary allowances foreign age60 hrd bonus">{{E_TOTAL}}</output>
+        <p id="eSub">{{E_SUB}}</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Employer cost</caption>
+        <tbody id="eLines">
+{{E_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Employee deductions</caption>
+        <tbody id="eEmployee">
+{{E_EMPLOYEE}}
+        </tbody>
+      </table>
+      <p class="note">Excludes PCB, the yearly foreign worker levy, overtime and other benefits.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="empPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Employer cost by salary (Malaysian employee under 60)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Salary</th><th scope="col">Employer EPF</th><th scope="col">SOCSO + EIS</th><th scope="col">Monthly without HRD</th><th scope="col">Monthly with 1% HRD</th><th scope="col">Yearly with HRD</th></tr></thead>
+      <tbody>
+{{E_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How employer cost is worked out</h2>
+  <ol>
+    <li><strong>Wages</strong> = basic salary + fixed allowances (wages for EPF and SOCSO).</li>
+    <li><strong>Employer EPF</strong> = 13% (wages up to RM5,000) or 12%, on the Third Schedule wage band, rounded up.</li>
+    <li><strong>SOCSO and EIS</strong> by the banded contribution schedules in RM100 steps up to the RM6,000 ceiling.</li>
+    <li><strong>HRD Corp levy</strong> = 1% or 0.5% of Malaysian employees' wages.</li>
+    <li><strong>Yearly</strong> = monthly × 12 + bonus + EPF on the bonus.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rates">Employer contribution rates 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates">
+    <table class="data text">
+      <thead><tr><th scope="col">Contribution</th><th scope="col">Malaysian employee</th><th scope="col">Foreign worker</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Employer EPF</th><td>13% (up to RM5,000), 12% (above); 4% from age 60</td><td>2% (from October 2025)</td></tr>
+        <tr><th scope="row">Employer SOCSO</th><td>1.75% (1.25% from age 60), RM6,000 ceiling</td><td>1.75%</td></tr>
+        <tr><th scope="row">Employer EIS</th><td>0.2%, RM6,000 ceiling</td><td>None</td></tr>
+        <tr><th scope="row">HRD Corp levy</th><td>1% (10 or more employees) or 0.5% (5 to 9, voluntary)</td><td>Not counted</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.kwsp.gov.my/ms/majikan/caruman" rel="noopener">KWSP (EPF): contribution rates</a></li>
+    <li><a href="https://www.perkeso.gov.my/" rel="noopener">PERKESO (SOCSO): contribution schedules</a></li>
+    <li><a href="https://hrdcorp.gov.my/" rel="noopener">HRD Corp: levy</a></li>
+    <li><a href="https://www.boardroomlimited.com/my/2025/10/07/employee-statutory-contributions-epf-socso-eis-hrd/" rel="noopener">BoardRoom Malaysia: EPF, SOCSO, EIS and HRD contributions</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for planning. Check KWSP, PERKESO and HRD Corp for exact amounts and your sector's coverage.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+    <a href="/overtime-calculator-malaysia/">Overtime Calculator<small>OT pay under the Employment Act</small></a>
+    <a href="/prorated-salary-calculator-malaysia/">Prorated Salary Calculator<small>Pay for a part month</small></a>
+  </div>
+</section>

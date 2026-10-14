@@ -42,6 +42,10 @@ const tnbCore = require('../assets/js/tnb-core.js');
 const ptptnCore = require('../assets/js/ptptn-core.js');
 const fidyahCore = require('../assets/js/fidyah-core.js');
 const debtCore = require('../assets/js/debt-core.js');
+const refiCore = require('../assets/js/refi-core.js');
+const rentbuyCore = require('../assets/js/rentbuy-core.js');
+const fdCore = require('../assets/js/fd-core.js');
+const employerCore = require('../assets/js/employer-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1326,10 +1330,104 @@ function debtMap(lang) {
     D_VERIFIED: longDate(debtCore.FACTS.verified, lang), D_VERIFIED_ISO: debtCore.FACTS.verified
   };
 }
+// ---- Refinance (home loan), BM + EN
+const REFI_EXAMPLE = { balance: 300000, rate: 4.5, yearsLeft: 25, newRate: 3.9, newYears: 25, cashOut: 0, lockPct: 0, valuation: 800, other: 1000, finance: 'cash' };
+function refiMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), r = refiCore.calculate(REFI_EXAMPLE);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const tr = (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`;
+  const lines = [tr(L ? 'Ansuran sekarang' : 'Current instalment', m(r.oldInstalment)), tr(L ? 'Ansuran baharu (baki sama)' : 'New instalment (same balance)', m(r.sameInstalment)),
+    tr(L ? 'Faedah dijimatkan' : 'Interest saved', m(r.interestSaved)), tr(L ? 'Kos refinance' : 'Refinancing costs', '− ' + m(r.costs)),
+    tr(L ? 'Penjimatan bersih' : 'Net saving', m(r.netSaving), 'total'), tr(L ? 'Pulang modal' : 'Break-even', L ? `${r.breakEven} bulan` : `${r.breakEven} months`)].join('\n');
+  const costs = [tr(L ? 'Duti setem 0.5%' : 'Stamp duty 0.5%', m(r.stamp)), tr(L ? 'Yuran guaman (SRO 2023)' : 'Legal fees (SRO 2023)', m(r.legal)), tr(L ? 'SST 8% atas yuran guaman' : '8% SST on legal fees', m(r.sst)),
+    tr(L ? 'Penalti tempoh kunci' : 'Lock-in penalty', m(r.penalty)), tr(L ? 'Yuran penilaian' : 'Valuation fee', m(r.valuation)), tr(L ? 'Kos lain' : 'Other costs', m(r.other)), tr(L ? 'Jumlah kos' : 'Total costs', m(r.costs), 'total')].join('\n');
+  const cut = [0.25, 0.5, 0.75, 1].map(d => { const x = refiCore.calculate({ ...REFI_EXAMPLE, newRate: 4.5 - d }); return `<tr><th scope="row">${(4.5 - d).toFixed(2)}%</th><td>${m(x.monthlySaving)}</td><td>${m(x.interestSaved)}</td><td>${m(x.netSaving)}</td><td>${x.breakEven} ${L ? 'bulan' : 'months'}</td></tr>`; }).join('\n');
+  const cost = [200000, 300000, 500000, 800000].map(b => { const x = refiCore.calculate({ balance: b, rate: 4.5, yearsLeft: 25, newRate: 3.9, newYears: 25 }); return `<tr><th scope="row">${m(b)}</th><td>${m(x.stamp)}</td><td>${m(x.legal + x.sst)}</td><td>${m(x.stamp + x.legal + x.sst)}</td></tr>`; }).join('\n');
+  return {
+    R_BALANCE: REFI_EXAMPLE.balance, R_RATE: REFI_EXAMPLE.rate, R_LEFT: REFI_EXAMPLE.yearsLeft, R_NEW_RATE: REFI_EXAMPLE.newRate, R_NEW_YEARS: REFI_EXAMPLE.newYears,
+    R_VALUATION: REFI_EXAMPLE.valuation, R_OTHER: REFI_EXAMPLE.other,
+    R_FINANCE_OPTIONS: [opt('cash', 'Pay costs in cash', 'Bayar kos secara tunai', true), opt('loan', 'Add costs to the new loan', 'Masukkan kos ke dalam pinjaman baharu')].join(''),
+    R_HEAD: L ? 'Penjimatan bersih' : 'Net saving', R_NET: m(r.netSaving), R_SAVE: m(r.monthlySaving), R_SAVED: m(r.interestSaved), R_COSTS: m(r.costs), R_BE: r.breakEven,
+    R_OLD: m(r.oldInstalment), R_NEW: m(r.sameInstalment),
+    R_SUB: L ? `Jimat ${m(r.monthlySaving)} sebulan · pulang modal ${r.breakEven} bulan` : `Save ${m(r.monthlySaving)} a month · break-even ${r.breakEven} months`,
+    R_LINES: lines, R_COST_LINES: costs, R_CUT: cut, R_COST_TABLE: cost, R_OPR: refiCore.FACTS.opr,
+    R_VERIFIED: longDate(refiCore.FACTS.verified, lang), R_VERIFIED_ISO: refiCore.FACTS.verified
+  };
+}
+// ---- Rent vs buy, BM + EN
+const RB_EXAMPLE = { price: 500000, downPct: 10, rate: 4.2, years: 35, firstHome: 'none', upkeep: 1, growth: 3, sellCost: 3, rent: 1800, rentRise: 3, invest: 5, horizon: 10 };
+function rentbuyMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), r = rentbuyCore.calculate(RB_EXAMPLE);
+  const rm0 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { style: 'currency', currency: 'MYR', maximumFractionDigits: 0 }).format(n);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const tr = (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`;
+  const lines = [tr(L ? 'Kekayaan pembeli' : "Buyer's wealth", rm0(r.buyer)), tr(L ? 'Kekayaan penyewa' : "Renter's wealth", rm0(r.renter)), tr(L ? 'Kos permulaan membeli' : 'Up-front cost of buying', rm0(r.upfront)),
+    tr(L ? 'Ansuran bulanan' : 'Monthly instalment', m(r.instalment)), tr(L ? 'Kos memiliki bulan pertama' : 'First-month cost of owning', m(r.firstMonthOwn)),
+    tr(L ? 'Membeli mula untung' : 'Buying pulls ahead', r.breakEven ? (L ? 'Tahun ' : 'Year ') + r.breakEven : (L ? 'Tidak dalam tempoh ini' : 'Not within this period'), 'total')].join('\n');
+  const years = r.rows.map(x => `<tr><th scope="row">${x.year}</th><td>${rm0(x.buyer)}</td><td>${rm0(x.renter)}</td></tr>`).join('\n');
+  const grid = [0, 2, 3, 5].map(g => `<tr><th scope="row">${g}%</th>${[5, 10, 20].map(h => { const x = rentbuyCore.calculate({ ...RB_EXAMPLE, growth: g, horizon: h }); return `<td>${x.better === 'buy' ? (L ? 'Beli' : 'Buy') : (L ? 'Sewa' : 'Rent')} ${rm0(Math.abs(x.difference))}</td>`; }).join('')}</tr>`).join('\n');
+  const c = r.costs;
+  return {
+    B_PRICE: RB_EXAMPLE.price, B_DOWN: RB_EXAMPLE.downPct, B_RATE: RB_EXAMPLE.rate, B_YEARS: RB_EXAMPLE.years, B_UPKEEP: RB_EXAMPLE.upkeep, B_GROWTH: RB_EXAMPLE.growth,
+    B_SELL: RB_EXAMPLE.sellCost, B_RENT: RB_EXAMPLE.rent, B_RISE: RB_EXAMPLE.rentRise, B_INVEST: RB_EXAMPLE.invest, B_HORIZON: RB_EXAMPLE.horizon,
+    B_FIRST_OPTIONS: [opt('none', 'No', 'Tidak', true), opt('current', 'Yes, up to RM500,000 (to 2027)', 'Ya, hingga RM500,000 (hingga 2027)')].join(''),
+    B_HEAD: r.better === 'buy' ? (L ? 'Membeli lebih untung' : 'Buying comes out ahead') : (L ? 'Menyewa lebih untung' : 'Renting comes out ahead'), B_DIFF: rm0(Math.abs(r.difference)),
+    B_SUB: L ? `Selepas ${r.horizon} tahun: beli ${rm0(r.buyer)}, sewa ${rm0(r.renter)}` : `After ${r.horizon} years: buy ${rm0(r.buyer)}, rent ${rm0(r.renter)}`,
+    B_LINES: lines, B_YEARS_ROWS: years, B_GRID: grid, B_BUYER: rm0(r.buyer), B_RENTER: rm0(r.renter), B_UPFRONT: rm0(r.upfront), B_INST: m(r.instalment), B_BE: r.breakEven,
+    B_STAMP: rm0(c.stampTransfer + c.stampLoan), B_LEGAL: rm0(c.legalSpa + c.legalLoan + c.sst),
+    B_VERIFIED: longDate(rentbuyCore.FACTS.verified, lang), B_VERIFIED_ISO: rentbuyCore.FACTS.verified
+  };
+}
+// ---- Fixed deposit, BM + EN
+const FD_EXAMPLE = { amount: 10000, rate: 3.8, months: 12, renew: 1 };
+function fdMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), F = fdCore.FACTS, r = fdCore.calculate(FD_EXAMPLE);
+  const nf = (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d }).format(n);
+  const tr = (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`;
+  const lines = [tr(L ? 'Jumlah semasa matang' : 'Amount at maturity', m(r.maturity), 'total'), tr(L ? 'Faedah sebulan (jika dibayar bulanan)' : 'Interest a month (if paid monthly)', m(r.monthly)),
+    tr(L ? 'Pulangan selepas inflasi' : 'Return after inflation', nf(r.real) + '%')].join('\n');
+  const mo = n => L ? `${n} bulan` : `${n} ${n === 1 ? 'month' : 'months'}`;
+  const table = [2.5, 3, 3.5, 3.8, 4, 4.5].map(rt => `<tr><th scope="row">${nf(rt)}%</th>${[1, 3, 6, 12].map(n => `<td>${m(fdCore.interest(10000, rt, n))}</td>`).join('')}</tr>`).join('\n');
+  const grow = [10000, 50000, 100000, 250000].map(a => `<tr><th scope="row">${m(a)}</th>${[1, 3, 5].map(y => `<td>${m(fdCore.calculate({ amount: a, rate: 3.8, months: 12, renew: y }).total)}</td>`).join('')}</tr>`).join('\n');
+  return {
+    D_AMOUNT: FD_EXAMPLE.amount, D_RATE: FD_EXAMPLE.rate, D_INFLATION: F.inflation,
+    D_MONTH_OPTIONS: [1, 3, 6, 9, 12, 15, 18, 24, 36, 48, 60].map(n => `<option value="${n}"${n === 12 ? ' selected' : ''}>${mo(n)}</option>`).join(''),
+    D_INTEREST: m(r.interest), D_MATURITY: m(r.maturity), D_MONTHLY: m(r.monthly),
+    D_SUB: L ? `${r.months} bulan pada ${nf(r.rate)}% setahun · matang ${m(r.maturity)}` : `${r.months} months at ${nf(r.rate)}% a year · matures at ${m(r.maturity)}`,
+    D_LINES: lines, D_TABLE: table, D_GROW: grow, D_5Y: m(fdCore.calculate({ ...FD_EXAMPLE, renew: 5 }).total), D_6M: m(fdCore.interest(10000, 3.8, 6)),
+    D_PIDM: m(F.pidm), D_OPR: nf(F.opr), D_INFL: nf(F.inflation, 1),
+    D_VERIFIED: longDate(F.verified, lang), D_VERIFIED_ISO: F.verified
+  };
+}
+// ---- Employer cost, BM + EN
+const EMP_EXAMPLE = { salary: 3000, allowances: 0, hrd: 'full', foreign: 'no', age60: 'no', bonus: 0 };
+function employerMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), r = employerCore.calculate(EMP_EXAMPLE);
+  const nf = (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d }).format(n);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const tr = (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`;
+  const lines = [tr(L ? 'Gaji dan elaun tetap' : 'Wages and fixed allowances', m(r.wages)), tr(`${L ? 'KWSP majikan' : 'Employer EPF'} (${nf(r.epfRate * 100)}%)`, m(r.epf)),
+    tr(L ? 'PERKESO majikan' : 'Employer SOCSO', m(r.socso)), tr(L ? 'SIP (EIS) majikan' : 'Employer EIS', m(r.eis)), tr(`${L ? 'Levi HRD Corp' : 'HRD Corp levy'} (1%)`, m(r.hrd)),
+    tr(L ? 'Kos sebulan' : 'Cost a month', m(r.monthly), 'total'), tr(L ? 'Kos setahun' : 'Cost a year', m(r.yearly), 'total')].join('\n');
+  const emp = [tr(L ? 'KWSP pekerja' : 'Employee EPF', '− ' + m(r.employeeEpf)), tr(L ? 'PERKESO pekerja' : 'Employee SOCSO', '− ' + m(r.employeeSocso)),
+    tr(L ? 'SIP pekerja' : 'Employee EIS', '− ' + m(r.employeeEis)), tr(L ? 'Gaji sebelum PCB' : 'Pay before PCB', m(r.takeHomeBeforeTax), 'total')].join('\n');
+  const table = [1700, 2500, 3000, 4000, 5000, 6000, 8000, 10000].map(s => { const x = employerCore.calculate({ salary: s, hrd: 'full' }), y = employerCore.calculate({ salary: s }); return `<tr><th scope="row">${m(s)}</th><td>${m(x.epf)}</td><td>${m(x.socso + x.eis)}</td><td>${m(y.monthly)}</td><td>${m(x.monthly)}</td><td>${m(x.yearly)}</td></tr>`; }).join('\n');
+  const f = employerCore.calculate({ salary: 3000, foreign: 'yes' }), b = employerCore.calculate({ salary: 3000, hrd: 'full', bonus: 1 });
+  return {
+    E_SALARY: EMP_EXAMPLE.salary,
+    E_HRD_OPTIONS: [opt('full', '1% (10 or more Malaysian employees)', '1% (10 atau lebih pekerja Malaysia)', true), opt('half', '0.5% (5 to 9, registered voluntarily)', '0.5% (5 hingga 9, daftar sukarela)'), opt('none', 'Not registered / not covered', 'Tidak berdaftar / tidak diliputi')].join(''),
+    E_FOREIGN_OPTIONS: [opt('no', 'Malaysian', 'Warganegara Malaysia', true), opt('yes', 'Foreign worker', 'Pekerja asing')].join(''),
+    E_AGE_OPTIONS: [opt('no', 'Below 60', 'Bawah 60 tahun', true), opt('yes', '60 and above', '60 tahun ke atas')].join(''),
+    E_TOTAL: m(r.monthly), E_ONTOP: m(r.onTop), E_PCT: nf(r.onTopPct, 1), E_YEARLY: m(r.yearly),
+    E_SUB: L ? `${m(r.onTop)} (${nf(r.onTopPct, 1)}%) di atas gaji · ${m(r.yearly)} setahun` : `${m(r.onTop)} (${nf(r.onTopPct, 1)}%) on top of pay · ${m(r.yearly)} a year`,
+    E_LINES: lines, E_EMPLOYEE: emp, E_TABLE: table, E_FOREIGN: m(f.monthly), E_BONUS_YEARLY: m(b.yearly), E_BONUS_EPF: m(b.bonusEpf),
+    E_VERIFIED: longDate(employerCore.FACTS.verified, lang), E_VERIFIED_ISO: employerCore.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1469,6 +1567,10 @@ const bundles = {
   'ptptn.js': ['assets/js/ptptn-core.js', 'assets/js/ptptn-ui.js'],
   'fidyah.js': ['assets/js/fidyah-core.js', 'assets/js/fidyah-ui.js'],
   'debt.js': ['assets/js/carloan-core.js', 'assets/js/debt-core.js', 'assets/js/debt-ui.js'],
+  'refinance.js': ['assets/js/loan-core.js', 'assets/js/refi-core.js', 'assets/js/refi-ui.js'],
+  'rent-vs-buy.js': ['assets/js/loan-core.js', 'assets/js/rentbuy-core.js', 'assets/js/rentbuy-ui.js'],
+  'fixed-deposit.js': ['assets/js/fd-core.js', 'assets/js/fd-ui.js'],
+  'employer-cost.js': ['assets/js/salary-core.js', 'assets/js/employer-core.js', 'assets/js/employer-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

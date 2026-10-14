@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/kalkulator-fixed-deposit/",
+  "lang": "ms",
+  "alternates": { "en": "/fixed-deposit-calculator-malaysia/" },
+  "title": "Kalkulator Fixed Deposit (FD) 2026: Kira Faedah Simpanan Tetap",
+  "description": "Kalkulator fixed deposit: kira faedah FD 1 hingga 60 bulan, jumlah matang, faedah bulanan dan pulangan jika diperbaharui, dengan had PIDM RM250,000.",
+  "llms": "Mengira faedah simpanan tetap (fixed deposit) di Malaysia: faedah mudah bagi tempoh = deposit × kadar × bulan ÷ 12, dibayar semasa matang atau setiap bulan; memperbaharui semasa matang mengkompaunkannya. Contoh: RM10,000 pada 3.8% selama 12 bulan menghasilkan RM380 (matang RM10,380, atau RM31.67 sebulan); 6 bulan RM190; diperbaharui 5 tahun menjadi RM12,050. PIDM melindungi sehingga RM250,000 bagi setiap pendeposit di setiap bank ahli, termasuk faedah, dan deposit Islam serta konvensional dilindungi berasingan. Faedah daripada bank berlesen dikecualikan cukai bagi individu pemastautin. OPR 2.75% (dikekalkan 3 September 2026); inflasi utama purata 1.9% pada suku kedua 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fd",
+  "scripts": ["/assets/js/fixed-deposit.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Fixed Deposit", null]],
+  "about": ["Simpanan tetap", "Fixed deposit", "PIDM", "Kadar faedah Malaysia"],
+  "app": {
+    "name": "Kalkulator Fixed Deposit",
+    "category": "FinanceApplication",
+    "features": ["Faedah dan jumlah matang", "Tempoh 1 hingga 60 bulan", "Faedah bulanan", "Pulangan jika diperbaharui", "Pulangan selepas inflasi", "Had perlindungan PIDM RM250,000", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["PIDM: Soalan lazim Sistem Insurans Deposit", "https://www.pidm.gov.my/my/how-we-protect-you/deposit-insurance-system/deposit-insurance-system-faqs"],
+    ["LHDN: Nota Penerangan Borang BE 2026 (pengecualian faedah)", "https://ef.hasil.gov.my/eBE2026/Pdf/Nota_BE.pdf"],
+    ["Bernama: Bank Negara kekalkan OPR pada 2.75% (3 September 2026)", "https://bernama.com/en/region/news.php?id=2602553"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira faedah fixed deposit?", "a": "Darabkan deposit dengan kadar faedah setahun dan bilangan bulan, kemudian bahagi 12. RM10,000 pada 3.8% selama 12 bulan = RM380; selama 6 bulan = {{D_6M}}. Faedah dibayar semasa matang, atau setiap bulan bagi FD faedah bulanan." },
+    { "q": "Berapa faedah FD RM10,000 setahun?", "a": "Pada 3.8% setahun, RM380 dan jumlah matang RM10,380. Pada 3% RM300 dan pada 4% RM400. Jika diperbaharui setiap tahun selama 5 tahun pada 3.8%, ia menjadi {{D_5Y}}." },
+    { "q": "Adakah faedah fixed deposit dikenakan cukai?", "a": "Tidak bagi individu pemastautin. Faedah daripada wang yang didepositkan di bank dan institusi kewangan berlesen di Malaysia dikecualikan cukai pendapatan bagi individu pemastautin, seperti dinyatakan dalam nota Borang BE LHDN." },
+    { "q": "Berapa had perlindungan PIDM untuk fixed deposit?", "a": "PIDM melindungi sehingga RM250,000 bagi setiap pendeposit di setiap bank ahli, termasuk prinsipal dan faedah. Deposit di bank berlainan dilindungi berasingan, dan deposit Islam serta konvensional di bank yang sama juga dilindungi berasingan." },
+    { "q": "Adakah FD menewaskan inflasi?", "a": "Inflasi utama Malaysia purata 1.9% pada suku kedua 2026. FD pada 3.8% memberi pulangan sebenar kira-kira 1.9% setahun selepas inflasi; kadar di bawah inflasi bermakna kuasa beli simpanan anda berkurang." },
+    { "q": "Apa jadi jika FD dikeluarkan sebelum matang?", "a": "Kebanyakan bank tidak membayar faedah bagi pengeluaran dalam tempoh awal, dan bagi pengeluaran separuh jalan, faedah biasanya dibayar pada separuh kadar bagi bulan lengkap. Semak terma bank anda sebelum membuka FD." },
+    { "q": "Apakah kaitan OPR dengan kadar FD?", "a": "Kadar FD bank bergerak bersama OPR Bank Negara, yang dikekalkan pada 2.75% pada 3 September 2026. Kadar promosi FD biasanya sedikit di atas kadar papan bagi tempoh dan jumlah minimum tertentu." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator fixed deposit</li></ol></nav>
+  <h1>Kalkulator Fixed Deposit (Simpanan Tetap)</h1>
+  <p class="answer">Faedah FD = deposit × kadar × bulan ÷ 12. RM10,000 pada 3.8% selama 12 bulan menghasilkan <strong>{{D_INTEREST}}</strong> (matang {{D_MATURITY}}), atau {{D_MONTHLY}} sebulan bagi FD faedah bulanan. Faedah dikecualikan cukai bagi individu pemastautin, dan PIDM melindungi sehingga <strong>{{D_PIDM}}</strong> setiap bank. Masukkan simpanan anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/fixed-deposit-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="fdForm" novalidate aria-labelledby="fd-h">
+      <h2 id="fd-h">Simpanan anda</h2>
+      <div class="field"><label for="amount">Jumlah deposit</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="1000" value="{{D_AMOUNT}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="rate">Kadar setahun</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.05" value="{{D_RATE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="months">Tempoh</label><select class="input" id="months" name="months">{{D_MONTH_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="renew">Diperbaharui</label><div class="input"><input id="renew" name="renew" type="number" inputmode="numeric" min="1" max="30" step="1" value="1"><span aria-hidden="true">kali</span></div></div>
+        <div class="field"><label for="inflation">Inflasi setahun</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" step="0.1" value="{{D_INFLATION}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <p class="help">Masukkan kadar FD bank anda (papan atau promosi). Diperbaharui 1 = satu tempoh sahaja.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fd-result-h">
+      <h2 id="fd-result-h">Pulangan anda</h2>
+      <div class="net">
+        <p>Faedah</p>
+        <output id="dInterest" for="amount rate months renew">{{D_INTEREST}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Butiran</caption>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="dPidm" hidden>Melebihi had PIDM RM250,000 sebanyak <strong id="dOver">RM0.00</strong>. Pecahkan simpanan ke bank lain untuk perlindungan penuh.</p>
+      <p class="note">Faedah sebenar mungkin dikira mengikut hari (365 hari setahun) dan dibundarkan oleh bank.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fdPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Faedah FD bagi RM10,000 mengikut kadar dan tempoh</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kadar setahun</th><th scope="col">1 bulan</th><th scope="col">3 bulan</th><th scope="col">6 bulan</th><th scope="col">12 bulan</th></tr></thead>
+      <tbody>
+{{D_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kira faedah fixed deposit</h2>
+  <ol>
+    <li><strong>Faedah</strong> = deposit × kadar setahun × bulan ÷ 12 (faedah mudah bagi satu tempoh).</li>
+    <li><strong>Jumlah matang</strong> = deposit + faedah.</li>
+    <li><strong>Faedah bulanan</strong> = deposit × kadar ÷ 12.</li>
+    <li><strong>Diperbaharui:</strong> faedah setiap tempoh ditambah kepada deposit, jadi ia berkompaun.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grow-h">Nilai FD diperbaharui setiap tahun pada 3.8%</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grow-h">
+    <table class="data">
+      <thead><tr><th scope="col">Deposit</th><th scope="col">1 tahun</th><th scope="col">3 tahun</th><th scope="col">5 tahun</th></tr></thead>
+      <tbody>
+{{D_GROW}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Perkara penting FD di Malaysia</h2>
+  <ul>
+    <li><strong>PIDM:</strong> sehingga RM250,000 bagi setiap pendeposit di setiap bank ahli, termasuk faedah; Islam dan konvensional berasingan.</li>
+    <li><strong>Cukai:</strong> faedah daripada bank berlesen dikecualikan bagi individu pemastautin.</li>
+    <li><strong>OPR:</strong> {{D_OPR}}% (dikekalkan 3 September 2026); kadar FD bergerak bersamanya.</li>
+    <li><strong>Inflasi:</strong> purata {{D_INFL}}% pada suku kedua 2026; bandingkan kadar FD dengan inflasi untuk pulangan sebenar.</li>
+    <li><strong>Pengeluaran awal:</strong> faedah dikurangkan atau tidak dibayar; semak terma bank.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.pidm.gov.my/my/how-we-protect-you/deposit-insurance-system/deposit-insurance-system-faqs" rel="noopener">PIDM: soalan lazim Sistem Insurans Deposit</a></li>
+    <li><a href="https://ef.hasil.gov.my/eBE2026/Pdf/Nota_BE.pdf" rel="noopener">LHDN: nota penerangan Borang BE 2026</a></li>
+    <li><a href="https://bernama.com/en/region/news.php?id=2602553" rel="noopener">Bernama: OPR dikekalkan pada 2.75%</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja. Kadar, cara pengiraan dan terma pengeluaran awal ditetapkan oleh setiap bank.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+    <a href="/harga-emas-hari-ini/">Harga Emas Hari Ini<small>Harga emas segram</small></a>
+  </div>
+</section>
