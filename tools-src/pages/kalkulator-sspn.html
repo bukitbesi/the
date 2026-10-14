@@ -1,0 +1,164 @@
+<!--page
+{
+  "path": "/kalkulator-sspn/",
+  "lang": "ms",
+  "alternates": { "en": "/sspn-calculator/" },
+  "title": "Kalkulator SSPN 2026: Simpanan, Dividen 4.10% dan Pelepasan Cukai",
+  "description": "Kalkulator SSPN: unjuran baki Simpan SSPN dengan dividen 4.10% bagi 2025, dan cukai pendapatan yang dijimat dengan pelepasan SSPN RM8,000.",
+  "llms": "Mengunjurkan simpanan Simpan SSPN (Skim Simpanan Pendidikan Nasional, PTPTN) dan pelepasan cukai: dividen tahunan dikreditkan atas purata baki bulanan (4.10% bagi 2025, tertinggi dalam 11 tahun; 4.05% bagi 2024; 3.60% bagi 2023), dan simpanan layak pelepasan cukai pendapatan hingga RM8,000 setahun bagi setiap pembayar cukai sehingga TT2027; cukai dijimat = cukai sebelum pelepasan − cukai selepas pelepasan pada kadar pemastautin TT2026. Contoh: RM200 sebulan selama 18 tahun pada 4.10% menjadi kira-kira RM63,497 (RM43,200 simpanan, RM20,297 dividen); simpanan RM2,400 setahun menjimatkan cukai RM264 pada pendapatan bercukai RM60,000; RM8,000 penuh (kira-kira RM667 sebulan) menjimatkan RM880 pada RM60,000 dan RM2,000 pada RM120,000. Simpan SSPN Prime dibuka dari RM20 tanpa komitmen bulanan; Simpan SSPN Plus bermula kira-kira RM30 sebulan dengan perlindungan takaful.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "sspn",
+  "scripts": ["/assets/js/sspn.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator SSPN", null]],
+  "about": ["Simpan SSPN", "PTPTN", "Simpanan pendidikan", "Pelepasan cukai"],
+  "app": {
+    "name": "Kalkulator SSPN",
+    "category": "FinanceApplication",
+    "features": ["Unjuran baki dengan dividen tahunan", "Pelepasan cukai RM8,000", "Cukai dijimat ikut pendapatan", "Simpanan bulanan dan sekali gus", "Jadual tahun demi tahun", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bernama: PTPTN umum dividen Simpan SSPN 4.10% bagi 2025", "https://www.bernama.com/bm/news.php/bfokus/sukan/news.php?id=2553562"],
+    ["NST: Simpan SSPN 2025 dividend set at 4.10pc", "https://www.nst.com.my/amp/news/nation/2026/05/1434715/simpan-sspn-2025-dividend-set-410pc"],
+    ["RinggitPlus: Berapa banyak cukai boleh dijimat dengan SSPN dan PRS", "https://ringgitplus.com/ms/blog/cukai-pendapatan/berapa-banyak-cukai-yang-boleh-anda-jimat-dengan-sspn-dan-prs.html"],
+    ["FMT: Simpan SSPN makes education savings a breeze", "https://www.freemalaysiatoday.com/category/nation/2025/12/24/simpan-sspn-makes-education-savings-a-breeze"],
+    ["Zurich Malaysia: Simpan SSPN Plus", "https://www.zurich.com.my/knowledge-hub/articles/2026/start-saving-and-fulfill-your-child-dreams-with-simpan-sspn-plus"]
+  ],
+  "faq": [
+    { "q": "Berapa dividen SSPN bagi 2025?", "a": "4.10%, diumumkan PTPTN pada Mei 2026 dan tertinggi dalam 11 tahun. Bagi 2024 ia 4.05% dan bagi 2023 3.60%. Dividen dikreditkan terus ke akaun pendeposit." },
+    { "q": "RM200 sebulan dalam SSPN jadi berapa?", "a": "Pada 4.10% setahun, RM200 sebulan selama 18 tahun menjadi kira-kira {{S_BALANCE}}: simpanan {{S_DEPOSITS}} dan dividen {{S_DIVIDENDS}}. Selepas setahun, bakinya {{S_ONE_YEAR}}. Dividen akan datang boleh lebih tinggi atau rendah." },
+    { "q": "Berapa pelepasan cukai SSPN?", "a": "Hingga RM8,000 setahun bagi setiap pembayar cukai atas simpanan SSPN, sehingga TT2027. Had ini bagi setiap pembayar cukai, bukan setiap anak. Simpan kira-kira RM667 sebulan untuk menggunakan pelepasan penuh." },
+    { "q": "Berapa cukai dijimat dengan SSPN?", "a": "Pelepasan anda darab kadar cukai tertinggi anda. Pada pendapatan bercukai RM60,000, simpanan RM2,400 menjimatkan {{S_SAVED}} dan RM8,000 penuh menjimatkan {{S_MAX_SAVED}}; pada RM120,000, pelepasan penuh menjimatkan {{S_HI_SAVED}}." },
+    { "q": "Apa beza SSPN Prime dan SSPN Plus?", "a": "Simpan SSPN Prime dibuka dengan serendah RM20 tanpa komitmen bulanan. Simpan SSPN Plus ada pakej bulanan tetap dari kira-kira RM30 yang membahagikan bayaran antara simpanan dan perlindungan takaful. Kedua-duanya menerima dividen dan pelepasan cukai." },
+    { "q": "Adakah pengeluaran menjejaskan pelepasan cukai SSPN?", "a": "Pelepasan atas simpanan bersih bagi tahun itu. LHDN dan PTPTN menetapkan cara pengeluaran dikira, termasuk pengeluaran untuk pengajian tinggi anak, jadi semak panduan terkini sebelum mengeluarkan wang pada tahun anda menuntut." },
+    { "q": "SSPN lebih baik daripada simpanan tetap?", "a": "Bagi pembayar cukai, biasanya ya: dividen 2025 sebanyak 4.10% melebihi kadar FD biasa, dan pelepasan RM8,000 memberi penjimatan cukai tambahan. Wang itu bertujuan untuk pendidikan, dan dividen tidak dijamin." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator SSPN</li></ol></nav>
+  <h1>Kalkulator SSPN</h1>
+  <p class="answer">Pada dividen 2025 sebanyak <strong>4.10%</strong>, RM200 sebulan dalam Simpan SSPN selama 18 tahun menjadi kira-kira <strong>{{S_BALANCE}}</strong> ({{S_DIVIDENDS}} daripadanya dividen). Simpanan juga layak pelepasan cukai hingga <strong>RM8,000</strong> setahun sehingga TT2027, menjimatkan cukai {{S_SAVED}} setahun pada pendapatan bercukai RM60,000. Masukkan simpanan anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/sspn-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="sspnForm" novalidate aria-labelledby="ss-h">
+      <h2 id="ss-h">Simpanan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="monthly">Simpanan sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="monthly" name="monthly" type="number" inputmode="decimal" min="0" step="50" value="{{S_MONTHLY}}"></div></div>
+        <div class="field"><label for="lump">Sekali gus tahun ini</label><div class="input"><span aria-hidden="true">RM</span><input id="lump" name="lump" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="balance">Baki sedia ada</label><div class="input"><span aria-hidden="true">RM</span><input id="balance" name="balance" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+        <div class="field"><label for="years">Tempoh</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="30" step="1" value="{{S_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="rate">Dividen setahun</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="20" step="0.05" value="{{S_RATE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="income">Pendapatan bercukai setahun</label><div class="input"><span aria-hidden="true">RM</span><input id="income" name="income" type="number" inputmode="decimal" min="0" step="1000" value="{{S_INCOME}}"></div></div>
+      </div>
+      <p class="help">Pendapatan bercukai: pendapatan selepas pelepasan lain, sebelum SSPN.</p>
+    </form>
+
+    <section class="box" aria-labelledby="ss-result-h">
+      <h2 id="ss-result-h">SSPN anda</h2>
+      <div class="net">
+        <p>Baki akhir</p>
+        <output id="sBalance" for="monthly lump balance years rate">{{S_BALANCE}}</output>
+        <p id="sSub">{{S_SUB}}</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Simpanan dan cukai</caption>
+        <tbody id="sLines">
+{{S_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Dividen dikreditkan setahun sekali atas purata baki bulanan; kadar akan datang tidak dijamin.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="sspnPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Baki SSPN ikut simpanan bulanan pada 4.10%</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Sebulan</th><th scope="col">5 tahun</th><th scope="col">10 tahun</th><th scope="col">15 tahun</th><th scope="col">18 tahun</th></tr></thead>
+      <tbody>
+{{S_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kalkulator SSPN berfungsi</h2>
+  <ol>
+    <li><strong>Simpanan</strong> ditambah pada awal setiap bulan; sekali gus pada awal tahun pertama.</li>
+    <li><strong>Dividen</strong> = kadar tahunan × purata baki hujung bulan, dikreditkan pada akhir setiap tahun.</li>
+    <li><strong>Pelepasan cukai</strong> = simpanan tahun ini, hingga RM8,000.</li>
+    <li><strong>Cukai dijimat</strong> = cukai atas pendapatan bercukai − cukai selepas pelepasan (kadar pemastautin TT2026).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tax-h">Cukai dijimat ikut pelepasan SSPN dan pendapatan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tax-h">
+    <table class="data">
+      <thead><tr><th scope="col">Pendapatan bercukai</th><th scope="col">Simpan RM2,400</th><th scope="col">RM6,000</th><th scope="col">RM8,000 (had)</th></tr></thead>
+      <tbody>
+{{S_TAX}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="years-h">Baki anda tahun demi tahun</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Simpanan</th><th scope="col">Dividen</th><th scope="col">Baki</th></tr></thead>
+      <tbody id="sRows">
+{{S_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="div-h">Kadar dividen Simpan SSPN</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="div-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Dividen</th></tr></thead>
+      <tbody>
+{{S_DIVS}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Simpan SSPN Prime:</strong> dibuka dari RM20, tanpa komitmen bulanan.</li>
+    <li><strong>Simpan SSPN Plus:</strong> pakej bulanan dari kira-kira RM30 dengan perlindungan takaful.</li>
+    <li><strong>Geran padanan:</strong> syarat geran padanan PTPTN telah berubah dari semasa ke semasa dan angka terkini tidak dapat disahkan, jadi tidak dimasukkan; tanya PTPTN.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bernama.com/bm/news.php/bfokus/sukan/news.php?id=2553562" rel="noopener">Bernama: Dividen Simpan SSPN 4.10% bagi 2025</a></li>
+    <li><a href="https://www.nst.com.my/amp/news/nation/2026/05/1434715/simpan-sspn-2025-dividend-set-410pc" rel="noopener">NST: Simpan SSPN 2025 dividend set at 4.10pc</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/cukai-pendapatan/berapa-banyak-cukai-yang-boleh-anda-jimat-dengan-sspn-dan-prs.html" rel="noopener">RinggitPlus: Cukai dijimat dengan SSPN dan PRS</a></li>
+    <li><a href="https://www.freemalaysiatoday.com/category/nation/2025/12/24/simpan-sspn-makes-education-savings-a-breeze" rel="noopener">FMT: Simpan SSPN Prime dan Plus</a></li>
+    <li><a href="https://www.zurich.com.my/knowledge-hub/articles/2026/start-saving-and-fulfill-your-child-dreams-with-simpan-sspn-plus" rel="noopener">Zurich Malaysia: Pakej Simpan SSPN Plus</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran. Dividen diisytihar setiap tahun oleh PTPTN dan tidak dijamin; semak LHDN untuk cara pelepasan terpakai kepada anda.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-kos-pendidikan-anak/">Kalkulator Kos Pendidikan Anak<small>Berapa perlu disimpan untuk universiti</small></a>
+    <a href="/kalkulator-ptptn/">Kalkulator PTPTN<small>Bayaran balik bulanan dan ujrah</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai dengan semua pelepasan</small></a>
+  </div>
+</section>

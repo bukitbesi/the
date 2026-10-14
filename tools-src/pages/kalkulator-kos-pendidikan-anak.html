@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/kalkulator-kos-pendidikan-anak/",
+  "lang": "ms",
+  "alternates": { "en": "/education-cost-calculator-malaysia/" },
+  "title": "Kalkulator Kos Pendidikan Anak: Berapa Perlu Simpan untuk Universiti",
+  "description": "Kalkulator kos pendidikan anak: kos universiti pada harga masa depan dan simpanan bulanan yang diperlukan, dengan inflasi pendidikan dan pulangan SSPN.",
+  "llms": "Merancang simpanan universiti anak di Malaysia: kos setiap tahun pengajian = kos setahun hari ini (yuran dan kos sara hidup) × (1 + inflasi pendidikan)^tahun hingga tahun itu, dan simpanan bulanan diperlukan dari sekarang = jumlah diperlukan pada permulaan universiti (tahun berikutnya didiskaun pada pulangan simpanan), tolak simpanan sedia ada yang berkembang pada pulangan itu, dibahagi atas bulan yang tinggal dengan pengkompaunan bulanan. Contoh: anak berumur 5 tahun memulakan ijazah 4 tahun pada umur 18, berkos RM25,000 setahun hari ini, dengan inflasi 5% dan pulangan 4.10% (dividen Simpan SSPN bagi 2025) serta RM5,000 sudah disimpan: ijazah berkos RM203,185 pada harga masa depan (RM47,141 pada tahun pertama) dan memerlukan RM889.77 sebulan. Tanpa simpanan, bermula sejak lahir memerlukan kira-kira RM768 sebulan, umur 5 kira-kira RM931 dan umur 12 kira-kira RM1,665. Inflasi dan pulangan ialah andaian pengguna.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "edu",
+  "scripts": ["/assets/js/education-cost.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Kos Pendidikan Anak", null]],
+  "about": ["Simpanan pendidikan", "Kos universiti", "Inflasi pendidikan", "SSPN"],
+  "app": {
+    "name": "Kalkulator Kos Pendidikan Anak",
+    "category": "FinanceApplication",
+    "features": ["Kos universiti pada harga masa depan", "Simpanan bulanan diperlukan", "Inflasi pendidikan", "Pulangan simpanan (contoh dividen SSPN)", "Simpanan sedia ada", "Kos ikut tahun pengajian", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bernama: PTPTN umum dividen Simpan SSPN 4.10% bagi 2025", "https://www.bernama.com/bm/news.php/bfokus/sukan/news.php?id=2553562"],
+    ["RinggitPlus: Berapa banyak cukai boleh dijimat dengan SSPN dan PRS", "https://ringgitplus.com/ms/blog/cukai-pendapatan/berapa-banyak-cukai-yang-boleh-anda-jimat-dengan-sspn-dan-prs.html"],
+    ["Investopedia: Future value", "https://www.investopedia.com/terms/f/futurevalue.asp"]
+  ],
+  "faq": [
+    { "q": "Berapa perlu simpan sebulan untuk universiti anak?", "a": "Bagi anak berumur 5 tahun yang memulakan ijazah 4 tahun pada umur 18 berkos RM25,000 setahun hari ini, dengan inflasi pendidikan 5%, pulangan 4.10% dan RM5,000 sudah disimpan, simpan kira-kira {{D_MONTHLY}} sebulan. Masukkan kos anda sendiri untuk angka anda." },
+    { "q": "Berapa kos universiti pada masa depan?", "a": "Naikkan kos hari ini ikut inflasi pendidikan bagi setiap tahun hingga tahun pengajian itu. RM25,000 setahun hari ini menjadi {{D_FIRST}} pada tahun pertama 13 tahun lagi pada 5%, dan ijazah 4 tahun berjumlah {{D_TOTAL}}." },
+    { "q": "Kenapa perlu mula menyimpan awal?", "a": "Lebih banyak bulan dan lebih banyak pengkompaunan. Bagi ijazah RM25,000 setahun yang sama, bermula sejak lahir tanpa simpanan memerlukan kira-kira {{D_BIRTH}} sebulan, dan pada umur 12 kira-kira {{D_TWELVE}} sebulan." },
+    { "q": "Kadar inflasi pendidikan apa patut digunakan?", "a": "Ia andaian anda. Yuran dan kos sara hidup biasanya naik lebih cepat daripada inflasi umum, jadi ramai ibu bapa merancang dengan 5% hingga 6% setahun. Tanpa inflasi dan pulangan, contoh ini memerlukan {{D_FLAT}} sebulan." },
+    { "q": "Di mana patut simpan wang pendidikan?", "a": "Simpan SSPN membayar dividen 4.10% bagi 2025 dan memberi pelepasan cukai hingga RM8,000 setahun sehingga TT2027, sesuai untuk simpanan pendidikan. ASB, KWSP dan unit amanah ialah pilihan lain dengan risiko dan akses berbeza." },
+    { "q": "Kos apa yang patut dimasukkan?", "a": "Yuran pengajian, penginapan, makanan, pengangkutan, buku, komputer riba dan kos sara hidup lain bagi setiap tahun. Yuran universiti awam lebih rendah daripada swasta, tetapi kos sara hidup terpakai kepada kedua-duanya." },
+    { "q": "Bagaimana jika anak dapat biasiswa atau pinjaman PTPTN?", "a": "Biasiswa mengurangkan jumlah yang diperlukan; pinjaman PTPTN memindahkan kos kepada anak selepas tamat pengajian. Rancang untuk kos penuh dan anggap sebarang tajaan sebagai bonus." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator kos pendidikan anak</li></ol></nav>
+  <h1>Kalkulator Kos Pendidikan Anak</h1>
+  <p class="answer">Untuk membiayai ijazah 4 tahun yang berkos RM25,000 setahun hari ini bagi anak berumur 5 tahun, simpan kira-kira <strong>{{D_MONTHLY}} sebulan</strong> hingga umur 18, dengan andaian inflasi pendidikan 5%, pulangan 4.10% (dividen Simpan SSPN 2025) dan RM5,000 sudah disimpan. Pada harga masa depan, ijazah itu berkos <strong>{{D_TOTAL}}</strong>. Masukkan umur anak dan kos anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/education-cost-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="eduForm" novalidate aria-labelledby="ed-h">
+      <h2 id="ed-h">Anak anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="age">Umur anak sekarang</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="0" max="25" step="1" value="{{D_AGE}}"><span aria-hidden="true">tahun</span></div></div>
+        <div class="field"><label for="start">Masuk universiti pada umur</label><div class="input"><input id="start" name="start" type="number" inputmode="numeric" min="15" max="30" step="1" value="{{D_START}}"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="study">Tempoh pengajian</label><div class="input"><input id="study" name="study" type="number" inputmode="numeric" min="1" max="8" step="1" value="{{D_STUDY}}"><span aria-hidden="true">tahun</span></div></div>
+        <div class="field"><label for="cost">Kos setahun hari ini</label><div class="input"><span aria-hidden="true">RM</span><input id="cost" name="cost" type="number" inputmode="decimal" min="0" step="1000" value="{{D_COST}}"></div></div>
+      </div>
+      <p class="help">Kos setahun: yuran campur penginapan, makanan, pengangkutan dan buku.</p>
+      <div class="field-row">
+        <div class="field"><label for="inflation">Inflasi pendidikan</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="{{D_INFL}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="ret">Pulangan simpanan</label><div class="input"><input id="ret" name="ret" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="{{D_RET}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field"><label for="saved">Sudah disimpan</label><div class="input"><span aria-hidden="true">RM</span><input id="saved" name="saved" type="number" inputmode="decimal" min="0" step="500" value="{{D_SAVED}}"></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="ed-result-h">
+      <h2 id="ed-result-h">Pelan anda</h2>
+      <div class="net">
+        <p>Simpan sebulan</p>
+        <output id="dMonthly" for="age start study cost inflation ret saved">{{D_MONTHLY}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pelan</caption>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Kos ikut tahun pengajian</caption>
+        <tbody id="dYears">
+{{D_YEARS}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="eduPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="age-h">Simpanan bulanan ikut umur anak (RM25,000 setahun hari ini, ijazah 4 tahun)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="age-h">
+    <table class="data">
+      <thead><tr><th scope="col">Umur sekarang</th><th scope="col">Tahun menyimpan</th><th scope="col">Kos harga masa depan</th><th scope="col">Simpan sebulan</th></tr></thead>
+      <tbody>
+{{D_BYAGE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kos pendidikan dikira</h2>
+  <ol>
+    <li><strong>Kos setiap tahun</strong> = kos setahun hari ini × (1 + inflasi)^(tahun hingga tahun itu).</li>
+    <li><strong>Perlu ada pada hari pertama</strong> = kos setiap tahun didiskaun pada pulangan simpanan ke permulaan universiti.</li>
+    <li><strong>Simpanan sedia ada</strong> berkembang pada pulangan simpanan hingga masa itu.</li>
+    <li><strong>Simpanan bulanan</strong> = kekurangan ÷ nilai masa depan menyimpan RM1 pada awal setiap bulan.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cost-h">Simpanan bulanan ikut kos setahun (anak 5 tahun, tiada simpanan)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cost-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kos setahun hari ini</th><th scope="col">4 tahun hari ini</th><th scope="col">4 tahun harga masa depan</th><th scope="col">Simpan sebulan</th></tr></thead>
+      <tbody>
+{{D_BYCOST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tips">Menyimpan untuk pendidikan di Malaysia</h2>
+  <ul>
+    <li><strong>Simpan SSPN:</strong> dividen 4.10% bagi 2025 dan pelepasan cukai hingga RM8,000 setahun sehingga TT2027.</li>
+    <li><strong>Mula awal:</strong> setiap tahun lewat menaikkan jumlah bulanan dengan ketara.</li>
+    <li><strong>Semak setiap tahun:</strong> kemas kini kos, inflasi dan simpanan apabila anak membesar.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bernama.com/bm/news.php/bfokus/sukan/news.php?id=2553562" rel="noopener">Bernama: Dividen Simpan SSPN 4.10% bagi 2025</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/cukai-pendapatan/berapa-banyak-cukai-yang-boleh-anda-jimat-dengan-sspn-dan-prs.html" rel="noopener">RinggitPlus: Pelepasan cukai SSPN</a></li>
+    <li><a href="https://www.investopedia.com/terms/f/futurevalue.asp" rel="noopener">Investopedia: Future value</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran perancangan. Inflasi dan pulangan ialah andaian; yuran dan pulangan sebenar akan berbeza.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-sspn/">Kalkulator SSPN<small>Simpanan, dividen dan pelepasan cukai</small></a>
+    <a href="/kalkulator-ptptn/">Kalkulator PTPTN<small>Bayaran balik bulanan dan ujrah</small></a>
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+  </div>
+</section>

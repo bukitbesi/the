@@ -108,6 +108,11 @@
       "description": "Debt consolidation calculator for Malaysia: compare 15–18% credit card interest with one personal lo"
     },
     {
+      "name": "Education Cost Calculator Malaysia",
+      "url": "/education-cost-calculator-malaysia/",
+      "description": "Education cost calculator for Malaysian parents: your child's university cost at future prices and t"
+    },
+    {
       "name": "Employer Cost Calculator Malaysia",
       "url": "/employer-cost-calculator-malaysia/",
       "description": "Employer cost calculator for Malaysia: what an employee really costs a month and a year, with employ"
@@ -288,14 +293,29 @@
       "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"
     },
     {
+      "name": "SSPN Calculator",
+      "url": "/sspn-calculator/",
+      "description": "SSPN calculator: project your Simpan SSPN balance with the 4.10% dividend for 2025, and the income t"
+    },
+    {
       "name": "TNB Bill Calculator",
       "url": "/tnb-bill-calculator/",
       "description": "Free TNB bill calculator: your home electricity bill by the RP4 tariff (27.03 sen/kWh), EEI rebate, "
     },
     {
+      "name": "Unit Trust Calculator Malaysia",
+      "url": "/unit-trust-calculator-malaysia/",
+      "description": "Unit trust calculator for Malaysia: the value of a lump sum and monthly investment after the sales c"
+    },
+    {
       "name": "Unused CSS Remover",
       "url": "/unused-css-remover/",
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
+    },
+    {
+      "name": "Water Bill Calculator Malaysia",
+      "url": "/water-bill-calculator-malaysia/",
+      "description": "Water bill calculator for Malaysia: your domestic bill from m³ used in Selangor, KL, Johor, Penang, "
     },
     {
       "name": "Working Days Calculator Malaysia",

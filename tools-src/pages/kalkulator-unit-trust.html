@@ -1,0 +1,156 @@
+<!--page
+{
+  "path": "/kalkulator-unit-trust/",
+  "lang": "ms",
+  "alternates": { "en": "/unit-trust-calculator-malaysia/" },
+  "title": "Kalkulator Unit Trust: Pulangan Selepas Caj Jualan dan Yuran",
+  "description": "Kalkulator unit trust: nilai pelaburan sekali gus dan bulanan selepas caj jualan dan yuran tahunan, pulangan bersih, dan KWSP i-Invest pada 0.5%.",
+  "llms": "Mengira pulangan unit amanah (unit trust) di Malaysia: setiap pelaburan membeli unit pada NAB campur caj jualan (unit = amaun ÷ (NAB × (1 + caj))), dana berkembang pada pulangan kasar tolak yuran tahunan (pengurusan dan pemegang amanah) yang dikenakan setiap bulan atas nilai, dan pulangan bersih setahun ialah kadar pulangan dalaman aliran tunai anda. Contoh: RM10,000 campur RM300 sebulan selama 10 tahun pada pulangan kasar 7%, caj jualan 3% dan yuran tahunan 1.6% menjadi RM62,126 atas RM46,000 dilabur, pulangan bersih 4.83% setahun; pelan sama melalui KWSP i-Invest (had caj jualan 0.5%) memberi RM63,671, dan tanpa caj atau yuran RM71,277, jadi caj dan yuran berkos RM9,151. Caj jualan 5% atas RM10,000 mengambil RM476. Skim Pelaburan Ahli KWSP menghadkan caj jualan 0.5% dalam talian (i-Invest) dan 3% melalui ejen.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "unittrust",
+  "scripts": ["/assets/js/unit-trust.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Unit Trust", null]],
+  "about": ["Unit amanah", "Caj jualan", "Yuran pengurusan", "KWSP i-Invest"],
+  "app": {
+    "name": "Kalkulator Unit Trust",
+    "category": "FinanceApplication",
+    "features": ["Pelaburan sekali gus dan bulanan", "Caj jualan setiap pembelian", "Yuran pengurusan dan pemegang amanah tahunan", "Pulangan bersih setahun (IRR)", "Perbandingan KWSP i-Invest 0.5%", "Kos caj dan yuran", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["NST: KWSP hadkan caj jualan i-Invest 0.5% setiap transaksi", "https://www.nst.com.my/amp/business/corporate/2024/04/1033331/epf-releases-revised-list-189-funds-approved-investment-members"],
+    ["Malay Mail: KWSP i-Invest untuk pelaburan unit amanah dalam talian", "https://www.malaymail.com/news/money/2019/08/19/epf-i-invest-online-platform-enables-unit-trust-investment-directly-from-ep/1782065"],
+    ["FIMM: Kajian 2021 fi dan caj skim unit amanah", "https://www.fimm.com.my/wp-content/uploads/2022/06/FIMM-2021-Research-on-Unit-Trust-Schemes-Fees-and-Charges.pdf"],
+    ["The Edge: Fi dan caj unit amanah menurun", "https://theedgemalaysia.com/article/trends-unit-trust-fees-and-charges-down-sustainable-funds-rise"]
+  ],
+  "faq": [
+    { "q": "Bagaimana caj jualan unit trust dikira?", "a": "Unit dibeli pada NAB campur caj jualan, jadi RM10,500 pada caj 5% membeli unit bernilai RM10,000 dan membayar caj RM500. Atas RM10,000 pada 5%, anda membayar {{U_LUMP5}} dan baki menjadi unit." },
+    { "q": "RM300 sebulan dalam unit trust jadi berapa?", "a": "RM10,000 campur RM300 sebulan selama 10 tahun, pada pulangan kasar 7% dengan caj jualan 3% dan yuran tahunan 1.6%, menjadi kira-kira {{U_VALUE}} atas {{U_PAID}} dilabur, pulangan bersih {{U_NET}}% setahun." },
+    { "q": "Berapa kos yuran unit trust dalam jangka panjang?", "a": "Dalam contoh, caj jualan {{U_CHARGES}} dan yuran tahunan {{U_FEES}} meninggalkan {{U_VALUE}} berbanding {{U_NOCOST}} tanpa caj atau yuran: kos {{U_COST}} dalam 10 tahun. Yuran tahunan berkos lebih tinggi daripada caj jualan dalam tempoh panjang." },
+    { "q": "Berapa caj jualan KWSP i-Invest?", "a": "KWSP menghadkan caj jualan 0.5% setiap pembelian bagi dana yang dibeli dalam talian melalui i-Invest, berbanding hingga 3% melalui ejen. Pelan contoh pada 0.5% menjadi {{U_IINVEST}}." },
+    { "q": "Apakah pulangan bersih unit trust?", "a": "Kadar tahunan yang mengubah bayaran anda menjadi nilai akhir, selepas caj jualan dan yuran. Pulangan kasar 7% menjadi kira-kira {{U_NET}}% bersih dalam contoh; bandingkan dengan FD, ASB atau KWSP." },
+    { "q": "Apakah yuran yang dikenakan unit trust?", "a": "Caj jualan permulaan setiap pembelian, yuran pengurusan tahunan dan yuran pemegang amanah yang diambil daripada nilai dana, dan kadangkala caj tukar atau caj jualan balik. Semuanya disenaraikan dalam prospektus dan Lembaran Penjelasan Produk (PHS) dana." },
+    { "q": "Adakah pulangan lepas unit trust dijamin?", "a": "Tidak. Pulangan dana berubah setiap tahun dan boleh negatif. Gunakan pulangan kasar jangka panjang yang realistik dan semak prestasi serta risiko lepas dalam lembaran fakta dana." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator unit trust</li></ol></nav>
+  <h1>Kalkulator Unit Trust</h1>
+  <p class="answer">RM10,000 campur RM300 sebulan dalam unit trust selama 10 tahun, pada pulangan kasar 7% dengan caj jualan 3% dan yuran tahunan 1.6%, menjadi kira-kira <strong>{{U_VALUE}}</strong> atas {{U_PAID}} dilabur: <strong>pulangan bersih {{U_NET}}%</strong> setahun. Caj dan yuran berkos {{U_COST}}; melalui KWSP i-Invest (caj 0.5%) pelan sama memberi {{U_IINVEST}}. Masukkan angka dana anda di bawah.</p>
+  <p class="meta"><span>Caj disemak <time datetime="{{U_VERIFIED_ISO}}">{{U_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/unit-trust-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="utForm" novalidate aria-labelledby="ut-h">
+      <h2 id="ut-h">Pelaburan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="lump">Sekali gus</label><div class="input"><span aria-hidden="true">RM</span><input id="lump" name="lump" type="number" inputmode="decimal" min="0" step="1000" value="{{U_LUMP}}"></div></div>
+        <div class="field"><label for="monthly">Labur sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="monthly" name="monthly" type="number" inputmode="decimal" min="0" step="50" value="{{U_MONTHLY}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="years">Tempoh</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="40" step="1" value="{{U_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+        <div class="field"><label for="gross">Pulangan kasar setahun</label><div class="input"><input id="gross" name="gross" type="number" inputmode="decimal" min="0" max="50" step="0.5" value="{{U_GROSS}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="charge">Caj jualan</label><div class="input"><input id="charge" name="charge" type="number" inputmode="decimal" min="0" max="10" step="0.5" value="{{U_CHARGE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="fee">Yuran tahunan</label><div class="input"><input id="fee" name="fee" type="number" inputmode="decimal" min="0" max="10" step="0.05" value="{{U_FEE}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <p class="help">Yuran tahunan = yuran pengurusan + yuran pemegang amanah, daripada Lembaran Penjelasan Produk dana.</p>
+    </form>
+
+    <section class="box" aria-labelledby="ut-result-h">
+      <h2 id="ut-result-h">Pulangan anda</h2>
+      <div class="net">
+        <p>Nilai akhir</p>
+        <output id="uValue" for="lump monthly years gross charge fee">{{U_VALUE}}</output>
+        <p id="uSub">{{U_SUB}}</p>
+      </div>
+      <p class="sr-only" id="uLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="uLines">
+{{U_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Pulangan tidak dijamin; pulangan kasar ialah andaian anda.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="utPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="charge-h">Kesan caj jualan ke atas hasil</h2>
+  <p>RM10,000 campur RM300 sebulan selama 10 tahun pada 7% kasar dan yuran tahunan 1.6%.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="charge-h">
+    <table class="data">
+      <thead><tr><th scope="col">Caj jualan</th><th scope="col">Caj dibayar</th><th scope="col">Nilai akhir</th><th scope="col">Pulangan bersih</th></tr></thead>
+      <tbody>
+{{U_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kalkulator unit trust berfungsi</h2>
+  <ol>
+    <li><strong>Unit dibeli</strong> = amaun ÷ (NAB × (1 + caj jualan)); caj ialah bezanya.</li>
+    <li><strong>Pertumbuhan</strong> setiap bulan pada pulangan kasar ((1 + tahunan)^(1/12) − 1).</li>
+    <li><strong>Yuran tahunan</strong> diambil setiap bulan daripada nilai (yuran ÷ 12).</li>
+    <li><strong>Pulangan bersih</strong> = kadar tahunan yang mengubah bayaran anda menjadi nilai akhir (IRR).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="fee-h">Kesan yuran tahunan ke atas hasil</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fee-h">
+    <table class="data">
+      <thead><tr><th scope="col">Yuran tahunan</th><th scope="col">Yuran dibayar</th><th scope="col">Nilai akhir</th><th scope="col">Pulangan bersih</th></tr></thead>
+      <tbody>
+{{U_FEETABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="years-h">Pelaburan anda tahun demi tahun</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun</th><th scope="col">Dilabur</th><th scope="col">Nilai</th><th scope="col">Keuntungan</th></tr></thead>
+      <tbody id="uRows">
+{{U_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Caj unit trust di Malaysia</h2>
+  <ul>
+    <li><strong>Skim Pelaburan Ahli KWSP:</strong> caj jualan dihadkan 0.5% dalam talian melalui i-Invest dan 3% melalui ejen.</li>
+    <li><strong>Pelaburan tunai:</strong> caj jualan berbeza ikut dana dan saluran; FIMM mendapati purata caj jualan tunai turun ke 1.9% pada 2020 daripada 3.1% pada 2014.</li>
+    <li><strong>Yuran tahunan:</strong> yuran pengurusan dan pemegang amanah diambil daripada dana setiap hari dan sudah termasuk dalam NAB yang diterbitkan.</li>
+    <li><strong>Baca Lembaran Penjelasan Produk</strong> untuk setiap caj sebelum melabur.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.nst.com.my/amp/business/corporate/2024/04/1033331/epf-releases-revised-list-189-funds-approved-investment-members" rel="noopener">NST: Caj jualan i-Invest dihadkan 0.5%</a></li>
+    <li><a href="https://www.malaymail.com/news/money/2019/08/19/epf-i-invest-online-platform-enables-unit-trust-investment-directly-from-ep/1782065" rel="noopener">Malay Mail: Pelancaran KWSP i-Invest</a></li>
+    <li><a href="https://www.fimm.com.my/wp-content/uploads/2022/06/FIMM-2021-Research-on-Unit-Trust-Schemes-Fees-and-Charges.pdf" rel="noopener">FIMM: Kajian fi dan caj unit amanah</a></li>
+    <li><a href="https://theedgemalaysia.com/article/trends-unit-trust-fees-and-charges-down-sustainable-funds-rise" rel="noopener">The Edge: Fi dan caj unit amanah menurun</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Ilustrasi, bukan nasihat pelaburan. Harga unit amanah boleh naik dan turun; baca prospektus sebelum melabur.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+    <a href="/kalkulator-fixed-deposit/">Kalkulator Fixed Deposit<small>Faedah FD dan pulangan</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>

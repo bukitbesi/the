@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/education-cost-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-kos-pendidikan-anak/" },
+  "title": "Education Cost Calculator Malaysia: How Much to Save for University",
+  "description": "Education cost calculator for Malaysian parents: your child's university cost at future prices and the monthly saving needed, with inflation and SSPN returns.",
+  "llms": "Plans university savings for a child in Malaysia: each year of study costs today's yearly cost (fees and living costs) × (1 + education inflation)^years until that year, and the monthly saving needed from now = the amount needed when university starts (later years discounted at the savings return), less existing savings grown at that return, spread over the months left with monthly compounding. Example: a 5-year-old starting a 4-year degree at 18, costing RM25,000 a year today, with 5% inflation and a 4.10% return (the Simpan SSPN dividend for 2025) and RM5,000 already saved: the degree costs RM203,185 at future prices (RM47,141 in the first year) and needs RM889.77 a month. With nothing saved, starting at birth needs about RM768 a month, at 5 about RM931 and at 12 about RM1,665. Inflation and return are assumptions the user sets.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "edu",
+  "scripts": ["/assets/js/education-cost.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Education Cost Calculator", null]],
+  "about": ["Education savings", "University cost", "Education inflation", "SSPN"],
+  "app": {
+    "name": "Education Cost Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["University cost at future prices", "Monthly saving needed", "Education inflation", "Savings return (e.g. SSPN dividend)", "Existing savings", "Cost by year of study", "Works offline"]
+  },
+  "citations": [
+    ["Bernama: PTPTN declares 4.10% Simpan SSPN dividend for 2025", "https://bernama.com/en/news.php?id=2553599"],
+    ["RinggitPlus: How much tax you save with SSPN and PRS", "https://ringgitplus.com/en/blog/tax/how-much-tax-you-save-with-sspn-and-prs.html"],
+    ["Investopedia: Future value", "https://www.investopedia.com/terms/f/futurevalue.asp"]
+  ],
+  "faq": [
+    { "q": "How much should I save a month for my child's university?", "a": "For a 5-year-old starting a 4-year degree at 18 that costs RM25,000 a year today, with 5% education inflation, a 4.10% return and RM5,000 already saved, save about {{D_MONTHLY}} a month. Enter your own costs for your figure." },
+    { "q": "How much will university cost in the future?", "a": "Grow today's cost by education inflation for each year until that year of study. RM25,000 a year today becomes {{D_FIRST}} in the first year 13 years from now at 5%, and the 4-year degree totals {{D_TOTAL}}." },
+    { "q": "Why start saving early?", "a": "More months and more compounding. With the same RM25,000-a-year degree, starting at birth with nothing saved needs about {{D_BIRTH}} a month, and starting at age 12 about {{D_TWELVE}} a month." },
+    { "q": "What education inflation rate should I use?", "a": "It is your assumption. Fees and living costs usually rise faster than general inflation, so many parents plan with 5% to 6% a year. With no inflation and no return, the example needs {{D_FLAT}} a month." },
+    { "q": "Where should I keep education savings?", "a": "Simpan SSPN paid a 4.10% dividend for 2025 and gives up to RM8,000 of tax relief a year until YA2027, which suits education savings. ASB, EPF and unit trusts are other options with different risks and access." },
+    { "q": "What costs should I include?", "a": "Tuition fees, accommodation, food, transport, books, a laptop and other living costs for each year. Public university fees are lower than private ones, but living costs apply to both." },
+    { "q": "What if my child gets a scholarship or PTPTN loan?", "a": "Scholarships reduce what you need; a PTPTN loan shifts the cost to your child after graduation. Plan for the full cost and treat any award as a bonus." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Education cost calculator</li></ol></nav>
+  <h1>Education Cost Calculator Malaysia</h1>
+  <p class="answer">To fund a 4-year degree that costs RM25,000 a year today for a 5-year-old, save about <strong>{{D_MONTHLY}} a month</strong> until age 18, assuming 5% education inflation, a 4.10% return (the 2025 Simpan SSPN dividend) and RM5,000 already saved. At future prices the degree costs <strong>{{D_TOTAL}}</strong>. Enter your child's age and costs below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-kos-pendidikan-anak/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="eduForm" novalidate aria-labelledby="ed-h">
+      <h2 id="ed-h">Your child</h2>
+      <div class="field-row">
+        <div class="field"><label for="age">Child's age now</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="0" max="25" step="1" value="{{D_AGE}}"><span aria-hidden="true">years</span></div></div>
+        <div class="field"><label for="start">Starts university at</label><div class="input"><input id="start" name="start" type="number" inputmode="numeric" min="15" max="30" step="1" value="{{D_START}}"><span aria-hidden="true">years</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="study">Years of study</label><div class="input"><input id="study" name="study" type="number" inputmode="numeric" min="1" max="8" step="1" value="{{D_STUDY}}"><span aria-hidden="true">years</span></div></div>
+        <div class="field"><label for="cost">Cost a year today</label><div class="input"><span aria-hidden="true">RM</span><input id="cost" name="cost" type="number" inputmode="decimal" min="0" step="1000" value="{{D_COST}}"></div></div>
+      </div>
+      <p class="help">Cost a year: fees plus accommodation, food, transport and books.</p>
+      <div class="field-row">
+        <div class="field"><label for="inflation">Education inflation</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="{{D_INFL}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="ret">Savings return</label><div class="input"><input id="ret" name="ret" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="{{D_RET}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field"><label for="saved">Already saved</label><div class="input"><span aria-hidden="true">RM</span><input id="saved" name="saved" type="number" inputmode="decimal" min="0" step="500" value="{{D_SAVED}}"></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="ed-result-h">
+      <h2 id="ed-result-h">Your plan</h2>
+      <div class="net">
+        <p>Save a month</p>
+        <output id="dMonthly" for="age start study cost inflation ret saved">{{D_MONTHLY}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Plan</caption>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Cost by year of study</caption>
+        <tbody id="dYears">
+{{D_YEARS}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="eduPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="age-h">Monthly saving by child's age (RM25,000 a year today, 4-year degree)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="age-h">
+    <table class="data">
+      <thead><tr><th scope="col">Age now</th><th scope="col">Years to save</th><th scope="col">Cost at future prices</th><th scope="col">Save a month</th></tr></thead>
+      <tbody>
+{{D_BYAGE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the education cost is worked out</h2>
+  <ol>
+    <li><strong>Each year's cost</strong> = today's yearly cost × (1 + inflation)^(years until that year).</li>
+    <li><strong>Needed on day one</strong> = each year's cost discounted at the savings return to the start of university.</li>
+    <li><strong>Existing savings</strong> grow at the savings return until then.</li>
+    <li><strong>Monthly saving</strong> = shortfall ÷ the future value of saving RM1 at the start of each month.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cost-h">Monthly saving by yearly cost (child aged 5, nothing saved)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cost-h">
+    <table class="data">
+      <thead><tr><th scope="col">Cost a year today</th><th scope="col">4 years today</th><th scope="col">4 years at future prices</th><th scope="col">Save a month</th></tr></thead>
+      <tbody>
+{{D_BYCOST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tips">Saving for education in Malaysia</h2>
+  <ul>
+    <li><strong>Simpan SSPN:</strong> 4.10% dividend for 2025 and up to RM8,000 tax relief a year until YA2027.</li>
+    <li><strong>Start early:</strong> each year of delay raises the monthly amount sharply.</li>
+    <li><strong>Review yearly:</strong> update costs, inflation and your savings as your child grows.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://bernama.com/en/news.php?id=2553599" rel="noopener">Bernama: 4.10% Simpan SSPN dividend for 2025</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/tax/how-much-tax-you-save-with-sspn-and-prs.html" rel="noopener">RinggitPlus: SSPN tax relief</a></li>
+    <li><a href="https://www.investopedia.com/terms/f/futurevalue.asp" rel="noopener">Investopedia: Future value</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A planning estimate. Inflation and returns are assumptions; actual fees and returns will differ.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/sspn-calculator/">SSPN Calculator<small>Savings, dividend and tax relief</small></a>
+    <a href="/ptptn-repayment-calculator/">PTPTN Repayment Calculator<small>Monthly repayment and ujrah</small></a>
+    <a href="/cgpa-calculator/">CGPA Calculator<small>Grade point average</small></a>
+  </div>
+</section>
