@@ -33,6 +33,11 @@ const zakatCore = require('../assets/js/zakat-core.js');
 const goldCore = require('../assets/js/gold-core.js');
 const promptCore = require('../assets/js/prompt-core.js');
 const goldData = JSON.parse(read('gold-data.json'));
+const fuelCore = require('../assets/js/fuel-core.js');
+const fuelData = JSON.parse(read('fuel-data.json'));
+const ncdCore = require('../assets/js/ncd-core.js');
+const hijriCore = require('../assets/js/hijri-core.js');
+const iddahCore = require('../assets/js/iddah-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1096,10 +1101,143 @@ function imgMap(lang) {
     P_VERIFIED: longDate(promptCore.FACTS.verified, lang), P_VERIFIED_ISO: promptCore.FACTS.verified
   };
 }
+// ---- Fuel cost (kalkulator minyak), EN + BM: this week's prices come from tools-src/fuel-data.json (data.gov.my).
+const fuelLatest = fuelCore.latest(fuelData.history);
+const FUEL_EXAMPLE = { distance: 350, consumption: 7, unit: 'l100', roundTrip: 'no', passengers: 1, toll: 0, fuel: 'ron95_budi95' };
+function fuelMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, P = fuelLatest.prices, N = fuelCore.LABELS[lang], m = n => money(n, lang);
+  const nf = (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d }).format(n);
+  const sen = n => nf(n * 100, 1) + ' sen';
+  const rm = n => money(n, lang);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const fuels = fuelCore.FUELS.filter(k => P[k]);
+  const r = fuelCore.trip({ ...FUEL_EXAMPLE, price: P.ron95_budi95 });
+  const lines = [[L ? 'Jarak' : 'Distance', nf(r.km, 1) + ' km'], [L ? 'Minyak diperlukan' : 'Fuel needed', nf(r.litres) + ' L'], [L ? 'Kos minyak' : 'Fuel cost', m(r.fuel)],
+    [L ? 'Kos sekilometer' : 'Cost per km', sen(r.perKm)]].map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Jumlah kos perjalanan' : 'Total trip cost'}</th><td>${m(r.total)}</td></tr>`);
+  const end = d => new Date(Date.parse(d) + 6 * 864e5).toISOString().slice(0, 10);
+  const week = d => { const e = end(d); return d.slice(0, 7) === e.slice(0, 7) ? `${+d.slice(8)}–${longDate(e, lang)}` : `${longDate(d, lang)} – ${longDate(e, lang)}`; };
+  const change = c => !c ? (L ? 'Tiada perubahan' : 'No change') : (c > 0 ? '▲ ' : '▼ ') + nf(Math.abs(c) * 100, 0) + ' sen';
+  const prices = fuels.map(k => `<tr><th scope="row">${esc(N[k])}</th><td><strong>${rm(P[k])}</strong></td><td>${change(fuelLatest.change[k])}</td></tr>`).join('\n');
+  const hist = fuelData.history.slice(-8).reverse().map(h => `<tr><th scope="row">${longDate(h.date, lang)}</th>${['ron95_budi95', 'ron95', 'ron97', 'diesel', 'diesel_eastmsia'].map(k => `<td>${h[k] ? rm(h[k]) : '–'}</td>`).join('')}</tr>`).join('\n');
+  const cols = ['ron95_budi95', 'ron95', 'ron97', 'diesel'];
+  const perKm = [5, 6, 7, 8, 10, 12].map(c => `<tr><th scope="row">${c} L/100 km <small>${nf(100 / c, 1)} km/L</small></th>${cols.map(k => `<td>${sen(c / 100 * P[k])}</td>`).join('')}</tr>`).join('\n');
+  const dist = [50, 100, 200, 350, 500, 1000].map(d => `<tr><th scope="row">${nf(d, 0)} km</th>${cols.map(k => `<td>${m(fuelCore.trip({ distance: d, consumption: 7, price: P[k] }).fuel)}</td>`).join('')}</tr>`).join('\n');
+  const mo = fuelCore.monthly(2000 * 7 / 100, 'ron95_budi95', P), big = fuelCore.monthly(5000 * 7 / 100, 'ron95_budi95', P);
+  const r97 = fuelCore.trip({ ...FUEL_EXAMPLE, price: P.ron97 }), r95 = fuelCore.trip({ ...FUEL_EXAMPLE, price: P.ron95 }), rd = fuelCore.trip({ ...FUEL_EXAMPLE, price: P.diesel });
+  return {
+    F_DISTANCE: FUEL_EXAMPLE.distance, F_CONS: FUEL_EXAMPLE.consumption, F_PRICE: P.ron95_budi95.toFixed(2), F_QUOTA: fuelCore.FACTS.budiQuota,
+    F_FUEL_OPTIONS: fuels.map((k, i) => `<option value="${k}" data-price="${P[k].toFixed(2)}"${i === 0 ? ' selected' : ''}>${esc(N[k])} – ${rm(P[k])}</option>`).join(''),
+    F_UNIT_OPTIONS: [opt('l100', 'L/100 km', 'L/100 km', true), opt('kml', 'km/L', 'km/L')].join(''),
+    F_RT_OPTIONS: [opt('no', 'One way', 'Sehala', true), opt('yes', 'Return trip', 'Pergi balik')].join(''),
+    F_HEAD: L ? 'Kos minyak perjalanan' : 'Fuel cost for the trip',
+    F_TOTAL: m(r.total), F_SUB: L ? `${nf(r.litres)} liter · ${sen(r.perKm)}/km · ${m(r.perPerson)} seorang` : `${nf(r.litres)} litres · ${sen(r.perKm)}/km · ${m(r.perPerson)} per person`,
+    F_LINES: lines.join('\n'), F_PRICES: prices, F_HISTORY: hist, F_PERKM: perKm, F_DIST: dist,
+    F_WEEK: week(fuelLatest.date), F_WEEK_ISO: fuelLatest.date,
+    F_BUDI95: rm(P.ron95_budi95), F_RON95: rm(P.ron95), F_RON97: rm(P.ron97), F_DIESEL: rm(P.diesel), F_DIESEL_EAST: rm(P.diesel_eastmsia || 0), F_DIESEL_BUDI: rm(P.diesel_budi || 0),
+    F_EX_BUDI: m(r.fuel), F_EX_RON95: m(r95.fuel), F_EX_RON97: m(r97.fuel), F_EX_DIESEL: m(rd.fuel), F_EX_LITRES: nf(r.litres), F_EX_PERKM: sen(r.perKm), F_EX_PERKM97: sen(r97.perKm),
+    F_MO_COST: m(mo.cost), F_MO_LITRES: nf(mo.litres, 0), F_BIG_COST: m(big.cost), F_BIG_LITRES: nf(big.litres, 0), F_BIG_OVER: nf(big.over, 0), F_BIG_SAVING: m(big.saving),
+    F_GAP: m(P.ron95 - P.ron95_budi95),
+    F_VERIFIED: longDate(fuelCore.FACTS.verified, lang), F_VERIFIED_ISO: fuelCore.FACTS.verified
+  };
+}
+// ---- NCD (no claim discount), EN + BM
+const NCD_EXAMPLE = { type: 'car', years: 5, gross: 2000, repair: 2000, sumInsured: 70000, cc: 1500 };
+function ncdMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), S = ncdCore.SCALE;
+  const pc = n => `${Number(n.toFixed(2))}%`;
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const yrs = y => y >= 5 ? (L ? '5 tahun atau lebih' : '5 years or more') : L ? `${y} tahun` : `${y} ${y === 1 ? 'year' : 'years'}`;
+  const r = ncdCore.calculate(NCD_EXAMPLE), p = r.premium;
+  const lines = [[L ? 'Premium kasar (sebelum NCD)' : 'Gross premium (before NCD)', m(p.gross)], [`${L ? 'Diskaun NCD' : 'NCD discount'} (${pc(r.ncd)})`, '− ' + m(p.discount)],
+    [L ? 'Premium selepas NCD' : 'Premium after NCD', m(p.net)], ['SST 8%', m(p.sst)], [L ? 'Duti setem' : 'Stamp duty', m(p.stamp)]]
+    .map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Jumlah dibayar' : 'Total to pay'}</th><td>${m(p.total)}</td></tr>`);
+  const ladder = r.ladder.map(l => `<tr${l.years === r.years ? ' class="total"' : ''}><th scope="row">${yrs(l.years)}</th><td>${pc(l.ncd)}</td><td>${m(l.total)}</td></tr>`).join('\n');
+  const claim = r.claim.rows.map(x => `<tr><th scope="row">${L ? 'Pembaharuan ke-' + x.renewal : 'Renewal ' + x.renewal}</th><td>${pc(x.keep)}</td><td>${pc(x.after)}</td><td>${m(x.extra)}</td></tr>`).join('\n');
+  const scale = [0, 1, 2, 3, 4, 5].map(y => `<tr><th scope="row">${yrs(y)}</th><td>${pc(S.car[y])}</td><td>${pc(S.motorcycle[y])}</td><td>${pc(S.commercial[y])}</td></tr>`).join('\n');
+  const prem = [800, 1500, 2000, 3000, 4000].map(g => `<tr><th scope="row">${m(g)}</th>${[0, 25, 30, 38.33, 45, 55].map(n => `<td>${m(ncdCore.premium(g, n).total)}</td>`).join('')}</tr>`).join('\n');
+  const est = carCore.insurance(NCD_EXAMPLE.sumInsured, NCD_EXAMPLE.cc, 0).gross;
+  const claims = [1000, 2000, 3000, 4000].map(g => { const c = ncdCore.claimCost('car', 5, g); const c3 = ncdCore.claimCost('car', 3, g); return `<tr><th scope="row">${m(g)}</th><td>${m(c3.total)}</td><td>${m(c.total)}</td></tr>`; }).join('\n');
+  const advice = r.repair > r.claim.total
+    ? (L ? `Tuntut insurans: kos baiki ${m(r.repair)} melebihi ${m(r.claim.total)} premium tambahan akibat kehilangan NCD.` : `Claim: the ${m(r.repair)} repair costs more than the ${m(r.claim.total)} extra premium from losing your NCD.`)
+    : (L ? `Bayar sendiri: kos baiki ${m(r.repair)} lebih rendah daripada ${m(r.claim.total)} premium tambahan akibat kehilangan NCD.` : `Pay it yourself: the ${m(r.repair)} repair costs less than the ${m(r.claim.total)} extra premium from losing your NCD.`);
+  const c3 = ncdCore.claimCost('car', 3, 2000), moto = ncdCore.calculate({ type: 'motorcycle', years: 5, gross: 300 });
+  return {
+    N_TYPE_OPTIONS: [opt('car', 'Private car', 'Kereta persendirian', true), opt('motorcycle', 'Motorcycle', 'Motosikal'), opt('commercial', 'Commercial vehicle', 'Kenderaan perdagangan')].join(''),
+    N_YEARS_OPTIONS: [0, 1, 2, 3, 4, 5].map(y => `<option value="${y}"${y === NCD_EXAMPLE.years ? ' selected' : ''}>${y === 5 ? (L ? '5+ tahun' : '5+ years') : yrs(y)}</option>`).join(''),
+    N_BASIS_OPTIONS: [opt('gross', 'I know my premium before NCD', 'Saya tahu premium sebelum NCD', true), opt('estimate', 'Estimate from sum insured and cc', 'Anggar dari nilai dilindungi dan cc')].join(''),
+    N_GROSS: NCD_EXAMPLE.gross, N_REPAIR: NCD_EXAMPLE.repair, N_SUM: NCD_EXAMPLE.sumInsured, N_CC: NCD_EXAMPLE.cc, N_EST_GROSS: m(est),
+    N_RATE: pc(r.ncd), N_TOTAL: m(p.total), N_SAVE: m(p.discount), N_LINES: lines.join('\n'), N_LADDER: ladder, N_CLAIM: claim, N_CLAIM_TOTAL: m(r.claim.total),
+    N_SUB: L ? `Anda jimat ${m(p.discount)} · NCD tahun depan ${pc(r.next)} jika tiada tuntutan` : `You save ${m(p.discount)} · next year ${pc(r.next)} if you make no claim`,
+    N_ADVICE: advice, N_SCALE: scale, N_PREM: prem, N_CLAIMS: claims, N_C3: m(c3.total), N_MOTO: m(moto.premium.total), N_MOTO_SAVE: m(moto.premium.discount),
+    N_VERIFIED: longDate(ncdCore.FACTS.verified, lang), N_VERIFIED_ISO: ncdCore.FACTS.verified
+  };
+}
+// ---- Iddah and ihdad, BM + EN (dates on Malaysia's takwim from hijri-core.js)
+const IDDAH_EXAMPLE = { event: 'divorce', date: '2026-10-14', consummated: 'yes', talak: 'rajie', state: 'haid', lastPeriod: '2026-10-01', cycle: 28, due: '' };
+function iddahMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, r = iddahCore.calculate(IDDAH_EXAMPLE);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const hj = iso => hijriCore.formatHijri(hijriCore.toHijri(iso), lang), gd = (iso, w) => hijriCore.formatGregorian(iso, lang, w);
+  const both = iso => `${gd(iso)}<small>${hj(iso)}</small>`;
+  const dayN = n => L ? `${n} hari` : `${n} ${n === 1 ? 'day' : 'days'}`;
+  const lines = [[L ? 'Jenis iddah' : 'Type of iddah', L ? "Tiga kali suci (quru')" : "Three periods of purity (quru')"], [L ? 'Mula' : 'Starts', both(r.start)],
+    ...r.periods.map((p, i) => [L ? `Haid ke-${i + 1} selepas talak` : `Period ${i + 1} after the talak`, both(p)])].map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Tamat' : 'Ends'}</th><td>${both(r.end)}</td></tr>`,
+    `<tr><th scope="row">${L ? 'Tempoh' : 'Length'}</th><td>${dayN(r.days)}</td></tr>`,
+    `<tr><th scope="row">${L ? 'Boleh rujuk hingga' : 'Reconciliation (rujuk) possible until'}</th><td>${both(r.end)}</td></tr>`,
+    `<tr><th scope="row">${L ? 'Ihdad (berkabung)' : 'Ihdad (mourning)'}</th><td>${L ? 'Tidak wajib' : 'Not required'}</td></tr>`);
+  const d = IDDAH_EXAMPLE.date, w = iddahCore.calculate({ event: 'death', date: d }), t = iddahCore.calculate({ event: 'divorce', date: d, state: 'nohaid' });
+  const ex = [
+    [L ? 'Cerai, masih haid (kitaran 28 hari)' : 'Divorce, still menstruating (28-day cycle)', r],
+    [L ? 'Cerai, tiada haid (putus haid / belum haid)' : 'Divorce, not menstruating (menopause / never)', t],
+    [L ? 'Kematian suami' : "Husband's death", w],
+    [L ? 'Cerai sebelum bersetubuh' : 'Divorce before consummation', iddahCore.calculate({ event: 'divorce', date: d, consummated: 'no' })]
+  ].map(([a, x]) => `<tr><th scope="row">${a}</th><td>${x.kind === 'none' ? (L ? 'Tiada iddah' : 'No iddah') : `${gd(x.end)}<small>${hj(x.end)}</small>`}</td><td>${dayN(x.days)}</td></tr>`).join('\n');
+  const wafat = ['2026-11-01', '2027-01-15', '2027-03-10', '2027-06-06'].map(s => { const x = iddahCore.calculate({ event: 'death', date: s }); return `<tr><th scope="row">${gd(s)}<small>${hj(s)}</small></th><td>${gd(x.end)}<small>${hj(x.end)}</small></td><td>${dayN(x.days)}</td></tr>`; }).join('\n');
+  return {
+    I_EVENT_OPTIONS: [opt('divorce', 'Divorce (talak, khuluk or fasakh)', 'Perceraian (talak, khuluk atau fasakh)', true), opt('death', "Husband's death", 'Kematian suami')].join(''),
+    I_CONS_OPTIONS: [opt('yes', 'Yes', 'Ya', true), opt('no', 'No', 'Tidak')].join(''),
+    I_TALAK_OPTIONS: [opt('rajie', "Talak raj'i (first or second, revocable)", "Talak raj'i (kali pertama atau kedua)", true), opt('bain', 'Talak bain (third talak, khuluk or fasakh)', 'Talak bain (talak tiga, khuluk atau fasakh)')].join(''),
+    I_STATE_OPTIONS: [opt('haid', 'Still menstruating', 'Masih haid', true), opt('nohaid', 'Not menstruating (menopause, never, or medical)', 'Tiada haid (putus haid, belum haid atau sebab perubatan)'), opt('pregnant', 'Pregnant', 'Hamil')].join(''),
+    I_DATE: IDDAH_EXAMPLE.date, I_LAST: IDDAH_EXAMPLE.lastPeriod, I_CYCLE: IDDAH_EXAMPLE.cycle,
+    I_END: gd(r.end, true), I_END_HIJRI: hj(r.end), I_SUB: `${L ? "Tiga kali suci (quru')" : "Three periods of purity (quru')"} · ${dayN(r.days)}`, I_LINES: lines.join('\n'),
+    I_EXAMPLES: ex, I_WAFAT: wafat, I_EX_DATE: gd(d), I_EX_DATE_H: hj(d), I_EX_END: gd(r.end), I_EX_DAYS: r.days,
+    I_W_END: gd(w.end), I_W_END_H: hj(w.end), I_W_DAYS: w.days, I_T_END: gd(t.end), I_T_DAYS: t.days,
+    I_VERIFIED: longDate(iddahCore.FACTS.verified, lang), I_VERIFIED_ISO: iddahCore.FACTS.verified
+  };
+}
+// ---- Hijri ⇄ Gregorian (Malaysia's takwim), BM + EN. "Today" is baked as the page date; the script refreshes it.
+function hijriMap(lang, p) {
+  const L = lang === 'ms' ? 1 : 0, H = hijriCore, day = p.dateModified, h = H.toHijri(day);
+  const hj = (x) => H.formatHijri(x, lang), gd = (iso, w) => H.formatGregorian(iso, lang, w);
+  const lines = [[L ? 'Tarikh Hijrah' : 'Hijri date', hj(h), 'total'], [L ? 'Tarikh Masihi' : 'Gregorian date', gd(day)], [L ? 'Hari' : 'Day', H.DAYS[lang][H.weekday(day)]],
+    [L ? 'Bilangan hari bulan ini' : 'Days in this Hijri month', h.length], [L ? 'Dari hari ini' : 'From today', L ? 'Hari ini' : 'Today']]
+    .map(([a, b, c]) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`).join('\n');
+  const rel = n => n === 0 ? (L ? 'Hari ini' : 'Today') : L ? `${n} hari lagi` : `in ${n} ${n === 1 ? 'day' : 'days'}`;
+  const sighted = L ? 'tertakluk rukyah' : 'subject to moon sighting';
+  const upcoming = H.upcoming(day, 8).map(e => `<tr><th scope="row">${H.EVENT_NAMES[lang][e.key]}${e.sighted ? `<small>${sighted}</small>` : ''}</th><td>${e.d} ${H.MONTHS[lang][e.m - 1]} ${e.y}</td><td>${gd(e.date, true)}</td><td>${rel(H.daysBetween(day, e.date))}</td></tr>`).join('\n');
+  const year = y => H.yearTable(y).map(x => `<tr><th scope="row">${H.MONTHS[lang][x.m - 1]} ${y}</th><td>${gd(x.start, true)}</td><td>${gd(x.end)}</td><td>${x.length}</td></tr>`).join('\n');
+  const events = y => H.events(y).map(e => `<tr><th scope="row">${H.EVENT_NAMES[lang][e.key]}</th><td>${e.d} ${H.MONTHS[lang][e.m - 1]} ${y}</td><td>${gd(e.date, true)}</td></tr>`).join('\n');
+  const next = k => H.upcoming(day, 40).find(e => e.key === k);
+  const nx = k => { const e = next(k); return { date: gd(e.date, true), y: e.y }; };
+  const fitr = nx('syawal'), ram = nx('ramadan'), adha = nx('adha'), muh = nx('muharram'), maulid = nx('maulid');
+  return {
+    H_TODAY_H: hj(h), H_TODAY_G: gd(day, true), H_GDATE: day, H_HD: h.d, H_HY: h.y, H_DAY_ISO: day,
+    H_MONTH_OPTIONS: H.MONTHS[lang].map((n, i) => `<option value="${i + 1}"${i + 1 === h.m ? ' selected' : ''}>${n}</option>`).join(''),
+    H_OUT: hj(h), H_OUT_SUB: `${H.DAYS[lang][H.weekday(day)]} · ${gd(day)}`, H_LINES: lines, H_UPCOMING: upcoming,
+    H_Y1: h.y, H_Y2: h.y + 1, H_YEAR1: year(h.y), H_YEAR2: year(h.y + 1), H_EVENTS1: events(h.y), H_EVENTS2: events(h.y + 1),
+    H_FITR: fitr.date, H_FITR_Y: fitr.y, H_RAMADAN: ram.date, H_RAMADAN_Y: ram.y, H_ADHA: adha.date, H_ADHA_Y: adha.y,
+    H_MUHARRAM: muh.date, H_MUHARRAM_Y: muh.y, H_MAULID: maulid.date, H_MAULID_Y: maulid.y,
+    H_FIRST: gd(H.range().first), H_LAST: gd(H.range().last),
+    H_VERIFIED: longDate(H.FACTS.verified, lang), H_VERIFIED_ISO: H.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1150,6 +1288,14 @@ const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
   // The gold price pages change every day with the price.
   if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
+  // The fuel pages change every week with the prices.
+  if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
+  // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
+  if (p.render === 'hijri') p.dateModified = [p.dateModified, goldDate, fuelLatest.date].filter(Boolean).sort().pop();
+  // Renderer values can appear in FAQ answers as {{KEY}} (plain text), so schema and page quote the same figures.
+  const rendered = p.render ? RENDERERS[p.render](p.lang, p) : {};
+  const fill = t => t.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => k in rendered ? String(rendered[k]) : m);
+  if (p.faq) p.faq = p.faq.map(f => ({ ...f, q: fill(f.q), a: fill(f.a) }));
   const url = site.origin + p.path;
   const pageId = url + '#webpage';
   const alternates = Object.entries(p.alternates || {});
@@ -1193,7 +1339,7 @@ for (const p of pages) {
     PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n') + (p.app ? '\n' + shareScript : ''),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
     ...(p.salary ? salaryMap(p.lang) : {}),
-    ...(p.render ? RENDERERS[p.render](p.lang, p) : {})
+    ...rendered
   };
   const html = render(map);
   fs.mkdirSync(path.join(pub, p.path), { recursive: true });
@@ -1223,6 +1369,10 @@ const bundles = {
   'harga-emas.js': ['assets/js/gold-core.js', 'assets/js/goldprice-ui.js'],
   'prompt-generator.js': ['assets/js/prompt-core.js', 'assets/js/prompt-cards.js', 'assets/js/prompt-ui.js'],
   'image-to-prompt.js': ['assets/js/prompt-core.js', 'assets/js/prompt-cards.js', 'assets/js/img2prompt-ui.js'],
+  'fuel.js': ['assets/js/fuel-core.js', 'assets/js/fuel-ui.js'],
+  'ncd.js': ['assets/js/carloan-core.js', 'assets/js/ncd-core.js', 'assets/js/ncd-ui.js'],
+  'iddah.js': ['assets/js/hijri-core.js', 'assets/js/iddah-core.js', 'assets/js/iddah-ui.js'],
+  'hijri.js': ['assets/js/hijri-core.js', 'assets/js/hijri-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
