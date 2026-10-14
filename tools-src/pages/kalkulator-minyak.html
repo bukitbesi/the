@@ -1,0 +1,207 @@
+<!--page
+{
+  "path": "/kalkulator-minyak/",
+  "lang": "ms",
+  "alternates": { "en": "/fuel-cost-calculator-malaysia/" },
+  "title": "Kalkulator Minyak 2026: Kira Kos Petrol RON95, RON97 dan Diesel",
+  "description": "Kalkulator minyak percuma: kira kos perjalanan dan RM sekilometer ikut harga minyak minggu ini (BUDI95, RON95, RON97, diesel) dan kuota BUDI95.",
+  "llms": "Mengira kos minyak perjalanan di Malaysia: liter diperlukan (jarak × L/100 km ÷ 100), kos minyak, tol, kos sekilometer dan kos seorang, pergi balik, kos sebulan dan pembahagian kuota BUDI95 (RON95 RM1.99 seliter bagi rakyat Malaysia layak hingga 300 liter sebulan mulai 1 September 2026, lebihan pada harga pasaran); juga mengira penggunaan minyak kereta dengan kaedah isi penuh (km ÷ liter). Harga runcit mingguan RON95 bersubsidi dan tanpa subsidi, RON97, diesel Semenanjung, diesel Sabah/Sarawak/Labuan dan BUDI Diesel diambil setiap minggu daripada data rasmi Kementerian Kewangan di data.gov.my.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fuel",
+  "scripts": ["/assets/js/fuel.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Minyak", null]],
+  "about": ["Harga minyak Malaysia", "Penggunaan minyak kereta", "BUDI95", "Kos perjalanan"],
+  "app": {
+    "name": "Kalkulator Minyak",
+    "category": "UtilitiesApplication",
+    "features": ["Harga minyak mingguan rasmi (data.gov.my)", "Kos perjalanan dan RM sekilometer", "Pergi balik, tol dan kongsi kos seorang", "Kos sebulan dengan kuota BUDI95", "Kira penggunaan minyak (kaedah isi penuh)", "L/100 km atau km/liter", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["data.gov.my: Harga Petroleum dan Diesel (Kementerian Kewangan)", "https://data.gov.my/data-catalogue/fuelprice"],
+    ["Kementerian Kewangan: Had kelayakan BUDI MADANI dinaikkan semula kepada 300 liter mulai 1 September 2026", "https://mof.gov.my/portal/ms/berita/siaran-media/had-kelayakan-asas-bulanan-budi-madani-dinaikkan-semula-kepada-300-liter-mulai-1-september-2026"],
+    ["Berita Harian: Kuota BUDI95 kembali kepada 300 liter mulai hari ini", "https://www.bharian.com.my/amp/berita/nasional/2026/09/1613672/kuota-budi95-kembali-kepada-300-liter-mulai-hari-ini"]
+  ],
+  "faq": [
+    { "q": "Berapa harga minyak minggu ini?", "a": "Bagi minggu {{F_WEEK}}: RON95 BUDI95 {{F_BUDI95}} seliter, RON95 tanpa subsidi {{F_RON95}}, RON97 {{F_RON97}}, diesel Semenanjung {{F_DIESEL}} dan diesel Sabah, Sarawak dan Labuan {{F_DIESEL_EAST}} seliter. Harga ditetapkan setiap minggu oleh Kementerian Kewangan dan dikemas kini di halaman ini daripada data.gov.my." },
+    { "q": "Bagaimana mengira kos minyak perjalanan?", "a": "Darabkan jarak dengan penggunaan minyak (liter setiap 100 km), bahagi 100, kemudian darab dengan harga seliter. Perjalanan 350 km dengan kereta 7 L/100 km memerlukan {{F_EX_LITRES}} liter, iaitu {{F_EX_BUDI}} dengan RON95 BUDI95, {{F_EX_RON95}} dengan RON95 tanpa subsidi atau {{F_EX_RON97}} dengan RON97." },
+    { "q": "Berapa kos minyak sekilometer?", "a": "Bagi kereta yang menggunakan 7 liter setiap 100 km, kos sekilometer ialah {{F_EX_PERKM}} dengan RON95 BUDI95 dan {{F_EX_PERKM97}} dengan RON97 pada harga minggu ini. Rumusnya: liter setiap 100 km ÷ 100 × harga seliter." },
+    { "q": "Bagaimana mengira penggunaan minyak kereta sendiri?", "a": "Isi tangki sehingga penuh dan set semula meter perjalanan. Apabila mengisi penuh semula, bahagikan liter yang diisi dengan kilometer yang dipandu dan darab 100. Contohnya 36 liter selepas 450 km ialah 8 liter setiap 100 km, atau 12.5 km seliter." },
+    { "q": "Berapa kuota BUDI95 sebulan?", "a": "300 liter sebulan bagi rakyat Malaysia yang layak mulai 1 September 2026, pada harga RM1.99 seliter. Kuota diturunkan kepada 200 liter mulai April 2026 dan dinaikkan semula oleh Kementerian Kewangan. Liter melebihi kuota dibayar pada harga RON95 tanpa subsidi ({{F_RON95}} minggu ini)." },
+    { "q": "Berapa kos minyak sebulan untuk 2,000 km?", "a": "Dengan kereta 7 L/100 km, 2,000 km memerlukan {{F_MO_LITRES}} liter, iaitu {{F_MO_COST}} dengan RON95 BUDI95 kerana masih dalam kuota 300 liter. Pada 5,000 km ({{F_BIG_LITRES}} liter), {{F_BIG_OVER}} liter melebihi kuota dan kosnya {{F_BIG_COST}}." },
+    { "q": "Bilakah harga minyak baharu diumumkan?", "a": "Kementerian Kewangan mengumumkan harga runcit mingguan pada hari Rabu dan harga baharu berkuat kuasa mulai Khamis hingga Rabu berikutnya. Harga RON95 BUDI95 (RM1.99) dan diesel Sabah, Sarawak dan Labuan ditetapkan tetap, manakala RON95 tanpa subsidi, RON97 dan diesel Semenanjung berubah mengikut harga pasaran." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator minyak</li></ol></nav>
+  <h1>Kalkulator Minyak dan Harga Minyak Minggu Ini</h1>
+  <p class="answer">Harga minyak minggu ini (<time datetime="{{F_WEEK_ISO}}">{{F_WEEK}}</time>): <strong>RON95 BUDI95 {{F_BUDI95}}</strong>, RON95 tanpa subsidi {{F_RON95}}, <strong>RON97 {{F_RON97}}</strong> dan diesel {{F_DIESEL}} seliter. Kos minyak = jarak × liter setiap 100 km ÷ 100 × harga seliter, jadi 350 km dengan kereta 7 L/100 km kos <strong>{{F_EX_BUDI}}</strong> dengan BUDI95. Masukkan perjalanan anda di bawah.</p>
+  <p class="meta"><span>Harga dikemas kini setiap minggu · fakta disemak <time datetime="{{F_VERIFIED_ISO}}">{{F_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/fuel-cost-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="fuelForm" novalidate aria-labelledby="fuel-h">
+      <h2 id="fuel-h">Perjalanan anda</h2>
+      <div class="field"><div class="seg" role="radiogroup" aria-label="Kira"><label><input type="radio" name="mode" value="trip" checked> Kos perjalanan</label><label><input type="radio" name="mode" value="measure"> Penggunaan minyak</label></div></div>
+      <div class="field">
+        <label for="fuel">Jenis minyak</label>
+        <select class="input" id="fuel" name="fuel">{{F_FUEL_OPTIONS}}</select>
+      </div>
+      <div class="field"><label for="price">Harga seliter</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{F_PRICE}}"></div><p class="help">Diisi mengikut harga minggu ini; ubah jika perlu.</p></div>
+      <div id="fTrip">
+        <div class="field-row">
+          <div class="field"><label for="distance">Jarak</label><div class="input"><input id="distance" name="distance" type="number" inputmode="decimal" min="0" step="1" value="{{F_DISTANCE}}"><span aria-hidden="true">km</span></div></div>
+          <div class="field"><label for="roundTrip">Perjalanan</label><select class="input" id="roundTrip" name="roundTrip">{{F_RT_OPTIONS}}</select></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="consumption">Penggunaan minyak</label><div class="input"><input id="consumption" name="consumption" type="number" inputmode="decimal" min="0" step="0.1" value="{{F_CONS}}"></div></div>
+          <div class="field"><label for="unit">Unit</label><select class="input" id="unit" name="unit">{{F_UNIT_OPTIONS}}</select></div>
+        </div>
+        <p class="help">Kereta kecil biasanya 5–7 L/100 km, sedan 7–9, SUV dan MPV 9–12.</p>
+        <div class="field-row">
+          <div class="field"><label for="passengers">Bilangan orang berkongsi</label><div class="input"><input id="passengers" name="passengers" type="number" inputmode="numeric" min="1" step="1" value="1"></div></div>
+          <div class="field"><label for="toll">Tol (pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="toll" name="toll" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+        </div>
+        <fieldset class="field-group">
+          <legend>Kos sebulan (pilihan)</legend>
+          <div class="field-row">
+            <div class="field"><label for="trips">Perjalanan sebulan</label><div class="input"><input id="trips" name="trips" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+            <div class="field"><label for="quota">Kuota BUDI sebulan</label><div class="input"><input id="quota" name="quota" type="number" inputmode="numeric" min="0" step="10" value="{{F_QUOTA}}"><span aria-hidden="true">liter</span></div></div>
+          </div>
+        </fieldset>
+      </div>
+      <div id="fMeasure" hidden>
+        <div class="field-row">
+          <div class="field"><label for="km">Km sejak isi penuh</label><div class="input"><input id="km" name="km" type="number" inputmode="decimal" min="0" step="1" value="450"><span aria-hidden="true">km</span></div></div>
+          <div class="field"><label for="litres">Liter diisi semula</label><div class="input"><input id="litres" name="litres" type="number" inputmode="decimal" min="0" step="0.01" value="36"><span aria-hidden="true">L</span></div></div>
+        </div>
+        <p class="help">Isi penuh, set semula meter perjalanan, pandu seperti biasa, kemudian isi penuh semula.</p>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="fuel-result-h">
+      <h2 id="fuel-result-h">Keputusan</h2>
+      <div class="net">
+        <p id="fHeadLabel">{{F_HEAD}}</p>
+        <output id="fTotal" for="fuel price distance roundTrip consumption unit passengers toll">{{F_TOTAL}}</output>
+        <p id="fSub">{{F_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="fLines">
+{{F_LINES}}
+        </tbody>
+      </table>
+      <div id="fMonthWrap" hidden>
+        <table class="rows">
+          <caption>Sebulan</caption>
+          <tbody>
+            <tr><th scope="row">Minyak sebulan</th><td id="fMonthLitres">0 L</td></tr>
+            <tr class="total"><th scope="row">Kos sebulan</th><td id="fMonth">RM0.00</td></tr>
+          </tbody>
+        </table>
+        <p class="callout" id="fBudi" hidden></p>
+      </div>
+      <p class="note">BUDI95 hanya untuk rakyat Malaysia yang layak dengan MyKad dan lesen memandu aktif. Bukan warganegara membayar harga tanpa subsidi.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fuelPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="prices-h">Harga minyak minggu ini</h2>
+  <p>Berkuat kuasa {{F_WEEK}}, mengikut data rasmi Kementerian Kewangan di data.gov.my.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="prices-h">
+    <table class="data">
+      <thead><tr><th scope="col">Minyak</th><th scope="col">Seliter</th><th scope="col">Berbanding minggu lalu</th></tr></thead>
+      <tbody>
+{{F_PRICES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Beza harga RON95 tanpa subsidi dengan BUDI95 ialah <strong>{{F_GAP}} seliter</strong>, jadi kuota BUDI95 penuh 300 liter bernilai kira-kira 300 × beza itu sebulan.</p>
+
+  <h2 id="formula">Cara kira kos minyak</h2>
+  <ol>
+    <li><strong>Liter diperlukan</strong> = jarak (km) × penggunaan (L/100 km) ÷ 100. Jika anda tahu km seliter: jarak ÷ km seliter.</li>
+    <li><strong>Kos minyak</strong> = liter × harga seliter. Tambah tol jika ada.</li>
+    <li><strong>Kos sekilometer</strong> = penggunaan ÷ 100 × harga seliter.</li>
+    <li><strong>Kongsi kos</strong> = jumlah ÷ bilangan orang.</li>
+    <li><strong>BUDI95</strong>: liter sebulan hingga kuota pada RM1.99, lebihan pada harga RON95 tanpa subsidi.</li>
+  </ol>
+  <p>Contoh: 350 km pada 7 L/100 km = {{F_EX_LITRES}} liter. Dengan BUDI95 kosnya {{F_EX_BUDI}}, RON95 tanpa subsidi {{F_EX_RON95}}, RON97 {{F_EX_RON97}} dan diesel Semenanjung {{F_EX_DIESEL}}.</p>
+
+  <h2 id="perkm-h">Kos sekilometer mengikut penggunaan minyak</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="perkm-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penggunaan</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th></tr></thead>
+      <tbody>
+{{F_PERKM}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="dist-h">Kos minyak mengikut jarak (7 L/100 km)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="dist-h">
+    <table class="data">
+      <thead><tr><th scope="col">Jarak</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th></tr></thead>
+      <tbody>
+{{F_DIST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="hist-h">Harga minyak 8 minggu terakhir</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hist-h">
+    <table class="data">
+      <thead><tr><th scope="col">Mulai</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th><th scope="col">Diesel Sabah/Sarawak</th></tr></thead>
+      <tbody>
+{{F_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="budi">BUDI95 dan BUDI Diesel</h2>
+  <ul>
+    <li><strong>BUDI95:</strong> RON95 pada RM1.99 seliter untuk rakyat Malaysia dengan MyKad dan lesen memandu yang sah, hingga <strong>300 liter sebulan</strong> mulai 1 September 2026 (200 liter dari April hingga Ogos 2026). Pemandu e-hailing boleh mendapat kuota tambahan.</li>
+    <li><strong>BUDI Diesel:</strong> diesel bersubsidi {{F_DIESEL_BUDI}} seliter bagi pemilik kenderaan diesel persendirian yang layak, 300 liter sebulan (400 liter bagi pikap dan jip yang diluluskan).</li>
+    <li><strong>Sabah, Sarawak dan Labuan:</strong> diesel {{F_DIESEL_EAST}} seliter.</li>
+  </ul>
+  <p>Semak kelayakan dan baki kuota di portal rasmi BUDI MADANI atau aplikasi stesen minyak.</p>
+
+  <h2 id="tips">Cara jimat minyak</h2>
+  <ul>
+    <li>Pandu pada 80–100 km/j di lebuh raya; penggunaan naik dengan ketara di atas 110 km/j.</li>
+    <li>Pastikan tekanan tayar mengikut label pintu kereta; tayar kurang angin menambah penggunaan.</li>
+    <li>Kurangkan beban dan rak bumbung yang tidak digunakan.</li>
+    <li>RON97 hanya berbaloi jika manual kereta anda memerlukannya; kebanyakan kereta direka untuk RON95.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://data.gov.my/data-catalogue/fuelprice" rel="noopener">data.gov.my: Harga Petroleum dan Diesel (Kementerian Kewangan)</a></li>
+    <li><a href="https://mof.gov.my/portal/ms/berita/siaran-media/had-kelayakan-asas-bulanan-budi-madani-dinaikkan-semula-kepada-300-liter-mulai-1-september-2026" rel="noopener">Kementerian Kewangan: kuota BUDI MADANI 300 liter mulai 1 September 2026</a></li>
+    <li><a href="https://www.bharian.com.my/amp/berita/nasional/2026/09/1613672/kuota-budi95-kembali-kepada-300-liter-mulai-hari-ini" rel="noopener">Berita Harian: kuota BUDI95 kembali 300 liter</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja. Penggunaan sebenar bergantung pada kereta, cara pemanduan dan trafik. Harga di stesen mengikut pengumuman mingguan Kementerian Kewangan.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-loan-kereta/">Kalkulator Loan Kereta<small>Ansuran, cukai jalan dan insurans</small></a>
+    <a href="/kalkulator-ncd/">Kalkulator NCD<small>Diskaun tanpa tuntutan insurans kereta</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+  </div>
+</section>

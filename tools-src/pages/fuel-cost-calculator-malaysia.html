@@ -1,0 +1,207 @@
+<!--page
+{
+  "path": "/fuel-cost-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-minyak/" },
+  "title": "Fuel Cost Calculator Malaysia 2026: Petrol Price and RM per km",
+  "description": "Free fuel cost calculator for Malaysia: trip cost and RM per km at this week's RON95 BUDI95, RON95, RON97 and diesel prices, with the BUDI95 quota.",
+  "llms": "Calculates fuel cost in Malaysia: litres needed (distance × L/100 km ÷ 100), fuel cost, tolls, cost per km and per person, return trips, monthly cost and the BUDI95 split (RON95 at RM1.99 a litre for eligible Malaysians up to 300 litres a month from 1 September 2026, the rest at the market price); also measures a car's fuel consumption by the full-tank method (km ÷ litres). Weekly retail prices for subsidised and unsubsidised RON95, RON97, Peninsular diesel, Sabah/Sarawak/Labuan diesel and BUDI Diesel are taken every week from the Ministry of Finance's official data on data.gov.my.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fuel",
+  "scripts": ["/assets/js/fuel.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Fuel Cost Calculator", null]],
+  "about": ["Fuel prices in Malaysia", "Fuel consumption", "BUDI95", "Trip cost"],
+  "app": {
+    "name": "Fuel Cost Calculator Malaysia",
+    "category": "UtilitiesApplication",
+    "features": ["Official weekly fuel prices (data.gov.my)", "Trip cost and RM per km", "Return trips, tolls and cost per person", "Monthly cost with the BUDI95 quota", "Fuel consumption by the full-tank method", "L/100 km or km/L", "Works offline"]
+  },
+  "citations": [
+    ["data.gov.my: Price of Petroleum and Diesel (Ministry of Finance)", "https://data.gov.my/data-catalogue/fuelprice"],
+    ["Ministry of Finance: BUDI MADANI monthly limit raised back to 300 litres from 1 September 2026", "https://mof.gov.my/portal/ms/berita/siaran-media/had-kelayakan-asas-bulanan-budi-madani-dinaikkan-semula-kepada-300-liter-mulai-1-september-2026"],
+    ["Berita Harian: BUDI95 quota back to 300 litres", "https://www.bharian.com.my/amp/berita/nasional/2026/09/1613672/kuota-budi95-kembali-kepada-300-liter-mulai-hari-ini"]
+  ],
+  "faq": [
+    { "q": "What is the fuel price in Malaysia this week?", "a": "For the week of {{F_WEEK}}: RON95 under BUDI95 {{F_BUDI95}} a litre, unsubsidised RON95 {{F_RON95}}, RON97 {{F_RON97}}, Peninsular diesel {{F_DIESEL}} and Sabah, Sarawak and Labuan diesel {{F_DIESEL_EAST}} a litre. The Ministry of Finance sets the prices every week and this page updates from data.gov.my." },
+    { "q": "How do I calculate the fuel cost of a trip?", "a": "Multiply the distance by the car's consumption in litres per 100 km, divide by 100, then multiply by the price per litre. A 350 km trip in a car using 7 L/100 km needs {{F_EX_LITRES}} litres: {{F_EX_BUDI}} with BUDI95 RON95, {{F_EX_RON95}} with unsubsidised RON95 or {{F_EX_RON97}} with RON97." },
+    { "q": "What is the fuel cost per km?", "a": "For a car using 7 litres per 100 km, fuel costs {{F_EX_PERKM}} per km with BUDI95 RON95 and {{F_EX_PERKM97}} per km with RON97 at this week's prices. The formula is litres per 100 km ÷ 100 × price per litre." },
+    { "q": "How do I measure my car's fuel consumption?", "a": "Fill the tank to full and reset the trip meter. At the next full fill-up, divide the litres added by the kilometres driven and multiply by 100. For example, 36 litres after 450 km is 8 litres per 100 km, or 12.5 km per litre." },
+    { "q": "What is the BUDI95 monthly quota?", "a": "300 litres a month for eligible Malaysians from 1 September 2026, at RM1.99 a litre. The quota was cut to 200 litres from April 2026 and raised back by the Ministry of Finance. Litres above the quota are charged at the unsubsidised RON95 price ({{F_RON95}} this week)." },
+    { "q": "How much does 2,000 km of driving a month cost in fuel?", "a": "In a car using 7 L/100 km, 2,000 km needs {{F_MO_LITRES}} litres, which costs {{F_MO_COST}} with BUDI95 RON95 because it is within the 300-litre quota. At 5,000 km ({{F_BIG_LITRES}} litres), {{F_BIG_OVER}} litres are over the quota and the cost is {{F_BIG_COST}}." },
+    { "q": "When are new fuel prices announced?", "a": "The Ministry of Finance announces weekly retail prices on Wednesday and they apply from Thursday to the following Wednesday. BUDI95 RON95 (RM1.99) and Sabah, Sarawak and Labuan diesel are fixed, while unsubsidised RON95, RON97 and Peninsular diesel follow market prices." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Fuel cost calculator</li></ol></nav>
+  <h1>Fuel Cost Calculator Malaysia and This Week's Fuel Prices</h1>
+  <p class="answer">Fuel prices this week (<time datetime="{{F_WEEK_ISO}}">{{F_WEEK}}</time>): <strong>RON95 BUDI95 {{F_BUDI95}}</strong>, unsubsidised RON95 {{F_RON95}}, <strong>RON97 {{F_RON97}}</strong> and diesel {{F_DIESEL}} a litre. Fuel cost = distance × litres per 100 km ÷ 100 × price per litre, so 350 km in a 7 L/100 km car costs <strong>{{F_EX_BUDI}}</strong> with BUDI95. Enter your trip below.</p>
+  <p class="meta"><span>Prices updated weekly · facts verified <time datetime="{{F_VERIFIED_ISO}}">{{F_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-minyak/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="fuelForm" novalidate aria-labelledby="fuel-h">
+      <h2 id="fuel-h">Your trip</h2>
+      <div class="field"><div class="seg" role="radiogroup" aria-label="Calculate"><label><input type="radio" name="mode" value="trip" checked> Trip cost</label><label><input type="radio" name="mode" value="measure"> Fuel consumption</label></div></div>
+      <div class="field">
+        <label for="fuel">Fuel</label>
+        <select class="input" id="fuel" name="fuel">{{F_FUEL_OPTIONS}}</select>
+      </div>
+      <div class="field"><label for="price">Price per litre</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{F_PRICE}}"></div><p class="help">Filled in from this week's price; change it if you need to.</p></div>
+      <div id="fTrip">
+        <div class="field-row">
+          <div class="field"><label for="distance">Distance</label><div class="input"><input id="distance" name="distance" type="number" inputmode="decimal" min="0" step="1" value="{{F_DISTANCE}}"><span aria-hidden="true">km</span></div></div>
+          <div class="field"><label for="roundTrip">Trip</label><select class="input" id="roundTrip" name="roundTrip">{{F_RT_OPTIONS}}</select></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="consumption">Fuel consumption</label><div class="input"><input id="consumption" name="consumption" type="number" inputmode="decimal" min="0" step="0.1" value="{{F_CONS}}"></div></div>
+          <div class="field"><label for="unit">Unit</label><select class="input" id="unit" name="unit">{{F_UNIT_OPTIONS}}</select></div>
+        </div>
+        <p class="help">Small cars typically use 5–7 L/100 km, sedans 7–9, SUVs and MPVs 9–12.</p>
+        <div class="field-row">
+          <div class="field"><label for="passengers">People sharing</label><div class="input"><input id="passengers" name="passengers" type="number" inputmode="numeric" min="1" step="1" value="1"></div></div>
+          <div class="field"><label for="toll">Tolls (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="toll" name="toll" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+        </div>
+        <fieldset class="field-group">
+          <legend>Monthly cost (optional)</legend>
+          <div class="field-row">
+            <div class="field"><label for="trips">Trips a month</label><div class="input"><input id="trips" name="trips" type="number" inputmode="numeric" min="0" step="1" value="0"></div></div>
+            <div class="field"><label for="quota">BUDI monthly quota</label><div class="input"><input id="quota" name="quota" type="number" inputmode="numeric" min="0" step="10" value="{{F_QUOTA}}"><span aria-hidden="true">litres</span></div></div>
+          </div>
+        </fieldset>
+      </div>
+      <div id="fMeasure" hidden>
+        <div class="field-row">
+          <div class="field"><label for="km">Km since the last fill-up</label><div class="input"><input id="km" name="km" type="number" inputmode="decimal" min="0" step="1" value="450"><span aria-hidden="true">km</span></div></div>
+          <div class="field"><label for="litres">Litres to refill</label><div class="input"><input id="litres" name="litres" type="number" inputmode="decimal" min="0" step="0.01" value="36"><span aria-hidden="true">L</span></div></div>
+        </div>
+        <p class="help">Fill to full, reset the trip meter, drive as usual, then fill to full again.</p>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="fuel-result-h">
+      <h2 id="fuel-result-h">Result</h2>
+      <div class="net">
+        <p id="fHeadLabel">{{F_HEAD}}</p>
+        <output id="fTotal" for="fuel price distance roundTrip consumption unit passengers toll">{{F_TOTAL}}</output>
+        <p id="fSub">{{F_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="fLines">
+{{F_LINES}}
+        </tbody>
+      </table>
+      <div id="fMonthWrap" hidden>
+        <table class="rows">
+          <caption>A month</caption>
+          <tbody>
+            <tr><th scope="row">Fuel a month</th><td id="fMonthLitres">0 L</td></tr>
+            <tr class="total"><th scope="row">Monthly cost</th><td id="fMonth">RM0.00</td></tr>
+          </tbody>
+        </table>
+        <p class="callout" id="fBudi" hidden></p>
+      </div>
+      <p class="note">BUDI95 is only for eligible Malaysians with a MyKad and a valid driving licence. Non-citizens pay the unsubsidised price.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fuelPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="prices-h">Fuel prices this week</h2>
+  <p>In force {{F_WEEK}}, from the Ministry of Finance's official data on data.gov.my.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="prices-h">
+    <table class="data">
+      <thead><tr><th scope="col">Fuel</th><th scope="col">Per litre</th><th scope="col">Against last week</th></tr></thead>
+      <tbody>
+{{F_PRICES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Unsubsidised RON95 costs <strong>{{F_GAP}} a litre</strong> more than BUDI95, so a full 300-litre BUDI95 quota is worth about 300 times that gap a month.</p>
+
+  <h2 id="formula">How fuel cost is calculated</h2>
+  <ol>
+    <li><strong>Litres needed</strong> = distance (km) × consumption (L/100 km) ÷ 100. If you know km per litre: distance ÷ km per litre.</li>
+    <li><strong>Fuel cost</strong> = litres × price per litre. Add tolls if any.</li>
+    <li><strong>Cost per km</strong> = consumption ÷ 100 × price per litre.</li>
+    <li><strong>Sharing</strong> = total ÷ number of people.</li>
+    <li><strong>BUDI95</strong>: litres in the month up to the quota at RM1.99, the rest at the unsubsidised RON95 price.</li>
+  </ol>
+  <p>Example: 350 km at 7 L/100 km = {{F_EX_LITRES}} litres. That costs {{F_EX_BUDI}} with BUDI95, {{F_EX_RON95}} with unsubsidised RON95, {{F_EX_RON97}} with RON97 and {{F_EX_DIESEL}} with Peninsular diesel.</p>
+
+  <h2 id="perkm-h">Cost per km by fuel consumption</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="perkm-h">
+    <table class="data">
+      <thead><tr><th scope="col">Consumption</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th></tr></thead>
+      <tbody>
+{{F_PERKM}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="dist-h">Fuel cost by distance (7 L/100 km)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="dist-h">
+    <table class="data">
+      <thead><tr><th scope="col">Distance</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th></tr></thead>
+      <tbody>
+{{F_DIST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="hist-h">Fuel prices for the last 8 weeks</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hist-h">
+    <table class="data">
+      <thead><tr><th scope="col">From</th><th scope="col">BUDI95</th><th scope="col">RON95</th><th scope="col">RON97</th><th scope="col">Diesel</th><th scope="col">Diesel Sabah/Sarawak</th></tr></thead>
+      <tbody>
+{{F_HISTORY}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="budi">BUDI95 and BUDI Diesel</h2>
+  <ul>
+    <li><strong>BUDI95:</strong> RON95 at RM1.99 a litre for Malaysians with a valid MyKad and driving licence, up to <strong>300 litres a month</strong> from 1 September 2026 (200 litres from April to August 2026). E-hailing drivers can get an extra quota.</li>
+    <li><strong>BUDI Diesel:</strong> subsidised diesel at {{F_DIESEL_BUDI}} a litre for eligible private diesel vehicle owners, 300 litres a month (400 litres for approved pick-ups and 4×4s).</li>
+    <li><strong>Sabah, Sarawak and Labuan:</strong> diesel at {{F_DIESEL_EAST}} a litre.</li>
+  </ul>
+  <p>Check eligibility and your remaining quota on the official BUDI MADANI portal or your petrol station app.</p>
+
+  <h2 id="tips">How to use less fuel</h2>
+  <ul>
+    <li>Cruise at 80–100 km/h on highways; consumption rises sharply above 110 km/h.</li>
+    <li>Keep tyres at the pressure on the door label; soft tyres raise consumption.</li>
+    <li>Remove extra weight and unused roof racks.</li>
+    <li>RON97 is only worth it if your owner's manual calls for it; most cars are designed for RON95.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://data.gov.my/data-catalogue/fuelprice" rel="noopener">data.gov.my: Price of Petroleum and Diesel (Ministry of Finance)</a></li>
+    <li><a href="https://mof.gov.my/portal/ms/berita/siaran-media/had-kelayakan-asas-bulanan-budi-madani-dinaikkan-semula-kepada-300-liter-mulai-1-september-2026" rel="noopener">Ministry of Finance: BUDI MADANI quota 300 litres from 1 September 2026</a></li>
+    <li><a href="https://www.bharian.com.my/amp/berita/nasional/2026/09/1613672/kuota-budi95-kembali-kepada-300-liter-mulai-hari-ini" rel="noopener">Berita Harian: BUDI95 quota back to 300 litres</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. Real consumption depends on the car, driving style and traffic. Pump prices follow the Ministry of Finance's weekly announcement.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/car-loan-calculator-malaysia/">Car Loan Calculator<small>Instalment, road tax and insurance</small></a>
+    <a href="/ncd-calculator-malaysia/">NCD Calculator<small>No claim discount on car insurance</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+  </div>
+</section>

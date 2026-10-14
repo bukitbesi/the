@@ -1,0 +1,177 @@
+<!--page
+{
+  "path": "/iddah-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-iddah/" },
+  "title": "Iddah Calculator Malaysia: Waiting Period After Divorce or Death",
+  "description": "Free iddah calculator: when a Muslim woman's iddah ends after divorce (three periods, three months, pregnancy) or a husband's death (4 months 10 days).",
+  "llms": "Calculates the iddah (waiting period) and ihdad (mourning) for Muslim women in Malaysia under the Shafi'i school and JAKIM's Garis Panduan Ber'iddah: divorce after consummation while still menstruating, three quru' (periods of purity), ending when the third menstruation after the talak begins, at least 32 days if divorced while pure or 47 if during menstruation, with dates estimated from the last period and cycle length; not menstruating (menopause, never, or medical), three Hijri months; pregnant, until delivery; divorce before consummation, no iddah. Husband's death: four Hijri months and ten days (about 130 days) even before consummation, or until delivery if pregnant, with ihdad required throughout. Hijri months follow Malaysia's official takwim (MABIMS imkanur rukyah criteria).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "iddah",
+  "scripts": ["/assets/js/iddah.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Iddah Calculator", null]],
+  "about": ["Iddah", "Ihdad", "Islamic family law in Malaysia", "Talaq"],
+  "app": {
+    "name": "Iddah Calculator",
+    "category": "ReferenceApplication",
+    "features": ["Divorce iddah: three periods, three months or pregnancy", "Date estimate from the last period", "Widow's iddah: 4 months and 10 days", "Gregorian and Hijri dates (Malaysian takwim)", "Reconciliation (rujuk) and ihdad periods", "Works offline"]
+  },
+  "citations": [
+    ["JAKIM: Garis Panduan Ber'iddah Bagi Wanita Yang Bercerai Atau Kematian Suami", "https://www.islam.gov.my/ms/garis-panduan/479-garis-panduan-ber-iddah-bagi-wanita-yang-bercerai-atau-kematian-suami"],
+    ["Federal Territories Mufti Department: Irsyad al-Fatwa 715, iddah of a pregnant widow", "https://www.muftiwp.gov.my/en/artikel/irsyad-fatwa/irsyad-fatwa-umum-cat/5384-irsyad-al-fatwa-siri-ke-715-tempoh-idah-wanita-mengandung-yang-kematian-suami"],
+    ["Federal Territories Mufti Department: Irsyad al-Fatwa 615, maintenance of a divorced wife", "https://muftiwp.gov.my/en/artikel/irsyad-fatwa/irsyad-fatwa-umum-cat/4979-irsyad-al-fatwa-siri-ke-615-hukum-nafkah-isteri-yang-diceraikan"],
+    ["Islamic Family Law (Federal Territories) Act 1984 (Act 303)", "http://www2.esyariah.gov.my/esyariah/mal/portalv1/enakmen2011/Federal_Updated.nsf/b3ac9c218c8efdc4482568310022d8b3/633473c64eaa80a048256fd50001141a?OpenDocument"]
+  ],
+  "faq": [
+    { "q": "How long is the iddah after divorce?", "a": "For a woman who still menstruates, the iddah is three periods of purity (quru') and ends when the third menstruation after the talak begins; on a 28-day cycle that is usually about two months, and at least 32 days. A woman who does not menstruate waits three Hijri months, a pregnant woman until delivery, and a divorce before consummation has no iddah." },
+    { "q": "How long is the iddah after a husband's death?", "a": "Four Hijri months and ten days, about 130 days, even if the marriage was not consummated. For example, a death on {{I_EX_DATE}} ({{I_EX_DATE_H}}) means the iddah ends on {{I_W_END}} ({{I_W_END_H}}), after {{I_W_DAYS}} days. If the wife is pregnant, the iddah ends when she gives birth." },
+    { "q": "How are three periods of purity counted?", "a": "In the Shafi'i school, quru' means a period of purity. If the talak happens while she is pure, the rest of that purity counts as the first, and the iddah ends when the third menstruation after the talak begins. If the talak happens during menstruation, that menstruation does not count. Example: last period 1 October 2026, 28-day cycle, talak on {{I_EX_DATE}}: the iddah ends on {{I_EX_END}}, after {{I_EX_DAYS}} days." },
+    { "q": "What is ihdad and who must observe it?", "a": "Ihdad is mourning by giving up adornment. It is required of a widow for the whole iddah of 4 months and 10 days (or until delivery). She avoids perfume, kohl and make-up, henna, jewellery and bright clothing, and stays in the marital home except for needs. Ihdad is not required after a divorce." },
+    { "q": "Does a pregnant widow wait 4 months and 10 days?", "a": "No. According to the Federal Territories Mufti Department, the iddah of a pregnant widow ends when she gives birth, whether that is soon after the death or months later, based on Surah at-Talaq verse 4." },
+    { "q": "Can the husband take his wife back during the iddah?", "a": "Yes, after a talak raj'i (first or second talak) the husband can reconcile (rujuk) while the iddah lasts, and the wife is entitled to maintenance and housing throughout it. After the iddah ends, or after a talak bain, the marriage can only resume with a new marriage contract where the law allows it." },
+    { "q": "When does the iddah start?", "a": "From the moment the talak is pronounced or the husband dies, not from the date the divorce is registered. A divorce outside court must be reported to and confirmed by the Syariah Court, and the confirmed date of the talak is when the iddah starts." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Iddah calculator</li></ol></nav>
+  <h1>Iddah and Ihdad Calculator</h1>
+  <p class="answer">The iddah after a husband's death is <strong>4 Hijri months and 10 days</strong> (about 130 days), with ihdad. After a divorce, a woman who still menstruates waits <strong>three periods of purity</strong>, ending when the third menstruation after the talak begins (at least 32 days); no menstruation: 3 Hijri months; pregnant: until delivery; before consummation: no iddah. Enter your dates below.</p>
+  <p class="meta"><span>Rulings verified <time datetime="{{I_VERIFIED_ISO}}">{{I_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-iddah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="iddahForm" novalidate aria-labelledby="iddah-h">
+      <h2 id="iddah-h">Your details</h2>
+      <div class="field"><label for="event">Reason for the iddah</label><select class="input" id="event" name="event">{{I_EVENT_OPTIONS}}</select></div>
+      <div class="field"><label for="date">Date of the talak or death</label><input class="input" id="date" name="date" type="date" min="1979-11-21" max="2077-11-16" value="{{I_DATE}}"></div>
+      <div id="iDivorce">
+        <div class="field-row">
+          <div class="field"><label for="consummated">Marriage consummated?</label><select class="input" id="consummated" name="consummated">{{I_CONS_OPTIONS}}</select></div>
+          <div class="field"><label for="talak">Type of talak</label><select class="input" id="talak" name="talak">{{I_TALAK_OPTIONS}}</select></div>
+        </div>
+      </div>
+      <div class="field"><label for="state">The wife is</label><select class="input" id="state" name="state">{{I_STATE_OPTIONS}}</select></div>
+      <fieldset class="field-group" id="iCycle">
+        <legend>Estimate the three periods (optional)</legend>
+        <div class="field-row">
+          <div class="field"><label for="lastPeriod">First day of the last period</label><input class="input" id="lastPeriod" name="lastPeriod" type="date" value="{{I_LAST}}"></div>
+          <div class="field"><label for="cycle">Cycle length</label><div class="input"><input id="cycle" name="cycle" type="number" inputmode="numeric" min="15" max="60" step="1" value="{{I_CYCLE}}"><span aria-hidden="true">days</span></div></div>
+        </div>
+        <p class="help">The last period that began on or before the talak. Cycle = days from the start of one period to the start of the next.</p>
+      </fieldset>
+      <div class="field" id="iDue" hidden><label for="due">Expected delivery date (optional)</label><input class="input" id="due" name="due" type="date" value=""></div>
+    </form>
+
+    <section class="box" aria-labelledby="iddah-result-h">
+      <h2 id="iddah-result-h">Iddah period</h2>
+      <div class="net">
+        <p>The iddah ends</p>
+        <output id="iEnd" for="event date consummated state lastPeriod cycle due">{{I_END}}</output>
+        <p><strong id="iEndHijri">{{I_END_HIJRI}}</strong> · <span id="iSub">{{I_SUB}}</span></p>
+      </div>
+      <p class="sr-only" id="iLive" aria-live="polite"></p>
+      <p class="callout error" id="iError" hidden>Enter a date between 21 November 1979 and 16 November 2077.</p>
+      <table class="rows">
+        <caption>Details</caption>
+        <tbody id="iLines">
+{{I_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="iIhdad" hidden>Ihdad is required for the whole iddah: avoid perfume, kohl and make-up, henna, jewellery and bright clothing, and stay in the marital home except for needs.</p>
+      <p class="note" id="iEstimate">The three-period dates are estimated from your cycle; the iddah actually ends when the third period after the talak begins.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="iddahPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="types-h">Types and length of iddah</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="types-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Situation</th><th scope="col">Iddah</th><th scope="col">Ihdad</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Divorce after consummation, still menstruating</th><td>Three periods of purity (quru'): ends when the third menstruation after the talak begins</td><td>Not required</td></tr>
+        <tr><th scope="row">Divorce, not menstruating (menopause, never, medical)</th><td>Three Hijri months</td><td>Not required</td></tr>
+        <tr><th scope="row">Divorce while pregnant</th><td>Until delivery</td><td>Not required</td></tr>
+        <tr><th scope="row">Divorce before consummation</th><td>No iddah (Surah al-Ahzab, verse 49)</td><td>Not required</td></tr>
+        <tr><th scope="row">Husband's death</th><td>Four Hijri months and ten days (Surah al-Baqarah, verse 234)</td><td>Required</td></tr>
+        <tr><th scope="row">Husband's death while pregnant</th><td>Until delivery (Surah at-Talaq, verse 4)</td><td>Required</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The same iddah applies to talak, khuluk (divorce at the wife's request for compensation) and fasakh. Only a talak raj'i can be revoked by rujuk during the iddah.</p>
+
+  <h2 id="examples-h">Example: talak or death on {{I_EX_DATE}}</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="examples-h">
+    <table class="data">
+      <thead><tr><th scope="col">Situation</th><th scope="col">Iddah ends</th><th scope="col">Length</th></tr></thead>
+      <tbody>
+{{I_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="how">How this calculator works</h2>
+  <ol>
+    <li><strong>Three periods:</strong> the next periods are projected from the start of your last period and your cycle. The iddah ends at the start of the third period after the talak. If the talak was during purity, at least 32 days; during menstruation, at least 47.</li>
+    <li><strong>Three months:</strong> the same Hijri date three months later.</li>
+    <li><strong>Four months and ten days:</strong> the same Hijri date four months later, plus ten days.</li>
+    <li><strong>Hijri months</strong> follow Malaysia's official takwim (MABIMS imkanur rukyah criteria), so the number of days depends on whether months have 29 or 30 days.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="wafat-h">When a widow's iddah ends (4 months 10 days)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="wafat-h">
+    <table class="data">
+      <thead><tr><th scope="col">Date of death</th><th scope="col">Iddah ends</th><th scope="col">Length</th></tr></thead>
+      <tbody>
+{{I_WAFAT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ihdad">Ihdad: what a widow avoids</h2>
+  <p>JAKIM's guideline makes ihdad (mourning) required of a woman whose husband has died. Throughout the iddah she avoids:</p>
+  <ul>
+    <li>perfume and scented products;</li>
+    <li>kohl, make-up and henna;</li>
+    <li>jewellery and ornaments;</li>
+    <li>bright or decorative clothing worn to adorn.</li>
+  </ul>
+  <p>She stays in the home she lived in when her husband died, and may go out for needs such as work, medical care or buying necessities.</p>
+
+  <h2 id="rights">Rights during the iddah</h2>
+  <ul>
+    <li><strong>Talak raj'i:</strong> the wife is entitled to maintenance and housing throughout the iddah, and the husband may reconcile before it ends.</li>
+    <li><strong>Iddah maintenance and mut'ah</strong> can be claimed in your state's Syariah Court.</li>
+    <li><strong>Remarriage:</strong> a woman may not marry another man until the iddah ends.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.islam.gov.my/ms/garis-panduan/479-garis-panduan-ber-iddah-bagi-wanita-yang-bercerai-atau-kematian-suami" rel="noopener">JAKIM: guideline on iddah for divorced and widowed women</a></li>
+    <li><a href="https://www.muftiwp.gov.my/en/artikel/irsyad-fatwa/irsyad-fatwa-umum-cat/5384-irsyad-al-fatwa-siri-ke-715-tempoh-idah-wanita-mengandung-yang-kematian-suami" rel="noopener">Federal Territories Mufti: iddah of a pregnant widow</a></li>
+    <li><a href="https://muftiwp.gov.my/en/artikel/irsyad-fatwa/irsyad-fatwa-umum-cat/4979-irsyad-al-fatwa-siri-ke-615-hukum-nafkah-isteri-yang-diceraikan" rel="noopener">Federal Territories Mufti: maintenance of a divorced wife</a></li>
+    <li><a href="http://www2.esyariah.gov.my/esyariah/mal/portalv1/enakmen2011/Federal_Updated.nsf/b3ac9c218c8efdc4482568310022d8b3/633473c64eaa80a048256fd50001141a?OpenDocument" rel="noopener">Islamic Family Law (Federal Territories) Act 1984</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A reference tool, not a fatwa or legal advice. Irregular cycles, istihadah, miscarriage and disputed talak dates should be taken to your district religious office, state Mufti Department or Syariah Court.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/hijri-date-converter/">Hijri Date Converter<small>Malaysia's official Hijri takwim</small></a>
+    <a href="/zakat-calculator-malaysia/">Zakat Calculator Malaysia<small>Zakat on income with had kifayah</small></a>
+    <a href="https://www.thebukitbesi.com/p/kalkulator-faraid.html">Faraid Calculator<small>Islamic inheritance shares</small></a>
+  </div>
+</section>

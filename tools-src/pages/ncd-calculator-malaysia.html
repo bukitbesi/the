@@ -1,0 +1,175 @@
+<!--page
+{
+  "path": "/ncd-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-ncd/" },
+  "title": "NCD Calculator Malaysia 2026: No Claim Discount on Car Insurance",
+  "description": "Free NCD calculator for Malaysia: your no claim discount by claim-free years for cars and motorcycles, premium after NCD and SST, and what a claim really costs.",
+  "llms": "Calculates the No Claim Discount (NCD) on Malaysian motor insurance using the former motor tariff scale that every insurer and takaful operator still applies: private cars 0%, 25%, 30%, 38.33%, 45% and 55% after 0 to 5 or more claim-free years; motorcycles and commercial vehicles 0%, 15%, 20% and 25%. Premium = gross premium − NCD, plus 8% SST and RM10 stamp duty. An own-damage or theft claim resets the NCD to 0% at the next renewal; the tool works out the extra premium paid while the NCD climbs back (RM2,952.07 on a RM2,000 gross premium at 55%) so drivers can decide whether paying for a repair themselves is cheaper.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ncd",
+  "scripts": ["/assets/js/ncd.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["NCD Calculator", null]],
+  "about": ["No Claim Discount", "Car insurance in Malaysia", "Motorcycle insurance", "Motor insurance premium"],
+  "app": {
+    "name": "NCD Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["NCD by claim-free years", "Cars, motorcycles and commercial vehicles", "Premium after NCD, 8% SST and stamp duty", "Gross premium estimate from sum insured and cc", "The real cost of a claim (lost NCD)", "Claim or pay yourself", "Works offline"]
+  },
+  "citations": [
+    ["PIAM: Motor Insurance Consumer Guide", "https://www.piam.org.my/pdf/consumer-guide/PIAM-FAQ-Sheet-Motor-Insurance-Consumer-Guide.pdf"],
+    ["Kurnia: No-Claim Discount (NCD), a comprehensive guide", "https://www.kurnia.com/blog/no-claim-discount-ncd-rate"],
+    ["RinggitPlus: What is No-Claim Discount (NCD) and how does it work in Malaysia", "https://ringgitplus.com/en/blog/the-experts-corner/what-is-no-claim-discount-ncd-and-how-does-it-work-in-malaysia.html"]
+  ],
+  "faq": [
+    { "q": "What are the NCD rates for car insurance in Malaysia?", "a": "For private cars: 25% after 1 claim-free year, 30% after 2, 38.33% after 3, 45% after 4 and a maximum of 55% after 5 or more. A new car, or a car after a claim, starts at 0%." },
+    { "q": "How is NCD calculated?", "a": "Multiply the gross premium by the NCD percentage, take it off the gross premium, then add 8% SST and RM10 stamp duty. On a RM2,000 gross premium with 55% NCD, the discount is RM1,100, the premium RM900, SST RM72 and the total RM982." },
+    { "q": "What is the NCD for motorcycles?", "a": "Motorcycles and commercial vehicles get 15% after 1 claim-free year, 20% after 2 and a maximum of 25% after 3 or more. On a RM300 gross premium at 25% NCD, the total is {{N_MOTO}}." },
+    { "q": "What happens to my NCD if I make a claim?", "a": "An own-damage or theft claim resets the NCD to 0% at the next renewal; it then climbs back through 25%, 30%, 38.33%, 45% and 55% with each claim-free year. On a RM2,000 gross premium at 55% NCD, one claim costs RM2,952.07 in extra premium over five years." },
+    { "q": "Should I claim insurance or pay for the repair myself?", "a": "Pay yourself if the repair costs less than the extra premium from losing your NCD. On a RM2,000 gross premium the threshold is RM2,952.07 at 55% NCD and {{N_C3}} at 38.33% NCD. Damage above that is worth claiming." },
+    { "q": "Can I transfer my NCD to a new car?", "a": "Yes. The NCD belongs to the policyholder, not the car. When you sell or replace a car, ask your insurer to withdraw the NCD from the old car's policy so it can be used on a new car registered in your name." },
+    { "q": "Which claims do not affect my NCD?", "a": "Usually a windscreen claim under windscreen cover, and a third-party claim made against the at-fault driver's insurer, do not affect your NCD. Own-damage, theft and flood claims without an NCD protection add-on reset it to 0%. Check your policy terms." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">NCD calculator</li></ol></nav>
+  <h1>NCD Calculator Malaysia</h1>
+  <p class="answer">The NCD for a private car is <strong>25%, 30%, 38.33%, 45% and a maximum of 55%</strong> after 1 to 5 claim-free years; motorcycles top out at 25%. On a RM2,000 gross premium, 55% NCD saves <strong>{{N_SAVE}}</strong> and you pay {{N_TOTAL}} including 8% SST. One claim costs {{N_CLAIM_TOTAL}} in extra premium. Enter your policy below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{N_VERIFIED_ISO}}">{{N_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-ncd/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="ncdForm" novalidate aria-labelledby="ncd-h">
+      <h2 id="ncd-h">Your policy</h2>
+      <div class="field-row">
+        <div class="field"><label for="type">Vehicle</label><select class="input" id="type" name="type">{{N_TYPE_OPTIONS}}</select></div>
+        <div class="field"><label for="years">Claim-free years</label><select class="input" id="years" name="years">{{N_YEARS_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="basis">Premium</label><select class="input" id="basis" name="basis">{{N_BASIS_OPTIONS}}</select></div>
+      <div class="field" id="nGrossField"><label for="gross">Gross premium before NCD</label><div class="input"><span aria-hidden="true">RM</span><input id="gross" name="gross" type="number" inputmode="decimal" min="0" step="10" value="{{N_GROSS}}"></div><p class="help">Shown on your renewal notice as "Gross premium".</p></div>
+      <fieldset class="field-group" id="nEstimate" hidden>
+        <legend>Gross premium estimate (comprehensive, Peninsular)</legend>
+        <div class="field-row">
+          <div class="field"><label for="sumInsured">Sum insured</label><div class="input"><span aria-hidden="true">RM</span><input id="sumInsured" name="sumInsured" type="number" inputmode="decimal" min="0" step="1000" value="{{N_SUM}}"></div></div>
+          <div class="field"><label for="cc">Engine capacity</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" step="1" value="{{N_CC}}"><span aria-hidden="true">cc</span></div></div>
+        </div>
+        <p class="help">Estimated gross premium: <strong id="nEstGross">{{N_EST_GROSS}}</strong>, from the former motor tariff. Real premiums vary by insurer.</p>
+      </fieldset>
+      <div class="field"><label for="repair">Repair cost if you claim (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="repair" name="repair" type="number" inputmode="decimal" min="0" step="100" value="{{N_REPAIR}}"></div><p class="help">To compare claiming with paying yourself.</p></div>
+    </form>
+
+    <section class="box" aria-labelledby="ncd-result-h">
+      <h2 id="ncd-result-h">Your NCD and premium</h2>
+      <div class="net">
+        <p>No claim discount</p>
+        <output id="nRate" for="type years">{{N_RATE}}</output>
+        <p>Total to pay <strong id="nTotal">{{N_TOTAL}}</strong> · <span id="nSub">{{N_SUB}}</span></p>
+      </div>
+      <p class="sr-only" id="nLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Premium</caption>
+        <tbody id="nLines">
+{{N_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="nAdvice">{{N_ADVICE}}</p>
+      <table class="rows">
+        <caption>Cost of one claim (extra premium)</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col">No claim</th><th scope="col">After a claim</th><th scope="col">Extra</th></tr></thead>
+        <tbody id="nClaim">
+{{N_CLAIM}}
+        </tbody>
+        <tfoot><tr class="total"><th scope="row" colspan="3">Total</th><td id="nClaimTotal">{{N_CLAIM_TOTAL}}</td></tr></tfoot>
+      </table>
+      <table class="rows">
+        <caption>Premium at each NCD level</caption>
+        <thead><tr><th scope="col">Claim-free years</th><th scope="col">NCD</th><th scope="col">You pay</th></tr></thead>
+        <tbody id="nLadder">
+{{N_LADDER}}
+        </tbody>
+      </table>
+      <p class="note">The claim cost assumes the gross premium stays the same; it excludes the policy excess.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ncdPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="scale-h">Motor insurance NCD table</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="scale-h">
+    <table class="data">
+      <thead><tr><th scope="col">Claim-free years</th><th scope="col">Private car</th><th scope="col">Motorcycle</th><th scope="col">Commercial vehicle</th></tr></thead>
+      <tbody>
+{{N_SCALE}}
+      </tbody>
+    </table>
+  </div>
+  <p>NCD moves at each renewal: every claim-free policy year takes you up one step. A new car starts at 0%, so the first 25% applies at the renewal after one full claim-free year.</p>
+
+  <h2 id="formula">How the premium after NCD is worked out</h2>
+  <ol>
+    <li><strong>NCD discount</strong> = gross premium × NCD percentage.</li>
+    <li><strong>Net premium</strong> = gross premium − NCD discount.</li>
+    <li><strong>SST</strong> = 8% × net premium.</li>
+    <li><strong>Total</strong> = net premium + SST + RM10 stamp duty.</li>
+  </ol>
+  <p>Example: RM2,000 gross premium at 55% NCD → RM1,100 discount, RM900 premium, RM72 SST, <strong>RM982</strong> in total.</p>
+
+  <h2 id="prem-h">Total premium by NCD</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="prem-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gross premium</th><th scope="col">0%</th><th scope="col">25%</th><th scope="col">30%</th><th scope="col">38.33%</th><th scope="col">45%</th><th scope="col">55%</th></tr></thead>
+      <tbody>
+{{N_PREM}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="claim-h">Should you claim or pay yourself?</h2>
+  <p>After a claim the NCD drops to 0% and takes five years to climb back to 55%. The extra premium over those years is what the claim really costs. If the repair costs less, paying yourself is cheaper.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="claim-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gross premium</th><th scope="col">Cost of a claim at 38.33% NCD</th><th scope="col">Cost of a claim at 55% NCD</th></tr></thead>
+      <tbody>
+{{N_CLAIMS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">NCD rules to know</h2>
+  <ul>
+    <li><strong>The NCD is yours, not the car's.</strong> When you change cars, ask for an NCD withdrawal from the old policy to use on the new car in your name.</li>
+    <li><strong>Own-damage, theft and disaster claims</strong> reset the NCD to 0% at the next renewal.</li>
+    <li><strong>Windscreen claims</strong> under windscreen cover, and claims against the at-fault driver's insurer, usually leave the NCD intact.</li>
+    <li><strong>Late renewal</strong> can cost you the NCD; renew before the policy expires.</li>
+    <li>Since motor premiums were liberalised, each insurer sets its own gross premium, but the same NCD scale still applies.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.piam.org.my/pdf/consumer-guide/PIAM-FAQ-Sheet-Motor-Insurance-Consumer-Guide.pdf" rel="noopener">PIAM: Motor Insurance Consumer Guide</a></li>
+    <li><a href="https://www.kurnia.com/blog/no-claim-discount-ncd-rate" rel="noopener">Kurnia: NCD rate table</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/the-experts-corner/what-is-no-claim-discount-ncd-and-how-does-it-work-in-malaysia.html" rel="noopener">RinggitPlus: how NCD works in Malaysia</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. Your insurer or takaful operator sets the actual premium, excess and NCD terms. Confirm your current NCD with your insurer before buying a policy.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/car-loan-calculator-malaysia/">Car Loan Calculator<small>Instalment, road tax and insurance</small></a>
+    <a href="/fuel-cost-calculator-malaysia/">Fuel Cost Calculator<small>Trip cost and this week's fuel prices</small></a>
+    <a href="/personal-loan-calculator-malaysia/">Personal Loan Calculator<small>Monthly instalment and effective rate</small></a>
+  </div>
+</section>

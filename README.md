@@ -1,11 +1,11 @@
-# The Bukit Besi Tools — 48 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 66 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
 [![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
-directory of 48 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+directory of 66 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
 code minifiers, SEO and schema generators, writing utilities, image editors,
 AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
 No signup, no tracking scripts, works offline after one visit.
@@ -82,6 +82,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/asb-dividend-calculator/](https://tool.thebukitbesi.com/asb-dividend-calculator/) + [/kalkulator-dividen-asb/](https://tool.thebukitbesi.com/kalkulator-dividen-asb/) | English + BM | asb dividend calculator, asb financing calculator; kalkulator dividen asb, loan asb |
 | [/prorated-salary-calculator-malaysia/](https://tool.thebukitbesi.com/prorated-salary-calculator-malaysia/) + [/kalkulator-gaji-prorata/](https://tool.thebukitbesi.com/kalkulator-gaji-prorata/) | English + BM | prorated salary calculator malaysia, unpaid leave deduction; kalkulator gaji prorata |
 | [/overtime-calculator-malaysia/](https://tool.thebukitbesi.com/overtime-calculator-malaysia/) + [/kalkulator-ot/](https://tool.thebukitbesi.com/kalkulator-ot/) | English + BM | overtime calculator malaysia, public holiday pay; kalkulator OT akta kerja, kira gaji OT |
+| [/kalkulator-minyak/](https://tool.thebukitbesi.com/kalkulator-minyak/) + [/fuel-cost-calculator-malaysia/](https://tool.thebukitbesi.com/fuel-cost-calculator-malaysia/) | BM + English | kalkulator minyak, harga minyak minggu ini, kos minyak perjalanan; fuel cost calculator malaysia, petrol price |
+| [/kalkulator-ncd/](https://tool.thebukitbesi.com/kalkulator-ncd/) + [/ncd-calculator-malaysia/](https://tool.thebukitbesi.com/ncd-calculator-malaysia/) | BM + English | kalkulator ncd, ncd insurans kereta, patut claim insurans; ncd calculator malaysia |
+| [/kalkulator-iddah/](https://tool.thebukitbesi.com/kalkulator-iddah/) + [/iddah-calculator/](https://tool.thebukitbesi.com/iddah-calculator/) | BM + English | kalkulator iddah, tempoh iddah cerai, iddah kematian suami, ihdad; iddah calculator |
+| [/tukar-tarikh-hijrah/](https://tool.thebukitbesi.com/tukar-tarikh-hijrah/) + [/hijri-date-converter/](https://tool.thebukitbesi.com/hijri-date-converter/) | BM + English | tukar tarikh hijrah ke masihi, tarikh hijrah hari ini, kalendar hijrah 2027; hijri date converter malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -127,6 +131,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (prorated salary):** `prorate-core.js` follows section 18A of the Employment Act 1955 (calendar days). Recheck after any Employment Act amendment and update `FACTS.verified`.
 
 **Upkeep (overtime):** `ot-core.js` holds the Employment Act rates, the RM4,000 First Schedule threshold, the 104-hour limit and the minimum wage (`FACTS`). Update them after any Employment Act amendment or minimum wage order, then `FACTS.verified` and `tools-src/tests/ot.test.mjs`.
+
+**Upkeep (fuel):** `.github/workflows/fuel-weekly.yml` runs `tools-src/fuel-fetch.mjs` every Wednesday evening and Thursday morning (Malaysia time), pulls the Ministry of Finance's weekly prices from data.gov.my (`fuelprice`, CC BY 4.0) into `tools-src/fuel-data.json` (last 52 weeks), rebuilds and commits. If a run fails the old prices stay. `fuel-core.js` `FACTS` holds the BUDI95 and BUDI Diesel monthly quotas (300 litres from 1 September 2026); update them, `FACTS.verified` and `tools-src/tests/fuel.test.mjs` when MOF changes a quota.
+
+**Upkeep (NCD):** `ncd-core.js` holds the motor NCD scale, 8% SST and RM10 stamp duty (kept equal to `carloan-core.js`, enforced by `tools-src/tests/ncd.test.mjs`). Recheck after any Budget change to service tax on insurance and update `FACTS.verified`.
+
+**Upkeep (iddah):** `iddah-core.js` follows JAKIM's Garis Panduan Ber'iddah (Shafi'i). Recheck if JAKIM or the Mufti departments revise the guideline; dates come from `hijri-core.js`.
+
+**Upkeep (Hijri):** `hijri-core.js` holds Malaysia's takwim month lengths for 1400–1500H, generated by `tools-src/hijri-gen.mjs` (MABIMS criteria, astronomy-engine). Each year, check the new year's official dates (Awal Muharram, Ramadan, Syawal, Zulhijjah) against JAKIM / the federal holiday list, add them to `tools-src/tests/hijri.test.mjs`, and if MABIMS changes its criteria regenerate `FACTS.lengths`. The Hijri pages' "today" and upcoming dates move with the daily gold rebuild.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -189,6 +201,10 @@ assets/js/carloan-core.js   car loan: EIR / flat rate, conversion, Rule of 78 se
 assets/js/asb-core.js       ASB: dividend on monthly lowest balances, projection with the RM200,000 limit, financing
 assets/js/prorate-core.js   prorated salary: section 18A calendar days, working days, 26-day rate
 assets/js/ot-core.js        overtime: ORP, hourly rate, 1.5×/2×/3× rates, rest day and public holiday pay
+assets/js/fuel-core.js      fuel cost: trip cost, RM per km, full-tank consumption, BUDI95 quota, data.gov.my parser
+assets/js/ncd-core.js       NCD: motor scale, premium after NCD with SST and stamp duty, cost of a claim
+assets/js/hijri-core.js     Hijri ⇄ Gregorian on Malaysia's takwim (MABIMS month table 1400–1500H), key Islamic dates
+assets/js/iddah-core.js     iddah: three quru' (projected periods), three months, 4 months 10 days, pregnancy; ihdad
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

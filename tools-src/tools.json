@@ -423,6 +423,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator Minyak (Fuel Cost Calculator)",
+    "desc": "Trip cost and RM per km at this week's official RON95 BUDI95, RON95, RON97 and diesel prices, fuel consumption from a fill-up and the 300-litre BUDI95 quota. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-minyak/",
+    "cat": "calc",
+    "icon": "kalkulator-minyak",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator NCD Insurans Kereta",
+    "desc": "Your no claim discount by claim-free years (25% to 55% for cars, up to 25% for motorcycles), premium after NCD and 8% SST, and whether a claim is worth losing your NCD. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-ncd/",
+    "cat": "calc",
+    "icon": "kalkulator-ncd",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Iddah & Ihdad",
+    "desc": "When the iddah ends after divorce (three periods of purity, three Hijri months or pregnancy) or a husband's death (4 months 10 days), with ihdad and rujuk dates on the Malaysian takwim. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-iddah/",
+    "cat": "calc",
+    "icon": "kalkulator-iddah",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Tukar Tarikh Hijrah ke Masihi",
+    "desc": "Convert Hijri and Gregorian dates on Malaysia's official takwim (MABIMS criteria), today's Hijri date and the next Ramadan, Hari Raya and Islamic holidays. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/tukar-tarikh-hijrah/",
+    "cat": "calc",
+    "icon": "tukar-tarikh-hijrah",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

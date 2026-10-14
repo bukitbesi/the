@@ -1,0 +1,39 @@
+name: Weekly fuel prices
+
+# Bakes the Ministry of Finance's weekly retail fuel prices (data.gov.my) into the fuel cost calculator pages, so
+# search engines and offline visitors see this week's prices. MOF announces on Wednesday evening for Thursday.
+on:
+  schedule:
+    - cron: '30 11 * * 3'   # Wednesday 19:30 Malaysia time, after the announcement
+    - cron: '15 0 * * 4'    # Thursday 08:15 Malaysia time, once data.gov.my has the new week
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fuel-weekly
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch prices, test, build and validate
+        run: |
+          node tools-src/fuel-fetch.mjs
+          node --test tools-src/tests/fuel.test.mjs
+          node tools-src/build.mjs
+          node tools-src/validate.mjs
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No change."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A tools-src/fuel-data.json docs
+          git commit -m "Update fuel prices $(date -u +%Y-%m-%d)"
+          git push

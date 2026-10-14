@@ -1,0 +1,175 @@
+<!--page
+{
+  "path": "/kalkulator-ncd/",
+  "lang": "ms",
+  "alternates": { "en": "/ncd-calculator-malaysia/" },
+  "title": "Kalkulator NCD 2026: Diskaun Tanpa Tuntutan Insurans Kereta",
+  "description": "Kalkulator NCD percuma: kira peratus NCD insurans kereta dan motosikal ikut tahun tanpa tuntutan, premium selepas NCD dan SST, dan kos sebenar membuat tuntutan.",
+  "llms": "Mengira diskaun tanpa tuntutan (NCD) insurans kenderaan di Malaysia mengikut jadual tarif motor yang masih digunakan semua syarikat insurans dan takaful: kereta persendirian 0%, 25%, 30%, 38.33%, 45% dan 55% selepas 0 hingga 5 tahun atau lebih tanpa tuntutan; motosikal dan kenderaan perdagangan 0%, 15%, 20% dan 25%. Premium = premium kasar − NCD, ditambah SST 8% dan duti setem RM10. Tuntutan kerosakan sendiri atau kecurian mengembalikan NCD kepada 0% pada pembaharuan seterusnya; alat ini mengira premium tambahan yang dibayar sepanjang tempoh NCD naik semula (RM2,952.07 bagi premium kasar RM2,000 pada NCD 55%) supaya pengguna boleh menentukan sama ada lebih murah membayar kos baiki sendiri.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ncd",
+  "scripts": ["/assets/js/ncd.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator NCD", null]],
+  "about": ["No Claim Discount", "Insurans kereta", "Insurans motosikal", "Premium insurans motor"],
+  "app": {
+    "name": "Kalkulator NCD",
+    "category": "FinanceApplication",
+    "features": ["Peratus NCD ikut tahun tanpa tuntutan", "Kereta, motosikal dan kenderaan perdagangan", "Premium selepas NCD, SST 8% dan duti setem", "Anggaran premium kasar dari nilai dilindungi dan cc", "Kos sebenar membuat tuntutan (kehilangan NCD)", "Tuntut atau bayar sendiri", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["PIAM: Panduan Pengguna Insurans Motor", "https://www.piam.org.my/pdf/consumer-guide/PIAM-FAQ-Sheet-Motor-Insurance-Consumer-Guide.pdf"],
+    ["Kurnia: No-Claim Discount (NCD), panduan lengkap", "https://www.kurnia.com/blog/no-claim-discount-ncd-rate"],
+    ["Motorist: Bagaimana NCD berfungsi di Malaysia", "https://www.motorist.my/ms/article/4368/how-no-claim-discount-ncd-works-in-malaysia"]
+  ],
+  "faq": [
+    { "q": "Berapa kadar NCD insurans kereta di Malaysia?", "a": "Bagi kereta persendirian: 25% selepas 1 tahun tanpa tuntutan, 30% selepas 2 tahun, 38.33% selepas 3 tahun, 45% selepas 4 tahun dan maksimum 55% selepas 5 tahun atau lebih. Kereta baharu atau selepas tuntutan bermula pada 0%." },
+    { "q": "Bagaimana mengira NCD insurans kereta?", "a": "Darabkan premium kasar dengan peratus NCD, tolak daripada premium kasar, kemudian tambah SST 8% dan duti setem RM10. Bagi premium kasar RM2,000 dengan NCD 55%, diskaun ialah RM1,100, premium RM900, SST RM72 dan jumlah dibayar RM982." },
+    { "q": "Berapa NCD untuk motosikal?", "a": "Motosikal dan kenderaan perdagangan mendapat 15% selepas 1 tahun tanpa tuntutan, 20% selepas 2 tahun dan maksimum 25% selepas 3 tahun atau lebih. Bagi premium kasar RM300 pada NCD 25%, jumlah dibayar ialah {{N_MOTO}}." },
+    { "q": "Apa jadi pada NCD jika saya membuat tuntutan?", "a": "Tuntutan kerosakan sendiri atau kecurian mengembalikan NCD kepada 0% pada pembaharuan seterusnya, kemudian ia naik semula 25%, 30%, 38.33%, 45% dan 55% setiap tahun tanpa tuntutan. Bagi premium kasar RM2,000 pada NCD 55%, satu tuntutan menelan RM2,952.07 premium tambahan sepanjang lima tahun." },
+    { "q": "Patut claim insurans atau bayar sendiri?", "a": "Bayar sendiri jika kos baiki lebih rendah daripada premium tambahan akibat kehilangan NCD. Pada premium kasar RM2,000, ambang itu ialah RM2,952.07 jika NCD anda 55% dan {{N_C3}} jika NCD anda 38.33%. Kerosakan lebih besar daripada itu lebih berbaloi dituntut." },
+    { "q": "Adakah NCD boleh dipindahkan ke kereta baharu?", "a": "Ya. NCD milik pemegang polisi, bukan kereta. Apabila menjual atau menukar kereta, minta syarikat insurans menarik balik NCD daripada polisi kereta lama supaya ia boleh digunakan pada kereta baharu yang didaftarkan atas nama anda." },
+    { "q": "Tuntutan apa yang tidak menjejaskan NCD?", "a": "Biasanya tuntutan cermin hadapan di bawah perlindungan cermin, dan tuntutan pihak ketiga terhadap insurans pemandu yang bersalah, tidak menjejaskan NCD anda. Tuntutan kerosakan sendiri, kecurian dan banjir tanpa tambahan perlindungan NCD akan mengembalikannya kepada 0%. Semak syarat polisi anda." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator NCD</li></ol></nav>
+  <h1>Kalkulator NCD Insurans Kereta</h1>
+  <p class="answer">NCD kereta persendirian ialah <strong>25%, 30%, 38.33%, 45% dan maksimum 55%</strong> selepas 1 hingga 5 tahun tanpa tuntutan; motosikal maksimum 25%. Pada premium kasar RM2,000, NCD 55% menjimatkan <strong>{{N_SAVE}}</strong> dan anda membayar {{N_TOTAL}} termasuk SST 8%. Satu tuntutan menelan {{N_CLAIM_TOTAL}} premium tambahan. Masukkan polisi anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{N_VERIFIED_ISO}}">{{N_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/ncd-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="ncdForm" novalidate aria-labelledby="ncd-h">
+      <h2 id="ncd-h">Polisi anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="type">Kenderaan</label><select class="input" id="type" name="type">{{N_TYPE_OPTIONS}}</select></div>
+        <div class="field"><label for="years">Tahun tanpa tuntutan</label><select class="input" id="years" name="years">{{N_YEARS_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="basis">Premium</label><select class="input" id="basis" name="basis">{{N_BASIS_OPTIONS}}</select></div>
+      <div class="field" id="nGrossField"><label for="gross">Premium kasar sebelum NCD</label><div class="input"><span aria-hidden="true">RM</span><input id="gross" name="gross" type="number" inputmode="decimal" min="0" step="10" value="{{N_GROSS}}"></div><p class="help">Tertera pada notis pembaharuan sebagai "Gross premium" atau "Premium kasar".</p></div>
+      <fieldset class="field-group" id="nEstimate" hidden>
+        <legend>Anggaran premium kasar (komprehensif, Semenanjung)</legend>
+        <div class="field-row">
+          <div class="field"><label for="sumInsured">Nilai dilindungi</label><div class="input"><span aria-hidden="true">RM</span><input id="sumInsured" name="sumInsured" type="number" inputmode="decimal" min="0" step="1000" value="{{N_SUM}}"></div></div>
+          <div class="field"><label for="cc">Kapasiti enjin</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" step="1" value="{{N_CC}}"><span aria-hidden="true">cc</span></div></div>
+        </div>
+        <p class="help">Anggaran premium kasar: <strong id="nEstGross">{{N_EST_GROSS}}</strong>, dari kadar tarif motor terdahulu. Premium sebenar berbeza ikut syarikat.</p>
+      </fieldset>
+      <div class="field"><label for="repair">Kos baiki jika membuat tuntutan (pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="repair" name="repair" type="number" inputmode="decimal" min="0" step="100" value="{{N_REPAIR}}"></div><p class="help">Untuk membandingkan tuntut atau bayar sendiri.</p></div>
+    </form>
+
+    <section class="box" aria-labelledby="ncd-result-h">
+      <h2 id="ncd-result-h">NCD dan premium anda</h2>
+      <div class="net">
+        <p>Diskaun tanpa tuntutan</p>
+        <output id="nRate" for="type years">{{N_RATE}}</output>
+        <p>Jumlah dibayar <strong id="nTotal">{{N_TOTAL}}</strong> · <span id="nSub">{{N_SUB}}</span></p>
+      </div>
+      <p class="sr-only" id="nLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Premium</caption>
+        <tbody id="nLines">
+{{N_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="nAdvice">{{N_ADVICE}}</p>
+      <table class="rows">
+        <caption>Kos satu tuntutan (premium tambahan)</caption>
+        <thead><tr><th scope="col">Tahun</th><th scope="col">Tanpa tuntutan</th><th scope="col">Selepas tuntutan</th><th scope="col">Tambahan</th></tr></thead>
+        <tbody id="nClaim">
+{{N_CLAIM}}
+        </tbody>
+        <tfoot><tr class="total"><th scope="row" colspan="3">Jumlah</th><td id="nClaimTotal">{{N_CLAIM_TOTAL}}</td></tr></tfoot>
+      </table>
+      <table class="rows">
+        <caption>Premium mengikut tahap NCD</caption>
+        <thead><tr><th scope="col">Tahun tanpa tuntutan</th><th scope="col">NCD</th><th scope="col">Dibayar</th></tr></thead>
+        <tbody id="nLadder">
+{{N_LADDER}}
+        </tbody>
+      </table>
+      <p class="note">Kos tuntutan mengandaikan premium kasar kekal sama; tidak termasuk "excess" polisi.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ncdPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="scale-h">Jadual NCD insurans motor</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="scale-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahun tanpa tuntutan</th><th scope="col">Kereta persendirian</th><th scope="col">Motosikal</th><th scope="col">Kenderaan perdagangan</th></tr></thead>
+      <tbody>
+{{N_SCALE}}
+      </tbody>
+    </table>
+  </div>
+  <p>NCD dikira pada setiap pembaharuan: setiap tahun polisi tanpa tuntutan menaikkan anda satu tahap. Kereta baharu bermula pada 0%, jadi NCD 25% pertama diperoleh pada pembaharuan selepas setahun penuh tanpa tuntutan.</p>
+
+  <h2 id="formula">Cara kira premium selepas NCD</h2>
+  <ol>
+    <li><strong>Diskaun NCD</strong> = premium kasar × peratus NCD.</li>
+    <li><strong>Premium bersih</strong> = premium kasar − diskaun NCD.</li>
+    <li><strong>SST</strong> = 8% × premium bersih.</li>
+    <li><strong>Jumlah</strong> = premium bersih + SST + duti setem RM10.</li>
+  </ol>
+  <p>Contoh: premium kasar RM2,000 dengan NCD 55% → diskaun RM1,100, premium RM900, SST RM72, jumlah <strong>RM982</strong>.</p>
+
+  <h2 id="prem-h">Jumlah premium mengikut NCD</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="prem-h">
+    <table class="data">
+      <thead><tr><th scope="col">Premium kasar</th><th scope="col">0%</th><th scope="col">25%</th><th scope="col">30%</th><th scope="col">38.33%</th><th scope="col">45%</th><th scope="col">55%</th></tr></thead>
+      <tbody>
+{{N_PREM}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="claim-h">Patut claim insurans atau bayar sendiri?</h2>
+  <p>Selepas tuntutan, NCD kembali ke 0% dan mengambil lima tahun untuk naik semula ke 55%. Premium tambahan sepanjang tempoh itu ialah kos sebenar tuntutan. Jika kos baiki lebih rendah, bayar sendiri lebih jimat.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="claim-h">
+    <table class="data">
+      <thead><tr><th scope="col">Premium kasar</th><th scope="col">Kos tuntutan pada NCD 38.33%</th><th scope="col">Kos tuntutan pada NCD 55%</th></tr></thead>
+      <tbody>
+{{N_CLAIMS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Peraturan penting NCD</h2>
+  <ul>
+    <li><strong>NCD milik anda, bukan kereta.</strong> Apabila menukar kereta, minta penarikan NCD daripada polisi lama untuk digunakan pada kereta baharu atas nama anda.</li>
+    <li><strong>Tuntutan kerosakan sendiri, kecurian dan bencana</strong> mengembalikan NCD kepada 0% pada pembaharuan seterusnya.</li>
+    <li><strong>Tuntutan cermin hadapan</strong> di bawah perlindungan cermin, dan tuntutan terhadap insurans pemandu yang bersalah, biasanya tidak menjejaskan NCD.</li>
+    <li><strong>Pembaharuan lewat</strong> boleh menjejaskan NCD; perbaharui sebelum tamat tempoh.</li>
+    <li>Sejak pasaran motor diliberalisasikan, premium kasar ditetapkan oleh setiap syarikat, tetapi jadual NCD yang sama masih digunakan.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.piam.org.my/pdf/consumer-guide/PIAM-FAQ-Sheet-Motor-Insurance-Consumer-Guide.pdf" rel="noopener">PIAM: Panduan Pengguna Insurans Motor</a></li>
+    <li><a href="https://www.kurnia.com/blog/no-claim-discount-ncd-rate" rel="noopener">Kurnia: jadual kadar NCD</a></li>
+    <li><a href="https://www.motorist.my/ms/article/4368/how-no-claim-discount-ncd-works-in-malaysia" rel="noopener">Motorist: bagaimana NCD berfungsi</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja. Premium, excess dan syarat NCD sebenar ditetapkan oleh syarikat insurans atau pengendali takaful anda. Semak NCD semasa anda dengan syarikat insurans sebelum membeli polisi.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-loan-kereta/">Kalkulator Loan Kereta<small>Ansuran, cukai jalan dan insurans</small></a>
+    <a href="/kalkulator-minyak/">Kalkulator Minyak<small>Kos perjalanan dan harga minyak minggu ini</small></a>
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Ansuran bulanan dan kadar efektif</small></a>
+  </div>
+</section>
