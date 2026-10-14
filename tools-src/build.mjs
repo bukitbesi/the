@@ -1158,7 +1158,7 @@ function ncdMap(lang) {
     .map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
   lines.push(`<tr class="total"><th scope="row">${L ? 'Jumlah dibayar' : 'Total to pay'}</th><td>${m(p.total)}</td></tr>`);
   const ladder = r.ladder.map(l => `<tr${l.years === r.years ? ' class="total"' : ''}><th scope="row">${yrs(l.years)}</th><td>${pc(l.ncd)}</td><td>${m(l.total)}</td></tr>`).join('\n');
-  const claim = r.claim.rows.map(x => `<tr><th scope="row">${L ? 'Pembaharuan ke-' + x.renewal : 'Renewal ' + x.renewal}</th><td>${pc(x.keep)}</td><td>${pc(x.after)}</td><td>${m(x.extra)}</td></tr>`).join('\n');
+  const claim = r.claim.rows.map(x => `<tr><th scope="row">${x.renewal}</th><td>${pc(x.keep)}</td><td>${pc(x.after)}</td><td>${m(x.extra)}</td></tr>`).join('\n');
   const scale = [0, 1, 2, 3, 4, 5].map(y => `<tr><th scope="row">${yrs(y)}</th><td>${pc(S.car[y])}</td><td>${pc(S.motorcycle[y])}</td><td>${pc(S.commercial[y])}</td></tr>`).join('\n');
   const prem = [800, 1500, 2000, 3000, 4000].map(g => `<tr><th scope="row">${m(g)}</th>${[0, 25, 30, 38.33, 45, 55].map(n => `<td>${m(ncdCore.premium(g, n).total)}</td>`).join('')}</tr>`).join('\n');
   const est = carCore.insurance(NCD_EXAMPLE.sumInsured, NCD_EXAMPLE.cc, 0).gross;
@@ -1168,7 +1168,7 @@ function ncdMap(lang) {
     : (L ? `Bayar sendiri: kos baiki ${m(r.repair)} lebih rendah daripada ${m(r.claim.total)} premium tambahan akibat kehilangan NCD.` : `Pay it yourself: the ${m(r.repair)} repair costs less than the ${m(r.claim.total)} extra premium from losing your NCD.`);
   const c3 = ncdCore.claimCost('car', 3, 2000), moto = ncdCore.calculate({ type: 'motorcycle', years: 5, gross: 300 });
   return {
-    N_TYPE_OPTIONS: [opt('car', 'Private car', 'Kereta persendirian', true), opt('motorcycle', 'Motorcycle', 'Motosikal'), opt('commercial', 'Commercial vehicle', 'Kenderaan perdagangan')].join(''),
+    N_TYPE_OPTIONS: [opt('car', 'Car', 'Kereta', true), opt('motorcycle', 'Motorcycle', 'Motosikal'), opt('commercial', 'Commercial', 'Komersial')].join(''),
     N_YEARS_OPTIONS: [0, 1, 2, 3, 4, 5].map(y => `<option value="${y}"${y === NCD_EXAMPLE.years ? ' selected' : ''}>${y === 5 ? (L ? '5+ tahun' : '5+ years') : yrs(y)}</option>`).join(''),
     N_BASIS_OPTIONS: [opt('gross', 'I know my premium before NCD', 'Saya tahu premium sebelum NCD', true), opt('estimate', 'Estimate from sum insured and cc', 'Anggar dari nilai dilindungi dan cc')].join(''),
     N_GROSS: NCD_EXAMPLE.gross, N_REPAIR: NCD_EXAMPLE.repair, N_SUM: NCD_EXAMPLE.sumInsured, N_CC: NCD_EXAMPLE.cc, N_EST_GROSS: m(est),
@@ -1190,7 +1190,7 @@ function iddahMap(lang) {
     ...r.periods.map((p, i) => [L ? `Haid ke-${i + 1} selepas talak` : `Period ${i + 1} after the talak`, both(p)])].map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
   lines.push(`<tr class="total"><th scope="row">${L ? 'Tamat' : 'Ends'}</th><td>${both(r.end)}</td></tr>`,
     `<tr><th scope="row">${L ? 'Tempoh' : 'Length'}</th><td>${dayN(r.days)}</td></tr>`,
-    `<tr><th scope="row">${L ? 'Boleh rujuk hingga' : 'Reconciliation (rujuk) possible until'}</th><td>${both(r.end)}</td></tr>`,
+    `<tr><th scope="row">${L ? 'Boleh rujuk hingga' : 'Rujuk possible until'}</th><td>${both(r.end)}</td></tr>`,
     `<tr><th scope="row">${L ? 'Ihdad (berkabung)' : 'Ihdad (mourning)'}</th><td>${L ? 'Tidak wajib' : 'Not required'}</td></tr>`);
   const d = IDDAH_EXAMPLE.date, w = iddahCore.calculate({ event: 'death', date: d }), t = iddahCore.calculate({ event: 'divorce', date: d, state: 'nohaid' });
   const ex = [

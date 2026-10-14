@@ -206,6 +206,8 @@ ins.adsbygoogle[data-ad-status=unfilled],.google-auto-placed:has(ins[data-ad-sta
 .field{margin-bottom:16px}
 .field>label,.field legend{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
 .help{font-size:.8rem;color:var(--text3);margin-top:4px}
+/* A hint under a whole row of fields keeps clear of the next label. */
+.field-row+.help{margin:-10px 0 16px}
 .input{display:flex;align-items:center;border:1px solid var(--border2);border-radius:12px;background:var(--bg);min-height:48px;padding:0 12px}
 .input:focus-within{border-color:var(--accent2);box-shadow:0 0 0 3px var(--tint-b)}
 .input span{color:var(--text3);font-weight:600;margin-right:8px}
@@ -232,6 +234,8 @@ fieldset{border:0;min-width:0}
 .rows td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .rows tr.total th,.rows tr.total td{font-weight:800;border-bottom:0}
 .rows small{display:block;color:var(--text3);font-size:.78rem;font-weight:400}
+/* Text-heavy result tables let values wrap on narrow phones instead of overflowing the box. */
+.rows.wrap td{white-space:normal;overflow-wrap:anywhere}
 .note{font-size:.82rem;color:var(--text3);margin-top:12px}
 .tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 
@@ -420,7 +424,9 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .field-group legend{font-weight:700;font-size:.95rem;padding:0;margin-bottom:10px;float:left;width:100%}
 .field-group legend+*{clear:both}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.field-row .field{min-width:0}
+.field-row .field{min-width:0;display:flex;flex-direction:column}
+/* A label that wraps to two lines pushes its input down; the shorter label grows so both inputs line up. */
+.field-row .field>label{flex:1 0 auto;display:flex;align-items:flex-end}
 .field-row-3{grid-template-columns:1fr 1fr 1fr}
 /* BMI gauge: segments on a 15–40 scale (Malaysian CPG cut-offs); colours are decorative, the category is in text. */
 .gauge{position:relative;display:flex;height:12px;margin:16px 0 22px;border-radius:99px;overflow:visible}
@@ -529,7 +535,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
       </div>
       <p class="sr-only" id="iLive" aria-live="polite"></p>
       <p class="callout error" id="iError" hidden>Enter a date between 21 November 1979 and 16 November 2077.</p>
-      <table class="rows">
+      <table class="rows wrap">
         <caption>Details</caption>
         <tbody id="iLines">
 <tr><th scope="row">Type of iddah</th><td>Three periods of purity (quru')</td></tr>
@@ -539,7 +545,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
 <tr><th scope="row">Period 3 after the talak</th><td>24 December 2026<small>14 Rajab 1448 AH</small></td></tr>
 <tr class="total"><th scope="row">Ends</th><td>24 December 2026<small>14 Rajab 1448 AH</small></td></tr>
 <tr><th scope="row">Length</th><td>71 days</td></tr>
-<tr><th scope="row">Reconciliation (rujuk) possible until</th><td>24 December 2026<small>14 Rajab 1448 AH</small></td></tr>
+<tr><th scope="row">Rujuk possible until</th><td>24 December 2026<small>14 Rajab 1448 AH</small></td></tr>
 <tr><th scope="row">Ihdad (mourning)</th><td>Not required</td></tr>
         </tbody>
       </table>
