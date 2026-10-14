@@ -1,0 +1,138 @@
+<!--page
+{
+  "path": "/fidyah-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-fidyah/" },
+  "title": "Fidyah Calculator Malaysia 2026: Fidyah Rates by State",
+  "description": "Fidyah calculator for Malaysia: fidyah for missed fasts at each state's 2026 rate, multiplied for delayed qada, for pregnancy, nursing and those unable to fast.",
+  "llms": "Calculates fidyah for missed Ramadan fasts in Malaysia at each state's 2026 rate (one cupak of the staple food a day, paid in money): Selangor RM2.00, RM4.30 or RM6.30 by rice type; Federal Territories RM4.00; Johor RM1.75, RM3.00 or RM5.00; Perak RM2.75, RM4.40 or RM7.45; Kedah RM2.00 or RM4.00; Perlis RM5.00; Terengganu RM2.50; Kelantan and Melaka RM2.00; Negeri Sembilan, Sabah and Sarawak RM1.90; Penang and Pahang RM1.75. Under the relied-upon Shafi'i view, delaying the qada past the next Ramadan without a valid reason adds one fidyah a day for every Ramadan passed; those unable to fast (old age, chronic illness) pay one fidyah a day without qada; pregnant or nursing women who did not fast for fear for the child make up the fast and pay one fidyah a day.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fidyah",
+  "scripts": ["/assets/js/fidyah.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Fidyah Calculator", null]],
+  "about": ["Fidyah", "Making up Ramadan fasts", "State fidyah rates", "Fasting"],
+  "app": {
+    "name": "Fidyah Calculator Malaysia",
+    "category": "ReferenceApplication",
+    "features": ["2026 fidyah rates for 14 states", "By rice type (Selangor, Johor, Perak, Kedah)", "Multiplied for every Ramadan passed", "Pregnant and nursing women", "Unable to fast (old age, chronic illness)", "Works offline"]
+  },
+  "citations": [
+    ["Lembaga Zakat Selangor: 2026 fidyah rates by rice type", "https://www.threads.com/@zakatselangor/post/DTMNjEHAc9L/korang-dah-selesaikan-fidyah-untuk-tahun-kadar-fidyah-di-selangor-mengikut?hl=en"],
+    ["Baitulmal JAWHAR: Fidyah rate statistics", "https://baitulmal.jawhar.gov.my/statistik-kadar-fidyah/"],
+    ["eCentral: 2026 fidyah rates by state", "https://ecentral.my/kadar-fidyah-2026/"],
+    ["MUIS: Fatwa on fidyah and kaffarah rates", "https://www.muis.gov.sg/resources/khutbah-and-religious-advice/fatwa/kadar-fidyah-dan-kafarah/"]
+  ],
+  "faq": [
+    { "q": "How is fidyah calculated?", "a": "Multiply the number of fasts not made up by the number of Ramadans that have passed, then by your state's fidyah rate. In Selangor (local rice, RM2.00): 5 days delayed past one Ramadan = 5 cupak = RM10.00; delayed past two Ramadans, {{FI_EX2}}." },
+    { "q": "What is the 2026 fidyah rate in Selangor?", "a": "Lembaga Zakat Selangor sets 2026 rates by rice type: RM2.00 a day (local super special rice), RM4.30 (fragrant, brown, ponni, imported and glutinous rice) and RM6.30 (basmathi, Japanese and red rice)." },
+    { "q": "What is the fidyah rate in the Federal Territories?", "a": "RM4.00 a day for 2026. Someone unable to fast for the whole 30 days of Ramadan pays {{FI_WP30}}." },
+    { "q": "Does fidyah multiply if the qada is delayed?", "a": "Yes, under the relied-upon Shafi'i view followed in Malaysia, every Ramadan that passes before the fast is made up without a valid reason adds one fidyah for each day. The fast must still be made up. The Maliki and Hanbali schools do not multiply it." },
+    { "q": "Who must pay fidyah?", "a": "Those who delay making up a fast past the next Ramadan without a valid reason; those unable to fast because of old age or an illness with no hope of recovery (fidyah without qada); and pregnant or nursing women who did not fast out of fear for the child (qada and fidyah)." },
+    { "q": "Does a pregnant woman pay fidyah or make up the fast?", "a": "If she did not fast out of fear for herself, she only makes up the fast. If it was out of fear for the unborn or nursing child, she makes up the fast and pays one cupak of fidyah for each day." },
+    { "q": "Where do I pay fidyah?", "a": "To your state's religious council or zakat centre, including online portals such as Lembaga Zakat Selangor and Pusat Pungutan Zakat Wilayah Persekutuan. Each state sets its rate from the current price of rice." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Fidyah calculator</li></ol></nav>
+  <h1>Fidyah Calculator Malaysia</h1>
+  <p class="answer">Fidyah = fasts not made up × Ramadans passed × your state's rate. 2026 rates: <strong>Selangor RM2.00</strong> (local rice, up to RM6.30), <strong>Federal Territories RM4.00</strong>, Johor RM1.75, Perak RM2.75 and Kedah RM2.00 a day. Five days delayed past one Ramadan in Selangor = <strong>{{FI_TOTAL}}</strong>. Enter your details below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{FI_VERIFIED_ISO}}">{{FI_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-fidyah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="fidyahForm" novalidate aria-labelledby="fidyah-h">
+      <h2 id="fidyah-h">Missed fasts</h2>
+      <div class="field-row">
+        <div class="field"><label for="state">State</label><select class="input" id="state" name="state">{{FI_STATE_OPTIONS}}</select></div>
+        <div class="field"><label for="type">Rice type / rate</label><select class="input" id="type" name="type">{{FI_TYPE_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="reason">Reason</label><select class="input" id="reason" name="reason">{{FI_REASON_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="days">Days of fasting</label><div class="input"><input id="days" name="days" type="number" inputmode="numeric" min="0" step="1" value="{{FI_DAYS}}"><span aria-hidden="true">days</span></div></div>
+        <div class="field" id="fYears"><label for="years">Ramadans passed</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="0" step="1" value="{{FI_YEARS}}"></div></div>
+      </div>
+      <p class="help">How many Ramadans began before the fast was made up. 1 if one Ramadan has just passed.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fidyah-result-h">
+      <h2 id="fidyah-result-h">Your fidyah</h2>
+      <div class="net">
+        <p>Total fidyah</p>
+        <output id="fTotal" for="state type reason days years">{{FI_TOTAL}}</output>
+        <p id="fSub">{{FI_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Calculation</caption>
+        <tbody id="fLines">
+{{FI_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Fidyah does not cancel the duty to make up the fast, except for those unable to fast.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fidyahPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">2026 fidyah rates by state</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">State</th><th scope="col">Per day (one cupak)</th><th scope="col">30 days (lowest rate)</th></tr></thead>
+      <tbody>
+{{FI_RATES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Each state's Islamic religious council sets the rate from the price of rice, and it can change every year. Pick the rate for the rice you eat.</p>
+
+  <h2 id="formula">How fidyah is worked out</h2>
+  <ol>
+    <li><strong>Delayed qada:</strong> days × Ramadans passed × rate. The fast must still be made up.</li>
+    <li><strong>Pregnant or nursing, for the child:</strong> days × (1 + Ramadans passed) × rate, and make up the fast.</li>
+    <li><strong>Unable to fast</strong> (old age or chronic illness): days × rate, with no qada.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="who">Who pays fidyah, who makes up the fast</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="who">
+    <table class="data text">
+      <thead><tr><th scope="col">Situation</th><th scope="col">Qada</th><th scope="col">Fidyah</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Temporary illness, travel, menstruation, postnatal bleeding</th><td>Yes</td><td>No, if made up before the next Ramadan</td></tr>
+        <tr><th scope="row">Qada delayed past the next Ramadan without a valid reason</th><td>Yes</td><td>1 cupak a day for every Ramadan passed</td></tr>
+        <tr><th scope="row">Pregnant or nursing, fearing for herself</th><td>Yes</td><td>No</td></tr>
+        <tr><th scope="row">Pregnant or nursing, fearing for the child</th><td>Yes</td><td>1 cupak a day</td></tr>
+        <tr><th scope="row">Old age or illness with no hope of recovery</th><td>No</td><td>1 cupak a day</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.threads.com/@zakatselangor/post/DTMNjEHAc9L/korang-dah-selesaikan-fidyah-untuk-tahun-kadar-fidyah-di-selangor-mengikut?hl=en" rel="noopener">Lembaga Zakat Selangor: 2026 fidyah rates</a></li>
+    <li><a href="https://baitulmal.jawhar.gov.my/statistik-kadar-fidyah/" rel="noopener">Baitulmal JAWHAR: fidyah rate statistics</a></li>
+    <li><a href="https://ecentral.my/kadar-fidyah-2026/" rel="noopener">eCentral: 2026 fidyah rates by state</a></li>
+    <li><a href="https://www.muis.gov.sg/resources/khutbah-and-religious-advice/fatwa/kadar-fidyah-dan-kafarah/" rel="noopener">MUIS: fatwa on fidyah rates (multiplying fidyah)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A reference tool, not a fatwa. Confirm the rate with your state's religious council or zakat centre before paying, and ask the Mufti Department about specific cases.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/hijri-date-converter/">Hijri Date Converter<small>Ramadan and Shawwal dates on Malaysia's takwim</small></a>
+    <a href="/zakat-calculator-malaysia/">Zakat Calculator Malaysia<small>Zakat on income with had kifayah</small></a>
+    <a href="/iddah-calculator/">Iddah Calculator<small>Waiting period after divorce or death</small></a>
+  </div>
+</section>

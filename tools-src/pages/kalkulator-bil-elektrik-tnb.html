@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/kalkulator-bil-elektrik-tnb/",
+  "lang": "ms",
+  "alternates": { "en": "/tnb-bill-calculator/" },
+  "title": "Kalkulator Bil Elektrik TNB 2026: Kira Bil Ikut Tarif Baharu",
+  "description": "Kalkulator bil elektrik TNB: kira bil rumah ikut tarif RP4 (27.03 sen/kWj), rebat EEI, AFA, KWTBB dan SST, dengan perlindungan 800 kWj hingga Disember 2026.",
+  "llms": "Mengira bil elektrik domestik TNB (Semenanjung Malaysia) mengikut tarif RP4 mulai 1 Julai 2025: caj tenaga 27.03 sen/kWj (hingga 1,500 kWj), caj kapasiti 4.55 sen/kWj dan caj rangkaian 12.85 sen/kWj, tolak Insentif Kecekapan Tenaga (EEI) bagi penggunaan hingga 1,000 kWj (kadar jalur × semua kWj, 25 sen bagi 1–200 kWj hingga 0.5 sen bagi 901–1,000 kWj); AFA (pelarasan bahan api bulanan), caj peruncitan RM10 dan SST 8% (atas kWj melebihi paras perlindungan) hanya dikenakan melebihi paras perlindungan 600 kWj, yang dinaikkan kepada 800 kWj bagi September hingga Disember 2026; KWTBB 1.6% melebihi 300 kWj. Contoh: 200 kWj RM38.86, 300 kWj RM65.79, 600 kWj RM215.98.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "tnb",
+  "scripts": ["/assets/js/tnb.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Bil Elektrik TNB", null]],
+  "about": ["Bil elektrik TNB", "Tarif elektrik domestik Malaysia", "Insentif Kecekapan Tenaga (EEI)", "AFA"],
+  "app": {
+    "name": "Kalkulator Bil Elektrik TNB",
+    "category": "UtilitiesApplication",
+    "features": ["Tarif domestik RP4 (Julai 2025)", "Rebat EEI ikut jalur penggunaan", "AFA, caj peruncitan, KWTBB dan SST", "Perlindungan 800 kWj (Sep–Dis 2026)", "Anggar kWj dari peralatan", "Pecahan bil penuh", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["myTNB: Fahami struktur tarif elektrik anda", "https://www.mytnb.com.my/tariff/index.html"],
+    ["paultan.org: Pengiraan tarif elektrik baharu TNB mulai Julai 2025", "https://paultan.org/2025/06/21/tnb-new-electricity-tariff-calculation-from-july-2025/"],
+    ["RinggitPlus: Your new TNB bill explained", "https://ringgitplus.com/en/blog/personal-finance-news/your-new-tnb-bill-explained-understanding-the-monthly-tariff-changes.html"],
+    ["Dewan Ekonomi: Kerajaan perluas perlindungan bil elektrik hingga 800 kWj", "https://dewanekonomi.jendeladbp.my/2026/09/18/15788/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira bil elektrik TNB?", "a": "Darab kWj dengan 44.43 sen (caj tenaga 27.03 + kapasiti 4.55 + rangkaian 12.85 sen), tolak rebat EEI (kadar jalur penggunaan anda × semua kWj), kemudian tambah KWTBB 1.6% jika melebihi 300 kWj. Bagi 300 kWj: RM133.29 − RM67.50 EEI = RM65.79." },
+    { "q": "Berapa bil elektrik untuk 300 kWj?", "a": "Kira-kira {{T_300}} sebulan: caj RM133.29 tolak rebat EEI 22.5 sen × 300 kWj (RM67.50). Tiada AFA, caj peruncitan, KWTBB atau SST pada paras ini. Bagi 200 kWj bil ialah {{T_200}} dan bagi 600 kWj {{T_600}}." },
+    { "q": "Apakah rebat EEI dalam bil TNB?", "a": "Insentif Kecekapan Tenaga (EEI) ialah rebat bagi penggunaan hingga 1,000 kWj sebulan. Kadar jalur anda didarab dengan semua kWj: 25 sen bagi 1–200 kWj, 22.5 sen bagi 251–300 kWj, 9 sen bagi 551–600 kWj, hingga 0.5 sen bagi 901–1,000 kWj. Lebih rendah penggunaan, lebih besar rebat." },
+    { "q": "Apakah AFA dalam bil elektrik?", "a": "AFA (Automatic Fuel Adjustment) ialah pelarasan kos bahan api bulanan dalam sen/kWj, boleh surcaj atau rebat, ditetapkan setiap bulan. Ia hanya dikenakan jika penggunaan melebihi paras perlindungan: 600 kWj, atau 800 kWj bagi September hingga Disember 2026. Masukkan kadar AFA pada bil anda dalam kalkulator." },
+    { "q": "Adakah pengguna bawah 800 kWj dikecualikan AFA dan SST?", "a": "Ya, bagi penggunaan September hingga 31 Disember 2026, kerajaan menaikkan paras perlindungan daripada 600 kepada 800 kWj sebulan: pengguna domestik hingga 800 kWj tidak dikenakan AFA, caj peruncitan RM10 dan SST 8%. Selepas itu paras kembali 600 kWj melainkan dilanjutkan." },
+    { "q": "Berapa bil TNB untuk 1,000 kWj?", "a": "Kira-kira {{T_1000}} pada paras perlindungan 600 kWj dan AFA sifar: caj RM444.30 tolak EEI 0.5 sen, tambah caj peruncitan RM10, KWTBB 1.6% dan SST 8% atas 400 kWj melebihi 600 kWj. AFA yang positif menambah bil." },
+    { "q": "Adakah kalkulator ini untuk Sabah dan Sarawak?", "a": "Tidak. Tarif ini untuk pengguna domestik TNB di Semenanjung Malaysia. Sabah dan Labuan dibekalkan oleh SESB dan Sarawak oleh SEB, masing-masing dengan tarif sendiri." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator bil elektrik TNB</li></ol></nav>
+  <h1>Kalkulator Bil Elektrik TNB</h1>
+  <p class="answer">Bil TNB domestik = kWj × <strong>44.43 sen</strong> (tenaga 27.03 + kapasiti 4.55 + rangkaian 12.85) tolak rebat EEI, tambah KWTBB 1.6% melebihi 300 kWj. Penggunaan 300 kWj sebulan berjumlah <strong>{{T_300}}</strong> dan 600 kWj {{T_600}}. AFA, caj peruncitan RM10 dan SST hanya dikenakan melebihi <strong>{{T_LEVEL}} kWj</strong>. Masukkan penggunaan anda di bawah.</p>
+  <p class="meta"><span>Tarif disemak <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/tnb-bill-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="tnbForm" novalidate aria-labelledby="tnb-h">
+      <h2 id="tnb-h">Penggunaan elektrik anda</h2>
+      <div class="field"><label for="mode">Cara kira</label><select class="input" id="mode" name="mode">{{T_MODE_OPTIONS}}</select></div>
+      <fieldset class="field-group" id="tAppliance" hidden>
+        <legend>Anggar dari peralatan</legend>
+        <div class="field-row">
+          <div class="field"><label for="watts">Jumlah watt peralatan</label><div class="input"><input id="watts" name="watts" type="number" inputmode="numeric" min="0" step="50" value="1000"><span aria-hidden="true">W</span></div></div>
+          <div class="field"><label for="hours">Jam sehari</label><div class="input"><input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="8"><span aria-hidden="true">jam</span></div></div>
+        </div>
+        <div class="field"><label for="base">Penggunaan lain sebulan</label><div class="input"><input id="base" name="base" type="number" inputmode="numeric" min="0" step="10" value="150"><span aria-hidden="true">kWj</span></div><p class="help">Peti sejuk, lampu dan lain-lain. Penghawa dingin 1 kuasa kuda kira-kira 800–1,000 W.</p></div>
+      </fieldset>
+      <div class="field"><label for="kwh">Penggunaan sebulan</label><div class="input"><input id="kwh" name="kwh" type="number" inputmode="numeric" min="0" max="1500" step="1" value="{{T_KWH}}"><span aria-hidden="true">kWj</span></div><p class="help">Tertera pada bil sebagai "Penggunaan (kWj)". Kalkulator meliputi hingga 1,500 kWj.</p></div>
+      <div class="field-row">
+        <div class="field"><label for="afa">Kadar AFA</label><div class="input"><input id="afa" name="afa" type="number" inputmode="decimal" step="0.01" value="{{T_AFA}}"><span aria-hidden="true">sen/kWj</span></div></div>
+        <div class="field"><label for="protection">Paras perlindungan</label><select class="input" id="protection" name="protection">{{T_PROT_OPTIONS}}</select></div>
+      </div>
+      <p class="help">Kadar AFA berubah setiap bulan (surcaj atau rebat); salin dari bil anda. Ia hanya dikenakan melebihi paras perlindungan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tnb-result-h">
+      <h2 id="tnb-result-h">Anggaran bil anda</h2>
+      <div class="net">
+        <p>Jumlah bil sebulan</p>
+        <output id="tTotal" for="kwh afa protection">{{T_TOTAL}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan bil</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Anggaran bagi tarif domestik am TNB di Semenanjung. Bil sebenar boleh berbeza mengikut hari bil dan pelarasan.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tnbPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Anggaran bil TNB mengikut kWj</h2>
+  <p>AFA sifar. Lajur kedua dengan perlindungan 800 kWj (September–Disember 2026), lajur ketiga pada paras biasa 600 kWj.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penggunaan</th><th scope="col">Rebat EEI</th><th scope="col">Bil (800 kWj)</th><th scope="col">Bil (600 kWj)</th></tr></thead>
+      <tbody>
+{{T_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara bil TNB dikira (tarif RP4)</h2>
+  <ol>
+    <li><strong>Caj asas:</strong> kWj × (27.03 sen tenaga + 4.55 sen kapasiti + 12.85 sen rangkaian) = 44.43 sen setiap kWj.</li>
+    <li><strong>Rebat EEI:</strong> kadar jalur penggunaan anda × semua kWj, bagi penggunaan hingga 1,000 kWj.</li>
+    <li><strong>AFA:</strong> kWj × kadar AFA bulan itu, hanya jika melebihi paras perlindungan.</li>
+    <li><strong>Caj peruncitan:</strong> RM10 sebulan, hanya jika melebihi paras perlindungan.</li>
+    <li><strong>KWTBB:</strong> 1.6% bagi penggunaan melebihi 300 kWj (Kumpulan Wang Tenaga Boleh Baharu).</li>
+    <li><strong>SST 8%:</strong> atas bahagian bil bagi kWj melebihi paras perlindungan.</li>
+  </ol>
+  <p>Contoh 300 kWj: 300 × 44.43 sen = RM133.29, tolak EEI 300 × 22.5 sen = RM67.50, bil <strong>RM65.79</strong> (purata 21.9 sen/kWj).</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="eei-h">Jadual rebat EEI</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="eei-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penggunaan sebulan</th><th scope="col">Rebat setiap kWj</th><th scope="col">Rebat maksimum jalur</th></tr></thead>
+      <tbody>
+{{T_EEI}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="protect">Perlindungan 800 kWj hingga Disember 2026</h2>
+  <p>Bagi penggunaan September hingga 31 Disember 2026, kerajaan menaikkan paras perlindungan pengguna domestik daripada 600 kepada 800 kWj sebulan. Pengguna hingga 800 kWj tidak dikenakan AFA, caj peruncitan dan SST. Contoh 800 kWj dengan AFA 3 sen: {{T_800P}} dengan perlindungan, berbanding {{T_800N}} pada paras biasa.</p>
+
+  <h2 id="tips">Cara kurangkan bil elektrik</h2>
+  <ul>
+    <li>Set penghawa dingin pada 24–25°C dan bersihkan penapis setiap bulan.</li>
+    <li>Pantau kWj pada bil: melepasi 600 atau 800 kWj menambah AFA, caj peruncitan dan SST, dan rebat EEI berkurang apabila penggunaan naik.</li>
+    <li>Tukar kepada lampu LED dan peralatan berlabel 5 bintang Suruhanjaya Tenaga.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.mytnb.com.my/tariff/index.html" rel="noopener">myTNB: struktur tarif elektrik</a></li>
+    <li><a href="https://paultan.org/2025/06/21/tnb-new-electricity-tariff-calculation-from-july-2025/" rel="noopener">paultan.org: pengiraan tarif baharu TNB</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/personal-finance-news/your-new-tnb-bill-explained-understanding-the-monthly-tariff-changes.html" rel="noopener">RinggitPlus: penjelasan bil TNB baharu</a></li>
+    <li><a href="https://dewanekonomi.jendeladbp.my/2026/09/18/15788/" rel="noopener">Dewan Ekonomi: perlindungan bil elektrik hingga 800 kWj</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja, bukan bil rasmi. Kadar AFA berubah setiap bulan dan penggunaan melebihi 1,500 kWj dikenakan caj tenaga lebih tinggi. Rujuk bil dan kalkulator rasmi myTNB untuk jumlah sebenar.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-minyak/">Kalkulator Minyak<small>Kos perjalanan dan harga minyak minggu ini</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+    <a href="/kalkulator-gabung-hutang/">Kalkulator Gabung Hutang<small>Satukan hutang kad kredit</small></a>
+  </div>
+</section>

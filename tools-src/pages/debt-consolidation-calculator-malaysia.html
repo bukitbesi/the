@@ -1,0 +1,163 @@
+<!--page
+{
+  "path": "/debt-consolidation-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-gabung-hutang/" },
+  "title": "Debt Consolidation Calculator Malaysia: Is It Worth It?",
+  "description": "Debt consolidation calculator for Malaysia: compare 15–18% credit card interest with one personal loan, including stamp duty and EIR, and see the real saving.",
+  "llms": "Compares paying credit card and other debts as they are (monthly interest on the balance; card minimum payment 5% of the balance or RM50, whichever is higher; card finance charges 15%, 17% or 18% a year by repayment record) with consolidating them into one personal loan (flat rate converted to EIR, 0.5% stamp duty). Example: RM15,000 of card debt at 18% paid at the minimum costs RM5,967.05 in interest; a 6% flat, 5-year loan costs RM325 a month with RM4,500 interest and RM75 stamp duty (10.85% EIR), saving RM1,392.05. A RM10,000 card balance at 18% paid at the minimum takes 89 months and RM4,054.96 in interest.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "debt",
+  "scripts": ["/assets/js/debt.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Debt Consolidation Calculator", null]],
+  "about": ["Debt consolidation", "Credit card debt", "Personal loans", "Credit card interest in Malaysia"],
+  "app": {
+    "name": "Debt Consolidation Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Up to 3 debts (credit cards, other loans)", "Card minimum payment 5% or RM50", "Consolidation loan at a flat rate or EIR", "0.5% stamp duty", "Interest saved and time to clear", "Works offline"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Credit Card and Credit Card-i policy document", "https://www.bnm.gov.my/documents/20124/938039/credit_card_and_credit_card-i_PD.pdf"],
+    ["HSBC Malaysia: Credit card product disclosure", "https://www.hsbc.com.my/content/dam/hsbc/my/docs/credit-card-product-disclosure.pdf"],
+    ["AKPK: Debt Management Programme", "https://www.akpk.org.my/"]
+  ],
+  "faq": [
+    { "q": "Is consolidating credit card debt worth it?", "a": "Usually, if the new loan's rate is clearly lower and you do not run the cards up again. RM15,000 of card debt at 18% paid at the minimum costs {{D_NOW_INT}} in interest; a 6% flat, 5-year loan costs {{D_LOAN_INT}} in interest and {{D_STAMP}} stamp duty, saving {{D_SAVING}}." },
+    { "q": "What is credit card interest in Malaysia?", "a": "Bank Negara sets tiered finance charges: 15% a year for cardholders who paid the minimum on time for 12 consecutive months, 17% for 10 of the last 12 months, and 18% for everyone else. Cash advances are charged at most 18% a year." },
+    { "q": "What is the credit card minimum payment?", "a": "At least 5% of the outstanding balance or RM50, whichever is higher. Paying only the minimum on RM10,000 at 18% takes {{D_P10_MONTHS}} months (about {{D_P10_YEARS}} years) and {{D_P10_INT}} in interest." },
+    { "q": "Why does a flat-rate personal loan cost more than it looks?", "a": "A flat rate is charged on the original loan for the whole term even as the balance falls. A 6% flat rate over 5 years equals an effective rate (EIR) of about {{D_EIR}}, so compare the EIR with the card's 15–18%." },
+    { "q": "When is debt consolidation not worth it?", "a": "If you already pay large amounts on your cards each month and will clear them within a year or two, stretching the debt into a 5-year loan can cost more interest. It also backfires if you spend on the cards again once they are paid off." },
+    { "q": "What are the alternatives to a consolidation loan?", "a": "A credit card balance transfer at a low rate for a set period, or AKPK's free Debt Management Programme (DMP), which renegotiates repayments with your banks if you are struggling to pay." },
+    { "q": "What other costs does a consolidation loan have?", "a": "Stamp duty of 0.5% of the loan (RM75 on RM15,000), and sometimes a processing fee or insurance. The bank also checks your CCRIS record and debt service ratio (DSR) before approving." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Debt consolidation calculator</li></ol></nav>
+  <h1>Debt Consolidation Calculator Malaysia</h1>
+  <p class="answer">RM15,000 of credit card debt at 18% paid at the minimum costs <strong>{{D_NOW_INT}} in interest</strong>. Consolidating it into a 6% flat, 5-year personal loan costs {{D_MONTHLY}} a month and saves <strong>{{D_SAVING}}</strong> after stamp duty. It only pays off if the loan's effective rate is lower and the cards are not used again. Enter your debts below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-gabung-hutang/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="debtForm" novalidate aria-labelledby="debt-h">
+      <h2 id="debt-h">Your debts now</h2>
+      <fieldset class="field-group">
+        <legend>Debt 1</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b1">Balance</label><input class="input" id="b1" name="b1" type="number" inputmode="decimal" min="0" step="100" value="{{D_B1}}"></div>
+          <div class="field"><label for="r1">Interest %</label><input class="input" id="r1" name="r1" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p1">Payment</label><input class="input" id="p1" name="p1" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Debt 2</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b2">Balance</label><input class="input" id="b2" name="b2" type="number" inputmode="decimal" min="0" step="100" value="{{D_B2}}"></div>
+          <div class="field"><label for="r2">Interest %</label><input class="input" id="r2" name="r2" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p2">Payment</label><input class="input" id="p2" name="p2" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Debt 3 (optional)</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b3">Balance</label><input class="input" id="b3" name="b3" type="number" inputmode="decimal" min="0" step="100" value=""></div>
+          <div class="field"><label for="r3">Interest %</label><input class="input" id="r3" name="r3" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p3">Payment</label><input class="input" id="p3" name="p3" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <p class="help">Leave the monthly payment empty for the card minimum (5% of the balance or RM50).</p>
+      <fieldset class="field-group">
+        <legend>Consolidation loan</legend>
+        <div class="field-row">
+          <div class="field"><label for="rate">Rate a year</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.1" value="{{D_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="years">Term</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="10" step="1" value="{{D_YEARS}}"><span aria-hidden="true">years</span></div></div>
+        </div>
+        <div class="field"><label for="method">Rate type</label><select class="input" id="method" name="method">{{D_METHOD_OPTIONS}}</select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="debt-result-h">
+      <h2 id="debt-result-h">Comparison</h2>
+      <div class="net">
+        <p id="dHead">{{D_HEAD}}</p>
+        <output id="dSaving" for="b1 r1 p1 b2 r2 p2 b3 r3 p3 rate years method">{{D_SAVING}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <p class="callout" id="dNever" hidden>Your payment does not cover the monthly interest, so the debt never clears. Raise the payment or get help from AKPK.</p>
+      <table class="rows">
+        <caption>Now against the loan</caption>
+        <thead><tr><th scope="col"></th><th scope="col">Now</th><th scope="col">Loan</th></tr></thead>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Card interest is worked out monthly on the balance; banks charge daily, so real figures differ slightly.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="debtPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="min-h">The cost of paying only the card minimum</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="min-h">
+    <table class="data">
+      <thead><tr><th scope="col">Balance</th><th scope="col">First payment</th><th scope="col">Time (18%)</th><th scope="col">Interest (18%)</th><th scope="col">Interest (15%)</th></tr></thead>
+      <tbody>
+{{D_MIN}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the comparison is worked out</h2>
+  <ol>
+    <li><strong>Now:</strong> each month, interest = balance × rate ÷ 12; your fixed payment, or the 5% / RM50 minimum, is taken off until the balance is zero.</li>
+    <li><strong>Loan:</strong> flat-rate instalment = (loan + loan × rate × years) ÷ months, or the reducing-balance (EIR) instalment.</li>
+    <li><strong>Loan cost</strong> = interest + 0.5% stamp duty.</li>
+    <li><strong>Saving</strong> = interest now − loan cost.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Credit card rates and rules in Malaysia</h2>
+  <ul>
+    <li><strong>Finance charges:</strong> 15% a year (minimum paid on time 12 months in a row), 17% (10 of 12 months), 18% (everyone else).</li>
+    <li><strong>Minimum payment:</strong> 5% of the balance or RM50, whichever is higher.</li>
+    <li><strong>Cash advances:</strong> at most 18% a year, plus a withdrawal fee.</li>
+    <li><strong>Personal loans:</strong> mostly advertised at flat rates; Bank Negara bans flat-rate pricing for new personal financing from 1 January 2027.</li>
+  </ul>
+
+  <h2 id="tips">Before you consolidate</h2>
+  <ul>
+    <li>Compare the loan's <strong>EIR</strong>, not its flat rate, with your card rate.</li>
+    <li>Choose the shortest term you can afford: a long term lowers the instalment but adds interest.</li>
+    <li>Close the cards or cut their limits once paid off so the debt does not come back.</li>
+    <li>If you are struggling to pay, AKPK runs a free Debt Management Programme (DMP).</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/documents/20124/938039/credit_card_and_credit_card-i_PD.pdf" rel="noopener">Bank Negara Malaysia: Credit Card policy document</a></li>
+    <li><a href="https://www.hsbc.com.my/content/dam/hsbc/my/docs/credit-card-product-disclosure.pdf" rel="noopener">HSBC Malaysia: credit card product disclosure (tiered rates)</a></li>
+    <li><a href="https://www.akpk.org.my/" rel="noopener">AKPK: Debt Management Programme</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for comparison, not financial advice. The bank decides the rate, fees and approval.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/personal-loan-calculator-malaysia/">Personal Loan Calculator<small>Monthly instalment and effective rate</small></a>
+    <a href="/ptptn-repayment-calculator/">PTPTN Repayment Calculator<small>Instalment and 1% ujrah</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+  </div>
+</section>

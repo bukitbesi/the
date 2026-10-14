@@ -1,0 +1,136 @@
+<!--page
+{
+  "path": "/ptptn-repayment-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-ptptn/" },
+  "title": "PTPTN Repayment Calculator 2026: Monthly Instalment and 1% Ujrah",
+  "description": "Free PTPTN repayment calculator: monthly instalment with the 1% a year ujrah, total repaid, early settlement saving and the restructuring minimum instalment.",
+  "llms": "Calculates PTPTN loan repayment under the ujrah scheme: ujrah of 1% a year on the principal for the repayment period (total ujrah = principal × 1% × years), spread evenly over the months; example RM30,000 over 15 years: RM4,500 ujrah, RM191.67 a month; 20 years RM150 a month. Repayment starts 12 months after the loan ends and ujrah is charged from the 13th month. Settling early pays the principal balance plus ujrah to the current month only (RM20,000 after 5 years, saving RM3,000 ujrah). Restructuring can extend the period to age 60 with a minimum instalment of about 5–8% of gross income. No repayment discount is offered under Budget 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ptptn",
+  "scripts": ["/assets/js/ptptn.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["PTPTN Repayment Calculator", null]],
+  "about": ["PTPTN", "Education loan repayment", "Ujrah", "Student loans in Malaysia"],
+  "app": {
+    "name": "PTPTN Repayment Calculator",
+    "category": "FinanceApplication",
+    "features": ["Monthly instalment with 1% ujrah", "Total ujrah and total repaid", "Early settlement (ujrah saved)", "Restructuring minimum instalment (5–8% of income)", "Instalment table by amount and period", "Works offline"]
+  },
+  "citations": [
+    ["PTPTN official portal: Repayment", "https://www.ptptn.gov.my/bayaran-balik/"],
+    ["PTPTN official portal: What you must know about repayment", "https://www.ptptn.gov.my/perkara-yang-wajib-anda-tahu-tentang-bayaran-balik-pinjaman-ptptn/"],
+    ["RinggitPlus: PTPTN repayment guide for graduates", "https://ringgitplus.com/ms/blog/sudut-pakar/ini-panduan-bayaran-balik-pinjaman-ptptn-untuk-graduan-di-malaysia.html"]
+  ],
+  "faq": [
+    { "q": "How is PTPTN repayment calculated?", "a": "Work out the ujrah as principal × 1% × the period in years, add it to the principal, then divide by the number of months. A RM30,000 loan over 15 years: RM4,500 ujrah, RM34,500 in total, RM191.67 a month." },
+    { "q": "What is the PTPTN instalment for RM30,000?", "a": "RM191.67 a month over 15 years (RM4,500 ujrah), or {{P_20}} a month over 20 years (RM6,000 ujrah). A longer period lowers the instalment but adds ujrah." },
+    { "q": "When does PTPTN repayment start?", "a": "Repayment starts 12 months after the loan ends, that is after you finish studying, without waiting for a notice from PTPTN. Monthly ujrah is charged from the 13th month; paying early within those 12 months carries no ujrah." },
+    { "q": "How much do I save by settling PTPTN early?", "a": "Full settlement only charges ujrah up to the current month, so the remaining future ujrah is not payable. For RM30,000 over 15 years, after 5 years of payments the principal balance is {{P_S5}} and you save {{P_S5_SAVE}} of ujrah." },
+    { "q": "Is there a PTPTN repayment discount in 2026?", "a": "No. PTPTN has stated there is no repayment discount under Budget 2026. The earlier 10% to 20% discounts were time-limited campaigns that have ended." },
+    { "q": "Can I lower my PTPTN instalment?", "a": "Yes, through restructuring the period can be extended to age 60 with a minimum instalment of about 5% to 8% of gross income, subject to PTPTN's approval. The 1% a year ujrah applies for the extended period." },
+    { "q": "What is PTPTN ujrah?", "a": "Ujrah is a 1% a year service charge (fee) under Shariah principles, replacing conventional interest. It is worked out on the principal for the repayment period and does not compound." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">PTPTN repayment calculator</li></ol></nav>
+  <h1>PTPTN Repayment Calculator</h1>
+  <p class="answer">PTPTN instalment = (principal + principal × <strong>1% ujrah</strong> × years) ÷ months. A RM30,000 loan over 15 years carries RM4,500 ujrah and an instalment of <strong>{{P_MONTHLY}} a month</strong>; over 20 years {{P_20}} a month. Repayment starts 12 months after you finish studying. Enter your loan below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-ptptn/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="ptptnForm" novalidate aria-labelledby="ptptn-h">
+      <h2 id="ptptn-h">Your loan</h2>
+      <div class="field"><label for="amount">Loan amount (principal)</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="500" value="{{P_AMOUNT}}"></div><p class="help">The amount disbursed, as on your statement or repayment schedule (JBB).</p></div>
+      <div class="field"><label for="years">Repayment period</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="40" step="1" value="{{P_YEARS}}"><span aria-hidden="true">years</span></div><p class="help">Your JBB sets the original period; restructuring can extend it to age 60.</p></div>
+      <fieldset class="field-group">
+        <legend>Settlement and restructuring (optional)</legend>
+        <div class="field-row">
+          <div class="field"><label for="paid">Months already paid</label><div class="input"><input id="paid" name="paid" type="number" inputmode="numeric" min="0" step="1" value="0"><span aria-hidden="true">months</span></div></div>
+          <div class="field"><label for="income">Gross monthly income</label><div class="input"><span aria-hidden="true">RM</span><input id="income" name="income" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="ptptn-result-h">
+      <h2 id="ptptn-result-h">Your repayment</h2>
+      <div class="net">
+        <p>Monthly instalment</p>
+        <output id="pMonthly" for="amount years">{{P_MONTHLY}}</output>
+        <p id="pSub">{{P_SUB}}</p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Summary</caption>
+        <tbody id="pLines">
+{{P_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Settle in full now</caption>
+        <tbody id="pSettle">
+{{P_SETTLE}}
+        </tbody>
+      </table>
+      <p class="note">An estimate. The exact figures follow your repayment schedule (JBB) and account statement on the PTPTN portal.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ptptnPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">PTPTN instalment by loan amount</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Loan</th><th scope="col">10 years</th><th scope="col">15 years</th><th scope="col">20 years</th></tr></thead>
+      <tbody>
+{{P_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the PTPTN instalment is worked out</h2>
+  <ol>
+    <li><strong>Ujrah</strong> = principal × 1% × period (years). No compounding.</li>
+    <li><strong>Total repaid</strong> = principal + ujrah.</li>
+    <li><strong>Monthly instalment</strong> = total repaid ÷ (years × 12).</li>
+    <li><strong>Full settlement</strong>: the principal balance only, because ujrah is charged up to the current month.</li>
+  </ol>
+  <p>Example: RM30,000 × 1% × 15 = RM4,500 ujrah; RM34,500 ÷ 180 months = <strong>RM191.67</strong> a month.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">PTPTN repayment rules</h2>
+  <ul>
+    <li><strong>Start:</strong> 12 months after the loan ends, without waiting for a notice. Ujrah starts in the 13th month.</li>
+    <li><strong>Discounts:</strong> no repayment discount under Budget 2026.</li>
+    <li><strong>Restructuring:</strong> the period can be extended to age 60 with a minimum instalment of about 5–8% of gross income, subject to approval.</li>
+    <li><strong>Salary deduction:</strong> employers can deduct instalments straight from salary; check your statement every year.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.ptptn.gov.my/bayaran-balik/" rel="noopener">PTPTN official portal: repayment</a></li>
+    <li><a href="https://www.ptptn.gov.my/perkara-yang-wajib-anda-tahu-tentang-bayaran-balik-pinjaman-ptptn/" rel="noopener">PTPTN: what you must know about repayment</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/sudut-pakar/ini-panduan-bayaran-balik-pinjaman-ptptn-untuk-graduan-di-malaysia.html" rel="noopener">RinggitPlus: PTPTN repayment guide</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. Your PTPTN repayment schedule (JBB) is the official reference for the instalment and period.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+    <a href="/personal-loan-calculator-malaysia/">Personal Loan Calculator<small>Monthly instalment and effective rate</small></a>
+    <a href="/debt-consolidation-calculator-malaysia/">Debt Consolidation Calculator<small>Combine credit card debt into one loan</small></a>
+  </div>
+</section>

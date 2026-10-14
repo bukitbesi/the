@@ -459,6 +459,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator Bil Elektrik TNB",
+    "desc": "Your TNB domestic bill by the RP4 tariff: 44.43 sen/kWh less the EEI rebate, AFA, the RM10 retail charge, KWTBB and SST, with the 800 kWh protection to December 2026. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-bil-elektrik-tnb/",
+    "cat": "calc",
+    "icon": "kalkulator-bil-elektrik-tnb",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator PTPTN",
+    "desc": "PTPTN monthly instalment with the 1% a year ujrah, total repaid, early settlement saving and the restructuring minimum. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-ptptn/",
+    "cat": "calc",
+    "icon": "kalkulator-ptptn",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Fidyah",
+    "desc": "Fidyah for missed Ramadan fasts at each state's 2026 rate, multiplied for every Ramadan passed, for pregnant and nursing women and those unable to fast. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-fidyah/",
+    "cat": "calc",
+    "icon": "kalkulator-fidyah",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Gabung Hutang (Debt Consolidation)",
+    "desc": "Compare paying 15–18% credit card debt as it is with one personal loan: interest, stamp duty, EIR, monthly payment and the real saving. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-gabung-hutang/",
+    "cat": "calc",
+    "icon": "kalkulator-gabung-hutang",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
