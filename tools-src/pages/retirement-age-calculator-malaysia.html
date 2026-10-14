@@ -1,0 +1,149 @@
+<!--page
+{
+  "path": "/retirement-age-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-umur-bersara/" },
+  "title": "Retirement Age Calculator Malaysia: Date, EPF Ages and Pension",
+  "description": "Find your retirement date in Malaysia at 60, the time left, your EPF ages 50, 55 and 60, and a civil servant's monthly pension and gratuity.",
+  "llms": "Calculates retirement in Malaysia: the minimum retirement age for private-sector employees is 60 (Minimum Retirement Age Act 2012) and civil servants retire compulsorily at 60, with optional retirement from 40 after at least 10 years' service. The retirement date is the birthday at the chosen age (born 15 May 1990 retires on 15 May 2050, 23 years 7 months 1 day after 14 October 2026). EPF ages: 50 (Akaun Sejahtera withdrawal), 55 (Akaun 55, full withdrawal), 60 (Akaun Emas; employer EPF drops to 4% and employee to 0%), contributions mandatory until 75. Pensionable civil servants: monthly pension = 1/600 × months of service (up to 360) × final basic salary, at most 60%; gratuity = 7.5% × months of service × final basic salary; at least 10 years' (120 months') service. Example: 416 months on RM5,000 gives RM3,000 a month and RM156,000 gratuity. New permanent civil service posts are to be non-pensionable with EPF instead (Cabinet decision, January 2024).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "retire",
+  "scripts": ["/assets/js/retirement-age.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Retirement Age Calculator", null]],
+  "about": ["Retirement age in Malaysia", "Minimum Retirement Age Act 2012", "EPF withdrawal age", "Civil service pension"],
+  "app": {
+    "name": "Retirement Age Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Retirement date and time left", "Age now", "EPF ages 50, 55, 60 and 75", "Private sector and civil service", "Optional retirement from age 40", "Civil service pension and gratuity", "Works offline"]
+  },
+  "citations": [
+    ["JPA: FAQ on retirement and retirement benefits", "https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf"],
+    ["JPA Pension Division: Pension scheme", "https://pencen.jpa.gov.my/skim-pencen.html?view=article&id=15%3Ainfo-skim-pencen-faedah-terbitan&catid=11"],
+    ["MyGovernment: EPF age 50 withdrawal", "https://www.malaysia.gov.my/my/topics/pengeluaran-kwsp-umur-50-tahun"],
+    ["RTM: JPA studies raising the compulsory retirement age to 65", "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jpa-kaji-cadangan-naik-umur-persaraan-wajib-65-tahun"],
+    ["MDM Arang: Overview of the pension scheme and retirement benefits", "https://mdmarang.gov.my/images/pdf/HR/1.%20Overview%20Skim%20Pencen%20dan%20Faedah%20Persaraan.pdf"]
+  ],
+  "faq": [
+    { "q": "What is the retirement age in Malaysia?", "a": "60. The Minimum Retirement Age Act 2012 stops private employers from retiring employees before 60, and civil servants retire compulsorily at 60. JPA is studying a rise to 65, but no change has been made." },
+    { "q": "When will I retire if I was born on 15 May 1990?", "a": "At 60, on {{RT_DATE}}. From {{RT_TODAY}} that is {{RT_LEFT}} away. Enter your own date of birth for your date." },
+    { "q": "At what ages can I withdraw EPF?", "a": "At 50 you can withdraw from Akaun Sejahtera, at 55 the savings move to Akaun 55 and can be withdrawn in full, and from 60 new savings go to Akaun Emas. Contributions stay mandatory while you work, up to age 75." },
+    { "q": "How is a civil servant's pension calculated?", "a": "Monthly pension = 1/600 × months of pensionable service (up to 360) × final basic salary, so the most is 60%. 416 months on a final salary of RM5,000 gives {{RT_G_PENSION}} a month." },
+    { "q": "How much is the retirement gratuity?", "a": "Gratuity = 7.5% × months of pensionable service × final basic salary, paid once. 416 months on RM5,000 gives {{RT_G_GRAT}}. You need at least 10 years of service for a pension and gratuity." },
+    { "q": "Can civil servants retire early?", "a": "Yes, optional retirement is allowed from age 40 with at least 10 years' service. Retiring at 50 after 300 months on RM4,000 gives a pension of {{RT_O_PENSION}} a month and a gratuity of {{RT_O_GRAT}}." },
+    { "q": "Can a private employer make me retire before 60?", "a": "No, not on age grounds: the Minimum Retirement Age Act 2012 sets 60 as the minimum. You can choose to retire earlier, and you may keep working after 60 if your employer agrees." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Retirement age calculator</li></ol></nav>
+  <h1>Retirement Age Calculator Malaysia</h1>
+  <p class="answer">The retirement age in Malaysia is <strong>60</strong> for both private-sector employees (Minimum Retirement Age Act 2012) and civil servants. Born on 15 May 1990, you retire on <strong>{{RT_DATE}}</strong>, {{RT_LEFT}} from {{RT_TODAY}}. Enter your date of birth for your date, EPF ages and, for civil servants, your pension and gratuity.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{RT_VERIFIED_ISO}}">{{RT_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-umur-bersara/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="retForm" novalidate aria-labelledby="rt-h">
+      <h2 id="rt-h">About you</h2>
+      <div class="field-row">
+        <div class="field"><label for="dob">Date of birth</label><input class="input" id="dob" name="dob" type="date" min="1940-01-01" max="2010-12-31" value="{{RT_DOB}}"></div>
+        <div class="field"><label for="age">Retirement age</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="40" max="75" step="1" value="{{RT_AGE}}"><span aria-hidden="true">years</span></div></div>
+      </div>
+      <div class="field"><label for="sector">Sector</label><select class="input" id="sector" name="sector">{{RT_SECTOR_OPTIONS}}</select></div>
+      <fieldset class="field-group" id="rtGov" hidden>
+        <legend>Pension</legend>
+        <div class="field-row">
+          <div class="field"><label for="start">Date of appointment</label><input class="input" id="start" name="start" type="date" min="1960-01-01" max="2030-12-31" value="{{RT_START}}"></div>
+          <div class="field"><label for="salary">Final basic salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="100" value="{{RT_SALARY}}"></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Civil servants: compulsory at 60, optional from 40 with 10 years' service.</p>
+    </form>
+
+    <section class="box" aria-labelledby="rt-result-h">
+      <h2 id="rt-result-h">Your retirement</h2>
+      <div class="net">
+        <p>Retirement date</p>
+        <output id="rtDate" for="dob age sector start salary">{{RT_DATE}}</output>
+        <p id="rtSub">{{RT_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rtLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Dates</caption>
+        <tbody id="rtLines">
+{{RT_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="rtEarly" hidden>Under 60: a private employer cannot make you retire early.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rtPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="years-h">Retirement and EPF ages by year of birth</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Born in</th><th scope="col">Age 50</th><th scope="col">Age 55</th><th scope="col">Retire at 60</th><th scope="col">Age 75</th></tr></thead>
+      <tbody>
+{{RT_YEARS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How it is worked out</h2>
+  <ol>
+    <li><strong>Retirement date</strong> = your birthday at the retirement age (60 by default).</li>
+    <li><strong>Time left</strong> = years, months and days from today to that date.</li>
+    <li><strong>EPF ages</strong> = your birthdays at 50, 55, 60 and 75.</li>
+    <li><strong>Pension</strong> = 1/600 × months of service (up to 360) × final basic salary, at most 60%.</li>
+    <li><strong>Gratuity</strong> = 7.5% × months of service × final basic salary.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="pen-h">Civil service pension and gratuity by service</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pen-h">
+    <table class="data">
+      <thead><tr><th scope="col">Months of service</th><th scope="col">Final salary</th><th scope="col">Pension rate</th><th scope="col">Pension a month</th><th scope="col">Gratuity</th></tr></thead>
+      <tbody>
+{{RT_PENSION}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Retirement rules in Malaysia</h2>
+  <ul>
+    <li><strong>Private sector:</strong> minimum retirement age 60 (Minimum Retirement Age Act 2012); working past 60 is by agreement.</li>
+    <li><strong>Civil service:</strong> compulsory retirement at 60; optional from 40 with at least 10 years' service. JPA is studying 65.</li>
+    <li><strong>EPF after 60:</strong> employer EPF 4%, employee 0% (voluntary); contributions mandatory to 75.</li>
+    <li><strong>New civil servants:</strong> the Cabinet decided in January 2024 that new permanent posts will be non-pensionable, with EPF instead; existing officers keep their pension.</li>
+    <li><strong>Leave cash-in (GCR):</strong> sources give different day limits, so it is left out; check with your HR or JPA.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf" rel="noopener">JPA: FAQ on retirement and retirement benefits</a></li>
+    <li><a href="https://pencen.jpa.gov.my/skim-pencen.html?view=article&amp;id=15%3Ainfo-skim-pencen-faedah-terbitan&amp;catid=11" rel="noopener">JPA Pension Division: Pension scheme</a></li>
+    <li><a href="https://www.malaysia.gov.my/my/topics/pengeluaran-kwsp-umur-50-tahun" rel="noopener">MyGovernment: EPF age 50 withdrawal</a></li>
+    <li><a href="https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jpa-kaji-cadangan-naik-umur-persaraan-wajib-65-tahun" rel="noopener">RTM: JPA studies a retirement age of 65</a></li>
+    <li><a href="https://mdmarang.gov.my/images/pdf/HR/1.%20Overview%20Skim%20Pencen%20dan%20Faedah%20Persaraan.pdf" rel="noopener">MDM Arang: Pension scheme overview</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate. Your pension and gratuity are set by JPA from your service record; check your EPF withdrawal options with KWSP.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/epf-calculator/">EPF Calculator<small>Savings at 55 and 60</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
+    <a href="/fixed-deposit-calculator-malaysia/">Fixed Deposit Calculator<small>FD interest and returns</small></a>
+  </div>
+</section>

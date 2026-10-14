@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/working-days-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-hari-bekerja/" },
+  "title": "Working Days Calculator Malaysia 2026-2027 by State",
+  "description": "Count working days between two dates in any Malaysian state, minus weekends, public holidays and leave, or find the date 14 working days ahead. 2026 and 2027.",
+  "llms": "Counts working days in Malaysia by state for 2026 and 2027: calendar days minus the state's weekend (Friday and Saturday in Kedah, Kelantan and Terengganu; Saturday and Sunday in all other states, including Johor since 1 January 2025) and federal and state public holidays that fall on workdays, including replacement holidays, then minus annual leave. Also adds N working days to a start date for deadlines. Results: Selangor has 248 working days in 2027 (244 in 2026); Kuala Lumpur 247, Johor 248, Kedah 244, Kelantan 241 and Terengganu 239 in 2027. November 2026 has 20 working days in Selangor (Deepavali on Sunday 8 November, replaced on Monday 9 November). 14 working days from 14 October 2026 in Selangor ends on 3 November 2026. Islamic holiday dates are subject to the official moon sighting.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "workdays",
+  "scripts": ["/assets/js/working-days.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Working Days Calculator", null]],
+  "about": ["Working days", "Public holidays in Malaysia", "Weekends by state", "Business days"],
+  "app": {
+    "name": "Working Days Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["All 16 states and federal territories", "Friday–Saturday and Saturday–Sunday weekends", "Federal and state public holidays 2026 and 2027", "Replacement holidays", "Annual leave", "Add working days to a date", "Working days per month"]
+  },
+  "citations": [
+    ["Cabinet Office: Public holidays 2026 (HKA 2026)", "https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf"],
+    ["MKN: Johor weekend moves to Saturday and Sunday from 1 January 2025", "https://www.mkn.gov.my/web/ms/2024/12/31/2025-johor-cuti-hujung-minggu-sabtu-ahad-antara-perkara-baharu-berkuat-kuasa-esok/"],
+    ["SAYS: Extra Hari Raya Aidilfitri holiday in 2026", "https://says.com/my/seismik/rakyat-malaysia-dapat-cuti-tambahan-sehari-pada-jumaat-atau-isnin-tertakluk-kepada-tarikh-hari-raya"],
+    ["python-holidays: Malaysia holidays by state", "https://github.com/vacanza/holidays"]
+  ],
+  "faq": [
+    { "q": "How many working days are there in 2027 in Malaysia?", "a": "It depends on the state. Selangor has {{W_SEL27}} working days in 2027, Kuala Lumpur {{W_KL27}}, Johor {{W_JOH27}}, Penang {{W_PNG27}}, Sabah {{W_SBH27}} and Sarawak {{W_SWK27}}. Fri–Sat states have fewer: Kedah {{W_KDH27}}, Kelantan {{W_KEL27}} and Terengganu {{W_TRG27}}." },
+    { "q": "How many working days are in 2026?", "a": "Selangor has {{W_SEL26}} working days in 2026. For the rest of the year, November 2026 has {{W_NOV26}} working days in Selangor and December 2026 has {{W_DEC26}}." },
+    { "q": "Which states have a Friday–Saturday weekend?", "a": "Kedah, Kelantan and Terengganu. Johor returned to a Saturday–Sunday weekend on 1 January 2025, so every other state and federal territory rests on Saturday and Sunday." },
+    { "q": "What happens when a public holiday falls on a weekend?", "a": "In most cases the next working day is a replacement holiday. In Selangor, Deepavali on Sunday 8 November 2026 is replaced on Monday 9 November. Saturday–Sunday states usually replace only Sunday holidays." },
+    { "q": "What date is 14 working days from today?", "a": "Count only working days, skipping weekends and public holidays. 14 working days from Wednesday 14 October 2026 in Selangor ends on {{W_END}}: three weekends (six days) are skipped." },
+    { "q": "Are the Islamic holiday dates final?", "a": "Hari Raya Aidilfitri, Aidiladha, Awal Muharram, Maulidur Rasul, Nuzul al-Quran and Israk Mikraj follow the official moon sighting, so a date can move by a day. Ad hoc holidays declared later are not included until they are announced." },
+    { "q": "How many public holidays does Selangor have in 2027?", "a": "{{W_HOL27}} public holiday dates, including replacement days. Some fall on weekends, so they do not reduce the working day count." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Working days calculator</li></ol></nav>
+  <h1>Working Days Calculator Malaysia</h1>
+  <p class="answer">Selangor has <strong>{{W_SEL27}} working days in 2027</strong> ({{W_SEL26}} in 2026) after Saturday–Sunday weekends and public holidays; Kuala Lumpur has {{W_KL27}}, and the Friday–Saturday states have fewer (Kelantan {{W_KEL27}}, Terengganu {{W_TRG27}}). Pick your state and dates below, take off your leave, or add working days to find a deadline.</p>
+  <p class="meta"><span>Holidays verified <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-hari-bekerja/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="wdForm" novalidate aria-labelledby="wd-h">
+      <h2 id="wd-h">Dates and state</h2>
+      <div class="field"><label for="state">State</label><select class="input" id="state" name="state">{{W_STATE_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="from">From</label><input class="input" id="from" name="from" type="date" min="2026-01-01" max="2027-12-31" value="{{W_FROM}}"></div>
+        <div class="field"><label for="to">To</label><input class="input" id="to" name="to" type="date" min="2026-01-01" max="2027-12-31" value="{{W_TO}}"></div>
+      </div>
+      <div class="field"><label for="leave">Annual leave taken</label><div class="input"><input id="leave" name="leave" type="number" inputmode="numeric" min="0" max="365" step="1" value="0"><span aria-hidden="true">days</span></div></div>
+      <fieldset class="field-group">
+        <legend>Deadline</legend>
+        <div class="field-row">
+          <div class="field"><label for="start">Start date</label><input class="input" id="start" name="start" type="date" min="2026-01-01" max="2027-12-31" value="{{W_START}}"></div>
+          <div class="field"><label for="add">Working days to add</label><div class="input"><input id="add" name="add" type="number" inputmode="numeric" min="0" max="400" step="1" value="{{W_ADD}}"><span aria-hidden="true">days</span></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="wd-result-h">
+      <h2 id="wd-result-h">Working days</h2>
+      <div class="net">
+        <p>Working days</p>
+        <output id="wDays" for="state from to leave">{{W_DAYS}}</output>
+        <p id="wSub">{{W_SUB}}</p>
+      </div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Count</caption>
+        <tbody id="wLines">
+{{W_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Deadline</caption>
+        <tbody id="wDeadline">
+{{W_DEADLINE}}
+        </tbody>
+      </table>
+      <p class="callout" id="wOut" hidden>Outside the 2026–2027 data: public holidays not counted.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="wdPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="hol-h"><span id="wHolH">{{W_HOL_H}}</span></h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hol-h">
+    <table class="rows wrap">
+      <tbody id="wHol">
+{{W_HOL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="mon-h"><span id="wMonH">{{W_MON_H}}</span></h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="mon-h">
+    <table class="data">
+      <thead><tr><th scope="col">Month</th><th scope="col">Days</th><th scope="col">Weekend</th><th scope="col">Holidays</th><th scope="col">Working days</th></tr></thead>
+      <tbody id="wMonths">
+{{W_MONTHS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How working days are counted</h2>
+  <ol>
+    <li><strong>Calendar days</strong> from the start date to the end date, both included.</li>
+    <li><strong>Minus weekends:</strong> Friday and Saturday in Kedah, Kelantan and Terengganu; Saturday and Sunday elsewhere.</li>
+    <li><strong>Minus public holidays</strong> on workdays, federal and state, with replacement days.</li>
+    <li><strong>Minus annual leave</strong> you plan to take.</li>
+    <li><strong>Deadline:</strong> step forward from the start date, counting only working days.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="states-h">Working days by state, 2026 and 2027</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="states-h">
+    <table class="data">
+      <thead><tr><th scope="col">State</th><th scope="col">Weekend</th><th scope="col">2026</th><th scope="col">2027</th><th scope="col">Holidays 2027</th></tr></thead>
+      <tbody>
+{{W_STATES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Public holiday rules</h2>
+  <ul>
+    <li><strong>Weekends:</strong> Kedah, Kelantan and Terengganu rest on Friday and Saturday; Johor moved to Saturday and Sunday on 1 January 2025.</li>
+    <li><strong>Extra Hari Raya holiday 2026:</strong> Friday 20 March 2026 nationwide, plus Thursday 19 March in Kelantan.</li>
+    <li><strong>Islamic dates</strong> follow the official moon sighting and can shift by a day.</li>
+    <li><strong>Employees:</strong> the Employment Act 1955 gives 11 paid public holidays a year, five of them fixed; employers pick the rest from gazetted holidays.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf" rel="noopener">Cabinet Office: Public holidays 2026 (HKA 2026)</a></li>
+    <li><a href="https://www.mkn.gov.my/web/ms/2024/12/31/2025-johor-cuti-hujung-minggu-sabtu-ahad-antara-perkara-baharu-berkuat-kuasa-esok/" rel="noopener">MKN: Johor weekend on Saturday and Sunday</a></li>
+    <li><a href="https://says.com/my/seismik/rakyat-malaysia-dapat-cuti-tambahan-sehari-pada-jumaat-atau-isnin-tertakluk-kepada-tarikh-hari-raya" rel="noopener">SAYS: Extra Hari Raya holiday 2026</a></li>
+    <li><a href="https://github.com/vacanza/holidays" rel="noopener">python-holidays: Malaysia by state</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Holidays as gazetted and announced by {{W_VERIFIED}}. Check later announcements and your employer's holiday list.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/prorated-salary-calculator-malaysia/">Prorated Salary Calculator<small>Pay for a part month</small></a>
+    <a href="/overtime-calculator-malaysia/">Overtime Calculator<small>Public holiday and rest day pay</small></a>
+    <a href="/hijri-date-converter/">Hijri Date Converter<small>Islamic dates on Malaysia's calendar</small></a>
+  </div>
+</section>

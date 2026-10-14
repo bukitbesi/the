@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/kalkulator-hari-bekerja/",
+  "lang": "ms",
+  "alternates": { "en": "/working-days-calculator-malaysia/" },
+  "title": "Kalkulator Hari Bekerja 2026-2027 Ikut Negeri",
+  "description": "Kira hari bekerja antara dua tarikh di setiap negeri, tolak hujung minggu, cuti umum dan cuti tahunan, atau cari tarikh 14 hari bekerja dari sekarang.",
+  "llms": "Mengira hari bekerja di Malaysia ikut negeri bagi 2026 dan 2027: jumlah hari tolak hujung minggu negeri (Jumaat dan Sabtu di Kedah, Kelantan dan Terengganu; Sabtu dan Ahad di negeri lain, termasuk Johor sejak 1 Januari 2025) dan cuti umum persekutuan dan negeri yang jatuh pada hari bekerja, termasuk cuti ganti, kemudian tolak cuti tahunan. Juga menambah N hari bekerja kepada tarikh mula untuk tarikh akhir. Hasil: Selangor ada 248 hari bekerja pada 2027 (244 pada 2026); Kuala Lumpur 247, Johor 248, Kedah 244, Kelantan 241 dan Terengganu 239 pada 2027. November 2026 ada 20 hari bekerja di Selangor (Deepavali jatuh Ahad 8 November, diganti Isnin 9 November). 14 hari bekerja dari 14 Oktober 2026 di Selangor berakhir pada 3 November 2026. Tarikh cuti Islam tertakluk kepada rukyah rasmi.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "workdays",
+  "scripts": ["/assets/js/working-days.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Hari Bekerja", null]],
+  "about": ["Hari bekerja", "Cuti umum Malaysia", "Hujung minggu ikut negeri", "Hari perniagaan"],
+  "app": {
+    "name": "Kalkulator Hari Bekerja",
+    "category": "BusinessApplication",
+    "features": ["Semua 16 negeri dan wilayah persekutuan", "Hujung minggu Jumaat–Sabtu dan Sabtu–Ahad", "Cuti umum persekutuan dan negeri 2026 dan 2027", "Cuti ganti", "Cuti tahunan", "Tambah hari bekerja kepada tarikh", "Hari bekerja sebulan"]
+  },
+  "citations": [
+    ["Pejabat Kabinet: Hari Kelepasan Am 2026 (HKA 2026)", "https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf"],
+    ["MKN: Hujung minggu Johor Sabtu dan Ahad mulai 1 Januari 2025", "https://www.mkn.gov.my/web/ms/2024/12/31/2025-johor-cuti-hujung-minggu-sabtu-ahad-antara-perkara-baharu-berkuat-kuasa-esok/"],
+    ["SAYS: Cuti tambahan Hari Raya Aidilfitri 2026", "https://says.com/my/seismik/rakyat-malaysia-dapat-cuti-tambahan-sehari-pada-jumaat-atau-isnin-tertakluk-kepada-tarikh-hari-raya"],
+    ["python-holidays: Cuti Malaysia ikut negeri", "https://github.com/vacanza/holidays"]
+  ],
+  "faq": [
+    { "q": "Berapa hari bekerja pada 2027 di Malaysia?", "a": "Bergantung pada negeri. Selangor ada {{W_SEL27}} hari bekerja pada 2027, Kuala Lumpur {{W_KL27}}, Johor {{W_JOH27}}, Pulau Pinang {{W_PNG27}}, Sabah {{W_SBH27}} dan Sarawak {{W_SWK27}}. Negeri berhujung minggu Jumaat–Sabtu kurang sedikit: Kedah {{W_KDH27}}, Kelantan {{W_KEL27}} dan Terengganu {{W_TRG27}}." },
+    { "q": "Berapa hari bekerja pada 2026?", "a": "Selangor ada {{W_SEL26}} hari bekerja pada 2026. Untuk baki tahun ini, November 2026 ada {{W_NOV26}} hari bekerja di Selangor dan Disember 2026 ada {{W_DEC26}}." },
+    { "q": "Negeri mana bercuti hujung minggu Jumaat dan Sabtu?", "a": "Kedah, Kelantan dan Terengganu. Johor kembali kepada hujung minggu Sabtu–Ahad pada 1 Januari 2025, jadi semua negeri dan wilayah persekutuan lain bercuti pada Sabtu dan Ahad." },
+    { "q": "Apa berlaku jika cuti umum jatuh pada hujung minggu?", "a": "Biasanya hari bekerja berikutnya menjadi cuti ganti. Di Selangor, Deepavali pada Ahad 8 November 2026 diganti pada Isnin 9 November. Negeri berhujung minggu Sabtu–Ahad biasanya hanya mengganti cuti yang jatuh pada Ahad." },
+    { "q": "Bila tarikh 14 hari bekerja dari sekarang?", "a": "Kira hari bekerja sahaja, langkau hujung minggu dan cuti umum. 14 hari bekerja dari Rabu 14 Oktober 2026 di Selangor berakhir pada {{W_END}}: tiga hujung minggu (enam hari) dilangkau." },
+    { "q": "Adakah tarikh cuti Islam muktamad?", "a": "Hari Raya Aidilfitri, Aidiladha, Awal Muharam, Maulidur Rasul, Nuzul al-Quran dan Israk Mikraj mengikut rukyah rasmi, jadi tarikh boleh berubah sehari. Cuti peristiwa yang diumumkan kemudian tidak dimasukkan sehingga diumumkan." },
+    { "q": "Berapa cuti umum di Selangor pada 2027?", "a": "{{W_HOL27}} tarikh cuti umum, termasuk cuti ganti. Sebahagiannya jatuh pada hujung minggu, jadi tidak mengurangkan jumlah hari bekerja." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator hari bekerja</li></ol></nav>
+  <h1>Kalkulator Hari Bekerja</h1>
+  <p class="answer">Selangor ada <strong>{{W_SEL27}} hari bekerja pada 2027</strong> ({{W_SEL26}} pada 2026) selepas hujung minggu Sabtu–Ahad dan cuti umum; Kuala Lumpur ada {{W_KL27}}, dan negeri berhujung minggu Jumaat–Sabtu lebih sedikit (Kelantan {{W_KEL27}}, Terengganu {{W_TRG27}}). Pilih negeri dan tarikh di bawah, tolak cuti anda, atau tambah hari bekerja untuk mencari tarikh akhir.</p>
+  <p class="meta"><span>Cuti disemak <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/working-days-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="wdForm" novalidate aria-labelledby="wd-h">
+      <h2 id="wd-h">Tarikh dan negeri</h2>
+      <div class="field"><label for="state">Negeri</label><select class="input" id="state" name="state">{{W_STATE_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="from">Dari</label><input class="input" id="from" name="from" type="date" min="2026-01-01" max="2027-12-31" value="{{W_FROM}}"></div>
+        <div class="field"><label for="to">Hingga</label><input class="input" id="to" name="to" type="date" min="2026-01-01" max="2027-12-31" value="{{W_TO}}"></div>
+      </div>
+      <div class="field"><label for="leave">Cuti tahunan diambil</label><div class="input"><input id="leave" name="leave" type="number" inputmode="numeric" min="0" max="365" step="1" value="0"><span aria-hidden="true">hari</span></div></div>
+      <fieldset class="field-group">
+        <legend>Tarikh akhir</legend>
+        <div class="field-row">
+          <div class="field"><label for="start">Tarikh mula</label><input class="input" id="start" name="start" type="date" min="2026-01-01" max="2027-12-31" value="{{W_START}}"></div>
+          <div class="field"><label for="add">Tambah hari bekerja</label><div class="input"><input id="add" name="add" type="number" inputmode="numeric" min="0" max="400" step="1" value="{{W_ADD}}"><span aria-hidden="true">hari</span></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="wd-result-h">
+      <h2 id="wd-result-h">Hari bekerja</h2>
+      <div class="net">
+        <p>Hari bekerja</p>
+        <output id="wDays" for="state from to leave">{{W_DAYS}}</output>
+        <p id="wSub">{{W_SUB}}</p>
+      </div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Kiraan</caption>
+        <tbody id="wLines">
+{{W_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Tarikh akhir</caption>
+        <tbody id="wDeadline">
+{{W_DEADLINE}}
+        </tbody>
+      </table>
+      <p class="callout" id="wOut" hidden>Di luar data 2026–2027: cuti umum tidak dikira.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="wdPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="hol-h"><span id="wHolH">{{W_HOL_H}}</span></h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hol-h">
+    <table class="rows wrap">
+      <tbody id="wHol">
+{{W_HOL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="mon-h"><span id="wMonH">{{W_MON_H}}</span></h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="mon-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bulan</th><th scope="col">Hari</th><th scope="col">Hujung minggu</th><th scope="col">Cuti</th><th scope="col">Hari bekerja</th></tr></thead>
+      <tbody id="wMonths">
+{{W_MONTHS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara hari bekerja dikira</h2>
+  <ol>
+    <li><strong>Jumlah hari</strong> dari tarikh mula hingga tarikh akhir, kedua-duanya dikira.</li>
+    <li><strong>Tolak hujung minggu:</strong> Jumaat dan Sabtu di Kedah, Kelantan dan Terengganu; Sabtu dan Ahad di negeri lain.</li>
+    <li><strong>Tolak cuti umum</strong> pada hari bekerja, persekutuan dan negeri, termasuk cuti ganti.</li>
+    <li><strong>Tolak cuti tahunan</strong> yang anda rancang.</li>
+    <li><strong>Tarikh akhir:</strong> bergerak dari tarikh mula, mengira hari bekerja sahaja.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="states-h">Hari bekerja ikut negeri, 2026 dan 2027</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="states-h">
+    <table class="data">
+      <thead><tr><th scope="col">Negeri</th><th scope="col">Hujung minggu</th><th scope="col">2026</th><th scope="col">2027</th><th scope="col">Cuti 2027</th></tr></thead>
+      <tbody>
+{{W_STATES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Peraturan cuti umum</h2>
+  <ul>
+    <li><strong>Hujung minggu:</strong> Kedah, Kelantan dan Terengganu bercuti Jumaat dan Sabtu; Johor beralih ke Sabtu dan Ahad pada 1 Januari 2025.</li>
+    <li><strong>Cuti tambahan Hari Raya 2026:</strong> Jumaat 20 Mac 2026 di seluruh negara, serta Khamis 19 Mac di Kelantan.</li>
+    <li><strong>Tarikh Islam</strong> mengikut rukyah rasmi dan boleh berubah sehari.</li>
+    <li><strong>Pekerja:</strong> Akta Kerja 1955 memberi 11 cuti umum bergaji setahun, lima daripadanya wajib; majikan memilih selebihnya daripada cuti yang diwartakan.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.kabinet.gov.my/storage/2025/08/HKA-2026.pdf" rel="noopener">Pejabat Kabinet: Hari Kelepasan Am 2026</a></li>
+    <li><a href="https://www.mkn.gov.my/web/ms/2024/12/31/2025-johor-cuti-hujung-minggu-sabtu-ahad-antara-perkara-baharu-berkuat-kuasa-esok/" rel="noopener">MKN: Hujung minggu Johor Sabtu dan Ahad</a></li>
+    <li><a href="https://says.com/my/seismik/rakyat-malaysia-dapat-cuti-tambahan-sehari-pada-jumaat-atau-isnin-tertakluk-kepada-tarikh-hari-raya" rel="noopener">SAYS: Cuti tambahan Hari Raya 2026</a></li>
+    <li><a href="https://github.com/vacanza/holidays" rel="noopener">python-holidays: Malaysia ikut negeri</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Cuti seperti diwartakan dan diumumkan hingga {{W_VERIFIED}}. Semak pengumuman terkini dan senarai cuti majikan anda.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji-prorata/">Kalkulator Gaji Prorata<small>Gaji bulan tidak lengkap</small></a>
+    <a href="/kalkulator-ot/">Kalkulator OT<small>Bayaran cuti umum dan hari rehat</small></a>
+    <a href="/tukar-tarikh-hijrah/">Tukar Tarikh Hijrah<small>Tarikh Islam ikut takwim Malaysia</small></a>
+  </div>
+</section>

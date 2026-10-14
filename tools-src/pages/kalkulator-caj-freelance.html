@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/kalkulator-caj-freelance/",
+  "lang": "ms",
+  "alternates": { "en": "/freelance-rate-calculator-malaysia/" },
+  "title": "Kalkulator Caj Freelance 2026: Kadar Sejam dan Sehari",
+  "description": "Kalkulator caj freelance: kadar sejam dan sehari yang perlu dicaj untuk dapat pendapatan bersih sasaran selepas kos, KWSP i-Saraan dan cukai pendapatan.",
+  "llms": "Mengira kadar yang perlu dicaj oleh freelancer di Malaysia: jualan setahun = pendapatan bersih sasaran + kos perniagaan + simpanan KWSP (i-Saraan atau sukarela, % daripada untung) + PERKESO bekerja sendiri (SKSPS) jika ada + cukai pendapatan pemastautin (kadar TT2026, pelepasan diri RM9,000, pelepasan KWSP hingga RM4,000, rebat RM400 jika pendapatan bercukai RM35,000 atau kurang); kadar sejam = jualan ÷ jam boleh caj (jam seminggu × minggu bekerja). Contoh: pendapatan bersih RM5,000 sebulan, kos RM500 sebulan, KWSP 11%, 30 jam boleh caj seminggu dan 6 minggu cuti: jualan RM75,961.54 setahun (RM6,330.13 sebulan), cukai RM2,265.77, KWSP RM7,695.77, 1,380 jam boleh caj, jadi caj RM55.04 sejam atau RM440.36 sehari. Pendapatan freelance ialah pendapatan perniagaan, diisytihar dalam Borang B sebelum 30 Jun.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "freelance",
+  "scripts": ["/assets/js/freelance-rate.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Caj Freelance", null]],
+  "about": ["Freelance", "Kadar sejam", "Cukai bekerja sendiri", "KWSP i-Saraan"],
+  "app": {
+    "name": "Kalkulator Caj Freelance",
+    "category": "BusinessApplication",
+    "features": ["Kadar sejam dan sehari", "Jualan diperlukan untuk pendapatan sasaran", "Cukai pendapatan pemastautin TT2026", "Simpanan KWSP i-Saraan dan pelepasan cukai", "Kos perniagaan", "Jam boleh caj dan minggu cuti", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["PwC Malaysia: Kadar cukai dan pelepasan individu", "https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html"],
+    ["KWSP: i-Saraan", "https://www.kwsp.gov.my/"],
+    ["PERKESO: Skim Keselamatan Sosial Pekerjaan Sendiri", "https://www.perkeso.gov.my/"]
+  ],
+  "faq": [
+    { "q": "Berapa caj freelance yang patut saya kenakan?", "a": "Kira ke belakang daripada pendapatan bersih yang anda perlukan. Untuk RM5,000 sebulan selepas kos RM500 sebulan, KWSP 11% dan cukai, pada 30 jam boleh caj seminggu dengan 6 minggu cuti, caj sekurang-kurangnya {{F_HOURLY}} sejam atau {{F_DAILY}} sehari, iaitu invois {{F_MONTHLY}} sebulan." },
+    { "q": "Berapa jam boleh caj seorang freelancer?", "a": "Lebih sedikit daripada sangkaan: urusan pentadbiran, jualan dan pindaan percuma mengambil masa. 30 jam boleh caj seminggu selama 46 minggu ialah {{F_BILLABLE}} jam setahun, berbanding kira-kira 2,000 jam bekerja bagi pekerja makan gaji." },
+    { "q": "Bagaimana pendapatan freelance dicukai?", "a": "Sebagai pendapatan perniagaan pada kadar pemastautin (0% hingga 30%), diisytihar dalam Borang B sebelum 30 Jun. Tolak kos perniagaan, kemudian pelepasan: RM9,000 untuk diri sendiri dan hingga RM4,000 untuk KWSP. Dalam contoh, cukainya {{F_TAX}} setahun; jika pendapatan bercukai RM35,000 atau kurang, rebat RM400 diberi." },
+    { "q": "Perlukah freelancer mencarum KWSP?", "a": "Ia sukarela tetapi berbaloi. Ahli bekerja sendiri boleh menyimpan melalui i-Saraan, dan simpanan KWSP layak pelepasan cukai hingga RM4,000. Contoh ini mengasingkan 11% untung, iaitu {{F_EPFV}} setahun." },
+    { "q": "Perlukah freelancer mencarum PERKESO?", "a": "Pekerja bekerja sendiri dalam sektor yang diliputi Skim Keselamatan Sosial Pekerjaan Sendiri (SKSPS) PERKESO wajib mencarum; yang lain boleh menyertai. Masukkan caruman bulanan pelan anda dalam kalkulator." },
+    { "q": "Kos apa yang patut dimasukkan?", "a": "Semua yang dibayar oleh perniagaan: komputer riba dan perisian, internet dan telefon, ruang kerja bersama, pengangkutan, perakaunan, insurans, serta fi marketplace atau bayaran. Agihkan kos peralatan sekali beli mengikut jangka hayatnya." },
+    { "q": "Berapa kadar untuk sasaran lebih rendah?", "a": "Pendapatan bersih RM3,000 sebulan dengan kos RM300, tanpa KWSP dan 25 jam boleh caj seminggu selama 48 minggu memerlukan {{F_LOW_REVENUE}} setahun, atau {{F_LOW_HOURLY}} sejam. Rebat menghapuskan cukai pada pendapatan itu." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator caj freelance</li></ol></nav>
+  <h1>Kalkulator Caj Freelance</h1>
+  <p class="answer">Untuk membawa pulang RM5,000 sebulan sebagai freelancer selepas kos RM500, KWSP 11% dan cukai pendapatan, caj sekurang-kurangnya <strong>{{F_HOURLY}} sejam</strong> ({{F_DAILY}} sehari) pada 30 jam boleh caj seminggu dengan 6 minggu cuti. Itu bermakna jualan <strong>{{F_REVENUE}}</strong> setahun, termasuk cukai {{F_TAX}}. Masukkan angka anda di bawah.</p>
+  <p class="meta"><span>Kadar cukai disemak <time datetime="{{F_VERIFIED_ISO}}">{{F_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/freelance-rate-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="flForm" novalidate aria-labelledby="fl-h">
+      <h2 id="fl-h">Sasaran anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="target">Pendapatan bersih sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="target" name="target" type="number" inputmode="decimal" min="0" step="100" value="{{F_TARGET}}"></div></div>
+        <div class="field"><label for="expenses">Kos sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="expenses" name="expenses" type="number" inputmode="decimal" min="0" step="50" value="{{F_EXPENSES}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="hours">Jam boleh caj seminggu</label><div class="input"><input id="hours" name="hours" type="number" inputmode="decimal" min="1" max="80" step="1" value="{{F_HOURS}}"><span aria-hidden="true">jam</span></div></div>
+        <div class="field"><label for="weeksOff">Minggu cuti setahun</label><div class="input"><input id="weeksOff" name="weeksOff" type="number" inputmode="numeric" min="0" max="26" step="1" value="{{F_WEEKS}}"><span aria-hidden="true">minggu</span></div></div>
+      </div>
+      <p class="help">Minggu cuti: cuti, sakit dan jurang antara projek.</p>
+      <div class="field-row">
+        <div class="field"><label for="epf">Simpanan KWSP</label><div class="input"><input id="epf" name="epf" type="number" inputmode="decimal" min="0" max="50" step="1" value="{{F_EPF}}"><span aria-hidden="true">% untung</span></div></div>
+        <div class="field"><label for="socso">PERKESO (SKSPS) sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="socso" name="socso" type="number" inputmode="decimal" min="0" step="1" value="0"></div></div>
+      </div>
+      <div class="field"><label for="relief">Pelepasan cukai lain setahun</label><div class="input"><span aria-hidden="true">RM</span><input id="relief" name="relief" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="fl-result-h">
+      <h2 id="fl-result-h">Kadar anda</h2>
+      <div class="net">
+        <p>Kadar sejam minimum</p>
+        <output id="fHourly" for="target expenses hours weeksOff epf socso relief">{{F_HOURLY}}</output>
+        <p id="fSub">{{F_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Jualan diperlukan</caption>
+        <tbody id="fLines">
+{{F_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Cukai pada kadar pemastautin TT2026 dengan pelepasan diri RM9,000 dan pelepasan KWSP hingga RM4,000.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="flPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Caj freelance ikut sasaran pendapatan bersih</h2>
+  <p>Kos RM500 sebulan, KWSP 11%, 30 jam boleh caj seminggu, 6 minggu cuti.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bersih sebulan</th><th scope="col">Invois sebulan</th><th scope="col">Cukai setahun</th><th scope="col">Kadar sejam</th><th scope="col">Kadar sehari</th></tr></thead>
+      <tbody>
+{{F_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kadar dikira</h2>
+  <ol>
+    <li><strong>Untung</strong> diperlukan supaya untung − KWSP − PERKESO − cukai = pendapatan bersih × 12.</li>
+    <li><strong>Cukai</strong> atas pendapatan bercukai = untung − RM9,000 − KWSP (hingga RM4,000) − pelepasan lain, pada kadar pemastautin, tolak rebat RM400 hingga RM35,000.</li>
+    <li><strong>Jualan</strong> = untung + kos perniagaan × 12.</li>
+    <li><strong>Jam boleh caj</strong> = jam seminggu × (52 − minggu cuti).</li>
+    <li><strong>Kadar sejam</strong> = jualan ÷ jam boleh caj; kadar sehari = sejam × 8.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="hours-h">Kesan jam boleh caj ke atas kadar (bersih RM5,000)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hours-h">
+    <table class="data">
+      <thead><tr><th scope="col">Jam seminggu</th><th scope="col">Jam setahun</th><th scope="col">Kadar sejam</th><th scope="col">Kadar sehari</th></tr></thead>
+      <tbody>
+{{F_HOURS_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Cukai dan simpanan untuk freelancer</h2>
+  <ul>
+    <li><strong>Borang B:</strong> pendapatan freelance dan perniagaan lain diisytihar dalam Borang B sebelum 30 Jun; simpan resit perbelanjaan.</li>
+    <li><strong>KWSP i-Saraan:</strong> simpanan sukarela untuk pekerja bekerja sendiri; pelepasan KWSP hingga RM4,000 setahun.</li>
+    <li><strong>PERKESO SKSPS:</strong> wajib bagi pekerja bekerja sendiri dalam sektor diliputi.</li>
+    <li><strong>Bajet 2027:</strong> mencadangkan pelepasan diri RM12,000 dan kadar lebih rendah mulai TT2027; bandingkan dalam <a href="/kalkulator-cukai-pendapatan/">kalkulator cukai pendapatan</a>.</li>
+    <li><strong>SST:</strong> hanya jika perkhidmatan bercukai anda melepasi had pendaftaran.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html" rel="noopener">PwC Malaysia: Kadar cukai dan pelepasan individu</a></li>
+    <li><a href="https://www.kwsp.gov.my/" rel="noopener">KWSP: i-Saraan</a></li>
+    <li><a href="https://www.perkeso.gov.my/" rel="noopener">PERKESO: Skim Keselamatan Sosial Pekerjaan Sendiri</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran untuk penetapan harga. Cukai bergantung pada pelepasan dan perbelanjaan dibenarkan; rujuk LHDN atau ejen cukai.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai dengan semua pelepasan</small></a>
+    <a href="/kalkulator-margin-untung/">Kalkulator Margin Untung<small>Margin, markup dan harga jual</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Unjuran simpanan persaraan</small></a>
+  </div>
+</section>

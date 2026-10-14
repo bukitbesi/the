@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/kalkulator-margin-untung/",
+  "lang": "ms",
+  "alternates": { "en": "/profit-margin-calculator-malaysia/" },
+  "title": "Kalkulator Margin Untung: Kira Margin, Markup dan Harga Jual",
+  "description": "Kalkulator margin untung untuk peniaga: untung seunit selepas fi Shopee, Lazada atau TikTok Shop, beza margin dan markup, harga pulang modal dan harga jual.",
+  "llms": "Mengira margin untung untuk peniaga di Malaysia: untung seunit = harga jual − kos barang − fi peratusan (komisen marketplace, fi bayaran dan servis) − fi tetap setiap pesanan − kos penghantaran ditanggung − kos iklan seunit; margin = untung ÷ harga jual; markup = untung ÷ kos; harga pulang modal = (kos + kos tetap) ÷ (1 − fi %); harga untuk margin sasaran = (kos + kos tetap) ÷ (1 − fi % − margin sasaran). Contoh: harga jual RM100, kos RM60 dan fi 10% memberi untung RM30, margin 30% dan markup 50%; harga pulang modal RM66.67; margin 40% memerlukan RM120. Margin sentiasa lebih kecil daripada markup: margin 25% sama dengan markup 33.3%, margin 50% sama dengan markup 100%. Kadar fi dimasukkan sendiri kerana platform kerap mengubahnya.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "margin",
+  "scripts": ["/assets/js/profit-margin.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Margin Untung", null]],
+  "about": ["Margin untung", "Markup", "Penetapan harga", "Berniaga online di Malaysia"],
+  "app": {
+    "name": "Kalkulator Margin Untung",
+    "category": "BusinessApplication",
+    "features": ["Untung seunit selepas fi marketplace", "Margin dan markup", "Harga pulang modal", "Harga jual untuk margin sasaran", "Kos penghantaran dan iklan seunit", "Untung sebulan ikut jumlah unit", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Investopedia: Profit margin", "https://www.investopedia.com/terms/p/profitmargin.asp"],
+    ["Investopedia: Markup", "https://www.investopedia.com/terms/m/markup.asp"],
+    ["JKDM: Portal MySST (cukai jualan dan perkhidmatan)", "https://mysst.customs.gov.my/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana cara kira margin untung?", "a": "Margin untung = untung ÷ harga jual × 100. Jual pada RM100 dengan kos RM60 dan fi platform 10%: untung RM100 − RM60 − RM10 = {{M_PROFIT}}, jadi margin ialah {{M_MARGIN}}%." },
+    { "q": "Apakah beza margin dan markup?", "a": "Margin membahagi untung dengan harga jual; markup membahagi untung dengan kos. Untung RM30 atas harga RM100 dan kos RM60 ialah margin {{M_MARGIN}}% tetapi markup {{M_MARKUP}}%. Margin 25% sama dengan markup 33.3%, margin 50% sama dengan markup 100%." },
+    { "q": "Berapa harga jual untuk margin 40%?", "a": "Harga = kos ÷ (1 − fi % − margin sasaran). Dengan kos RM60 dan fi 10%, RM60 ÷ (1 − 0.10 − 0.40) = {{M_TPRICE}}. Fi dikenakan atas harga jual, jadi mesti dimasukkan dalam formula." },
+    { "q": "Berapa harga pulang modal saya?", "a": "Harga pulang modal = kos ÷ (1 − fi %). Dengan kos RM60 dan fi 10%, harganya {{M_BE}}; jual di bawah harga itu bermakna rugi setiap pesanan." },
+    { "q": "Bagaimana fi marketplace menjejaskan margin?", "a": "Komisen, fi bayaran dan fi servis ialah peratusan harga jual, jadi ia memotong margin mata demi mata. Barang RM50 berkos RM20 dengan fi 12%, fi pesanan RM1, penghantaran RM3 dan iklan RM5 memberi untung {{M_SHOP_PROFIT}} (margin {{M_SHOP_MARGIN}}%). Semak kadar semasa di seller centre anda." },
+    { "q": "Berapa margin untung yang baik?", "a": "Bergantung pada produk dan saluran. Selepas fi, penghantaran dan iklan, ramai peniaga online menyasarkan margin bersih 20% hingga 30% setiap pesanan; produk margin rendah perlukan jualan tinggi atau harga lebih tinggi untuk menampung pemulangan dan overhed." },
+    { "q": "Adakah SST termasuk dalam harga saya?", "a": "Hanya jika anda berdaftar cukai jualan atau cukai perkhidmatan dan barang atau perkhidmatan itu bercukai. Perniagaan berdaftar mengenakan SST di atas harga dan membayarnya kepada JKDM, jadi ia bukan untung; jangan masukkan dalam kiraan ini." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator margin untung</li></ol></nav>
+  <h1>Kalkulator Margin Untung</h1>
+  <p class="answer">Margin untung = untung ÷ harga jual. Jual pada RM100 dengan kos RM60 dan fi marketplace 10%, anda untung <strong>{{M_PROFIT}}</strong> seunit: <strong>margin {{M_MARGIN}}%</strong> tetapi markup {{M_MARKUP}}%. Harga pulang modal {{M_BE}}, dan margin 40% memerlukan harga {{M_TPRICE}}. Masukkan harga, kos dan fi anda di bawah.</p>
+  <p class="meta"><span>Formula disemak <time datetime="{{M_VERIFIED_ISO}}">{{M_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/profit-margin-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="marginForm" novalidate aria-labelledby="mg-h">
+      <h2 id="mg-h">Produk anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="price">Harga jual</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.1" value="{{M_PRICE}}"></div></div>
+        <div class="field"><label for="cost">Kos barang</label><div class="input"><span aria-hidden="true">RM</span><input id="cost" name="cost" type="number" inputmode="decimal" min="0" step="0.1" value="{{M_COST}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="feePct">Fi (% harga)</label><div class="input"><input id="feePct" name="feePct" type="number" inputmode="decimal" min="0" max="90" step="0.1" value="{{M_FEE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="fixedFee">Fi tetap sepesanan</label><div class="input"><span aria-hidden="true">RM</span><input id="fixedFee" name="fixedFee" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+      </div>
+      <p class="help">Jumlahkan komisen, fi bayaran dan fi servis daripada seller centre anda.</p>
+      <div class="field-row">
+        <div class="field"><label for="shipping">Penghantaran ditanggung</label><div class="input"><span aria-hidden="true">RM</span><input id="shipping" name="shipping" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+        <div class="field"><label for="ads">Kos iklan seunit</label><div class="input"><span aria-hidden="true">RM</span><input id="ads" name="ads" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="target">Margin sasaran</label><div class="input"><input id="target" name="target" type="number" inputmode="decimal" min="0" max="95" step="1" value="{{M_TARGET}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="qty">Unit sebulan</label><div class="input"><input id="qty" name="qty" type="number" inputmode="numeric" min="0" step="10" value="{{M_QTY}}"><span aria-hidden="true">unit</span></div></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="mg-result-h">
+      <h2 id="mg-result-h">Untung anda</h2>
+      <div class="net">
+        <p>Untung seunit</p>
+        <output id="mProfit" for="price cost feePct fixedFee shipping ads">{{M_PROFIT}}</output>
+        <p id="mSub">{{M_SUB}}</p>
+      </div>
+      <p class="sr-only" id="mLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="mLines">
+{{M_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="mLoss" hidden>Anda rugi setiap jualan. Naikkan harga sekurang-kurangnya ke harga pulang modal atau kurangkan kos.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="marginPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="conv-h">Tukar margin ke markup (dan sebaliknya)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="conv-h">
+    <table class="data">
+      <thead><tr><th scope="col">Peratus</th><th scope="col">Margin → markup</th><th scope="col">Markup → margin</th></tr></thead>
+      <tbody>
+{{M_CONV}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara margin untung dikira</h2>
+  <ol>
+    <li><strong>Fi</strong> = harga jual × fi % + fi tetap setiap pesanan.</li>
+    <li><strong>Untung seunit</strong> = harga jual − kos − fi − penghantaran ditanggung − kos iklan seunit.</li>
+    <li><strong>Margin</strong> = untung ÷ harga jual; <strong>markup</strong> = untung ÷ kos.</li>
+    <li><strong>Harga pulang modal</strong> = (kos + kos tetap) ÷ (1 − fi %).</li>
+    <li><strong>Harga untuk margin sasaran</strong> = (kos + kos tetap) ÷ (1 − fi % − margin sasaran).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="price-h">Harga jual untuk kos RM60 ikut fi dan margin sasaran</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="price-h">
+    <table class="data">
+      <thead><tr><th scope="col">Fi</th><th scope="col">Margin 20%</th><th scope="col">Margin 30%</th><th scope="col">Margin 40%</th><th scope="col">Margin 50%</th></tr></thead>
+      <tbody>
+{{M_PRICES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tips">Tip harga untuk peniaga online</h2>
+  <ul>
+    <li><strong>Guna kadar fi sebenar:</strong> komisen, fi bayaran dan fi servis berbeza ikut kategori, kempen dan program; ambil daripada seller centre.</li>
+    <li><strong>Kira penghantaran percuma dan baucar:</strong> subsidi penghantaran atau baucar penjual ialah kos setiap pesanan.</li>
+    <li><strong>Tetapkan harga ikut margin, bukan markup:</strong> markup 30% hanyalah margin 23.1%, sebelum fi.</li>
+    <li><strong>SST bukan untung:</strong> perniagaan berdaftar mengutipnya untuk JKDM.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.investopedia.com/terms/p/profitmargin.asp" rel="noopener">Investopedia: Profit margin</a></li>
+    <li><a href="https://www.investopedia.com/terms/m/markup.asp" rel="noopener">Investopedia: Markup</a></li>
+    <li><a href="https://mysst.customs.gov.my/" rel="noopener">JKDM: Portal MySST</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran untuk penetapan harga. Fi, baucar, pemulangan dan overhed mengubah untung sebenar.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-roas/">Kalkulator ROAS<small>Pulangan belanja iklan dan ROAS pulang modal</small></a>
+    <a href="/kalkulator-caj-freelance/">Kalkulator Caj Freelance<small>Kadar sejam selepas cukai dan KWSP</small></a>
+    <a href="/kalkulator-kos-pekerja/">Kalkulator Kos Pekerja<small>Kos sebenar seorang pekerja</small></a>
+  </div>
+</section>
