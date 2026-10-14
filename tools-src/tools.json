@@ -495,6 +495,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator Refinance Rumah",
+    "desc": "Is refinancing your home loan worth it: old against new instalment, interest saved, 0.5% stamp duty, SRO 2023 legal fees, lock-in penalty, cash-out and break-even. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-refinance-rumah/",
+    "cat": "calc",
+    "icon": "kalkulator-refinance-rumah",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Sewa atau Beli Rumah",
+    "desc": "Rent or buy in Malaysia: your wealth after 5, 10 or 20 years with stamp duty, legal fees, instalments, rising rent, price growth and investment returns. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-sewa-atau-beli-rumah/",
+    "cat": "calc",
+    "icon": "kalkulator-sewa-atau-beli-rumah",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Fixed Deposit (FD)",
+    "desc": "Fixed deposit interest for 1 to 60 months, maturity amount, monthly interest, renewals, return after inflation and the RM250,000 PIDM limit. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-fixed-deposit/",
+    "cat": "calc",
+    "icon": "kalkulator-fixed-deposit",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Kos Pekerja (Employer Cost)",
+    "desc": "What an employee really costs: employer EPF, SOCSO, EIS, the HRD Corp levy, bonus and foreign workers, monthly and yearly. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-kos-pekerja/",
+    "cat": "calc",
+    "icon": "kalkulator-kos-pekerja",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

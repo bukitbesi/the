@@ -1,11 +1,11 @@
-# The Bukit Besi Tools — 70 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 74 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
 [![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
-directory of 70 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+directory of 74 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
 code minifiers, SEO and schema generators, writing utilities, image editors,
 AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
 No signup, no tracking scripts, works offline after one visit.
@@ -90,6 +90,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-ptptn/](https://tool.thebukitbesi.com/kalkulator-ptptn/) + [/ptptn-repayment-calculator/](https://tool.thebukitbesi.com/ptptn-repayment-calculator/) | BM + English | kalkulator ptptn, bayaran balik ptptn, ujrah; ptptn repayment calculator |
 | [/kalkulator-fidyah/](https://tool.thebukitbesi.com/kalkulator-fidyah/) + [/fidyah-calculator/](https://tool.thebukitbesi.com/fidyah-calculator/) | BM + English | kalkulator fidyah, kadar fidyah 2026 mengikut negeri; fidyah calculator malaysia |
 | [/kalkulator-gabung-hutang/](https://tool.thebukitbesi.com/kalkulator-gabung-hutang/) + [/debt-consolidation-calculator-malaysia/](https://tool.thebukitbesi.com/debt-consolidation-calculator-malaysia/) | BM + English | gabung hutang kad kredit, penyatuan hutang; debt consolidation calculator malaysia |
+| [/kalkulator-refinance-rumah/](https://tool.thebukitbesi.com/kalkulator-refinance-rumah/) + [/refinance-calculator-malaysia/](https://tool.thebukitbesi.com/refinance-calculator-malaysia/) | BM + English | kalkulator refinance rumah, kos refinance; refinance calculator malaysia |
+| [/kalkulator-sewa-atau-beli-rumah/](https://tool.thebukitbesi.com/kalkulator-sewa-atau-beli-rumah/) + [/rent-vs-buy-calculator-malaysia/](https://tool.thebukitbesi.com/rent-vs-buy-calculator-malaysia/) | BM + English | sewa atau beli rumah; rent vs buy calculator malaysia |
+| [/kalkulator-fixed-deposit/](https://tool.thebukitbesi.com/kalkulator-fixed-deposit/) + [/fixed-deposit-calculator-malaysia/](https://tool.thebukitbesi.com/fixed-deposit-calculator-malaysia/) | BM + English | kalkulator fixed deposit, faedah fd; fixed deposit calculator malaysia |
+| [/kalkulator-kos-pekerja/](https://tool.thebukitbesi.com/kalkulator-kos-pekerja/) + [/employer-cost-calculator-malaysia/](https://tool.thebukitbesi.com/employer-cost-calculator-malaysia/) | BM + English | kos majikan, caruman kwsp majikan, levi hrd; employer cost calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -151,6 +155,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (fidyah):** `fidyah-core.js` `STATES` holds each state's fidyah rate for the year (`FACTS.year`). Update every January when the state councils publish new rates, then `tools-src/tests/fidyah.test.mjs`.
 
 **Upkeep (debt consolidation):** `debt-core.js` holds the card minimum payment (5% / RM50) and tiers (15/17/18%); loan maths come from `carloan-core.js`.
+
+**Upkeep (refinance, rent vs buy):** both use `loan-core.js` (stamp duty, SRO 2023 legal fees, first-home exemption). `refi-core.js` holds the OPR for the FAQ (`FACTS.opr`); update it after each Bank Negara MPC decision.
+
+**Upkeep (fixed deposit):** `fd-core.js` holds the PIDM limit, the OPR and the inflation default (`FACTS`). Update after MPC decisions and quarterly DOSM inflation releases.
+
+**Upkeep (employer cost):** `employer-core.js` uses `salary-core.js` for EPF, SOCSO and EIS, and holds the foreign-worker EPF rate and HRD Corp levy rates. Recheck after any KWSP, PERKESO or HRD Corp rate change.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -221,6 +231,10 @@ assets/js/tnb-core.js       TNB bill: RP4 charges, EEI band rebate, AFA, retail,
 assets/js/ptptn-core.js     PTPTN: 1% ujrah instalment, early settlement, restructuring minimum
 assets/js/fidyah-core.js    fidyah: 2026 state rates by rice type, multiplication by Ramadans passed
 assets/js/debt-core.js      debt consolidation: card payoff at the minimum vs one personal loan (EIR, stamp duty)
+assets/js/refi-core.js      refinance: old vs new instalment on the same balance, costs, break-even, cash-out
+assets/js/rentbuy-core.js   rent vs buy: buyer's equity vs renter's invested savings, year by year
+assets/js/fd-core.js        fixed deposit: simple interest per term, renewals, PIDM limit, real return
+assets/js/employer-core.js  employer cost: EPF, SOCSO, EIS, HRD levy, foreign workers, bonus EPF
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

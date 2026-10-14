@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/kalkulator-kos-pekerja/",
+  "lang": "ms",
+  "alternates": { "en": "/employer-cost-calculator-malaysia/" },
+  "title": "Kalkulator Kos Pekerja Majikan 2026: KWSP, PERKESO, SIP dan HRD",
+  "description": "Kalkulator kos majikan: jumlah sebenar seorang pekerja sebulan dan setahun, termasuk KWSP majikan, PERKESO, SIP, levi HRD Corp, bonus dan pekerja asing.",
+  "llms": "Mengira kos sebenar seorang pekerja kepada majikan di Malaysia: gaji dan elaun tetap, KWSP majikan (13% bagi gaji hingga RM5,000, 12% melebihi; 4% bagi pekerja 60 tahun ke atas; 2% bagi pekerja asing mulai Oktober 2025), PERKESO majikan 1.75% (1.25% bagi 60 tahun ke atas) dan SIP 0.2% (bukan bagi pekerja asing) mengikut jadual caruman, levi HRD Corp 1% bagi majikan dengan 10 atau lebih pekerja Malaysia dalam sektor diliputi atau 0.5% secara sukarela bagi 5 hingga 9 pekerja (atas gaji pekerja Malaysia sahaja), serta KWSP atas bonus. Contoh: gaji RM3,000 dengan levi HRD 1%: KWSP RM390, PERKESO RM51.65, SIP RM5.90, HRD RM30, jumlah RM3,477.55 sebulan (15.9% di atas gaji) dan RM41,730.60 setahun.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "employer",
+  "scripts": ["/assets/js/employer-cost.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Kos Pekerja", null]],
+  "about": ["Kos majikan", "Caruman KWSP majikan", "PERKESO dan SIP", "Levi HRD Corp"],
+  "app": {
+    "name": "Kalkulator Kos Pekerja Majikan",
+    "category": "BusinessApplication",
+    "features": ["KWSP majikan ikut Jadual Ketiga", "PERKESO dan SIP ikut jadual caruman", "Levi HRD Corp 1% atau 0.5%", "Pekerja asing (KWSP 2%, tiada SIP)", "Pekerja 60 tahun ke atas", "Bonus dan kos setahun", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["KWSP: Kadar caruman", "https://www.kwsp.gov.my/ms/majikan/caruman"],
+    ["PERKESO: Jadual kadar caruman", "https://www.perkeso.gov.my/"],
+    ["HRD Corp: Levi", "https://hrdcorp.gov.my/"],
+    ["BoardRoom Malaysia: Employee statutory contributions EPF, SOCSO, EIS and HRD", "https://www.boardroomlimited.com/my/2025/10/07/employee-statutory-contributions-epf-socso-eis-hrd/"]
+  ],
+  "faq": [
+    { "q": "Berapa kos majikan untuk pekerja bergaji RM3,000?", "a": "Kira-kira {{E_TOTAL}} sebulan dengan levi HRD Corp 1%: gaji RM3,000, KWSP majikan RM390 (13%), PERKESO RM51.65, SIP RM5.90 dan levi HRD RM30. Itu {{E_ONTOP}} ({{E_PCT}}%) di atas gaji, atau {{E_YEARLY}} setahun." },
+    { "q": "Berapa caruman KWSP majikan?", "a": "13% bagi pekerja bergaji RM5,000 ke bawah dan 12% bagi gaji melebihi RM5,000, dikira atas jalur gaji Jadual Ketiga dan dibundarkan ke ringgit seterusnya. Bagi pekerja 60 tahun ke atas, 4%. Bagi pekerja asing, 2% mulai Oktober 2025." },
+    { "q": "Siapa perlu membayar levi HRD Corp?", "a": "Majikan dalam sektor yang diliputi dengan 10 atau lebih pekerja warganegara Malaysia wajib membayar 1% daripada gaji bulanan. Majikan dengan 5 hingga 9 pekerja boleh mendaftar secara sukarela pada 0.5%. Levi dikira atas gaji pekerja Malaysia sahaja." },
+    { "q": "Berapa kos pekerja asing kepada majikan?", "a": "Bagi pekerja asing bergaji RM3,000: KWSP majikan 2% (RM60) dan PERKESO RM51.65, tanpa SIP dan levi HRD, jumlah {{E_FOREIGN}} sebulan. Levi pekerja asing tahunan dan kos permit Jabatan Imigresen dibayar berasingan." },
+    { "q": "Adakah bonus dikenakan KWSP?", "a": "Ya, bonus ialah gaji bagi KWSP. Bonus sebulan bagi gaji RM3,000 menjadikan gaji bulan itu RM6,000, jadi KWSP majikan 12% dan tambahan KWSP atas bonus ialah {{E_BONUS_EPF}}. Kos setahun dengan bonus itu ialah {{E_BONUS_YEARLY}}." },
+    { "q": "Berapa caruman PERKESO dan SIP majikan?", "a": "PERKESO majikan kira-kira 1.75% (Bencana Pekerjaan dan Keilatan) dan SIP 0.2%, mengikut jadual caruman berjalur sehingga siling gaji RM6,000. Bagi gaji RM3,000, PERKESO RM51.65 dan SIP RM5.90." },
+    { "q": "Apakah kos lain mengupah pekerja?", "a": "Selain caruman berkanun: elaun, kerja lebih masa, cuti berbayar, insurans perubatan, latihan, peralatan dan kos pengambilan. Kalkulator ini merangkumi gaji, caruman berkanun, levi HRD dan bonus." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator kos pekerja</li></ol></nav>
+  <h1>Kalkulator Kos Pekerja untuk Majikan</h1>
+  <p class="answer">Seorang pekerja bergaji RM3,000 menelan kos <strong>{{E_TOTAL}}</strong> sebulan kepada majikan: KWSP majikan 13% (RM390), PERKESO RM51.65, SIP RM5.90 dan levi HRD Corp 1% (RM30), iaitu {{E_ONTOP}} atau {{E_PCT}}% di atas gaji, dan <strong>{{E_YEARLY}}</strong> setahun. Masukkan gaji pekerja anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/employer-cost-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="empForm" novalidate aria-labelledby="emp-h">
+      <h2 id="emp-h">Pekerja</h2>
+      <div class="field-row">
+        <div class="field"><label for="salary">Gaji pokok</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="100" value="{{E_SALARY}}"></div></div>
+        <div class="field"><label for="allowances">Elaun tetap</label><div class="input"><span aria-hidden="true">RM</span><input id="allowances" name="allowances" type="number" inputmode="decimal" min="0" step="50" value="0"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="foreign">Kewarganegaraan</label><select class="input" id="foreign" name="foreign">{{E_FOREIGN_OPTIONS}}</select></div>
+        <div class="field"><label for="age60">Umur</label><select class="input" id="age60" name="age60">{{E_AGE_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="hrd">Levi HRD Corp</label><select class="input" id="hrd" name="hrd">{{E_HRD_OPTIONS}}</select></div>
+      <div class="field"><label for="bonus">Bonus setahun</label><div class="input"><input id="bonus" name="bonus" type="number" inputmode="decimal" min="0" step="0.5" value="0"><span aria-hidden="true">bulan gaji</span></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="emp-result-h">
+      <h2 id="emp-result-h">Kos kepada majikan</h2>
+      <div class="net">
+        <p>Kos sebulan</p>
+        <output id="eTotal" for="salary allowances foreign age60 hrd bonus">{{E_TOTAL}}</output>
+        <p id="eSub">{{E_SUB}}</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Kos majikan</caption>
+        <tbody id="eLines">
+{{E_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Potongan pekerja</caption>
+        <tbody id="eEmployee">
+{{E_EMPLOYEE}}
+        </tbody>
+      </table>
+      <p class="note">Tidak termasuk PCB, levi pekerja asing tahunan, kerja lebih masa dan faedah lain.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="empPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Kos majikan mengikut gaji (pekerja Malaysia bawah 60 tahun)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gaji</th><th scope="col">KWSP majikan</th><th scope="col">PERKESO + SIP</th><th scope="col">Sebulan tanpa HRD</th><th scope="col">Sebulan dengan HRD 1%</th><th scope="col">Setahun dengan HRD</th></tr></thead>
+      <tbody>
+{{E_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kos majikan dikira</h2>
+  <ol>
+    <li><strong>Gaji</strong> = gaji pokok + elaun tetap (gaji bagi KWSP dan PERKESO).</li>
+    <li><strong>KWSP majikan</strong> = 13% (gaji hingga RM5,000) atau 12%, atas jalur gaji Jadual Ketiga, dibundarkan ke atas.</li>
+    <li><strong>PERKESO dan SIP</strong> mengikut jadual caruman berjalur RM100 hingga siling RM6,000.</li>
+    <li><strong>Levi HRD Corp</strong> = 1% atau 0.5% gaji pekerja Malaysia.</li>
+    <li><strong>Setahun</strong> = sebulan × 12 + bonus + KWSP atas bonus.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rates">Kadar caruman majikan 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates">
+    <table class="data text">
+      <thead><tr><th scope="col">Caruman</th><th scope="col">Pekerja Malaysia</th><th scope="col">Pekerja asing</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">KWSP majikan</th><td>13% (hingga RM5,000), 12% (melebihi); 4% dari umur 60</td><td>2% (mulai Oktober 2025)</td></tr>
+        <tr><th scope="row">PERKESO majikan</th><td>1.75% (1.25% dari umur 60), siling RM6,000</td><td>1.75%</td></tr>
+        <tr><th scope="row">SIP (EIS) majikan</th><td>0.2%, siling RM6,000</td><td>Tiada</td></tr>
+        <tr><th scope="row">Levi HRD Corp</th><td>1% (10 atau lebih pekerja) atau 0.5% (5 hingga 9, sukarela)</td><td>Tidak dikira</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.kwsp.gov.my/ms/majikan/caruman" rel="noopener">KWSP: kadar caruman</a></li>
+    <li><a href="https://www.perkeso.gov.my/" rel="noopener">PERKESO: jadual kadar caruman</a></li>
+    <li><a href="https://hrdcorp.gov.my/" rel="noopener">HRD Corp: levi</a></li>
+    <li><a href="https://www.boardroomlimited.com/my/2025/10/07/employee-statutory-contributions-epf-socso-eis-hrd/" rel="noopener">BoardRoom Malaysia: caruman berkanun EPF, SOCSO, EIS dan HRD</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran untuk perancangan. Rujuk KWSP, PERKESO dan HRD Corp untuk jumlah sebenar dan liputan sektor anda.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+    <a href="/kalkulator-ot/">Kalkulator OT<small>Bayaran lebih masa ikut Akta Kerja</small></a>
+    <a href="/kalkulator-gaji-prorata/">Kalkulator Gaji Prorata<small>Gaji bulan tidak lengkap</small></a>
+  </div>
+</section>

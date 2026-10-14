@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/fixed-deposit-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-fixed-deposit/" },
+  "title": "Fixed Deposit Calculator Malaysia 2026: FD Interest and Returns",
+  "description": "Fixed deposit calculator for Malaysia: FD interest for 1 to 60 months, maturity amount, monthly interest and returns when renewed, with the RM250,000 PIDM cap.",
+  "llms": "Calculates fixed deposit interest in Malaysia: simple interest for the tenure = deposit × rate × months ÷ 12, paid at maturity or monthly; renewing at maturity compounds it. Example: RM10,000 at 3.8% for 12 months earns RM380 (RM10,380 at maturity, or RM31.67 a month); 6 months RM190; renewed for 5 years it grows to RM12,050. PIDM protects up to RM250,000 per depositor per member bank, interest included, with Islamic and conventional deposits protected separately. Interest from licensed banks is tax-exempt for resident individuals. OPR 2.75% (held on 3 September 2026); headline inflation averaged 1.9% in Q2 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fd",
+  "scripts": ["/assets/js/fixed-deposit.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Fixed Deposit Calculator", null]],
+  "about": ["Fixed deposits", "FD interest", "PIDM", "Interest rates in Malaysia"],
+  "app": {
+    "name": "Fixed Deposit Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Interest and maturity amount", "Tenure from 1 to 60 months", "Monthly interest", "Returns when renewed", "Return after inflation", "RM250,000 PIDM limit", "Works offline"]
+  },
+  "citations": [
+    ["PIDM: Deposit Insurance System FAQs", "https://www.pidm.gov.my/my/how-we-protect-you/deposit-insurance-system/deposit-insurance-system-faqs"],
+    ["LHDN: Form BE 2026 explanatory notes (interest exemption)", "https://ef.hasil.gov.my/eBE2026/Pdf/Nota_BE.pdf"],
+    ["Bernama: Bank Negara holds the OPR at 2.75% (3 September 2026)", "https://bernama.com/en/region/news.php?id=2602553"]
+  ],
+  "faq": [
+    { "q": "How is fixed deposit interest calculated?", "a": "Multiply the deposit by the yearly interest rate and the number of months, then divide by 12. RM10,000 at 3.8% for 12 months = RM380; for 6 months = {{D_6M}}. Interest is paid at maturity, or monthly for a monthly-interest FD." },
+    { "q": "How much interest does RM10,000 earn in an FD for a year?", "a": "At 3.8% a year, RM380, and RM10,380 at maturity. At 3% RM300, and at 4% RM400. Renewed every year for 5 years at 3.8%, it grows to {{D_5Y}}." },
+    { "q": "Is fixed deposit interest taxed in Malaysia?", "a": "Not for resident individuals. Interest on money deposited with licensed banks and financial institutions in Malaysia is exempt from income tax for resident individuals, as LHDN's Form BE notes state." },
+    { "q": "How much of my fixed deposit does PIDM protect?", "a": "PIDM protects up to RM250,000 per depositor per member bank, principal and interest together. Deposits at different banks are protected separately, and so are Islamic and conventional deposits at the same bank." },
+    { "q": "Does a fixed deposit beat inflation?", "a": "Malaysia's headline inflation averaged 1.9% in Q2 2026. An FD at 3.8% gives a real return of about 1.9% a year after inflation; a rate below inflation means your savings lose buying power." },
+    { "q": "What happens if I withdraw an FD early?", "a": "Most banks pay no interest for withdrawals in the early part of the term, and for partway withdrawals usually pay interest at half the rate for completed months. Check your bank's terms before opening an FD." },
+    { "q": "How does the OPR affect FD rates?", "a": "Banks' FD rates move with Bank Negara's OPR, held at 2.75% on 3 September 2026. Promotional FD rates are usually a little above board rates for a set tenure and minimum amount." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Fixed deposit calculator</li></ol></nav>
+  <h1>Fixed Deposit Calculator Malaysia</h1>
+  <p class="answer">FD interest = deposit × rate × months ÷ 12. RM10,000 at 3.8% for 12 months earns <strong>{{D_INTEREST}}</strong> ({{D_MATURITY}} at maturity), or {{D_MONTHLY}} a month for a monthly-interest FD. The interest is tax-exempt for resident individuals, and PIDM protects up to <strong>{{D_PIDM}}</strong> per bank. Enter your deposit below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-fixed-deposit/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="fdForm" novalidate aria-labelledby="fd-h">
+      <h2 id="fd-h">Your deposit</h2>
+      <div class="field"><label for="amount">Deposit amount</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="1000" value="{{D_AMOUNT}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="rate">Rate a year</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.05" value="{{D_RATE}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="months">Tenure</label><select class="input" id="months" name="months">{{D_MONTH_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="renew">Renewals</label><div class="input"><input id="renew" name="renew" type="number" inputmode="numeric" min="1" max="30" step="1" value="1"><span aria-hidden="true">times</span></div></div>
+        <div class="field"><label for="inflation">Inflation a year</label><div class="input"><input id="inflation" name="inflation" type="number" inputmode="decimal" min="0" step="0.1" value="{{D_INFLATION}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <p class="help">Enter your bank's FD rate (board or promotional). Renewals 1 = a single term.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fd-result-h">
+      <h2 id="fd-result-h">Your return</h2>
+      <div class="net">
+        <p>Interest</p>
+        <output id="dInterest" for="amount rate months renew">{{D_INTEREST}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Details</caption>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="dPidm" hidden>Above the RM250,000 PIDM limit by <strong id="dOver">RM0.00</strong>. Split your savings across banks for full protection.</p>
+      <p class="note">Banks may work out interest by days (365 a year) and round it.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fdPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">FD interest on RM10,000 by rate and tenure</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Rate a year</th><th scope="col">1 month</th><th scope="col">3 months</th><th scope="col">6 months</th><th scope="col">12 months</th></tr></thead>
+      <tbody>
+{{D_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How fixed deposit interest is worked out</h2>
+  <ol>
+    <li><strong>Interest</strong> = deposit × yearly rate × months ÷ 12 (simple interest for one term).</li>
+    <li><strong>Maturity amount</strong> = deposit + interest.</li>
+    <li><strong>Monthly interest</strong> = deposit × rate ÷ 12.</li>
+    <li><strong>Renewals:</strong> each term's interest is added to the deposit, so it compounds.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grow-h">FD value renewed every year at 3.8%</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grow-h">
+    <table class="data">
+      <thead><tr><th scope="col">Deposit</th><th scope="col">1 year</th><th scope="col">3 years</th><th scope="col">5 years</th></tr></thead>
+      <tbody>
+{{D_GROW}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">What to know about FDs in Malaysia</h2>
+  <ul>
+    <li><strong>PIDM:</strong> up to RM250,000 per depositor per member bank, interest included; Islamic and conventional separately.</li>
+    <li><strong>Tax:</strong> interest from licensed banks is exempt for resident individuals.</li>
+    <li><strong>OPR:</strong> {{D_OPR}}% (held on 3 September 2026); FD rates move with it.</li>
+    <li><strong>Inflation:</strong> averaged {{D_INFL}}% in Q2 2026; compare your FD rate with inflation for the real return.</li>
+    <li><strong>Early withdrawal:</strong> interest is cut or not paid; check the bank's terms.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.pidm.gov.my/my/how-we-protect-you/deposit-insurance-system/deposit-insurance-system-faqs" rel="noopener">PIDM: Deposit Insurance System FAQs</a></li>
+    <li><a href="https://ef.hasil.gov.my/eBE2026/Pdf/Nota_BE.pdf" rel="noopener">LHDN: Form BE 2026 explanatory notes</a></li>
+    <li><a href="https://bernama.com/en/region/news.php?id=2602553" rel="noopener">Bernama: OPR held at 2.75%</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate only. Each bank sets its rates, interest method and early-withdrawal terms.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+    <a href="/gold-price-malaysia/">Gold Price Malaysia Today<small>Gold price per gram</small></a>
+  </div>
+</section>

@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/rent-vs-buy-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-sewa-atau-beli-rumah/" },
+  "title": "Rent vs Buy Calculator Malaysia: Which Leaves You Better Off?",
+  "description": "Rent vs buy calculator for Malaysia: compare your wealth after 5, 10 or 20 years, with stamp duty, legal fees, instalments, rising rent and investment returns.",
+  "llms": "Compares renting with buying a home in Malaysia: the buyer pays the down payment, stamp duty (with the first-home exemption up to RM500,000), SRO 2023 legal fees and SST up front, then the instalment and upkeep; the renter pays rent rising each year and invests the buyer's up-front cost plus any monthly difference. After the chosen period, the buyer's wealth = home value less selling costs and the loan balance; the renter's = the investment pot. Example: a RM500,000 home, 10% down, 4.2% over 35 years (RM2,046.83 instalment, RM74,075 up front), rent of RM1,800 rising 3% a year, prices up 3% a year and a 5% investment return: after 10 years the buyer has RM272,014 against the renter's RM193,066; buying pulls ahead in year 5.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "rentbuy",
+  "scripts": ["/assets/js/rent-vs-buy.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Rent vs Buy Calculator", null]],
+  "about": ["Rent or buy a home", "Home ownership in Malaysia", "Home loans", "Investing"],
+  "app": {
+    "name": "Rent vs Buy Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Up-front cost of buying (stamp duty, legal fees, SST)", "First-home stamp duty exemption", "House price growth and rent rises", "Renter's investment return", "Wealth year by year", "The year buying pulls ahead", "Works offline"]
+  },
+  "citations": [
+    ["Free Malaysia Today: First-home stamp duty exemption extended to 2027", "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/pengecualian-duti-setem-penuh-untuk-rumah-pertama-bawah-rm500-000"],
+    ["Bank Negara Malaysia: Monetary Policy Statement (OPR 2.75%)", "https://www.bnm.gov.my/-/monetary-policy-statement-09072026"],
+    ["Stamp Act 1949 and Solicitors' Remuneration Order 2023 (see the Home Loan Calculator)", "https://tool.thebukitbesi.com/home-loan-calculator-malaysia/"]
+  ],
+  "faq": [
+    { "q": "Is it better to rent or buy a home in Malaysia?", "a": "It depends on how long you stay and how fast prices rise. For a RM500,000 home against RM1,800 rent, with prices up 3% and a 5% investment return a year, the buyer is worth {{B_BUYER}} against the renter's {{B_RENTER}} after 10 years, and buying pulls ahead in year {{B_BE}}. If prices do not rise, renting often wins." },
+    { "q": "What is the up-front cost of buying a RM500,000 home?", "a": "With 10% down: a RM50,000 down payment, {{B_STAMP}} in stamp duty (transfer and loan agreement) and {{B_LEGAL}} in legal fees and SST, about {{B_UPFRONT}} in total. First-home buyers under RM500,000 are exempt from stamp duty until 31 December 2027." },
+    { "q": "How does this calculator compare renting and buying?", "a": "The renter invests the money the buyer spends up front, and each year whoever spends less invests the difference. After the chosen period, the buyer's wealth is the home's value less selling costs and the loan balance, and the renter's is the investment pot." },
+    { "q": "How long do I need to stay for buying to pay off?", "a": "Usually at least 5 to 7 years, because the up-front costs (stamp duty, legal fees) and selling costs must be recovered through the home's growth and principal repaid. Our example breaks even in year {{B_BE}}." },
+    { "q": "What does owning a home cost besides the instalment?", "a": "Assessment and quit rent, maintenance fees and sinking fund for strata homes, fire insurance or MRTA, and repairs. The calculator uses a yearly percentage of the price; 1% is a common estimate." },
+    { "q": "Is renting throwing money away?", "a": "Not necessarily. Renters avoid the up-front costs and loan interest, and can invest the difference. Renting wins when home prices grow slowly, you move within a few years, or your investment return is high." },
+    { "q": "What is the instalment on a RM500,000 home?", "a": "For a RM450,000 loan (10% down) at 4.2% over 35 years, the instalment is {{B_INST}} a month." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Rent vs buy calculator</li></ol></nav>
+  <h1>Rent vs Buy Calculator Malaysia</h1>
+  <p class="answer">A RM500,000 home (10% down, 4.2%, {{B_INST}} instalment) against renting at RM1,800 a month: with prices up 3% and a 5% investment return a year, after 10 years the buyer has <strong>{{B_BUYER}}</strong> and the renter <strong>{{B_RENTER}}</strong>; buying pulls ahead in year {{B_BE}}. Enter your own figures below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{B_VERIFIED_ISO}}">{{B_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-sewa-atau-beli-rumah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="rbForm" novalidate aria-labelledby="rb-h">
+      <h2 id="rb-h">Buy</h2>
+      <div class="field"><label for="price">Home price</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="10000" value="{{B_PRICE}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="downPct">Down payment</label><div class="input"><input id="downPct" name="downPct" type="number" inputmode="decimal" min="0" max="100" step="1" value="{{B_DOWN}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="rate">Loan rate</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.05" value="{{B_RATE}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="years">Loan tenure</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{B_YEARS}}"><span aria-hidden="true">years</span></div></div>
+        <div class="field"><label for="firstHome">First home?</label><select class="input" id="firstHome" name="firstHome">{{B_FIRST_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="upkeep">Ownership cost a year</label><div class="input"><input id="upkeep" name="upkeep" type="number" inputmode="decimal" min="0" step="0.1" value="{{B_UPKEEP}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="growth">Price growth a year</label><div class="input"><input id="growth" name="growth" type="number" inputmode="decimal" step="0.5" value="{{B_GROWTH}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field"><label for="sellCost">Selling costs (agent, legal)</label><div class="input"><input id="sellCost" name="sellCost" type="number" inputmode="decimal" min="0" step="0.5" value="{{B_SELL}}"><span aria-hidden="true">%</span></div></div>
+      <fieldset class="field-group">
+        <legend>Rent</legend>
+        <div class="field-row">
+          <div class="field"><label for="rent">Rent a month</label><div class="input"><span aria-hidden="true">RM</span><input id="rent" name="rent" type="number" inputmode="decimal" min="0" step="50" value="{{B_RENT}}"></div></div>
+          <div class="field"><label for="rentRise">Rent rise a year</label><div class="input"><input id="rentRise" name="rentRise" type="number" inputmode="decimal" min="0" step="0.5" value="{{B_RISE}}"><span aria-hidden="true">%</span></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="invest">Investment return</label><div class="input"><input id="invest" name="invest" type="number" inputmode="decimal" min="0" step="0.5" value="{{B_INVEST}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="horizon">Years to compare</label><div class="input"><input id="horizon" name="horizon" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{B_HORIZON}}"><span aria-hidden="true">years</span></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="rb-result-h">
+      <h2 id="rb-result-h">Result</h2>
+      <div class="net">
+        <p id="bHead">{{B_HEAD}}</p>
+        <output id="bDiff" for="price downPct rate years firstHome upkeep growth sellCost rent rentRise invest horizon">{{B_DIFF}}</output>
+        <p id="bSub">{{B_SUB}}</p>
+      </div>
+      <p class="sr-only" id="bLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Summary</caption>
+        <tbody id="bLines">
+{{B_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Wealth each year</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col">Buy</th><th scope="col">Rent</th></tr></thead>
+        <tbody id="bYears">
+{{B_YEARS_ROWS}}
+        </tbody>
+      </table>
+      <p class="note">A simple pre-tax estimate; RPGT and interest rate changes are not included.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rbPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Who comes out ahead: price growth against years</h2>
+  <p>A RM500,000 home, RM1,800 rent rising 3% a year, 5% investment return.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Price growth a year</th><th scope="col">5 years</th><th scope="col">10 years</th><th scope="col">20 years</th></tr></thead>
+      <tbody>
+{{B_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the comparison is worked out</h2>
+  <ol>
+    <li><strong>Up-front cost of buying</strong> = down payment + transfer and loan stamp duty + SRO 2023 legal fees + SST.</li>
+    <li><strong>Each year:</strong> the buyer pays the instalment and ownership costs; the renter pays rent. Whoever spends less invests the difference.</li>
+    <li><strong>The renter</strong> invests the buyer's up-front cost in year one.</li>
+    <li><strong>At the end:</strong> buyer = home value × (1 − selling costs) − loan balance + investments; renter = investment pot.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">When renting makes more sense</h2>
+  <ul>
+    <li>You may change job or city within 3 to 5 years.</li>
+    <li>Prices in the area are flat or oversupplied.</li>
+    <li>You reliably invest the difference (for example ASB, voluntary EPF or an index fund).</li>
+  </ul>
+  <h2 id="tips2">When buying makes more sense</h2>
+  <ul>
+    <li>You will stay a long time and rents in the area are high relative to prices.</li>
+    <li>You qualify for the first-home stamp duty exemption or schemes such as the Housing Credit Guarantee Scheme.</li>
+    <li>A fixed instalment gives certainty against rent that rises every year.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/pengecualian-duti-setem-penuh-untuk-rumah-pertama-bawah-rm500-000" rel="noopener">FMT: first-home stamp duty exemption to 2027</a></li>
+    <li><a href="https://www.bnm.gov.my/-/monetary-policy-statement-09072026" rel="noopener">Bank Negara Malaysia: monetary policy statement</a></li>
+    <li><a href="/home-loan-calculator-malaysia/">Home Loan Calculator: stamp duty and SRO 2023 legal fees</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for comparison, not financial advice. Home price growth and investment returns are not guaranteed.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and DSR</small></a>
+    <a href="/refinance-calculator-malaysia/">Refinance Calculator<small>Saving and break-even</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly investment returns</small></a>
+  </div>
+</section>

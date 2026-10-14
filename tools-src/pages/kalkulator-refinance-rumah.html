@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/kalkulator-refinance-rumah/",
+  "lang": "ms",
+  "alternates": { "en": "/refinance-calculator-malaysia/" },
+  "title": "Kalkulator Refinance Rumah 2026: Berbaloi atau Tidak?",
+  "description": "Kalkulator refinance rumah: bandingkan ansuran lama dan baharu, kira penjimatan faedah, kos (duti setem, yuran guaman, penalti) dan tempoh pulang modal.",
+  "llms": "Mengira sama ada refinance pinjaman rumah di Malaysia berbaloi: ansuran baki pinjaman pada kadar semasa berbanding kadar baharu (baki yang sama), faedah dijimatkan, kos refinance (duti setem 0.5% atas pinjaman baharu tanpa pengecualian refinance, yuran guaman SRO 2023 1.25% bagi RM500,000 pertama dan 1% selebihnya, minimum RM500, ditambah SST 8%, penalti tempoh kunci, yuran penilaian dan kos lain), penjimatan bersih, tempoh pulang modal, serta pengeluaran tunai (cash-out). Contoh: baki RM300,000 selama 25 tahun dari 4.5% ke 3.9% menurunkan ansuran daripada RM1,667.50 kepada RM1,566.99, menjimatkan RM30,150.24 faedah; kos RM7,350 dan penjimatan bersih RM22,800.24, pulang modal 74 bulan. OPR 2.75% (dikekalkan 3 September 2026).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "refi",
+  "scripts": ["/assets/js/refinance.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Refinance Rumah", null]],
+  "about": ["Refinance pinjaman rumah", "Pembiayaan semula", "Duti setem pinjaman", "Yuran guaman SRO 2023"],
+  "app": {
+    "name": "Kalkulator Refinance Rumah",
+    "category": "FinanceApplication",
+    "features": ["Ansuran lama berbanding baharu", "Faedah dijimatkan", "Duti setem 0.5% dan yuran guaman SRO 2023 + SST", "Penalti tempoh kunci", "Pengeluaran tunai (cash-out)", "Tempoh pulang modal", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Kenyataan Dasar Monetari (OPR 2.75%)", "https://www.bnm.gov.my/-/monetary-policy-statement-09072026"],
+    ["PropertyGuru: The ultimate guide to refinancing", "https://www.propertyguru.com.my/property-guides/the-ultimate-guide-to-refinancing-9507"],
+    ["iProperty: How to refinance a housing loan (2026)", "https://www.iproperty.com.my/guides/what-is-home-loan-refinancing-how-can-i-do-it-12748"]
+  ],
+  "faq": [
+    { "q": "Adakah refinance rumah berbaloi?", "a": "Biasanya berbaloi jika kadar turun sekurang-kurangnya 0.5% dan anda akan menyimpan rumah lebih lama daripada tempoh pulang modal. Baki RM300,000 selama 25 tahun dari 4.5% ke 3.9% menjimatkan {{R_SAVE}} sebulan dan {{R_SAVED}} faedah; selepas kos {{R_COSTS}}, penjimatan bersih ialah {{R_NET}}." },
+    { "q": "Berapa kos refinance rumah?", "a": "Duti setem 0.5% atas jumlah pinjaman baharu, yuran guaman SRO 2023 (1.25% bagi RM500,000 pertama, minimum RM500) dengan SST 8%, yuran penilaian, kos pelepasan gadaian lama dan penalti tempoh kunci jika masih dalam tempoh. Bagi pinjaman RM300,000, duti setem RM1,500 dan yuran guaman RM3,750 + SST RM300." },
+    { "q": "Adakah duti setem dikecualikan untuk refinance?", "a": "Tidak. Duti setem 0.5% dikenakan sekali lagi atas perjanjian pinjaman baharu. Pengecualian duti setem rumah pertama hanya untuk pembelian, bukan pembiayaan semula." },
+    { "q": "Bagaimana mengira tempoh pulang modal refinance?", "a": "Bahagikan jumlah kos refinance dengan penjimatan ansuran bulanan. Kos RM7,350 ÷ penjimatan RM100.51 sebulan = {{R_BE}} bulan. Jika anda menjual atau refinance semula sebelum itu, refinance merugikan." },
+    { "q": "Apakah penalti tempoh kunci (lock-in)?", "a": "Kebanyakan pinjaman rumah mempunyai tempoh kunci 3 hingga 5 tahun. Menyelesaikan pinjaman dalam tempoh itu dikenakan penalti, biasanya 2% hingga 3% daripada baki atau jumlah pinjaman asal mengikut perjanjian. Semak perjanjian pinjaman anda." },
+    { "q": "Bolehkah saya mengeluarkan tunai semasa refinance?", "a": "Ya, cash-out refinance meminjam lebih daripada baki semasa, tertakluk kepada nilai rumah dan DSR. Duti setem dan yuran guaman dikira atas jumlah pinjaman baharu, dan ansuran meningkat kerana pinjaman lebih besar." },
+    { "q": "Apakah OPR semasa?", "a": "Bank Negara mengekalkan OPR pada 2.75% pada 3 September 2026. Kadar pinjaman rumah boleh ubah mengikut kadar asas (SBR) bank, yang bergerak bersama OPR." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator refinance rumah</li></ol></nav>
+  <h1>Kalkulator Refinance Rumah</h1>
+  <p class="answer">Refinance berbaloi jika faedah dijimatkan melebihi kos. Baki RM300,000 selama 25 tahun dari 4.5% ke 3.9% menurunkan ansuran daripada {{R_OLD}} kepada <strong>{{R_NEW}}</strong> dan menjimatkan {{R_SAVED}} faedah. Selepas kos {{R_COSTS}} (duti setem 0.5%, yuran guaman, penilaian), penjimatan bersih ialah <strong>{{R_NET}}</strong> dengan pulang modal {{R_BE}} bulan. Masukkan pinjaman anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/refinance-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="refiForm" novalidate aria-labelledby="refi-h">
+      <h2 id="refi-h">Pinjaman anda</h2>
+      <fieldset class="field-group">
+        <legend>Pinjaman sekarang</legend>
+        <div class="field"><label for="balance">Baki pinjaman</label><div class="input"><span aria-hidden="true">RM</span><input id="balance" name="balance" type="number" inputmode="decimal" min="0" step="1000" value="{{R_BALANCE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="rate">Kadar sekarang</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.05" value="{{R_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="yearsLeft">Baki tempoh</label><div class="input"><input id="yearsLeft" name="yearsLeft" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{R_LEFT}}"><span aria-hidden="true">tahun</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Pinjaman baharu</legend>
+        <div class="field-row">
+          <div class="field"><label for="newRate">Kadar baharu</label><div class="input"><input id="newRate" name="newRate" type="number" inputmode="decimal" min="0" step="0.05" value="{{R_NEW_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="newYears">Tempoh baharu</label><div class="input"><input id="newYears" name="newYears" type="number" inputmode="numeric" min="1" max="35" step="1" value="{{R_NEW_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+        </div>
+        <div class="field"><label for="cashOut">Pengeluaran tunai (pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="cashOut" name="cashOut" type="number" inputmode="decimal" min="0" step="1000" value="0"></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Kos</legend>
+        <div class="field-row">
+          <div class="field"><label for="lockPct">Penalti tempoh kunci</label><div class="input"><input id="lockPct" name="lockPct" type="number" inputmode="decimal" min="0" max="10" step="0.5" value="0"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="valuation">Yuran penilaian</label><div class="input"><span aria-hidden="true">RM</span><input id="valuation" name="valuation" type="number" inputmode="decimal" min="0" step="50" value="{{R_VALUATION}}"></div></div>
+        </div>
+        <div class="field"><label for="other">Kos lain (pelepasan gadaian, pendaftaran)</label><div class="input"><span aria-hidden="true">RM</span><input id="other" name="other" type="number" inputmode="decimal" min="0" step="50" value="{{R_OTHER}}"></div></div>
+        <div class="field"><label for="finance">Cara bayar kos</label><select class="input" id="finance" name="finance">{{R_FINANCE_OPTIONS}}</select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="refi-result-h">
+      <h2 id="refi-result-h">Perbandingan</h2>
+      <div class="net">
+        <p id="rHead">{{R_HEAD}}</p>
+        <output id="rNet" for="balance rate yearsLeft newRate newYears cashOut lockPct valuation other finance">{{R_NET}}</output>
+        <p id="rSub">{{R_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Ringkasan</caption>
+        <tbody id="rLines">
+{{R_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Kos refinance</caption>
+        <tbody id="rCosts">
+{{R_COST_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Penjimatan dikira atas baki yang sama supaya adil; pengeluaran tunai menambah ansuran baharu secara berasingan.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="refiPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="cut-h">Penjimatan mengikut kadar baharu (baki RM300,000, 25 tahun, dari 4.5%)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cut-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kadar baharu</th><th scope="col">Jimat sebulan</th><th scope="col">Faedah dijimatkan</th><th scope="col">Bersih selepas kos</th><th scope="col">Pulang modal</th></tr></thead>
+      <tbody>
+{{R_CUT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kira refinance</h2>
+  <ol>
+    <li><strong>Ansuran</strong> = pinjaman × r ÷ (1 − (1 + r)<sup>−n</sup>), dengan r = kadar ÷ 12 dan n = bulan.</li>
+    <li><strong>Faedah dijimatkan</strong> = jumlah faedah pinjaman lama − faedah pinjaman baharu bagi baki yang sama.</li>
+    <li><strong>Kos</strong> = duti setem 0.5% + yuran guaman SRO 2023 + SST 8% + penalti + penilaian + kos lain.</li>
+    <li><strong>Pulang modal</strong> = kos ÷ penjimatan ansuran sebulan.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cost-h">Duti setem dan yuran guaman refinance</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cost-h">
+    <table class="data">
+      <thead><tr><th scope="col">Pinjaman baharu</th><th scope="col">Duti setem 0.5%</th><th scope="col">Yuran guaman + SST</th><th scope="col">Jumlah</th></tr></thead>
+      <tbody>
+{{R_COST_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="when">Bilakah refinance berbaloi</h2>
+  <ul>
+    <li>Kadar baharu sekurang-kurangnya 0.5% lebih rendah daripada kadar sekarang.</li>
+    <li>Anda sudah melepasi tempoh kunci (lock-in), atau penalti kecil berbanding penjimatan.</li>
+    <li>Anda akan menyimpan rumah lebih lama daripada tempoh pulang modal.</li>
+    <li>Memanjangkan tempoh menurunkan ansuran tetapi menambah faedah; bandingkan jumlah faedah, bukan ansuran sahaja.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/-/monetary-policy-statement-09072026" rel="noopener">Bank Negara Malaysia: kenyataan dasar monetari (OPR)</a></li>
+    <li><a href="https://www.propertyguru.com.my/property-guides/the-ultimate-guide-to-refinancing-9507" rel="noopener">PropertyGuru: panduan refinance</a></li>
+    <li><a href="https://www.iproperty.com.my/guides/what-is-home-loan-refinancing-how-can-i-do-it-12748" rel="noopener">iProperty: cara refinance pinjaman rumah</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja, bukan nasihat kewangan. Kadar, yuran dan kelulusan ditentukan oleh bank, dan yuran guaman sebenar mengikut sebut harga peguam anda.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan DSR</small></a>
+    <a href="/kalkulator-sewa-atau-beli-rumah/">Kalkulator Sewa atau Beli Rumah<small>Mana lebih untung jangka panjang</small></a>
+    <a href="/kalkulator-rpgt/">Kalkulator RPGT<small>Cukai keuntungan harta tanah</small></a>
+  </div>
+</section>
