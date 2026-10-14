@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/tnb-bill-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-bil-elektrik-tnb/" },
+  "title": "TNB Bill Calculator 2026: Electricity Bill by the New Tariff",
+  "description": "Free TNB bill calculator: your home electricity bill by the RP4 tariff (27.03 sen/kWh), EEI rebate, AFA, KWTBB and SST, with the 800 kWh protection to Dec 2026.",
+  "llms": "Calculates the TNB domestic electricity bill (Peninsular Malaysia) under the RP4 tariff from 1 July 2025: energy charge 27.03 sen/kWh (up to 1,500 kWh), capacity 4.55 sen/kWh and network 12.85 sen/kWh, less the Energy Efficiency Incentive (EEI) for use up to 1,000 kWh (the band rate × all kWh, 25 sen for 1–200 kWh down to 0.5 sen for 901–1,000 kWh); AFA (monthly fuel adjustment), the RM10 retail charge and 8% SST (on kWh above the protection level) apply only above the protection level of 600 kWh, raised to 800 kWh for September to December 2026; KWTBB 1.6% above 300 kWh. Examples: 200 kWh RM38.86, 300 kWh RM65.79, 600 kWh RM215.98.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "tnb",
+  "scripts": ["/assets/js/tnb.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["TNB Bill Calculator", null]],
+  "about": ["TNB electricity bill", "Malaysian domestic electricity tariff", "Energy Efficiency Incentive (EEI)", "AFA"],
+  "app": {
+    "name": "TNB Bill Calculator",
+    "category": "UtilitiesApplication",
+    "features": ["RP4 domestic tariff (July 2025)", "EEI rebate by usage band", "AFA, retail charge, KWTBB and SST", "800 kWh protection (Sep–Dec 2026)", "Estimate kWh from appliances", "Full bill breakdown", "Works offline"]
+  },
+  "citations": [
+    ["myTNB: Understand your electricity tariff", "https://www.mytnb.com.my/tariff/index.html"],
+    ["paultan.org: TNB new electricity tariff calculation from July 2025", "https://paultan.org/2025/06/21/tnb-new-electricity-tariff-calculation-from-july-2025/"],
+    ["RinggitPlus: Your new TNB bill explained", "https://ringgitplus.com/en/blog/personal-finance-news/your-new-tnb-bill-explained-understanding-the-monthly-tariff-changes.html"],
+    ["Free Malaysia Today: Electricity bill protection extended to 800 kWh", "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/09/17/kerajaan-perluas-perlindungan-bil-elektrik-pengguna-domestik-hingga-800kwj"]
+  ],
+  "faq": [
+    { "q": "How is the TNB electricity bill calculated?", "a": "Multiply your kWh by 44.43 sen (energy 27.03 + capacity 4.55 + network 12.85 sen), subtract the EEI rebate (your usage band's rate × all kWh), then add KWTBB of 1.6% if you use more than 300 kWh. For 300 kWh: RM133.29 − RM67.50 EEI = RM65.79." },
+    { "q": "How much is the bill for 300 kWh?", "a": "About {{T_300}} a month: RM133.29 in charges less the EEI rebate of 22.5 sen × 300 kWh (RM67.50). There is no AFA, retail charge, KWTBB or SST at this level. For 200 kWh the bill is {{T_200}} and for 600 kWh {{T_600}}." },
+    { "q": "What is the EEI rebate on a TNB bill?", "a": "The Energy Efficiency Incentive (EEI) is a rebate for usage up to 1,000 kWh a month. Your band's rate is multiplied by all your kWh: 25 sen for 1–200 kWh, 22.5 sen for 251–300 kWh, 9 sen for 551–600 kWh, down to 0.5 sen for 901–1,000 kWh. The less you use, the bigger the rebate." },
+    { "q": "What is AFA on the electricity bill?", "a": "AFA (Automatic Fuel Adjustment) is a monthly fuel cost adjustment in sen per kWh, either a surcharge or a rebate, set each month. It only applies above the protection level: 600 kWh, or 800 kWh for September to December 2026. Enter the AFA rate from your bill in the calculator." },
+    { "q": "Are households under 800 kWh exempt from AFA and SST?", "a": "Yes, for usage from September to 31 December 2026 the government raised the protection level from 600 to 800 kWh a month: domestic users up to 800 kWh pay no AFA, RM10 retail charge or 8% SST. After that the level returns to 600 kWh unless it is extended." },
+    { "q": "How much is the TNB bill for 1,000 kWh?", "a": "About {{T_1000}} at the 600 kWh protection level with zero AFA: RM444.30 in charges less a 0.5 sen EEI rebate, plus the RM10 retail charge, 1.6% KWTBB and 8% SST on the 400 kWh above 600 kWh. A positive AFA adds to the bill." },
+    { "q": "Does this calculator work for Sabah and Sarawak?", "a": "No. These are TNB's domestic tariffs for Peninsular Malaysia. Sabah and Labuan are supplied by SESB and Sarawak by SEB, each with its own tariff." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">TNB bill calculator</li></ol></nav>
+  <h1>TNB Bill Calculator</h1>
+  <p class="answer">A TNB domestic bill = kWh × <strong>44.43 sen</strong> (energy 27.03 + capacity 4.55 + network 12.85) less the EEI rebate, plus 1.6% KWTBB above 300 kWh. Using 300 kWh a month costs <strong>{{T_300}}</strong> and 600 kWh {{T_600}}. AFA, the RM10 retail charge and SST only apply above <strong>{{T_LEVEL}} kWh</strong>. Enter your usage below.</p>
+  <p class="meta"><span>Tariff verified <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-bil-elektrik-tnb/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="tnbForm" novalidate aria-labelledby="tnb-h">
+      <h2 id="tnb-h">Your electricity use</h2>
+      <div class="field"><label for="mode">Method</label><select class="input" id="mode" name="mode">{{T_MODE_OPTIONS}}</select></div>
+      <fieldset class="field-group" id="tAppliance" hidden>
+        <legend>Estimate from appliances</legend>
+        <div class="field-row">
+          <div class="field"><label for="watts">Total appliance watts</label><div class="input"><input id="watts" name="watts" type="number" inputmode="numeric" min="0" step="50" value="1000"><span aria-hidden="true">W</span></div></div>
+          <div class="field"><label for="hours">Hours a day</label><div class="input"><input id="hours" name="hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="8"><span aria-hidden="true">h</span></div></div>
+        </div>
+        <div class="field"><label for="base">Other use a month</label><div class="input"><input id="base" name="base" type="number" inputmode="numeric" min="0" step="10" value="150"><span aria-hidden="true">kWh</span></div><p class="help">Fridge, lights and the rest. A 1 hp air conditioner draws about 800–1,000 W.</p></div>
+      </fieldset>
+      <div class="field"><label for="kwh">Use a month</label><div class="input"><input id="kwh" name="kwh" type="number" inputmode="numeric" min="0" max="1500" step="1" value="{{T_KWH}}"><span aria-hidden="true">kWh</span></div><p class="help">Shown on your bill as "Usage (kWh)". The calculator covers up to 1,500 kWh.</p></div>
+      <div class="field-row">
+        <div class="field"><label for="afa">AFA rate</label><div class="input"><input id="afa" name="afa" type="number" inputmode="decimal" step="0.01" value="{{T_AFA}}"><span aria-hidden="true">sen/kWh</span></div></div>
+        <div class="field"><label for="protection">Protection level</label><select class="input" id="protection" name="protection">{{T_PROT_OPTIONS}}</select></div>
+      </div>
+      <p class="help">The AFA rate changes monthly (surcharge or rebate); copy it from your bill. It only applies above the protection level.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tnb-result-h">
+      <h2 id="tnb-result-h">Your estimated bill</h2>
+      <div class="net">
+        <p>Monthly bill</p>
+        <output id="tTotal" for="kwh afa protection">{{T_TOTAL}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Bill breakdown</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <p class="note">An estimate for TNB's general domestic tariff in the Peninsula. The actual bill can differ with billing days and adjustments.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tnbPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Estimated TNB bill by kWh</h2>
+  <p>Zero AFA. The second column uses the 800 kWh protection (September–December 2026), the third the standard 600 kWh level.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Use</th><th scope="col">EEI rebate</th><th scope="col">Bill (800 kWh)</th><th scope="col">Bill (600 kWh)</th></tr></thead>
+      <tbody>
+{{T_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the TNB bill is worked out (RP4 tariff)</h2>
+  <ol>
+    <li><strong>Base charges:</strong> kWh × (27.03 sen energy + 4.55 sen capacity + 12.85 sen network) = 44.43 sen per kWh.</li>
+    <li><strong>EEI rebate:</strong> your usage band's rate × all kWh, for use up to 1,000 kWh.</li>
+    <li><strong>AFA:</strong> kWh × the month's AFA rate, only above the protection level.</li>
+    <li><strong>Retail charge:</strong> RM10 a month, only above the protection level.</li>
+    <li><strong>KWTBB:</strong> 1.6% for use above 300 kWh (Renewable Energy Fund).</li>
+    <li><strong>8% SST:</strong> on the part of the bill for kWh above the protection level.</li>
+  </ol>
+  <p>Example for 300 kWh: 300 × 44.43 sen = RM133.29, less EEI of 300 × 22.5 sen = RM67.50, a bill of <strong>RM65.79</strong> (21.9 sen/kWh on average).</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="eei-h">EEI rebate table</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="eei-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly use</th><th scope="col">Rebate per kWh</th><th scope="col">Top rebate in the band</th></tr></thead>
+      <tbody>
+{{T_EEI}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="protect">800 kWh protection to December 2026</h2>
+  <p>For usage from September to 31 December 2026, the government raised the domestic protection level from 600 to 800 kWh a month. Households up to 800 kWh pay no AFA, retail charge or SST. Example for 800 kWh with a 3 sen AFA: {{T_800P}} with the protection, against {{T_800N}} at the standard level.</p>
+
+  <h2 id="tips">How to cut your electricity bill</h2>
+  <ul>
+    <li>Set air conditioners to 24–25°C and clean the filters monthly.</li>
+    <li>Watch the kWh on your bill: going past 600 or 800 kWh adds AFA, the retail charge and SST, and the EEI rebate shrinks as use rises.</li>
+    <li>Switch to LED lights and Energy Commission 5-star rated appliances.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.mytnb.com.my/tariff/index.html" rel="noopener">myTNB: electricity tariff structure</a></li>
+    <li><a href="https://paultan.org/2025/06/21/tnb-new-electricity-tariff-calculation-from-july-2025/" rel="noopener">paultan.org: TNB's new tariff calculation</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/personal-finance-news/your-new-tnb-bill-explained-understanding-the-monthly-tariff-changes.html" rel="noopener">RinggitPlus: the new TNB bill explained</a></li>
+    <li><a href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/09/17/kerajaan-perluas-perlindungan-bil-elektrik-pengguna-domestik-hingga-800kwj" rel="noopener">Free Malaysia Today: protection extended to 800 kWh</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate, not an official bill. The AFA rate changes every month and use above 1,500 kWh carries a higher energy charge. Check your bill and the official myTNB calculator for the exact amount.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/fuel-cost-calculator-malaysia/">Fuel Cost Calculator<small>Trip cost and this week's fuel prices</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>Take-home pay after EPF, SOCSO and PCB</small></a>
+    <a href="/debt-consolidation-calculator-malaysia/">Debt Consolidation Calculator<small>Combine credit card debt into one loan</small></a>
+  </div>
+</section>

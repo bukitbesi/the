@@ -1,0 +1,138 @@
+<!--page
+{
+  "path": "/kalkulator-fidyah/",
+  "lang": "ms",
+  "alternates": { "en": "/fidyah-calculator/" },
+  "title": "Kalkulator Fidyah 2026: Kadar Fidyah Puasa Mengikut Negeri",
+  "description": "Kalkulator fidyah: kira fidyah puasa ikut kadar 2026 setiap negeri, termasuk gandaan bagi qada yang ditangguh, wanita hamil dan menyusu, dan yang uzur.",
+  "llms": "Mengira fidyah puasa Ramadan di Malaysia mengikut kadar 2026 setiap negeri (satu cupak makanan asasi sehari, dibayar dalam wang): Selangor RM2.00, RM4.30 atau RM6.30 ikut jenis beras; Wilayah Persekutuan RM4.00; Johor RM1.75, RM3.00 atau RM5.00; Perak RM2.75, RM4.40 atau RM7.45; Kedah RM2.00 atau RM4.00; Perlis RM5.00; Terengganu RM2.50; Kelantan dan Melaka RM2.00; Negeri Sembilan, Sabah dan Sarawak RM1.90; Pulau Pinang dan Pahang RM1.75. Mengikut pendapat muktamad mazhab Syafie, menangguh qada melepasi Ramadan berikutnya tanpa uzur menambah satu fidyah sehari bagi setiap Ramadan yang berlalu; yang tidak mampu berpuasa (tua, sakit kronik) membayar satu fidyah sehari tanpa qada; wanita hamil atau menyusu yang tidak berpuasa kerana bimbangkan anak perlu qada dan membayar satu fidyah sehari.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "fidyah",
+  "scripts": ["/assets/js/fidyah.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Fidyah", null]],
+  "about": ["Fidyah", "Qada puasa Ramadan", "Kadar fidyah negeri", "Puasa"],
+  "app": {
+    "name": "Kalkulator Fidyah",
+    "category": "ReferenceApplication",
+    "features": ["Kadar fidyah 2026 bagi 14 negeri", "Ikut jenis beras (Selangor, Johor, Perak, Kedah)", "Gandaan bagi setiap Ramadan yang berlalu", "Wanita hamil dan menyusu", "Tidak mampu berpuasa (tua, sakit kronik)", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Lembaga Zakat Selangor: kadar fidyah 2026 mengikut jenis beras", "https://www.threads.com/@zakatselangor/post/DTMNjEHAc9L/korang-dah-selesaikan-fidyah-untuk-tahun-kadar-fidyah-di-selangor-mengikut?hl=en"],
+    ["Portal Baitulmal JAWHAR: Statistik kadar fidyah", "https://baitulmal.jawhar.gov.my/statistik-kadar-fidyah/"],
+    ["eCentral: Kadar fidyah 2026 setiap negeri", "https://ecentral.my/kadar-fidyah-2026/"],
+    ["MUIS: Fatwa berkaitan kadar fidyah dan kafarah", "https://www.muis.gov.sg/resources/khutbah-and-religious-advice/fatwa/kadar-fidyah-dan-kafarah/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira fidyah puasa?", "a": "Darab bilangan hari puasa yang tidak diganti dengan bilangan Ramadan yang telah berlalu, kemudian darab dengan kadar fidyah negeri anda. Contoh di Selangor (beras tempatan RM2.00): 5 hari yang tertangguh satu Ramadan = 5 cupak = RM10.00; jika tertangguh dua Ramadan, {{FI_EX2}}." },
+    { "q": "Berapa kadar fidyah 2026 di Selangor?", "a": "Lembaga Zakat Selangor menetapkan kadar 2026 mengikut jenis beras: RM2.00 sehari (beras tempatan super spesial), RM4.30 (beras wangi, perang, ponni, import dan pulut) dan RM6.30 (basmathi, jepun dan merah)." },
+    { "q": "Berapa kadar fidyah di Wilayah Persekutuan?", "a": "RM4.00 sehari bagi 2026. Seseorang yang tidak mampu berpuasa sepanjang Ramadan 30 hari membayar {{FI_WP30}}." },
+    { "q": "Adakah fidyah berganda jika lambat qada?", "a": "Ya, menurut pendapat muktamad mazhab Syafie yang diamalkan di Malaysia, setiap Ramadan yang berlalu sebelum puasa diganti tanpa uzur menambah satu fidyah bagi setiap hari. Puasa itu masih wajib diqada. Mazhab Maliki dan Hanbali tidak menggandakannya." },
+    { "q": "Siapa yang wajib membayar fidyah?", "a": "Mereka yang menangguh qada puasa hingga masuk Ramadan berikutnya tanpa uzur; mereka yang tidak mampu berpuasa kerana tua atau sakit yang tiada harapan sembuh (fidyah tanpa qada); dan wanita hamil atau menyusu yang tidak berpuasa kerana bimbangkan keselamatan anak (qada dan fidyah)." },
+    { "q": "Wanita hamil perlu bayar fidyah atau qada?", "a": "Jika dia tidak berpuasa kerana bimbangkan dirinya sendiri, dia hanya perlu qada. Jika kerana bimbangkan kandungan atau anak yang disusukan, dia perlu qada dan membayar satu cupak fidyah bagi setiap hari." },
+    { "q": "Di mana membayar fidyah?", "a": "Kepada majlis agama atau pusat zakat negeri anda, termasuk melalui portal dalam talian seperti Lembaga Zakat Selangor dan Pusat Pungutan Zakat Wilayah Persekutuan. Kadar ditetapkan setiap negeri berdasarkan harga beras semasa." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator fidyah</li></ol></nav>
+  <h1>Kalkulator Fidyah Puasa</h1>
+  <p class="answer">Fidyah = hari puasa tidak diganti × bilangan Ramadan berlalu × kadar negeri. Kadar 2026: <strong>Selangor RM2.00</strong> (beras tempatan, hingga RM6.30), <strong>Wilayah Persekutuan RM4.00</strong>, Johor RM1.75, Perak RM2.75 dan Kedah RM2.00 sehari. Lima hari yang tertangguh satu Ramadan di Selangor = <strong>{{FI_TOTAL}}</strong>. Masukkan butiran anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{FI_VERIFIED_ISO}}">{{FI_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/fidyah-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="fidyahForm" novalidate aria-labelledby="fidyah-h">
+      <h2 id="fidyah-h">Puasa yang ditinggalkan</h2>
+      <div class="field-row">
+        <div class="field"><label for="state">Negeri</label><select class="input" id="state" name="state">{{FI_STATE_OPTIONS}}</select></div>
+        <div class="field"><label for="type">Jenis beras / kadar</label><select class="input" id="type" name="type">{{FI_TYPE_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="reason">Sebab</label><select class="input" id="reason" name="reason">{{FI_REASON_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="days">Hari puasa</label><div class="input"><input id="days" name="days" type="number" inputmode="numeric" min="0" step="1" value="{{FI_DAYS}}"><span aria-hidden="true">hari</span></div></div>
+        <div class="field" id="fYears"><label for="years">Ramadan telah berlalu</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="0" step="1" value="{{FI_YEARS}}"><span aria-hidden="true">kali</span></div></div>
+      </div>
+      <p class="help">Bilangan Ramadan yang masuk sebelum puasa itu diganti. 1 jika baru melepasi satu Ramadan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fidyah-result-h">
+      <h2 id="fidyah-result-h">Fidyah anda</h2>
+      <div class="net">
+        <p>Jumlah fidyah</p>
+        <output id="fTotal" for="state type reason days years">{{FI_TOTAL}}</output>
+        <p id="fSub">{{FI_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pengiraan</caption>
+        <tbody id="fLines">
+{{FI_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Fidyah tidak menggugurkan kewajipan qada, kecuali bagi yang tidak mampu berpuasa.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fidyahPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">Kadar fidyah 2026 mengikut negeri</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Negeri</th><th scope="col">Sehari (secupak)</th><th scope="col">30 hari (kadar terendah)</th></tr></thead>
+      <tbody>
+{{FI_RATES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kadar ditetapkan oleh majlis agama Islam setiap negeri berdasarkan harga beras dan boleh berubah setiap tahun. Pilih kadar mengikut jenis beras yang anda makan.</p>
+
+  <h2 id="formula">Cara kira fidyah</h2>
+  <ol>
+    <li><strong>Tertangguh qada:</strong> hari × bilangan Ramadan yang berlalu × kadar. Puasa masih wajib diganti.</li>
+    <li><strong>Hamil atau menyusu, bimbangkan anak:</strong> hari × (1 + Ramadan berlalu) × kadar, dan qada.</li>
+    <li><strong>Tidak mampu berpuasa</strong> (tua atau sakit kronik): hari × kadar, tanpa qada.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="who">Siapa wajib fidyah, siapa wajib qada</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="who">
+    <table class="data text">
+      <thead><tr><th scope="col">Keadaan</th><th scope="col">Qada</th><th scope="col">Fidyah</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Sakit sementara, musafir, haid, nifas</th><td>Ya</td><td>Tidak, jika diganti sebelum Ramadan berikutnya</td></tr>
+        <tr><th scope="row">Menangguh qada melepasi Ramadan berikutnya tanpa uzur</th><td>Ya</td><td>1 cupak sehari bagi setiap Ramadan yang berlalu</td></tr>
+        <tr><th scope="row">Hamil atau menyusu, bimbangkan diri sendiri</th><td>Ya</td><td>Tidak</td></tr>
+        <tr><th scope="row">Hamil atau menyusu, bimbangkan anak</th><td>Ya</td><td>1 cupak sehari</td></tr>
+        <tr><th scope="row">Tua atau sakit tiada harapan sembuh</th><td>Tidak</td><td>1 cupak sehari</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.threads.com/@zakatselangor/post/DTMNjEHAc9L/korang-dah-selesaikan-fidyah-untuk-tahun-kadar-fidyah-di-selangor-mengikut?hl=en" rel="noopener">Lembaga Zakat Selangor: kadar fidyah 2026</a></li>
+    <li><a href="https://baitulmal.jawhar.gov.my/statistik-kadar-fidyah/" rel="noopener">Baitulmal JAWHAR: statistik kadar fidyah</a></li>
+    <li><a href="https://ecentral.my/kadar-fidyah-2026/" rel="noopener">eCentral: kadar fidyah 2026 setiap negeri</a></li>
+    <li><a href="https://www.muis.gov.sg/resources/khutbah-and-religious-advice/fatwa/kadar-fidyah-dan-kafarah/" rel="noopener">MUIS: fatwa kadar fidyah dan kafarah (gandaan fidyah)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Alat rujukan, bukan fatwa. Sahkan kadar dengan majlis agama atau pusat zakat negeri anda sebelum membayar, dan rujuk Jabatan Mufti bagi kes khusus.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/tukar-tarikh-hijrah/">Tukar Tarikh Hijrah<small>Tarikh Ramadan dan Syawal ikut takwim Malaysia</small></a>
+    <a href="/kalkulator-zakat-pendapatan/">Kalkulator Zakat Pendapatan<small>Zakat gaji dengan had kifayah</small></a>
+    <a href="/kalkulator-iddah/">Kalkulator Iddah<small>Tempoh iddah cerai dan kematian suami</small></a>
+  </div>
+</section>

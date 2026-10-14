@@ -1,0 +1,136 @@
+<!--page
+{
+  "path": "/kalkulator-ptptn/",
+  "lang": "ms",
+  "alternates": { "en": "/ptptn-repayment-calculator/" },
+  "title": "Kalkulator PTPTN 2026: Kira Bayaran Balik Bulanan dan Ujrah 1%",
+  "description": "Kalkulator PTPTN percuma: kira ansuran bulanan dengan ujrah 1% setahun, jumlah dibayar, jimat bayar penuh lebih awal dan ansuran minimum penstrukturan semula.",
+  "llms": "Mengira bayaran balik pinjaman PTPTN skim ujrah: ujrah 1% setahun ke atas prinsipal bagi tempoh bayaran balik (jumlah ujrah = prinsipal × 1% × tahun), dibahagi sama rata setiap bulan; contoh RM30,000 selama 15 tahun: ujrah RM4,500, ansuran RM191.67 sebulan; 20 tahun RM150 sebulan. Bayaran balik bermula 12 bulan selepas tamat pinjaman dan ujrah dikenakan mulai bulan ke-13. Bayaran penuh lebih awal membayar baki prinsipal dan ujrah hingga bulan semasa sahaja (RM20,000 selepas 5 tahun, jimat RM3,000 ujrah). Penstrukturan semula boleh melanjutkan tempoh hingga umur 60 dengan ansuran minimum kira-kira 5–8% pendapatan kasar. Tiada diskaun bayaran balik di bawah Belanjawan 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "ptptn",
+  "scripts": ["/assets/js/ptptn.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator PTPTN", null]],
+  "about": ["PTPTN", "Bayaran balik pinjaman pendidikan", "Ujrah", "Pinjaman pelajaran Malaysia"],
+  "app": {
+    "name": "Kalkulator PTPTN",
+    "category": "FinanceApplication",
+    "features": ["Ansuran bulanan dengan ujrah 1%", "Jumlah ujrah dan jumlah dibayar", "Bayaran penuh lebih awal (jimat ujrah)", "Ansuran minimum penstrukturan semula (5–8% gaji)", "Jadual ansuran mengikut jumlah dan tempoh", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Portal Rasmi PTPTN: Bayaran Balik", "https://www.ptptn.gov.my/bayaran-balik/"],
+    ["Portal Rasmi PTPTN: Perkara yang wajib anda tahu tentang bayaran balik", "https://www.ptptn.gov.my/perkara-yang-wajib-anda-tahu-tentang-bayaran-balik-pinjaman-ptptn/"],
+    ["RinggitPlus: Panduan bayaran balik pinjaman PTPTN untuk graduan", "https://ringgitplus.com/ms/blog/sudut-pakar/ini-panduan-bayaran-balik-pinjaman-ptptn-untuk-graduan-di-malaysia.html"]
+  ],
+  "faq": [
+    { "q": "Bagaimana mengira bayaran balik PTPTN?", "a": "Kira ujrah sebagai prinsipal × 1% × tempoh dalam tahun, tambah kepada prinsipal, kemudian bahagi dengan bilangan bulan. Pinjaman RM30,000 selama 15 tahun: ujrah RM4,500, jumlah RM34,500, ansuran RM191.67 sebulan." },
+    { "q": "Berapa ansuran PTPTN untuk RM30,000?", "a": "RM191.67 sebulan selama 15 tahun (ujrah RM4,500), atau {{P_20}} sebulan selama 20 tahun (ujrah RM6,000). Tempoh lebih panjang mengurangkan ansuran tetapi menambah ujrah." },
+    { "q": "Bilakah bayaran balik PTPTN bermula?", "a": "Bayaran balik bermula 12 bulan selepas tamat pinjaman, iaitu selepas tamat pengajian, tanpa perlu menunggu notis daripada PTPTN. Ujrah bulanan dikenakan mulai bulan ke-13; membayar lebih awal dalam tempoh 12 bulan itu tidak dikenakan ujrah." },
+    { "q": "Berapa jimat jika bayar penuh PTPTN lebih awal?", "a": "Bayaran penuh hanya mengenakan ujrah hingga bulan semasa, jadi baki ujrah akan datang tidak perlu dibayar. Bagi RM30,000 selama 15 tahun, selepas 5 tahun membayar, baki prinsipal ialah {{P_S5}} dan anda menjimatkan {{P_S5_SAVE}} ujrah." },
+    { "q": "Adakah diskaun bayaran balik PTPTN pada 2026?", "a": "Tidak. PTPTN menyatakan tiada diskaun bagi bayaran balik pinjaman berdasarkan Belanjawan 2026. Diskaun 10% hingga 20% sebelum ini adalah kempen bertempoh yang telah tamat." },
+    { "q": "Bolehkah ansuran PTPTN dikurangkan?", "a": "Ya, melalui penstrukturan semula, tempoh boleh dilanjutkan hingga umur 60 tahun dengan ansuran minimum kira-kira 5% hingga 8% pendapatan kasar, tertakluk kepada kelulusan PTPTN. Ujrah 1% setahun dikenakan sepanjang tempoh lanjutan." },
+    { "q": "Apakah ujrah PTPTN?", "a": "Ujrah ialah kos upah (caj perkhidmatan) 1% setahun mengikut prinsip syariah, menggantikan faedah konvensional. Ia dikira atas prinsipal bagi tempoh bayaran balik dan tidak berkompaun." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator PTPTN</li></ol></nav>
+  <h1>Kalkulator Bayaran Balik PTPTN</h1>
+  <p class="answer">Ansuran PTPTN = (prinsipal + prinsipal × <strong>1% ujrah</strong> × tahun) ÷ bilangan bulan. Pinjaman RM30,000 selama 15 tahun dikenakan ujrah RM4,500 dan ansuran <strong>{{P_MONTHLY}} sebulan</strong>; 20 tahun {{P_20}} sebulan. Bayaran balik bermula 12 bulan selepas tamat pengajian. Masukkan pinjaman anda di bawah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/ptptn-repayment-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="ptptnForm" novalidate aria-labelledby="ptptn-h">
+      <h2 id="ptptn-h">Pinjaman anda</h2>
+      <div class="field"><label for="amount">Jumlah pinjaman (prinsipal)</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="500" value="{{P_AMOUNT}}"></div><p class="help">Jumlah yang dikeluarkan, seperti dalam penyata atau Jadual Bayaran Balik (JBB).</p></div>
+      <div class="field"><label for="years">Tempoh bayaran balik</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="40" step="1" value="{{P_YEARS}}"><span aria-hidden="true">tahun</span></div><p class="help">Tempoh asal ditetapkan dalam JBB anda; penstrukturan semula boleh melanjutkan hingga umur 60.</p></div>
+      <fieldset class="field-group">
+        <legend>Bayar penuh dan penstrukturan (pilihan)</legend>
+        <div class="field-row">
+          <div class="field"><label for="paid">Bulan sudah dibayar</label><div class="input"><input id="paid" name="paid" type="number" inputmode="numeric" min="0" step="1" value="0"><span aria-hidden="true">bulan</span></div></div>
+          <div class="field"><label for="income">Gaji kasar sebulan</label><div class="input"><span aria-hidden="true">RM</span><input id="income" name="income" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="ptptn-result-h">
+      <h2 id="ptptn-result-h">Bayaran balik anda</h2>
+      <div class="net">
+        <p>Ansuran bulanan</p>
+        <output id="pMonthly" for="amount years">{{P_MONTHLY}}</output>
+        <p id="pSub">{{P_SUB}}</p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Ringkasan</caption>
+        <tbody id="pLines">
+{{P_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Bayar penuh sekarang</caption>
+        <tbody id="pSettle">
+{{P_SETTLE}}
+        </tbody>
+      </table>
+      <p class="note">Anggaran. Jumlah sebenar ikut Jadual Bayaran Balik (JBB) dan penyata akaun anda di portal PTPTN.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ptptnPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Ansuran PTPTN mengikut jumlah pinjaman</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Pinjaman</th><th scope="col">10 tahun</th><th scope="col">15 tahun</th><th scope="col">20 tahun</th></tr></thead>
+      <tbody>
+{{P_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara ansuran PTPTN dikira</h2>
+  <ol>
+    <li><strong>Ujrah</strong> = prinsipal × 1% × tempoh (tahun). Tiada kompaun.</li>
+    <li><strong>Jumlah dibayar</strong> = prinsipal + ujrah.</li>
+    <li><strong>Ansuran bulanan</strong> = jumlah dibayar ÷ (tahun × 12).</li>
+    <li><strong>Bayar penuh</strong>: baki prinsipal sahaja, kerana ujrah dikenakan hingga bulan semasa.</li>
+  </ol>
+  <p>Contoh: RM30,000 × 1% × 15 = RM4,500 ujrah; RM34,500 ÷ 180 bulan = <strong>RM191.67</strong> sebulan.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Peraturan bayaran balik PTPTN</h2>
+  <ul>
+    <li><strong>Mula bayar:</strong> 12 bulan selepas tamat pinjaman, tanpa menunggu notis. Ujrah mula dikenakan pada bulan ke-13.</li>
+    <li><strong>Diskaun:</strong> tiada diskaun bayaran balik berdasarkan Belanjawan 2026.</li>
+    <li><strong>Penstrukturan semula:</strong> tempoh boleh dilanjutkan hingga umur 60 dengan ansuran minimum kira-kira 5–8% pendapatan kasar, tertakluk kelulusan.</li>
+    <li><strong>Potongan gaji:</strong> majikan boleh memotong ansuran terus dari gaji; semak penyata anda setiap tahun.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.ptptn.gov.my/bayaran-balik/" rel="noopener">Portal Rasmi PTPTN: bayaran balik</a></li>
+    <li><a href="https://www.ptptn.gov.my/perkara-yang-wajib-anda-tahu-tentang-bayaran-balik-pinjaman-ptptn/" rel="noopener">PTPTN: perkara wajib tahu tentang bayaran balik</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/sudut-pakar/ini-panduan-bayaran-balik-pinjaman-ptptn-untuk-graduan-di-malaysia.html" rel="noopener">RinggitPlus: panduan bayaran balik PTPTN</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran sahaja. Jadual Bayaran Balik (JBB) PTPTN anda adalah rujukan rasmi bagi ansuran dan tempoh.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Ansuran bulanan dan kadar efektif</small></a>
+    <a href="/kalkulator-gabung-hutang/">Kalkulator Gabung Hutang<small>Satukan hutang kad kredit</small></a>
+  </div>
+</section>

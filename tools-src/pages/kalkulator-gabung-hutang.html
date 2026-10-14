@@ -1,0 +1,163 @@
+<!--page
+{
+  "path": "/kalkulator-gabung-hutang/",
+  "lang": "ms",
+  "alternates": { "en": "/debt-consolidation-calculator-malaysia/" },
+  "title": "Kalkulator Gabung Hutang Kad Kredit: Berbaloi atau Tidak?",
+  "description": "Kalkulator gabung hutang: bandingkan faedah kad kredit 15–18% dengan satu pinjaman peribadi, termasuk duti setem dan EIR, dan lihat penjimatan sebenar.",
+  "llms": "Membandingkan membayar hutang kad kredit dan hutang lain seperti biasa (faedah bulanan atas baki; bayaran minimum kad 5% baki atau RM50, mana lebih tinggi; caj kewangan kad 15%, 17% atau 18% setahun mengikut rekod bayaran) dengan menyatukannya ke dalam satu pinjaman peribadi (kadar rata ditukar kepada EIR, duti setem 0.5%). Contoh: hutang kad RM15,000 pada 18% dibayar minimum menelan faedah RM5,967.05; pinjaman 6% kadar rata 5 tahun berbayar RM325 sebulan dengan faedah RM4,500 dan duti setem RM75 (EIR 10.85%), menjimatkan RM1,392.05. Hutang kad RM10,000 pada 18% dengan bayaran minimum mengambil 89 bulan dan faedah RM4,054.96.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "debt",
+  "scripts": ["/assets/js/debt.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Gabung Hutang", null]],
+  "about": ["Penyatuan hutang", "Hutang kad kredit", "Pinjaman peribadi", "Faedah kad kredit Malaysia"],
+  "app": {
+    "name": "Kalkulator Gabung Hutang",
+    "category": "FinanceApplication",
+    "features": ["Hingga 3 hutang (kad kredit, pinjaman lain)", "Bayaran minimum kad 5% atau RM50", "Pinjaman penyatuan kadar rata atau EIR", "Duti setem 0.5%", "Penjimatan faedah dan tempoh selesai", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Dokumen dasar Kad Kredit dan Kad Kredit-i", "https://www.bnm.gov.my/documents/20124/938039/credit_card_and_credit_card-i_PD.pdf"],
+    ["HSBC Malaysia: Pendedahan produk kad kredit", "https://www.hsbc.com.my/content/dam/hsbc/my/docs/credit-card-product-disclosure.pdf"],
+    ["AKPK: Program Pengurusan Kredit", "https://www.akpk.org.my/"]
+  ],
+  "faq": [
+    { "q": "Adakah gabung hutang kad kredit berbaloi?", "a": "Biasanya berbaloi jika kadar pinjaman baharu jauh lebih rendah dan anda tidak menambah hutang kad semula. Hutang kad RM15,000 pada 18% dibayar minimum menelan {{D_NOW_INT}} faedah; pinjaman 6% kadar rata 5 tahun menelan {{D_LOAN_INT}} faedah dan {{D_STAMP}} duti setem, jimat {{D_SAVING}}." },
+    { "q": "Berapa faedah kad kredit di Malaysia?", "a": "Bank Negara menetapkan caj kewangan berperingkat: 15% setahun bagi pemegang kad yang membayar minimum tepat masa selama 12 bulan berturut-turut, 17% bagi 10 daripada 12 bulan, dan 18% bagi yang lain. Pengeluaran tunai dikenakan maksimum 18% setahun." },
+    { "q": "Berapa bayaran minimum kad kredit?", "a": "Sekurang-kurangnya 5% daripada baki tertunggak atau RM50, mana yang lebih tinggi. Membayar minimum sahaja bagi baki RM10,000 pada 18% mengambil {{D_P10_MONTHS}} bulan (kira-kira {{D_P10_YEARS}} tahun) dan faedah {{D_P10_INT}}." },
+    { "q": "Kenapa kadar rata pinjaman peribadi lebih mahal daripada yang nampak?", "a": "Kadar rata dikira atas jumlah pinjaman asal sepanjang tempoh walaupun baki berkurang. Kadar rata 6% selama 5 tahun bersamaan kadar efektif (EIR) kira-kira {{D_EIR}}, jadi bandingkan EIR dengan 15–18% kad kredit." },
+    { "q": "Bilakah gabung hutang tidak berbaloi?", "a": "Jika anda sudah membayar kad dengan jumlah besar setiap bulan dan akan selesai dalam setahun dua, memanjangkan hutang kepada pinjaman 5 tahun boleh menelan lebih banyak faedah. Ia juga merugikan jika anda kembali berbelanja dengan kad selepas dilunaskan." },
+    { "q": "Apakah pilihan lain selain pinjaman penyatuan?", "a": "Pindahan baki (balance transfer) kad kredit dengan kadar rendah untuk tempoh tertentu, atau Program Pengurusan Kredit (DMP) AKPK yang percuma dan merundingkan semula bayaran dengan bank jika anda sukar membayar." },
+    { "q": "Apakah kos lain pinjaman penyatuan?", "a": "Duti setem 0.5% atas jumlah pinjaman (RM75 bagi RM15,000), dan kadangkala yuran pemprosesan atau insurans. Bank juga menyemak CCRIS dan nisbah khidmat hutang (DSR) anda sebelum meluluskan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator gabung hutang</li></ol></nav>
+  <h1>Kalkulator Gabung Hutang Kad Kredit</h1>
+  <p class="answer">Hutang kad kredit RM15,000 pada 18% yang dibayar minimum menelan <strong>{{D_NOW_INT}} faedah</strong>. Menyatukannya ke dalam pinjaman peribadi 6% kadar rata selama 5 tahun berbayar {{D_MONTHLY}} sebulan dan menjimatkan <strong>{{D_SAVING}}</strong> selepas duti setem. Ia hanya berbaloi jika kadar efektif pinjaman lebih rendah dan kad tidak digunakan semula. Masukkan hutang anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{D_VERIFIED_ISO}}">{{D_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/debt-consolidation-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="debtForm" novalidate aria-labelledby="debt-h">
+      <h2 id="debt-h">Hutang anda sekarang</h2>
+      <fieldset class="field-group">
+        <legend>Hutang 1</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b1">Baki</label><input class="input" id="b1" name="b1" type="number" inputmode="decimal" min="0" step="100" value="{{D_B1}}"></div>
+          <div class="field"><label for="r1">Faedah %</label><input class="input" id="r1" name="r1" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p1">Bayaran</label><input class="input" id="p1" name="p1" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Hutang 2</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b2">Baki</label><input class="input" id="b2" name="b2" type="number" inputmode="decimal" min="0" step="100" value="{{D_B2}}"></div>
+          <div class="field"><label for="r2">Faedah %</label><input class="input" id="r2" name="r2" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p2">Bayaran</label><input class="input" id="p2" name="p2" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Hutang 3 (pilihan)</legend>
+        <div class="field-row field-row-3">
+          <div class="field"><label for="b3">Baki</label><input class="input" id="b3" name="b3" type="number" inputmode="decimal" min="0" step="100" value=""></div>
+          <div class="field"><label for="r3">Faedah %</label><input class="input" id="r3" name="r3" type="number" inputmode="decimal" min="0" step="0.1" value="18"></div>
+          <div class="field"><label for="p3">Bayaran</label><input class="input" id="p3" name="p3" type="number" inputmode="decimal" min="0" step="10" value="" placeholder="Minimum"></div>
+        </div>
+      </fieldset>
+      <p class="help">Bayaran bulanan kosong = bayaran minimum kad (5% baki atau RM50).</p>
+      <fieldset class="field-group">
+        <legend>Pinjaman penyatuan</legend>
+        <div class="field-row">
+          <div class="field"><label for="rate">Kadar setahun</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" step="0.1" value="{{D_RATE}}"><span aria-hidden="true">%</span></div></div>
+          <div class="field"><label for="years">Tempoh</label><div class="input"><input id="years" name="years" type="number" inputmode="numeric" min="1" max="10" step="1" value="{{D_YEARS}}"><span aria-hidden="true">tahun</span></div></div>
+        </div>
+        <div class="field"><label for="method">Jenis kadar</label><select class="input" id="method" name="method">{{D_METHOD_OPTIONS}}</select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="debt-result-h">
+      <h2 id="debt-result-h">Perbandingan</h2>
+      <div class="net">
+        <p id="dHead">{{D_HEAD}}</p>
+        <output id="dSaving" for="b1 r1 p1 b2 r2 p2 b3 r3 p3 rate years method">{{D_SAVING}}</output>
+        <p id="dSub">{{D_SUB}}</p>
+      </div>
+      <p class="sr-only" id="dLive" aria-live="polite"></p>
+      <p class="callout" id="dNever" hidden>Bayaran anda tidak menampung faedah bulanan, jadi hutang tidak akan selesai. Naikkan bayaran atau dapatkan bantuan AKPK.</p>
+      <table class="rows">
+        <caption>Sekarang berbanding pinjaman</caption>
+        <thead><tr><th scope="col"></th><th scope="col">Sekarang</th><th scope="col">Pinjaman</th></tr></thead>
+        <tbody id="dLines">
+{{D_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Faedah kad dikira bulanan atas baki; bank mengira harian, jadi angka sebenar sedikit berbeza.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="debtPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="min-h">Kos membayar minimum kad kredit sahaja</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="min-h">
+    <table class="data">
+      <thead><tr><th scope="col">Baki</th><th scope="col">Bayaran pertama</th><th scope="col">Tempoh (18%)</th><th scope="col">Faedah (18%)</th><th scope="col">Faedah (15%)</th></tr></thead>
+      <tbody>
+{{D_MIN}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara perbandingan dikira</h2>
+  <ol>
+    <li><strong>Sekarang:</strong> setiap bulan, faedah = baki × kadar ÷ 12; bayaran tetap anda atau minimum 5% / RM50 ditolak hingga baki sifar.</li>
+    <li><strong>Pinjaman:</strong> ansuran kadar rata = (pinjaman + pinjaman × kadar × tahun) ÷ bulan, atau ansuran EIR baki berkurangan.</li>
+    <li><strong>Kos pinjaman</strong> = faedah + duti setem 0.5%.</li>
+    <li><strong>Penjimatan</strong> = faedah sekarang − kos pinjaman.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Kadar dan peraturan kad kredit di Malaysia</h2>
+  <ul>
+    <li><strong>Caj kewangan:</strong> 15% setahun (bayar minimum tepat masa 12 bulan berturut-turut), 17% (10 daripada 12 bulan), 18% (lain-lain).</li>
+    <li><strong>Bayaran minimum:</strong> 5% baki tertunggak atau RM50, mana lebih tinggi.</li>
+    <li><strong>Pengeluaran tunai:</strong> maksimum 18% setahun, ditambah fi pengeluaran.</li>
+    <li><strong>Pinjaman peribadi:</strong> kebanyakan diiklankan dengan kadar rata; Bank Negara melarang kadar rata bagi pembiayaan peribadi baharu mulai 1 Januari 2027.</li>
+  </ul>
+
+  <h2 id="tips">Sebelum menyatukan hutang</h2>
+  <ul>
+    <li>Bandingkan <strong>EIR</strong> pinjaman, bukan kadar rata, dengan kadar kad anda.</li>
+    <li>Pilih tempoh sesingkat yang mampu: tempoh panjang mengurangkan ansuran tetapi menambah faedah.</li>
+    <li>Tutup atau kurangkan had kad selepas dilunaskan supaya hutang tidak berulang.</li>
+    <li>Jika sukar membayar, AKPK menawarkan Program Pengurusan Kredit (DMP) secara percuma.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/documents/20124/938039/credit_card_and_credit_card-i_PD.pdf" rel="noopener">Bank Negara Malaysia: dokumen dasar Kad Kredit</a></li>
+    <li><a href="https://www.hsbc.com.my/content/dam/hsbc/my/docs/credit-card-product-disclosure.pdf" rel="noopener">HSBC Malaysia: pendedahan produk kad kredit (kadar berperingkat)</a></li>
+    <li><a href="https://www.akpk.org.my/" rel="noopener">AKPK: Program Pengurusan Kredit</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran untuk perbandingan, bukan nasihat kewangan. Kadar, yuran dan kelulusan pinjaman ditentukan oleh bank.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Ansuran bulanan dan kadar efektif</small></a>
+    <a href="/kalkulator-ptptn/">Kalkulator PTPTN<small>Bayaran balik dan ujrah 1%</small></a>
+    <a href="/kalkulator-gaji/">Kalkulator Gaji Bersih<small>Gaji bersih selepas KWSP, PERKESO dan PCB</small></a>
+  </div>
+</section>

@@ -38,6 +38,10 @@ const fuelData = JSON.parse(read('fuel-data.json'));
 const ncdCore = require('../assets/js/ncd-core.js');
 const hijriCore = require('../assets/js/hijri-core.js');
 const iddahCore = require('../assets/js/iddah-core.js');
+const tnbCore = require('../assets/js/tnb-core.js');
+const ptptnCore = require('../assets/js/ptptn-core.js');
+const fidyahCore = require('../assets/js/fidyah-core.js');
+const debtCore = require('../assets/js/debt-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1234,10 +1238,98 @@ function hijriMap(lang, p) {
     H_VERIFIED: longDate(H.FACTS.verified, lang), H_VERIFIED_ISO: H.FACTS.verified
   };
 }
+// ---- TNB electricity bill (RP4), BM + EN. The protection level baked in follows the page date.
+const TNB_EXAMPLE = { kwh: 300, afa: 0 };
+function tnbMap(lang, p) {
+  // The protection level follows the latest data date, so the page flips back to 600 kWh with the daily rebuild in January.
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), F = tnbCore.FACTS, level = tnbCore.protectionOn([p.dateModified, goldDate].sort().pop());
+  const nf = (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d }).format(n);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const r = tnbCore.calculate({ ...TNB_EXAMPLE, protection: level });
+  const lines = [[L ? 'Caj tenaga (27.03 sen)' : 'Energy charge (27.03 sen)', m(r.energy)], [L ? 'Caj kapasiti (4.55 sen)' : 'Capacity charge (4.55 sen)', m(r.capacity)],
+    [L ? 'Caj rangkaian (12.85 sen)' : 'Network charge (12.85 sen)', m(r.network)], [`${L ? 'Rebat EEI' : 'EEI rebate'} (${nf(r.eeiRate, 1)} sen)`, '− ' + m(r.eei)]]
+    .map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Jumlah bil' : 'Total bill'}</th><td>${m(r.total)}</td></tr>`);
+  const table = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500].map(k => {
+    const a = tnbCore.calculate({ kwh: k, protection: 600 }), b = tnbCore.calculate({ kwh: k, protection: 800 });
+    return `<tr><th scope="row">${k} kWh</th><td>${nf(tnbCore.eeiRate(k), 1)} sen</td><td>${m(b.total)}</td><td>${m(a.total)}</td></tr>`;
+  }).join('\n');
+  const eei = tnbCore.EEI.map((x, i) => `<tr><th scope="row">${i ? tnbCore.EEI[i - 1][0] + 1 : 1}–${x[0]} kWh</th><td>${nf(x[1], 1)} sen</td><td>${m(x[0] * x[1] / 100)}</td></tr>`).join('\n');
+  const ex = k => tnbCore.calculate({ kwh: k, protection: 600 }).total, exA = (k, afa, lv) => tnbCore.calculate({ kwh: k, afa, protection: lv }).total;
+  return {
+    T_KWH: TNB_EXAMPLE.kwh, T_AFA: TNB_EXAMPLE.afa,
+    T_PROT_OPTIONS: [opt(800, 'Up to 800 kWh (Sep–Dec 2026)', 'Hingga 800 kWj (Sep–Dis 2026)', level === 800), opt(600, 'Up to 600 kWh (standard)', 'Hingga 600 kWj (biasa)', level === 600)].join(''),
+    T_MODE_OPTIONS: [opt('kwh', 'I know my kWh', 'Saya tahu kWj saya', true), opt('appliance', 'Estimate from appliances', 'Anggar dari peralatan')].join(''),
+    T_TOTAL: m(r.total), T_SUB: L ? `${nf(r.perKwh, 1)} sen/kWj purata · dilindungi: tiada AFA, caj peruncitan dan SST` : `${nf(r.perKwh, 1)} sen/kWh on average · protected: no AFA, retail charge or SST`,
+    T_LINES: lines.join('\n'), T_TABLE: table, T_EEI: eei, T_LEVEL: level,
+    T_200: m(ex(200)), T_300: m(ex(300)), T_600: m(ex(600)), T_1000: m(ex(1000)), T_800P: m(exA(800, 3, 800)), T_800N: m(exA(800, 3, 600)),
+    T_VERIFIED: longDate(F.verified, lang), T_VERIFIED_ISO: F.verified
+  };
+}
+// ---- PTPTN repayment (ujrah), BM + EN
+const PTPTN_EXAMPLE = { amount: 30000, years: 15, paid: 0, income: 0 };
+function ptptnMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), r = ptptnCore.calculate(PTPTN_EXAMPLE);
+  const lines = [[L ? 'Pinjaman (prinsipal)' : 'Loan (principal)', m(r.principal)], [L ? 'Ujrah 1% setahun' : 'Ujrah 1% a year', m(r.ujrah)], [L ? 'Jumlah dibayar' : 'Total repaid', m(r.total)]]
+    .map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Ansuran bulanan' : 'Monthly instalment'}</th><td>${m(r.monthly)}</td></tr>`);
+  const settle = `<tr class="total"><th scope="row">${L ? 'Bayar penuh sekarang (baki prinsipal)' : 'Settle in full now (principal balance)'}</th><td>${m(r.settle)}</td></tr>\n<tr><th scope="row">${L ? 'Ujrah dijimatkan' : 'Ujrah saved'}</th><td>${m(r.saving)}</td></tr>`;
+  const table = [10000, 20000, 30000, 40000, 50000, 70000, 100000].map(a => `<tr><th scope="row">${m(a)}</th>${[10, 15, 20].map(y => `<td>${m(ptptnCore.calculate({ amount: a, years: y }).monthly)}</td>`).join('')}</tr>`).join('\n');
+  const s5 = ptptnCore.calculate({ amount: 30000, years: 15, paid: 60 });
+  return {
+    P_AMOUNT: PTPTN_EXAMPLE.amount, P_YEARS: PTPTN_EXAMPLE.years, P_MONTHLY: m(r.monthly), P_UJRAH: m(r.ujrah), P_TOTAL: m(r.total),
+    P_SUB: L ? `${r.months} bulan · jumlah ${m(r.total)} · ujrah ${m(r.ujrah)}` : `${r.months} months · total ${m(r.total)} · ujrah ${m(r.ujrah)}`,
+    P_LINES: lines.join('\n'), P_SETTLE: settle, P_TABLE: table, P_S5: m(s5.settle), P_S5_SAVE: m(s5.saving), P_20: m(ptptnCore.calculate({ amount: 30000, years: 20 }).monthly),
+    P_VERIFIED: longDate(ptptnCore.FACTS.verified, lang), P_VERIFIED_ISO: ptptnCore.FACTS.verified
+  };
+}
+// ---- Fidyah, BM + EN (2026 state rates)
+const FIDYAH_EXAMPLE = { state: 'selangor', type: 0, days: 5, years: 1, reason: 'delay' };
+function fidyahMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), S = fidyahCore.STATES, r = fidyahCore.calculate(FIDYAH_EXAMPLE);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const TY = L ? { local: 'Beras tempatan', import: 'Beras import / wangi', premium: 'Basmathi / premium', other: 'Beras lain' } : { local: 'Local rice', import: 'Imported / fragrant rice', premium: 'Basmathi / premium', other: 'Other rice' };
+  const sel = S[FIDYAH_EXAMPLE.state];
+  const lines = [[L ? 'Kadar sehari' : 'Rate per day', m(r.perDay)], [L ? 'Hari puasa' : 'Days of fasting', r.days], [L ? 'Fidyah sehari' : 'Fidyah per day', r.units],
+    [L ? 'Jumlah fidyah (cupak)' : 'Total fidyah (cupak)', r.count], [L ? 'Puasa perlu diganti' : 'Fasts still to make up', r.qada]].map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`);
+  lines.push(`<tr class="total"><th scope="row">${L ? 'Jumlah fidyah' : 'Total fidyah'}</th><td>${m(r.total)}</td></tr>`);
+  const rates = Object.values(S).map(s => `<tr><th scope="row">${s.name}</th><td>${s.rates.map((x, i) => s.types ? `${m(x)}<small>${TY[s.types[i]]}</small>` : m(x)).join(' ')}</td><td>${m(s.rates[0] * 30)}</td></tr>`).join('\n');
+  return {
+    FI_STATE_OPTIONS: Object.entries(S).map(([k, s]) => `<option value="${k}"${k === FIDYAH_EXAMPLE.state ? ' selected' : ''}>${s.name}</option>`).join(''),
+    FI_TYPE_OPTIONS: sel.rates.map((x, i) => `<option value="${i}"${i === 0 ? ' selected' : ''}>${TY[sel.types[i]]} – ${m(x)}</option>`).join(''),
+    FI_REASON_OPTIONS: [opt('delay', 'Did not make up the fast before the next Ramadan', 'Tidak qada sebelum Ramadan berikutnya', true), opt('child', 'Pregnant or nursing, fasted out for the baby', 'Hamil atau menyusu, tidak berpuasa kerana bimbang anak'), opt('unable', 'Unable to fast (old age, chronic illness)', 'Tidak mampu berpuasa (tua, sakit kronik)')].join(''),
+    FI_DAYS: FIDYAH_EXAMPLE.days, FI_YEARS: FIDYAH_EXAMPLE.years, FI_TOTAL: m(r.total),
+    FI_SUB: L ? `${r.count} cupak × ${m(r.perDay)} · masih perlu qada ${r.qada} hari` : `${r.count} cupak × ${m(r.perDay)} · still make up ${r.qada} days`,
+    FI_LINES: lines.join('\n'), FI_RATES: rates,
+    FI_EX2: m(fidyahCore.calculate({ days: 5, years: 2, state: 'selangor', type: 0 }).total), FI_WP30: m(fidyahCore.calculate({ days: 30, state: 'wp', reason: 'unable' }).total),
+    FI_VERIFIED: longDate(fidyahCore.FACTS.verified, lang), FI_VERIFIED_ISO: fidyahCore.FACTS.verified
+  };
+}
+// ---- Debt consolidation, BM + EN
+const DEBT_EXAMPLE = { debts: [{ balance: 10000, rate: 18, payment: '' }, { balance: 5000, rate: 18, payment: '' }, { balance: '', rate: 18, payment: '' }], rate: 6, years: 5, method: 'flat' };
+function debtMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, m = n => money(n, lang), r = debtCore.calculate(DEBT_EXAMPLE);
+  const opt = (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`;
+  const mo = n => L ? `${n} bulan` : `${n} months`;
+  const rows = [[L ? 'Bayaran bulanan' : 'Monthly payment', m(r.nowMonthly), m(r.monthly)], [L ? 'Faedah' : 'Interest', m(r.nowInterest), m(r.loanInterest)],
+    [L ? 'Duti setem 0.5%' : 'Stamp duty 0.5%', '–', m(r.stamp)], [L ? 'Tempoh' : 'Time to clear', mo(r.nowMonths), mo(r.months)], [L ? 'Kadar efektif (EIR)' : 'Effective rate (EIR)', '', r.eir + '%']]
+    .map(([a, b, c]) => `<tr><th scope="row">${a}</th><td>${b}</td><td>${c}</td></tr>`).join('\n');
+  const minTable = [3000, 5000, 10000, 20000, 30000].map(b => { const x = debtCore.payoff(b, 18, 0), y = debtCore.payoff(b, 15, 0); return `<tr><th scope="row">${m(b)}</th><td>${m(x.first)}</td><td>${mo(x.months)}</td><td>${m(x.interest)}</td><td>${m(y.interest)}</td></tr>`; }).join('\n');
+  const p10 = debtCore.payoff(10000, 18, 0);
+  return {
+    D_B1: 10000, D_B2: 5000, D_RATE: DEBT_EXAMPLE.rate, D_YEARS: DEBT_EXAMPLE.years,
+    D_METHOD_OPTIONS: [opt('flat', 'Flat rate (as banks quote)', 'Kadar rata (seperti iklan bank)', true), opt('eir', 'Effective rate (EIR)', 'Kadar efektif (EIR)')].join(''),
+    D_HEAD: r.saving >= 0 ? (L ? 'Penjimatan' : 'You save') : (L ? 'Kos tambahan' : 'Extra cost'), D_SAVING: m(Math.abs(r.saving)),
+    D_SUB: L ? `Bayaran bulanan ${m(r.monthly)} selama ${r.years} tahun` : `Monthly payment ${m(r.monthly)} for ${r.years} years`, D_LINES: rows, D_MIN: minTable,
+    D_NOW_INT: m(r.nowInterest), D_NOW_MONTHS: r.nowMonths, D_LOAN_INT: m(r.loanInterest), D_MONTHLY: m(r.monthly), D_NOW_MONTHLY: m(r.nowMonthly), D_EIR: r.eir + '%', D_STAMP: m(r.stamp),
+    D_P10_MONTHS: p10.months, D_P10_INT: m(p10.interest), D_P10_YEARS: (p10.months / 12).toFixed(1),
+    D_VERIFIED: longDate(debtCore.FACTS.verified, lang), D_VERIFIED_ISO: debtCore.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1373,6 +1465,10 @@ const bundles = {
   'ncd.js': ['assets/js/carloan-core.js', 'assets/js/ncd-core.js', 'assets/js/ncd-ui.js'],
   'iddah.js': ['assets/js/hijri-core.js', 'assets/js/iddah-core.js', 'assets/js/iddah-ui.js'],
   'hijri.js': ['assets/js/hijri-core.js', 'assets/js/hijri-ui.js'],
+  'tnb.js': ['assets/js/tnb-core.js', 'assets/js/tnb-ui.js'],
+  'ptptn.js': ['assets/js/ptptn-core.js', 'assets/js/ptptn-ui.js'],
+  'fidyah.js': ['assets/js/fidyah-core.js', 'assets/js/fidyah-ui.js'],
+  'debt.js': ['assets/js/carloan-core.js', 'assets/js/debt-core.js', 'assets/js/debt-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
