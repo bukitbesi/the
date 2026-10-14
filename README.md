@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 83 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 87 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -103,6 +103,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-bil-air/](https://tool.thebukitbesi.com/kalkulator-bil-air/) + [/water-bill-calculator-malaysia/](https://tool.thebukitbesi.com/water-bill-calculator-malaysia/) | BM + English | kira bil air, tarif air selangor 2025; water bill calculator malaysia |
 | [/kalkulator-unit-trust/](https://tool.thebukitbesi.com/kalkulator-unit-trust/) + [/unit-trust-calculator-malaysia/](https://tool.thebukitbesi.com/unit-trust-calculator-malaysia/) | BM + English | kalkulator unit trust, caj jualan; unit trust calculator malaysia |
 | [/kalkulator-kos-pendidikan-anak/](https://tool.thebukitbesi.com/kalkulator-kos-pendidikan-anak/) + [/education-cost-calculator-malaysia/](https://tool.thebukitbesi.com/education-cost-calculator-malaysia/) | BM + English | kos pendidikan anak, simpanan universiti; education cost calculator malaysia |
+| [/arah-kiblat/](https://tool.thebukitbesi.com/arah-kiblat/) + [/qibla-direction-malaysia/](https://tool.thebukitbesi.com/qibla-direction-malaysia/) | BM + English | arah kiblat, darjah kiblat kuala lumpur; qibla direction malaysia |
+| [/kalkulator-simpanan-persaraan/](https://tool.thebukitbesi.com/kalkulator-simpanan-persaraan/) + [/retirement-savings-calculator-malaysia/](https://tool.thebukitbesi.com/retirement-savings-calculator-malaysia/) | BM + English | simpanan persaraan cukup, kwsp rm390k; retirement savings calculator malaysia |
+| [/kalkulator-cuti-tahunan/](https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/) + [/annual-leave-calculator-malaysia/](https://tool.thebukitbesi.com/annual-leave-calculator-malaysia/) | BM + English | kira cuti tahunan prorata, akta kerja; annual leave calculator malaysia |
+| [/kalkulator-faedah-penamatan/](https://tool.thebukitbesi.com/kalkulator-faedah-penamatan/) + [/termination-benefits-calculator-malaysia/](https://tool.thebukitbesi.com/termination-benefits-calculator-malaysia/) | BM + English | faedah penamatan, pampasan diberhentikan kerja; termination benefits calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -182,6 +186,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (water bill):** `water-core.js` `STATES` holds each operator's block rates, minimum charge and effective date. Recheck after each SPAN tariff review (about every three years) and add Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah and Sarawak once their full tables are confirmed from two sources.
 
 **Upkeep (unit trust):** `unittrust-core.js` holds the EPF i-Invest sales charge cap (0.5%); everything else is user input.
+
+**Upkeep (qibla):** `qibla-core.js` holds the Kaaba coordinates and the town list; no yearly change. Istiwa' a'zam dates in the copy (27–28 May, 15–16 July) are stable; the exact minute comes from JAKIM each year.
+
+**Upkeep (retirement savings):** `nestegg-core.js` holds EPF's Retirement Income Adequacy benchmarks (RM390,000, RM650,000, RM1.3 million), reviewed by EPF every three years from 2029; update `FACTS` and both pages then.
+
+**Upkeep (annual leave, termination benefits):** `leave-core.js` and `termination-core.js` hold the Employment Act 1955 entitlements, the 1980 Regulations' 10/15/20 days and the RM4,000 First Schedule threshold. Recheck after any amendment to the Act or the First Schedule.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -265,6 +275,10 @@ assets/js/sspn-core.js      SSPN: balance with yearly dividend, RM8,000 relief a
 assets/js/water-core.js     water bill: domestic block tariffs and minimum charge by state
 assets/js/unittrust-core.js unit trust: sales charge, yearly fees, net return (IRR), EPF i-Invest comparison
 assets/js/edu-core.js       education cost: inflated yearly costs and monthly saving needed
+assets/js/qibla-core.js     qibla: great-circle bearing and distance to the Kaaba, Malaysian towns
+assets/js/nestegg-core.js   retirement savings: amount needed with inflation, projection, shortfall, drawdown age
+assets/js/leave-core.js     leave: Employment Act annual leave tiers, pro rata with half-day rounding, other leave
+assets/js/termination-core.js termination: notice by service, pay in lieu, 1980 Regulations benefit
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

@@ -1,0 +1,149 @@
+<!--page
+{
+  "path": "/annual-leave-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-cuti-tahunan/" },
+  "title": "Annual Leave Calculator Malaysia: Pro Rata Leave by the Employment Act",
+  "description": "Annual leave calculator for Malaysia: your leave under the Employment Act (8, 12 or 16 days), pro rata for joiners and leavers, and pay for unused leave.",
+  "llms": "Calculates paid leave under Malaysia's Employment Act 1955 as amended from 1 January 2023 (it covers all employees): annual leave of 8 days a year with under 2 years' service, 12 days with 2 to under 5 years and 16 days with 5 years or more (s.60E); in a year of joining or leaving, leave is pro rata by completed months (entitlement × months ÷ 12), with a fraction of a day under one half disregarded and one half or more counted as a day; unused leave on leaving is paid at the ordinary rate of pay (monthly wages ÷ 26). Sick leave is 14, 18 or 22 days a year by the same service bands, plus 60 days of hospitalisation leave (s.60F); maternity leave is 98 days and paternity leave 7 days for married men with 12 months' service, for up to five confinements. Example: leaving on 30 June 2026 after 4 years 4 months gives 12 × 6 ÷ 12 = 6 days; with 3 taken, 3 days on RM3,900 a month are paid RM450 (RM150 a day). Joining on 1 April 2026 gives 8 × 9 ÷ 12 = 6 days for 2026.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "leave",
+  "scripts": ["/assets/js/annual-leave.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Annual Leave Calculator", null]],
+  "about": ["Annual leave", "Employment Act 1955", "Sick leave", "Maternity and paternity leave"],
+  "app": {
+    "name": "Annual Leave Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Annual leave by length of service", "Pro rata leave for joiners and leavers", "Half-day rounding rule", "Pay for unused leave at the ordinary rate of pay", "Sick, hospitalisation, maternity and paternity leave", "Works offline"]
+  },
+  "citations": [
+    ["Employment Act 1955 (Act 265), updated text, JTKSM", "https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf"],
+    ["Rahmat Lim & Partners: Amended Employment Act covers all employees from 1 January 2023", "https://www.rahmatlim.com/publication/articles/22319/all-employees-irrespective-of-wages-to-be-covered-under-amended-employment-act-1955-from-1-january-2023"],
+    ["HSF Kramer: Sick leave entitlements in Singapore and Malaysia", "https://www.hsfkramer.com/notes/employment/2026-posts/compliance-check-sick-leave-entitlements-in-singapore-and-malaysia"],
+    ["Talenox: Annual leave in Malaysia", "https://help.talenox.com/en/articles/3522203-annual-leave-malaysia"],
+    ["Payroll Panda: Leave entitlement in Malaysia", "https://www.payrollpanda.my/article/leave-entitlement/"]
+  ],
+  "faq": [
+    { "q": "How many days of annual leave do I get in Malaysia?", "a": "At least 8 days a year with under 2 years of service, 12 days with 2 to under 5 years and 16 days with 5 years or more, under section 60E of the Employment Act 1955. Your contract can give more but not less." },
+    { "q": "How is pro rata annual leave calculated?", "a": "Entitlement × completed months ÷ 12, with a fraction under half a day dropped and half a day or more counted as a day. Joining on 1 April with an 8-day entitlement gives 8 × 9 ÷ 12 = {{L_JOIN}} days for that year." },
+    { "q": "How much annual leave do I get when I resign?", "a": "Leave for the completed months of your final year. Leaving on 30 June after 4 years with a 12-day entitlement gives 12 × 6 ÷ 12 = 6 days, less any days already taken." },
+    { "q": "Is unused annual leave paid when I leave?", "a": "Usually yes: leave earned but not taken when the contract ends is paid at the ordinary rate of pay (monthly wages ÷ 26), unless you take it during the notice period; dismissal for misconduct is an exception. 3 unused days on RM3,900 a month is {{L_PAY}}." },
+    { "q": "How many days of sick leave do I get?", "a": "14 days a year with under 2 years of service, 18 days with 2 to under 5 years and 22 days with 5 years or more, plus 60 days of hospitalisation leave a year when hospitalisation is needed, under section 60F." },
+    { "q": "How long is maternity and paternity leave?", "a": "Maternity leave is 98 consecutive days. Married fathers get 7 consecutive days of paid paternity leave per confinement, up to five confinements, after 12 months with the same employer." },
+    { "q": "Does the Employment Act cover employees earning above RM4,000?", "a": "Yes. From 1 January 2023 the Act covers all employees regardless of wages, and the annual, sick, maternity and paternity leave rules apply to everyone; only some overtime, rest day and termination benefit provisions are limited to those earning up to RM4,000." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Annual leave calculator</li></ol></nav>
+  <h1>Annual Leave Calculator Malaysia</h1>
+  <p class="answer">Under the Employment Act you get at least <strong>8, 12 or 16 days</strong> of paid annual leave a year (under 2, 2 to 5, and 5 or more years of service), pro rata in the year you join or leave. Leaving on 30 June after 4 years gives 12 × 6 ÷ 12 = <strong>{{L_DAYS}}</strong>; with 3 taken, the other 3 are paid {{L_PAY}} on RM3,900 a month. Enter your dates below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{L_VERIFIED_ISO}}">{{L_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-cuti-tahunan/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="leaveForm" novalidate aria-labelledby="lv-h">
+      <h2 id="lv-h">Your service</h2>
+      <div class="field-row">
+        <div class="field"><label for="start">Date you joined</label><input class="input" id="start" name="start" type="date" min="1970-01-01" max="2030-12-31" value="{{L_START}}"></div>
+        <div class="field"><label for="end">Last day or today</label><input class="input" id="end" name="end" type="date" min="1970-01-01" max="2030-12-31" value="{{L_END}}"></div>
+      </div>
+      <div class="field"><label for="leaving">Leaving the job?</label><select class="input" id="leaving" name="leaving">{{L_LEAVING_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="taken">Leave taken this year</label><div class="input"><input id="taken" name="taken" type="number" inputmode="numeric" min="0" max="60" step="1" value="{{L_TAKEN}}"><span aria-hidden="true">days</span></div></div>
+        <div class="field"><label for="wage">Monthly wage</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="100" value="{{L_WAGE}}"></div></div>
+      </div>
+      <p class="help">The leave year here is the calendar year; some employers use your joining anniversary.</p>
+    </form>
+
+    <section class="box" aria-labelledby="lv-result-h">
+      <h2 id="lv-result-h">Your leave</h2>
+      <div class="net">
+        <p>Annual leave earned</p>
+        <output id="lDays" for="start end leaving taken">{{L_DAYS}}</output>
+        <p id="lSub">{{L_SUB}}</p>
+      </div>
+      <p class="sr-only" id="lLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Annual leave</caption>
+        <tbody id="lLines">
+{{L_LINES}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>Other leave</caption>
+        <tbody id="lOther">
+{{L_OTHER}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="leavePrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="tiers-h">Leave entitlement by length of service</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tiers-h">
+    <table class="data">
+      <thead><tr><th scope="col">Service</th><th scope="col">Annual leave</th><th scope="col">Sick leave</th><th scope="col">Hospitalisation</th></tr></thead>
+      <tbody>
+{{L_TIERS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How annual leave is worked out</h2>
+  <ol>
+    <li><strong>Entitlement</strong> by service: 8 days (under 2 years), 12 days (2 to under 5) or 16 days (5 or more).</li>
+    <li><strong>Pro rata</strong> in a part year: entitlement × completed months ÷ 12.</li>
+    <li><strong>Rounding:</strong> under half a day is dropped; half a day or more counts as a full day.</li>
+    <li><strong>Unused leave on leaving</strong> × ordinary rate of pay (monthly wages ÷ 26).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="pro-h">Pro rata annual leave by completed months</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pro-h">
+    <table class="data">
+      <thead><tr><th scope="col">Months</th><th scope="col">8-day entitlement</th><th scope="col">12-day entitlement</th><th scope="col">16-day entitlement</th></tr></thead>
+      <tbody>
+{{L_PRO}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Leave rules in the Employment Act</h2>
+  <ul>
+    <li><strong>Coverage:</strong> all employees from 1 January 2023, regardless of wages.</li>
+    <li><strong>Hospitalisation:</strong> 60 days a year, separate from ordinary sick leave since the 2022 amendment.</li>
+    <li><strong>Maternity:</strong> 98 consecutive days; <strong>paternity:</strong> 7 consecutive days for married fathers after 12 months' service, up to five confinements.</li>
+    <li><strong>Your contract</strong> can give more leave, never less than the Act.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://jtksm.mohr.gov.my/sites/default/files/2023-11/Akta%20Kerja%201955%20(Akta%20265).pdf" rel="noopener">Employment Act 1955 (Act 265), JTKSM</a></li>
+    <li><a href="https://www.rahmatlim.com/publication/articles/22319/all-employees-irrespective-of-wages-to-be-covered-under-amended-employment-act-1955-from-1-january-2023" rel="noopener">Rahmat Lim &amp; Partners: Amended Employment Act from 1 January 2023</a></li>
+    <li><a href="https://www.hsfkramer.com/notes/employment/2026-posts/compliance-check-sick-leave-entitlements-in-singapore-and-malaysia" rel="noopener">HSF Kramer: Sick leave entitlements</a></li>
+    <li><a href="https://help.talenox.com/en/articles/3522203-annual-leave-malaysia" rel="noopener">Talenox: Annual leave in Malaysia</a></li>
+    <li><a href="https://www.payrollpanda.my/article/leave-entitlement/" rel="noopener">Payroll Panda: Leave entitlement</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> The Act's minimums. Your contract or collective agreement may give more; check with your employer or JTKSM.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/termination-benefits-calculator-malaysia/">Termination Benefits Calculator<small>Notice and termination pay</small></a>
+    <a href="/working-days-calculator-malaysia/">Working Days Calculator<small>Working days by state</small></a>
+    <a href="/prorated-salary-calculator-malaysia/">Prorated Salary Calculator<small>Pay for a part month</small></a>
+  </div>
+</section>
