@@ -1,11 +1,11 @@
 {
- "fetchedAt": "2026-10-14T12:00:00.000Z",
+ "fetchedAt": "2026-10-14T15:10:04.857Z",
  "source": "https://api.data.gov.my/data-catalogue?id=fuelprice&filter=level@series_type",
  "history": [
   {
    "date": "2025-10-16",
-   "ron95": 2.6,
    "ron95_budi95": 1.99,
+   "ron95": 2.6,
    "ron97": 3.18,
    "diesel": 2.93,
    "diesel_eastmsia": 2.15,
@@ -13,8 +13,8 @@
   },
   {
    "date": "2025-10-23",
-   "ron95": 2.6,
    "ron95_budi95": 1.99,
+   "ron95": 2.6,
    "ron97": 3.14,
    "diesel": 2.89,
    "diesel_eastmsia": 2.15,
@@ -22,8 +22,8 @@
   },
   {
    "date": "2025-10-30",
-   "ron95": 2.6,
    "ron95_budi95": 1.99,
+   "ron95": 2.6,
    "ron97": 3.2,
    "diesel": 2.95,
    "diesel_eastmsia": 2.15,
@@ -31,8 +31,8 @@
   },
   {
    "date": "2025-11-06",
-   "ron95": 2.6,
    "ron95_budi95": 1.99,
+   "ron95": 2.6,
    "ron97": 3.2,
    "diesel": 3.02,
    "diesel_eastmsia": 2.15,
@@ -40,8 +40,8 @@
   },
   {
    "date": "2025-11-13",
-   "ron95": 2.65,
    "ron95_budi95": 1.99,
+   "ron95": 2.65,
    "ron97": 3.25,
    "diesel": 3.07,
    "diesel_eastmsia": 2.15,
@@ -49,8 +49,8 @@
   },
   {
    "date": "2025-11-20",
-   "ron95": 2.65,
    "ron95_budi95": 1.99,
+   "ron95": 2.65,
    "ron97": 3.28,
    "diesel": 3.1,
    "diesel_eastmsia": 2.15,
@@ -58,8 +58,8 @@
   },
   {
    "date": "2025-11-27",
-   "ron95": 2.63,
    "ron95_budi95": 1.99,
+   "ron95": 2.63,
    "ron97": 3.26,
    "diesel": 3.08,
    "diesel_eastmsia": 2.15,
@@ -67,8 +67,8 @@
   },
   {
    "date": "2025-12-04",
-   "ron95": 2.66,
    "ron95_budi95": 1.99,
+   "ron95": 2.66,
    "ron97": 3.29,
    "diesel": 3.08,
    "diesel_eastmsia": 2.15,
@@ -76,8 +76,8 @@
   },
   {
    "date": "2025-12-11",
-   "ron95": 2.64,
    "ron95_budi95": 1.99,
+   "ron95": 2.64,
    "ron97": 3.27,
    "diesel": 3.06,
    "diesel_eastmsia": 2.15,
@@ -85,8 +85,8 @@
   },
   {
    "date": "2025-12-18",
-   "ron95": 2.62,
    "ron95_budi95": 1.99,
+   "ron95": 2.62,
    "ron97": 3.24,
    "diesel": 3.02,
    "diesel_eastmsia": 2.15,
@@ -94,8 +94,8 @@
   },
   {
    "date": "2025-12-25",
-   "ron95": 2.56,
    "ron95_budi95": 1.99,
+   "ron95": 2.56,
    "ron97": 3.16,
    "diesel": 2.94,
    "diesel_eastmsia": 2.15,
@@ -103,8 +103,8 @@
   },
   {
    "date": "2026-01-01",
-   "ron95": 2.56,
    "ron95_budi95": 1.99,
+   "ron95": 2.56,
    "ron97": 3.16,
    "diesel": 2.94,
    "diesel_eastmsia": 2.15,
@@ -112,8 +112,8 @@
   },
   {
    "date": "2026-01-08",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.11,
    "diesel": 2.89,
    "diesel_eastmsia": 2.15,
@@ -121,8 +121,8 @@
   },
   {
    "date": "2026-01-15",
-   "ron95": 2.52,
    "ron95_budi95": 1.99,
+   "ron95": 2.52,
    "ron97": 3.08,
    "diesel": 2.84,
    "diesel_eastmsia": 2.15,
@@ -130,8 +130,8 @@
   },
   {
    "date": "2026-01-22",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.1,
    "diesel": 2.88,
    "diesel_eastmsia": 2.15,
@@ -139,8 +139,8 @@
   },
   {
    "date": "2026-01-29",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.1,
    "diesel": 2.92,
    "diesel_eastmsia": 2.15,
@@ -148,8 +148,8 @@
   },
   {
    "date": "2026-02-05",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.1,
    "diesel": 2.96,
    "diesel_eastmsia": 2.15,
@@ -157,8 +157,8 @@
   },
   {
    "date": "2026-02-12",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.1,
    "diesel": 2.99,
    "diesel_eastmsia": 2.15,
@@ -166,8 +166,8 @@
   },
   {
    "date": "2026-02-19",
-   "ron95": 2.54,
    "ron95_budi95": 1.99,
+   "ron95": 2.54,
    "ron97": 3.1,
    "diesel": 2.99,
    "diesel_eastmsia": 2.15,
@@ -175,8 +175,8 @@
   },
   {
    "date": "2026-02-26",
-   "ron95": 2.59,
    "ron95_budi95": 1.99,
+   "ron95": 2.59,
    "ron97": 3.15,
    "diesel": 3.04,
    "diesel_eastmsia": 2.15,
@@ -184,8 +184,8 @@
   },
   {
    "date": "2026-03-05",
-   "ron95": 2.67,
    "ron95_budi95": 1.99,
+   "ron95": 2.67,
    "ron97": 3.25,
    "diesel": 3.12,
    "diesel_eastmsia": 2.15,
@@ -193,8 +193,8 @@
   },
   {
    "date": "2026-03-12",
-   "ron95": 3.27,
    "ron95_budi95": 1.99,
+   "ron95": 3.27,
    "ron97": 3.85,
    "diesel": 3.92,
    "diesel_eastmsia": 2.15,
@@ -202,8 +202,8 @@
   },
   {
    "date": "2026-03-19",
-   "ron95": 3.27,
    "ron95_budi95": 1.99,
+   "ron95": 3.27,
    "ron97": 4.55,
    "diesel": 4.72,
    "diesel_eastmsia": 2.15,
@@ -211,8 +211,8 @@
   },
   {
    "date": "2026-03-26",
-   "ron95": 3.87,
    "ron95_budi95": 1.99,
+   "ron95": 3.87,
    "ron97": 5.15,
    "diesel": 5.52,
    "diesel_eastmsia": 2.15,
@@ -220,8 +220,8 @@
   },
   {
    "date": "2026-04-02",
-   "ron95": 3.87,
    "ron95_budi95": 1.99,
+   "ron95": 3.87,
    "ron97": 4.95,
    "diesel": 6.02,
    "diesel_eastmsia": 2.15,
@@ -229,8 +229,8 @@
   },
   {
    "date": "2026-04-09",
-   "ron95": 4.27,
    "ron95_budi95": 1.99,
+   "ron95": 4.27,
    "ron97": 5.35,
    "diesel": 6.72,
    "diesel_eastmsia": 2.15,
@@ -238,8 +238,8 @@
   },
   {
    "date": "2026-04-16",
-   "ron95": 4.02,
    "ron95_budi95": 1.99,
+   "ron95": 4.02,
    "ron97": 5.1,
    "diesel": 5.97,
    "diesel_eastmsia": 2.15,
@@ -247,8 +247,8 @@
   },
   {
    "date": "2026-04-23",
-   "ron95": 3.87,
    "ron95_budi95": 1.99,
+   "ron95": 3.87,
    "ron97": 4.85,
    "diesel": 5.12,
    "diesel_eastmsia": 2.15,
@@ -256,8 +256,8 @@
   },
   {
    "date": "2026-04-30",
-   "ron95": 3.97,
    "ron95_budi95": 1.99,
+   "ron95": 3.97,
    "ron97": 4.9,
    "diesel": 5.12,
    "diesel_eastmsia": 2.15,
@@ -265,8 +265,8 @@
   },
   {
    "date": "2026-05-07",
-   "ron95": 4.02,
    "ron95_budi95": 1.99,
+   "ron95": 4.02,
    "ron97": 4.9,
    "diesel": 5.17,
    "diesel_eastmsia": 2.15,
@@ -274,8 +274,8 @@
   },
   {
    "date": "2026-05-14",
-   "ron95": 3.87,
    "ron95_budi95": 1.99,
+   "ron95": 3.87,
    "ron97": 4.7,
    "diesel": 4.87,
    "diesel_eastmsia": 2.15,
@@ -283,8 +283,8 @@
   },
   {
    "date": "2026-05-21",
-   "ron95": 4.07,
    "ron95_budi95": 1.99,
+   "ron95": 4.07,
    "ron97": 4.85,
    "diesel": 4.97,
    "diesel_eastmsia": 2.15,
@@ -292,8 +292,8 @@
   },
   {
    "date": "2026-05-28",
-   "ron95": 3.92,
    "ron95_budi95": 1.99,
+   "ron95": 3.92,
    "ron97": 4.65,
    "diesel": 4.87,
    "diesel_eastmsia": 2.15,
@@ -301,8 +301,8 @@
   },
   {
    "date": "2026-06-04",
-   "ron95": 3.72,
    "ron95_budi95": 1.99,
+   "ron95": 3.72,
    "ron97": 4.35,
    "diesel": 4.67,
    "diesel_eastmsia": 2.15,
@@ -310,8 +310,8 @@
   },
   {
    "date": "2026-06-11",
-   "ron95": 3.72,
    "ron95_budi95": 1.99,
+   "ron95": 3.72,
    "ron97": 4.35,
    "diesel": 4.67,
    "diesel_eastmsia": 2.15,
@@ -319,8 +319,8 @@
   },
   {
    "date": "2026-06-18",
-   "ron95": 3.72,
    "ron95_budi95": 1.99,
+   "ron95": 3.72,
    "ron97": 4.35,
    "diesel": 4.37,
    "diesel_eastmsia": 2.15,
@@ -328,8 +328,8 @@
   },
   {
    "date": "2026-06-25",
-   "ron95": 3.47,
    "ron95_budi95": 1.99,
+   "ron95": 3.47,
    "ron97": 4.1,
    "diesel": 4.07,
    "diesel_eastmsia": 2.15,
@@ -337,8 +337,8 @@
   },
   {
    "date": "2026-07-01",
-   "ron95": 3.37,
    "ron95_budi95": 1.99,
+   "ron95": 3.37,
    "ron97": 4,
    "diesel": 3.97,
    "diesel_eastmsia": 2.15,
@@ -346,8 +346,8 @@
   },
   {
    "date": "2026-07-09",
-   "ron95": 3.37,
    "ron95_budi95": 1.99,
+   "ron95": 3.37,
    "ron97": 4,
    "diesel": 3.97,
    "diesel_eastmsia": 2.15,
@@ -355,8 +355,8 @@
   },
   {
    "date": "2026-07-16",
-   "ron95": 3.42,
    "ron95_budi95": 1.99,
+   "ron95": 3.42,
    "ron97": 4,
    "diesel": 4.07,
    "diesel_eastmsia": 2.15,
@@ -364,8 +364,8 @@
   },
   {
    "date": "2026-07-23",
-   "ron95": 3.62,
    "ron95_budi95": 1.99,
+   "ron95": 3.62,
    "ron97": 4.2,
    "diesel": 4.42,
    "diesel_eastmsia": 2.15,
@@ -373,8 +373,8 @@
   },
   {
    "date": "2026-07-30",
-   "ron95": 3.82,
    "ron95_budi95": 1.99,
+   "ron95": 3.82,
    "ron97": 4.4,
    "diesel": 4.62,
    "diesel_eastmsia": 2.15,
@@ -382,8 +382,8 @@
   },
   {
    "date": "2026-08-06",
-   "ron95": 3.77,
    "ron95_budi95": 1.99,
+   "ron95": 3.77,
    "ron97": 4.35,
    "diesel": 4.57,
    "diesel_eastmsia": 2.15,
@@ -391,8 +391,8 @@
   },
   {
    "date": "2026-08-13",
-   "ron95": 3.62,
    "ron95_budi95": 1.99,
+   "ron95": 3.62,
    "ron97": 4.15,
    "diesel": 4.47,
    "diesel_eastmsia": 2.15,
@@ -400,8 +400,8 @@
   },
   {
    "date": "2026-08-20",
-   "ron95": 3.77,
    "ron95_budi95": 1.99,
+   "ron95": 3.77,
    "ron97": 4.25,
    "diesel": 4.67,
    "diesel_eastmsia": 2.15,
@@ -409,8 +409,8 @@
   },
   {
    "date": "2026-08-27",
-   "ron95": 3.82,
    "ron95_budi95": 1.99,
+   "ron95": 3.82,
    "ron97": 4.3,
    "diesel": 4.72,
    "diesel_eastmsia": 2.15,
@@ -418,8 +418,8 @@
   },
   {
    "date": "2026-09-03",
-   "ron95": 3.77,
    "ron95_budi95": 1.99,
+   "ron95": 3.77,
    "ron97": 4.25,
    "diesel": 4.67,
    "diesel_eastmsia": 2.15,
@@ -427,8 +427,8 @@
   },
   {
    "date": "2026-09-10",
-   "ron95": 4.02,
    "ron95_budi95": 1.99,
+   "ron95": 4.02,
    "ron97": 4.5,
    "diesel": 4.92,
    "diesel_eastmsia": 2.15,
@@ -436,8 +436,8 @@
   },
   {
    "date": "2026-09-17",
-   "ron95": 4.37,
    "ron95_budi95": 1.99,
+   "ron95": 4.37,
    "ron97": 4.85,
    "diesel": 5.27,
    "diesel_eastmsia": 2.15,
@@ -445,8 +445,8 @@
   },
   {
    "date": "2026-09-24",
-   "ron95": 4.57,
    "ron95_budi95": 1.99,
+   "ron95": 4.57,
    "ron97": 5.05,
    "diesel": 5.42,
    "diesel_eastmsia": 2.15,
@@ -454,8 +454,8 @@
   },
   {
    "date": "2026-10-01",
-   "ron95": 4.52,
    "ron95_budi95": 1.99,
+   "ron95": 4.52,
    "ron97": 5,
    "diesel": 5.27,
    "diesel_eastmsia": 2.15,
@@ -463,8 +463,8 @@
   },
   {
    "date": "2026-10-08",
-   "ron95": 4.67,
    "ron95_budi95": 1.99,
+   "ron95": 4.67,
    "ron97": 5.15,
    "diesel": 5.27,
    "diesel_eastmsia": 2.15,
