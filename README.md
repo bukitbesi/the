@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 74 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 79 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -94,6 +94,11 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-sewa-atau-beli-rumah/](https://tool.thebukitbesi.com/kalkulator-sewa-atau-beli-rumah/) + [/rent-vs-buy-calculator-malaysia/](https://tool.thebukitbesi.com/rent-vs-buy-calculator-malaysia/) | BM + English | sewa atau beli rumah; rent vs buy calculator malaysia |
 | [/kalkulator-fixed-deposit/](https://tool.thebukitbesi.com/kalkulator-fixed-deposit/) + [/fixed-deposit-calculator-malaysia/](https://tool.thebukitbesi.com/fixed-deposit-calculator-malaysia/) | BM + English | kalkulator fixed deposit, faedah fd; fixed deposit calculator malaysia |
 | [/kalkulator-kos-pekerja/](https://tool.thebukitbesi.com/kalkulator-kos-pekerja/) + [/employer-cost-calculator-malaysia/](https://tool.thebukitbesi.com/employer-cost-calculator-malaysia/) | BM + English | kos majikan, caruman kwsp majikan, levi hrd; employer cost calculator malaysia |
+| [/kalkulator-margin-untung/](https://tool.thebukitbesi.com/kalkulator-margin-untung/) + [/profit-margin-calculator-malaysia/](https://tool.thebukitbesi.com/profit-margin-calculator-malaysia/) | BM + English | kalkulator margin untung, kira markup; profit margin calculator malaysia |
+| [/kalkulator-roas/](https://tool.thebukitbesi.com/kalkulator-roas/) + [/roas-calculator/](https://tool.thebukitbesi.com/roas-calculator/) | BM + English | kalkulator roas, roas pulang modal; roas calculator |
+| [/kalkulator-caj-freelance/](https://tool.thebukitbesi.com/kalkulator-caj-freelance/) + [/freelance-rate-calculator-malaysia/](https://tool.thebukitbesi.com/freelance-rate-calculator-malaysia/) | BM + English | caj freelance sejam; freelance rate calculator malaysia |
+| [/kalkulator-hari-bekerja/](https://tool.thebukitbesi.com/kalkulator-hari-bekerja/) + [/working-days-calculator-malaysia/](https://tool.thebukitbesi.com/working-days-calculator-malaysia/) | BM + English | kira hari bekerja, hari bekerja 2027 selangor; working days calculator malaysia |
+| [/kalkulator-umur-bersara/](https://tool.thebukitbesi.com/kalkulator-umur-bersara/) + [/retirement-age-calculator-malaysia/](https://tool.thebukitbesi.com/retirement-age-calculator-malaysia/) | BM + English | kalkulator umur bersara, kira pencen; retirement age calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -161,6 +166,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (fixed deposit):** `fd-core.js` holds the PIDM limit, the OPR and the inflation default (`FACTS`). Update after MPC decisions and quarterly DOSM inflation releases.
 
 **Upkeep (employer cost):** `employer-core.js` uses `salary-core.js` for EPF, SOCSO and EIS, and holds the foreign-worker EPF rate and HRD Corp levy rates. Recheck after any KWSP, PERKESO or HRD Corp rate change.
+
+**Upkeep (working days):** `workdays-core.js` embeds federal and state holidays for 2026 and 2027 (`H.days`, state bitmasks in `STATES` order) and the weekend rules. Each year, when the Cabinet publishes the next HKA list (usually mid-year), add the new year, recheck Islamic dates after moon sightings and add ad hoc holidays, then update `FACTS.years` and `tools-src/tests/workdays.test.mjs`.
+
+**Upkeep (retirement age):** `retire-core.js` holds the retirement ages, the pension formula (1/600, 360 months, 60%) and gratuity rate. Update if JPA raises the compulsory age (65 is under study) or the non-pensionable scheme for new civil servants starts.
+
+**Upkeep (freelance rate, profit margin, ROAS):** `freelance-core.js` uses the YA2026 rates in `salary-core.js`; when Budget 2027 rates (RM12,000 self relief) take effect for YA2027, update `FACTS.self` and both pages. `roas-core.js` holds the 8% service tax; `margin-core.js` has no rates to maintain.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -235,6 +246,11 @@ assets/js/refi-core.js      refinance: old vs new instalment on the same balance
 assets/js/rentbuy-core.js   rent vs buy: buyer's equity vs renter's invested savings, year by year
 assets/js/fd-core.js        fixed deposit: simple interest per term, renewals, PIDM limit, real return
 assets/js/employer-core.js  employer cost: EPF, SOCSO, EIS, HRD levy, foreign workers, bonus EPF
+assets/js/margin-core.js    profit margin: fees, profit per unit, margin vs markup, break-even and target price
+assets/js/roas-core.js      ROAS: ROI, break-even ROAS, ACoS, CPA, 8% service tax on ads
+assets/js/freelance-core.js freelance rate: revenue for a take-home target after EPF and tax, hourly and day rate
+assets/js/workdays-core.js  working days: 2026–2027 federal and state holidays, weekends by state, deadlines
+assets/js/retire-core.js    retirement: date at 60, EPF ages, civil service pension and gratuity
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

@@ -46,6 +46,11 @@ const refiCore = require('../assets/js/refi-core.js');
 const rentbuyCore = require('../assets/js/rentbuy-core.js');
 const fdCore = require('../assets/js/fd-core.js');
 const employerCore = require('../assets/js/employer-core.js');
+const marginCore = require('../assets/js/margin-core.js');
+const roasCore = require('../assets/js/roas-core.js');
+const freelanceCore = require('../assets/js/freelance-core.js');
+const workdaysCore = require('../assets/js/workdays-core.js');
+const retireCore = require('../assets/js/retire-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1424,10 +1429,122 @@ function employerMap(lang) {
     E_VERIFIED: longDate(employerCore.FACTS.verified, lang), E_VERIFIED_ISO: employerCore.FACTS.verified
   };
 }
+// ---- batch 3: profit margin, ROAS, freelance rate, working days, retirement age
+const b3 = lang => {
+  const L = lang === 'ms' ? 1 : 0;
+  return {
+    L, m: n => money(n, lang),
+    nf: (n, d = 2) => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { maximumFractionDigits: d }).format(n),
+    tr: (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`,
+    opt: (v, en, bm, sel) => `<option value="${v}"${sel ? ' selected' : ''}>${L ? bm : en}</option>`
+  };
+};
+const MARGIN_EXAMPLE = { price: 100, cost: 60, feePct: 10, fixedFee: 0, shipping: 0, ads: 0, target: 40, qty: 100 };
+function marginMap(lang) {
+  const { L, m, nf, tr } = b3(lang), r = marginCore.calculate(MARGIN_EXAMPLE);
+  const lines = [tr(L ? 'Harga jual' : 'Selling price', m(r.price)), tr(L ? 'Kos barang' : 'Product cost', '− ' + m(r.cost)), tr(L ? 'Fi platform dan bayaran' : 'Platform and payment fees', '− ' + m(r.fees)),
+    tr(L ? 'Untung seunit' : 'Profit per unit', m(r.profit), 'total'), tr(L ? 'Margin untung' : 'Profit margin', nf(r.margin, 1) + '%'), tr('Markup', nf(r.markup, 1) + '%'),
+    tr(L ? 'Harga pulang modal' : 'Break-even price', m(r.breakEven)), tr(L ? `Harga untuk margin ${nf(r.targetPct, 1)}%` : `Price for a ${nf(r.targetPct, 1)}% margin`, m(r.targetPrice)),
+    tr(L ? `Untung untuk ${r.qty} unit` : `Profit on ${r.qty} units`, m(r.monthly), 'total')].join('\n');
+  const conv = [5, 10, 15, 20, 25, 30, 35, 40, 50, 60].map(p => `<tr><th scope="row">${p}%</th><td>${nf(marginCore.markupFromMargin(p / 100) * 100, 1)}%</td><td>${nf(marginCore.marginFromMarkup(p / 100) * 100, 1)}%</td></tr>`).join('\n');
+  const price = [0, 5, 10, 15, 20].map(fee => `<tr><th scope="row">${fee}%</th>${[20, 30, 40, 50].map(t => `<td>${m(marginCore.priceFor(60, fee / 100, 0, t / 100))}</td>`).join('')}</tr>`).join('\n');
+  const s = marginCore.calculate({ price: 50, cost: 20, feePct: 12, fixedFee: 1, shipping: 3, ads: 5 });
+  return {
+    M_PRICE: r.price, M_COST: r.cost, M_FEE: MARGIN_EXAMPLE.feePct, M_TARGET: r.targetPct, M_QTY: r.qty,
+    M_PROFIT: m(r.profit), M_MARGIN: nf(r.margin, 1), M_MARKUP: nf(r.markup, 1), M_BE: m(r.breakEven), M_TPRICE: m(r.targetPrice),
+    M_SUB: `Margin ${nf(r.margin, 1)}% · markup ${nf(r.markup, 1)}%`, M_LINES: lines, M_CONV: conv, M_PRICES: price,
+    M_SHOP_PROFIT: m(s.profit), M_SHOP_MARGIN: nf(s.margin, 1), M_SHOP_BE: m(s.breakEven),
+    M_VERIFIED: longDate(marginCore.FACTS.verified, lang), M_VERIFIED_ISO: marginCore.FACTS.verified
+  };
+}
+const ROAS_EXAMPLE = { spend: 1000, revenue: 4000, margin: 40, orders: 50, tax: 'no' };
+function roasMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), r = roasCore.calculate(ROAS_EXAMPLE), x2 = n => new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n) + '×';
+  const lines = [tr(L ? 'Belanja iklan' : 'Ad spend', m(r.baseSpend)), tr(L ? 'Jualan daripada iklan' : 'Sales from ads', m(r.revenue)),
+    tr(L ? `Untung kasar (${nf(r.marginPct, 1)}%)` : `Gross profit (${nf(r.marginPct, 1)}%)`, m(r.gross)), tr(L ? 'Untung selepas iklan' : 'Profit after ads', m(r.profit), 'total'),
+    tr('ROI', nf(r.roi, 1) + '%'), tr(L ? 'ROAS pulang modal' : 'Break-even ROAS', x2(r.breakEven)), tr(L ? 'Jualan pulang modal' : 'Break-even sales', m(r.breakEvenRevenue)),
+    tr(L ? 'ACoS (iklan ÷ jualan)' : 'ACoS (ad spend ÷ sales)', nf(r.acos, 1) + '%'), tr(L ? 'Kos setiap pesanan (CPA)' : 'Cost per order (CPA)', m(r.cpa)),
+    tr(L ? 'Nilai purata pesanan' : 'Average order value', m(r.aov)), tr(L ? 'CPA maksimum pulang modal' : 'Break-even CPA', m(r.maxCpa))].join('\n');
+  const be = [10, 15, 20, 25, 30, 40, 50, 60, 70].map(p => `<tr><th scope="row">${p}%</th><td>${x2(roasCore.breakEven(p))}</td><td>${nf(100 / roasCore.breakEven(p), 1)}%</td></tr>`).join('\n');
+  const grid = [2, 3, 4, 5, 6].map(ro => `<tr><th scope="row">${x2(ro)}</th>${[20, 30, 40, 50].map(mg => { const x = roasCore.calculate({ spend: 1000, revenue: 1000 * ro, margin: mg }); return `<td>${m(x.profit)}</td>`; }).join('')}</tr>`).join('\n');
+  const t = roasCore.calculate({ ...ROAS_EXAMPLE, tax: 'yes' });
+  return {
+    R_SPEND: r.baseSpend, R_REVENUE: r.revenue, R_MARGIN: r.marginPct, R_ORDERS: r.orders,
+    R_TAX_OPTIONS: [opt('no', 'Not on my invoice', 'Tiada dalam invois', true), opt('yes', 'Add 8% service tax', 'Tambah cukai perkhidmatan 8%')].join(''),
+    R_ROAS: x2(r.roas), R_ROI: nf(r.roi, 1), R_PROFIT: m(r.profit), R_BE: x2(r.breakEven), R_CPA: m(r.cpa), R_MAXCPA: m(r.maxCpa),
+    R_SUB: L ? `ROI ${nf(r.roi, 1)}% · untung ${m(r.profit)}` : `ROI ${nf(r.roi, 1)}% · profit ${m(r.profit)}`, R_LINES: lines, R_BETABLE: be, R_GRID: grid,
+    R_TAX_ROAS: x2(t.roas), R_TAX_PROFIT: m(t.profit), R_TAX_ROI: nf(t.roi, 1),
+    R_VERIFIED: longDate(roasCore.FACTS.verified, lang), R_VERIFIED_ISO: roasCore.FACTS.verified
+  };
+}
+const FL_EXAMPLE = { target: 5000, expenses: 500, epf: 11, socso: 0, relief: 0, hours: 30, weeksOff: 6 };
+function freelanceMap(lang) {
+  const { L, m, nf, tr } = b3(lang), r = freelanceCore.calculate(FL_EXAMPLE);
+  const lines = [tr(L ? 'Pendapatan bersih setahun' : 'Take-home a year', m(r.target)), tr(L ? 'Kos perniagaan' : 'Business expenses', '+ ' + m(r.expenses)),
+    tr(L ? 'KWSP (i-Saraan / sukarela)' : 'EPF (i-Saraan / voluntary)', '+ ' + m(r.epf)), tr(L ? 'Cukai pendapatan' : 'Income tax', '+ ' + m(r.tax)),
+    tr(L ? 'Jualan diperlukan setahun' : 'Revenue needed a year', m(r.revenue), 'total'), tr(L ? 'Invois sebulan' : 'Billing a month', m(r.monthly)),
+    tr(L ? 'Jam boleh caj setahun' : 'Billable hours a year', nf(r.billable, 0)), tr(L ? 'Kadar sejam' : 'Hourly rate', m(r.hourly), 'total'), tr(L ? 'Kadar sehari (8 jam)' : 'Day rate (8 hours)', m(r.daily))].join('\n');
+  const table = [2000, 3000, 4000, 5000, 6000, 8000, 10000].map(t => { const x = freelanceCore.calculate({ ...FL_EXAMPLE, target: t }); return `<tr><th scope="row">${m(t)}</th><td>${m(x.monthly)}</td><td>${m(x.tax)}</td><td><strong>${m(x.hourly)}</strong></td><td>${m(x.daily)}</td></tr>`; }).join('\n');
+  const hrs = [20, 25, 30, 35, 40].map(h => { const x = freelanceCore.calculate({ ...FL_EXAMPLE, hours: h }); return `<tr><th scope="row">${h}</th><td>${nf(x.billable, 0)}</td><td>${m(x.hourly)}</td><td>${m(x.daily)}</td></tr>`; }).join('\n');
+  const low = freelanceCore.calculate({ target: 3000, expenses: 300, epf: 0, hours: 25, weeksOff: 4 });
+  return {
+    F_TARGET: FL_EXAMPLE.target, F_EXPENSES: FL_EXAMPLE.expenses, F_EPF: FL_EXAMPLE.epf, F_HOURS: FL_EXAMPLE.hours, F_WEEKS: FL_EXAMPLE.weeksOff,
+    F_HOURLY: m(r.hourly), F_DAILY: m(r.daily), F_MONTHLY: m(r.monthly), F_REVENUE: m(r.revenue), F_TAX: m(r.tax), F_EPFV: m(r.epf), F_BILLABLE: nf(r.billable, 0),
+    F_SUB: L ? `${m(r.daily)} sehari · ${m(r.monthly)} sebulan` : `${m(r.daily)} a day · ${m(r.monthly)} a month`, F_LINES: lines, F_TABLE: table, F_HOURS_TABLE: hrs,
+    F_LOW_HOURLY: m(low.hourly), F_LOW_REVENUE: m(low.revenue),
+    F_VERIFIED: longDate(freelanceCore.FACTS.verified, lang), F_VERIFIED_ISO: freelanceCore.FACTS.verified
+  };
+}
+const WD_EXAMPLE = { state: 'selangor', from: '2027-01-01', to: '2027-12-31', leave: 0, start: '2026-10-14', add: 14 };
+function workdaysMap(lang) {
+  const { L, nf, tr } = b3(lang), W = workdaysCore, loc = L ? 'ms-MY' : 'en-GB';
+  const dl = iso => new Date(iso + 'T00:00:00Z').toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  const ds = iso => new Date(iso + 'T00:00:00Z').toLocaleDateString(loc, { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const mn = i => new Date(Date.UTC(2026, i, 1)).toLocaleDateString(loc, { month: 'long', timeZone: 'UTC' });
+  const r = W.count(WD_EXAMPLE), d = W.addWorkdays(WD_EXAMPLE.state, WD_EXAMPLE.start, WD_EXAMPLE.add), sn = W.name(WD_EXAMPLE.state, lang), we = W.weekendDays(WD_EXAMPLE.state);
+  const lines = [tr(L ? 'Jumlah hari' : 'Calendar days', nf(r.days, 0)), tr(L ? 'Hujung minggu' : 'Weekend days', '− ' + nf(r.weekend, 0)), tr(L ? 'Cuti umum (hari bekerja)' : 'Public holidays on workdays', '− ' + nf(r.holidays, 0)),
+    tr(L ? 'Cuti umum pada hujung minggu' : 'Public holidays on a weekend', nf(r.holidaysOnWeekend, 0)), tr(L ? 'Hari bekerja' : 'Working days', nf(r.workdays, 0), 'total')].join('\n');
+  const dead = [tr(L ? 'Tarikh mula' : 'Start date', dl(WD_EXAMPLE.start)), tr(L ? 'Tambah hari bekerja' : 'Working days added', WD_EXAMPLE.add), tr(L ? 'Hujung minggu dan cuti dilangkau' : 'Weekend and holiday days skipped', d.skipped), tr(L ? 'Tarikh akhir' : 'End date', dl(d.date), 'total')].join('\n');
+  const hol = W.holidays(WD_EXAMPLE.state, 2027).map(h => { const w = we.includes(new Date(h.date + 'T00:00:00Z').getUTCDay()); return tr(ds(h.date), (L ? h.ms : h.en) + (w ? ` (${L ? 'hujung minggu' : 'weekend'})` : '')); }).join('\n');
+  const months = W.months(WD_EXAMPLE.state, 2027).map((x, i) => `<tr><th scope="row">${mn(i)}</th><td>${x.days}</td><td>${x.weekend}</td><td>${x.holidays}</td><td>${x.workdays}</td></tr>`).join('\n');
+  const states = W.STATES.map(([k]) => { const a = W.count({ state: k, from: '2026-01-01', to: '2026-12-31' }), b = W.count({ state: k, from: '2027-01-01', to: '2027-12-31' }); return `<tr><th scope="row">${W.name(k, lang)}</th><td>${W.weekendDays(k)[0] === 5 ? (L ? 'Jumaat–Sabtu' : 'Fri–Sat') : (L ? 'Sabtu–Ahad' : 'Sat–Sun')}</td><td>${a.workdays}</td><td>${b.workdays}</td><td>${W.holidays(k, 2027).length}</td></tr>`; }).join('\n');
+  const opts = W.STATES.map(([k]) => `<option value="${k}"${k === WD_EXAMPLE.state ? ' selected' : ''}>${W.name(k, lang)}</option>`).join('');
+  const c = k => W.count({ state: k, from: '2027-01-01', to: '2027-12-31' }).workdays, nov = W.count({ state: 'selangor', from: '2026-11-01', to: '2026-11-30' }), dec = W.count({ state: 'selangor', from: '2026-12-01', to: '2026-12-31' });
+  return {
+    W_STATE_OPTIONS: opts, W_FROM: WD_EXAMPLE.from, W_TO: WD_EXAMPLE.to, W_START: WD_EXAMPLE.start, W_ADD: WD_EXAMPLE.add,
+    W_DAYS: nf(r.workdays, 0), W_SUB: L ? `daripada ${r.days} hari: ${r.weekend} hujung minggu, ${r.holidays} cuti umum` : `of ${r.days} days: ${r.weekend} weekend, ${r.holidays} public holidays`,
+    W_LINES: lines, W_DEADLINE: dead, W_HOL: hol, W_MONTHS: months, W_STATES: states, W_END: dl(d.date),
+    W_HOL_H: L ? `Cuti umum ${sn} 2027` : `Public holidays in ${sn} 2027`, W_MON_H: L ? `Hari bekerja sebulan, ${sn} 2027` : `Working days a month, ${sn} 2027`,
+    W_SEL27: c('selangor'), W_SEL26: W.count({ state: 'selangor', from: '2026-01-01', to: '2026-12-31' }).workdays, W_KL27: c('kl'), W_JOH27: c('johor'), W_KEL27: c('kelantan'), W_TRG27: c('terengganu'), W_KDH27: c('kedah'), W_PNG27: c('penang'), W_SBH27: c('sabah'), W_SWK27: c('sarawak'),
+    W_NOV26: nov.workdays, W_DEC26: dec.workdays, W_HOL27: W.holidays('selangor', 2027).length,
+    W_VERIFIED: longDate(W.FACTS.verified, lang), W_VERIFIED_ISO: W.FACTS.verified
+  };
+}
+const RT_EXAMPLE = { dob: '1990-05-15', sector: 'private', age: 60, start: '2015-01-01', salary: 4000 };
+function retireMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), loc = L ? 'ms-MY' : 'en-GB', R = retireCore;
+  const dl = iso => new Date(iso + 'T00:00:00Z').toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  const pl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`, ymd = x => L ? `${x.years} tahun ${x.months} bulan ${x.days} hari` : `${pl(x.years, 'year')} ${pl(x.months, 'month')} ${pl(x.days, 'day')}`;
+  const r = R.calculate(RT_EXAMPLE);
+  const ms = { 50: L ? 'KWSP umur 50 (keluar Akaun Sejahtera)' : 'EPF age 50 (Akaun Sejahtera withdrawal)', 55: L ? 'KWSP umur 55 (Akaun 55, keluar penuh)' : 'EPF age 55 (Akaun 55, full withdrawal)', 60: L ? 'KWSP umur 60 (Akaun Emas)' : 'EPF age 60 (Akaun Emas)', 75: L ? 'Umur 75 (caruman KWSP wajib tamat)' : 'Age 75 (mandatory EPF contributions end)' };
+  const lines = [tr(L ? 'Umur sekarang' : 'Age now', ymd(r.ageNow)), tr(L ? 'Umur bersara' : 'Retirement age', r.age), tr(L ? 'Tarikh bersara' : 'Retirement date', dl(r.date), 'total'), tr(L ? 'Masa lagi' : 'Time left', ymd(r.left)),
+    ...r.milestones.map(x => tr(ms[x.age], dl(x.date)))].join('\n');
+  const yr = [1966, 1970, 1975, 1980, 1985, 1990, 1995, 2000].map(y => `<tr><th scope="row">${y}</th><td>${y + 50}</td><td>${y + 55}</td><td>${y + 60}</td><td>${y + 75}</td></tr>`).join('\n');
+  const pen = [[120, 3000], [240, 4000], [300, 4000], [360, 5000], [420, 6000]].map(([mo, s]) => { const x = R.calculate({ dob: '1980-01-01', sector: 'gov', start: R.birthday([1980, 1, 1], 60 - mo / 12), salary: s }); return `<tr><th scope="row">${mo} (${mo / 12} ${L ? 'tahun' : 'years'})</th><td>${m(s)}</td><td>${nf(x.pensionPct, 1)}%</td><td>${m(x.pension)}</td><td>${m(x.gratuity)}</td></tr>`; }).join('\n');
+  const g = R.calculate({ dob: '1975-03-01', sector: 'gov', start: '2000-07-01', salary: 5000 }), o = R.calculate({ dob: '1980-01-10', sector: 'gov', age: 50, start: '2005-01-10', salary: 4000 });
+  return {
+    RT_DOB: RT_EXAMPLE.dob, RT_AGE: RT_EXAMPLE.age, RT_START: RT_EXAMPLE.start, RT_SALARY: RT_EXAMPLE.salary,
+    RT_SECTOR_OPTIONS: [opt('private', 'Private sector', 'Sektor swasta', true), opt('gov', 'Civil servant (pensionable)', 'Penjawat awam (berpencen)')].join(''),
+    RT_DATE: dl(r.date), RT_SUB: L ? `${ymd(r.left)} lagi · umur ${r.age}` : `${ymd(r.left)} to go · age ${r.age}`, RT_LEFT: ymd(r.left), RT_LINES: lines, RT_YEARS: yr, RT_PENSION: pen,
+    RT_G_MONTHS: g.service.totalMonths, RT_G_PENSION: m(g.pension), RT_G_GRAT: m(g.gratuity), RT_O_PENSION: m(o.pension), RT_O_GRAT: m(o.gratuity),
+    RT_TODAY: longDate(R.FACTS.verified, lang),
+    RT_VERIFIED: longDate(R.FACTS.verified, lang), RT_VERIFIED_ISO: R.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1571,6 +1688,11 @@ const bundles = {
   'rent-vs-buy.js': ['assets/js/loan-core.js', 'assets/js/rentbuy-core.js', 'assets/js/rentbuy-ui.js'],
   'fixed-deposit.js': ['assets/js/fd-core.js', 'assets/js/fd-ui.js'],
   'employer-cost.js': ['assets/js/salary-core.js', 'assets/js/employer-core.js', 'assets/js/employer-ui.js'],
+  'profit-margin.js': ['assets/js/margin-core.js', 'assets/js/margin-ui.js'],
+  'roas.js': ['assets/js/roas-core.js', 'assets/js/roas-ui.js'],
+  'freelance-rate.js': ['assets/js/salary-core.js', 'assets/js/freelance-core.js', 'assets/js/freelance-ui.js'],
+  'working-days.js': ['assets/js/workdays-core.js', 'assets/js/workdays-ui.js'],
+  'retirement-age.js': ['assets/js/retire-core.js', 'assets/js/retire-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

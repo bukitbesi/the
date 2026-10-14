@@ -1,0 +1,149 @@
+<!--page
+{
+  "path": "/kalkulator-umur-bersara/",
+  "lang": "ms",
+  "alternates": { "en": "/retirement-age-calculator-malaysia/" },
+  "title": "Kalkulator Umur Bersara: Tarikh Bersara, Umur KWSP dan Pencen",
+  "description": "Kira tarikh bersara anda pada umur 60, berapa lama lagi, umur KWSP 50, 55 dan 60, serta pencen bulanan dan ganjaran penjawat awam.",
+  "llms": "Mengira persaraan di Malaysia: umur persaraan minimum pekerja swasta ialah 60 tahun (Akta Umur Persaraan Minimum 2012) dan penjawat awam bersara wajib pada 60 tahun, dengan persaraan pilihan dari umur 40 selepas sekurang-kurangnya 10 tahun perkhidmatan. Tarikh bersara ialah hari lahir pada umur dipilih (lahir 15 Mei 1990 bersara pada 15 Mei 2050, 23 tahun 7 bulan 1 hari selepas 14 Oktober 2026). Umur KWSP: 50 (pengeluaran Akaun Sejahtera), 55 (Akaun 55, keluar penuh), 60 (Akaun Emas; KWSP majikan turun ke 4% dan pekerja 0%), caruman wajib hingga 75. Penjawat awam berpencen: pencen bulanan = 1/600 × bulan perkhidmatan (hingga 360) × gaji pokok akhir, maksimum 60%; ganjaran = 7.5% × bulan perkhidmatan × gaji pokok akhir; sekurang-kurangnya 10 tahun (120 bulan) perkhidmatan. Contoh: 416 bulan dengan gaji RM5,000 memberi RM3,000 sebulan dan ganjaran RM156,000. Jawatan tetap baharu perkhidmatan awam akan tidak berpencen dengan caruman KWSP (keputusan Kabinet, Januari 2024).",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "retire",
+  "scripts": ["/assets/js/retirement-age.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Umur Bersara", null]],
+  "about": ["Umur persaraan di Malaysia", "Akta Umur Persaraan Minimum 2012", "Umur pengeluaran KWSP", "Pencen penjawat awam"],
+  "app": {
+    "name": "Kalkulator Umur Bersara",
+    "category": "FinanceApplication",
+    "features": ["Tarikh bersara dan masa lagi", "Umur sekarang", "Umur KWSP 50, 55, 60 dan 75", "Sektor swasta dan perkhidmatan awam", "Persaraan pilihan dari umur 40", "Pencen dan ganjaran penjawat awam", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["JPA: Soalan lazim persaraan dan faedah persaraan", "https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf"],
+    ["Bahagian Pasca Perkhidmatan JPA: Skim pencen", "https://pencen.jpa.gov.my/skim-pencen.html?view=article&id=15%3Ainfo-skim-pencen-faedah-terbitan&catid=11"],
+    ["MyGovernment: Pengeluaran KWSP umur 50 tahun", "https://www.malaysia.gov.my/my/topics/pengeluaran-kwsp-umur-50-tahun"],
+    ["RTM: JPA kaji cadangan naik umur persaraan wajib 65 tahun", "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jpa-kaji-cadangan-naik-umur-persaraan-wajib-65-tahun"],
+    ["MD Marang: Overview skim pencen dan faedah persaraan", "https://mdmarang.gov.my/images/pdf/HR/1.%20Overview%20Skim%20Pencen%20dan%20Faedah%20Persaraan.pdf"]
+  ],
+  "faq": [
+    { "q": "Berapa umur bersara di Malaysia?", "a": "60 tahun. Akta Umur Persaraan Minimum 2012 melarang majikan swasta menamatkan pekerja atas sebab umur sebelum 60, dan penjawat awam bersara wajib pada 60. JPA sedang mengkaji kenaikan ke 65, tetapi belum ada perubahan." },
+    { "q": "Bila saya bersara jika lahir pada 15 Mei 1990?", "a": "Pada umur 60, iaitu {{RT_DATE}}. Dari {{RT_TODAY}}, itu {{RT_LEFT}} lagi. Masukkan tarikh lahir anda untuk tarikh anda sendiri." },
+    { "q": "Pada umur berapa boleh keluarkan KWSP?", "a": "Pada umur 50 anda boleh keluarkan daripada Akaun Sejahtera, pada 55 simpanan dipindahkan ke Akaun 55 dan boleh dikeluarkan sepenuhnya, dan mulai 60 simpanan baharu masuk ke Akaun Emas. Caruman kekal wajib semasa bekerja hingga umur 75." },
+    { "q": "Bagaimana pencen penjawat awam dikira?", "a": "Pencen bulanan = 1/600 × bulan perkhidmatan berpencen (hingga 360) × gaji pokok akhir, jadi maksimum 60%. 416 bulan dengan gaji akhir RM5,000 memberi {{RT_G_PENSION}} sebulan." },
+    { "q": "Berapa ganjaran persaraan?", "a": "Ganjaran = 7.5% × bulan perkhidmatan berpencen × gaji pokok akhir, dibayar sekali. 416 bulan dengan RM5,000 memberi {{RT_G_GRAT}}. Anda perlu sekurang-kurangnya 10 tahun perkhidmatan untuk pencen dan ganjaran." },
+    { "q": "Bolehkah penjawat awam bersara awal?", "a": "Ya, persaraan pilihan dibenarkan dari umur 40 dengan sekurang-kurangnya 10 tahun perkhidmatan. Bersara pada 50 selepas 300 bulan dengan gaji RM4,000 memberi pencen {{RT_O_PENSION}} sebulan dan ganjaran {{RT_O_GRAT}}." },
+    { "q": "Bolehkah majikan swasta paksa saya bersara sebelum 60?", "a": "Tidak atas sebab umur: Akta Umur Persaraan Minimum 2012 menetapkan 60 sebagai umur minimum. Anda boleh memilih bersara lebih awal, dan boleh terus bekerja selepas 60 jika majikan bersetuju." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator umur bersara</li></ol></nav>
+  <h1>Kalkulator Umur Bersara</h1>
+  <p class="answer">Umur bersara di Malaysia ialah <strong>60 tahun</strong> bagi pekerja swasta (Akta Umur Persaraan Minimum 2012) dan penjawat awam. Lahir pada 15 Mei 1990, anda bersara pada <strong>{{RT_DATE}}</strong>, {{RT_LEFT}} lagi dari {{RT_TODAY}}. Masukkan tarikh lahir anda untuk tarikh bersara, umur KWSP dan, bagi penjawat awam, pencen dan ganjaran.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{RT_VERIFIED_ISO}}">{{RT_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/retirement-age-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="retForm" novalidate aria-labelledby="rt-h">
+      <h2 id="rt-h">Maklumat anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="dob">Tarikh lahir</label><input class="input" id="dob" name="dob" type="date" min="1940-01-01" max="2010-12-31" value="{{RT_DOB}}"></div>
+        <div class="field"><label for="age">Umur bersara</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="40" max="75" step="1" value="{{RT_AGE}}"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field"><label for="sector">Sektor</label><select class="input" id="sector" name="sector">{{RT_SECTOR_OPTIONS}}</select></div>
+      <fieldset class="field-group" id="rtGov" hidden>
+        <legend>Pencen</legend>
+        <div class="field-row">
+          <div class="field"><label for="start">Tarikh lantikan</label><input class="input" id="start" name="start" type="date" min="1960-01-01" max="2030-12-31" value="{{RT_START}}"></div>
+          <div class="field"><label for="salary">Gaji pokok akhir</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="100" value="{{RT_SALARY}}"></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Penjawat awam: wajib pada 60, pilihan dari 40 dengan 10 tahun perkhidmatan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="rt-result-h">
+      <h2 id="rt-result-h">Persaraan anda</h2>
+      <div class="net">
+        <p>Tarikh bersara</p>
+        <output id="rtDate" for="dob age sector start salary">{{RT_DATE}}</output>
+        <p id="rtSub">{{RT_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rtLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Tarikh</caption>
+        <tbody id="rtLines">
+{{RT_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="rtEarly" hidden>Bawah 60: majikan swasta tidak boleh memaksa anda bersara lebih awal.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rtPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="years-h">Umur bersara dan KWSP ikut tahun lahir</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="years-h">
+    <table class="data">
+      <thead><tr><th scope="col">Lahir</th><th scope="col">Umur 50</th><th scope="col">Umur 55</th><th scope="col">Bersara 60</th><th scope="col">Umur 75</th></tr></thead>
+      <tbody>
+{{RT_YEARS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara ia dikira</h2>
+  <ol>
+    <li><strong>Tarikh bersara</strong> = hari lahir anda pada umur bersara (60 secara lalai).</li>
+    <li><strong>Masa lagi</strong> = tahun, bulan dan hari dari hari ini hingga tarikh itu.</li>
+    <li><strong>Umur KWSP</strong> = hari lahir pada umur 50, 55, 60 dan 75.</li>
+    <li><strong>Pencen</strong> = 1/600 × bulan perkhidmatan (hingga 360) × gaji pokok akhir, maksimum 60%.</li>
+    <li><strong>Ganjaran</strong> = 7.5% × bulan perkhidmatan × gaji pokok akhir.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="pen-h">Pencen dan ganjaran penjawat awam ikut tempoh perkhidmatan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pen-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bulan perkhidmatan</th><th scope="col">Gaji akhir</th><th scope="col">Kadar pencen</th><th scope="col">Pencen sebulan</th><th scope="col">Ganjaran</th></tr></thead>
+      <tbody>
+{{RT_PENSION}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Peraturan persaraan di Malaysia</h2>
+  <ul>
+    <li><strong>Sektor swasta:</strong> umur persaraan minimum 60 (Akta Umur Persaraan Minimum 2012); bekerja selepas 60 atas persetujuan.</li>
+    <li><strong>Perkhidmatan awam:</strong> bersara wajib pada 60; pilihan dari 40 dengan sekurang-kurangnya 10 tahun perkhidmatan. JPA sedang mengkaji umur 65.</li>
+    <li><strong>KWSP selepas 60:</strong> KWSP majikan 4%, pekerja 0% (sukarela); caruman wajib hingga 75.</li>
+    <li><strong>Penjawat awam baharu:</strong> Kabinet memutuskan pada Januari 2024 bahawa jawatan tetap baharu tidak berpencen, dengan caruman KWSP; pegawai sedia ada kekal berpencen.</li>
+    <li><strong>Gantian cuti rehat (GCR):</strong> sumber memberi had hari yang berbeza, jadi ia tidak dimasukkan; semak dengan pegawai sumber manusia atau JPA.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf" rel="noopener">JPA: Soalan lazim persaraan dan faedah persaraan</a></li>
+    <li><a href="https://pencen.jpa.gov.my/skim-pencen.html?view=article&amp;id=15%3Ainfo-skim-pencen-faedah-terbitan&amp;catid=11" rel="noopener">Bahagian Pasca Perkhidmatan JPA: Skim pencen</a></li>
+    <li><a href="https://www.malaysia.gov.my/my/topics/pengeluaran-kwsp-umur-50-tahun" rel="noopener">MyGovernment: Pengeluaran KWSP umur 50 tahun</a></li>
+    <li><a href="https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jpa-kaji-cadangan-naik-umur-persaraan-wajib-65-tahun" rel="noopener">RTM: JPA kaji umur persaraan 65 tahun</a></li>
+    <li><a href="https://mdmarang.gov.my/images/pdf/HR/1.%20Overview%20Skim%20Pencen%20dan%20Faedah%20Persaraan.pdf" rel="noopener">MD Marang: Overview skim pencen</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran. Pencen dan ganjaran ditetapkan JPA berdasarkan rekod perkhidmatan anda; semak pilihan pengeluaran KWSP dengan KWSP.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Simpanan pada umur 55 dan 60</small></a>
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+    <a href="/kalkulator-fixed-deposit/">Kalkulator Fixed Deposit<small>Faedah FD dan pulangan</small></a>
+  </div>
+</section>

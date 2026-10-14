@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/freelance-rate-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-caj-freelance/" },
+  "title": "Freelance Rate Calculator Malaysia 2026: Hourly and Day Rate",
+  "description": "Freelance rate calculator for Malaysia: the hourly and day rate you need to take home your target income after expenses, EPF i-Saraan and income tax.",
+  "llms": "Calculates the rate a freelancer in Malaysia must charge: yearly revenue = take-home target + business expenses + EPF savings (i-Saraan or voluntary, a % of profit) + optional SOCSO self-employment (SKSPS) + resident income tax (YA2026 rates, self relief RM9,000, EPF relief up to RM4,000, RM400 rebate if chargeable income is RM35,000 or less); hourly rate = revenue ÷ billable hours (hours a week × weeks worked). Example: RM5,000 a month take-home, RM500 a month expenses, 11% EPF, 30 billable hours a week and 6 weeks off: revenue RM75,961.54 a year (RM6,330.13 a month), tax RM2,265.77, EPF RM7,695.77, 1,380 billable hours, so charge RM55.04 an hour or RM440.36 a day. Freelance income is business income, declared on Form B by 30 June.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "freelance",
+  "scripts": ["/assets/js/freelance-rate.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Freelance Rate Calculator", null]],
+  "about": ["Freelancing", "Hourly rate", "Self-employed income tax", "EPF i-Saraan"],
+  "app": {
+    "name": "Freelance Rate Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Hourly and day rate", "Revenue needed for a take-home target", "Resident income tax YA2026", "EPF i-Saraan savings and tax relief", "Business expenses", "Billable hours and weeks off", "Works offline"]
+  },
+  "citations": [
+    ["PwC Malaysia: Personal income tax rates and reliefs", "https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html"],
+    ["KWSP: i-Saraan", "https://www.kwsp.gov.my/"],
+    ["PERKESO: Self-Employment Social Security Scheme", "https://www.perkeso.gov.my/"]
+  ],
+  "faq": [
+    { "q": "How much should I charge as a freelancer in Malaysia?", "a": "Work back from the take-home you need. For RM5,000 a month after RM500 of monthly expenses, 11% EPF and tax, at 30 billable hours a week with 6 weeks off, charge at least {{F_HOURLY}} an hour or {{F_DAILY}} a day, billing {{F_MONTHLY}} a month." },
+    { "q": "How many billable hours does a freelancer have?", "a": "Fewer than you think: admin, sales and unpaid revisions take time. 30 billable hours a week for 46 weeks is {{F_BILLABLE}} hours a year, against about 2,000 working hours for an employee." },
+    { "q": "How is freelance income taxed in Malaysia?", "a": "As business income at resident rates (0% to 30%), declared on Form B by 30 June. Deduct business expenses, then reliefs: RM9,000 for yourself and up to RM4,000 for EPF. In the example the tax is {{F_TAX}} a year; with chargeable income of RM35,000 or less a RM400 rebate applies." },
+    { "q": "Should freelancers contribute to EPF?", "a": "It is voluntary but worth it. Self-employed members can save through i-Saraan, and EPF savings give up to RM4,000 tax relief. The example sets aside 11% of profit, {{F_EPFV}} a year." },
+    { "q": "Do freelancers need SOCSO?", "a": "Self-employed workers in sectors covered by PERKESO's Self-Employment Social Security Scheme (SKSPS) must contribute; others may join. Enter your plan's monthly contribution in the calculator." },
+    { "q": "What expenses should I include?", "a": "Everything the business pays for: laptop and software, internet and phone, coworking, transport, accounting, insurance, and marketplace or payment fees. Spread one-off equipment over its useful life." },
+    { "q": "What is a lower target worth an hour?", "a": "RM3,000 a month take-home with RM300 expenses, no EPF and 25 billable hours a week over 48 weeks needs {{F_LOW_REVENUE}} a year, or {{F_LOW_HOURLY}} an hour. The rebate removes the tax at that income." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Freelance rate calculator</li></ol></nav>
+  <h1>Freelance Rate Calculator Malaysia</h1>
+  <p class="answer">To take home RM5,000 a month as a freelancer after RM500 of expenses, 11% EPF and income tax, charge at least <strong>{{F_HOURLY}} an hour</strong> ({{F_DAILY}} a day) at 30 billable hours a week with 6 weeks off. That is <strong>{{F_REVENUE}}</strong> of revenue a year, including {{F_TAX}} of tax. Enter your own numbers below.</p>
+  <p class="meta"><span>Tax rates verified <time datetime="{{F_VERIFIED_ISO}}">{{F_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-caj-freelance/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="flForm" novalidate aria-labelledby="fl-h">
+      <h2 id="fl-h">Your target</h2>
+      <div class="field-row">
+        <div class="field"><label for="target">Take-home a month</label><div class="input"><span aria-hidden="true">RM</span><input id="target" name="target" type="number" inputmode="decimal" min="0" step="100" value="{{F_TARGET}}"></div></div>
+        <div class="field"><label for="expenses">Expenses a month</label><div class="input"><span aria-hidden="true">RM</span><input id="expenses" name="expenses" type="number" inputmode="decimal" min="0" step="50" value="{{F_EXPENSES}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="hours">Billable hours a week</label><div class="input"><input id="hours" name="hours" type="number" inputmode="decimal" min="1" max="80" step="1" value="{{F_HOURS}}"><span aria-hidden="true">hours</span></div></div>
+        <div class="field"><label for="weeksOff">Weeks off a year</label><div class="input"><input id="weeksOff" name="weeksOff" type="number" inputmode="numeric" min="0" max="26" step="1" value="{{F_WEEKS}}"><span aria-hidden="true">weeks</span></div></div>
+      </div>
+      <p class="help">Weeks off: holidays, sick days and gaps between projects.</p>
+      <div class="field-row">
+        <div class="field"><label for="epf">EPF savings</label><div class="input"><input id="epf" name="epf" type="number" inputmode="decimal" min="0" max="50" step="1" value="{{F_EPF}}"><span aria-hidden="true">% of profit</span></div></div>
+        <div class="field"><label for="socso">SOCSO (SKSPS) a month</label><div class="input"><span aria-hidden="true">RM</span><input id="socso" name="socso" type="number" inputmode="decimal" min="0" step="1" value="0"></div></div>
+      </div>
+      <div class="field"><label for="relief">Other tax reliefs a year</label><div class="input"><span aria-hidden="true">RM</span><input id="relief" name="relief" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+    </form>
+
+    <section class="box" aria-labelledby="fl-result-h">
+      <h2 id="fl-result-h">Your rate</h2>
+      <div class="net">
+        <p>Minimum hourly rate</p>
+        <output id="fHourly" for="target expenses hours weeksOff epf socso relief">{{F_HOURLY}}</output>
+        <p id="fSub">{{F_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Revenue needed</caption>
+        <tbody id="fLines">
+{{F_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Tax at YA2026 resident rates with RM9,000 self relief and EPF relief up to RM4,000.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="flPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Freelance rate by take-home target</h2>
+  <p>RM500 a month of expenses, 11% EPF, 30 billable hours a week, 6 weeks off.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Take-home a month</th><th scope="col">Billing a month</th><th scope="col">Tax a year</th><th scope="col">Hourly rate</th><th scope="col">Day rate</th></tr></thead>
+      <tbody>
+{{F_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the rate is worked out</h2>
+  <ol>
+    <li><strong>Profit</strong> needed so that profit − EPF − SOCSO − tax = take-home × 12.</li>
+    <li><strong>Tax</strong> on chargeable income = profit − RM9,000 − EPF (up to RM4,000) − other reliefs, at resident rates, less the RM400 rebate up to RM35,000.</li>
+    <li><strong>Revenue</strong> = profit + business expenses × 12.</li>
+    <li><strong>Billable hours</strong> = hours a week × (52 − weeks off).</li>
+    <li><strong>Hourly rate</strong> = revenue ÷ billable hours; day rate = hourly × 8.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="hours-h">How billable hours change the rate (RM5,000 take-home)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="hours-h">
+    <table class="data">
+      <thead><tr><th scope="col">Hours a week</th><th scope="col">Hours a year</th><th scope="col">Hourly rate</th><th scope="col">Day rate</th></tr></thead>
+      <tbody>
+{{F_HOURS_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Tax and savings for freelancers</h2>
+  <ul>
+    <li><strong>Form B:</strong> freelance and other business income is declared on Form B by 30 June; keep receipts for expenses.</li>
+    <li><strong>EPF i-Saraan:</strong> voluntary savings for the self-employed; EPF relief is up to RM4,000 a year.</li>
+    <li><strong>SOCSO SKSPS:</strong> required for self-employed workers in covered sectors.</li>
+    <li><strong>Budget 2027:</strong> proposes RM12,000 self relief and lower rates from YA2027; compare them in the <a href="/income-tax-calculator-malaysia/">income tax calculator</a>.</li>
+    <li><strong>SST:</strong> only if your taxable services pass the registration threshold.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.pwc.com/my/en/publications/mtb/personal-income-tax.html" rel="noopener">PwC Malaysia: Personal income tax rates and reliefs</a></li>
+    <li><a href="https://www.kwsp.gov.my/" rel="noopener">KWSP: i-Saraan</a></li>
+    <li><a href="https://www.perkeso.gov.my/" rel="noopener">PERKESO: Self-Employment Social Security Scheme</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for pricing. Your tax depends on your reliefs and allowable expenses; check with LHDN or a tax agent.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Tax with every relief</small></a>
+    <a href="/profit-margin-calculator-malaysia/">Profit Margin Calculator<small>Margin, markup and selling price</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Retirement savings projection</small></a>
+  </div>
+</section>

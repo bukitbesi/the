@@ -1,0 +1,140 @@
+<!--page
+{
+  "path": "/roas-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-roas/" },
+  "title": "ROAS Calculator Malaysia: ROAS, ROI and Break-even ROAS",
+  "description": "ROAS calculator for Facebook, TikTok, Google and Shopee ads in Malaysia: return on ad spend, ROI, break-even ROAS, CPA and the 8% service tax on ad spend.",
+  "llms": "Calculates return on ad spend (ROAS) for online ads in Malaysia: ROAS = sales from ads ÷ ad spend; profit after ads = sales × gross margin − ad spend; ROI = profit ÷ ad spend; break-even ROAS = 1 ÷ gross margin (a 40% margin needs 2.5×, 25% needs 4×, 50% needs 2×); ACoS = ad spend ÷ sales; CPA = ad spend ÷ orders; break-even CPA = average order value × margin. Example: RM1,000 ad spend, RM4,000 sales and a 40% margin give ROAS 4.00×, RM600 profit and 60% ROI; with 50 orders CPA is RM20 against a break-even CPA of RM32. If the invoice adds Malaysia's 8% service tax on imported digital services (from 1 March 2024), spend becomes RM1,080, ROAS 3.70× and profit RM520.",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "render": "roas",
+  "scripts": ["/assets/js/roas.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["ROAS Calculator", null]],
+  "about": ["Return on ad spend", "ROI", "Digital advertising", "Cost per acquisition"],
+  "app": {
+    "name": "ROAS Calculator",
+    "category": "BusinessApplication",
+    "features": ["ROAS and ROI", "Break-even ROAS from your margin", "Profit after ads", "CPA, average order value and break-even CPA", "ACoS", "Optional 8% service tax on ad spend", "Works offline"]
+  },
+  "citations": [
+    ["Google Ads Help: About Target ROAS bidding", "https://support.google.com/google-ads/answer/6268637"],
+    ["Fonoa: Malaysia increases SST rate as of 1 March 2024", "https://fonoa.com/blog/malaysia-increases-sst-rate-as-of-1-march-2024"],
+    ["RMCD: MySST portal", "https://mysst.customs.gov.my/"]
+  ],
+  "faq": [
+    { "q": "How do I calculate ROAS?", "a": "ROAS = sales from ads ÷ ad spend. RM4,000 of sales from RM1,000 of ads is a ROAS of {{R_ROAS}}, meaning RM4 of sales for every RM1 spent." },
+    { "q": "What is a good ROAS?", "a": "Any ROAS above your break-even ROAS makes money. Break-even ROAS = 1 ÷ gross margin: a 40% margin needs {{R_BE}}, a 25% margin 4.00× and a 50% margin 2.00×. A ROAS of 4 is profitable at a 40% margin but loses money at a 20% margin (break-even 5.00×)." },
+    { "q": "What is the difference between ROAS and ROI?", "a": "ROAS compares sales with ad spend; ROI compares profit with ad spend. RM4,000 sales, a 40% margin and RM1,000 of ads give ROAS {{R_ROAS}} but ROI {{R_ROI}}% ({{R_PROFIT}} profit)." },
+    { "q": "Is there tax on Facebook, TikTok or Google ads in Malaysia?", "a": "Since 1 March 2024 Malaysia charges 8% service tax on imported digital services, which include online ads bought from foreign platforms. If your invoice shows it, add it to the spend: RM1,000 becomes RM1,080, and the example ROAS falls to {{R_TAX_ROAS}} with {{R_TAX_PROFIT}} profit." },
+    { "q": "What is break-even CPA?", "a": "The most you can pay for one order without a loss: average order value × gross margin. With RM80 orders and a 40% margin it is {{R_MAXCPA}}; the example's CPA of {{R_CPA}} leaves room to spend more." },
+    { "q": "What is ACoS?", "a": "Advertising cost of sales, used on Shopee, Lazada and Amazon: ad spend ÷ sales. It is the inverse of ROAS, so ROAS 4.00× equals 25% ACoS. Stay below your gross margin to keep a profit." },
+    { "q": "Which sales should I count in ROAS?", "a": "Use sales attributed to the ads in the same period, after cancellations and returns where possible. Platform-reported ROAS depends on the attribution window, so compare it with your own order records." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">ROAS calculator</li></ol></nav>
+  <h1>ROAS Calculator</h1>
+  <p class="answer">ROAS = sales from ads ÷ ad spend. RM4,000 of sales from RM1,000 of ads is a ROAS of <strong>{{R_ROAS}}</strong>; with a 40% gross margin that is <strong>{{R_PROFIT}}</strong> profit and {{R_ROI}}% ROI. Your break-even ROAS is 1 ÷ margin, {{R_BE}} at 40%. Enter your ad numbers below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-roas/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="roasForm" novalidate aria-labelledby="ro-h">
+      <h2 id="ro-h">Your campaign</h2>
+      <div class="field-row">
+        <div class="field"><label for="spend">Ad spend</label><div class="input"><span aria-hidden="true">RM</span><input id="spend" name="spend" type="number" inputmode="decimal" min="0" step="50" value="{{R_SPEND}}"></div></div>
+        <div class="field"><label for="revenue">Sales from ads</label><div class="input"><span aria-hidden="true">RM</span><input id="revenue" name="revenue" type="number" inputmode="decimal" min="0" step="100" value="{{R_REVENUE}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="margin">Gross margin</label><div class="input"><input id="margin" name="margin" type="number" inputmode="decimal" min="0" max="100" step="1" value="{{R_MARGIN}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="orders">Orders</label><div class="input"><input id="orders" name="orders" type="number" inputmode="numeric" min="0" step="1" value="{{R_ORDERS}}"></div></div>
+      </div>
+      <p class="help">Gross margin = (price − product cost − platform fees) ÷ price, before ads.</p>
+      <div class="field"><label for="tax">8% service tax on ads</label><select class="input" id="tax" name="tax">{{R_TAX_OPTIONS}}</select></div>
+    </form>
+
+    <section class="box" aria-labelledby="ro-result-h">
+      <h2 id="ro-result-h">Your return</h2>
+      <div class="net">
+        <p>ROAS</p>
+        <output id="rRoas" for="spend revenue margin orders tax">{{R_ROAS}}</output>
+        <p id="rSub">{{R_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="rLines">
+{{R_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="rLoss" hidden>Below break-even: these ads lose money. Raise the ROAS above the break-even ROAS or improve the margin.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="roasPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="be-h">Break-even ROAS by gross margin</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="be-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gross margin</th><th scope="col">Break-even ROAS</th><th scope="col">Maximum ACoS</th></tr></thead>
+      <tbody>
+{{R_BETABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How ROAS and ROI are worked out</h2>
+  <ol>
+    <li><strong>Ad spend</strong> = amount billed, plus 8% service tax if your invoice adds it.</li>
+    <li><strong>ROAS</strong> = sales from ads ÷ ad spend.</li>
+    <li><strong>Profit after ads</strong> = sales × gross margin − ad spend; <strong>ROI</strong> = profit ÷ ad spend.</li>
+    <li><strong>Break-even ROAS</strong> = 1 ÷ gross margin; <strong>ACoS</strong> = ad spend ÷ sales.</li>
+    <li><strong>CPA</strong> = ad spend ÷ orders; <strong>break-even CPA</strong> = average order value × gross margin.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grid-h">Profit on RM1,000 of ads by ROAS and margin</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">ROAS</th><th scope="col">20% margin</th><th scope="col">30% margin</th><th scope="col">40% margin</th><th scope="col">50% margin</th></tr></thead>
+      <tbody>
+{{R_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="tax-h">Service tax on online ads in Malaysia</h2>
+  <ul>
+    <li><strong>Rate:</strong> 8% service tax on imported digital services from 1 March 2024 (6% before).</li>
+    <li><strong>Who charges it:</strong> registered foreign digital service providers charge it on their invoices; check whether your Meta, TikTok or Google invoice shows it.</li>
+    <li><strong>Count it as spend:</strong> unless your business can recover it, the tax is part of the ad cost.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://support.google.com/google-ads/answer/6268637" rel="noopener">Google Ads Help: About Target ROAS bidding</a></li>
+    <li><a href="https://fonoa.com/blog/malaysia-increases-sst-rate-as-of-1-march-2024" rel="noopener">Fonoa: Malaysia increases SST rate as of 1 March 2024</a></li>
+    <li><a href="https://mysst.customs.gov.my/" rel="noopener">RMCD: MySST portal</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate. Attribution windows, returns and fees change real results; check how your platform invoices tax.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/profit-margin-calculator-malaysia/">Profit Margin Calculator<small>Margin, markup and selling price</small></a>
+    <a href="/freelance-rate-calculator-malaysia/">Freelance Rate Calculator<small>Hourly rate after tax and EPF</small></a>
+    <a href="/ai-prompt-generator/">AI Prompt Generator<small>Prompts for ad images</small></a>
+  </div>
+</section>

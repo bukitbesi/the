@@ -531,6 +531,51 @@
     "live": true
   },
   {
+    "name": "Kalkulator Margin Untung (Profit Margin)",
+    "desc": "Profit per unit after marketplace fees, shipping and ads, margin vs markup, break-even price and the price for a target margin. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-margin-untung/",
+    "cat": "calc",
+    "icon": "kalkulator-margin-untung",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator ROAS (ROAS Calculator)",
+    "desc": "Return on ad spend, ROI, break-even ROAS from your margin, CPA, ACoS and the 8% service tax on ad spend. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-roas/",
+    "cat": "calc",
+    "icon": "kalkulator-roas",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Caj Freelance (Freelance Rate)",
+    "desc": "The hourly and day rate a freelancer needs to take home a target income after expenses, EPF i-Saraan and income tax. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-caj-freelance/",
+    "cat": "calc",
+    "icon": "kalkulator-caj-freelance",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Hari Bekerja (Working Days)",
+    "desc": "Working days between two dates in every state for 2026 and 2027, minus weekends, public holidays and leave, plus deadline dates. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-hari-bekerja/",
+    "cat": "calc",
+    "icon": "kalkulator-hari-bekerja",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Umur Bersara (Retirement Age)",
+    "desc": "Retirement date at 60, time left, EPF ages 50, 55, 60 and 75, and a civil servant's pension and gratuity. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-umur-bersara/",
+    "cat": "calc",
+    "icon": "kalkulator-umur-bersara",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
