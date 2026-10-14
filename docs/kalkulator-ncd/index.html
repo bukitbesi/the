@@ -206,6 +206,8 @@ ins.adsbygoogle[data-ad-status=unfilled],.google-auto-placed:has(ins[data-ad-sta
 .field{margin-bottom:16px}
 .field>label,.field legend{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px}
 .help{font-size:.8rem;color:var(--text3);margin-top:4px}
+/* A hint under a whole row of fields keeps clear of the next label. */
+.field-row+.help{margin:-10px 0 16px}
 .input{display:flex;align-items:center;border:1px solid var(--border2);border-radius:12px;background:var(--bg);min-height:48px;padding:0 12px}
 .input:focus-within{border-color:var(--accent2);box-shadow:0 0 0 3px var(--tint-b)}
 .input span{color:var(--text3);font-weight:600;margin-right:8px}
@@ -232,6 +234,8 @@ fieldset{border:0;min-width:0}
 .rows td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .rows tr.total th,.rows tr.total td{font-weight:800;border-bottom:0}
 .rows small{display:block;color:var(--text3);font-size:.78rem;font-weight:400}
+/* Text-heavy result tables let values wrap on narrow phones instead of overflowing the box. */
+.rows.wrap td{white-space:normal;overflow-wrap:anywhere}
 .note{font-size:.82rem;color:var(--text3);margin-top:12px}
 .tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 
@@ -420,7 +424,9 @@ select.input{max-width:100%;text-overflow:ellipsis}
 .field-group legend{font-weight:700;font-size:.95rem;padding:0;margin-bottom:10px;float:left;width:100%}
 .field-group legend+*{clear:both}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.field-row .field{min-width:0}
+.field-row .field{min-width:0;display:flex;flex-direction:column}
+/* A label that wraps to two lines pushes its input down; the shorter label grows so both inputs line up. */
+.field-row .field>label{flex:1 0 auto;display:flex;align-items:flex-end}
 .field-row-3{grid-template-columns:1fr 1fr 1fr}
 /* BMI gauge: segments on a 15–40 scale (Malaysian CPG cut-offs); colours are decorative, the category is in text. */
 .gauge{position:relative;display:flex;height:12px;margin:16px 0 22px;border-radius:99px;overflow:visible}
@@ -501,7 +507,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
     <form class="box" id="ncdForm" novalidate aria-labelledby="ncd-h">
       <h2 id="ncd-h">Polisi anda</h2>
       <div class="field-row">
-        <div class="field"><label for="type">Kenderaan</label><select class="input" id="type" name="type"><option value="car" selected>Kereta persendirian</option><option value="motorcycle">Motosikal</option><option value="commercial">Kenderaan perdagangan</option></select></div>
+        <div class="field"><label for="type">Kenderaan</label><select class="input" id="type" name="type"><option value="car" selected>Kereta</option><option value="motorcycle">Motosikal</option><option value="commercial">Komersial</option></select></div>
         <div class="field"><label for="years">Tahun tanpa tuntutan</label><select class="input" id="years" name="years"><option value="0">0 tahun</option><option value="1">1 tahun</option><option value="2">2 tahun</option><option value="3">3 tahun</option><option value="4">4 tahun</option><option value="5" selected>5+ tahun</option></select></div>
       </div>
       <div class="field"><label for="basis">Premium</label><select class="input" id="basis" name="basis"><option value="gross" selected>Saya tahu premium sebelum NCD</option><option value="estimate">Anggar dari nilai dilindungi dan cc</option></select></div>
@@ -539,13 +545,13 @@ select.input{max-width:100%;text-overflow:ellipsis}
       <p class="callout" id="nAdvice">Bayar sendiri: kos baiki RM 2,000.00 lebih rendah daripada RM 2,952.07 premium tambahan akibat kehilangan NCD.</p>
       <table class="rows">
         <caption>Kos satu tuntutan (premium tambahan)</caption>
-        <thead><tr><th scope="col">Tahun</th><th scope="col">Tanpa tuntutan</th><th scope="col">Selepas tuntutan</th><th scope="col">Tambahan</th></tr></thead>
+        <thead><tr><th scope="col">Tahun</th><th scope="col">Tiada tuntutan</th><th scope="col">Jika tuntut</th><th scope="col">Lebih bayar</th></tr></thead>
         <tbody id="nClaim">
-<tr><th scope="row">Pembaharuan ke-1</th><td>55%</td><td>0%</td><td>RM 1,188.00</td></tr>
-<tr><th scope="row">Pembaharuan ke-2</th><td>55%</td><td>25%</td><td>RM 648.00</td></tr>
-<tr><th scope="row">Pembaharuan ke-3</th><td>55%</td><td>30%</td><td>RM 540.00</td></tr>
-<tr><th scope="row">Pembaharuan ke-4</th><td>55%</td><td>38.33%</td><td>RM 360.07</td></tr>
-<tr><th scope="row">Pembaharuan ke-5</th><td>55%</td><td>45%</td><td>RM 216.00</td></tr>
+<tr><th scope="row">1</th><td>55%</td><td>0%</td><td>RM 1,188.00</td></tr>
+<tr><th scope="row">2</th><td>55%</td><td>25%</td><td>RM 648.00</td></tr>
+<tr><th scope="row">3</th><td>55%</td><td>30%</td><td>RM 540.00</td></tr>
+<tr><th scope="row">4</th><td>55%</td><td>38.33%</td><td>RM 360.07</td></tr>
+<tr><th scope="row">5</th><td>55%</td><td>45%</td><td>RM 216.00</td></tr>
         </tbody>
         <tfoot><tr class="total"><th scope="row" colspan="3">Jumlah</th><td id="nClaimTotal">RM 2,952.07</td></tr></tfoot>
       </table>

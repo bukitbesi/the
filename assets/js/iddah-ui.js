@@ -17,7 +17,7 @@
     live: function (r) { return r.end ? 'Iddah tamat ' + H.formatGregorian(r.end, 'ms') + '.' : 'Iddah: ' + T.kind[r.kind] + '.'; }
   } : {
     kind: { none: 'No iddah', quru: 'Three periods of purity (quru\')', months: 'Three Hijri months', wafat: 'Four months and ten days', pregnant: 'Until delivery' },
-    type: 'Type of iddah', start: 'Starts', end: 'Ends', days: 'Length', rujuk: 'Reconciliation (rujuk) possible until', ihdad: 'Ihdad (mourning)', yes: 'Required for the whole iddah', no: 'Not required',
+    type: 'Type of iddah', start: 'Starts', end: 'Ends', days: 'Length', rujuk: 'Rujuk possible until', ihdad: 'Ihdad (mourning)', yes: 'Required for the whole iddah', no: 'Not required',
     period: function (i) { return 'Period ' + (i + 1) + ' after the talak'; }, dayN: function (n) { return n + (n === 1 ? ' day' : ' days'); },
     none: 'No iddah: divorce before consummation.', due: 'On the day of delivery', quru: 'When the third period after the talak begins',
     min: function (n) { return 'At least ' + n + ' days. Enter your last period to estimate the date.'; },

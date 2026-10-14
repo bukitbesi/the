@@ -12,14 +12,14 @@
   var f = function (n) { return form.elements[n]; };
   var T = ms ? {
     gross: 'Premium kasar (sebelum NCD)', ncd: 'Diskaun NCD', net: 'Premium selepas NCD', sst: 'SST 8%', stamp: 'Duti setem', total: 'Jumlah dibayar',
-    years: function (y) { return y >= 5 ? '5 tahun atau lebih' : y + ' tahun'; }, renewal: function (k) { return 'Pembaharuan ke-' + k; },
+    years: function (y) { return y >= 5 ? '5 tahun atau lebih' : y + ' tahun'; }, renewal: function (k) { return String(k); },
     sub: function (r) { return 'Anda jimat ' + money(r.premium.discount) + ' · NCD tahun depan ' + pct(r.next) + ' jika tiada tuntutan'; },
     pay: function (r) { return 'Bayar sendiri: kos baiki ' + money(r.repair) + ' lebih rendah daripada ' + money(r.claim.total) + ' premium tambahan akibat kehilangan NCD.'; },
     claim: function (r) { return 'Tuntut insurans: kos baiki ' + money(r.repair) + ' melebihi ' + money(r.claim.total) + ' premium tambahan akibat kehilangan NCD.'; },
     live: function (r) { return 'NCD ' + pct(r.ncd) + ', premium ' + money(r.premium.total) + '.'; }
   } : {
     gross: 'Gross premium (before NCD)', ncd: 'NCD discount', net: 'Premium after NCD', sst: 'SST 8%', stamp: 'Stamp duty', total: 'Total to pay',
-    years: function (y) { return y >= 5 ? '5 years or more' : y + (y === 1 ? ' year' : ' years'); }, renewal: function (k) { return 'Renewal ' + k; },
+    years: function (y) { return y >= 5 ? '5 years or more' : y + (y === 1 ? ' year' : ' years'); }, renewal: function (k) { return String(k); },
     sub: function (r) { return 'You save ' + money(r.premium.discount) + ' · next year ' + pct(r.next) + ' if you make no claim'; },
     pay: function (r) { return 'Pay it yourself: the ' + money(r.repair) + ' repair costs less than the ' + money(r.claim.total) + ' extra premium from losing your NCD.'; },
     claim: function (r) { return 'Claim: the ' + money(r.repair) + ' repair costs more than the ' + money(r.claim.total) + ' extra premium from losing your NCD.'; },
