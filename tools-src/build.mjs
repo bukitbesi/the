@@ -64,6 +64,7 @@ const sstCore = require('../assets/js/sst-core.js');
 const bursaCore = require('../assets/js/bursa-core.js');
 const tenancyCore = require('../assets/js/tenancy-core.js');
 const eisCore = require('../assets/js/eis-core.js');
+const maskahwinCore = require('../assets/js/maskahwin-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1796,10 +1797,62 @@ function eisMap(lang) {
     E_VERIFIED: longDate(E.FACTS.verified, lang), E_VERIFIED_ISO: E.FACTS.verified
   };
 }
+// ---- batch 7: mas kahwin by state, in gold and dinar, wedding cost planner. Gold is today's price (daily rebuild).
+const MK_EXAMPLE = { state: 'selangor', bride: 'dara', kind: 'cash', qty: 300, paid: 'tunai', hantaran: 10000, gifts: 3000, guests: 500, perHead: 15, other: 8000, fees: '', months: 12 };
+const MK_ORDER = ['johor', 'kedah', 'kelantan', 'melaka', 'ns', 'pahang', 'penang', 'perak', 'perlis', 'sabah', 'sarawak', 'selangor', 'terengganu', 'wp'];
+const MK_NOTES = {
+  johor: ['The often-quoted figure dates from 1935; sources dispute whether it is a minimum or a ceiling. Not confirmed by the state office.', 'Angka yang sering dipetik bermula 1935; sumber berbeza sama ada ia minimum atau had maksimum. Belum disahkan pejabat negeri.'],
+  kedah: ['The enactment only requires the agreed value to be recorded. Published rates conflict.', 'Enakmen hanya mewajibkan nilai dipersetujui dicatat. Kadar yang diterbitkan bercanggah.'],
+  kelantan: ['The 2002 enactment sets no minimum (academic source). Not confirmed by the state office.', 'Enakmen 2002 tidak menetapkan minimum (sumber akademik). Belum disahkan pejabat negeri.'],
+  melaka: ['Minimum, raised from RM40 by MAIM.', 'Minimum, dinaikkan daripada RM40 oleh MAIM.'],
+  ns: ['Rates on the JHEAINS marriage application form; effective date not published.', 'Kadar dalam borang permohonan perkahwinan JHEAINS; tarikh kuat kuasa tidak diterbitkan.'],
+  pahang: ['Minimum, raised from RM22.50 (used since 1900) with the Sultan\'s consent; the ceiling depends on the couple\'s means.', 'Minimum, dinaikkan daripada RM22.50 (sejak 1900) dengan perkenan Sultan; had atas ikut kemampuan pasangan.'],
+  penang: ['Published figures conflict; the Penang Mufti says Islam sets no minimum or maximum.', 'Angka yang diterbitkan bercanggah; Mufti Pulau Pinang menyatakan Islam tidak menetapkan minimum atau maksimum.'],
+  perak: ['Published figures conflict; no official source found.', 'Angka yang diterbitkan bercanggah; tiada sumber rasmi ditemui.'],
+  perlis: ['Fatwa (2014): syarak sets no minimum or maximum; hantaran and kenduri are not obligatory.', 'Fatwa (2014): syarak tidak menetapkan minimum atau maksimum; hantaran dan kenduri tidak wajib.'],
+  sabah: ['Published figures conflict; the 2004 enactment requires the value to be recorded.', 'Angka yang diterbitkan bercanggah; Enakmen 2004 mewajibkan nilai dicatat.'],
+  sarawak: ['Published figures conflict; no official source found.', 'Angka yang diterbitkan bercanggah; tiada sumber rasmi ditemui.'],
+  selangor: ['Minimum, no maximum, for anak dara and janda; cash wang hantaran from the groom counts as mas kahwin.', 'Minimum tanpa had maksimum, untuk anak dara dan janda; wang hantaran tunai daripada lelaki dikira mas kahwin.'],
+  terengganu: ['No fixed rate: agreed between the two families\' wali (JHEAT, March 2024).', 'Tiada kadar tetap: dipersetujui wali kedua-dua keluarga (JHEAT, Mac 2024).'],
+  wp: ['Minimum for Kuala Lumpur, Putrajaya and Labuan; no separate janda rate published.', 'Minimum bagi Kuala Lumpur, Putrajaya dan Labuan; tiada kadar janda berasingan diterbitkan.']
+};
+const mkGram = () => { const p = goldCore.pureGram(goldData); return p ? Math.round(p.rm * 100) / 100 : 0; };
+function maskahwinMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), M = maskahwinCore, F = M.FACTS, gram = mkGram(), r = M.calculate({ ...MK_EXAMPLE, gram });
+  const head = { min: L ? 'Mas kahwin minimum' : 'Minimum mas kahwin', rate: L ? 'Kadar mas kahwin' : 'Mas kahwin rate', none: L ? 'Tiada kadar negeri' : 'No state rate', unconfirmed: L ? 'Belum disahkan secara rasmi' : 'Not officially confirmed' };
+  const fees = { officiant: L ? 'Jurunikah' : 'Officiant (jurunikah)', registration: L ? 'Pendaftaran' : 'Registration', witnesses: L ? 'Dua saksi' : 'Two witnesses', cards: L ? 'Kad nikah' : 'Nikah cards' };
+  const status = s => s.status === 'none' ? (L ? 'Tiada kadar' : 'No rate') : s.status === 'unconfirmed' ? (L ? 'Belum disahkan' : 'Not confirmed') : null;
+  const states = MK_ORDER.map(k => {
+    const s = F.states[k], a = M.rate(k, 'dara'), b = M.rate(k, 'janda'), st = status(s);
+    const since = s.since ? (s.announced ? (L ? 'Diumumkan ' : 'Announced ') : '') + longDate(s.since, lang) : '–';
+    const g = a.amount && gram ? nf(M.inGold(a.amount, gram).g999, 3) + ' g' : '–';
+    return `<tr><th scope="row">${s.name}</th><td>${st || m(a.amount)}</td><td>${st || m(b.amount)}</td><td>${since}</td><td>${g}</td><td>${MK_NOTES[k][L]}</td></tr>`;
+  }).join('\n');
+  const feeRows = ['selangor', 'wp', 'penang'].map(k => { const s = F.states[k]; return `<tr><th scope="row">${s.name}</th><td>${s.fees.map(([f, v]) => `${fees[f]} ${m(v)}`).join(', ')}</td><td>${m(M.rate(k).feeTotal)}</td></tr>`; }).join('\n');
+  const goldRows = [100, 200, 300, 500, 1000, 3000].map(a => { const g = M.inGold(a, gram); return `<tr><th scope="row">${m(a)}</th><td>${nf(g.g999, 3)} g</td><td>${nf(g.g916, 3)} g</td><td>${nf(g.dinar, 3)}</td></tr>`; }).join('\n');
+  const planLabel = { mahar: L ? 'Mas kahwin' : 'Mas kahwin', hantaran: 'Wang hantaran', gifts: L ? 'Cincin dan barang hantaran' : 'Rings and hantaran gifts', other: L ? 'Pelamin, pakaian, foto dan lain-lain' : 'Dais, attire, photos and other', fees: (L ? 'Fi nikah dan pendaftaran' : 'Nikah and registration fees') + (L ? ' (kadar rasmi negeri)' : ' (official state rate)') };
+  const plan = r.plan.map(([k, v]) => tr(k === 'catering' ? (L ? `Kenduri (${nf(r.guests, 0)} tetamu)` : `Reception (${nf(r.guests, 0)} guests)`) : planLabel[k], m(v)))
+    .concat([tr(L ? 'Jumlah kos perkahwinan' : 'Total wedding cost', m(r.total), 'total'), tr(L ? `Simpan sebulan (${r.months} bulan)` : `Save a month (${r.months} months)`, m(r.monthly))]).join('\n');
+  const lines = [tr(L ? 'Mas kahwin anda' : 'Your mas kahwin', m(r.mahar)), tr(L ? 'Semakan' : 'Check', L ? 'Memenuhi kadar negeri' : 'Meets the state rate', 'total'), tr(L ? 'Cara bayar' : 'Payment', L ? 'Dibayar tunai' : 'Paid in cash'),
+    tr(L ? 'Dalam emas 999' : 'In 999 gold', nf(r.gold.g999, 3) + ' g'), tr(L ? 'Dalam emas 916' : 'In 916 gold', nf(r.gold.g916, 3) + ' g'), tr(L ? 'Dalam dinar emas (4.25 g, 917)' : 'In gold dinars (4.25 g, 917)', nf(r.gold.dinar, 3))].join('\n');
+  const stateOpts = MK_ORDER.map(k => opt(k, F.states[k].name, F.states[k].name, k === 'selangor')).join('');
+  const g300 = M.inGold(300, gram), g100 = M.inGold(100, gram);
+  return {
+    MK_GRAM: gram, MK_GRAM_TXT: m(gram), MK_GOLD_DATE: longDate(goldDate, lang), MK_GOLD_ISO: goldDate,
+    MK_STATE_OPTIONS: stateOpts, MK_BRIDE_OPTIONS: [opt('dara', 'Anak dara (never married)', 'Anak dara', true), opt('janda', 'Janda (previously married)', 'Janda')].join(''),
+    MK_KIND_OPTIONS: [opt('cash', 'Cash (RM)', 'Tunai (RM)', true), opt('gold999', 'Gold 999, grams', 'Emas 999, gram'), opt('gold916', 'Gold 916, grams', 'Emas 916, gram'), opt('dinar', 'Gold dinar, coins', 'Dinar emas, keping')].join(''),
+    MK_PAID_OPTIONS: [opt('tunai', 'Cash, at the akad', 'Tunai, semasa akad', true), opt('hutang', 'Deferred (hutang)', 'Hutang (ditangguh)')].join(''),
+    MK_QTY: MK_EXAMPLE.qty, MK_HANTARAN: MK_EXAMPLE.hantaran, MK_GIFTS: MK_EXAMPLE.gifts, MK_GUESTS: MK_EXAMPLE.guests, MK_PERHEAD: MK_EXAMPLE.perHead, MK_OTHER: MK_EXAMPLE.other, MK_MONTHS: MK_EXAMPLE.months,
+    MK_HEAD: head[r.status], MK_RATE: m(r.amount), MK_SUB: L ? `Selangor · berkuat kuasa ${longDate('2010-01-01', lang)} · dahulu ${m(80)}` : `Selangor · in force ${longDate('2010-01-01', lang)} · was ${m(80)}`,
+    MK_LINES: lines, MK_PLAN: plan, MK_TOTAL: m(r.total), MK_MONTHLY: m(r.monthly), MK_STATES: states, MK_FEES: feeRows, MK_GOLDTABLE: goldRows,
+    MK_DINAR_RM: m(g300.dinarRm), MK_300_G: nf(g300.g999, 3), MK_300_916: nf(g300.g916, 3), MK_300_DINAR: nf(g300.dinar, 3), MK_100_G: nf(g100.g999, 3),
+    MK_VERIFIED: longDate(F.verified, lang), MK_VERIFIED_ISO: F.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1850,6 +1903,8 @@ const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
   // The gold price pages change every day with the price.
   if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
+  // The mas kahwin pages quote today's gold value.
+  if (p.render === 'maskahwin' && goldDate > p.dateModified) p.dateModified = goldDate;
   // The fuel pages change every week with the prices.
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
@@ -1961,6 +2016,7 @@ const bundles = {
   'bursa-fees.js': ['assets/js/bursa-core.js', 'assets/js/bursa-ui.js'],
   'tenancy-stamp-duty.js': ['assets/js/tenancy-core.js', 'assets/js/tenancy-ui.js'],
   'eis.js': ['assets/js/eis-core.js', 'assets/js/eis-ui.js'],
+  'maskahwin.js': ['assets/js/maskahwin-core.js', 'assets/js/maskahwin-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

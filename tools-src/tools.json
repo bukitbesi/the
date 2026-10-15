@@ -693,6 +693,15 @@
     "live": true
   },
   {
+    "name": "Kalkulator Mas Kahwin (Mas Kahwin Malaysia)",
+    "desc": "Mas kahwin rates by state with verification status, the value in 999 and 916 gold and gold dinars at today's price, and a wedding cost planner. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-mas-kahwin/",
+    "cat": "calc",
+    "icon": "kalkulator-mas-kahwin",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
