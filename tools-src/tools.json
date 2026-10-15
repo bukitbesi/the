@@ -738,6 +738,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator Umur (Age Calculator)",
+    "desc": "Exact age in years, months and days, Hijri age on Malaysia's takwim, next birthday and Malaysia's official ages from MyKad to retirement. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-umur/",
+    "cat": "calc",
+    "icon": "kalkulator-umur",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Tarikh Bersalin (Due Date Calculator)",
+    "desc": "Due date from the last period, pregnancy week and trimester, and the 98-day maternity and 7-day paternity leave dates in Malaysia. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-tarikh-bersalin/",
+    "cat": "calc",
+    "icon": "kalkulator-tarikh-bersalin",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Solar ATAP (Solar Calculator)",
+    "desc": "Home solar under Solar ATAP 2026: TNB bill with and without solar, export credit at 27.03 sen, SuRIA rebate and payback. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-solar/",
+    "cat": "calc",
+    "icon": "kalkulator-solar",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kos Lesen Memandu (Driving Licence Cost)",
+    "desc": "JPJ learner, probationary and competent licence fees by class, renewal for 1 to 10 years, physical print and IDP. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kos-lesen-memandu/",
+    "cat": "calc",
+    "icon": "kos-lesen-memandu",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

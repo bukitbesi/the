@@ -4,7 +4,8 @@
    Senior citizens (60+) without a spouse RM600 cash. Singles 21–59 (OKU 19–59) earning up to RM2,500 get no cash but
    RM600 SARA (RM50 a month). SARA for STR households RM1,200 (RM100 a month), RM2,400 for eKasih households. SARA untuk
    Semua: RM100 once to every citizen aged 18+ (credited 9 February 2026). Sources: HASiL FAQ STR 2026, sara.gov.my FAQ,
-   MOF media releases. The senior citizens' income cap is published as RM2,500 and RM5,000 by different sources, and
+   MOF media releases. Phase 4: applications and updates closed 30 September 2026; the payment date is not yet
+   announced (Phase 4 of 2025 began 18 October 2025). The senior citizens' income cap is published as RM2,500 and RM5,000 by different sources, and
    their SARA amount is not confirmed. Verified 15 October 2026. */
 (function (root) {
   'use strict';
@@ -15,6 +16,7 @@
     senior: 600, single: { cash: 0, sara: 600, cash2025: 600 }, sara: { household: 1200, ekasih: 2400 },
     bands: [2500, 5000],
     phases: [['1', '2026-01-20', [100, 500]], ['2', '2026-03-10', [100, 600]], ['3', '2026-08-15', [150, 600]], ['4', null, null]],
+    phase4: { closed: '2026-09-30', lastYear: '2025-10-18' },
     budget2027: { saraMax: 1800, saraMonth: 150, allocation: 16e9 }
   };
   var num = function (v) { v = Number(v); return isFinite(v) && v >= 0 ? v : 0; };
