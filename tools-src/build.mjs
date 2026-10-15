@@ -59,6 +59,7 @@ const qiblaCore = require('../assets/js/qibla-core.js');
 const nesteggCore = require('../assets/js/nestegg-core.js');
 const leaveCore = require('../assets/js/leave-core.js');
 const terminationCore = require('../assets/js/termination-core.js');
+const roadtaxCore = require('../assets/js/roadtax-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1689,10 +1690,42 @@ function terminationMap(lang) {
     T_VERIFIED: longDate(Tm.FACTS.verified, lang), T_VERIFIED_ISO: Tm.FACTS.verified
   };
 }
+// ---- road tax (LKM)
+const ROAD_EXAMPLE = { type: 'car', region: 'peninsular', body: 'saloon', owner: 'individual', cc: 1496, kw: 150, watts: 5000, months: 12 };
+const ROAD_MODELS = [['Perodua Myvi 1.5', 'car', 1496, 'saloon'], ['Honda City 1.5', 'car', 1498, 'saloon'], ['Proton X50 1.5T', 'car', 1477, 'saloon'], ['Proton X70 1.8T', 'car', 1799, 'saloon'],
+  ['Honda CR-V 1.5T', 'car', 1498, 'nonSaloon'], ['Toyota Camry 2.5', 'car', 2487, 'saloon'], ['Toyota Hilux 2.4', 'car', 2393, 'nonSaloon'],
+  ['BYD Atto 3', 'ev', 150], ['Tesla Model 3 RWD', 'ev', 208], ['Tesla Model Y RWD', 'ev', 220], ['BMW iX xDrive50', 'ev', 385], ['Lotus Eletre R', 'ev', 675]];
+function roadtaxMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), R = roadtaxCore, r = R.calculate(ROAD_EXAMPLE), t = o => R.calculate(o).tax;
+  const fmt = (b, prev) => b[2] ? (L ? `RM${nf(b[1])} + RM${b[2].toFixed(2)}/cc melebihi ${nf(prev, 0)} cc` : `RM${nf(b[1])} + RM${b[2].toFixed(2)}/cc above ${nf(prev, 0)} cc`) : m(b[1]);
+  const band = (bands, i) => { const prev = i ? bands[i - 1][0] : 0; return { prev, label: bands[i][0] === Infinity ? (L ? `Melebihi ${nf(prev, 0)}` : `Above ${nf(prev, 0)}`) : `${nf(prev + 1, 0)}–${nf(bands[i][0], 0)}` }; };
+  const pen = R.CAR.saloon.map((b, i) => { const { prev, label } = band(R.CAR.saloon, i); return `<tr><th scope="row">${label}</th><td>${fmt(b, prev)}</td><td>${fmt(R.CAR.nonSaloon[i], prev)}</td><td>${fmt(R.CAR.companySaloon[i], prev)}</td></tr>`; }).join('\n');
+  const east = R.CAR.eastSaloon.map((b, i) => { const { prev, label } = band(R.CAR.eastSaloon, i); return `<tr><th scope="row">${label}</th><td>${fmt(b, prev)}</td><td>${fmt(R.CAR.eastNonSaloon[i], prev)}</td></tr>`; }).join('\n');
+  const evT = R.EV.slice(1).map((b, i) => { const lo = i ? R.EV[i][0] : 0; return `<tr><th scope="row">${'ABCDEFGHIJ'[i]}</th><td>${nf(lo, 0)}–${nf(b[0], 0)} kW</td><td>${m(b[1])}</td><td>${b[3] ? m(b[3]) : '—'}</td><td>${m(R.ev(b[0]).tax)}</td></tr>`; }).join('\n') +
+    `\n<tr><th scope="row">K</th><td>${L ? 'Melebihi' : 'Above'} 1,010 kW</td><td>${m(R.EV_TOP)}</td><td>—</td><td>${m(R.EV_TOP)}</td></tr>`;
+  const moto = R.MOTO.map((b, i) => { const prev = i ? R.MOTO[i - 1][0] : 0, label = b[0] === Infinity ? (L ? `Melebihi ${prev}` : `Above ${prev}`) : `${prev + 1}–${b[0]}`; return `<tr><th scope="row">${label} cc</th><td>${b[1] === null ? (L ? 'Bercanggah (RM100 atau RM180)' : 'Conflicting (RM100 or RM180)') : m(b[1])}</td><td>${m(b[2])}</td></tr>`; }).join('\n');
+  const emoto = R.EMOTO.map((b, i) => { const prev = i ? R.EMOTO[i - 1][0] : 0, label = b[0] === Infinity ? (L ? `Melebihi ${nf(prev, 0)} W` : `Above ${nf(prev, 0)} W`) : `${nf(prev ? prev + 1 : 0, 0)}–${nf(b[0], 0)} W`; return `<tr><th scope="row">${label}</th><td>${m(b[1])}</td></tr>`; }).join('\n');
+  const models = ROAD_MODELS.map(([n, ty, v, body]) => { const x = ty === 'ev' ? t({ type: 'ev', kw: v }) : t({ cc: v, body }); const desc = ty === 'ev' ? `${v} kW` : `${nf(v, 0)} cc, ${body === 'saloon' ? 'saloon' : (L ? 'bukan saloon' : 'non-saloon')}`; return `<tr><th scope="row">${n}</th><td>${desc}</td><td>${m(x)}</td><td>${m(x / 2)}</td></tr>`; }).join('\n');
+  const comp = R.FACTS.compound.map(([d, c], i) => `<tr><th scope="row">${i ? R.FACTS.compound[i - 1][0] + 1 : 1}–${d} ${L ? 'hari' : 'days'}</th><td>${m(c)}</td></tr>`).join('\n');
+  const lines = [tr(L ? 'Jalur' : 'Band', '1,401–1,600 cc'), tr(L ? 'Kiraan' : 'Calculation', L ? 'RM90 tetap' : 'RM90 flat'), tr(L ? '12 bulan' : '12 months', m(r.annual), 'total'), tr(L ? '6 bulan' : '6 months', m(r.half)), tr(L ? 'Purata sebulan' : 'Average a month', m(r.monthly))].join('\n');
+  return {
+    RT_TYPE_OPTIONS: [opt('car', 'Car (petrol, diesel or hybrid)', 'Kereta (petrol, diesel atau hibrid)', true), opt('ev', 'Electric car', 'Kereta elektrik'), opt('moto', 'Motorcycle', 'Motosikal'), opt('emoto', 'Electric motorcycle', 'Motosikal elektrik')].join(''),
+    RT_REGION_OPTIONS: [opt('peninsular', 'Peninsular Malaysia', 'Semenanjung Malaysia', true), opt('east', 'Sabah and Sarawak', 'Sabah dan Sarawak'), opt('labuan', 'Labuan', 'Labuan'), opt('langkawi', 'Langkawi or Pangkor', 'Langkawi atau Pangkor')].join(''),
+    RT_BODY_OPTIONS: [opt('saloon', 'Saloon (as on your VOC)', 'Saloon (ikut geran)', true), opt('nonSaloon', 'Non-saloon (MPV, SUV, pickup)', 'Bukan saloon (MPV, SUV, pikap)')].join(''),
+    RT_OWNER_OPTIONS: [opt('individual', 'Individual', 'Individu', true), opt('company', 'Company', 'Syarikat')].join(''),
+    RT_MONTHS_OPTIONS: [opt('12', '12 months', '12 bulan', true), opt('6', '6 months', '6 bulan')].join(''),
+    RT_CC: ROAD_EXAMPLE.cc, RT_KW: ROAD_EXAMPLE.kw, RT_W: ROAD_EXAMPLE.watts,
+    RT_TAX: m(r.tax), RT_SUB: L ? '12 bulan · Kereta persendirian saloon · Semenanjung' : '12 months · Car private saloon · Peninsular', RT_LINES: lines,
+    RT_PEN: pen, RT_EAST: east, RT_EVT: evT, RT_MOTO: moto, RT_EMOTO: emoto, RT_MODELS: models, RT_COMPOUND: comp,
+    RT_1800: m(t({ cc: 1798 })), RT_2000: m(t({ cc: 1998 })), RT_2000NS: m(t({ cc: 1998, body: 'nonSaloon' })), RT_CAMRY: m(t({ cc: 2487 })), RT_CAMRY_CO: m(t({ cc: 2487, owner: 'company' })),
+    RT_ATTO: m(t({ type: 'ev', kw: 150 })), RT_M3: m(t({ type: 'ev', kw: 208 })), RT_EAST15: m(t({ cc: 1496, region: 'east' })), RT_LABUAN15: m(t({ cc: 1496, region: 'labuan' })), RT_LANGKAWI15: m(t({ cc: 1496, region: 'langkawi' })),
+    RT_VERIFIED: longDate(R.FACTS.verified, lang), RT_VERIFIED_ISO: R.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1849,6 +1882,7 @@ const bundles = {
   'retirement-savings.js': ['assets/js/nestegg-core.js', 'assets/js/nestegg-ui.js'],
   'annual-leave.js': ['assets/js/leave-core.js', 'assets/js/leave-ui.js'],
   'termination-benefits.js': ['assets/js/termination-core.js', 'assets/js/termination-ui.js'],
+  'road-tax.js': ['assets/js/roadtax-core.js', 'assets/js/roadtax-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

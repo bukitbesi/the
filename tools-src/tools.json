@@ -648,6 +648,15 @@
     "live": true
   },
   {
+    "name": "Kalkulator Roadtax (Road Tax Calculator)",
+    "desc": "JPJ road tax by engine cc or EV motor kW: saloon or non-saloon, private or company, Peninsular, Sabah, Sarawak, Labuan, Langkawi; motorcycles and e-motorcycles; 6 or 12 months. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-roadtax/",
+    "cat": "calc",
+    "icon": "kalkulator-roadtax",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
