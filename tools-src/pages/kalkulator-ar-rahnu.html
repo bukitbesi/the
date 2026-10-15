@@ -1,0 +1,166 @@
+<!--page
+{
+  "path": "/kalkulator-ar-rahnu/",
+  "lang": "ms",
+  "alternates": { "en": "/ar-rahnu-calculator-malaysia/" },
+  "title": "Kalkulator Ar-Rahnu 2026: Pajak Gadai Emas Islamik dan Upah Simpan",
+  "description": "Kira pembiayaan Ar-Rahnu (hingga 80% nilai emas) dan caj sebulan pada harga emas hari ini. Bandingkan Bank Muamalat, Bank Islam, TEKUN dan YaPEIM.",
+  "llms": "Kalkulator Ar-Rahnu (pajak gadai Islamik) di Malaysia, disemak 15 Oktober 2026. Dua model caj: bank yang menggunakan tawarruq (sejak keputusan Majlis Penasihat Syariah Bank Negara Malaysia yang berkuat kuasa 1 Februari 2020) mengenakan kadar keuntungan setahun atas jumlah pembiayaan; pengendali bukan bank mengenakan upah simpan setiap RM100 nilai emas (marhun) sebulan. Kadar diterbitkan: Bank Muamalat 11.25% setahun, hingga 80% nilai emas, hingga 18 bulan; Bank Islam hingga 11.25% setahun (siling), 80%; TEKUN RM0.50 setiap RM100 sebulan, 80%, 6 bulan boleh dilanjutkan; YaPEIM Care RM0.75 dan YaPEIM Bisnes RM1.00 setiap RM100 sebulan, 80%, 6 bulan. YaPEIM Didik RM0.85 (margin pembiayaan tidak disahkan). Bank Rakyat, Agrobank dan MAIDAM tidak menerbitkan kadar semasa. Contoh: emas bernilai RM6,000 dengan pembiayaan 80% (RM4,800) selama 6 bulan: Bank Muamalat RM45 sebulan (RM270), TEKUN RM30 (RM180), YaPEIM Care RM45 (RM270), YaPEIM Bisnes RM60 (RM360). Upah simpan RM0.75 atas nilai emas pada 80% pembiayaan sama dengan 11.25% setahun atas pembiayaan. Kedai pajak gadai konvensional boleh mengenakan hingga 2% sebulan atas pinjaman di bawah Akta Pemegang Pajak Gadai 1972. Jika gagal menebus, emas dilelong dan baki lebihan dipulangkan kepada pelanggan. Nilai emas kalkulator menggunakan harga emas tulen harian; setiap penyedia menetapkan harga segram sendiri, biasanya lebih rendah.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "rahnu",
+  "scripts": ["/assets/js/rahnu.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Ar-Rahnu", null]],
+  "about": ["Ar-Rahnu", "Pajak gadai Islamik", "Tawarruq", "Harga emas Malaysia"],
+  "app": {
+    "name": "Kalkulator Ar-Rahnu",
+    "category": "FinanceApplication",
+    "features": ["Nilai emas pada harga emas hari ini", "Pembiayaan hingga 80%", "Kadar keuntungan tawarruq dan upah simpan", "Bandingkan 5 penyedia", "Kadar setahun setara", "Had pajak gadai konvensional", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Dokumen Polisi Rahn", "https://www.bnm.gov.my/-/rahn-19072018"],
+    ["Bank Negara Malaysia: Keputusan Majlis Penasihat Syariah mesyuarat ke-194 dan ke-195", "https://www.bnm.gov.my/-/sac-194th-195th-meeting"],
+    ["Bank Muamalat: Lembaran Pendedahan Produk Ar-Rahnu Individu", "https://www.muamalat.com.my/wp-content/uploads/2025/12/PDS-Ar-Rahnu-Individual-BM.pdf"],
+    ["Bank Muamalat: Ar-Rahnu Prestige", "https://www.muamalat.com.my/financing/personal/ar-rahnu/ar-rahnu-prestige-islamic-pawn-broking-tawarruq/"],
+    ["Bank Islam: Ar-Rahnu", "https://www.bankislam.com/personal-banking/arrahnu/"],
+    ["Bank Islam: Lembaran Pendedahan Produk Ar-Rahnu", "https://www.bankislam.com/wp-content/uploads/PDS_Ar-Rahnu_Malay_150726.pdf"],
+    ["TEKUN: Syarat Ar-Rahnu TEKUN", "https://www.tekun.gov.my/en/ar-rahnu-tekun-conditions/"],
+    ["Ar-Rahnu YaPEIM: Soalan lazim", "https://www.arrahnuyapeim.net/faq"],
+    ["Ar-Rahnu YaPEIM: Produk", "https://www.arrahnuyapeim.net/produk"],
+    ["The Edge: Gold and Islamic pawnbroking", "https://theedgemalaysia.com/article/gold-and-islamic-pawnbroking"]
+  ],
+  "faq": [
+    { "q": "Berapa upah simpan Ar-Rahnu?", "a": "TEKUN RM0.50, YaPEIM Care RM0.75 dan YaPEIM Bisnes RM1.00 setiap RM100 nilai emas sebulan. Bank Muamalat dan Bank Islam tidak mengenakan upah simpan; mereka mengenakan kadar keuntungan tawarruq hingga 11.25% setahun atas jumlah pembiayaan." },
+    { "q": "Berapa saya boleh pinjam dengan emas 10 gram 916?", "a": "Pada harga emas tulen hari ini, 10 g emas 916 bernilai kira-kira {{R_MARHUN}}. Kebanyakan penyedia membiayai hingga 80% nilai itu. Harga segram setiap penyedia biasanya lebih rendah daripada harga pasaran, jadi jumlah sebenar mungkin kurang." },
+    { "q": "Berapa caj Ar-Rahnu untuk 6 bulan?", "a": "Bagi 10 g emas 916 pada pembiayaan 80% hari ini: Bank Muamalat {{R_MUA_CHARGE}}, TEKUN {{R_TEKUN_CHARGE}} dan YaPEIM Care {{R_CARE_CHARGE}} untuk 6 bulan. Kedai pajak gadai konvensional boleh mengenakan hingga {{R_PAWN}} bagi pinjaman yang sama pada 2% sebulan." },
+    { "q": "Apa beza Ar-Rahnu bank dan bukan bank?", "a": "Sejak 1 Februari 2020, bank Islam mesti menggunakan tawarruq dan mengenakan kadar keuntungan atas pembiayaan. Pengendali bukan bank seperti TEKUN dan YaPEIM masih mengenakan upah simpan atas nilai emas. Upah simpan RM0.75 pada pembiayaan 80% sama dengan 11.25% setahun atas pembiayaan." },
+    { "q": "Berapa lama tempoh Ar-Rahnu?", "a": "TEKUN, YaPEIM Care dan YaPEIM Bisnes: 6 bulan, boleh diperbaharui. Bank Muamalat dan Bank Islam: hingga 18 bulan. Bayar caj dan perbaharui sebelum tamat tempoh untuk mengelak lelongan." },
+    { "q": "Apa berlaku jika saya tidak tebus emas Ar-Rahnu?", "a": "Selepas tempoh dan notis, emas dilelong. Hasil lelongan menjelaskan pembiayaan dan caj, dan baki lebihan dipulangkan kepada anda; keputusan Majlis Penasihat Syariah BNM mewajibkan perkara ini dinyatakan dalam terma produk." },
+    { "q": "Adakah Ar-Rahnu lebih murah daripada pajak gadai biasa?", "a": "Biasanya ya. Kedai pajak gadai konvensional boleh mengenakan hingga 2% sebulan (24% setahun) atas pinjaman, berbanding kira-kira 7.5% hingga 15% setahun bagi Ar-Rahnu yang disenaraikan di sini." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Ar-Rahnu</li></ol></nav>
+  <h1>Kalkulator Ar-Rahnu 2026</h1>
+  <p class="answer">Ar-Rahnu membiayai <strong>hingga 80% nilai emas</strong> anda. Bank (Muamalat, Bank Islam) mengenakan hingga <strong>11.25% setahun</strong> atas pembiayaan, manakala TEKUN dan YaPEIM mengenakan upah simpan <strong>RM0.50 hingga RM1.00 setiap RM100</strong> nilai emas sebulan. Pada harga hari ini, 10 g emas 916 bernilai kira-kira {{R_MARHUN}}. Masukkan emas anda.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{R_VERIFIED_ISO}}">{{R_VERIFIED}}</time></span><span>Harga emas <time datetime="{{R_GOLD_ISO}}">{{R_GOLD_DATE}}</time></span><a href="/ar-rahnu-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="rahnuForm" novalidate aria-labelledby="rahnu-h" data-gram="{{R_GRAM}}">
+      <h2 id="rahnu-h">Emas anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="grams">Berat emas</label><div class="input"><input id="grams" name="grams" type="number" inputmode="decimal" min="0" step="0.1" value="{{R_GRAMS}}"><span aria-hidden="true">g</span></div></div>
+        <div class="field"><label for="karat">Ketulenan</label><select class="input" id="karat" name="karat">{{R_KARAT_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="price">Harga emas tulen segram</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" value="{{R_PRICE}}"></div></div>
+        <div class="field"><label for="months">Tempoh</label><div class="input"><input id="months" name="months" type="number" inputmode="numeric" min="1" max="18" step="1" value="{{R_MONTHS}}"><span aria-hidden="true">bulan</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="provider">Penyedia</label><select class="input" id="provider" name="provider">{{R_PROVIDER_OPTIONS}}</select></div>
+        <div class="field"><label for="want">Jumlah dipinjam (kosong = maksimum)</label><div class="input"><span aria-hidden="true">RM</span><input id="want" name="want" type="number" inputmode="decimal" min="0" step="100" value="" placeholder="Maksimum"></div></div>
+      </div>
+      <p class="help">Harga lalai ialah harga emas tulen hari ini ({{R_GRAM_TXT}} segram). Masukkan harga segram penyedia untuk anggaran lebih tepat.</p>
+    </form>
+
+    <section class="box" aria-labelledby="rahnu-result-h">
+      <h2 id="rahnu-result-h">Keputusan</h2>
+      <div class="net">
+        <p>Pembiayaan</p>
+        <output id="rFin" for="grams karat price months provider want">{{R_FIN}}</output>
+        <p id="rSub">{{R_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Ringkasan</caption>
+        <tbody id="rLines">
+{{R_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rahnuPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="compare-h">Bandingkan penyedia Ar-Rahnu</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penyedia</th><th scope="col">Caj</th><th scope="col">Pembiayaan</th><th scope="col">Sebulan</th><th scope="col">Jumlah caj</th><th scope="col">Setahun setara</th></tr></thead>
+      <tbody id="rCompare">
+{{R_COMPARE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Ikut emas dan tempoh dalam kalkulator. Bank Islam menerbitkan siling 11.25%; kadar sebenar anda mungkin lebih rendah.</p>
+
+  <h2 id="providers-h">Kadar Ar-Rahnu 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="providers-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penyedia</th><th scope="col">Model</th><th scope="col">Kadar</th><th scope="col">Margin pembiayaan</th><th scope="col">Tempoh</th></tr></thead>
+      <tbody>
+{{R_PROVIDERS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Tidak disenaraikan: Bank Rakyat, Agrobank dan MAIDAM tidak menerbitkan kadar semasa yang dapat kami sahkan; Pos Ar-Rahnu (RM0.56) dan YaPEIM Prestij mempunyai angka yang bercanggah atau satu sumber sahaja.</p>
+
+  <h2 id="formula">Cara caj Ar-Rahnu dikira</h2>
+  <ol>
+    <li><strong>Nilai emas (marhun)</strong> = berat × ketulenan × harga emas tulen segram.</li>
+    <li><strong>Pembiayaan</strong> = hingga margin penyedia (80%) × nilai emas.</li>
+    <li><strong>Bank (tawarruq)</strong>: caj sebulan = pembiayaan × kadar setahun ÷ 12.</li>
+    <li><strong>Upah simpan</strong>: caj sebulan = nilai emas ÷ 100 × kadar setiap RM100.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grams-h">Caj 6 bulan ikut berat emas 916</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grams-h">
+    <table class="data">
+      <thead><tr><th scope="col">Emas 916</th><th scope="col">Nilai hari ini</th><th scope="col">Pembiayaan 80%</th><th scope="col">Bank Muamalat</th><th scope="col">TEKUN</th></tr></thead>
+      <tbody>
+{{R_GRAMS_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Pada harga emas tulen {{R_GRAM_TXT}} segram ({{R_GOLD_DATE}}); emas 916 kira-kira {{R_PURE_916}} segram. Lihat <a href="/harga-emas-hari-ini/">harga emas hari ini</a>.</p>
+
+  <h2 id="rules">Perkara yang perlu tahu</h2>
+  <ul>
+    <li><strong>Lelong:</strong> jika tidak ditebus atau diperbaharui, emas dilelong; baki lebihan dipulangkan kepada anda.</li>
+    <li><strong>Tawarruq sejak 2020:</strong> Majlis Penasihat Syariah BNM memutuskan struktur qard, rahn, wadiah dan ujrah tidak memenuhi Dokumen Polisi Rahn bagi institusi kewangan Islam.</li>
+    <li><strong>Pajak gadai konvensional</strong> boleh mengenakan hingga 2% sebulan atas pinjaman.</li>
+    <li><strong>Emas yang diterima</strong> biasanya 18K hingga 24K; semak dengan penyedia.</li>
+    <li>Emas simpanan yang dicagar masih tertakluk kepada zakat; kira dengan <a href="/kalkulator-zakat-emas/">kalkulator zakat emas</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/-/rahn-19072018" rel="noopener">BNM: Dokumen Polisi Rahn</a> dan <a href="https://www.bnm.gov.my/-/sac-194th-195th-meeting" rel="noopener">keputusan Majlis Penasihat Syariah</a></li>
+    <li><a href="https://www.muamalat.com.my/wp-content/uploads/2025/12/PDS-Ar-Rahnu-Individual-BM.pdf" rel="noopener">Bank Muamalat: Lembaran produk</a> dan <a href="https://www.muamalat.com.my/financing/personal/ar-rahnu/ar-rahnu-prestige-islamic-pawn-broking-tawarruq/" rel="noopener">Ar-Rahnu Prestige</a></li>
+    <li><a href="https://www.bankislam.com/personal-banking/arrahnu/" rel="noopener">Bank Islam: Ar-Rahnu</a> dan <a href="https://www.bankislam.com/wp-content/uploads/PDS_Ar-Rahnu_Malay_150726.pdf" rel="noopener">lembaran produk</a></li>
+    <li><a href="https://www.tekun.gov.my/en/ar-rahnu-tekun-conditions/" rel="noopener">TEKUN: Syarat Ar-Rahnu</a></li>
+    <li><a href="https://www.arrahnuyapeim.net/faq" rel="noopener">YaPEIM: Soalan lazim</a> dan <a href="https://www.arrahnuyapeim.net/produk" rel="noopener">produk</a></li>
+    <li><a href="https://theedgemalaysia.com/article/gold-and-islamic-pawnbroking" rel="noopener">The Edge: Gold and Islamic pawnbroking</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran. Setiap penyedia menilai emas dengan harga segram sendiri dan boleh mengubah kadar; sahkan di kaunter sebelum mencagar.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/harga-emas-hari-ini/">Harga Emas Hari Ini<small>Emas 999, 916 dan Kijang Emas</small></a>
+    <a href="/kalkulator-zakat-emas/">Kalkulator Zakat Emas<small>Emas simpanan dan dipakai</small></a>
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Ansuran dan kadar sebenar</small></a>
+  </div>
+</section>

@@ -65,6 +65,10 @@ const bursaCore = require('../assets/js/bursa-core.js');
 const tenancyCore = require('../assets/js/tenancy-core.js');
 const eisCore = require('../assets/js/eis-core.js');
 const maskahwinCore = require('../assets/js/maskahwin-core.js');
+const hajiCore = require('../assets/js/haji-core.js');
+const strCore = require('../assets/js/str-core.js');
+const sspaCore = require('../assets/js/sspa-core.js');
+const rahnuCore = require('../assets/js/rahnu-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1849,10 +1853,95 @@ function maskahwinMap(lang) {
     MK_VERIFIED: longDate(F.verified, lang), MK_VERIFIED_ISO: F.verified
   };
 }
+// ---- batch 8: hajj cost and Tabung Haji, STR and SARA, SSPA salary, Ar-Rahnu
+const HAJI_EXAMPLE = { cat: 'M40', people: 1, balance: 3000, monthly: 300, rate: 3.5, registered: 'yes' };
+const monthName = (ym, lang) => new Date(ym + '-01T00:00:00Z').toLocaleDateString(lang === 'ms' ? 'ms-MY' : 'en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+function hajiMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), H = hajiCore, F = H.FACTS, r = H.calculate(HAJI_EXAMPLE);
+  const when = (x, ym) => x.months === 0 ? (L ? 'Sudah dicapai' : 'Already reached') : `${x.months} ${L ? 'bulan' : 'months'} (${monthName(ym, lang)})`;
+  const cost = [tr(L ? 'Kos sebenar haji Muassasah' : 'Actual Muassasah hajj cost', m(r.cost)), tr(L ? 'Bantuan Kewangan Haji' : 'Hajj financial assistance', '− ' + m(r.subsidy)), tr(L ? 'Anda bayar' : 'You pay', m(r.pay), 'total')].join('\n');
+  const save = [tr(L ? 'Baki Tabung Haji sekarang' : 'Tabung Haji balance now', m(r.balance)), tr(L ? 'Simpanan sebulan' : 'Monthly saving', m(r.monthly)),
+    tr(L ? 'Capai RM15,000 (layak tawaran)' : 'Reach RM15,000 (offer threshold)', when(r.toOffer, r.offerMonth), 'total'), tr(L ? `Capai bayaran haji ${m(r.pay)}` : `Reach the hajj payment ${m(r.pay)}`, when(r.toPay, r.payMonth)),
+    tr(L ? 'Hibah hingga RM15,000' : 'Hibah until RM15,000', m(r.toOffer.hibah)), tr(L ? 'Tarikh akhir 31 Disember 2028' : 'Deadline 31 December 2028', L ? `Simpan ${m(r.needDeadline)} sebulan untuk capai` : `Save ${m(r.needDeadline)} a month to make it`),
+    tr(L ? 'Baki selepas 5 tahun' : 'Balance after 5 years', m(r.fiveYears.balance)), tr(L ? 'Hibah dalam 5 tahun' : 'Hibah over 5 years', m(r.fiveYears.hibah))].join('\n');
+  const rates = ['B40', 'M40', 'T20'].map(c => { const x = H.calculate({ cat: c }); return `<tr><th scope="row">${c}</th><td>${m(x.pay)}</td><td>${m(x.subsidy)}${x.gov ? (L ? ' (termasuk RM1,000 kerajaan)' : ' (incl. RM1,000 government)') : ''}</td><td>${x.share}%</td><td>${m(x.cost)}</td></tr>`; }).join('\n');
+  const hibah = F.hibah.slice().reverse().map(([y, v]) => `<tr><th scope="row">${y}</th><td>${v.toFixed(2)}%</td><td>${m(H.grow(10000, 0, v, 12).hibah)}</td></tr>`).join('\n');
+  const left = H.monthsLeft(F.verified);
+  const plan = [0, 3000, 5000, 10000].map(b => `<tr><th scope="row">${m(b)}</th>${[12, 24, left, 36, 60].map(n => `<td>${m(H.monthlyFor(b, F.threshold, n, 3.5))}</td>`).join('')}</tr>`).join('\n');
+  const z = H.monthsTo(0, 500, 3.5, F.threshold);
+  return {
+    H_CAT_OPTIONS: [opt('B40', 'B40, first hajj', 'B40, haji pertama'), opt('M40', 'M40, first hajj', 'M40, haji pertama', true), opt('T20', 'T20 (no subsidy)', 'T20 (tiada bantuan)')].join(''),
+    H_REG_OPTIONS: [opt('yes', 'Yes, before 11 September 2026', 'Ya, sebelum 11 September 2026', true), opt('no', 'No, new depositor', 'Tidak, pendeposit baharu')].join(''),
+    H_PEOPLE: HAJI_EXAMPLE.people, H_BALANCE: HAJI_EXAMPLE.balance, H_MONTHLY: HAJI_EXAMPLE.monthly, H_RATE: HAJI_EXAMPLE.rate,
+    H_PAY: m(r.pay), H_SUB: L ? `M40 · bantuan ${m(r.subsidy)} (${100 - r.share}%) · kos sebenar ${m(r.cost)}` : `M40 · subsidy ${m(r.subsidy)} (${100 - r.share}%) · actual cost ${m(r.cost)}`,
+    H_COST: cost, H_SAVE: save, H_RATES: rates, H_HIBAH: hibah, H_PLAN: plan, H_LEFT: left,
+    H_500_MONTHS: z.months, H_500_HIBAH: m(z.hibah), H_NEED: m(r.needDeadline), H_TOOFFER: r.toOffer.months, H_OFFER_MONTH: monthName(r.offerMonth, lang),
+    H_NEED0: m(H.monthlyFor(0, F.threshold, left, 3.5)), H_HIB10K: m(H.grow(10000, 0, 3.5, 12).hibah),
+    H_VERIFIED: longDate(F.verified, lang), H_VERIFIED_ISO: F.verified
+  };
+}
+const STR_EXAMPLE = { cat: 'household', income: 2000, children: 3, ekasih: 'no', age: 30, oku: 'no' };
+function strMap(lang) {
+  const { L, m, tr, opt } = b3(lang), S = strCore, F = S.FACTS, r = S.calculate(STR_EXAMPLE);
+  const lines = [tr(L ? 'STR 2026 (tunai)' : 'STR 2026 (cash)', m(r.str)), tr(L ? 'SARA 2026 (barang asas, MyKad)' : 'SARA 2026 (basic goods, MyKad)', m(r.sara)),
+    tr(L ? 'Jumlah setahun' : 'Total a year', `${m(r.total)} (${L ? 'kira-kira' : 'about'} ${m(r.total / 12)} ${L ? 'sebulan' : 'a month'})`, 'total'),
+    tr(L ? 'Berbanding STR tunai 2025' : 'Compared with 2025 STR cash', '− ' + m(300)), tr(L ? 'SARA untuk Semua (setiap dewasa 18+)' : 'SARA untuk Semua (every adult 18+)', m(F.sus))].join('\n');
+  const kids = L ? ['Tiada anak', '1 hingga 2 anak', '3 hingga 4 anak', '5 anak atau lebih'] : ['No children', '1 to 2 children', '3 to 4 children', '5 or more children'];
+  const rates = kids.map((k, i) => `<tr><th scope="row">${k}</th><td>${m(F.household.low[i])}</td><td>${m(F.household.mid[i])}</td><td>${m(F.household2025.low[i])} / ${m(F.household2025.mid[i])}</td></tr>`).join('\n');
+  const both = kids.map((k, i) => `<tr><th scope="row">${k}</th><td>${m(F.household.low[i] + F.sara.household)}</td><td>${m(F.household.low[i] + F.sara.ekasih)}</td><td>${m(F.household.mid[i] + F.sara.household)}</td></tr>`).join('\n');
+  const phases = F.phases.map(([n, d, rg]) => `<tr><th scope="row">${L ? 'Fasa' : 'Phase'} ${n}</th><td>${d ? longDate(d, lang) : (L ? 'Belum diumumkan' : 'Not announced yet')}</td><td>${rg ? `${m(rg[0])} – ${m(rg[1])}` : (L ? 'Baki kadar tahunan' : 'Rest of the yearly rate')}</td></tr>`).join('\n');
+  return {
+    S_CAT_OPTIONS: [opt('household', 'Household (married or single parent)', 'Isi rumah (berkahwin atau ibu/bapa tunggal)', true), opt('single', 'Single, 21 to 59', 'Bujang, 21 hingga 59 tahun'), opt('senior', 'Senior citizen 60+ without a spouse', 'Warga emas 60+ tiada pasangan')].join(''),
+    S_EKASIH_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes (poor or hardcore poor)', 'Ya (miskin atau miskin tegar)')].join(''),
+    S_OKU_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes (from age 19)', 'Ya (dari umur 19)')].join(''),
+    S_INCOME: STR_EXAMPLE.income, S_CHILDREN: STR_EXAMPLE.children, S_AGE: STR_EXAMPLE.age,
+    S_TOTAL: m(r.total), S_SUB: L ? 'Pendapatan RM2,500 ke bawah · 3 anak' : 'Income up to RM2,500 · 3 children', S_LINES: lines, S_RATES: rates, S_BOTH: both, S_PHASES: phases,
+    S_MAX: m(F.household.low[3] + F.sara.ekasih), S_EX_STR: m(r.str), S_EX_SARA: m(r.sara),
+    S_VERIFIED: longDate(F.verified, lang), S_VERIFIED_ISO: F.verified
+  };
+}
+const SSPA_EXAMPLE = { basic: 2000, group: 'pelaksana', kgt: 0, mode: 'salary' };
+function sspaMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), P = sspaCore, F = P.FACTS, r = P.calculate(SSPA_EXAMPLE);
+  const lines = [tr(L ? 'Gaji pokok 30 November 2024' : 'Basic salary on 30 November 2024', m(r.base)), tr(L ? 'Fasa 1, 1 Dis 2024 (minimum RM240)' : 'Phase 1, 1 Dec 2024 (RM240 minimum)', '+ ' + m(r.p1)), tr(L ? 'Selepas fasa 1' : 'After phase 1', m(r.s1)),
+    tr(L ? 'Fasa 2, 1 Jan 2026 (7%)' : 'Phase 2, 1 Jan 2026 (7%)', '+ ' + m(r.p2)), tr(L ? 'Gaji pokok baharu' : 'New basic salary', m(r.s2), 'total'), tr(L ? 'Kenaikan SSPA sebulan' : 'SSPA rise a month', m(r.rise)), tr(L ? 'Kenaikan setahun' : 'Rise a year', m(r.yearly))].join('\n');
+  const grid = [1500, 2000, 2500, 3000, 4000, 5000, 7000, 10000].map(b => { const x = P.calculate({ basic: b }), k = P.calculate({ basic: b, group: 'kpt' }); return `<tr><th scope="row">${m(b)}</th><td>${m(x.s1)}</td><td>${m(x.s2)}</td><td>${m(x.rise)} (${nf(x.risePct, 2)}%)</td><td>${m(k.s2)}</td></tr>`; }).join('\n');
+  const groups = [['pelaksana', L ? 'Pelaksana (Gred 1 hingga 8)' : 'Pelaksana (Gred 1 to 8)'], ['pp', L ? 'Pengurusan dan Profesional (Gred 9 ke atas)' : 'Management and Professional (Gred 9 and up)'], ['kpt', L ? 'Pengurusan Tertinggi (Gred Utama, Gred Khas)' : 'Top Management (Gred Utama, Gred Khas)']]
+    .map(([g, n]) => { const [a, b] = F.rates[g]; return `<tr><th scope="row">${n}</th><td>${nf(a * 100, 0)}%${g !== 'kpt' ? (L ? ' (minimum RM240)' : ' (RM240 minimum)') : ''}</td><td>${nf(b * 100, 0)}%</td><td>${nf(((1 + a) * (1 + b) - 1) * 100, 2)}%</td></tr>`; }).join('\n');
+  const grades = F.grades.map(([o, n]) => `<tr><th scope="row">${o}</th><td>${n}</td></tr>`).join('\n');
+  const pp = P.calculate({ basic: 4000, group: 'pp' }), pen = P.calculate({ basic: 2000, mode: 'pension' }), kgt = P.calculate({ basic: 2000, kgt: 100 });
+  return {
+    P_GROUP_OPTIONS: [opt('pelaksana', 'Pelaksana (Gred 1 to 8, old 19 to 40)', 'Pelaksana (Gred 1 hingga 8, lama 19 hingga 40)', true), opt('pp', 'Management and Professional (Gred 9 and up, old 41+)', 'Pengurusan dan Profesional (Gred 9 ke atas, lama 41+)'), opt('kpt', 'Top Management (JUSA, Gred Utama, Gred Khas)', 'Pengurusan Tertinggi (JUSA, Gred Utama, Gred Khas)')].join(''),
+    P_MODE_OPTIONS: [opt('salary', 'Serving officer (salary)', 'Penjawat awam (gaji)', true), opt('pension', 'Pensioner (pension)', 'Pesara (pencen)')].join(''),
+    P_BASIC: SSPA_EXAMPLE.basic, P_KGT: 0,
+    P_NEW: m(r.s2), P_SUB: L ? `+${m(r.rise)} sebulan (${nf(r.risePct, 2)}%)` : `+${m(r.rise)} a month (${nf(r.risePct, 2)}%)`, P_LINES: lines, P_GRID: grid, P_GROUPS: groups, P_GRADES: grades,
+    P_EX_S1: m(r.s1), P_EX_S2: m(r.s2), P_PP_S1: m(pp.s1), P_PP_S2: m(pp.s2), P_PEN_S2: m(pen.s2), P_KGT_S2: m(kgt.s2),
+    P_VERIFIED: longDate(F.verified, lang), P_VERIFIED_ISO: F.verified
+  };
+}
+const RAHNU_EXAMPLE = { grams: 10, karat: '916', months: 6, want: '', provider: 'muamalat' };
+function rahnuMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), R = rahnuCore, F = R.FACTS, gram = mkGram(), r = R.calculate({ ...RAHNU_EXAMPLE, gram }), q = r.pick;
+  const basis = x => x.kind === 'rate' ? `${x.ceiling ? (L ? 'Hingga ' : 'Up to ') : ''}${nf(x.rate)}% ${L ? 'setahun atas pembiayaan' : 'a year on the financing'}` : `RM${x.fee.toFixed(2)} ${L ? 'setiap RM100 nilai emas sebulan' : 'per RM100 of gold value a month'}`;
+  const lines = [tr(L ? 'Nilai emas (marhun)' : 'Gold value (marhun)', m(r.marhun)), tr(L ? `Pembiayaan (${q.mof}% nilai emas)` : `Financing (${q.mof}% of gold value)`, m(q.financing)), tr(L ? 'Caj sebulan' : 'Charge a month', m(q.monthly)),
+    tr(L ? `Jumlah caj ${r.months} bulan` : `Total charge for ${r.months} months`, m(q.charge)), tr(L ? 'Jumlah tebus' : 'Total to redeem', m(q.repay), 'total'), tr(L ? 'Kadar setahun atas pembiayaan' : 'Yearly rate on the financing', nf(q.apr) + '%'),
+    tr(L ? 'Had kedai pajak gadai (2% sebulan)' : 'Pawnshop cap (2% a month)', m(r.pawn)), tr(L ? 'Caj terendah' : 'Lowest charge', `${r.best.name} · ${m(r.best.charge)}`)].join('\n');
+  const compare = r.list.map(x => `<tr><th scope="row">${x.name}</th><td>${basis(x)}</td><td>${m(x.financing)}</td><td>${m(x.monthly)}</td><td>${m(x.charge)}</td><td>${nf(x.apr)}%</td></tr>`).join('\n');
+  const providers = F.providers.map(p => `<tr><th scope="row">${p.name}</th><td>${p.kind === 'rate' ? (L ? 'Tawarruq, kadar keuntungan' : 'Tawarruq, profit rate') : (L ? 'Upah simpan' : 'Safekeeping fee')}</td><td>${basis(p)}</td><td>${p.mof}%</td><td>${p.tenure} ${L ? 'bulan' : 'months'}</td></tr>`).join('\n');
+  const grams = [1, 5, 10, 20, 50].map(g => { const x = R.calculate({ grams: g, karat: '916', gram, months: 6 }); return `<tr><th scope="row">${g} g</th><td>${m(x.marhun)}</td><td>${m(x.list[0].financing)}</td><td>${m(x.list[0].charge)}</td><td>${m(x.list[2].charge)}</td></tr>`; }).join('\n');
+  return {
+    R_GRAM: gram, R_PRICE: gram, R_GRAM_TXT: m(gram), R_GOLD_DATE: longDate(goldDate, lang), R_GOLD_ISO: goldDate, R_GRAMS: RAHNU_EXAMPLE.grams, R_MONTHS: RAHNU_EXAMPLE.months,
+    R_KARAT_OPTIONS: ['999', '916', '875', '835', '750'].map(k => opt(k, `${k} (${{ 999: 24, 916: 22, 875: 21, 835: 20, 750: 18 }[k]}K)`, `${k} (${{ 999: 24, 916: 22, 875: 21, 835: 20, 750: 18 }[k]}K)`, k === '916')).join(''),
+    R_PROVIDER_OPTIONS: F.providers.map(p => opt(p.id, p.name, p.name, p.id === 'muamalat')).join(''),
+    R_FIN: m(q.financing), R_SUB: `${q.name} · ${basis(q)}`, R_LINES: lines, R_COMPARE: compare, R_PROVIDERS: providers, R_GRAMS_TABLE: grams,
+    R_MARHUN: m(r.marhun), R_MUA_CHARGE: m(r.list[0].charge), R_TEKUN_CHARGE: m(r.list[2].charge), R_CARE_CHARGE: m(r.list[3].charge), R_PAWN: m(r.pawn), R_PURE_916: m(gram * 0.916),
+    R_VERIFIED: longDate(F.verified, lang), R_VERIFIED_ISO: F.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1904,7 +1993,7 @@ for (const p of pages) {
   // The gold price pages change every day with the price.
   if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
   // The mas kahwin pages quote today's gold value.
-  if (p.render === 'maskahwin' && goldDate > p.dateModified) p.dateModified = goldDate;
+  if ((p.render === 'maskahwin' || p.render === 'rahnu') && goldDate > p.dateModified) p.dateModified = goldDate;
   // The fuel pages change every week with the prices.
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
@@ -2017,6 +2106,10 @@ const bundles = {
   'tenancy-stamp-duty.js': ['assets/js/tenancy-core.js', 'assets/js/tenancy-ui.js'],
   'eis.js': ['assets/js/eis-core.js', 'assets/js/eis-ui.js'],
   'maskahwin.js': ['assets/js/maskahwin-core.js', 'assets/js/maskahwin-ui.js'],
+  'haji.js': ['assets/js/haji-core.js', 'assets/js/haji-ui.js'],
+  'str.js': ['assets/js/str-core.js', 'assets/js/str-ui.js'],
+  'sspa.js': ['assets/js/sspa-core.js', 'assets/js/sspa-ui.js'],
+  'rahnu.js': ['assets/js/rahnu-core.js', 'assets/js/rahnu-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

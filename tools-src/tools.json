@@ -702,6 +702,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator Tabung Haji (Hajj Cost Calculator)",
+    "desc": "Hajj cost for B40, M40 and T20 in 2026 and 2027, and how long your Tabung Haji savings take to reach the RM15,000 offer threshold with hibah. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-tabung-haji/",
+    "cat": "calc",
+    "icon": "kalkulator-tabung-haji",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator STR dan SARA (STR Calculator)",
+    "desc": "STR 2026 by household income and children, SARA RM1,200 or RM2,400, singles and senior citizens, with the payment phases. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-str/",
+    "cat": "calc",
+    "icon": "kalkulator-str",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Gaji SSPA (SSPA Salary Calculator)",
+    "desc": "New civil service salary under SSPA: phase 1 8% with the RM240 minimum and phase 2 7% compounding, Top Management rates and pensions. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-gaji-sspa/",
+    "cat": "calc",
+    "icon": "kalkulator-gaji-sspa",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Ar-Rahnu (Ar-Rahnu Calculator)",
+    "desc": "Islamic gold pawn financing and charges at today's gold price: bank tawarruq rates against safekeeping fees for Bank Muamalat, Bank Islam, TEKUN and YaPEIM. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-ar-rahnu/",
+    "cat": "calc",
+    "icon": "kalkulator-ar-rahnu",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

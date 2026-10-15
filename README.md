@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 93 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 97 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -113,6 +113,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-duti-setem-sewa/](https://tool.thebukitbesi.com/kalkulator-duti-setem-sewa/) + [/tenancy-stamp-duty-calculator-malaysia/](https://tool.thebukitbesi.com/tenancy-stamp-duty-calculator-malaysia/) | BM + English | duti setem perjanjian sewa; tenancy agreement stamp duty calculator |
 | [/kalkulator-sip-perkeso/](https://tool.thebukitbesi.com/kalkulator-sip-perkeso/) + [/eis-calculator-malaysia/](https://tool.thebukitbesi.com/eis-calculator-malaysia/) | BM + English | sip perkeso hilang kerja, elaun mencari pekerjaan; eis calculator malaysia |
 | [/kalkulator-mas-kahwin/](https://tool.thebukitbesi.com/kalkulator-mas-kahwin/) + [/mas-kahwin-malaysia/](https://tool.thebukitbesi.com/mas-kahwin-malaysia/) | BM + English | kadar mas kahwin ikut negeri, mas kahwin selangor, kalkulator kos kahwin; mas kahwin malaysia |
+| [/kalkulator-tabung-haji/](https://tool.thebukitbesi.com/kalkulator-tabung-haji/) + [/hajj-cost-calculator-malaysia/](https://tool.thebukitbesi.com/hajj-cost-calculator-malaysia/) | BM + English | kos haji 2026, kalkulator tabung haji, simpanan RM15,000; hajj cost malaysia |
+| [/kalkulator-str/](https://tool.thebukitbesi.com/kalkulator-str/) + [/str-calculator-malaysia/](https://tool.thebukitbesi.com/str-calculator-malaysia/) | BM + English | kalkulator str 2026, berapa str saya dapat, sara 2026; str calculator |
+| [/kalkulator-gaji-sspa/](https://tool.thebukitbesi.com/kalkulator-gaji-sspa/) + [/sspa-salary-calculator/](https://tool.thebukitbesi.com/sspa-salary-calculator/) | BM + English | kalkulator gaji sspa, gaji baharu penjawat awam, pelarasan pencen; sspa salary calculator |
+| [/kalkulator-ar-rahnu/](https://tool.thebukitbesi.com/kalkulator-ar-rahnu/) + [/ar-rahnu-calculator-malaysia/](https://tool.thebukitbesi.com/ar-rahnu-calculator-malaysia/) | BM + English | kalkulator ar rahnu, upah simpan, pajak gadai emas; ar-rahnu calculator |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -206,6 +210,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (Bursa fees):** `bursa-core.js` holds the 0.03% clearing fee and the 0.1% contract-note stamp duty under the remission order to 12 July 2028; update when it expires or changes. Brokerage is a user input.
 
 **Upkeep (tenancy stamp duty):** `tenancy-core.js` holds the Finance Act 2024 rates (RM1/3/5/7 per RM250, RM10 minimum and copies). Recheck after Budgets and LHDN stamp duty guideline updates.
+
+**Upkeep (hajj):** `haji-core.js` holds the Muassasah cost and B40/M40/T20 payments (1447H/2026 and 1448H/2027), the RM15,000 offer threshold, the 31 December 2028 deadline and the hibah history. Update after Tabung Haji announces the next season's cost (usually September or October) and each year's hibah (usually March).
+
+**Upkeep (STR):** `str-core.js` holds the 2026 STR and SARA rates and phases. Add Phase 4 when MOF announces it, and replace the rates when the 2027 table is published (Budget 2027 announced SARA up to RM150 a month only).
+
+**Upkeep (SSPA):** `sspa-core.js` holds the phase 1 and phase 2 rates, the RM240 floor and the grade map. No further phase is scheduled; add one only if JPA announces it.
+
+**Upkeep (Ar-Rahnu):** `rahnu-core.js` holds the published provider rates (Bank Muamalat, Bank Islam, TEKUN, YaPEIM Care and Bisnes). Recheck the product disclosure sheets yearly; Bank Rakyat, Agrobank and MAIDAM are left out until they publish rates. Gold values follow the daily gold rebuild.
 
 **Upkeep (mas kahwin):** `maskahwin-core.js` holds the state rates confirmed by an official source (Selangor, WP, Melaka, Pahang, Negeri Sembilan; Terengganu and Perlis with no rate) and the nikah fees for Selangor, WP and Penang. Seven states are marked not confirmed because published figures conflict; add them only when the state religious office publishes a rate. The gold and dinar values follow the daily gold rebuild.
 
@@ -303,6 +315,10 @@ assets/js/bursa-core.js     Bursa fees: brokerage, clearing, stamp duty, SST on 
 assets/js/tenancy-core.js   tenancy stamp duty (Finance Act 2024 rates), old rule, rental yield
 assets/js/eis-core.js       EIS: job search allowance schedule, re-employment and mobility allowances
 assets/js/maskahwin-core.js mas kahwin by state, gold and dinar value, wedding cost planner
+assets/js/haji-core.js      hajj cost by category, Tabung Haji savings to RM15,000 with hibah
+assets/js/str-core.js       STR and SARA 2026 by income, children and category
+assets/js/sspa-core.js      SSPA salary and pension adjustment, phase 1 and phase 2
+assets/js/rahnu-core.js     Ar-Rahnu financing and charges by provider at the gold price
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
