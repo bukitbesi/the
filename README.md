@@ -121,6 +121,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-tarikh-bersalin/](https://tool.thebukitbesi.com/kalkulator-tarikh-bersalin/) + [/due-date-calculator-malaysia/](https://tool.thebukitbesi.com/due-date-calculator-malaysia/) | BM + English | kalkulator tarikh bersalin, cuti bersalin 98 hari; due date calculator |
 | [/kalkulator-solar/](https://tool.thebukitbesi.com/kalkulator-solar/) + [/solar-calculator-malaysia/](https://tool.thebukitbesi.com/solar-calculator-malaysia/) | BM + English | kalkulator solar, solar atap, pulang modal solar; solar calculator malaysia |
 | [/kos-lesen-memandu/](https://tool.thebukitbesi.com/kos-lesen-memandu/) + [/driving-licence-cost-malaysia/](https://tool.thebukitbesi.com/driving-licence-cost-malaysia/) | BM + English | kos lesen memandu, renew lesen, yuran jpj; driving licence cost malaysia |
+| [/kalkulator-faraid/](https://tool.thebukitbesi.com/kalkulator-faraid/) + [/faraid-calculator/](https://tool.thebukitbesi.com/faraid-calculator/) | BM + English | kalkulator faraid, pembahagian harta pusaka; faraid calculator malaysia |
+| [/penukar-mata-wang/](https://tool.thebukitbesi.com/penukar-mata-wang/) + [/currency-converter-malaysia/](https://tool.thebukitbesi.com/currency-converter-malaysia/) | BM + English | penukar mata wang, kadar tukaran BNM; currency converter malaysia |
+| [/kalkulator-kalori/](https://tool.thebukitbesi.com/kalkulator-kalori/) + [/calorie-calculator-malaysia/](https://tool.thebukitbesi.com/calorie-calculator-malaysia/) | BM + English | kalkulator kalori, BMR, TDEE; calorie calculator malaysia |
+| [/kalkulator-saiz-kasut/](https://tool.thebukitbesi.com/kalkulator-saiz-kasut/) + [/shoe-size-converter/](https://tool.thebukitbesi.com/shoe-size-converter/) | BM + English | saiz kasut UK EU US, panjang kaki cm; shoe size converter |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -220,6 +224,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (due date):** `bersalin-core.js` holds the 98-day private-sector leave, the civil-service 60/90 days and the Budget 2027 announcement (98/490 days, pending a JPA circular). Switch the civil-service default when the circular is issued, and add PERKESO's post-maternity allowance if it is legislated.
 
 **Upkeep (solar):** `solar-core.js` holds the Solar ATAP rules and the SuRIA Home rebate (to 31 December 2026). Bills use `tnb-core.js`, so TNB tariff changes flow through. Remove SuRIA when it ends and recheck the ATAP guideline yearly.
+
+**Upkeep (faraid):** `faraid-core.js` follows the Shafi'i rules used by Malaysian syariah courts (hajb, 'awl, Umariyyatain, musytarakah, residue to Baitulmal or radd for Perlis). Grandfather with siblings is flagged, not computed. No yearly change; recheck if a state fatwa on radd or Baitulmal changes.
+
+**Upkeep (currency):** `fx-core.js` parses BNM's 12:00 middle rates (ECB via Frankfurter as backup). The `Daily gold price` workflow writes `tools-src/fx-data.json`; if both sources fail the previous rates stay.
+
+**Upkeep (calories):** `kalori-core.js` holds Mifflin-St Jeor, the activity factors, Asian BMI bands and Malaysia's RNI 2017 energy table. Update when the NCCFN publishes a new RNI.
+
+**Upkeep (shoe size):** `kasut-core.js` holds the standard UK/EU/US formulas and the brand table at UK 8 (Nike, ASICS, Vans, adidas, New Balance). Recheck brand charts yearly.
 
 **Upkeep (driving licence):** `lesen-core.js` holds the JPJ LDL, PDL, CDL, print and IDP fees. Recheck the JPJ fee table yearly; test fees and school ceilings are left out until JPJ publishes them.
 

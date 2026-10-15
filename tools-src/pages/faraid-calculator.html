@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/faraid-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-faraid/" },
+  "title": "Faraid Calculator Malaysia: Islamic Inheritance Shares (Shafi'i)",
+  "description": "Work out faraid (Islamic inheritance) under the Shafi'i school: each heir's share as a fraction and in ringgit, excluded heirs, awl and the Baitulmal residue.",
+  "llms": "Faraid (Islamic inheritance) calculator under the Shafi'i school as practised in Malaysia, verified 15 October 2026. Fixed shares (ashab al-furud): husband 1/2 with no child or son's child, 1/4 with one; wife or wives (shared) 1/4 or 1/8; father 1/6 with a son, 1/6 + residue with only daughters, the residue with no child; mother 1/6 with a child or two or more siblings, 1/3 otherwise, and 1/3 of the remainder in the Umariyyatain (spouse + father + mother: husband 1/2, mother 1/6, father 1/3; wife 1/4, mother 1/4, father 1/2); daughter 1/2 alone, 2/3 for two or more, residuary 2:1 with a son; son's daughter 1/6 with one daughter (takmilah); grandmother 1/6; uterine siblings 1/6 or 1/3; full sister 1/2 or 2/3, or residuary with daughters. Residuaries in order: son, son's son, father, grandfather, full brother, consanguine brother, nephews, uncles, cousins. 'Awl when the shares exceed the estate (wife + father + mother + 2 daughters: base 24 raised to 27, wife 1/9; husband + 2 sisters raised to 7). Musytarakah: full siblings share the 1/3 with uterine siblings. In Malaysia a residue with no residuary goes to Baitulmal (a wife alone gets 1/4, Baitulmal 3/4); Perlis (2018 fatwa) returns it to the fixed heirs other than the spouse (radd). Before faraid: funeral costs, debts, harta sepencarian and a bequest to non-heirs of up to 1/3. Example: an RM300,000 estate less RM5,000 funeral and RM10,000 debts = RM285,000 for a wife, mother, one son and two daughters: wife 1/8 RM35,625, mother 1/6 RM47,500, son RM100,937.50, each daughter RM50,468.75. Grandfather with siblings (muqasamah) cases need a Syariah Court ruling. Small estates up to RM5 million go to the JKPTG estate distribution unit; movable estates up to RM600,000 to Amanah Raya.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "faraid",
+  "scripts": ["/assets/js/faraid.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Faraid Calculator", null]],
+  "about": ["Faraid", "Islamic inheritance", "Shafi'i school", "Baitulmal"],
+  "app": {
+    "name": "Faraid Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["23 types of heir", "Shares as fractions, parts and ringgit", "Excluded heirs (mahjub)", "'Awl, Umariyyatain and musytarakah", "Baitulmal or radd (Perlis)", "Funeral, debts, harta sepencarian and 1/3 bequest", "Works offline"]
+  },
+  "citations": [
+    ["MAIS e-Faraid: Baitulmal as recipient of residue", "https://efaraid.mais.gov.my/baitulmal/"],
+    ["Baitulmal Sabah: Faraid", "https://baitulmal.sabah.gov.my/doc/FARAID.pdf"],
+    ["MyGovernment: Before distributing a Muslim estate", "https://www.malaysia.gov.my/personas/penjaga-kepada-ibu-bapa-tua/mengurus-harta-pusaka/perkara-penting-sebelum-pembahagian-pusaka-bagi-orang-islam"],
+    ["MyGovernment: Estate values and agencies", "https://www.malaysia.gov.my/my/topics/nilaian-harta-dan-agensi-pengurusan-pusaka"],
+    ["MyGovernment: Simple inheritance application procedure", "https://www.malaysia.gov.my/en/topics/simple-inheritance-application-procedure"],
+    ["Kedah Syariah Court: Faraid application procedure", "https://syariah.kedah.gov.my/wp-content/uploads/2026/05/PK-JKSNK-10-Permohonan-Faraid.pdf"],
+    ["MUIS: Faraidh guide", "https://muis.gov.sg/-/media/Files/OOM/Resources/Faraidh.ashx"],
+    ["UM Jurnal Fiqh: Baitulmal in inheritance", "https://fiqh.um.edu.my/index.php/fiqh/article/view/65952"],
+    ["IJARBSS: Perlis fatwa on surplus estates (radd)", "https://hrmars.com/ijarbss/article/view/22071/Evaluating-the-Fatwa-on-Surplus-Estate-Management-in-the-State-of-Perlis-Insights-into-the-Al-Radd-Reinstatement-Method"],
+    ["UM Jurnal Syariah: Musytarakah", "https://ijie.um.edu.my/index.php/JS/article/download/22781/11325/49391"]
+  ],
+  "faq": [
+    { "q": "How is an estate divided under faraid?", "a": "After funeral costs, debts, harta sepencarian and any bequest (at most 1/3) are taken out, fixed-share heirs such as the husband, wife, mother, father and daughters receive their fractions, and the rest goes to residuaries such as sons. Example: RM285,000 for a wife, mother, one son and two daughters gives the son {{F_EX_SON}} and each daughter {{F_EX_DAU}}." },
+    { "q": "What is the wife's share in faraid?", "a": "1/8 if the deceased left a child or son's child, and 1/4 if not. Two or more wives share that fraction equally. In the RM285,000 example the wife receives {{F_EX_WIFE}}." },
+    { "q": "Why does a son get twice a daughter's share?", "a": "The Quran (an-Nisa' 4:11) gives a son the share of two daughters when they inherit together as residuaries. Daughters without a son instead take a fixed share of 1/2 (one) or 2/3 (two or more)." },
+    { "q": "What happens to the residue if there is no residuary heir?", "a": "In Malaysia it goes to the Baitulmal of the State Islamic Religious Council. Example: a wife alone takes 1/4 and Baitulmal 3/4. In Perlis, a 2018 fatwa returns the residue (radd) to the fixed-share heirs other than the spouse." },
+    { "q": "What is 'awl in faraid?", "a": "'Awl applies when the fixed shares add up to more than the estate: the base is raised so every share shrinks in proportion. Example: a husband (1/2) and two full sisters (2/3) total 7/6, so the base 6 becomes 7: husband 3/7, each sister 2/7." },
+    { "q": "Who is excluded (mahjub) from faraid?", "a": "A nearer heir excludes a farther one: a son excludes grandchildren, the father excludes the grandfather and all siblings, the mother excludes grandmothers, and a child or the father excludes uterine siblings. The husband, wife, father, mother, son and daughter are never wholly excluded." },
+    { "q": "How do I apply for a faraid distribution in Malaysia?", "a": "Get a faraid certificate (Sijil Faraid) from the state Syariah High Court. Then apply through the JKPTG estate distribution unit for small estates up to RM5 million, Amanah Raya for movable estates up to RM600,000, or the civil High Court for larger estates or where there is a will." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Faraid Calculator</li></ol></nav>
+  <h1>Faraid Calculator Malaysia</h1>
+  <p class="answer">Faraid divides a Muslim estate after <strong>funeral costs, debts, harta sepencarian and any bequest (at most 1/3)</strong>: husband 1/2 or 1/4, wife 1/4 or 1/8, mother 1/3 or 1/6, daughters 1/2 or 2/3, and the rest to residuaries such as sons, who take twice a daughter's share. In Malaysia a residue with no residuary goes to <strong>Baitulmal</strong>. Enter the estate and heirs below.</p>
+  <p class="meta"><span>Rulings verified <time datetime="{{F_VERIFIED_ISO}}">{{F_VERIFIED}}</time></span><span>Shafi'i school</span><a href="/kalkulator-faraid/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="faraidForm" novalidate aria-labelledby="faraid-h">
+      <h2 id="faraid-h">Estate and heirs</h2>
+      <div class="field"><label for="deceased">The deceased</label><select class="input" id="deceased" name="deceased">{{F_DECEASED_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="estate">Total estate</label><div class="input"><span aria-hidden="true">RM</span><input id="estate" name="estate" type="number" inputmode="decimal" min="0" step="1000" value="{{F_ESTATE}}"></div></div>
+        <div class="field"><label for="sepencarian">Harta sepencarian</label><div class="input"><span aria-hidden="true">RM</span><input id="sepencarian" name="sepencarian" type="number" inputmode="decimal" min="0" step="1000" value="0"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="funeral">Funeral costs</label><div class="input"><span aria-hidden="true">RM</span><input id="funeral" name="funeral" type="number" inputmode="decimal" min="0" step="100" value="{{F_FUNERAL}}"></div></div>
+        <div class="field"><label for="debts">Debts</label><div class="input"><span aria-hidden="true">RM</span><input id="debts" name="debts" type="number" inputmode="decimal" min="0" step="100" value="{{F_DEBTS}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="wasiat">Bequest to non-heirs</label><div class="input"><span aria-hidden="true">RM</span><input id="wasiat" name="wasiat" type="number" inputmode="decimal" min="0" step="100" value="0"></div></div>
+        <div class="field"><label for="residue">Residue with no residuary</label><select class="input" id="residue" name="residue">{{F_RESIDUE_OPTIONS}}</select></div>
+      </div>
+{{F_HEIRS}}
+      <p class="help">Enter how many of each heir were alive at the death. Excluded heirs are marked.</p>
+    </form>
+
+    <section class="box" aria-labelledby="faraid-result-h">
+      <h2 id="faraid-result-h">Distribution</h2>
+      <div class="net">
+        <p>Net estate for faraid</p>
+        <output id="fNet" for="estate sepencarian funeral debts wasiat">{{F_NET}}</output>
+        <p id="fSub">{{F_SUB}}</p>
+      </div>
+      <p class="sr-only" id="fLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Estate</caption>
+        <tbody id="fMoney">
+{{F_MONEY}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>Heirs' shares</caption>
+        <tbody id="fShares">
+{{F_SHARES}}
+        </tbody>
+      </table>
+      <p class="help" id="fNotes"></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="faraidPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="ref-h">Faraid shares table</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ref-h">
+    <table class="data">
+      <thead><tr><th scope="col">Heir</th><th scope="col">Share and condition</th></tr></thead>
+      <tbody>
+{{F_REF}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="cases-h">Worked faraid cases</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cases-h">
+    <table class="data">
+      <thead><tr><th scope="col">Heirs</th><th scope="col">Shares</th><th scope="col">Base</th></tr></thead>
+      <tbody>
+{{F_CASES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How faraid is worked out</h2>
+  <ol>
+    <li><strong>Deduct</strong> funeral costs, debts, harta sepencarian and any bequest to non-heirs (at most 1/3 of what is left).</li>
+    <li><strong>Find excluded heirs</strong> (mahjub), for example grandchildren by a son and siblings by the father.</li>
+    <li><strong>Give the fixed shares</strong> (ashab al-furud); if they exceed the estate, raise the base ('awl).</li>
+    <li><strong>Give the residue to the residuaries</strong> in order; if there are none, to Baitulmal (or radd in Perlis).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">The estate process in Malaysia</h2>
+  <ul>
+    <li><strong>Sijil Faraid</strong> is issued by the state Syariah High Court on the death certificate and the heirs' identity cards.</li>
+    <li><strong>Small estates</strong> (up to RM5 million with no civil will): the JKPTG estate distribution unit, through MyLand.</li>
+    <li><strong>Summary estates</strong> (movable property only, up to RM600,000): Amanah Raya Berhad.</li>
+    <li><strong>Larger estates or with a will:</strong> the civil High Court (probate or letters of administration).</li>
+    <li><strong>Hibah</strong> given in life and EPF money paid to a nominee are outside faraid. Work out zakat with the <a href="/zakat-calculator-malaysia/">zakat calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://efaraid.mais.gov.my/baitulmal/" rel="noopener">MAIS e-Faraid: Baitulmal</a> and <a href="https://baitulmal.sabah.gov.my/doc/FARAID.pdf" rel="noopener">Baitulmal Sabah: Faraid</a></li>
+    <li><a href="https://www.malaysia.gov.my/personas/penjaga-kepada-ibu-bapa-tua/mengurus-harta-pusaka/perkara-penting-sebelum-pembahagian-pusaka-bagi-orang-islam" rel="noopener">MyGovernment: Before distribution</a>, <a href="https://www.malaysia.gov.my/my/topics/nilaian-harta-dan-agensi-pengurusan-pusaka" rel="noopener">estate agencies</a>, <a href="https://www.malaysia.gov.my/en/topics/simple-inheritance-application-procedure" rel="noopener">summary estates</a></li>
+    <li><a href="https://syariah.kedah.gov.my/wp-content/uploads/2026/05/PK-JKSNK-10-Permohonan-Faraid.pdf" rel="noopener">Kedah Syariah Court: Faraid application</a></li>
+    <li><a href="https://muis.gov.sg/-/media/Files/OOM/Resources/Faraidh.ashx" rel="noopener">MUIS: Faraidh guide</a></li>
+    <li><a href="https://fiqh.um.edu.my/index.php/fiqh/article/view/65952" rel="noopener">UM Jurnal Fiqh: Baitulmal</a>, <a href="https://hrmars.com/ijarbss/article/view/22071/Evaluating-the-Fatwa-on-Surplus-Estate-Management-in-the-State-of-Perlis-Insights-into-the-Al-Radd-Reinstatement-Method" rel="noopener">Perlis radd fatwa</a>, <a href="https://ijie.um.edu.my/index.php/JS/article/download/22781/11325/49391" rel="noopener">musytarakah</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> A guide, not a faraid certificate. The official distribution is set by the Syariah Court. Grandfather-with-siblings cases (muqasamah) and wasiat wajibah are not worked out here.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/zakat-calculator-malaysia/">Zakat Calculator Malaysia<small>Zakat on income with had kifayah</small></a>
+    <a href="/iddah-calculator/">Iddah Calculator<small>When the iddah ends</small></a>
+    <a href="/hajj-cost-calculator-malaysia/">Hajj Cost Calculator<small>Hajj cost and savings</small></a>
+  </div>
+</section>

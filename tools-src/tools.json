@@ -342,12 +342,12 @@
     "live": true
   },
   {
-    "name": "Malaysia Currency Converter",
-    "desc": "Convert MYR and other supported currencies using the exchange-rate data available in the tool.",
-    "url": "https://www.thebukitbesi.com/p/currency-converter-malaysia.html",
+    "name": "Currency Converter Malaysia",
+    "desc": "Ringgit converter at Bank Negara's 12:00 middle rate, updated daily, with a money changer rate check and a ringgit table for every currency. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/currency-converter-malaysia/",
     "cat": "util",
     "icon": "currency-converter-malaysia",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
@@ -838,11 +838,11 @@
   },
   {
     "name": "Kalkulator Faraid",
-    "desc": "Estimate Islamic inheritance shares for supported family scenarios and review the breakdown.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-faraid.html",
+    "desc": "Shafi'i faraid shares for 23 heirs with hajb, 'awl, Umariyyatain and Baitulmal or radd residue, after harta sepencarian, funeral costs, debts and the one-third wasiat cap. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-faraid/",
     "cat": "calc",
     "icon": "kalkulator-faraid",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
@@ -873,30 +873,21 @@
     "live": true
   },
   {
-    "name": "Pregnancy Dates & Test Timing",
-    "desc": "Estimate gestational age and view NIPT or ultrasound timing from your pregnancy dates.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html",
-    "cat": "calc",
-    "icon": "kalkulator-jantina-bayi",
-    "badge": "",
-    "live": true
-  },
-  {
     "name": "Kalkulator Saiz Kasut",
-    "desc": "Convert shoe sizes between UK, US, EU and centimeter measurements.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html",
+    "desc": "Shoe size from foot length in cm, or convert UK, EU, US men's and women's, kids' and Mondopoint, with brand chart differences. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-saiz-kasut/",
     "cat": "calc",
     "icon": "kalkulator-saiz-kasut",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
     "name": "Kalkulator Kalori",
-    "desc": "Estimate BMR, daily calorie needs and macronutrients from your activity and body measurements.",
-    "url": "https://www.thebukitbesi.com/p/kalkulator-kalori.html",
+    "desc": "BMR (Mifflin-St Jeor), daily calories for your activity and weight goal, macros, Asian BMI and Malaysia's RNI 2017 energy table. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-kalori/",
     "cat": "calc",
     "icon": "kalkulator-kalori",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

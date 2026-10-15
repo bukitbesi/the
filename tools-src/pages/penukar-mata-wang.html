@@ -1,0 +1,132 @@
+<!--page
+{
+  "path": "/penukar-mata-wang/",
+  "lang": "ms",
+  "alternates": { "en": "/currency-converter-malaysia/" },
+  "title": "Penukar Mata Wang: Kadar Tukaran Ringgit Hari Ini (Bank Negara)",
+  "description": "Tukar ringgit ke dolar, euro, yen, riyal dan mata wang lain pada kadar tengah Bank Negara Malaysia hari ini, dan semak berapa mahal kadar pengurup wang anda.",
+  "llms": "Penukar mata wang ringgit Malaysia menggunakan kadar tengah Bank Negara Malaysia (BNM) dari pasaran pertukaran asing antara bank Kuala Lumpur pada jam 12:00 tengah hari, dikemas kini setiap hari oleh aliran kerja automatik (sandaran: kadar rujukan Bank Pusat Eropah). Kadar dalam ringgit bagi setiap unit mata wang; sesetengah mata wang (contohnya yen Jepun, rupiah Indonesia, won Korea, baht Thailand, dolar Hong Kong) disebut bagi setiap 100 unit. Merangkumi dolar AS, dolar Singapura, euro, paun British, yen Jepun, yuan China, baht Thailand, rupiah Indonesia, dolar Australia, riyal Saudi, dirham UAE, dan lain-lain. Alat ini juga mengira beza peratus antara kadar pengurup wang atau bank dengan kadar tengah BNM, dan anggaran kos tambahan. Kadar BNM ialah kadar rujukan indikatif; bank, pengurup wang dan rangkaian kad menggunakan kadar beli dan jual serta caj sendiri.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "fx",
+  "scripts": ["/assets/js/fx.js"],
+  "breadcrumb": [["Alat", "/"], ["Utiliti", "/?cat=util#tools"], ["Penukar Mata Wang", null]],
+  "about": ["Kadar pertukaran asing", "Ringgit Malaysia", "Bank Negara Malaysia", "Pengurup wang"],
+  "app": {
+    "name": "Penukar Mata Wang Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Kadar tengah BNM tengah hari", "Lebih 25 mata wang", "Tukar dua hala", "Semakan kadar pengurup wang", "Jadual ringgit bagi setiap mata wang", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Kadar pertukaran", "https://www.bnm.gov.my/exchange-rates"],
+    ["Bank Negara Malaysia: Statistik kadar", "https://www.bnm.gov.my/rates-statistics"],
+    ["Bank Negara Malaysia: Open API", "https://www.bnm.gov.my/-/bnm-openapi"],
+    ["data.gov.my: Kadar pertukaran harian jam 12:00", "https://data.gov.my/data-catalogue/exchangerates_daily_1200"],
+    ["Bank Negara Malaysia: Kadar USD/MYR tidak tepat di sumber tidak rasmi", "https://www.bnm.gov.my/-/inaccurate-usdmyr"],
+    ["Frankfurter: Kadar rujukan ECB", "https://frankfurter.dev/providers/bnm/"]
+  ],
+  "faq": [
+    { "q": "Berapa 1 dolar AS dalam ringgit hari ini?", "a": "Pada kadar tengah BNM {{X_DATE}}, 1 USD = RM{{X_USD}}, jadi USD100 = {{X_USD100}}. Bank dan pengurup wang menjual sedikit lebih tinggi dan membeli sedikit lebih rendah daripada kadar ini." },
+    { "q": "RM100 boleh dapat berapa dolar AS?", "a": "Kira-kira {{X_RM100_USD}} USD pada kadar tengah BNM {{X_DATE}}. Jumlah sebenar di kaunter lebih rendah kerana kadar jual dan caj." },
+    { "q": "Kadar apa yang digunakan penukar ini?", "a": "Kadar tengah Bank Negara Malaysia dari pasaran antara bank Kuala Lumpur pada jam 12:00 tengah hari, dikemas kini setiap hari kerja. Jika BNM tidak tersedia, kadar rujukan Bank Pusat Eropah digunakan sebagai sandaran." },
+    { "q": "Kenapa kadar pengurup wang berbeza daripada kadar BNM?", "a": "Kadar BNM ialah kadar tengah antara bank. Pengurup wang dan bank menambah margin pada kadar jual dan menolak margin pada kadar beli. Masukkan kadar yang ditawarkan untuk melihat berapa peratus lebih mahal dan anggaran kos tambahan." },
+    { "q": "Kenapa yen dan rupiah disebut bagi 100 unit?", "a": "BNM menyebut mata wang bernilai rendah seperti yen Jepun, rupiah Indonesia, won Korea dan baht Thailand bagi setiap 100 unit. Penukar ini menukar semuanya kepada nilai seunit secara automatik." },
+    { "q": "Berapa 1 dolar Singapura dalam ringgit?", "a": "Pada kadar tengah BNM {{X_DATE}}, 1 SGD = RM{{X_SGD}}." },
+    { "q": "Adakah kadar Google tepat?", "a": "Tidak semestinya. BNM pernah memberi amaran pada 2024 apabila sumber tidak rasmi memaparkan kadar USD/MYR yang salah. Gunakan kadar rasmi BNM sebagai rujukan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Penukar Mata Wang</li></ol></nav>
+  <h1>Penukar Mata Wang Ringgit</h1>
+  <p class="answer">Pada kadar tengah Bank Negara Malaysia {{X_DATE}}, <strong>1 dolar AS = RM{{X_USD}}</strong> dan 1 dolar Singapura = RM{{X_SGD}}. Penukar ini menggunakan kadar rasmi BNM jam 12:00 tengah hari bagi {{X_COUNT}} mata wang, dan menunjukkan berapa lebih mahal kadar yang ditawarkan pengurup wang anda.</p>
+  <p class="meta"><span>Kadar <time datetime="{{X_DATE_ISO}}">{{X_DATE}}</time></span><span>Sumber: {{X_SOURCE}}</span><a href="/currency-converter-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="fxForm" novalidate aria-labelledby="fx-h" data-rates="{{X_RATES}}" data-names="{{X_NAMES}}">
+      <h2 id="fx-h">Tukar</h2>
+      <div class="field"><label for="amount">Jumlah</label><div class="input"><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="any" value="{{X_AMOUNT}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="from">Dari</label><select class="input" id="from" name="from">{{X_FROM_OPTIONS}}</select></div>
+        <div class="field"><label for="to">Kepada</label><select class="input" id="to" name="to">{{X_TO_OPTIONS}}</select></div>
+      </div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fxSwap">Tukar arah ⇄</button></div>
+      <div class="field"><label for="offer">Kadar pengurup wang (RM seunit, pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="offer" name="offer" type="number" inputmode="decimal" min="0" step="0.0001" value=""></div></div>
+      <p class="help">Masukkan kadar yang ditawarkan kaunter untuk melihat bezanya dengan kadar BNM.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fx-result-h">
+      <h2 id="fx-result-h">Keputusan</h2>
+      <div class="net">
+        <p>Anda dapat</p>
+        <output id="xResult" for="amount from to">{{X_RESULT}}</output>
+        <p id="xSub">{{X_SUB}}</p>
+      </div>
+      <p class="sr-only" id="xLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Kadar</caption>
+        <tbody id="xLines">
+{{X_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fxPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Kadar tukaran ringgit hari ini</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Mata wang</th><th scope="col">Ringgit</th><th scope="col">RM100 boleh dapat</th></tr></thead>
+      <tbody>
+{{X_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kadar tengah BNM {{X_DATE}}. Mata wang bertanda "/ 100" disebut bagi 100 unit.</p>
+
+  <h2 id="formula">Cara kadar dikira</h2>
+  <ol>
+    <li><strong>Kadar BNM</strong>: kadar tengah antara bank Kuala Lumpur pada jam 12:00, dalam ringgit bagi 1 atau 100 unit.</li>
+    <li><strong>Seunit</strong> = kadar ÷ unit; ringgit = 1.</li>
+    <li><strong>Tukaran</strong> = jumlah × (ringgit seunit mata wang asal) ÷ (ringgit seunit mata wang sasaran).</li>
+    <li><strong>Beza pengurup wang</strong> = (kadar ditawarkan − kadar BNM) ÷ kadar BNM.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips menukar wang</h2>
+  <ul>
+    <li><strong>Bandingkan</strong> kadar beberapa pengurup wang berlesen BNM, kerana margin berbeza antara kaunter.</li>
+    <li><strong>Kad debit atau kredit</strong> di luar negara dikenakan kadar rangkaian kad dan caj bank; semak terma bank anda.</li>
+    <li><strong>Haji dan umrah:</strong> riyal Saudi tersenarai; rancang simpanan dengan <a href="/kalkulator-tabung-haji/">kalkulator Tabung Haji</a>.</li>
+    <li>Lihat juga <a href="/harga-emas-hari-ini/">harga emas hari ini</a>, yang menggunakan kadar USD/MYR BNM.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/exchange-rates" rel="noopener">BNM: Kadar pertukaran</a>, <a href="https://www.bnm.gov.my/rates-statistics" rel="noopener">statistik kadar</a>, <a href="https://www.bnm.gov.my/-/bnm-openapi" rel="noopener">Open API</a></li>
+    <li><a href="https://data.gov.my/data-catalogue/exchangerates_daily_1200" rel="noopener">data.gov.my: Kadar harian 12:00</a></li>
+    <li><a href="https://www.bnm.gov.my/-/inaccurate-usdmyr" rel="noopener">BNM: Amaran kadar tidak tepat</a></li>
+    <li><a href="https://frankfurter.dev/providers/bnm/" rel="noopener">Frankfurter: Kadar rujukan</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Kadar tengah yang diterbitkan Bank Negara Malaysia ialah kadar rujukan indikatif untuk maklumat sahaja. Bank, pengurup wang dan rangkaian kad menggunakan kadar beli dan jual serta caj sendiri. Sumber: Bank Negara Malaysia.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/harga-emas-hari-ini/">Harga Emas Hari Ini<small>Emas 999, 916 dan Kijang Emas</small></a>
+    <a href="/kalkulator-tabung-haji/">Kalkulator Tabung Haji<small>Kos haji dan simpanan</small></a>
+    <a href="/kalkulator-fixed-deposit/">Kalkulator Fixed Deposit<small>Faedah simpanan tetap</small></a>
+  </div>
+</section>

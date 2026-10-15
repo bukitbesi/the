@@ -1,0 +1,133 @@
+<!--page
+{
+  "path": "/currency-converter-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/penukar-mata-wang/" },
+  "bloggerFrom": "https://www.thebukitbesi.com/p/currency-converter-malaysia.html",
+  "title": "Currency Converter Malaysia: Ringgit Exchange Rate Today (BNM)",
+  "description": "Convert ringgit to dollars, euros, yen, riyal and more at Bank Negara Malaysia's middle rate today, and check how much your money changer's rate costs you.",
+  "llms": "Malaysian ringgit currency converter using Bank Negara Malaysia (BNM) middle rates from the Kuala Lumpur interbank foreign exchange market at 12:00 noon, updated daily by an automated workflow (backup: European Central Bank reference rates). Rates are in ringgit per unit; some currencies (for example Japanese yen, Indonesian rupiah, Korean won, Thai baht, Hong Kong dollar) are quoted per 100 units. Covers the US dollar, Singapore dollar, euro, British pound, Japanese yen, Chinese yuan, Thai baht, Indonesian rupiah, Australian dollar, Saudi riyal, UAE dirham and more. The tool also works out the percentage gap between a money changer's or bank's rate and the BNM middle rate, and the estimated extra cost. BNM rates are indicative reference rates; banks, money changers and card networks apply their own buying and selling rates and fees.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "fx",
+  "scripts": ["/assets/js/fx.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Currency Converter", null]],
+  "about": ["Foreign exchange rates", "Malaysian ringgit", "Bank Negara Malaysia", "Money changers"],
+  "app": {
+    "name": "Currency Converter Malaysia",
+    "category": "FinanceApplication",
+    "features": ["BNM noon middle rates", "Over 25 currencies", "Two-way conversion", "Money changer rate check", "Ringgit table for every currency", "Works offline"]
+  },
+  "citations": [
+    ["Bank Negara Malaysia: Exchange rates", "https://www.bnm.gov.my/exchange-rates"],
+    ["Bank Negara Malaysia: Rates and statistics", "https://www.bnm.gov.my/rates-statistics"],
+    ["Bank Negara Malaysia: Open API", "https://www.bnm.gov.my/-/bnm-openapi"],
+    ["data.gov.my: Daily 12:00 exchange rates", "https://data.gov.my/data-catalogue/exchangerates_daily_1200"],
+    ["Bank Negara Malaysia: Inaccurate USD/MYR rates on unofficial sources", "https://www.bnm.gov.my/-/inaccurate-usdmyr"],
+    ["Frankfurter: ECB reference rates", "https://frankfurter.dev/providers/bnm/"]
+  ],
+  "faq": [
+    { "q": "How much is 1 US dollar in ringgit today?", "a": "At BNM's middle rate on {{X_DATE}}, 1 USD = RM{{X_USD}}, so USD100 = {{X_USD100}}. Banks and money changers sell slightly above and buy slightly below this rate." },
+    { "q": "How many US dollars is RM100?", "a": "About {{X_RM100_USD}} USD at BNM's middle rate on {{X_DATE}}. The amount at a counter is lower because of the selling rate and fees." },
+    { "q": "Which rate does this converter use?", "a": "Bank Negara Malaysia's middle rate from the Kuala Lumpur interbank market at 12:00 noon, updated every business day. If BNM is unavailable, the European Central Bank's reference rates are used as a backup." },
+    { "q": "Why is a money changer's rate different from BNM's?", "a": "BNM's rate is the interbank middle rate. Money changers and banks add a margin to their selling rate and take one off their buying rate. Enter the rate you are offered to see how many percent more expensive it is and the estimated extra cost." },
+    { "q": "Why are yen and rupiah quoted per 100 units?", "a": "BNM quotes low-value currencies such as the Japanese yen, Indonesian rupiah, Korean won and Thai baht per 100 units. This converter turns them all into per-unit values automatically." },
+    { "q": "How much is 1 Singapore dollar in ringgit?", "a": "At BNM's middle rate on {{X_DATE}}, 1 SGD = RM{{X_SGD}}." },
+    { "q": "Is Google's exchange rate accurate?", "a": "Not always. BNM issued a warning in 2024 when unofficial sources showed a wrong USD/MYR rate. Use BNM's official rate as the reference." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Currency Converter</li></ol></nav>
+  <h1>Currency Converter Malaysia</h1>
+  <p class="answer">At Bank Negara Malaysia's middle rate on {{X_DATE}}, <strong>1 US dollar = RM{{X_USD}}</strong> and 1 Singapore dollar = RM{{X_SGD}}. This converter uses BNM's official 12:00 noon rates for {{X_COUNT}} currencies, and shows how much more your money changer's rate costs you.</p>
+  <p class="meta"><span>Rates <time datetime="{{X_DATE_ISO}}">{{X_DATE}}</time></span><span>Source: {{X_SOURCE}}</span><a href="/penukar-mata-wang/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="fxForm" novalidate aria-labelledby="fx-h" data-rates="{{X_RATES}}" data-names="{{X_NAMES}}">
+      <h2 id="fx-h">Convert</h2>
+      <div class="field"><label for="amount">Amount</label><div class="input"><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="any" value="{{X_AMOUNT}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="from">From</label><select class="input" id="from" name="from">{{X_FROM_OPTIONS}}</select></div>
+        <div class="field"><label for="to">To</label><select class="input" id="to" name="to">{{X_TO_OPTIONS}}</select></div>
+      </div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fxSwap">Swap ⇄</button></div>
+      <div class="field"><label for="offer">Money changer's rate (RM per unit, optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="offer" name="offer" type="number" inputmode="decimal" min="0" step="0.0001" value=""></div></div>
+      <p class="help">Enter the counter's offered rate to see the gap from BNM's rate.</p>
+    </form>
+
+    <section class="box" aria-labelledby="fx-result-h">
+      <h2 id="fx-result-h">Result</h2>
+      <div class="net">
+        <p>You get</p>
+        <output id="xResult" for="amount from to">{{X_RESULT}}</output>
+        <p id="xSub">{{X_SUB}}</p>
+      </div>
+      <p class="sr-only" id="xLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Rates</caption>
+        <tbody id="xLines">
+{{X_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="fxPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Ringgit exchange rates today</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Currency</th><th scope="col">Ringgit</th><th scope="col">RM100 buys</th></tr></thead>
+      <tbody>
+{{X_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>BNM middle rates on {{X_DATE}}. Currencies marked "/ 100" are quoted per 100 units.</p>
+
+  <h2 id="formula">How the rates are worked out</h2>
+  <ol>
+    <li><strong>BNM rate</strong>: the Kuala Lumpur interbank middle rate at 12:00, in ringgit per 1 or 100 units.</li>
+    <li><strong>Per unit</strong> = rate ÷ unit; the ringgit = 1.</li>
+    <li><strong>Conversion</strong> = amount × (ringgit per unit of the source currency) ÷ (ringgit per unit of the target).</li>
+    <li><strong>Money changer gap</strong> = (offered rate − BNM rate) ÷ BNM rate.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips for changing money</h2>
+  <ul>
+    <li><strong>Compare</strong> several BNM-licensed money changers, because margins differ between counters.</li>
+    <li><strong>Debit and credit cards</strong> abroad use the card network's rate plus bank fees; check your bank's terms.</li>
+    <li><strong>Hajj and umrah:</strong> the Saudi riyal is listed; plan your savings with the <a href="/hajj-cost-calculator-malaysia/">hajj cost calculator</a>.</li>
+    <li>See also the <a href="/gold-price-malaysia/">gold price today</a>, which uses BNM's USD/MYR rate.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.bnm.gov.my/exchange-rates" rel="noopener">BNM: Exchange rates</a>, <a href="https://www.bnm.gov.my/rates-statistics" rel="noopener">rates and statistics</a>, <a href="https://www.bnm.gov.my/-/bnm-openapi" rel="noopener">Open API</a></li>
+    <li><a href="https://data.gov.my/data-catalogue/exchangerates_daily_1200" rel="noopener">data.gov.my: Daily 12:00 rates</a></li>
+    <li><a href="https://www.bnm.gov.my/-/inaccurate-usdmyr" rel="noopener">BNM: Warning on inaccurate rates</a></li>
+    <li><a href="https://frankfurter.dev/providers/bnm/" rel="noopener">Frankfurter: Reference rates</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Bank Negara Malaysia's published middle rates are indicative reference rates for information only. Banks, money changers and card networks apply their own buying and selling rates and fees, so the amount you receive or pay will differ. Source: Bank Negara Malaysia.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/gold-price-malaysia/">Gold Price Today<small>999, 916 and Kijang Emas</small></a>
+    <a href="/hajj-cost-calculator-malaysia/">Hajj Cost Calculator<small>Hajj cost and savings</small></a>
+    <a href="/fixed-deposit-calculator-malaysia/">Fixed Deposit Calculator<small>Fixed deposit interest</small></a>
+  </div>
+</section>

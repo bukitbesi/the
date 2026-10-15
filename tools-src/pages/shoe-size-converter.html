@@ -1,0 +1,151 @@
+<!--page
+{
+  "path": "/shoe-size-converter/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-saiz-kasut/" },
+  "title": "Shoe Size Converter: UK, EU, US and Foot Length (cm) Chart",
+  "description": "Find your shoe size from your foot length in cm, or convert between UK, EU, US men's and women's, kids' and Mondopoint sizes, with brand chart differences.",
+  "llms": "Shoe size from foot length and converter between sizing systems, verified 15 October 2026. The shoe last is about the foot length + 2/3 inch (1.7 cm) for adults and + 1.2 cm for children. UK adult size = 3 × last length (inches) − 25; UK children = 3 × last − 12 (0 to 13.5, then adult 1); EU (Paris point) = 1.5 × last length (cm); US men = UK + 1; US women = UK + 2; Mondopoint = foot length in mm (ISO 9407). Examples: a 26.2 cm foot = UK 8, EU 42, US men 9, US women 10, Mondopoint 262; a 24.5 cm foot = UK 6; a 22 cm foot = UK 3; a child's 17.4 cm foot = UK 10 kids, EU 28. Brand charts differ by up to half a UK or US size (about one EU size): at UK 8, Nike and ASICS are US 9 / EU 42.5, adidas and New Balance US 8.5 / EU 42, Vans US 9 / EU 42; US women runs UK + 1.5 to UK + 2.5 by brand. Shops in Malaysia mostly use UK and EU sizes. Measure feet in the afternoon, heel to the longest toe, both feet, and use the longer.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "kasut",
+  "scripts": ["/assets/js/kasut.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Shoe Size Converter", null]],
+  "about": ["Shoe size", "Foot length", "UK EU US sizes", "Mondopoint"],
+  "app": {
+    "name": "Shoe Size Converter",
+    "category": "UtilitiesApplication",
+    "features": ["Size from foot length (cm)", "UK, EU, US men's and women's", "Children's sizes", "Mondopoint (mm)", "Brand chart differences", "Works offline"]
+  },
+  "citations": [
+    ["Wikipedia: Shoe size", "https://en.wikipedia.org/wiki/Shoe_size"],
+    ["ISO 9407:2019 Footwear sizes: Mondopoint", "https://webstore.ansi.org/standards/iso/iso94072019"],
+    ["Nike Malaysia: Men's shoe size chart", "https://www.nike.com/my/size-fit/mens-footwear"],
+    ["adidas: Men's shoe size chart", "https://www.adidas.com/kw/en/size-chart-men-shoes.html"],
+    ["Bata Malaysia: Women's shoes (size chart)", "https://www.bata.com/my/bata-women-shoes-521D_017116621101W.html"],
+    ["Start-rite: Children's size conversion chart", "https://www.startriteshoes.com/measure/conversion-chart"],
+    ["StockX: Men's sneakers sizing chart", "https://stockx.com/news/mens-sneakers-sizing-chart"]
+  ],
+  "faq": [
+    { "q": "How do I find my shoe size from my foot length?", "a": "Measure your foot from the heel to the longest toe in cm and enter it above. A 26.2 cm foot is usually UK 8, EU 42 and US men 9; a 24.5 cm foot UK 6 and EU 39.5." },
+    { "q": "What UK size is EU 42?", "a": "About UK 8 and US men 9 by the standard formula. Nike and ASICS put UK 8 at EU 42.5, while adidas and New Balance put it at EU 42, so check the brand's chart." },
+    { "q": "What is the difference between US men's and women's sizes?", "a": "US women is usually UK + 2 and US men UK + 1, so a US women's size is about 1.5 to 2 sizes above US men's for the same foot. Nike uses UK + 2.5 and adidas UK + 1.5 for women." },
+    { "q": "How do I measure my foot correctly?", "a": "Stand on paper against a wall in the afternoon wearing the socks you will use, mark the heel and longest toe, measure both feet and use the longer. Leave about a thumb's width of room at the toe." },
+    { "q": "How do children's shoe sizes work?", "a": "UK children's sizes start at 0 and run to 13.5, then continue as adult UK 1. A 17.4 cm foot is usually UK 10 kids or EU 28. Recheck a child's size every few months." },
+    { "q": "What is Mondopoint?", "a": "The ISO 9407 sizing system that gives the foot length in millimetres, for example 262 for a 26.2 cm foot. It is used for ski boots, military footwear and by some Asian brands." },
+    { "q": "Why is my size different between brands?", "a": "Each brand uses its own lasts and charts, so the same size can differ by up to half a UK or US size (about one EU size). The chart of the brand you are buying is always the main reference." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Shoe Size Converter</li></ol></nav>
+  <h1>Shoe Size Converter</h1>
+  <p class="answer">Shoe size follows <strong>foot length</strong>: a 26.2 cm foot is usually <strong>UK 8, EU 42 and US men 9</strong>, and a 24.5 cm foot UK 6. Enter your foot length in cm, or a size you know, to convert between UK, EU, US men's and women's, kids' and Mondopoint sizes. Brand charts can differ by up to half a size.</p>
+  <p class="meta"><span>Verified <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Runs in your browser; no data sent</span><a href="/kalkulator-saiz-kasut/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="kasutForm" novalidate aria-labelledby="kasut-h">
+      <h2 id="kasut-h">Your foot or size</h2>
+      <div class="field"><label for="mode">Work out</label><select class="input" id="mode" name="mode">{{S_MODE_OPTIONS}}</select></div>
+      <div class="field" id="fFoot"><label for="foot">Foot length</label><div class="input"><input id="foot" name="foot" type="number" inputmode="decimal" min="8" max="35" step="0.1" value="{{S_FOOT}}"><span aria-hidden="true">cm</span></div></div>
+      <div class="field-row" id="fSize" hidden>
+        <div class="field"><label for="system">Size system</label><select class="input" id="system" name="system">{{S_SYSTEM_OPTIONS}}</select></div>
+        <div class="field"><label for="size">Size</label><div class="input"><input id="size" name="size" type="number" inputmode="decimal" min="0" step="0.5" value="{{S_SIZE}}"></div></div>
+      </div>
+      <p class="help">Measure heel to longest toe in the afternoon, both feet, and use the longer.</p>
+    </form>
+
+    <section class="box" aria-labelledby="kasut-result-h">
+      <h2 id="kasut-result-h">Your size</h2>
+      <div class="net">
+        <p>UK size</p>
+        <output id="sUk" for="mode foot system size">{{S_UK}}</output>
+        <p id="sSub">{{S_SUB}}</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>All systems</caption>
+        <tbody id="sLines">
+{{S_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="kasutPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="adult-h">Adult shoe size chart</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="adult-h">
+    <table class="data">
+      <thead><tr><th scope="col">UK</th><th scope="col">EU</th><th scope="col">US men</th><th scope="col">US women</th><th scope="col">Foot (cm)</th></tr></thead>
+      <tbody>
+{{S_ADULT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="kids-h">Children's shoe size chart</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kids-h">
+    <table class="data">
+      <thead><tr><th scope="col">UK kids</th><th scope="col">EU</th><th scope="col">Foot (cm)</th></tr></thead>
+      <tbody>
+{{S_KIDS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="brands-h">UK 8 on brand charts</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="brands-h">
+    <table class="data">
+      <thead><tr><th scope="col">Brand</th><th scope="col">US men</th><th scope="col">EU</th></tr></thead>
+      <tbody>
+{{S_BRANDS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Brand charts differ by up to half a UK or US size. Check the brand's chart before buying online.</p>
+
+  <h2 id="formula">How sizes are worked out</h2>
+  <ol>
+    <li><strong>Shoe last</strong> = foot length + 1.7 cm (adults) or + 1.2 cm (children).</li>
+    <li><strong>UK adult</strong> = 3 × last (inches) − 25; <strong>UK kids</strong> = 3 × last − 12.</li>
+    <li><strong>EU</strong> = 1.5 × last (cm); <strong>US men</strong> = UK + 1; <strong>US women</strong> = UK + 2.</li>
+    <li><strong>Mondopoint</strong> = foot length in mm.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips for choosing a size</h2>
+  <ul>
+    <li><strong>Measure in the afternoon</strong>, when feet are largest, wearing the socks you will use.</li>
+    <li><strong>Between two sizes?</strong> Take the larger, especially for sports and school shoes.</li>
+    <li><strong>The cm on a shoe box</strong> is a size code, not a foot length.</li>
+    <li><strong>Wide feet:</strong> pick a wide fit; width is measured across the widest part of the foot.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Shoe_size" rel="noopener">Wikipedia: Shoe size</a> and <a href="https://webstore.ansi.org/standards/iso/iso94072019" rel="noopener">ISO 9407:2019 Mondopoint</a></li>
+    <li><a href="https://www.nike.com/my/size-fit/mens-footwear" rel="noopener">Nike Malaysia</a>, <a href="https://www.adidas.com/kw/en/size-chart-men-shoes.html" rel="noopener">adidas</a>, <a href="https://www.bata.com/my/bata-women-shoes-521D_017116621101W.html" rel="noopener">Bata Malaysia</a></li>
+    <li><a href="https://www.startriteshoes.com/measure/conversion-chart" rel="noopener">Start-rite: Children's sizes</a> and <a href="https://stockx.com/news/mens-sneakers-sizing-chart" rel="noopener">StockX</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate from the standard formulas. Actual sizes differ by brand and model; try the shoes on or check the brand's chart before buying.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/bmi-calculator-malaysia/">BMI Calculator Malaysia<small>Asian BMI cut-offs</small></a>
+    <a href="/calorie-calculator-malaysia/">Calorie Calculator<small>BMR and daily calories</small></a>
+    <a href="/currency-converter-malaysia/">Currency Converter<small>BNM rates today</small></a>
+  </div>
+</section>
