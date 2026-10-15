@@ -211,6 +211,14 @@ const organization = {
   sameAs: [`https://x.com/${site.twitter.replace('@', '')}`],
   publishingPrinciples: site.origin + '/about/#method'
 };
+const byline = p => p.body.replace(/(<p class="meta"><span>[\s\S]*?<\/span>)/, `$1<span>${p.lang === 'ms' ? 'Oleh' : 'By'} <a href="${site.author.path}" rel="author">${site.author.name}</a></span>`);
+// The named person who builds and verifies the calculators (E-E-A-T); tool pages credit them as author.
+const person = {
+  '@type': 'Person', '@id': site.origin + site.author.path, name: site.author.name, url: site.origin + site.author.path, jobTitle: site.author.jobTitle,
+  worksFor: { '@id': site.mainSite + '/#organization' },
+  knowsAbout: ['Malaysian personal finance calculators', 'Malaysian tax and payroll rules', 'Islamic inheritance (faraid) and zakat calculation', 'Web development']
+};
+organization.founder = { '@id': person['@id'] };
 const website = {
   '@type': 'WebSite', '@id': site.origin + '/#website', url: site.origin + '/', name: site.brand + ' Tools',
   alternateName: ['Bukit Besi Tools', 'The Bukit Besi free online tools'],
@@ -2284,11 +2292,11 @@ for (const p of pages) {
   const hreflang = [[p.lang === 'ms' ? 'ms-MY' : 'en-MY', p.path], ...alternates.map(([l, u]) => [l === 'ms' ? 'ms-MY' : 'en-MY', u])];
   const xDefault = p.lang === 'en' ? p.path : (p.alternates && p.alternates.en) || p.path;
   const crumbs = p.breadcrumb.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, ...(href ? { item: abs(href) } : {}) }));
-  const graph = [organization, website, {
+  const graph = [organization, person, website, {
     '@type': p.schemaType || 'WebPage', '@id': pageId, url, name: p.title, description: p.description,
     inLanguage: p.lang === 'ms' ? 'ms-MY' : 'en-MY', isPartOf: { '@id': site.origin + '/#website' },
     breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.datePublished, dateModified: p.dateModified,
-    author: { '@id': site.mainSite + '/#organization' }, publisher: { '@id': site.mainSite + '/#organization' },
+    author: { '@id': p.policy ? site.mainSite + '/#organization' : person['@id'] }, publisher: { '@id': site.mainSite + '/#organization' },
     primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
     ...(p.about ? { about: p.about.map(name => ({ '@type': 'Thing', name })) } : {}),
     ...(p.citations ? { citation: p.citations.map(c => ({ '@type': 'CreativeWork', name: c[0], url: c[1] })) } : {}),
@@ -2316,7 +2324,7 @@ for (const p of pages) {
     NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=${p.cat || 'calc'}#tools">${catLabel(p.cat || 'calc', p.lang)}</a>`,
     HEADER_CTA: switcher || `    <a href="/" class="btn sm">${T[p.lang].ALL_TOOLS}</a>`,
     // Tool pages get a share bar after the article and a "Share result" button beside the calculator's actions.
-    MAIN: p.app ? p.body.replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
+    MAIN: p.app ? byline(p).replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
     FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
     PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n') + (p.app ? '\n' + shareScript : ''),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
