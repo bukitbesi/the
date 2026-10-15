@@ -77,6 +77,9 @@ const faraidCore = require('../assets/js/faraid-core.js');
 const fxCore = require('../assets/js/fx-core.js');
 const kaloriCore = require('../assets/js/kalori-core.js');
 const kasutCore = require('../assets/js/kasut-core.js');
+const samanCore = require('../assets/js/saman-core.js');
+const taksiranCore = require('../assets/js/taksiran-core.js');
+const evCore = require('../assets/js/ev-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -2146,7 +2149,74 @@ function kasutMap(lang) {
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, track: trackMap, near: nearMap, css: cssMap };
+// ---- batch 11: traffic summons, EV vs petrol, assessment tax.
+function samanMap(lang) {
+  const { L, m, tr } = b3(lang), S = samanCore, F = S.FACTS, r = S.calculate({ today: goldDate }), d = iso => longDate(iso, lang);
+  const tier = { early: L ? 'Bayar hingga {d} (50%)' : 'Pay by {d} (50% off)', mid: L ? 'Bayar hingga {d} (kira-kira ⅓ kurang)' : 'Pay by {d} (about ⅓ off)', full: L ? 'Bayar hingga {d} (penuh)' : 'Pay by {d} (full)' };
+  const lines = [tr(L ? 'Kompaun pada notis' : 'Compound on the notice', m(r.amount))]
+    .concat(r.tiers.map(t => tr(tier[t.key].replace('{d}', d(t.last)), m(t.pay), t.key === r.tier ? 'total' : '')))
+    .concat([tr((L ? 'Mulai ' : 'From ') + d(r.courtFrom), L ? 'Mahkamah atau senarai hitam' : 'Court or blacklist'), tr(L ? 'Jimat jika bayar sekarang' : 'You save by paying now', m(r.save))]).join('\n');
+  const table = [300, 250, 200, 150, 100].map(a => { const x = S.calculate({ amount: a, notice: '2026-10-01', pay: '2026-10-01' }); return `<tr><th scope="row">${m(a)}</th>${x.tiers.map(t => `<td>${m(t.pay)}</td>`).join('')}<td>${L ? 'Tiada kompaun' : 'No compound'}</td></tr>`; }).join('\n');
+  const ex = S.calculate({ amount: 300, notice: '2026-10-01', pay: '2026-10-01' });
+  return {
+    M_AMOUNT: r.amount, M_NOTICE: r.notice, M_PAY: m(r.payable), M_SUB: L ? `Hari ke-1 · kadar ini hingga ${d(r.lastDay)} (${r.daysLeft} hari lagi)` : `Day 1 · this rate until ${d(r.lastDay)} (${r.daysLeft} days left)`,
+    M_LINES: lines, M_TABLE: table, M_EX_1: d(ex.tiers[0].last), M_EX_2: d(ex.tiers[1].last), M_EX_3: d(ex.tiers[2].last), M_EX_COURT: d(ex.courtFrom),
+    M_VERIFIED: longDate(F.verified, lang), M_VERIFIED_ISO: F.verified
+  };
+}
+const TAKSIRAN_EXAMPLE = { council: 'dbkl', type: 'residential', mode: 'rent', rent: 1500 };
+const TAKSIRAN_COUNCILS = { dbkl: ['DBKL (Kuala Lumpur)', 'DBKL (Kuala Lumpur)'], mbpj: ['MBPJ (Petaling Jaya)', 'MBPJ (Petaling Jaya)'], mbpp: ['MBPP (Penang Island)', 'MBPP (Pulau Pinang)'], custom: ['Other council (enter its rate)', 'Majlis lain (masukkan kadar)'] };
+const TAKSIRAN_TYPES = {
+  en: { residential: 'Residential', commercial: 'Commercial', landed: 'Landed house', strata: 'Apartment or condominium', lowcost: 'Low-cost high-rise', serviced: 'Serviced apartment', landedLow: 'Low-cost or low-medium-cost landed', flatLow: 'Low-cost or middle-class flat', industrial: 'Industrial' },
+  ms: { residential: 'Kediaman', commercial: 'Komersial', landed: 'Rumah bertanah', strata: 'Pangsapuri atau kondominium', lowcost: 'Rumah pangsa kos rendah', serviced: 'Pangsapuri servis', landedLow: 'Rumah bertanah kos rendah atau sederhana rendah', flatLow: 'Rumah pangsa kos rendah atau kelas pertengahan', industrial: 'Perindustrian' }
+};
+function taksiranMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), X = taksiranCore, F = X.FACTS, N = TAKSIRAN_TYPES[lang], r = X.calculate(TAKSIRAN_EXAMPLE);
+  const cname = k => TAKSIRAN_COUNCILS[k][L];
+  const lines = [tr(L ? 'Nilai tahunan' : 'Annual value', m(r.annual)), tr(L ? 'Kadar' : 'Rate', nf(r.rate) + '%'), tr(L ? 'Cukai setahun' : 'Tax a year', m(r.tax), 'total'),
+    tr(L ? `Bayaran penggal 1 (hingga ${F.dueMs[0]})` : `Half 1 (due ${F.due[0]})`, m(r.half)), tr(L ? `Bayaran penggal 2 (hingga ${F.dueMs[1]})` : `Half 2 (due ${F.due[1]})`, m(r.half)), tr(L ? 'Purata sebulan' : 'Average a month', m(r.monthly))].join('\n');
+  const compare = X.compare(1500).map(x => `<tr data-rate="${x.rate}"><th scope="row">${cname(x.council)}</th><td>${N[x.type]} (${nf(x.rate)}%)</td><td>${m(x.tax)}</td></tr>`).join('\n');
+  const grid = [800, 1200, 1500, 2000, 3000, 5000].map(rent => `<tr><th scope="row">${m(rent)}</th><td>${m(rent * 12)}</td>${[['dbkl', 'residential'], ['mbpj', 'landed'], ['mbpj', 'strata'], ['mbpp', 'landed'], ['mbpp', 'strata']].map(([c, t]) => `<td>${m(X.calculate({ council: c, type: t, rent }).tax)}</td>`).join('')}</tr>`).join('\n');
+  const ex = X.calculate({ council: 'mbpj', type: 'landed', mode: 'annual', annual: 9900 }), cap = X.calculate({ council: 'mbpj', type: 'landed', rent: 1500, oldTax: 400 });
+  return {
+    T_TYPES: attr(JSON.stringify(N)), T_COUNCIL_OPTIONS: Object.keys(TAKSIRAN_COUNCILS).map(k => `<option value="${k}"${k === 'dbkl' ? ' selected' : ''}>${cname(k)}</option>`).join(''),
+    T_TYPE_OPTIONS: Object.entries(X.COUNCILS.dbkl.types).map(([k, v]) => `<option value="${k}"${k === 'residential' ? ' selected' : ''}>${N[k]} (${nf(v)}%)</option>`).join(''),
+    T_MODE_OPTIONS: [opt('rent', 'Monthly rent (estimate)', 'Sewa sebulan (anggaran)', true), opt('annual', 'Annual value on my bill', 'Nilai tahunan pada bil saya')].join(''),
+    T_RENT: 1500, T_ANNUAL: 18000, T_RATE: 5, T_TAX: m(r.pay), T_SUB: L ? `${m(r.half)} setiap penggal · ${nf(r.rate)}% daripada nilai tahunan` : `${m(r.half)} each half · ${nf(r.rate)}% of annual value`,
+    T_LINES: lines, T_COMPARE: compare, T_COMPARE_RENT: m(1500), T_GRID: grid,
+    T_EX: m(ex.tax), T_EX_HALF: m(ex.half), T_CAP_NEW: m(cap.tax), T_CAP_PAY: m(cap.capped),
+    T_VERIFIED: longDate(F.verified, lang), T_VERIFIED_ISO: F.verified
+  };
+}
+const EV_EXAMPLE = { km: 1500, evUse: 14.2, homeShare: 80, houseKwh: 400, publicRate: 1.4, petrolUse: 4.9, budi: 'yes' };
+const EV_SPECS = { qve: [52.5, 370], emas7: [49.5, 345], atto3: [49.92, 345], dolphin: [44.92, 340], modely: [57.5, 466] };
+function evMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), E = evCore, market = fuelLatest.prices.ron95, level = tnbCore.protectionOn(goldDate);
+  const calc = x => E.calculate({ ...EV_EXAMPLE, protection: level, marketPrice: market, ...x }, tnbCore);
+  const r = calc({}), n = calc({ budi: 'no' }), allHome = calc({ homeShare: 100 }), allPub = calc({ homeShare: 0 });
+  const lines = [tr(L ? 'Tenaga sebulan' : 'Energy a month', nf(r.evKwh, 0) + ' kWh'), tr(L ? `Cas di rumah (${nf(r.homeKwh, 0)} kWj, kenaikan bil TNB)` : `Home charging (${nf(r.homeKwh, 0)} kWh, rise in TNB bill)`, m(r.home)),
+    tr(L ? `Cas awam (${nf(r.publicKwh, 0)} kWj)` : `Public charging (${nf(r.publicKwh, 0)} kWh)`, m(r.pub)), tr(L ? 'Kos EV sebulan' : 'EV cost a month', m(r.ev), 'total'),
+    tr(L ? `Petrol (${nf(r.litres, 1)} liter)` : `Petrol (${nf(r.litres, 1)} litres)`, m(r.petrol), 'total'), tr(L ? 'Beza setahun' : 'Difference a year', m(Math.abs(r.yearly))),
+    tr(L ? 'Kos setiap 100 km (EV / petrol)' : 'Cost per 100 km (EV / petrol)', `${m(r.evPerKm)} / ${m(r.petrolPerKm)}`)].join('\n');
+  const grid = [500, 1000, 1500, 2000, 3000].map(km => { const h = calc({ km, homeShare: 100 }), p = calc({ km, homeShare: 0 }), b = calc({ km }), u = calc({ km, budi: 'no' });
+    return `<tr><th scope="row">${nf(km, 0)} km</th><td>${m(h.ev)}</td><td>${m(p.ev)}</td><td>${m(b.petrol)}</td><td>${m(u.petrol)}</td></tr>`; }).join('\n');
+  const models = E.EVS.map(([k, name, use]) => `<tr><th scope="row">${name}</th><td>${nf(EV_SPECS[k][0])} kWh</td><td>${EV_SPECS[k][1]} km</td><td>${nf(use, 1)}</td><td>${m(calc({ evUse: use, homeShare: 100 }).ev)}</td></tr>`).join('\n')
+    + '\n' + E.CARS.map(([k, name, use]) => `<tr><th scope="row">${name}</th><td>–</td><td>–</td><td>${nf(use, 2)} L</td><td>${m(calc({ petrolUse: use }).petrol)}</td></tr>`).join('\n');
+  const evOpts = E.EVS.map(([k, name, use]) => `<option value="${use}"${use === 14.2 ? ' selected' : ''}>${name} (${nf(use, 1)} kWh/100 km)</option>`).join('') + `<option value="custom">${L ? 'Lain-lain (masukkan sendiri)' : 'Other (enter your own)'}</option>`;
+  const carOpts = E.CARS.map(([k, name, use]) => `<option value="${use}"${use === 4.9 ? ' selected' : ''}>${name} (${nf(use, 2)} L/100 km)</option>`).join('') + `<option value="custom">${L ? 'Lain-lain (masukkan sendiri)' : 'Other (enter your own)'}</option>`;
+  const s = v => (v >= 0 ? '' : '−') + m(Math.abs(v));
+  return {
+    E_MARKET: market, E_PROTECTION: level, E_EV_OPTIONS: evOpts, E_CAR_OPTIONS: carOpts,
+    E_BUDI_OPTIONS: [opt('yes', 'Yes, BUDI95 RM1.99 (up to 300 litres)', 'Ya, BUDI95 RM1.99 (hingga 300 liter)', true), opt('no', `No, unsubsidised RM${market.toFixed(2)}`, `Tidak, tanpa subsidi RM${market.toFixed(2)}`)].join(''),
+    E_HEAD: r.save >= 0 ? (L ? 'EV lebih murah' : 'EV is cheaper') : (L ? 'EV lebih mahal' : 'EV costs more'), E_SAVE: m(Math.abs(r.save)),
+    E_SUB: L ? `EV ${m(r.ev)} · petrol ${m(r.petrol)} sebulan` : `EV ${m(r.ev)} · petrol ${m(r.petrol)} a month`, E_LINES: lines, E_GRID: grid, E_MODELS: models,
+    E_RON95: m(market), E_FUEL_DATE: longDate(fuelLatest.date, lang), E_FUEL_ISO: fuelLatest.date, E_LEVEL: nf(level, 0),
+    E_EX_EV: m(r.ev), E_EX_HOME: m(r.home), E_EX_SEN: nf(r.homeSen, 0), E_EX_PUB: m(r.pub), E_EX_PETROL: m(r.petrol), E_EX_SAVE: s(r.save), E_EX_PETROL_U: m(n.petrol), E_EX_SAVE_U: s(n.save), E_EX_YEAR_U: m(n.yearly),
+    E_EX_ALLHOME: m(allHome.ev), E_EX_PAYBACK: nf(calc({ budi: 'no', evExtra: 20000 }).payback || 0, 1), E_EX_ALLPUB: m(allPub.ev),
+    E_VERIFIED: longDate(E.FACTS.verified, lang), E_VERIFIED_ISO: E.FACTS.verified
+  };
+}
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2198,7 +2268,8 @@ for (const p of pages) {
   // The gold price pages change every day with the price.
   if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
   // The mas kahwin pages quote today's gold value.
-  if (['maskahwin', 'rahnu', 'umur', 'bersalin', 'solar'].includes(p.render) || (p.render === 'fx' && fxData.date > p.dateModified) && goldDate > p.dateModified) p.dateModified = goldDate;
+  if (['maskahwin', 'rahnu', 'umur', 'bersalin', 'solar', 'saman'].includes(p.render) || (p.render === 'fx' && fxData.date > p.dateModified) && goldDate > p.dateModified) p.dateModified = goldDate;
+  if (p.render === 'ev' && [fuelLatest.date, goldDate].sort().pop() > p.dateModified) p.dateModified = [fuelLatest.date, goldDate].sort().pop();
   // The fuel pages change every week with the prices.
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
@@ -2323,6 +2394,9 @@ const bundles = {
   'fx.js': ['assets/js/fx-core.js', 'assets/js/fx-ui.js'],
   'kalori.js': ['assets/js/kalori-core.js', 'assets/js/kalori-ui.js'],
   'kasut.js': ['assets/js/kasut-core.js', 'assets/js/kasut-ui.js'],
+  'saman.js': ['assets/js/saman-core.js', 'assets/js/saman-ui.js'],
+  'taksiran.js': ['assets/js/taksiran-core.js', 'assets/js/taksiran-ui.js'],
+  'ev.js': ['assets/js/tnb-core.js', 'assets/js/ev-core.js', 'assets/js/ev-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

@@ -125,6 +125,9 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/penukar-mata-wang/](https://tool.thebukitbesi.com/penukar-mata-wang/) + [/currency-converter-malaysia/](https://tool.thebukitbesi.com/currency-converter-malaysia/) | BM + English | penukar mata wang, kadar tukaran BNM; currency converter malaysia |
 | [/kalkulator-kalori/](https://tool.thebukitbesi.com/kalkulator-kalori/) + [/calorie-calculator-malaysia/](https://tool.thebukitbesi.com/calorie-calculator-malaysia/) | BM + English | kalkulator kalori, BMR, TDEE; calorie calculator malaysia |
 | [/kalkulator-saiz-kasut/](https://tool.thebukitbesi.com/kalkulator-saiz-kasut/) + [/shoe-size-converter/](https://tool.thebukitbesi.com/shoe-size-converter/) | BM + English | saiz kasut UK EU US, panjang kaki cm; shoe size converter |
+| [/kalkulator-saman-trafik/](https://tool.thebukitbesi.com/kalkulator-saman-trafik/) + [/traffic-summons-calculator-malaysia/](https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/) | BM + English | kalkulator saman, kadar kompaun 2026, bayar saman awal; traffic summons calculator |
+| [/kalkulator-cukai-taksiran/](https://tool.thebukitbesi.com/kalkulator-cukai-taksiran/) + [/assessment-tax-calculator-malaysia/](https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/) | BM + English | cukai taksiran, cukai pintu DBKL MBPJ MBPP; assessment tax calculator |
+| [/kalkulator-kos-ev/](https://tool.thebukitbesi.com/kalkulator-kos-ev/) + [/ev-vs-petrol-cost-calculator-malaysia/](https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/) | BM + English | kos cas EV, EV vs petrol; ev charging cost malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -232,6 +235,12 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (calories):** `kalori-core.js` holds Mifflin-St Jeor, the activity factors, Asian BMI bands and Malaysia's RNI 2017 energy table. Update when the NCCFN publishes a new RNI.
 
 **Upkeep (shoe size):** `kasut-core.js` holds the standard UK/EU/US formulas and the brand table at UK 8 (Nike, ASICS, Vans, adidas, New Balance). Recheck brand charts yearly.
+
+**Upkeep (summons):** `saman-core.js` holds the 2026 tiered compound scheme (50% to day 15, two thirds to day 30, full to day 60) and the RM300 maximum. On 1 January 2029 the maximum becomes RM500 (Road Transport (Amendment) Act 2026); update `FACTS.max` then, and add the official per-offence table if JPJ or PDRM publishes one.
+
+**Upkeep (assessment tax):** `taksiran-core.js` holds the DBKL, MBPJ and MBPP rates and Selangor's 25% cap. Add a council only when its rate is confirmed by the council and a second source (MBSA, MBSJ, MBKj and Putrajaya are pending); recheck after each revaluation (DBKL expected after 2026).
+
+**Upkeep (EV vs petrol):** `ev-core.js` uses `tnb-core.js` for home charging and the weekly `fuel-data.json` for petrol, so both update automatically. Review the BUDI95 price and quota (`FACTS`), the model presets (`EVS`, `CARS`) and the public charging examples on both pages every six months.
 
 **Upkeep (driving licence):** `lesen-core.js` holds the JPJ LDL, PDL, CDL, print and IDP fees. Recheck the JPJ fee table yearly; test fees and school ceilings are left out until JPJ publishes them.
 

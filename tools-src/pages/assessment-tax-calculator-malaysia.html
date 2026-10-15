@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/assessment-tax-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-cukai-taksiran/" },
+  "title": "Assessment Tax Calculator Malaysia 2026: DBKL, MBPJ and MBPP Rates",
+  "description": "Work out your cukai taksiran from rent or annual value: DBKL, MBPJ and MBPP rates, the two half-yearly payments (28 February, 31 August) and Selangor's 25% cap.",
+  "llms": "Malaysian assessment tax (cukai taksiran, cukai pintu) calculator, verified 15 October 2026. Under the Local Government Act 1976 (Act 171), yearly tax = annual value (the estimated gross rent a year, i.e. monthly rent × 12) × the council's rate (s.127, set by the council with state approval, at most 35% of annual value, s.130). Paid in two halves: by 28 February and 31 August; after that it becomes arrears (s.147) and each council sets its own late charges. Confirmed rates: DBKL 4% residential, 10% commercial; MBPJ (2025 valuation list) 4% landed, 3% apartment or condominium, 2% low-cost high-rise, 3.5% serviced apartment, with Selangor's 25% cap on increases from 1 January 2025; MBPP (from 1 January 2025) 5.6% landed, 5.0% low-cost and low-medium-cost landed, 5.0% low-cost and middle-class flats, 5.5% apartment or condominium, 9% commercial, 10.5% industrial. MBPJ example: annual value RM9,900 × 4% = RM396 a year (RM198 a half). Rent RM1,500 a month: DBKL RM720 a year, MBPP landed RM1,008. Councils in Johor and Melaka use improved value, not annual value; MBSA, MBSJ, MBKj and Putrajaya rates are entered by the user because sources are not yet sufficient.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "taksiran",
+  "scripts": ["/assets/js/taksiran.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Assessment Tax Calculator", null]],
+  "about": ["Assessment tax", "Cukai taksiran", "Annual value", "Local councils"],
+  "app": {
+    "name": "Assessment Tax Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["DBKL, MBPJ and MBPP rates", "From rent or annual value", "Two half-yearly payments", "Selangor 25% increase cap", "Compare every council", "Any other council's rate"]
+  },
+  "citations": [
+    ["Local Government Act 1976 (Act 171)", "https://www.tcclaw.com.my/wp-content/uploads/2020/10/Local-Government-Act-1976.pdf"],
+    ["MBPJ: General information on valuation and assessment tax (July 2025)", "https://www.mbpj.gov.my/sites/default/files/maklumat_am_penilaian_dan_cukai_taksiran_jul_2025.pdf"],
+    ["MBPP: Property valuation", "https://www.mbpp.gov.my/en/services/perkhidmatan-utama/penilaian-harta"],
+    ["MBPP: FAQ", "https://www.mbpp.gov.my/en/soalan-lazim1"],
+    ["The Star: DBKL assessment rates down", "https://www.thestar.com.my/news/nation/2013/12/19/dbkl-assessment-rates-down"],
+    ["The Star: Selangor assessment rate hike capped", "https://www.thestar.com.my/news/nation/2024/12/10/assessment-rate-hike-gets-go-ahead"],
+    ["Scoop: MBPJ new assessment rates", "https://www.scoop.my/news/213102/"]
+  ],
+  "faq": [
+    { "q": "How is assessment tax calculated?", "a": "Yearly tax = annual value × the council's rate. Annual value is the estimated monthly rent × 12. MBPJ's example: annual value RM9,900 × 4% = RM396 a year, paid as RM198 each half." },
+    { "q": "When is assessment tax due?", "a": "The first half by 28 February and the second half by 31 August. Bills are issued in January and July, and the full year can be paid at once before 28 February." },
+    { "q": "What is DBKL's assessment tax rate?", "a": "DBKL charges 4% of annual value for residential property and 10% for commercial. A home with an estimated rent of RM1,500 a month pays RM720 a year." },
+    { "q": "What are MBPJ's 2025 assessment rates?", "a": "MBPJ's new valuation list from 1 January 2025: 4% landed, 3% apartment or condominium, 2% low-cost high-rise and 3.5% serviced apartment. The increase is capped at 25% of the old tax." },
+    { "q": "What are MBPP's assessment rates in Penang?", "a": "From 1 January 2025: 5.6% landed, 5.0% low-cost landed and low-cost or middle-class flats, 5.5% apartment or condominium, 9% commercial and 10.5% industrial." },
+    { "q": "What happens if I pay assessment tax late?", "a": "Tax unpaid after 28 February or 31 August becomes arrears. The council can add notice and warrant charges and seize movable property; the charges differ by council." },
+    { "q": "Why is my council not listed?", "a": "Only rates confirmed by an official source and a second source are listed. For other councils, choose 'Other council' and enter the rate on your bill. Councils in Johor and Melaka use improved value, not annual value." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Assessment Tax Calculator</li></ol></nav>
+  <h1>Assessment Tax Calculator Malaysia 2026</h1>
+  <p class="answer">Assessment tax = <strong>annual value (monthly rent × 12) × the council's rate</strong>: a Kuala Lumpur home with an estimated rent of RM1,500 a month pays <strong>RM720 a year</strong> at DBKL's 4%, in two halves due 28 February and 31 August. Pick your council and property type to work out your tax and compare DBKL, MBPJ and MBPP.</p>
+  <p class="meta"><span>Verified <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Runs in your browser; no data sent</span><a href="/kalkulator-cukai-taksiran/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="taksiranForm" novalidate aria-labelledby="taksiran-h" data-types="{{T_TYPES}}">
+      <h2 id="taksiran-h">Your property</h2>
+      <div class="field"><label for="council">Council</label><select class="input" id="council" name="council">{{T_COUNCIL_OPTIONS}}</select></div>
+      <div class="field" id="tTypeF"><label for="type">Property type</label><select class="input" id="type" name="type">{{T_TYPE_OPTIONS}}</select></div>
+      <div class="field" id="tRateF" hidden><label for="rate">Your council's rate</label><div class="input"><input id="rate" name="rate" type="number" inputmode="decimal" min="0" max="35" step="0.01" value="{{T_RATE}}"><span aria-hidden="true">%</span></div></div>
+      <div class="field"><label for="mode">Work out from</label><select class="input" id="mode" name="mode">{{T_MODE_OPTIONS}}</select></div>
+      <div class="field" id="tRentF"><label for="rent">Monthly rent</label><div class="input"><span aria-hidden="true">RM</span><input id="rent" name="rent" type="number" inputmode="decimal" min="0" step="50" value="{{T_RENT}}"></div></div>
+      <div class="field" id="tAnnualF" hidden><label for="annual">Annual value</label><div class="input"><span aria-hidden="true">RM</span><input id="annual" name="annual" type="number" inputmode="decimal" min="0" step="100" value="{{T_ANNUAL}}"></div></div>
+      <div class="field" id="tOldF" hidden><label for="oldTax">Yearly tax before 2025 (optional)</label><div class="input"><span aria-hidden="true">RM</span><input id="oldTax" name="oldTax" type="number" inputmode="decimal" min="0" step="1" value=""></div></div>
+      <p class="help">The real annual value is set by the council and printed on your bill; rent is an estimate.</p>
+    </form>
+
+    <section class="box" aria-labelledby="taksiran-result-h">
+      <h2 id="taksiran-result-h">Assessment tax</h2>
+      <div class="net">
+        <p>A year</p>
+        <output id="tTax" for="council type rate mode rent annual oldTax">{{T_TAX}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Breakdown</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="taksiranPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="compare-h">Rent of <span id="tCompareRent">{{T_COMPARE_RENT}}</span> a month at each council</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-h">
+    <table class="data">
+      <thead><tr><th scope="col">Council</th><th scope="col">Type and rate</th><th scope="col">Tax a year</th></tr></thead>
+      <tbody id="tCompare">
+{{T_COMPARE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="grid-h">Yearly tax by rent</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly rent</th><th scope="col">Annual value</th><th scope="col">DBKL 4%</th><th scope="col">MBPJ landed 4%</th><th scope="col">MBPJ strata 3%</th><th scope="col">MBPP landed 5.6%</th><th scope="col">MBPP condo 5.5%</th></tr></thead>
+      <tbody>
+{{T_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Example</h2>
+  <p><strong>MBPJ:</strong> a landed house with an annual value of RM9,900 × 4% = <strong>{{T_EX}}</strong> a year, or {{T_EX_HALF}} each half (MBPJ's own example). <strong>Selangor cap:</strong> if the old tax was RM400 and the new tax is {{T_CAP_NEW}}, the increase is capped at 25%, so you pay {{T_CAP_PAY}}.</p>
+
+  <h2 id="formula">How assessment tax is worked out</h2>
+  <ol>
+    <li><strong>Annual value</strong> = estimated gross monthly rent × 12, set by the council's valuation department.</li>
+    <li><strong>Yearly tax</strong> = annual value × the council's rate (at most 35%).</li>
+    <li><strong>Each half</strong> = yearly tax ÷ 2, due 28 February and 31 August.</li>
+    <li><strong>Selangor:</strong> increases from 2025 are capped at 25% of the old tax.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Key points</h2>
+  <ul>
+    <li><strong>Objections:</strong> according to MBPP, the rate cannot be appealed; objections are against the annual value when a new valuation list is reviewed.</li>
+    <li><strong>Late payment:</strong> arrears after 28 February or 31 August; notice and warrant charges differ by council.</li>
+    <li><strong>Selangor exemptions:</strong> low-cost and SelangorKu homes are exempt; some village homes can apply.</li>
+    <li><strong>Johor and Melaka</strong> use improved value (market value) at a small rate, so this calculator does not fit councils there.</li>
+    <li><strong>Not listed</strong> because sources are not yet sufficient: MBSA, MBSJ, MBKj, Putrajaya and other councils. Use the rate on your bill.</li>
+    <li>Other home costs: <a href="/home-loan-calculator-malaysia/">home loan</a>, <a href="/water-bill-calculator-malaysia/">water bill</a> and <a href="/tenancy-stamp-duty-calculator-malaysia/">tenancy stamp duty</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.tcclaw.com.my/wp-content/uploads/2020/10/Local-Government-Act-1976.pdf" rel="noopener">Local Government Act 1976 (Act 171)</a></li>
+    <li><a href="https://www.mbpj.gov.my/sites/default/files/maklumat_am_penilaian_dan_cukai_taksiran_jul_2025.pdf" rel="noopener">MBPJ: Valuation and assessment tax</a> and <a href="https://www.scoop.my/news/213102/" rel="noopener">Scoop</a></li>
+    <li><a href="https://www.mbpp.gov.my/en/services/perkhidmatan-utama/penilaian-harta" rel="noopener">MBPP: Property valuation</a> and <a href="https://www.mbpp.gov.my/en/soalan-lazim1" rel="noopener">FAQ</a></li>
+    <li><a href="https://www.thestar.com.my/news/nation/2013/12/19/dbkl-assessment-rates-down" rel="noopener">The Star: DBKL rates</a> and <a href="https://www.thestar.com.my/news/nation/2024/12/10/assessment-rate-hike-gets-go-ahead" rel="noopener">Selangor cap</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate from published rates. The annual value and amount on your council bill are final; special reductions or rebates are not included.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, DSR and stamp duty</small></a>
+    <a href="/rent-vs-buy-calculator-malaysia/">Rent vs Buy<small>Compare the real cost</small></a>
+    <a href="/water-bill-calculator-malaysia/">Water Bill Calculator<small>Water tariffs by state</small></a>
+  </div>
+</section>

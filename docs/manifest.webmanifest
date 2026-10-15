@@ -88,6 +88,11 @@
       "description": "Free ASB dividend calculator: payout from your monthly lowest balance, a 10-year compounding project"
     },
     {
+      "name": "Assessment Tax Calculator Malaysia",
+      "url": "/assessment-tax-calculator-malaysia/",
+      "description": "Work out your cukai taksiran from rent or annual value: DBKL, MBPJ and MBPP rates, the two half-year"
+    },
+    {
       "name": "BMI Calculator Malaysia",
       "url": "/bmi-calculator-malaysia/",
       "description": "Free BMI calculator with Malaysian Ministry of Health cut-offs (overweight from 23): your category, "
@@ -166,6 +171,11 @@
       "name": "EPF Calculator Malaysia",
       "url": "/epf-calculator/",
       "description": "Free EPF calculator: project your KWSP savings to 55 or 60 with the latest 6.15% dividend, see all t"
+    },
+    {
+      "name": "EV vs Petrol Cost Calculator Malaysia",
+      "url": "/ev-vs-petrol-cost-calculator-malaysia/",
+      "description": "Compare an EV and a petrol car per month: the real rise in your TNB bill from home charging, public "
     },
     {
       "name": "Faraid Calculator Malaysia",
@@ -411,6 +421,11 @@
       "name": "TNB Bill Calculator",
       "url": "/tnb-bill-calculator/",
       "description": "Free TNB bill calculator: your home electricity bill by the RP4 tariff (27.03 sen/kWh), EEI rebate, "
+    },
+    {
+      "name": "Traffic Summons Calculator Malaysia",
+      "url": "/traffic-summons-calculator-malaysia/",
+      "description": "Work out your JPJ, PDRM or AwAS summons compound from the notice date: 50% off within 15 days, RM200"
     },
     {
       "name": "Unit Trust Calculator Malaysia",

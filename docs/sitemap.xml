@@ -51,6 +51,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/asb-dividend-calculator/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cukai-taksiran/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/bmi-calculator-malaysia/</loc>
     <lastmod>2026-10-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/bmi-calculator-malaysia/"/>
@@ -156,6 +163,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/epf-calculator/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-kwsp/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/epf-calculator/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-kos-ev/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/faraid-calculator/</loc>
@@ -341,6 +355,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-cukai-taksiran/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cukai-taksiran/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/assessment-tax-calculator-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/</loc>
     <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/"/>
@@ -437,6 +458,13 @@
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-kalori/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/calorie-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/calorie-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-kos-ev/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-kos-ev/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-kos-pekerja/</loc>
@@ -563,6 +591,13 @@
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-saiz-kasut/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/shoe-size-converter/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/shoe-size-converter/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/kalkulator-saman-trafik/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-saman-trafik/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/kalkulator-sewa-atau-beli-rumah/</loc>
@@ -970,6 +1005,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/tnb-bill-calculator/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-bil-elektrik-tnb/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/tnb-bill-calculator/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-saman-trafik/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/tukar-tarikh-hijrah/</loc>
