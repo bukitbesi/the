@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/kalkulator-sst/",
+  "lang": "ms",
+  "alternates": { "en": "/sst-calculator-malaysia/" },
+  "title": "Kalkulator SST 2026: Tambah atau Keluarkan 8%, 6%, 10% atau 5%",
+  "description": "Kalkulator SST: tambah cukai jualan dan perkhidmatan pada harga atau keluarkannya daripada jumlah pada 8%, 6%, 10% atau 5%, dengan caj perkhidmatan restoran.",
+  "llms": "Menambah atau mengeluarkan Cukai Jualan dan Perkhidmatan (SST) Malaysia. Cukai perkhidmatan: kadar am 8% mulai 1 Mac 2024 (kebanyakan perkhidmatan bercukai, perkhidmatan kewangan berasaskan fi); 6% bagi makanan dan minuman, telekomunikasi, letak kenderaan, logistik, pembinaan, kesihatan swasta untuk bukan warganegara, pendidikan swasta bercukai dan, mulai 1 Januari 2026, perkhidmatan sewaan dan pajakan. Cukai jualan: kadar standard 10% dan 5% bagi barang tersenarai, dengan barang keperluan asas dikecualikan (disemak mulai 1 Julai 2025). Tambah cukai: jumlah = harga × (1 + kadar); keluarkan cukai: harga = jumlah ÷ (1 + kadar). Contoh: RM100 + 8% = RM108; RM108 termasuk 8% = RM100 + cukai RM8; pada 6%, makanan RM100 dengan caj perkhidmatan 10% = RM116, kerana cukai perkhidmatan dikenakan atas makanan dan minuman, bukan atas caj perkhidmatan (panduan F&B JKDM). Had pendaftaran dalam 12 bulan: RM500,000 bagi kebanyakan perkhidmatan dan pengilang, RM1.5 juta bagi F&B, pembinaan dan kesihatan swasta, RM1 juta bagi sewaan dan perkhidmatan kewangan. Bajet 2027 menurunkan cukai perkhidmatan penjagaan warga emas kepada 6% mulai 1 Januari 2027.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "sst",
+  "scripts": ["/assets/js/sst.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator SST", null]],
+  "about": ["Cukai Jualan dan Perkhidmatan", "Cukai perkhidmatan", "Cukai jualan", "JKDM"],
+  "app": {
+    "name": "Kalkulator SST",
+    "category": "BusinessApplication",
+    "features": ["Tambah SST pada harga", "Keluarkan SST daripada jumlah", "Cukai perkhidmatan 8% dan 6%", "Cukai jualan 10% dan 5%", "Caj perkhidmatan restoran", "Had pendaftaran", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Kementerian Kewangan: Soalan lazim peluasan skop perkhidmatan bercukai dan perubahan kadar", "https://mof.gov.my/portal/ms/berita/soalan-lazim/soalan-lazim-peluasan-skop-perkhidmatan-bercukai-dan-perubahan-kadar-cukai-perkhidmatan"],
+    ["Kementerian Kewangan: Pemakluman dasar dikemas kini SST (5 Januari 2026)", "https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf"],
+    ["KPMG Malaysia: Kadar cukai perkhidmatan 6% bagi sewaan atau pajakan", "https://kpmg.com/my/en/insights/2026/03/6-percent-service-tax-rate-for-rental-or-leasing-services.html"],
+    ["KPMG Malaysia: Semakan cukai jualan dan peluasan cukai perkhidmatan (2025)", "https://kpmg.com/my/en/home/insights/2025/06/review-of-goods-for-sales-tax-and-expansion-of-scope-for-service-tax.html"],
+    ["JKDM: Panduan perkhidmatan makanan dan minuman", "https://circulars.mia.org.my/2018/88/Guide_on_FnB_02112018_V3.pdf"],
+    ["Bernama: Bajet 2027 cukai perkhidmatan penjagaan warga emas", "https://www.bernama.com/en/news.php?id=2617695"]
+  ],
+  "faq": [
+    { "q": "Berapa kadar SST di Malaysia pada 2026?", "a": "Cukai perkhidmatan ialah 8% bagi kebanyakan perkhidmatan bercukai dan 6% bagi makanan dan minuman, telekomunikasi, letak kenderaan, logistik, pembinaan, sewaan dan pajakan (mulai 1 Januari 2026), kesihatan swasta untuk bukan warganegara dan pendidikan swasta bercukai. Cukai jualan atas barang ialah 10% atau 5%, dengan barang keperluan asas dikecualikan." },
+    { "q": "Bagaimana tambah SST 8% pada harga?", "a": "Darab dengan 1.08. RM100 + SST 8% = {{S_TOTAL}}; cukainya RM8." },
+    { "q": "Bagaimana keluarkan SST daripada jumlah?", "a": "Bahagi dengan 1 + kadar. RM108 termasuk SST 8% ialah {{S_REMOVE}} sebelum cukai, jadi cukainya RM8. Jangan tolak 8% daripada RM108, yang memberi RM8.64." },
+    { "q": "Adakah SST dikenakan atas caj perkhidmatan restoran?", "a": "Tidak. Mengikut panduan F&B kastam, cukai perkhidmatan dikenakan atas makanan dan minuman, bukan atas caj perkhidmatan 10%. Makanan RM100 dengan caj perkhidmatan 10% dan cukai perkhidmatan 6% berjumlah {{S_REST}}." },
+    { "q": "Bila perniagaan perlu daftar SST?", "a": "Apabila jualan atau perkhidmatan bercukai melepasi had dalam 12 bulan: RM500,000 bagi kebanyakan perkhidmatan dan pengilang, RM1.5 juta bagi makanan dan minuman, pembinaan dan kesihatan swasta, serta RM1 juta bagi sewaan dan perkhidmatan kewangan." },
+    { "q": "Apa yang berubah dalam SST mulai Julai 2025?", "a": "Cukai jualan disemak kepada 5% dan 10% bagi barang tidak penting dan premium, dan cukai perkhidmatan diperluas kepada sewaan dan pajakan, pembinaan, perkhidmatan kewangan berasaskan fi, kesihatan swasta untuk bukan warganegara, pendidikan swasta dan perkhidmatan kecantikan. Sewaan dan pajakan turun daripada 8% kepada 6% mulai 1 Januari 2026." },
+    { "q": "Adakah Bajet 2027 mengubah SST?", "a": "Bajet 2027 mengekalkan SST. Ia menurunkan cukai perkhidmatan penjagaan warga emas daripada 8% kepada 6% mulai 1 Januari 2027, dengan yuran hingga RM96,000 setahun bagi setiap orang dikecualikan, dan menambah kemudahan bayaran balik cukai jualan bagi bekalan jentera dan bahan mentah kepada pengilang." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator SST</li></ol></nav>
+  <h1>Kalkulator SST</h1>
+  <p class="answer">Cukai perkhidmatan Malaysia ialah <strong>8%</strong> bagi kebanyakan perkhidmatan dan <strong>6%</strong> bagi makanan dan minuman, telekomunikasi, letak kenderaan, logistik, pembinaan dan sewaan, manakala cukai jualan atas barang ialah 10% atau 5%. RM100 + SST 8% = <strong>{{S_TOTAL}}</strong>; untuk mengeluarkan 8% daripada jumlah, bahagi dengan 1.08. Masukkan amaun anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/sst-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="sstForm" novalidate aria-labelledby="sst-h">
+      <h2 id="sst-h">Amaun anda</h2>
+      <div class="field"><label for="mode">Kiraan</label><select class="input" id="mode" name="mode">{{S_MODE_OPTIONS}}</select></div>
+      <div class="field"><label for="amount">Amaun</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="0.01" value="100"></div></div>
+      <div class="field"><label for="rate">Kadar SST</label><select class="input" id="rate" name="rate">{{S_RATE_OPTIONS}}</select></div>
+      <div class="field"><label for="charge">Caj perkhidmatan (restoran)</label><div class="input"><input id="charge" name="charge" type="number" inputmode="decimal" min="0" max="30" step="1" value="0"><span aria-hidden="true">%</span></div></div>
+      <p class="help">Cukai perkhidmatan dikenakan atas makanan dan minuman, bukan atas caj perkhidmatan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="sst-result-h">
+      <h2 id="sst-result-h">Keputusan</h2>
+      <div class="net">
+        <p id="sMainLabel">Jumlah termasuk SST</p>
+        <output id="sMain" for="mode amount rate charge">{{S_TOTAL}}</output>
+        <p id="sSub">{{S_SUB}}</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="sLines">
+{{S_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="sstPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">Kadar SST di Malaysia (2026)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Kadar</th><th scope="col">Terpakai kepada</th></tr></thead>
+      <tbody>
+{{S_RATES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara SST dikira</h2>
+  <ol>
+    <li><strong>Tambah SST:</strong> cukai = harga × kadar; jumlah = harga + cukai.</li>
+    <li><strong>Keluarkan SST:</strong> harga = jumlah ÷ (1 + kadar); cukai = jumlah − harga.</li>
+    <li><strong>Restoran:</strong> cukai perkhidmatan atas makanan dan minuman sahaja; caj perkhidmatan ditambah berasingan.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grid-h">Harga dengan dan tanpa SST</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Amaun</th><th scope="col">+ 6%</th><th scope="col">+ 8%</th><th scope="col">+ 10%</th><th scope="col">Sebelum 6% (jika termasuk)</th><th scope="col">Sebelum 8% (jika termasuk)</th></tr></thead>
+      <tbody>
+{{S_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="thresh-h">Had pendaftaran SST (12 bulan)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="thresh-h">
+    <table class="data">
+      <thead><tr><th scope="col">Perniagaan</th><th scope="col">Had</th></tr></thead>
+      <tbody>
+{{S_THRESH}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Sewaan kediaman</strong> di luar cukai perkhidmatan; yuran pendidikan swasta pelajar Malaysia dikecualikan di bawah had yang ditetapkan.</li>
+    <li><strong>Bajet 2027:</strong> perkhidmatan penjagaan warga emas menjadi 6% mulai 1 Januari 2027, dengan yuran hingga RM96,000 setahun bagi setiap orang dikecualikan.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://mof.gov.my/portal/ms/berita/soalan-lazim/soalan-lazim-peluasan-skop-perkhidmatan-bercukai-dan-perubahan-kadar-cukai-perkhidmatan" rel="noopener">Kementerian Kewangan: Soalan lazim skop dan kadar cukai perkhidmatan</a></li>
+    <li><a href="https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf" rel="noopener">Kementerian Kewangan: Dasar SST dikemas kini, Januari 2026</a></li>
+    <li><a href="https://kpmg.com/my/en/insights/2026/03/6-percent-service-tax-rate-for-rental-or-leasing-services.html" rel="noopener">KPMG Malaysia: 6% bagi sewaan dan pajakan</a></li>
+    <li><a href="https://kpmg.com/my/en/home/insights/2025/06/review-of-goods-for-sales-tax-and-expansion-of-scope-for-service-tax.html" rel="noopener">KPMG Malaysia: Semakan cukai jualan 2025</a></li>
+    <li><a href="https://circulars.mia.org.my/2018/88/Guide_on_FnB_02112018_V3.pdf" rel="noopener">JKDM: Panduan perkhidmatan makanan dan minuman</a></li>
+    <li><a href="https://www.bernama.com/en/news.php?id=2617695" rel="noopener">Bernama: Bajet 2027 cukai penjagaan warga emas</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Sama ada sesuatu perkhidmatan atau barang bercukai, dan pada kadar apa, bergantung pada klasifikasi tepatnya; semak MySST atau penasihat cukai anda.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-margin-untung/">Kalkulator Margin Untung<small>Margin, markup dan harga jual</small></a>
+    <a href="/kalkulator-duti-setem-sewa/">Kalkulator Duti Setem Sewa<small>Duti setem perjanjian sewa dan pulangan</small></a>
+    <a href="/kalkulator-cukai-pendapatan/">Kalkulator Cukai Pendapatan<small>Cukai dengan semua pelepasan</small></a>
+  </div>
+</section>

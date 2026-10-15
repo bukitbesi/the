@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 88 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 92 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -108,6 +108,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-cuti-tahunan/](https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/) + [/annual-leave-calculator-malaysia/](https://tool.thebukitbesi.com/annual-leave-calculator-malaysia/) | BM + English | kira cuti tahunan prorata, akta kerja; annual leave calculator malaysia |
 | [/kalkulator-faedah-penamatan/](https://tool.thebukitbesi.com/kalkulator-faedah-penamatan/) + [/termination-benefits-calculator-malaysia/](https://tool.thebukitbesi.com/termination-benefits-calculator-malaysia/) | BM + English | faedah penamatan, pampasan diberhentikan kerja; termination benefits calculator malaysia |
 | [/kalkulator-roadtax/](https://tool.thebukitbesi.com/kalkulator-roadtax/) + [/road-tax-calculator-malaysia/](https://tool.thebukitbesi.com/road-tax-calculator-malaysia/) | BM + English | kalkulator roadtax, harga roadtax ikut cc, roadtax ev 2026; road tax calculator malaysia |
+| [/kalkulator-sst/](https://tool.thebukitbesi.com/kalkulator-sst/) + [/sst-calculator-malaysia/](https://tool.thebukitbesi.com/sst-calculator-malaysia/) | BM + English | kalkulator sst, kira sst 8%; sst calculator malaysia |
+| [/kalkulator-saham-bursa/](https://tool.thebukitbesi.com/kalkulator-saham-bursa/) + [/bursa-share-fee-calculator/](https://tool.thebukitbesi.com/bursa-share-fee-calculator/) | BM + English | kalkulator saham bursa, caj brokeraj; bursa share fee calculator |
+| [/kalkulator-duti-setem-sewa/](https://tool.thebukitbesi.com/kalkulator-duti-setem-sewa/) + [/tenancy-stamp-duty-calculator-malaysia/](https://tool.thebukitbesi.com/tenancy-stamp-duty-calculator-malaysia/) | BM + English | duti setem perjanjian sewa; tenancy agreement stamp duty calculator |
+| [/kalkulator-sip-perkeso/](https://tool.thebukitbesi.com/kalkulator-sip-perkeso/) + [/eis-calculator-malaysia/](https://tool.thebukitbesi.com/eis-calculator-malaysia/) | BM + English | sip perkeso hilang kerja, elaun mencari pekerjaan; eis calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -196,6 +200,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (road tax):** `roadtax-core.js` holds every JPJ table (private and company cars, Sabah and Sarawak, island 50% rules, EV groups A to K, motorcycles, e-motorcycles) and the 2026 compound amounts. `carloan-core.js` keeps its own copy of the private car and EV bands for the car loan page; update both together. Open items: Peninsular motorcycles 251–500 cc (RM100 vs RM180), East Malaysia company saloons and EVs, island motorcycles, diesel surcharge, and the location-based rule in the Road Transport (Amendment) Act 2026.
 
+**Upkeep (SST):** `sst-core.js` holds the 8%/6% service tax and 5%/10% sales tax rates and thresholds; recheck after every Budget and MOF SST order (rates moved in March 2024, July 2025 and January 2026).
+
+**Upkeep (Bursa fees):** `bursa-core.js` holds the 0.03% clearing fee and the 0.1% contract-note stamp duty under the remission order to 12 July 2028; update when it expires or changes. Brokerage is a user input.
+
+**Upkeep (tenancy stamp duty):** `tenancy-core.js` holds the Finance Act 2024 rates (RM1/3/5/7 per RM250, RM10 minimum and copies). Recheck after Budgets and LHDN stamp duty guideline updates.
+
+**Upkeep (EIS):** `eis-core.js` holds the Job Search Allowance rates, the RM6,000 ceiling and the October 2026 amendment values (50% re-employment, RM7,000 training, RM1,000 mobility). Recheck after PERKESO announcements; the contribution-based duration tiers are not modelled because sources conflict.
+
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
 **Upkeep (RPGT):** `rpgt-core.js` holds the Schedule 5 rates, the individual exemption and the retention rates. Check after each Budget and update `FACTS.verified` and `tools-src/tests/rpgt.test.mjs`.
@@ -283,6 +295,10 @@ assets/js/nestegg-core.js   retirement savings: amount needed with inflation, pr
 assets/js/leave-core.js     leave: Employment Act annual leave tiers, pro rata with half-day rounding, other leave
 assets/js/termination-core.js termination: notice by service, pay in lieu, 1980 Regulations benefit
 assets/js/roadtax-core.js   road tax: JPJ cc tables, company and island rates, EV kW groups, motorcycles, 6-month renewal
+assets/js/sst-core.js       SST: add or remove service and sales tax, restaurant service charge
+assets/js/bursa-core.js     Bursa fees: brokerage, clearing, stamp duty, SST on ETFs, profit, break-even
+assets/js/tenancy-core.js   tenancy stamp duty (Finance Act 2024 rates), old rule, rental yield
+assets/js/eis-core.js       EIS: job search allowance schedule, re-employment and mobility allowances
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

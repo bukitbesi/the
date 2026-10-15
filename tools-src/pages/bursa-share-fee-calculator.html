@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/bursa-share-fee-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-saham-bursa/" },
+  "title": "Bursa Share Fee Calculator: Brokerage, Stamp Duty and Profit",
+  "description": "Bursa Malaysia share fee calculator: brokerage, 0.03% clearing fee, 0.1% stamp duty, SST on ETFs and REITs, net profit and the break-even selling price.",
+  "llms": "Calculates Bursa Malaysia share trading costs and profit. On each buy and each sell: brokerage (negotiable, set by each broker as a rate with a minimum per contract), a clearing fee of 0.03% of the contract value capped at RM1,000, and stamp duty on the contract note of 0.10% capped at RM1,000 for listed shares (remission order P.U.(A) 208/2023, 13 July 2023 to 12 July 2028; the statutory rate is RM1.50 per RM1,000). 8% service tax applies to brokerage and clearing on ETFs, REITs, warrants and similar securities; brokers do not charge it on ordinary shares. Example: 1,000 shares bought at RM2.00 and sold at RM2.30 with 0.08% brokerage and an RM8 minimum: buy charges RM10.60, sell charges RM10.99, net profit RM278.41 (13.85%), break-even selling price RM2.022. Single-tier dividends are tax-free for individuals up to RM100,000 a year, with 2% on the excess from YA2025; gains on listed shares are not subject to capital gains tax.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "bursa",
+  "scripts": ["/assets/js/bursa-fees.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Bursa Share Fee Calculator", null]],
+  "about": ["Bursa Malaysia", "Share trading fees", "Stamp duty on contract notes", "Brokerage"],
+  "app": {
+    "name": "Bursa Share Fee Calculator",
+    "category": "FinanceApplication",
+    "features": ["Brokerage with a minimum fee", "Clearing fee and stamp duty with caps", "8% SST on ETFs, REITs and warrants", "Net profit and return", "Break-even selling price", "Dividends", "Works offline"]
+  },
+  "citations": [
+    ["EY Malaysia: Remission of stamp duty on contract notes for listed shares", "https://ey.com/en_my/tax-alerts/remission-of-stamp-duty-on-contract-notes-for-the-trading-of-listed-shares-or-stocks"],
+    ["Skrine: Stamp duty remission order for contract notes gazetted", "https://www.skrine.com/insights/alerts/july-2023/stamp-duty-remission-order-for-contract-notes-gaze"],
+    ["moomoo Malaysia: Trading fees", "https://moomoo.com/my/support/topic9_137"],
+    ["Rakuten Trade: Charges and fees", "https://www.rakutentrade.my/faqs/charges-and-fees"],
+    ["Securities Commission: Negotiable stockbroking commissions", "https://www.sc.com.my/resources/media/media-release/new-stockbroking-commission-rate-structure-to-take-effect-on-1-jan-2008"],
+    ["Skrine: Rules on income tax on dividend income above RM100,000", "https://www.skrine.com/insights/alerts/may-2025/rules-on-income-tax-on-dividend-income-exceeding-r"]
+  ],
+  "faq": [
+    { "q": "What are the fees for buying shares on Bursa Malaysia?", "a": "Brokerage (set by your broker, often a percentage with a minimum), a 0.03% clearing fee capped at RM1,000, and 0.1% stamp duty capped at RM1,000. Buying RM2,000 of shares at 0.08% brokerage with an RM8 minimum costs {{B_BUYFEES}} in charges." },
+    { "q": "How much is stamp duty on Bursa shares?", "a": "0.1% of the contract value, capped at RM1,000 per contract note, under a remission order running from 13 July 2023 to 12 July 2028. The statutory rate is RM1.50 per RM1,000, so some brokers round up to the next RM1,000 block." },
+    { "q": "What is the Bursa clearing fee?", "a": "0.03% of the contract value, capped at RM1,000 per contract, paid on both the buy and the sell. On a RM2 million trade the cap applies: {{B_BIG_CLEAR}}." },
+    { "q": "Is there SST on share trading in Malaysia?", "a": "Brokers charge 8% service tax on brokerage and clearing fees for ETFs, REITs, warrants, structured warrants and similar securities, but not on ordinary listed shares. Stamp duty is not subject to SST." },
+    { "q": "What is my break-even price?", "a": "The selling price at which the sale proceeds after selling costs cover what you paid including buying costs. Buying 1,000 shares at RM2.00 with these charges, you break even at about {{B_BE}}." },
+    { "q": "Are share dividends taxed in Malaysia?", "a": "Single-tier dividends are tax-free for individuals up to RM100,000 a year. From YA2025, individuals pay 2% on chargeable dividend income above RM100,000: RM120,000 of dividends means 2% of RM20,000, or RM400." },
+    { "q": "Is there capital gains tax on Bursa shares?", "a": "No for individuals. The capital gains tax from 2024 applies to companies and certain other bodies on unlisted shares; gains on listed shares are not in scope." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Bursa share fee calculator</li></ol></nav>
+  <h1>Bursa Share Fee Calculator</h1>
+  <p class="answer">Every Bursa Malaysia trade pays brokerage, a <strong>0.03% clearing fee</strong> and <strong>0.1% stamp duty</strong> (both capped at RM1,000) on the buy and again on the sell. Buying 1,000 shares at RM2.00 and selling at RM2.30 with 0.08% brokerage (RM8 minimum) costs {{B_FEES}} in charges and leaves <strong>{{B_PROFIT}}</strong> profit; you break even at {{B_BE}}. Enter your trade below.</p>
+  <p class="meta"><span>Fees verified <time datetime="{{B_VERIFIED_ISO}}">{{B_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-saham-bursa/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="bursaForm" novalidate aria-labelledby="bs-h">
+      <h2 id="bs-h">Your trade</h2>
+      <div class="field"><label for="qty">Number of shares</label><div class="input"><input id="qty" name="qty" type="number" inputmode="numeric" min="0" step="100" value="{{B_QTY}}"><span aria-hidden="true">units</span></div></div>
+      <div class="field-row">
+        <div class="field"><label for="buy">Buy price</label><div class="input"><span aria-hidden="true">RM</span><input id="buy" name="buy" type="number" inputmode="decimal" min="0" step="0.005" value="{{B_BUY}}"></div></div>
+        <div class="field"><label for="sell">Sell price</label><div class="input"><span aria-hidden="true">RM</span><input id="sell" name="sell" type="number" inputmode="decimal" min="0" step="0.005" value="{{B_SELL}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="brokerPct">Brokerage rate</label><div class="input"><input id="brokerPct" name="brokerPct" type="number" inputmode="decimal" min="0" max="2" step="0.01" value="{{B_PCT}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="brokerMin">Minimum brokerage</label><div class="input"><span aria-hidden="true">RM</span><input id="brokerMin" name="brokerMin" type="number" inputmode="decimal" min="0" step="1" value="{{B_MIN}}"></div></div>
+      </div>
+      <p class="help">Use your broker's rate and minimum; 1 lot = 100 shares.</p>
+      <div class="field-row">
+        <div class="field"><label for="asset">Security</label><select class="input" id="asset" name="asset">{{B_ASSET_OPTIONS}}</select></div>
+        <div class="field"><label for="dividend">Dividend per share</label><div class="input"><span aria-hidden="true">RM</span><input id="dividend" name="dividend" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="bs-result-h">
+      <h2 id="bs-result-h">Your profit</h2>
+      <div class="net">
+        <p>Net profit</p>
+        <output id="bProfit" for="qty buy sell brokerPct brokerMin asset dividend">{{B_PROFIT}}</output>
+        <p id="bSub">{{B_SUB}}</p>
+      </div>
+      <p class="sr-only" id="bLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Buy and sell</caption>
+        <tbody id="bLines">
+{{B_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Stamp duty shown at exactly 0.1%; some brokers round up per RM1,000.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="bursaPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Charges on one trade by value (0.08% brokerage, RM8 minimum)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Trade value</th><th scope="col">Brokerage</th><th scope="col">Clearing</th><th scope="col">Stamp duty</th><th scope="col">Total</th><th scope="col">% of value</th></tr></thead>
+      <tbody>
+{{B_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>Small trades pay a much higher share because of the brokerage minimum. Count both sides: a round trip costs about twice this.</p>
+
+  <h2 id="formula">How Bursa trading costs are worked out</h2>
+  <ol>
+    <li><strong>Contract value</strong> = price × number of shares.</li>
+    <li><strong>Brokerage</strong> = the higher of value × your broker's rate and the broker's minimum.</li>
+    <li><strong>Clearing fee</strong> = 0.03% of value, up to RM1,000.</li>
+    <li><strong>Stamp duty</strong> = 0.1% of value, up to RM1,000.</li>
+    <li><strong>SST</strong> = 8% of brokerage and clearing for ETFs, REITs and warrants.</li>
+    <li><strong>Net profit</strong> = sale value − selling costs − (buy value + buying costs) + dividends.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tax on shares in Malaysia</h2>
+  <ul>
+    <li><strong>Dividends:</strong> single-tier dividends are tax-free up to RM100,000 a year; from YA2025 individuals pay 2% on the excess. Foreign dividends and EPF, ASNB and unit trust distributions are outside this rule.</li>
+    <li><strong>Capital gains:</strong> gains on listed shares are not subject to capital gains tax for individuals.</li>
+    <li><strong>Brokerage</strong> is negotiable between you and your broker; online brokers often charge a percentage with a low minimum.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://ey.com/en_my/tax-alerts/remission-of-stamp-duty-on-contract-notes-for-the-trading-of-listed-shares-or-stocks" rel="noopener">EY Malaysia: Stamp duty remission on contract notes</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/july-2023/stamp-duty-remission-order-for-contract-notes-gaze" rel="noopener">Skrine: Stamp duty remission order</a></li>
+    <li><a href="https://moomoo.com/my/support/topic9_137" rel="noopener">moomoo Malaysia: Trading fees</a></li>
+    <li><a href="https://www.rakutentrade.my/faqs/charges-and-fees" rel="noopener">Rakuten Trade: Charges and fees</a></li>
+    <li><a href="https://www.sc.com.my/resources/media/media-release/new-stockbroking-commission-rate-structure-to-take-effect-on-1-jan-2008" rel="noopener">Securities Commission: Negotiable commissions</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/may-2025/rules-on-income-tax-on-dividend-income-exceeding-r" rel="noopener">Skrine: Dividend income above RM100,000</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate, not investment advice. Your broker's contract note shows the exact charges.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/unit-trust-calculator-malaysia/">Unit Trust Calculator<small>Returns after charges and fees</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Yearly dividend and projection</small></a>
+    <a href="/gold-price-malaysia/">Gold Price Malaysia Today<small>Gold price per gram</small></a>
+  </div>
+</section>

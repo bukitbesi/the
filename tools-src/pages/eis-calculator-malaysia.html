@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/eis-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-sip-perkeso/" },
+  "title": "EIS Calculator Malaysia 2026: PERKESO Job Loss Allowance",
+  "description": "PERKESO EIS calculator: your monthly Job Search Allowance after losing a job (80% to 30% of wages for 3 to 6 months) and the new 50% re-employment allowance.",
+  "llms": "Calculates PERKESO's Employment Insurance System (EIS, now LINDUNG KERJAYA) benefits after job loss in Malaysia. Job Search Allowance: 80% of the assumed monthly wage in month 1, 50% in month 2, 40% in months 3 and 4 and 30% in months 5 and 6, for 3 to 6 months depending on contributions; wages counted up to the RM6,000 insured ceiling; the first claim needs at least 12 monthly contributions in the 24 months before the job loss and must be made within 60 days. Example: RM3,000 assumed wage for 6 months = RM2,400 + RM1,500 + RM1,200 + RM1,200 + RM900 + RM900 = RM8,100. Under the Employment Insurance System (Amendment) Act 2026, for job loss from 1 October 2026: the Early Re-employment Allowance is 50% of the unpaid allowance (25% before), so someone on RM3,000 re-employed after month 2 gets RM2,100 on top of RM3,900 already paid; training fees up to RM7,000 (was RM4,000) with a RM30 daily allowance; a new RM1,000 Mobility Assistance Allowance for a new job more than 100 km from home. Covered: retrenchment, VSS or MSS, closure, constructive dismissal; not covered: resignation, dismissal for misconduct, retirement. Contributions are 0.2% from the employee and 0.2% from the employer.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "eis",
+  "scripts": ["/assets/js/eis.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["EIS Calculator", null]],
+  "about": ["Employment Insurance System", "PERKESO", "Job Search Allowance", "Retrenchment"],
+  "app": {
+    "name": "EIS Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Job Search Allowance month by month", "3 to 6 months", "RM6,000 wage ceiling", "Early Re-employment Allowance (50% from 1 October 2026)", "Mobility Assistance Allowance", "Training fee limit", "Works offline"]
+  },
+  "citations": [
+    ["PERKESO: Employment Insurance System flyer", "https://www.perkeso.gov.my/images/flyers/sip/200224%20-%20Flyers%20-%20SIP%20-%20BM_compressed.pdf"],
+    ["MyGovernment: EIS assistance under PERKESO", "https://www.malaysia.gov.my/en/categories/aid-welfare-and-assistance/job-aid/employment-insurance-scheme-eis-assistance-under-perkeso"],
+    ["RinggitPlus: PERKESO pays more if you lose your job from 1 October", "https://ringgitplus.com/en/blog/insurance/perkeso-pays-more-if-you-lose-your-job-from-1-october.html"],
+    ["The Star: Do Malaysians get an unemployment allowance if they lose their job?", "https://www.thestar.com.my/news/true-or-not/2026/10/02/quickcheck-do-malaysians-get-an-unemployment-allowance-if-they-lose-their-job"],
+    ["Bernama: PERKESO raises support for workers who lose their jobs", "https://bernama.com/en/general/news.php?id=2609232"],
+    ["MyLaw: Employment Insurance System (Amendment) Act 2026", "https://mylaw.my/legislation/employment-insurance-system-amendment-act-2026"]
+  ],
+  "faq": [
+    { "q": "How much EIS will I get if I lose my job?", "a": "80% of your assumed monthly wage in the first month, then 50%, 40%, 40%, 30% and 30%, for 3 to 6 months. On RM3,000 that is RM2,400, RM1,500, RM1,200, RM1,200, RM900 and RM900: {{E_TOTAL}} over 6 months." },
+    { "q": "How long does the Job Search Allowance last?", "a": "3 to 6 months, depending on how many contributions you have made. The first claim needs at least 12 monthly contributions in the 24 months before you lost your job. PERKESO confirms your period when it approves the claim." },
+    { "q": "What is the maximum EIS allowance?", "a": "Wages count up to the RM6,000 insured ceiling, so the first month is at most RM4,800 and 6 months about {{E_MAX}}. PERKESO may use a banded assumed wage slightly below your actual pay." },
+    { "q": "What changed for EIS from 1 October 2026?", "a": "For job loss on or after 1 October 2026, the Early Re-employment Allowance rises from 25% to 50% of the unpaid allowance, training fees rise to RM7,000 with RM30 a day, and a new RM1,000 Mobility Assistance Allowance helps if your new job is over 100 km from home." },
+    { "q": "What is the Early Re-employment Allowance?", "a": "A lump sum when you find a new job before your allowance ends: 50% of the allowance still unpaid. On RM3,000, re-employed after month 2, you get {{E_ERA}} on top of RM3,900 already paid, {{E_ERA_REC}} in all." },
+    { "q": "Who can claim EIS?", "a": "Employees who lose their job through retrenchment, a voluntary or mutual separation scheme, business closure or constructive dismissal. Resignation, dismissal for misconduct and retirement are not covered. Claim within 60 days and register on MYFutureJobs." },
+    { "q": "How much is the EIS contribution?", "a": "0.2% of wages from the employee and 0.2% from the employer, up to RM11.90 each a month at the RM6,000 ceiling." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">EIS calculator</li></ol></nav>
+  <h1>EIS Calculator Malaysia</h1>
+  <p class="answer">After losing your job, PERKESO's EIS pays a Job Search Allowance of <strong>80% of your wage in month 1</strong>, then 50%, 40%, 40%, 30% and 30%, for 3 to 6 months. On RM3,000 that is <strong>{{E_TOTAL}}</strong> over 6 months. For job loss from 1 October 2026, finding a new job early pays 50% of the allowance left. Enter your wage below.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-sip-perkeso/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="eisForm" novalidate aria-labelledby="eis-h">
+      <h2 id="eis-h">Your claim</h2>
+      <div class="field"><label for="wage">Monthly wage (insured)</label><div class="input"><span aria-hidden="true">RM</span><input id="wage" name="wage" type="number" inputmode="decimal" min="0" step="100" value="{{E_WAGE}}"></div></div>
+      <div class="field-row">
+        <div class="field"><label for="months">Allowance period</label><select class="input" id="months" name="months">{{E_MONTH_OPTIONS}}</select></div>
+        <div class="field"><label for="lossAfter">Lost job</label><select class="input" id="lossAfter" name="lossAfter">{{E_LOSS_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="newJob">New job found</label><select class="input" id="newJob" name="newJob">{{E_JOB_OPTIONS}}</select></div>
+        <div class="field"><label for="far">New job far away?</label><select class="input" id="far" name="far">{{E_FAR_OPTIONS}}</select></div>
+      </div>
+      <p class="help">PERKESO sets 3 to 6 months from your contributions; use 6 if you have contributed for 2 years.</p>
+    </form>
+
+    <section class="box" aria-labelledby="eis-result-h">
+      <h2 id="eis-result-h">Your allowance</h2>
+      <div class="net">
+        <p>Total Job Search Allowance</p>
+        <output id="eTotal" for="wage months lossAfter newJob far">{{E_TOTAL}}</output>
+        <p id="eSub">{{E_SUB}}</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Summary</caption>
+        <tbody id="eLines">
+{{E_LINES}}
+        </tbody>
+      </table>
+      <table class="rows">
+        <caption>Month by month</caption>
+        <tbody id="eSchedule">
+{{E_SCHED}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="eisPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Job Search Allowance by wage</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly wage</th><th scope="col">Month 1</th><th scope="col">3 months total</th><th scope="col">6 months total</th></tr></thead>
+      <tbody>
+{{E_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the EIS allowance is worked out</h2>
+  <ol>
+    <li><strong>Assumed wage</strong> = your insured monthly wage, up to RM6,000.</li>
+    <li><strong>Job Search Allowance</strong> = 80%, 50%, 40%, 40%, 30% and 30% of it in months 1 to 6.</li>
+    <li><strong>Period</strong>: 3 to 6 months, set by PERKESO from your contributions.</li>
+    <li><strong>Early Re-employment Allowance</strong> = 50% of the unpaid allowance (25% for job loss before 1 October 2026).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">EIS benefits and conditions (2026)</h2>
+  <ul>
+    <li><strong>Eligibility:</strong> at least 12 contributions in the 24 months before job loss for a first claim; claim within 60 days at LINDUNG KERJAYA and register on MYFutureJobs.</li>
+    <li><strong>Covered:</strong> retrenchment, VSS or MSS, business closure, constructive dismissal and resignation because of harassment, threats or dangerous orders.</li>
+    <li><strong>Not covered:</strong> resignation, dismissal for misconduct and retirement.</li>
+    <li><strong>From 1 October 2026:</strong> training fees up to RM7,000 with RM30 a day; Mobility Assistance Allowance of RM1,000 for a new job over 100 km from home within 12 months of the last allowance payment.</li>
+    <li><strong>Also claim</strong> your employer's termination benefits; see the <a href="/termination-benefits-calculator-malaysia/">termination benefits calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.perkeso.gov.my/images/flyers/sip/200224%20-%20Flyers%20-%20SIP%20-%20BM_compressed.pdf" rel="noopener">PERKESO: EIS flyer</a></li>
+    <li><a href="https://www.malaysia.gov.my/en/categories/aid-welfare-and-assistance/job-aid/employment-insurance-scheme-eis-assistance-under-perkeso" rel="noopener">MyGovernment: EIS assistance</a></li>
+    <li><a href="https://ringgitplus.com/en/blog/insurance/perkeso-pays-more-if-you-lose-your-job-from-1-october.html" rel="noopener">RinggitPlus: EIS changes from 1 October 2026</a></li>
+    <li><a href="https://www.thestar.com.my/news/true-or-not/2026/10/02/quickcheck-do-malaysians-get-an-unemployment-allowance-if-they-lose-their-job" rel="noopener">The Star: QuickCheck on job loss allowance</a></li>
+    <li><a href="https://bernama.com/en/general/news.php?id=2609232" rel="noopener">Bernama: PERKESO raises job loss support</a></li>
+    <li><a href="https://mylaw.my/legislation/employment-insurance-system-amendment-act-2026" rel="noopener">MyLaw: EIS (Amendment) Act 2026</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate. PERKESO decides eligibility, the assumed wage and the number of months when it approves your claim.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/termination-benefits-calculator-malaysia/">Termination Benefits Calculator<small>Notice and retrenchment pay</small></a>
+    <a href="/annual-leave-calculator-malaysia/">Annual Leave Calculator<small>Pay for unused leave</small></a>
+    <a href="/salary-calculator-malaysia/">Malaysia Salary Calculator<small>EPF, SOCSO and EIS deductions</small></a>
+  </div>
+</section>

@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/tenancy-stamp-duty-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-duti-setem-sewa/" },
+  "title": "Tenancy Agreement Stamp Duty Calculator Malaysia 2026",
+  "description": "Stamp duty on a tenancy agreement in Malaysia: RM1, RM3, RM5 or RM7 per RM250 of yearly rent by term, RM10 copies, the old rule, and your rental yield.",
+  "llms": "Calculates stamp duty on a Malaysian tenancy or lease agreement under the Stamp Act 1949, First Schedule item 49(a) as amended by the Finance Act 2024: duty is charged per RM250 or part of the average yearly rent, with no exemption threshold (the old RM2,400 exemption is gone): RM1 per RM250 for a term up to 1 year, RM3 for over 1 to 3 years, RM5 for over 3 to 5 years and RM7 for over 5 years or no fixed term; minimum duty RM10; RM10 for each stamped copy. Stamp within 30 days of signing through e-Duti Setem on MyTax (self-assessment from 1 January 2026). Examples: RM2,000 a month for 1 year = RM96; RM1,800 for 1 year = RM87 (+RM10 copy = RM97); RM1,500 for 2 years = 72 × RM3 = RM216 (RM126 under the old RM1/RM2/RM4 rule with the first RM2,400 exempt). Also gives the rental yield: RM1,500 a month on a RM350,000 home is a 5.14% gross yield. The 50% tax exemption on residential rent applied to YA2018 only.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "tenancy",
+  "scripts": ["/assets/js/tenancy-stamp-duty.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Tenancy Stamp Duty Calculator", null]],
+  "about": ["Stamp duty", "Tenancy agreement", "Stamp Act 1949", "Rental yield"],
+  "app": {
+    "name": "Tenancy Agreement Stamp Duty Calculator Malaysia",
+    "category": "FinanceApplication",
+    "features": ["Stamp duty by rent and term", "RM10 minimum and copies", "Comparison with the old rule", "Gross and net rental yield", "Vacancy and owner's costs", "Works offline"]
+  },
+  "citations": [
+    ["Skrine: Proposed amendments to the Stamp Act 1949 (tenancy rates)", "https://www.skrine.com/insights/alerts/november-2024/proposed-amendments-to-the-stamp-act-1949-part-1"],
+    ["KPMG Malaysia: Stamp duty self-assessment from 1 January 2026", "https://assets.kpmg.com/content/dam/kpmgsites/my/pdf/2025/12/stamp-duty-in-malaysia-are-you-ready-for-the-self-assessment-era.pdf.coredownload.inline.pdf"],
+    ["LHDN: Guideline on stamp duty under the Stamp Act 1949", "https://www.hasil.gov.my/wp-content/uploads/20251106-garis-panduan-pengenalan-duti-setem-di-bawah-akta-setem-1949.pdf"],
+    ["Speedhome: Stamp duty for tenancy agreements", "https://speedhome.com/blog/stamp-duty-tenancy-agreement-calculator"],
+    ["StashAway: Stamp duty for tenancy agreements in Malaysia", "https://www.stashaway.my/r/stamp-duty-tenancy-agreement-malaysia"],
+    ["Skrine: Tax exemption for tenancy with monthly rent up to RM2,000 (YA2018)", "https://www.skrine.com/insights/alerts/february-2019/tax-exemption-for-tenancy-with-monthly-rent-not-ex"]
+  ],
+  "faq": [
+    { "q": "How much is stamp duty on a tenancy agreement in Malaysia?", "a": "RM1 for every RM250 (or part) of the yearly rent for a term up to 1 year, RM3 for over 1 to 3 years, RM5 for over 3 to 5 years and RM7 above 5 years, with a minimum of RM10. RM1,500 a month for 2 years: RM18,000 ÷ 250 = 72 × RM3 = {{T_DUTY}}." },
+    { "q": "What is the stamp duty for RM2,000 rent a month?", "a": "For a 1-year tenancy, RM24,000 ÷ 250 = 96 units × RM1 = {{T_2000}}. For 2 years it is RM288, at RM3 per unit." },
+    { "q": "Is the first RM2,400 of rent still exempt?", "a": "No. The Finance Act 2024 removed the RM2,400 exemption and moved to RM1, RM3, RM5 and RM7 per RM250. RM1,500 a month for 2 years paid {{T_OLD}} under the old rule and pays {{T_DUTY}} now." },
+    { "q": "How much is stamp duty for a copy of the agreement?", "a": "RM10 for each duplicate or copy stamped, so the landlord's and the tenant's copies together usually add RM10 to the duty on the original." },
+    { "q": "Who pays and when must it be stamped?", "a": "The tenant usually pays, unless the agreement says otherwise. Stamp within 30 days of signing through e-Duti Setem on LHDN's MyTax, which runs on self-assessment from 1 January 2026; late stamping carries a penalty." },
+    { "q": "What is a good rental yield in Malaysia?", "a": "Gross yield = yearly rent ÷ property price. RM1,500 a month on a RM350,000 home is {{T_GROSS}}%; after one month's vacancy and RM2,400 of yearly costs the net yield is {{T_NET}}%." },
+    { "q": "Is rental income taxed in Malaysia?", "a": "Yes, net rental income is taxed at your normal resident rates. The 50% exemption for residential rents up to RM2,000 a month applied to YA2018 only and has not been renewed." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Tenancy stamp duty calculator</li></ol></nav>
+  <h1>Tenancy Agreement Stamp Duty Calculator</h1>
+  <p class="answer">Stamp duty on a Malaysian tenancy agreement is <strong>RM1, RM3, RM5 or RM7 for every RM250 of yearly rent</strong> for a term up to 1, 3, 5 or more than 5 years, with no RM2,400 exemption and a RM10 minimum. A 2-year tenancy at RM1,500 a month pays <strong>{{T_DUTY}}</strong>, plus RM10 for a copy. Enter your rent and term below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-duti-setem-sewa/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="tenancyForm" novalidate aria-labelledby="tn-h">
+      <h2 id="tn-h">Your tenancy</h2>
+      <div class="field-row">
+        <div class="field"><label for="rent">Monthly rent</label><div class="input"><span aria-hidden="true">RM</span><input id="rent" name="rent" type="number" inputmode="decimal" min="0" step="50" value="{{T_RENT}}"></div></div>
+        <div class="field"><label for="months">Tenancy term</label><div class="input"><input id="months" name="months" type="number" inputmode="numeric" min="1" max="360" step="1" value="{{T_MONTHS}}"><span aria-hidden="true">months</span></div></div>
+      </div>
+      <div class="field"><label for="copies">Copies to stamp</label><div class="input"><input id="copies" name="copies" type="number" inputmode="numeric" min="0" max="10" step="1" value="{{T_COPIES}}"><span aria-hidden="true">copies</span></div></div>
+      <fieldset class="field-group">
+        <legend>Rental yield (optional)</legend>
+        <div class="field"><label for="price">Property price</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="10000" value="{{T_PRICE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="costs">Owner's costs a year</label><div class="input"><span aria-hidden="true">RM</span><input id="costs" name="costs" type="number" inputmode="decimal" min="0" step="100" value="{{T_COSTS}}"></div></div>
+          <div class="field"><label for="vacancy">Vacant months a year</label><div class="input"><input id="vacancy" name="vacancy" type="number" inputmode="decimal" min="0" max="12" step="0.5" value="{{T_VACANCY}}"><span aria-hidden="true">months</span></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Owner's costs: maintenance fee, assessment, quit rent, insurance and repairs.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tn-result-h">
+      <h2 id="tn-result-h">Stamp duty</h2>
+      <div class="net">
+        <p>Total stamp duty</p>
+        <output id="tDuty" for="rent months copies">{{T_TOTAL}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tenancyPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Tenancy stamp duty by monthly rent and term</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Monthly rent</th><th scope="col">1 year</th><th scope="col">2 years</th><th scope="col">4 years</th><th scope="col">6 years</th></tr></thead>
+      <tbody>
+{{T_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>Duty on the original agreement; add RM10 for each stamped copy.</p>
+
+  <h2 id="formula">How tenancy stamp duty is worked out</h2>
+  <ol>
+    <li><strong>Yearly rent</strong> = monthly rent × 12 (the average yearly rent if it changes).</li>
+    <li><strong>Units</strong> = yearly rent ÷ RM250, rounded up.</li>
+    <li><strong>Duty</strong> = units × the rate for the term, at least RM10.</li>
+    <li><strong>Copies</strong>: RM10 each.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rates-h">Stamp duty rates for tenancy agreements</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tenancy term</th><th scope="col">Duty per RM250 of yearly rent</th></tr></thead>
+      <tbody>
+{{T_BANDS}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Old rule:</strong> the first RM2,400 of yearly rent was exempt and the rates were RM1, RM2 and RM4 per RM250. Most sources date the change to 1 January 2025; a few say 1 January 2026. Agreements signed in 2026 use the new rates either way.</li>
+    <li><strong>Self-assessment:</strong> from 1 January 2026 tenancy agreements are stamped through e-Duti Setem on MyTax, within 30 days of signing.</li>
+    <li><strong>Rental income tax:</strong> net rent is taxed at normal rates; the 50% exemption applied only to YA2018.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.skrine.com/insights/alerts/november-2024/proposed-amendments-to-the-stamp-act-1949-part-1" rel="noopener">Skrine: Amendments to the Stamp Act 1949</a></li>
+    <li><a href="https://assets.kpmg.com/content/dam/kpmgsites/my/pdf/2025/12/stamp-duty-in-malaysia-are-you-ready-for-the-self-assessment-era.pdf.coredownload.inline.pdf" rel="noopener">KPMG Malaysia: Stamp duty self-assessment</a></li>
+    <li><a href="https://www.hasil.gov.my/wp-content/uploads/20251106-garis-panduan-pengenalan-duti-setem-di-bawah-akta-setem-1949.pdf" rel="noopener">LHDN: Stamp duty guideline</a></li>
+    <li><a href="https://speedhome.com/blog/stamp-duty-tenancy-agreement-calculator" rel="noopener">Speedhome: Tenancy stamp duty</a></li>
+    <li><a href="https://www.stashaway.my/r/stamp-duty-tenancy-agreement-malaysia" rel="noopener">StashAway: Tenancy stamp duty</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/february-2019/tax-exemption-for-tenancy-with-monthly-rent-not-ex" rel="noopener">Skrine: 50% rental exemption (YA2018)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate. The duty assessed on MyTax is final; agreements with premiums, rent-free periods or unusual terms may differ.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/rent-vs-buy-calculator-malaysia/">Rent vs Buy Calculator<small>Renting against buying a home</small></a>
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Instalment, stamp duty and legal fees</small></a>
+    <a href="/rpgt-calculator-malaysia/">RPGT Calculator<small>Tax when you sell property</small></a>
+  </div>
+</section>

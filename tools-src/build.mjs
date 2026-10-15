@@ -60,6 +60,10 @@ const nesteggCore = require('../assets/js/nestegg-core.js');
 const leaveCore = require('../assets/js/leave-core.js');
 const terminationCore = require('../assets/js/termination-core.js');
 const roadtaxCore = require('../assets/js/roadtax-core.js');
+const sstCore = require('../assets/js/sst-core.js');
+const bursaCore = require('../assets/js/bursa-core.js');
+const tenancyCore = require('../assets/js/tenancy-core.js');
+const eisCore = require('../assets/js/eis-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -1722,10 +1726,80 @@ function roadtaxMap(lang) {
     RT_VERIFIED: longDate(R.FACTS.verified, lang), RT_VERIFIED_ISO: R.FACTS.verified
   };
 }
+// ---- batch 6: SST, Bursa share fees, tenancy stamp duty, EIS
+function sstMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), S = sstCore, r = S.calculate({ amount: 100, rate: 8 });
+  const lines = [tr(L ? 'Harga sebelum cukai' : 'Price before tax', m(r.base)), tr('SST (8%)', m(r.tax)), tr(L ? 'Jumlah termasuk cukai' : 'Total including tax', m(r.total), 'total'), tr(L ? 'Bahagian cukai dalam jumlah' : 'Tax share of the total', nf(r.taxShare, 2) + '%')].join('\n');
+  const rates = [[8, L ? 'Cukai perkhidmatan am (kebanyakan perkhidmatan bercukai, termasuk perkhidmatan kewangan berasaskan fi)' : 'General service tax (most taxable services, including fee-based financial services)'],
+    [6, L ? 'Makanan dan minuman, telekomunikasi, letak kenderaan, logistik, pembinaan, sewaan dan pajakan (mulai 1 Januari 2026), kesihatan swasta untuk bukan warganegara, pendidikan swasta yang bercukai' : 'Food and beverage, telecommunications, parking, logistics, construction, rental and leasing (from 1 January 2026), private healthcare for non-citizens, taxable private education'],
+    [10, L ? 'Cukai jualan, kadar asas (barang tidak penting dan premium)' : 'Sales tax, standard rate (non-essential and premium goods)'], [5, L ? 'Cukai jualan, kadar dikurangkan (barang tersenarai)' : 'Sales tax, reduced rate (listed goods)'], [0, L ? 'Barang keperluan asas dikecualikan' : 'Exempt essential goods']]
+    .map(([v, d]) => `<tr><th scope="row">${v}%</th><td>${d}</td></tr>`).join('\n');
+  const grid = [10, 50, 100, 500, 1000, 5000].map(a => `<tr><th scope="row">${m(a)}</th>${[6, 8, 10].map(rt => `<td>${m(S.calculate({ amount: a, rate: rt }).total)}</td>`).join('')}${[6, 8].map(rt => `<td>${m(S.calculate({ amount: a, rate: rt, mode: 'remove' }).base)}</td>`).join('')}</tr>`).join('\n');
+  const th = S.FACTS.thresholds.map(([k, v]) => `<tr><th scope="row">${{ services: L ? 'Kebanyakan perkhidmatan' : 'Most services', manufacturer: L ? 'Pengilang barang bercukai' : 'Manufacturer of taxable goods', fnb: L ? 'Makanan dan minuman' : 'Food and beverage', rental: L ? 'Sewaan dan pajakan' : 'Rental and leasing', financial: L ? 'Perkhidmatan kewangan' : 'Financial services', construction: L ? 'Pembinaan' : 'Construction', healthcare: L ? 'Kesihatan swasta' : 'Private healthcare' }[k]}</th><td>${m(v)}</td></tr>`).join('\n');
+  const rest = S.calculate({ amount: 100, rate: 6, charge: 10 });
+  return {
+    S_MODE_OPTIONS: [opt('add', 'Add SST to a price', 'Tambah SST pada harga', true), opt('remove', 'Remove SST from a total', 'Keluarkan SST daripada jumlah')].join(''),
+    S_RATE_OPTIONS: [opt('8', '8% service tax (general)', '8% cukai perkhidmatan (am)', true), opt('6', '6% service tax (F&B, telco, rental and others)', '6% cukai perkhidmatan (F&B, telko, sewaan dan lain-lain)'), opt('10', '10% sales tax', '10% cukai jualan'), opt('5', '5% sales tax', '5% cukai jualan')].join(''),
+    S_TOTAL: m(r.total), S_SUB: L ? 'SST RM 8.00 pada 8%' : 'SST RM 8.00 at 8%', S_LINES: lines, S_RATES: rates, S_GRID: grid, S_THRESH: th, S_REST: m(rest.total),
+    S_REMOVE: m(S.calculate({ amount: 108, rate: 8, mode: 'remove' }).base),
+    S_VERIFIED: longDate(S.FACTS.verified, lang), S_VERIFIED_ISO: S.FACTS.verified
+  };
+}
+const BURSA_EXAMPLE = { qty: 1000, buy: 2, sell: 2.3, brokerPct: 0.08, brokerMin: 8, asset: 'shares', dividend: 0 };
+function bursaMap(lang) {
+  const { L, m, nf, tr, opt } = b3(lang), B = bursaCore, r = B.calculate(BURSA_EXAMPLE);
+  const lines = [tr(L ? 'Nilai belian' : 'Buy value', m(r.buyValue)), tr(L ? 'Brokeraj belian' : 'Buy brokerage', '+ ' + m(r.buyFees.brokerage)), tr(L ? 'Fi penjelasan belian' : 'Buy clearing fee', '+ ' + m(r.buyFees.clearing)), tr(L ? 'Duti setem belian' : 'Buy stamp duty', '+ ' + m(r.buyFees.stamp)),
+    tr(L ? 'Kos belian' : 'Total buy cost', m(r.cost), 'total'), tr(L ? 'Nilai jualan' : 'Sell value', m(r.sellValue)), tr(L ? 'Brokeraj jualan' : 'Sell brokerage', '− ' + m(r.sellFees.brokerage)), tr(L ? 'Fi penjelasan jualan' : 'Sell clearing fee', '− ' + m(r.sellFees.clearing)),
+    tr(L ? 'Duti setem jualan' : 'Sell stamp duty', '− ' + m(r.sellFees.stamp)), tr(L ? 'Hasil jualan bersih' : 'Net sale proceeds', m(r.proceeds), 'total'), tr(L ? 'Untung bersih' : 'Net profit', m(r.profit), 'total'), tr(L ? 'Pulangan' : 'Return', nf(r.ret, 2) + '%'),
+    tr(L ? 'Jumlah caj' : 'Total charges', m(r.feesTotal)), tr(L ? 'Harga pulang modal' : 'Break-even price', 'RM' + r.breakEven.toFixed(3))].join('\n');
+  const grid = [1000, 5000, 10000, 50000, 100000, 1000000].map(v => { const f = B.fees(v, 0.0008, 8, false); return `<tr><th scope="row">${m(v)}</th><td>${m(f.brokerage)}</td><td>${m(f.clearing)}</td><td>${m(f.stamp)}</td><td>${m(f.total)}</td><td>${nf(f.total / v * 100, 3)}%</td></tr>`; }).join('\n');
+  const big = B.fees(2000000, 0.0008, 8, false);
+  return {
+    B_QTY: BURSA_EXAMPLE.qty, B_BUY: BURSA_EXAMPLE.buy, B_SELL: BURSA_EXAMPLE.sell, B_PCT: BURSA_EXAMPLE.brokerPct, B_MIN: BURSA_EXAMPLE.brokerMin,
+    B_ASSET_OPTIONS: [opt('shares', 'Ordinary shares (no SST on fees)', 'Saham biasa (tiada SST atas caj)', true), opt('etf', 'ETF, REIT or warrant (8% SST on brokerage and clearing)', 'ETF, REIT atau waran (SST 8% atas brokeraj dan penjelasan)')].join(''),
+    B_PROFIT: m(r.profit), B_RET: nf(r.ret, 2), B_FEES: m(r.feesTotal), B_BE: 'RM' + r.breakEven.toFixed(3), B_BUYFEES: m(r.buyFees.total), B_SELLFEES: m(r.sellFees.total),
+    B_SUB: L ? `Pulangan ${nf(r.ret, 2)}% · caj ${m(r.feesTotal)}` : `Return ${nf(r.ret, 2)}% · charges ${m(r.feesTotal)}`, B_LINES: lines, B_GRID: grid, B_BIG_STAMP: m(big.stamp), B_BIG_CLEAR: m(big.clearing),
+    B_VERIFIED: longDate(B.FACTS.verified, lang), B_VERIFIED_ISO: B.FACTS.verified
+  };
+}
+const TEN_EXAMPLE = { rent: 1500, months: 24, copies: 1, price: 350000, costs: 2400, vacancy: 1 };
+function tenancyMap(lang) {
+  const { L, m, nf, tr } = b3(lang), T = tenancyCore, r = T.calculate(TEN_EXAMPLE);
+  const lines = [tr(L ? 'Sewa setahun' : 'Yearly rent', m(r.annual)), tr(L ? 'Unit RM250 (dibundar naik)' : 'Units of RM250 (rounded up)', r.units), tr(L ? 'Kadar setiap RM250' : 'Rate per RM250', 'RM' + r.rate), tr(L ? 'Duti setem perjanjian' : 'Agreement stamp duty', m(r.duty)),
+    tr(L ? 'Salinan (1 × RM10)' : 'Copies (1 × RM10)', m(r.copyDuty)), tr(L ? 'Jumlah duti setem' : 'Total stamp duty', m(r.total), 'total'), tr(L ? 'Di bawah peraturan lama (dulu)' : 'Under the old rule (before)', m(r.old)),
+    tr(L ? 'Pulangan kasar' : 'Gross rental yield', nf(r.grossYield, 2) + '%'), tr(L ? 'Pendapatan sewa bersih setahun' : 'Net rental income a year', m(r.netIncome)), tr(L ? 'Pulangan bersih' : 'Net rental yield', nf(r.netYield, 2) + '%', 'total')].join('\n');
+  const grid = [500, 1000, 1500, 2000, 3000, 5000].map(rent => `<tr><th scope="row">${m(rent)}</th>${[12, 24, 48, 72].map(mo => `<td>${m(T.stampDuty(rent, mo).duty)}</td>`).join('')}</tr>`).join('\n');
+  const bands = T.FACTS.bands.map(([mo, rate], i) => `<tr><th scope="row">${[L ? 'Hingga 1 tahun' : 'Up to 1 year', L ? 'Lebih 1 hingga 3 tahun' : 'Over 1 to 3 years', L ? 'Lebih 3 hingga 5 tahun' : 'Over 3 to 5 years', L ? 'Lebih 5 tahun atau tidak tetap' : 'Over 5 years or indefinite'][i]}</th><td>RM${rate}</td></tr>`).join('\n');
+  return {
+    T_RENT: TEN_EXAMPLE.rent, T_MONTHS: TEN_EXAMPLE.months, T_COPIES: TEN_EXAMPLE.copies, T_PRICE: TEN_EXAMPLE.price, T_COSTS: TEN_EXAMPLE.costs, T_VACANCY: TEN_EXAMPLE.vacancy,
+    T_TOTAL: m(r.total), T_DUTY: m(r.duty), T_OLD: m(r.old), T_GROSS: nf(r.grossYield, 2), T_NET: nf(r.netYield, 2),
+    T_SUB: L ? `${r.units} × RM${r.rate} + 1 salinan · tempoh ${r.months} bulan` : `${r.units} × RM${r.rate} + 1 copy · ${r.months}-month term`, T_LINES: lines, T_GRID: grid, T_BANDS: bands,
+    T_2000: m(T.stampDuty(2000, 12).duty), T_1800: m(T.stampDuty(1800, 12).duty),
+    T_VERIFIED: longDate(T.FACTS.verified, lang), T_VERIFIED_ISO: T.FACTS.verified
+  };
+}
+const EIS_EXAMPLE = { wage: 3000, months: 6, newJob: 0, lossAfter: 'yes', far: 'no' };
+function eisMap(lang) {
+  const { L, m, tr, opt } = b3(lang), E = eisCore, r = E.calculate(EIS_EXAMPLE), mo = n => L ? `Bulan ${n}` : `Month ${n}`;
+  const lines = [tr(L ? 'Gaji andaian (siling RM6,000)' : 'Assumed wage (RM6,000 ceiling)', m(r.wage)), tr(L ? 'Tempoh elaun' : 'Allowance period', L ? '6 bulan' : '6 months'), tr(L ? 'Jumlah Elaun Mencari Pekerjaan' : 'Total Job Search Allowance', m(r.total), 'total'), tr(L ? 'Yuran latihan maksimum' : 'Maximum training fee', m(r.trainingCap))].join('\n');
+  const sched = r.schedule.map(x => tr(`${mo(x.month)} (${x.rate}%)`, m(x.amount))).join('\n');
+  const grid = [1700, 2000, 3000, 4000, 5000, 6000].map(w => { const x = E.calculate({ wage: w, months: 6 }); return `<tr><th scope="row">${m(w)}</th><td>${m(x.schedule[0].amount)}</td><td>${m(E.calculate({ wage: w, months: 3 }).total)}</td><td>${m(x.total)}</td></tr>`; }).join('\n');
+  const era = E.calculate({ wage: 3000, months: 6, newJob: 2 }), era5 = E.calculate({ wage: 5000, months: 6, newJob: 2 });
+  const monthOpts = [3, 4, 5, 6].map(n => opt(String(n), `${n} months`, `${n} bulan`, n === 6)).join('');
+  const jobOpts = [opt('0', 'Not yet / no', 'Belum / tidak', true), ...[1, 2, 3, 4, 5].map(n => opt(String(n), `After month ${n}`, `Selepas bulan ${n}`))].join('');
+  return {
+    E_WAGE: EIS_EXAMPLE.wage, E_MONTH_OPTIONS: monthOpts, E_JOB_OPTIONS: jobOpts,
+    E_LOSS_OPTIONS: [opt('yes', 'On or after 1 October 2026', 'Pada atau selepas 1 Oktober 2026', true), opt('no', 'Before 1 October 2026', 'Sebelum 1 Oktober 2026')].join(''),
+    E_FAR_OPTIONS: [opt('no', 'No', 'Tidak', true), opt('yes', 'Yes, over 100 km from home', 'Ya, lebih 100 km dari rumah')].join(''),
+    E_TOTAL: m(r.total), E_FIRST: m(r.schedule[0].amount), E_SUB: L ? `6 bulan · bulan pertama ${m(r.schedule[0].amount)}` : `6 months · first month ${m(r.schedule[0].amount)}`,
+    E_LINES: lines, E_SCHED: sched, E_GRID: grid, E_ERA: m(era.era), E_ERA_REC: m(era.received), E_ERA5: m(era5.era), E_MAX: m(E.calculate({ wage: 6000, months: 6 }).total),
+    E_VERIFIED: longDate(E.FACTS.verified, lang), E_VERIFIED_ISO: E.FACTS.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -1883,6 +1957,10 @@ const bundles = {
   'annual-leave.js': ['assets/js/leave-core.js', 'assets/js/leave-ui.js'],
   'termination-benefits.js': ['assets/js/termination-core.js', 'assets/js/termination-ui.js'],
   'road-tax.js': ['assets/js/roadtax-core.js', 'assets/js/roadtax-ui.js'],
+  'sst.js': ['assets/js/sst-core.js', 'assets/js/sst-ui.js'],
+  'bursa-fees.js': ['assets/js/bursa-core.js', 'assets/js/bursa-ui.js'],
+  'tenancy-stamp-duty.js': ['assets/js/tenancy-core.js', 'assets/js/tenancy-ui.js'],
+  'eis.js': ['assets/js/eis-core.js', 'assets/js/eis-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],
