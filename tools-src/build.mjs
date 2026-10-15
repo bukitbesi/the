@@ -206,7 +206,7 @@ const faqSchema = (faq, id, pageId) => ({
   mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
 });
 const organization = {
-  '@type': 'Organization', '@id': site.mainSite + '/#organization', name: site.brand, url: site.mainSite + '/',
+  '@type': 'Organization', '@id': site.mainSite + '/#org', name: site.brand, url: site.mainSite + '/',
   logo: { '@type': 'ImageObject', url: abs(site.logo.local512), width: 512, height: 512 },
   sameAs: [`https://x.com/${site.twitter.replace('@', '')}`],
   publishingPrinciples: site.origin + '/about/#method'
@@ -214,15 +214,15 @@ const organization = {
 const byline = p => p.body.replace(/(<p class="meta"><span>[\s\S]*?<\/span>)/, `$1<span>${p.lang === 'ms' ? 'Oleh' : 'By'} <a href="${site.author.path}" rel="author">${site.author.name}</a></span>`);
 // The named person who builds and verifies the calculators (E-E-A-T); tool pages credit them as author.
 const person = {
-  '@type': 'Person', '@id': site.origin + site.author.path, name: site.author.name, url: site.origin + site.author.path, jobTitle: site.author.jobTitle,
-  worksFor: { '@id': site.mainSite + '/#organization' }, sameAs: [site.mainSite + '/p/about.html'],
+  '@type': 'Person', '@id': site.mainSite + '/p/about.html#person', name: site.author.name, alternateName: site.author.alternateName, url: site.mainSite + '/p/about.html', jobTitle: site.author.jobTitle,
+  worksFor: { '@id': site.mainSite + '/#org' }, sameAs: [site.origin + site.author.path, 'https://www.linkedin.com/in/bukitbesi/', 'https://x.com/bukitbesiblog', 'https://instagram.com/bukitbesi'],
   knowsAbout: ['Malaysian personal finance calculators', 'Malaysian tax and payroll rules', 'Islamic inheritance (faraid) and zakat calculation', 'Web development']
 };
 organization.founder = { '@id': person['@id'] };
 const website = {
   '@type': 'WebSite', '@id': site.origin + '/#website', url: site.origin + '/', name: site.brand + ' Tools',
   alternateName: ['Bukit Besi Tools', 'The Bukit Besi free online tools'],
-  inLanguage: ['en', 'ms'], publisher: { '@id': site.mainSite + '/#organization' }
+  inLanguage: ['en', 'ms'], publisher: { '@id': site.mainSite + '/#org' }
 };
 const ldJson = graph => JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
 
@@ -266,7 +266,7 @@ const homeGraph = [
     description: homeDescription, inLanguage: 'en', isAccessibleForFree: true,
     isPartOf: { '@id': site.origin + '/#website' },
     primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
-    dateModified: site.dateModified, author: { '@id': site.mainSite + '/#organization' },
+    dateModified: site.dateModified, author: { '@id': site.mainSite + '/#org' },
     audience: { '@type': 'Audience', audienceType: 'Developers, bloggers, content creators and Malaysian users' },
     about: liveCats.map(c => ({ '@type': 'Thing', name: site.categories[c].label, description: site.categories[c].blurb })),
     mainEntity: { '@id': site.origin + '/#toollist' }
@@ -2296,7 +2296,7 @@ for (const p of pages) {
     '@type': p.schemaType || 'WebPage', '@id': pageId, url, name: p.title, description: p.description,
     inLanguage: p.lang === 'ms' ? 'ms-MY' : 'en-MY', isPartOf: { '@id': site.origin + '/#website' },
     breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.datePublished, dateModified: p.dateModified,
-    author: { '@id': p.policy ? site.mainSite + '/#organization' : person['@id'] }, publisher: { '@id': site.mainSite + '/#organization' },
+    author: { '@id': p.policy ? site.mainSite + '/#org' : person['@id'] }, publisher: { '@id': site.mainSite + '/#org' },
     primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
     ...(p.about ? { about: p.about.map(name => ({ '@type': 'Thing', name })) } : {}),
     ...(p.citations ? { citation: p.citations.map(c => ({ '@type': 'CreativeWork', name: c[0], url: c[1] })) } : {}),
@@ -2309,7 +2309,7 @@ for (const p of pages) {
     applicationCategory: p.app.category, operatingSystem: 'Any', browserRequirements: 'Requires JavaScript',
     inLanguage: p.lang === 'ms' ? 'ms-MY' : 'en-MY', isAccessibleForFree: true,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'MYR' }, featureList: p.app.features,
-    publisher: { '@id': site.mainSite + '/#organization' }, dateModified: p.dateModified
+    publisher: { '@id': site.mainSite + '/#org' }, dateModified: p.dateModified
   });
   if (p.faq && p.faq.length) graph.push(faqSchema(p.faq, url + '#faq', pageId));
 
