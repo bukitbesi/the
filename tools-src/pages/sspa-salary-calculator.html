@@ -1,0 +1,159 @@
+<!--page
+{
+  "path": "/sspa-salary-calculator/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-gaji-sspa/" },
+  "title": "SSPA Salary Calculator 2026: New Civil Service Pay and Pension",
+  "description": "Work out your new SSPA salary: phase 1 8% (RM240 minimum) and phase 2 7% on the 31 December 2025 salary, or 4% and 3% for JUSA. Pension adjustment too.",
+  "llms": "Malaysian civil service salary adjustment under the Sistem Saraan Perkhidmatan Awam (SSPA), for officers who took the SSPA option (Service Circulars No. 1 and 2 of 2024), verified 15 October 2026. Phase 1 from 1 December 2024: Pelaksana (Gred 1 to 8, formerly 19 to 40) and Management and Professional (Gred 9 and up, formerly 41 and up) 8% of basic salary, at least RM240 (basic salary of RM3,000 or less gets RM240); Top Management (JUSA, Gred Utama and Gred Khas) 4%. Phase 2 from 1 January 2026 (paid 22 January 2026): 7% (3% for Top Management) of the basic salary on 31 December 2025, so it compounds on phase 1 and the 2025 annual increment. Examples: RM2,000 becomes RM2,240 after phase 1 and RM2,396.80 after phase 2 (19.84% more); RM4,000 becomes RM4,320 then RM4,622.40 (15.56%); RM10,000 Top Management becomes RM10,712 (7.12%). Pensioners: pensions adjust by the last-salary group, 8% or 4% from 1 December 2024 and 7% or 3% from 1 January 2026 under the Pensions Adjustment Act 1980; phase 2 allocation RM1.97 billion for over 950,000 pensioners. Gred 1 starting salary under SSPA RM1,500. Officers who stayed on the old SSM (about 1,400) get no adjustment. Grade map: SSM 19/20 becomes SSPA 1, 21/22/24 becomes 2, 25/26 becomes 3, 27/28 becomes 4, 29/30 becomes 5, 41/42 becomes 9, 43/44 becomes 10.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "sspa",
+  "scripts": ["/assets/js/sspa.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["SSPA Salary Calculator", null]],
+  "about": ["Sistem Saraan Perkhidmatan Awam", "Malaysian civil service pay", "Public Service Department", "Civil service pension"],
+  "app": {
+    "name": "SSPA Salary Calculator",
+    "category": "FinanceApplication",
+    "features": ["Phase 1 8% with RM240 minimum and phase 2 7%", "Top Management 4% and 3%", "2025 increment in the phase 2 base", "Pension adjustment for retirees", "Monthly and yearly rise", "SSM to SSPA grade map", "Works offline"]
+  },
+  "citations": [
+    ["RTM: SSPA phase 2 salary adjustment in January 2026", "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/pelarasan-gaji-fasa-2-sspa-dilaksanakan-januari-2026"],
+    ["RTM: Government pensioners receive phase 2 pension adjustment in January 2026", "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/pesara-kerajaan-terima-pelarasan-pencen-fasa-2-pada-januari-2026-kppa/"],
+    ["Ministry of Health: SSPA salary adjustment briefing slides", "https://www3.moh.gov.my/moh/resources/Warga%20KKM/SSPA/SLAID%20SLU%20SSPA%20KEPADA%20PTJ%202024/2._PELARASAN_GAJI_SLU_SSPA_KKM_.pdf"],
+    ["Bernama: PM announces 15% and 7% civil service pay rises", "https://bernama.com/en/news.php?id=2329689"],
+    ["NST: Second phase SSPA pay rise", "https://www.nst.com.my/amp/news/nation/2026/01/1361970/second-phase-sspa-pay-rise-drive-civil-service-excellence"],
+    ["NST: Officers who opt out of SSPA not eligible for phased salary adjustment", "https://nst.com.my/amp/news/nation/2024/09/1105642/officers-who-opt-out-sspa-not-eligible-phase-salary-adjustment"],
+    ["The Sun: Officers opting out of SSPA not eligible for phased salary adjustment", "https://thesun.my/news/malaysia-news/officers-opting-out-of-sspa-not-eligible-for-phased-salary-adjustment-nc13000863/"],
+    ["FMT: Anwar announces 7% to 15% pay hikes for civil servants", "https://freemalaysiatoday.com/category/nation/2024/08/16/anwar-announces-7-15-pay-hikes-for-civil-servants"],
+    ["FMT: RM1.97 billion allocated for phase 2 SSPA pension adjustments", "https://www.freemalaysiatoday.com/category/nation/2025/11/11/rm1-97bil-allocated-for-phase-2-sspa-pension-adjustments"],
+    ["Utusan Sarawak: SSM to SSPA grade map", "https://utusansarawak.com.my/?p=56237"]
+  ],
+  "faq": [
+    { "q": "How much is the SSPA salary increase?", "a": "Pelaksana and Management and Professional: 8% from 1 December 2024 (RM240 minimum) and 7% from 1 January 2026. Top Management (JUSA, Gred Utama, Gred Khas): 4% and 3%. Because phase 2 is worked out on the salary after phase 1, the totals are 15.56% and 7.12%, not 15% and 7%." },
+    { "q": "What is my new salary on RM2,000?", "a": "8% is RM160, so the RM240 minimum applies: RM2,000 becomes {{P_EX_S1}}. Phase 2 is 7% of RM2,240 (RM156.80): new salary {{P_EX_S2}}, without an annual increment. With a RM100 increment in 2025, the new salary is {{P_KGT_S2}}." },
+    { "q": "Who gets the RM240 minimum?", "a": "Pelaksana and Management and Professional officers with a basic salary of RM3,000 or less in phase 1, because 8% of RM3,000 is exactly RM240. Top Management is not included. No minimum was found for phase 2." },
+    { "q": "Is phase 2 worked out on the original salary?", "a": "No. Phase 2 is 7% (or 3%) of the basic salary on 31 December 2025, which already includes phase 1 and the 2025 increment. Example: RM4,000 becomes {{P_PP_S1}}, then {{P_PP_S2}}." },
+    { "q": "How much do pensions rise under SSPA?", "a": "Pensions adjust by the last-salary group: 8% (4% for Top Management) from 1 December 2024 and 7% (3%) from 1 January 2026. A RM2,000 pension becomes {{P_PEN_S2}}. An RM240 minimum for pensions could not be confirmed." },
+    { "q": "What are the new SSPA grades?", "a": "SSPA renumbers the grades: SSM 19/20 becomes Gred 1, 21/22/24 Gred 2, 25/26 Gred 3, 27/28 Gred 4, 29/30 Gred 5, 39/40 Gred 8, 41/42 Gred 9 and 43/44 Gred 10. Pelaksana is Gred 1 to 8; Management and Professional starts at Gred 9." },
+    { "q": "Do officers who did not opt for SSPA get the rise?", "a": "No. About 1,400 officers who stayed on the Malaysian Remuneration System (SSM) get neither the phase 1 nor the phase 2 adjustment." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">SSPA Salary Calculator</li></ol></nav>
+  <h1>SSPA Salary Calculator 2026</h1>
+  <p class="answer">Under SSPA, Pelaksana and Management and Professional pay rose <strong>8% (RM240 minimum) on 1 December 2024</strong> and <strong>7% on 1 January 2026</strong> on the latest salary, so RM2,000 becomes <strong>{{P_EX_S2}}</strong>. Top Management rose 4% and 3%, and pensioners got the same pension adjustment. Enter your basic salary.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Runs in your browser; no data sent</span><a href="/kalkulator-gaji-sspa/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="sspaForm" novalidate aria-labelledby="sspa-h">
+      <h2 id="sspa-h">Your pay</h2>
+      <div class="field"><label for="mode">You are</label><select class="input" id="mode" name="mode">{{P_MODE_OPTIONS}}</select></div>
+      <div class="field"><label for="group">Service group</label><select class="input" id="group" name="group">{{P_GROUP_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="basic">Basic salary or pension (Nov 2024)</label><div class="input"><span aria-hidden="true">RM</span><input id="basic" name="basic" type="number" inputmode="decimal" min="0" step="10" value="{{P_BASIC}}"></div></div>
+        <div class="field" id="fKgt"><label for="kgt">2025 annual increment</label><div class="input"><span aria-hidden="true">RM</span><input id="kgt" name="kgt" type="number" inputmode="decimal" min="0" step="10" value="{{P_KGT}}"></div></div>
+      </div>
+      <p class="help">Basic salary before 1 December 2024. The 2025 annual increment (KGT) goes into the phase 2 base.</p>
+    </form>
+
+    <section class="box" aria-labelledby="sspa-result-h">
+      <h2 id="sspa-result-h">New salary</h2>
+      <div class="net">
+        <p>From 1 January 2026</p>
+        <output id="pNew" for="mode group basic kgt">{{P_NEW}}</output>
+        <p id="pSub">{{P_SUB}}</p>
+      </div>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Step-by-step adjustment</caption>
+        <tbody id="pLines">
+{{P_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="sspaPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">New SSPA salary by basic salary</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Basic salary Nov 2024</th><th scope="col">After phase 1</th><th scope="col">After phase 2</th><th scope="col">Rise</th><th scope="col">Top Management</th></tr></thead>
+      <tbody>
+{{P_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>Pelaksana and Management and Professional, without an annual increment. The last column shows the salary at the Top Management rates (4% and 3%).</p>
+
+  <h2 id="groups-h">SSPA rates by group</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="groups-h">
+    <table class="data">
+      <thead><tr><th scope="col">Group</th><th scope="col">Phase 1 (1 Dec 2024)</th><th scope="col">Phase 2 (1 Jan 2026)</th><th scope="col">Compounded total</th></tr></thead>
+      <tbody>
+{{P_GROUPS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the SSPA salary is worked out</h2>
+  <ol>
+    <li><strong>Phase 1</strong> = basic salary × 8% (RM240 minimum), or × 4% for Top Management.</li>
+    <li><strong>Salary on 31 December 2025</strong> = salary after phase 1 + the 2025 increment.</li>
+    <li><strong>Phase 2</strong> = salary on 31 December 2025 × 7% (or × 3%).</li>
+    <li><strong>New salary</strong> = salary on 31 December 2025 + phase 2. If it is still below the grade's starting salary, it is raised to the starting salary.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grades-h">SSM to SSPA grade map</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grades-h">
+    <table class="data">
+      <thead><tr><th scope="col">SSM grade (old)</th><th scope="col">SSPA grade</th></tr></thead>
+      <tbody>
+{{P_GRADES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Other things to know</h2>
+  <ul>
+    <li><strong>Gred 1 starting salary</strong> under SSPA is RM1,500 a month.</li>
+    <li><strong>Annual increments</strong> are now set per grade and need a MyPERFORMANCE score of at least 75%; your actual salary also depends on them.</li>
+    <li><strong>Pensioners</strong> who retired before 1 January 2026 receive the pension adjustment, not the phase 2 salary adjustment.</li>
+    <li><strong>Contract officers</strong> are reported to qualify at the same rates, but only one source confirms it.</li>
+    <li>Work out take-home pay after EPF and PCB with the <a href="/salary-calculator-malaysia/">salary calculator</a>, and your pension with the <a href="/retirement-age-calculator-malaysia/">retirement age calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/pelarasan-gaji-fasa-2-sspa-dilaksanakan-januari-2026" rel="noopener">RTM: SSPA phase 2</a> and <a href="https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/pesara-kerajaan-terima-pelarasan-pencen-fasa-2-pada-januari-2026-kppa/" rel="noopener">phase 2 pensions</a></li>
+    <li><a href="https://www3.moh.gov.my/moh/resources/Warga%20KKM/SSPA/SLAID%20SLU%20SSPA%20KEPADA%20PTJ%202024/2._PELARASAN_GAJI_SLU_SSPA_KKM_.pdf" rel="noopener">Ministry of Health: SSPA salary slides</a></li>
+    <li><a href="https://bernama.com/en/news.php?id=2329689" rel="noopener">Bernama: Pay rise announcement</a></li>
+    <li><a href="https://www.nst.com.my/amp/news/nation/2026/01/1361970/second-phase-sspa-pay-rise-drive-civil-service-excellence" rel="noopener">NST: Phase 2</a> and <a href="https://nst.com.my/amp/news/nation/2024/09/1105642/officers-who-opt-out-sspa-not-eligible-phase-salary-adjustment" rel="noopener">the RM240 rule</a></li>
+    <li><a href="https://thesun.my/news/malaysia-news/officers-opting-out-of-sspa-not-eligible-for-phased-salary-adjustment-nc13000863/" rel="noopener">The Sun: RM240 and 8%</a></li>
+    <li><a href="https://freemalaysiatoday.com/category/nation/2024/08/16/anwar-announces-7-15-pay-hikes-for-civil-servants" rel="noopener">FMT: 7% to 15% announcement</a> and <a href="https://www.freemalaysiatoday.com/category/nation/2025/11/11/rm1-97bil-allocated-for-phase-2-sspa-pension-adjustments" rel="noopener">phase 2 pensions</a></li>
+    <li><a href="https://utusansarawak.com.my/?p=56237" rel="noopener">Utusan Sarawak: SSPA grade map</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate from the announced rates. Your pay slip depends on your annual increment, the grade's starting salary and JPA's decisions. This tool is not a JPA site.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/salary-calculator-malaysia/">Salary Calculator Malaysia<small>EPF, SOCSO and PCB deductions</small></a>
+    <a href="/retirement-age-calculator-malaysia/">Retirement Age Calculator<small>Retirement date and pension</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Tax and reliefs</small></a>
+  </div>
+</section>
