@@ -1,0 +1,169 @@
+<!--page
+{
+  "path": "/kalkulator-kos-ev/",
+  "lang": "ms",
+  "alternates": { "en": "/ev-vs-petrol-cost-calculator-malaysia/" },
+  "title": "Kalkulator Kos EV vs Petrol 2026: Cas di Rumah, Cas Awam, BUDI95",
+  "description": "Bandingkan kos sebulan EV dan kereta petrol: kenaikan sebenar bil TNB bila cas di rumah, harga cas awam, petrol BUDI95 atau tanpa subsidi, dan pulang modal.",
+  "llms": "Kalkulator kos EV berbanding petrol untuk Malaysia, disemak 15 Oktober 2026. Cas di rumah dikira sebagai kenaikan bil TNB di bawah tarif domestik RP4 (tenaga 27.03 sen, kapasiti 4.55 sen, rangkaian 12.85 sen sekWj, tolak Insentif Kecekapan Tenaga yang berkurang apabila penggunaan naik, KWTBB 1.6% melebihi 300 kWj, SST melebihi paras perlindungan); tiada tarif khas EV untuk rumah. Contoh: rumah 400 kWj sebulan, EV menambah 170 kWj, bil naik kira-kira RM94, iaitu sekitar 55 sen sekWj, lebih tinggi daripada kadar asas kerana insentif kecekapan berkurang. Harga cas awam tidak dikawal (MITI, Julai 2026) dan ditetapkan pengendali: contoh diterbitkan AC kira-kira RM1.00 hingga RM1.15 sekWj, DC RM1.30 hingga RM1.80 sekWj; Tesla Supercharger untuk EV bukan Tesla RM1.80. Petrol mengikut harga mingguan Kementerian Kewangan: BUDI95 RON95 RM1.99 seliter hingga 300 liter sebulan, harga tanpa subsidi di atas kuota. Contoh 1,500 km sebulan, EV 14.2 kWj/100 km (80% cas di rumah, cas awam RM1.40), Proton Saga 4.9 L/100 km: dengan BUDI95 kos petrol hampir sama dengan EV; tanpa subsidi (RON95 RM4.62 pada 15 Oktober 2026) EV jimat kira-kira RM186 sebulan. Angka penggunaan EV ialah kapasiti bateri ÷ jarak WLTP; penggunaan sebenar biasanya lebih tinggi.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "ev",
+  "scripts": ["/assets/js/ev.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Kos EV vs Petrol", null]],
+  "about": ["Kenderaan elektrik", "Kos cas EV", "Tarif TNB", "BUDI95"],
+  "app": {
+    "name": "Kalkulator Kos EV vs Petrol",
+    "category": "FinanceApplication",
+    "features": ["Kenaikan sebenar bil TNB (RP4)", "Cas di rumah dan cas awam", "BUDI95 dan harga tanpa subsidi", "Model EV dan kereta popular", "Pulang modal", "Harga petrol mingguan"]
+  },
+  "citations": [
+    ["TNB: Tarif elektrik domestik", "https://www.mytnb.com.my/tariff"],
+    ["Bernama: Struktur tarif elektrik baharu RP4", "https://bernama.com/en/news.php?id=2440710"],
+    ["data.gov.my: Harga bahan api mingguan", "https://data.gov.my/data-catalogue/fuelprice"],
+    ["Malay Mail: Harga cas EV tidak dikawal (MITI)", "https://www.malaymail.com/news/malaysia/2026/07/29/ev-charging-rates-remain-unregulated-as-malaysia-leaves-pricing-to-operators/229318"],
+    ["The Sun: Tiada kawalan harga cas EV", "https://thesun.my/news/malaysia-news/no-price-controls-on-ev-charging-miti-encourages-private-sector"],
+    ["SoyaCincau: Harga cas Gentari", "https://soyacincau.com/2026/07/15/gentari-dc-charging-fee-price-cut-select-locations/"],
+    ["paultan.org: Tesla Supercharger untuk EV bukan Tesla", "https://paultan.org/2026/03/04/pengecas-tesla-supercharger-kini-dibuka-untuk-ev-bukan-tesla-di-malaysia-lokasi-terpilih-rm1-80-kwj/"],
+    ["paultan.org: Perodua QV-E jarak WLTP 370 km", "https://paultan.org/2026/02/04/perodua-qv-e-jarak-gerak-wltp-boleh-cecah-370-km-bateri-lfp-52-5-kwh-lebih-jauh-berbanding-emas-5/"]
+  ],
+  "faq": [
+    { "q": "Lebih jimat EV atau kereta petrol di Malaysia?", "a": "Bagi 1,500 km sebulan, EV 14.2 kWj/100 km yang dicas 80% di rumah kos kira-kira {{E_EX_EV}}, manakala Proton Saga dengan petrol BUDI95 kos {{E_EX_PETROL}} (beza {{E_EX_SAVE}}). Tanpa subsidi petrol {{E_EX_PETROL_U}}, jadi EV jimat {{E_EX_SAVE_U}} sebulan." },
+    { "q": "Berapa kos cas EV di rumah?", "a": "Kos sebenar ialah kenaikan bil TNB. Rumah 400 kWj sebulan yang menambah 170 kWj untuk EV membayar kira-kira {{E_EX_HOME}} lagi, sekitar {{E_EX_SEN}} sen sekWj, kerana insentif kecekapan tenaga berkurang apabila penggunaan naik." },
+    { "q": "Adakah TNB ada tarif khas untuk EV?", "a": "Tidak. Di bawah RP4 (mulai 1 Julai 2025) cas EV di rumah dikira dengan tarif domestik biasa. Skim Masa Penggunaan (ToU) pilihan ada untuk meter pintar, dengan tenaga luar puncak 24.43 sen berbanding 27.03 sen biasa." },
+    { "q": "Berapa harga cas EV awam di Malaysia?", "a": "Harga tidak dikawal kerajaan dan ditetapkan pengendali. Contoh diterbitkan: AC kira-kira RM1.00 hingga RM1.15 sekWj, DC RM1.30 hingga RM1.80 sekWj, dan Tesla Supercharger untuk EV bukan Tesla RM1.80 sekWj." },
+    { "q": "Bagaimana BUDI95 mempengaruhi perbandingan?", "a": "BUDI95 menjual RON95 pada RM1.99 seliter hingga 300 liter sebulan kepada rakyat Malaysia yang layak. Pada harga ini kereta petrol jimat bahan api seperti Saga hampir sama kos dengan EV; tanpa subsidi ({{E_RON95}} seliter minggu ini) EV jauh lebih murah." },
+    { "q": "Berapa lama EV pulang modal?", "a": "Masukkan beza harga EV dan kereta petrol. Contohnya beza RM20,000 dengan penjimatan tanpa subsidi {{E_EX_YEAR_U}} setahun mengambil kira-kira {{E_EX_PAYBACK}} tahun. Dengan BUDI95, penjimatan mungkin terlalu kecil untuk pulang modal." },
+    { "q": "Adakah angka penggunaan EV tepat?", "a": "Angka model ialah kapasiti bateri dibahagi jarak WLTP. Penggunaan sebenar biasanya lebih tinggi, terutama di lebuh raya dan dengan penghawa dingin, jadi masukkan angka dari paparan kereta anda jika ada." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Kos EV vs Petrol</li></ol></nav>
+  <h1>Kalkulator Kos EV vs Petrol</h1>
+  <p class="answer">Bagi 1,500 km sebulan, EV yang dicas 80% di rumah kos kira-kira <strong>{{E_EX_EV}}</strong>, berbanding <strong>{{E_EX_PETROL}}</strong> bagi Proton Saga dengan petrol BUDI95 RM1.99 dan {{E_EX_PETROL_U}} tanpa subsidi. Cas di rumah dikira sebagai kenaikan sebenar bil TNB (sekitar {{E_EX_SEN}} sen sekWj), bukan kadar asas, kerana insentif kecekapan tenaga berkurang apabila penggunaan naik.</p>
+  <p class="meta"><span>Disemak <time datetime="{{E_VERIFIED_ISO}}">{{E_VERIFIED}}</time></span><span>Harga petrol <time datetime="{{E_FUEL_ISO}}">{{E_FUEL_DATE}}</time></span><a href="/ev-vs-petrol-cost-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="evForm" novalidate aria-labelledby="ev-h" data-market="{{E_MARKET}}" data-protection="{{E_PROTECTION}}">
+      <h2 id="ev-h">Pemanduan anda</h2>
+      <div class="field"><label for="km">Jarak sebulan</label><div class="input"><input id="km" name="km" type="number" inputmode="numeric" min="0" step="100" value="1500"><span aria-hidden="true">km</span></div></div>
+      <div class="field"><label for="evModel">EV</label><select class="input" id="evModel" name="evModel">{{E_EV_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="evUse">Guna EV (kWj/100 km)</label><div class="input"><input id="evUse" name="evUse" type="number" inputmode="decimal" min="5" max="40" step="0.1" value="14.2"></div></div>
+        <div class="field"><label for="homeShare">Cas di rumah</label><div class="input"><input id="homeShare" name="homeShare" type="number" inputmode="numeric" min="0" max="100" step="5" value="80"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="houseKwh">Penggunaan rumah tanpa EV</label><div class="input"><input id="houseKwh" name="houseKwh" type="number" inputmode="numeric" min="0" max="1500" step="10" value="400"><span aria-hidden="true">kWj</span></div></div>
+        <div class="field"><label for="publicRate">Cas awam (RM/kWj)</label><div class="input"><input id="publicRate" name="publicRate" type="number" inputmode="decimal" min="0" step="0.05" value="1.40"></div></div>
+      </div>
+      <div class="field"><label for="carModel">Kereta petrol</label><select class="input" id="carModel" name="carModel">{{E_CAR_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="petrolUse">Guna petrol (L/100 km)</label><div class="input"><input id="petrolUse" name="petrolUse" type="number" inputmode="decimal" min="1" max="30" step="0.1" value="4.9"></div></div>
+        <div class="field"><label for="budi">BUDI95</label><select class="input" id="budi" name="budi">{{E_BUDI_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="evExtra">Beza harga EV (pilihan)</label><div class="input"><span aria-hidden="true">RM</span><input id="evExtra" name="evExtra" type="number" inputmode="numeric" min="0" step="1000" value=""></div></div>
+      <p class="help">Penggunaan rumah ada pada bil TNB anda. Angka model EV ialah bateri ÷ jarak WLTP; penggunaan sebenar biasanya lebih tinggi.</p>
+    </form>
+
+    <section class="box" aria-labelledby="ev-result-h">
+      <h2 id="ev-result-h">Kos sebulan</h2>
+      <div class="net">
+        <p id="eHead">{{E_HEAD}}</p>
+        <output id="eSave" for="km evUse homeShare houseKwh publicRate petrolUse budi evExtra">{{E_SAVE}}</output>
+        <p id="eSub">{{E_SUB}}</p>
+      </div>
+      <p class="sr-only" id="eLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Pecahan sebulan</caption>
+        <tbody id="eLines">
+{{E_LINES}}
+        </tbody>
+      </table>
+      <p class="help" id="eNote" hidden></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="evPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Kos sebulan ikut jarak</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Jarak</th><th scope="col">EV, cas rumah</th><th scope="col">EV, cas awam RM1.40</th><th scope="col">Saga, BUDI95</th><th scope="col">Saga, tanpa subsidi</th></tr></thead>
+      <tbody>
+{{E_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>EV 14.2 kWj/100 km, rumah 400 kWj sebulan, paras perlindungan {{E_LEVEL}} kWj; Proton Saga 4.9 L/100 km; RON95 tanpa subsidi {{E_RON95}} ({{E_FUEL_DATE}}).</p>
+
+  <h2 id="models-h">Model popular, 1,500 km sebulan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="models-h">
+    <table class="data">
+      <thead><tr><th scope="col">Model</th><th scope="col">Bateri</th><th scope="col">Jarak WLTP</th><th scope="col">kWj atau L / 100 km</th><th scope="col">Kos sebulan</th></tr></thead>
+      <tbody>
+{{E_MODELS}}
+      </tbody>
+    </table>
+  </div>
+  <p>EV dicas sepenuhnya di rumah; kereta petrol dengan BUDI95. Angka petrol ialah tuntutan pengeluar.</p>
+
+  <h2 id="rates-h">Harga cas awam yang diterbitkan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Rangkaian</th><th scope="col">AC</th><th scope="col">DC</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Gentari</th><td>RM1.00–1.15</td><td>RM1.30–1.80</td></tr>
+        <tr><th scope="row">JomCharge</th><td>RM1.10</td><td>RM1.40</td></tr>
+        <tr><th scope="row">Tesla Supercharger (EV bukan Tesla)</th><td>–</td><td>RM1.80</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Sekilowatt jam, berbeza ikut lokasi; harga tidak dikawal kerajaan. Semak aplikasi pengendali sebelum mengecas.</p>
+
+  <h2 id="formula">Cara kos dikira</h2>
+  <ol>
+    <li><strong>Tenaga EV</strong> = jarak × kWj/100 km ÷ 100.</li>
+    <li><strong>Cas di rumah</strong> = bil TNB dengan cas EV − bil tanpa EV (tarif RP4, termasuk kehilangan insentif kecekapan tenaga).</li>
+    <li><strong>Cas awam</strong> = baki kWj × harga sekWj.</li>
+    <li><strong>Petrol</strong> = liter × RM1.99 hingga 300 liter (BUDI95), harga tanpa subsidi di atasnya.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Perkara penting</h2>
+  <ul>
+    <li><strong>Cas 100% di rumah:</strong> {{E_EX_ALLHOME}} sebulan; <strong>100% cas awam:</strong> {{E_EX_ALLPUB}}, bagi contoh 1,500 km.</li>
+    <li><strong>Tarif ToU TNB</strong> (meter pintar): tenaga luar puncak 24.43 sen berbanding 27.03 sen; puncak 2 petang hingga 10 malam hari bekerja.</li>
+    <li><strong>Cukai jalan EV</strong> dikenakan mulai 1 Januari 2026; kira dengan <a href="/kalkulator-roadtax/">kalkulator cukai jalan</a>.</li>
+    <li><strong>Pelepasan cukai</strong> hingga RM2,500 untuk peralatan cas EV dan langganan cas awam (LHDN).</li>
+    <li>Lihat juga <a href="/kalkulator-bil-elektrik-tnb/">kalkulator bil TNB</a> dan <a href="/kalkulator-minyak/">kalkulator minyak</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.mytnb.com.my/tariff" rel="noopener">TNB: Tarif domestik</a> dan <a href="https://bernama.com/en/news.php?id=2440710" rel="noopener">Bernama: RP4</a></li>
+    <li><a href="https://data.gov.my/data-catalogue/fuelprice" rel="noopener">data.gov.my: Harga bahan api mingguan (MOF)</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2026/07/29/ev-charging-rates-remain-unregulated-as-malaysia-leaves-pricing-to-operators/229318" rel="noopener">Malay Mail</a> dan <a href="https://thesun.my/news/malaysia-news/no-price-controls-on-ev-charging-miti-encourages-private-sector" rel="noopener">The Sun</a>: harga cas tidak dikawal</li>
+    <li><a href="https://soyacincau.com/2026/07/15/gentari-dc-charging-fee-price-cut-select-locations/" rel="noopener">SoyaCincau: Gentari</a> dan <a href="https://paultan.org/2026/03/04/pengecas-tesla-supercharger-kini-dibuka-untuk-ev-bukan-tesla-di-malaysia-lokasi-terpilih-rm1-80-kwj/" rel="noopener">paultan.org: Tesla</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran tanpa AFA, insurans, servis dan susut nilai. Penggunaan sebenar, harga cas dan bil TNB anda akan berbeza.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-bil-elektrik-tnb/">Kalkulator Bil TNB<small>Tarif RP4 dan EEI</small></a>
+    <a href="/kalkulator-minyak/">Kalkulator Minyak<small>Harga petrol mingguan</small></a>
+    <a href="/kalkulator-solar/">Kalkulator Solar<small>Solar ATAP dan pulang modal</small></a>
+  </div>
+</section>

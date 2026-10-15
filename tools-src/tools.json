@@ -774,6 +774,33 @@
     "live": true
   },
   {
+    "name": "Kalkulator Saman Trafik",
+    "desc": "JPJ, PDRM and AwAS summons compound under the 2026 pay-early scheme: 50% within 15 days, RM200 to day 30, full to day 60, with every deadline. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-saman-trafik/",
+    "cat": "calc",
+    "icon": "kalkulator-saman-trafik",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Cukai Taksiran",
+    "desc": "Assessment tax from rent or annual value at DBKL, MBPJ and MBPP rates, the two half-yearly payments and Selangor's 25% increase cap, or any council's rate. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-cukai-taksiran/",
+    "cat": "calc",
+    "icon": "kalkulator-cukai-taksiran",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Kos EV vs Petrol",
+    "desc": "EV against petrol per month: the real rise in your TNB bill from home charging, public charging prices, BUDI95 or unsubsidised petrol, popular models and payback. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-kos-ev/",
+    "cat": "calc",
+    "icon": "kalkulator-kos-ev",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",
