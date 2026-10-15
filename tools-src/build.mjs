@@ -73,6 +73,10 @@ const umurCore = require('../assets/js/umur-core.js');
 const bersalinCore = require('../assets/js/bersalin-core.js');
 const solarCore = require('../assets/js/solar-core.js');
 const lesenCore = require('../assets/js/lesen-core.js');
+const faraidCore = require('../assets/js/faraid-core.js');
+const fxCore = require('../assets/js/fx-core.js');
+const kaloriCore = require('../assets/js/kalori-core.js');
+const kasutCore = require('../assets/js/kasut-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -2028,10 +2032,120 @@ function lesenMap(lang) {
     N_VERIFIED: longDate(F.verified, lang), N_VERIFIED_ISO: F.verified
   };
 }
+// ---- batch 10: faraid, currency converter, calories, shoe size (moved from the blog; see bloggerFrom).
+const FARAID_EXAMPLE = { estate: 300000, sepencarian: 0, funeral: 5000, debts: 10000, wasiat: 0, residue: 'baitulmal', wife: 1, son: 1, daughter: 2, mother: 1 };
+const fracTxt = x => `${x.n}/${x.d}`;
+function faraidMap(lang) {
+  const { L, m, opt } = b3(lang), R = faraidCore, LB = R.LABELS[L ? 'ms' : 'en'], r = R.calculate(FARAID_EXAMPLE), mo = r.money;
+  const tr = (a, b, c) => `<tr${c ? ` class="${c}"` : ''}><th scope="row">${a}</th><td>${b}</td></tr>`;
+  const persons = n => n > 1 ? (L ? ` (${n} orang)` : ` (${n} persons)`) : '';
+  const field = (k, max, val, id, hidden) => `<div class="field"${id ? ` id="${id}"` : ''}${hidden ? ' hidden' : ''}><label for="${k}">${LB[k]}</label><div class="input"><input id="${k}" name="${k}" type="number" inputmode="numeric" min="0" max="${max}" step="1" value="${val || 0}"></div></div>`;
+  const max = Object.fromEntries(R.HEIRS);
+  const rowOf = keys => keys.map(k => k === 'husband' ? field(k, 1, 0, 'fHusband', true) : k === 'wife' ? field(k, 4, FARAID_EXAMPLE.wife, 'fWife') : field(k, max[k], FARAID_EXAMPLE[k])).reduce((a, x, i) => (i % 2 ? a[a.length - 1].push(x) : a.push([x]), a), []).map(p => `<div class="field-row">${p.join('')}</div>`).join('\n');
+  const groups = [[L ? 'Pasangan dan anak' : 'Spouse and children', ['husband', 'wife', 'son', 'daughter', 'grandson', 'granddaughter']],
+    [L ? 'Ibu bapa, datuk dan nenek' : 'Parents and grandparents', ['father', 'mother', 'grandfather', 'grandmotherF', 'grandmotherM']],
+    [L ? 'Adik-beradik' : 'Brothers and sisters', ['brother', 'sister', 'brotherF', 'sisterF', 'brotherM', 'sisterM']]];
+  const heirsHtml = groups.map(([t, ks]) => `<h3>${t}</h3>\n${rowOf(ks)}`).join('\n') +
+    `\n<details class="more"><summary>${L ? 'Saudara lain (anak saudara, bapa saudara, sepupu)' : 'Other relatives (nephews, uncles, cousins)'}</summary>\n${rowOf(['nephew', 'nephewF', 'uncle', 'uncleF', 'cousin', 'cousinF'])}\n</details>`;
+  const moneyRows = [tr(L ? 'Jumlah harta' : 'Total estate', m(mo.gross)), tr(L ? 'Kos pengurusan jenazah' : 'Funeral costs', '− ' + m(mo.funeral)), tr(L ? 'Hutang' : 'Debts', '− ' + m(mo.debts)), tr(L ? 'Harta bersih untuk faraid' : 'Net estate for faraid', m(mo.net), 'total')].join('\n');
+  const shareRows = r.list.filter(x => x.count).map(x => tr(`${LB[x.key]}${persons(x.count)} · ${fracTxt(x.share)}`, `${m(x.each)}${x.count > 1 ? (L ? ' seorang' : ' each') : ''} · ${x.saham}/${r.D}`)).join('\n');
+  // Fixed shares reference table.
+  const ref = (L ? [
+    ['Suami', '1/2 jika tiada anak atau cucu; 1/4 jika ada'], ['Isteri (seorang atau lebih, dikongsi)', '1/4 jika tiada anak atau cucu; 1/8 jika ada'], ['Bapa', '1/6 jika ada anak lelaki; 1/6 + baki jika hanya anak perempuan; baki jika tiada anak'],
+    ['Ibu', '1/6 jika ada anak atau 2+ adik-beradik; 1/3 jika tidak; 1/3 baki dalam Umariyyatain'], ['Anak perempuan', '1/2 seorang; 2/3 dua atau lebih; asabah 2:1 bersama anak lelaki'], ['Anak lelaki', 'Asabah: baki, 2 bahagian bagi setiap 1 bahagian anak perempuan'],
+    ['Cucu perempuan (dari anak lelaki)', '1/2 atau 2/3 jika tiada anak; 1/6 bersama seorang anak perempuan'], ['Nenek', '1/6, dikongsi jika dua'], ['Saudara seibu', '1/6 seorang; 1/3 dua atau lebih, lelaki sama dengan perempuan'],
+    ['Saudara perempuan seibu sebapa', '1/2 atau 2/3; asabah bersama saudara lelaki atau anak perempuan']
+  ] : [
+    ['Husband', '1/2 with no child or grandchild; 1/4 with one'], ['Wife (one or more, shared)', '1/4 with no child or grandchild; 1/8 with one'], ['Father', '1/6 with a son; 1/6 + residue with only daughters; residue with no child'],
+    ['Mother', '1/6 with a child or 2+ siblings; 1/3 otherwise; 1/3 of the remainder in the Umariyyatain'], ['Daughter', '1/2 alone; 2/3 for two or more; residuary 2:1 with a son'], ['Son', 'Residuary: the remainder, 2 parts for each 1 part of a daughter'],
+    ["Son's daughter", '1/2 or 2/3 with no child; 1/6 with one daughter'], ['Grandmother', '1/6, shared if two'], ['Uterine siblings', '1/6 for one; 1/3 for two or more, male equal to female'],
+    ['Full sister', '1/2 or 2/3; residuary with a brother or with daughters']
+  ]).map(([a, b]) => `<tr><th scope="row">${a}</th><td>${b}</td></tr>`).join('\n');
+  // Worked cases from the engine.
+  const cases = [
+    [{ husband: 1, mother: 1, daughter: 2, son: 1 }], [{ wife: 1, father: 1, mother: 1, daughter: 2 }], [{ husband: 1, sister: 2 }], [{ husband: 1, father: 1, mother: 1 }], [{ wife: 1 }], [{ husband: 1, mother: 1, brotherM: 2, brother: 2 }]
+  ].map(([c]) => { const x = R.solve(c); const who = x.list.map(y => `${LB[y.key]}${y.count > 1 ? ' ×' + y.count : ''} ${fracTxt(y.share)}`).join(', ') + (x.baitulmal.n ? `, Baitulmal ${fracTxt(x.baitulmal)}` : ''); return `<tr><th scope="row">${x.list.map(y => LB[y.key] + (y.count > 1 ? ' ×' + y.count : '')).join(' + ')}</th><td>${who}</td><td>${x.asal}${x.awl ? ' → ' + x.awlBase : ''}</td></tr>`; }).join('\n');
+  const son = r.list.find(x => x.key === 'son'), dau = r.list.find(x => x.key === 'daughter'), wife = r.list.find(x => x.key === 'wife'), mother = r.list.find(x => x.key === 'mother');
+  return {
+    F_HEIRS: heirsHtml, F_ESTATE: FARAID_EXAMPLE.estate, F_FUNERAL: FARAID_EXAMPLE.funeral, F_DEBTS: FARAID_EXAMPLE.debts,
+    F_DECEASED_OPTIONS: [opt('male', 'Man (leaves a wife or wives)', 'Lelaki (meninggalkan isteri)', true), opt('female', 'Woman (leaves a husband)', 'Perempuan (meninggalkan suami)')].join(''),
+    F_RESIDUE_OPTIONS: [opt('baitulmal', 'Baitulmal (Malaysian practice)', 'Baitulmal (amalan Malaysia)', true), opt('radd', 'Radd to heirs (Perlis fatwa)', 'Radd kepada waris (fatwa Perlis)')].join(''),
+    F_NET: m(mo.net), F_SUB: L ? `Asal masalah ${r.asal} · ${r.D} bahagian` : `Base ${r.asal} · ${r.D} parts`, F_MONEY: moneyRows, F_SHARES: shareRows, F_REF: ref, F_CASES: cases,
+    F_EX_SON: m(son.each), F_EX_DAU: m(dau.each), F_EX_WIFE: m(wife.each), F_EX_MOTHER: m(mother.each), F_EX_NET: m(mo.net),
+    F_VERIFIED: longDate(R.FACTS.verified, lang), F_VERIFIED_ISO: R.FACTS.verified
+  };
+}
+// Currency: BNM noon rates from tools-src/fx-data.json (daily workflow); until the first run, USD from the gold snapshot.
+const fxData = fs.existsSync(path.join(root, 'tools-src/fx-data.json')) ? JSON.parse(read('fx-data.json'))
+  : { date: (goldData.fx && goldData.fx.date) || goldDate, source: 'BNM', session: '1200', rates: goldData.fx ? { USD: { unit: 1, mid: goldData.fx.usdMyr } } : {} };
+const FX_NAMES = { MYR: ['Malaysian ringgit', 'Ringgit Malaysia'], USD: ['US dollar', 'Dolar AS'], EUR: ['Euro', 'Euro'], GBP: ['British pound', 'Paun British'], SGD: ['Singapore dollar', 'Dolar Singapura'],
+  JPY: ['Japanese yen', 'Yen Jepun'], CNY: ['Chinese yuan', 'Yuan China'], THB: ['Thai baht', 'Baht Thailand'], IDR: ['Indonesian rupiah', 'Rupiah Indonesia'], AUD: ['Australian dollar', 'Dolar Australia'],
+  SAR: ['Saudi riyal', 'Riyal Saudi'], AED: ['UAE dirham', 'Dirham UAE'], HKD: ['Hong Kong dollar', 'Dolar Hong Kong'], KRW: ['South Korean won', 'Won Korea Selatan'], TWD: ['Taiwan dollar', 'Dolar Taiwan'],
+  INR: ['Indian rupee', 'Rupee India'], PHP: ['Philippine peso', 'Peso Filipina'], BND: ['Brunei dollar', 'Dolar Brunei'], CAD: ['Canadian dollar', 'Dolar Kanada'], CHF: ['Swiss franc', 'Franc Swiss'],
+  NZD: ['New Zealand dollar', 'Dolar New Zealand'], VND: ['Vietnamese dong', 'Dong Vietnam'], KHR: ['Cambodian riel', 'Riel Kemboja'], MMK: ['Myanmar kyat', 'Kyat Myanmar'], PKR: ['Pakistani rupee', 'Rupee Pakistan'],
+  NPR: ['Nepalese rupee', 'Rupee Nepal'], EGP: ['Egyptian pound', 'Paun Mesir'], BDT: ['Bangladeshi taka', 'Taka Bangladesh'] };
+const FX_ORDER = ['USD', 'SGD', 'EUR', 'GBP', 'JPY', 'CNY', 'THB', 'IDR', 'AUD', 'SAR', 'AED', 'HKD', 'KRW', 'TWD', 'INR', 'PHP', 'BND', 'CAD', 'CHF', 'NZD', 'VND', 'KHR', 'MMK', 'PKR', 'NPR', 'EGP', 'BDT'];
+const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+function fxMap(lang) {
+  const { L, m, nf, tr } = b3(lang), X = fxCore, s = fxData, codes = FX_ORDER.filter(c => s.rates[c]);
+  const name = c => (FX_NAMES[c] || [c, c])[L];
+  const dec = n => { const a = Math.abs(n); return a >= 100 ? 2 : a >= 1 ? 4 : 6; };
+  const opts = sel => ['MYR'].concat(codes).map(c => `<option value="${c}"${c === sel ? ' selected' : ''}>${c} · ${name(c)}</option>`).join('');
+  const r = X.convert(s, 100, 'USD', 'MYR');
+  const lines = r ? [tr(L ? 'Kadar tengah BNM' : 'BNM middle rate', `1 USD = ${nf(r.rate, dec(r.rate))} MYR`), tr(L ? 'Songsang' : 'Inverse', `1 MYR = ${nf(r.inverse, dec(r.inverse))} USD`)].join('\n') : '';
+  const table = codes.map(c => { const per = X.perUnit(s, c), u = s.rates[c].unit; return `<tr><th scope="row">${c} <small>${name(c)}</small></th><td>${m(per * u)}${u > 1 ? ` / ${u}` : ''}</td><td>${nf(100 / per, dec(100 / per))}</td></tr>`; }).join('\n');
+  const names = Object.fromEntries(['MYR'].concat(codes).map(c => [c, name(c)]));
+  const usd = X.perUnit(s, 'USD'), sgd = X.perUnit(s, 'SGD');
+  return {
+    X_RATES: attr(JSON.stringify({ date: s.date, source: s.source, rates: s.rates })), X_NAMES: attr(JSON.stringify(names)), X_FROM_OPTIONS: opts('USD'), X_TO_OPTIONS: opts('MYR'), X_AMOUNT: 100,
+    X_RESULT: r ? `${nf(r.result, 2)} MYR` : '–', X_SUB: name('MYR'), X_LINES: lines, X_TABLE: table, X_COUNT: codes.length,
+    X_DATE: longDate(s.date || goldDate, lang), X_DATE_ISO: s.date || goldDate, X_SOURCE: s.source === 'ECB' ? (L ? 'Bank Pusat Eropah (sandaran)' : 'European Central Bank (backup)') : 'Bank Negara Malaysia',
+    X_USD: usd ? nf(usd, 4) : '–', X_USD100: usd ? m(usd * 100) : '–', X_SGD: sgd ? nf(sgd, 4) : '–', X_RM100_USD: usd ? nf(100 / usd, 2) : '–',
+    X_VERIFIED: longDate(X.FACTS.verified, lang), X_VERIFIED_ISO: X.FACTS.verified
+  };
+}
+const KALORI_EXAMPLE = { sex: 'male', age: 30, weight: 70, height: 170, activity: 'moderate', goal: 'maintain' };
+function kaloriMap(lang) {
+  const { L, nf, tr, opt } = b3(lang), K = kaloriCore, F = K.FACTS, r = K.calculate(KALORI_EXAMPLE), kc = n => nf(n, 0) + ' kcal';
+  const act = L ? { sedentary: 'Tidak aktif', light: 'Aktif ringan', moderate: 'Aktif sederhana', active: 'Sangat aktif', extra: 'Amat aktif' } : { sedentary: 'Sedentary', light: 'Lightly active', moderate: 'Moderately active', active: 'Very active', extra: 'Extra active' };
+  const actHelp = L ? { sedentary: 'kerja pejabat, tiada senaman', light: 'senaman 1 hingga 3 hari seminggu', moderate: 'senaman 3 hingga 5 hari', active: 'senaman 6 hingga 7 hari', extra: 'kerja fizikal dan latihan' } : { sedentary: 'desk job, no exercise', light: 'exercise 1 to 3 days a week', moderate: 'exercise 3 to 5 days', active: 'exercise 6 to 7 days', extra: 'physical job plus training' };
+  const lines = [tr(L ? 'Kadar metabolisme asas (BMR)' : 'Basal metabolic rate (BMR)', kc(r.bmr)), tr(L ? 'Keperluan harian (kekal berat)' : 'Daily need (keep weight)', kc(r.tdee)), tr(L ? 'Sasaran kalori sehari' : 'Daily calorie target', kc(r.target), 'total'),
+    tr(L ? 'Karbohidrat (55%)' : 'Carbohydrate (55%)', nf(r.carb, 0) + ' g'), tr(L ? 'Protein (15%)' : 'Protein (15%)', nf(r.protein, 0) + ' g'), tr(L ? 'Lemak (30%)' : 'Fat (30%)', nf(r.fat, 0) + ' g'),
+    tr('BMI', `${nf(r.bmi, 1)} (${L ? 'berlebihan berat badan' : 'overweight'})`), tr(L ? 'Berat sihat untuk tinggi anda' : 'Healthy weight for your height', `${nf(r.healthy[0], 1)}–${nf(r.healthy[1], 1)} kg`)].join('\n');
+  const levels = r.levels.map(x => tr(`${act[x.key]} (× ${x.factor})`, kc(x.kcal), x.key === 'moderate' ? 'total' : '')).join('\n');
+  const rni = F.rni.pal.map((p, i) => `<tr><th scope="row">${p.toFixed(1)}</th><td>${kc(F.rni.male[i])}</td><td>${kc(F.rni.female[i])}</td></tr>`).join('\n');
+  const goals = [['lose05', L ? 'Turun 0.5 kg seminggu' : 'Lose 0.5 kg a week'], ['lose025', L ? 'Turun 0.25 kg seminggu' : 'Lose 0.25 kg a week'], ['maintain', L ? 'Kekal berat' : 'Keep weight'], ['gain025', L ? 'Naik 0.25 kg seminggu' : 'Gain 0.25 kg a week']]
+    .map(([g, n]) => { const x = K.calculate({ ...KALORI_EXAMPLE, goal: g }), y = K.calculate({ sex: 'female', age: 30, weight: 60, height: 158, activity: 'moderate', goal: g }); return `<tr><th scope="row">${n}</th><td>${kc(x.target)}</td><td>${kc(y.target)}</td></tr>`; }).join('\n');
+  const f = K.calculate({ sex: 'female', age: 30, weight: 60, height: 158, activity: 'sedentary' });
+  return {
+    K_SEX_OPTIONS: [opt('male', 'Male', 'Lelaki', true), opt('female', 'Female', 'Perempuan')].join(''),
+    K_ACT_OPTIONS: F.activity.map(([k]) => opt(k, `${act[k]}: ${actHelp[k]}`, `${act[k]}: ${actHelp[k]}`, k === 'moderate')).join(''),
+    K_GOAL_OPTIONS: [['maintain', 'Keep my weight', 'Kekalkan berat'], ['lose025', 'Lose 0.25 kg a week', 'Turun 0.25 kg seminggu'], ['lose05', 'Lose 0.5 kg a week', 'Turun 0.5 kg seminggu'], ['lose1', 'Lose 1 kg a week', 'Turun 1 kg seminggu'], ['gain025', 'Gain 0.25 kg a week', 'Naik 0.25 kg seminggu'], ['gain05', 'Gain 0.5 kg a week', 'Naik 0.5 kg seminggu']]
+      .map(([v, e, b]) => opt(v, e, b, v === 'maintain')).join(''),
+    K_AGE: KALORI_EXAMPLE.age, K_WEIGHT: KALORI_EXAMPLE.weight, K_HEIGHT: KALORI_EXAMPLE.height,
+    K_TARGET: kc(r.target), K_SUB: L ? `BMR ${kc(r.bmr)} · keperluan harian ${kc(r.tdee)}` : `BMR ${kc(r.bmr)} · daily need ${kc(r.tdee)}`, K_LINES: lines, K_LEVELS: levels, K_RNI: rni, K_GOALS: goals,
+    K_EX_BMR: kc(r.bmr), K_EX_TDEE: kc(r.tdee), K_EX_LOSE: kc(K.calculate({ ...KALORI_EXAMPLE, goal: 'lose05' }).target), K_F_BMR: kc(f.bmr), K_F_TDEE: kc(f.tdee),
+    K_VERIFIED: longDate(F.verified, lang), K_VERIFIED_ISO: F.verified
+  };
+}
+function kasutMap(lang) {
+  const { L, nf, tr, opt } = b3(lang), S = kasutCore, F = S.FACTS, r = S.fromFoot(26);
+  const lines = [tr('UK', nf(r.uk, 1)), tr('EU', nf(r.eu, 1)), tr(L ? 'US lelaki' : 'US men', nf(r.usM, 1)), tr(L ? 'US wanita' : 'US women', nf(r.usW, 1)), tr('Mondopoint (mm)', String(r.mm)), tr(L ? 'Panjang kaki' : 'Foot length', '26 cm', 'total')].join('\n');
+  const adult = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(uk => { const foot = S.toFoot('uk', uk), x = S.fromFoot(foot); return `<tr><th scope="row">${uk}</th><td>${nf(x.eu, 1)}</td><td>${uk + F.usMen}</td><td>${uk + F.usWomen}</td><td>${nf(foot, 1)}</td></tr>`; }).join('\n');
+  const kids = [0, 2, 4, 6, 8, 10, 11, 12, 13].map(uk => { const foot = S.toFoot('ukKids', uk), x = S.fromFoot(foot); return `<tr><th scope="row">${uk}</th><td>${nf(x.eu, 1)}</td><td>${nf(foot, 1)}</td></tr>`; }).join('\n');
+  const brands = [['Nike', '9', '42.5'], ['ASICS', '9', '42.5'], ['Vans', '9', '42'], ['adidas', '8.5', '42'], ['New Balance', '8.5', '42']].map(([b, us, eu]) => `<tr><th scope="row">${b}</th><td>${us}</td><td>${eu}</td></tr>`).join('\n');
+  return {
+    S_MODE_OPTIONS: [opt('foot', 'From my foot length', 'Dari panjang kaki', true), opt('size', 'From a size I know', 'Dari saiz yang saya tahu')].join(''),
+    S_SYSTEM_OPTIONS: [opt('uk', 'UK', 'UK', true), opt('eu', 'EU', 'EU'), opt('usM', 'US men', 'US lelaki'), opt('usW', 'US women', 'US wanita'), opt('ukKids', 'UK kids', 'UK kanak-kanak'), opt('mm', 'Mondopoint (mm)', 'Mondopoint (mm)')].join(''),
+    S_FOOT: 26, S_SIZE: 8, S_UK: 'UK ' + nf(r.uk, 1), S_SUB: L ? `EU ${nf(r.eu, 1)} · US lelaki ${nf(r.usM, 1)} · kaki 26 cm` : `EU ${nf(r.eu, 1)} · US men ${nf(r.usM, 1)} · foot 26 cm`,
+    S_LINES: lines, S_ADULT: adult, S_KIDS: kids, S_BRANDS: brands,
+    S_VERIFIED: longDate(F.verified, lang), S_VERIFIED_ISO: F.verified
+  };
+}
 // Gzip size rendered into the page, so the tools' stats lines never grow (and reflow) after load.
 const kbText = n => n < 1024 ? n + ' B' : (n / 1024).toFixed(n < 10240 ? 2 : 1) + ' KB';
 const gzText = t => ' · ' + kbText(zlib.gzipSync(Buffer.from(t)).length) + ' gzipped';
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2083,7 +2197,7 @@ for (const p of pages) {
   // The gold price pages change every day with the price.
   if (p.render === 'goldprice' && goldDate) p.dateModified = goldDate;
   // The mas kahwin pages quote today's gold value.
-  if (['maskahwin', 'rahnu', 'umur', 'bersalin', 'solar'].includes(p.render) && goldDate > p.dateModified) p.dateModified = goldDate;
+  if (['maskahwin', 'rahnu', 'umur', 'bersalin', 'solar'].includes(p.render) || (p.render === 'fx' && fxData.date > p.dateModified) && goldDate > p.dateModified) p.dateModified = goldDate;
   // The fuel pages change every week with the prices.
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
@@ -2204,6 +2318,10 @@ const bundles = {
   'bersalin.js': ['assets/js/bersalin-core.js', 'assets/js/bersalin-ui.js'],
   'solar.js': ['assets/js/tnb-core.js', 'assets/js/solar-core.js', 'assets/js/solar-ui.js'],
   'lesen.js': ['assets/js/lesen-core.js', 'assets/js/lesen-ui.js'],
+  'faraid.js': ['assets/js/faraid-core.js', 'assets/js/faraid-ui.js'],
+  'fx.js': ['assets/js/fx-core.js', 'assets/js/fx-ui.js'],
+  'kalori.js': ['assets/js/kalori-core.js', 'assets/js/kalori-ui.js'],
+  'kasut.js': ['assets/js/kasut-core.js', 'assets/js/kasut-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

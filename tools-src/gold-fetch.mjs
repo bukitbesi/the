@@ -9,7 +9,9 @@ import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 const G = require('../assets/js/gold-core.js');
+const FX = require('../assets/js/fx-core.js');
 const file = path.join(path.dirname(fileURLToPath(import.meta.url)), 'gold-data.json');
+const fxFile = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fx-data.json');
 const BNM = { Accept: 'application/vnd.BNM.API.v1+json', 'User-Agent': 'BukitBesiGold/1.0 (+https://tool.thebukitbesi.com/harga-emas-hari-ini/)' };
 
 async function getJson(url, headers = {}) {
@@ -23,13 +25,20 @@ async function getJson(url, headers = {}) {
 const old = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
 const now = new Date();
 const months = [0, 1].map(back => { const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - back, 1)); return [d.getUTCFullYear(), d.getUTCMonth() + 1]; });
-const [kijangJson, fxJson, fxBackup, spotJson, ...monthJson] = await Promise.all([
+const [allFx, allFxBackup, kijangJson, fxJson, fxBackup, spotJson, ...monthJson] = await Promise.all([
+  getJson('https://api.bnm.gov.my/public/exchange-rate?session=1200&quote=rm', BNM),
+  getJson('https://api.frankfurter.app/latest?from=MYR'),
   getJson('https://api.bnm.gov.my/public/kijang-emas', BNM),
   getJson('https://api.bnm.gov.my/public/exchange-rate/USD', BNM),
   getJson('https://api.frankfurter.app/latest?from=USD&to=MYR'),
   getJson('https://api.gold-api.com/price/XAU'),
   ...months.map(([y, m]) => getJson(`https://api.bnm.gov.my/public/kijang-emas/year/${y}/month/${m}`, BNM))
 ]);
+
+// All BNM noon rates for the currency converter (ECB backup); keep the old file when neither answers.
+const fxSnap = FX.parseBnm(allFx) || FX.parseFrankfurter(allFxBackup);
+if (fxSnap) { fs.writeFileSync(fxFile, JSON.stringify({ fetchedAt: now.toISOString(), ...fxSnap }, null, 2) + '\n'); console.log(`FX: ${fxSnap.source} ${fxSnap.date}, ${Object.keys(fxSnap.rates).length} currencies`); }
+else console.warn('FX: no rate source answered; keeping the old fx-data.json.');
 
 const kijang = G.parseKijang(kijangJson) || old.kijang || null;
 const snap = {

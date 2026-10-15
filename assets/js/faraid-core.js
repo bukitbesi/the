@@ -12,6 +12,18 @@
   var HEIRS = [['husband', 1], ['wife', 4], ['son', 20], ['daughter', 20], ['grandson', 20], ['granddaughter', 20], ['father', 1], ['mother', 1],
     ['grandfather', 1], ['grandmotherF', 1], ['grandmotherM', 1], ['brother', 20], ['sister', 20], ['brotherF', 20], ['sisterF', 20], ['brotherM', 20], ['sisterM', 20],
     ['nephew', 20], ['nephewF', 20], ['uncle', 20], ['uncleF', 20], ['cousin', 20], ['cousinF', 20]];
+  var LABELS = {
+    ms: { husband: 'Suami', wife: 'Isteri', son: 'Anak lelaki', daughter: 'Anak perempuan', grandson: 'Cucu lelaki (dari anak lelaki)', granddaughter: 'Cucu perempuan (dari anak lelaki)',
+      father: 'Bapa', mother: 'Ibu', grandfather: 'Datuk (bapa kepada bapa)', grandmotherF: 'Nenek (ibu kepada bapa)', grandmotherM: 'Nenek (ibu kepada ibu)',
+      brother: 'Saudara lelaki seibu sebapa', sister: 'Saudara perempuan seibu sebapa', brotherF: 'Saudara lelaki sebapa', sisterF: 'Saudara perempuan sebapa',
+      brotherM: 'Saudara lelaki seibu', sisterM: 'Saudara perempuan seibu', nephew: 'Anak saudara lelaki (seibu sebapa)', nephewF: 'Anak saudara lelaki (sebapa)',
+      uncle: 'Bapa saudara seibu sebapa (sebelah bapa)', uncleF: 'Bapa saudara sebapa (sebelah bapa)', cousin: 'Sepupu lelaki (anak bapa saudara seibu sebapa)', cousinF: 'Sepupu lelaki (anak bapa saudara sebapa)' },
+    en: { husband: 'Husband', wife: 'Wife (wives)', son: 'Son', daughter: 'Daughter', grandson: "Son's son", granddaughter: "Son's daughter",
+      father: 'Father', mother: 'Mother', grandfather: 'Paternal grandfather', grandmotherF: 'Paternal grandmother', grandmotherM: 'Maternal grandmother',
+      brother: 'Full brother', sister: 'Full sister', brotherF: 'Consanguine brother (same father)', sisterF: 'Consanguine sister (same father)',
+      brotherM: 'Uterine brother (same mother)', sisterM: 'Uterine sister (same mother)', nephew: "Full brother's son", nephewF: "Consanguine brother's son",
+      uncle: 'Full paternal uncle', uncleF: 'Consanguine paternal uncle', cousin: "Full paternal uncle's son", cousinF: "Consanguine paternal uncle's son" }
+  };
   var MALE = { husband: 1, son: 1, grandson: 1, father: 1, grandfather: 1, brother: 1, brotherF: 1, brotherM: 1, nephew: 1, nephewF: 1, uncle: 1, uncleF: 1, cousin: 1, cousinF: 1 };
 
   function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = b; b = a % b; a = t; } return a || 1; }
@@ -171,7 +183,7 @@
     return r;
   }
 
-  var api = { FACTS: FACTS, HEIRS: HEIRS, solve: solve, calculate: calculate, F: F };
+  var api = { FACTS: FACTS, HEIRS: HEIRS, LABELS: LABELS, solve: solve, calculate: calculate, F: F };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.TBBFaraid = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

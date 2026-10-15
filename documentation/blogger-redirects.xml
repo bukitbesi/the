@@ -12,6 +12,9 @@
 <b:case value='https://www.thebukitbesi.com/p/css-minifier-tool.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/css-minifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/css-minifier/");</script>
+<b:case value='https://www.thebukitbesi.com/p/currency-converter-malaysia.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/currency-converter-malaysia/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/currency-converter-malaysia/");</script>
 <b:case value='https://www.thebukitbesi.com/p/html-beautifier-online.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/html-beautifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/html-beautifier/");</script>
@@ -24,6 +27,18 @@
 <b:case value='https://www.thebukitbesi.com/p/kalkulator-bmi.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/kalkulator-bmi/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/kalkulator-bmi/");</script>
+<b:case value='https://www.thebukitbesi.com/p/kalkulator-faraid.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/kalkulator-faraid/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/kalkulator-faraid/");</script>
+<b:case value='https://www.thebukitbesi.com/p/kalkulator-jantina-bayi.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/kalkulator-tarikh-bersalin/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/kalkulator-tarikh-bersalin/");</script>
+<b:case value='https://www.thebukitbesi.com/p/kalkulator-kalori.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/kalkulator-kalori/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/kalkulator-kalori/");</script>
+<b:case value='https://www.thebukitbesi.com/p/kalkulator-saiz-kasut.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/kalkulator-saiz-kasut/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/kalkulator-saiz-kasut/");</script>
 <b:case value='https://www.thebukitbesi.com/p/kalkulator-zakat.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/");</script>

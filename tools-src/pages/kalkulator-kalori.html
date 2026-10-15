@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/kalkulator-kalori/",
+  "lang": "ms",
+  "alternates": { "en": "/calorie-calculator-malaysia/" },
+  "bloggerFrom": "https://www.thebukitbesi.com/p/kalkulator-kalori.html",
+  "title": "Kalkulator Kalori: BMR, Keperluan Kalori Harian dan Turun Berat",
+  "description": "Kira BMR, keperluan kalori harian dan sasaran kalori untuk turun atau naik berat, dengan karbohidrat, protein dan lemak ikut RNI Malaysia serta BMI Asia.",
+  "llms": "Kalkulator kalori untuk rakyat Malaysia, disemak 15 Oktober 2026. Kadar metabolisme asas (BMR) dengan persamaan Mifflin-St Jeor (1990): lelaki 10 × berat (kg) + 6.25 × tinggi (cm) − 5 × umur + 5; perempuan sama tetapi −161. Keperluan harian = BMR × faktor aktiviti: 1.2 tidak aktif, 1.375 aktif ringan (senaman 1 hingga 3 hari seminggu), 1.55 sederhana (3 hingga 5 hari), 1.725 sangat aktif (6 hingga 7 hari), 1.9 amat aktif. Turun 0.5 kg seminggu memerlukan kira-kira 550 kcal kurang sehari (anggaran 7,700 kcal bagi setiap kg). Contoh: lelaki 30 tahun, 70 kg, 170 cm, aktif sederhana: BMR 1,618 kcal, keperluan 2,508 kcal, turun 0.5 kg seminggu 1,958 kcal. Perempuan 30 tahun, 60 kg, 158 cm, tidak aktif: BMR 1,277 kcal, keperluan 1,532 kcal. Pembahagian makronutrien ikut Recommended Nutrient Intakes for Malaysia (RNI 2017): karbohidrat 50 hingga 65%, protein 10 hingga 20%, lemak tidak melebihi 30% tenaga. RNI 2017 bagi umur 19 hingga 29 pada tahap aktiviti fizikal 1.4/1.6/1.8/2.0: lelaki 1,960/2,240/2,520/2,800 kcal, perempuan 1,610/1,840/2,080/2,310 kcal. BMI ikut potongan Asia CPG Malaysia: bawah 18.5 kurang berat, 18.5 hingga 22.9 normal, 23 hingga 27.4 berlebihan, 27.5 ke atas obes. Pinggan Sihat Malaysia: suku nasi atau bijirin, suku protein, separuh sayur dan buah.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "kalori",
+  "scripts": ["/assets/js/kalori.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Kalori", null]],
+  "about": ["Kalori", "Kadar metabolisme asas", "Diet", "Berat badan sihat"],
+  "app": {
+    "name": "Kalkulator Kalori",
+    "category": "HealthApplication",
+    "features": ["BMR Mifflin-St Jeor", "Keperluan kalori ikut aktiviti", "Sasaran turun atau naik berat", "Karbohidrat, protein dan lemak ikut RNI Malaysia", "BMI potongan Asia", "Berat sihat untuk tinggi", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["KKM: Recommended Nutrient Intakes for Malaysia 2017", "https://hq.moh.gov.my/nutrition/wp-content/uploads/2023/12/FA-Buku-RNI.pdf"],
+    ["KKM: RNI bab tenaga", "https://www.moh.gov.my/images/perkhidmatan-utama/info-kesihatan/pemakanan/2_chat.pdf"],
+    ["KKM: Garis Panduan Amalan Klinikal Pengurusan Obesiti 2023", "https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/panduan-amalan-klinikal/CPG_Management_of_Obesity_Second_Edition_2023.pdf"],
+    ["FAO: Panduan Diet Malaysia", "https://www.fao.org/nutrition/education/dietary-guidelines/regions/malaysia/en/"],
+    ["Mifflin et al. 1990: Persamaan BMR (PubMed)", "https://pubmed.ncbi.nlm.nih.gov/2305711/"],
+    ["WHO Expert Consultation 2004: BMI untuk penduduk Asia", "https://pubmed.ncbi.nlm.nih.gov/14726171/"]
+  ],
+  "faq": [
+    { "q": "Berapa kalori saya perlu sehari?", "a": "Bergantung pada BMR dan aktiviti anda. Lelaki 30 tahun, 70 kg dan 170 cm yang aktif sederhana memerlukan kira-kira {{K_EX_TDEE}} sehari; perempuan 30 tahun, 60 kg dan 158 cm yang tidak aktif kira-kira {{K_F_TDEE}}. RNI 2017 memberi 2,240 kcal (lelaki) dan 1,840 kcal (perempuan) umur 19 hingga 29 pada tahap aktiviti 1.6." },
+    { "q": "Apakah BMR?", "a": "Kadar metabolisme asas ialah tenaga yang digunakan badan semasa rehat penuh untuk bernafas, mengepam darah dan mengekalkan suhu. Contoh: lelaki 30 tahun, 70 kg, 170 cm mempunyai BMR {{K_EX_BMR}}." },
+    { "q": "Berapa kalori untuk turun 0.5 kg seminggu?", "a": "Kira-kira 550 kcal kurang daripada keperluan harian anda, kerana 1 kg lemak badan bersamaan anggaran 7,700 kcal. Bagi contoh lelaki di atas, sasarannya {{K_EX_LOSE}} sehari. Jangan turun di bawah BMR tanpa nasihat doktor." },
+    { "q": "Berapa karbohidrat, protein dan lemak sehari?", "a": "RNI Malaysia 2017 mengesyorkan karbohidrat 50 hingga 65%, protein 10 hingga 20% dan lemak tidak melebihi 30% tenaga. Kalkulator ini menggunakan 55%, 15% dan 30%, ditukar kepada gram (4 kcal segram karbohidrat dan protein, 9 kcal segram lemak)." },
+    { "q": "Apakah BMI normal untuk orang Malaysia?", "a": "18.5 hingga 22.9 ikut potongan Asia dalam CPG Malaysia. 23 hingga 27.4 berlebihan berat badan dan 27.5 ke atas obes, lebih rendah daripada potongan WHO antarabangsa (25 dan 30)." },
+    { "q": "Apakah Pinggan Sihat Malaysia?", "a": "Konsep Suku-Suku Separuh dalam Panduan Diet Malaysia 2020: suku pinggan nasi atau bijirin, suku protein (ikan, ayam, daging atau kekacang) dan separuh sayur-sayuran dan buah-buahan." },
+    { "q": "Adakah formula ini tepat?", "a": "Mifflin-St Jeor menganggar BMR dalam lingkungan 10% bagi kira-kira 82% orang dewasa bukan obes. Keperluan sebenar berbeza ikut individu; pantau berat anda selama 2 hingga 3 minggu dan laraskan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Kalori</li></ol></nav>
+  <h1>Kalkulator Kalori</h1>
+  <p class="answer">Keperluan kalori harian ialah <strong>BMR × tahap aktiviti</strong>: lelaki 30 tahun, 70 kg dan 170 cm yang aktif sederhana memerlukan kira-kira <strong>{{K_EX_TDEE}}</strong> sehari, dan {{K_EX_LOSE}} untuk turun 0.5 kg seminggu. Kalkulator ini juga memberi karbohidrat, protein dan lemak ikut RNI Malaysia serta BMI potongan Asia. Masukkan butiran anda.</p>
+  <p class="meta"><span>Disemak <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/calorie-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="kaloriForm" novalidate aria-labelledby="kalori-h">
+      <h2 id="kalori-h">Butiran anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="sex">Jantina</label><select class="input" id="sex" name="sex">{{K_SEX_OPTIONS}}</select></div>
+        <div class="field"><label for="age">Umur</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="15" max="100" step="1" value="{{K_AGE}}"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="weight">Berat</label><div class="input"><input id="weight" name="weight" type="number" inputmode="decimal" min="20" step="0.1" value="{{K_WEIGHT}}"><span aria-hidden="true">kg</span></div></div>
+        <div class="field"><label for="height">Tinggi</label><div class="input"><input id="height" name="height" type="number" inputmode="decimal" min="100" step="0.5" value="{{K_HEIGHT}}"><span aria-hidden="true">cm</span></div></div>
+      </div>
+      <div class="field"><label for="activity">Tahap aktiviti</label><select class="input" id="activity" name="activity">{{K_ACT_OPTIONS}}</select></div>
+      <div class="field"><label for="goal">Matlamat</label><select class="input" id="goal" name="goal">{{K_GOAL_OPTIONS}}</select></div>
+      <p class="help">Untuk dewasa 18 tahun ke atas. Wanita hamil atau menyusu perlukan nasihat pakar diet.</p>
+    </form>
+
+    <section class="box" aria-labelledby="kalori-result-h">
+      <h2 id="kalori-result-h">Kalori anda</h2>
+      <div class="net">
+        <p>Sasaran kalori sehari</p>
+        <output id="kTarget" for="sex age weight height activity goal">{{K_TARGET}}</output>
+        <p id="kSub">{{K_SUB}}</p>
+      </div>
+      <p class="sr-only" id="kLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Ringkasan</caption>
+        <tbody id="kLines">
+{{K_LINES}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>Ikut tahap aktiviti</caption>
+        <tbody id="kLevels">
+{{K_LEVELS}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="kaloriPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rni-h">Keperluan tenaga RNI Malaysia 2017 (umur 19 hingga 29)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rni-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahap aktiviti fizikal (PAL)</th><th scope="col">Lelaki</th><th scope="col">Perempuan</th></tr></thead>
+      <tbody>
+{{K_RNI}}
+      </tbody>
+    </table>
+  </div>
+  <p>RNI mengesyorkan PAL 1.6 bagi kebanyakan orang dewasa. Nilai bagi umur 30 ke atas tidak dapat kami sahkan dan tidak disenaraikan.</p>
+
+  <h2 id="goals-h">Sasaran kalori ikut matlamat</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="goals-h">
+    <table class="data">
+      <thead><tr><th scope="col">Matlamat</th><th scope="col">Lelaki 30, 70 kg, 170 cm</th><th scope="col">Perempuan 30, 60 kg, 158 cm</th></tr></thead>
+      <tbody>
+{{K_GOALS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kedua-duanya aktif sederhana (× 1.55).</p>
+
+  <h2 id="formula">Cara kalori dikira</h2>
+  <ol>
+    <li><strong>BMR</strong> (Mifflin-St Jeor) = 10 × berat + 6.25 × tinggi − 5 × umur + 5 (lelaki) atau − 161 (perempuan).</li>
+    <li><strong>Keperluan harian</strong> = BMR × faktor aktiviti (1.2 hingga 1.9).</li>
+    <li><strong>Sasaran</strong> = keperluan ± (kg seminggu × 7,700 ÷ 7).</li>
+    <li><strong>Makronutrien</strong>: 55% karbohidrat dan 15% protein ÷ 4 kcal segram, 30% lemak ÷ 9 kcal segram.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Panduan makan sihat Malaysia</h2>
+  <ul>
+    <li><strong>Pinggan Sihat (Suku-Suku Separuh):</strong> suku bijirin, suku protein, separuh sayur dan buah.</li>
+    <li><strong>BMI Asia:</strong> normal 18.5 hingga 22.9; lilitan pinggang melebihi 90 cm (lelaki) atau 80 cm (perempuan) menandakan risiko.</li>
+    <li><strong>Turun berat secara beransur-ansur</strong> lebih mudah dikekalkan; dapatkan nasihat doktor jika anda mempunyai penyakit kronik.</li>
+    <li>Semak BMI anda dengan <a href="/kalkulator-bmi/">kalkulator BMI</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://hq.moh.gov.my/nutrition/wp-content/uploads/2023/12/FA-Buku-RNI.pdf" rel="noopener">KKM: RNI Malaysia 2017</a> dan <a href="https://www.moh.gov.my/images/perkhidmatan-utama/info-kesihatan/pemakanan/2_chat.pdf" rel="noopener">bab tenaga</a></li>
+    <li><a href="https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/panduan-amalan-klinikal/CPG_Management_of_Obesity_Second_Edition_2023.pdf" rel="noopener">KKM: CPG Pengurusan Obesiti 2023</a></li>
+    <li><a href="https://www.fao.org/nutrition/education/dietary-guidelines/regions/malaysia/en/" rel="noopener">FAO: Panduan Diet Malaysia</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" rel="noopener">Mifflin et al. 1990</a> dan <a href="https://pubmed.ncbi.nlm.nih.gov/14726171/" rel="noopener">WHO 2004: BMI Asia</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran untuk dewasa sihat, bukan nasihat perubatan. Dapatkan nasihat doktor atau pakar diet sebelum mengubah diet secara besar, terutama jika hamil, menyusu atau mempunyai penyakit.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-bmi/">Kalkulator BMI<small>BMI potongan Asia</small></a>
+    <a href="/kalkulator-tarikh-bersalin/">Kalkulator Tarikh Bersalin<small>Jangkaan bersalin dan cuti</small></a>
+    <a href="/kalkulator-umur/">Kalkulator Umur<small>Umur tepat dan umur Hijrah</small></a>
+  </div>
+</section>

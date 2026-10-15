@@ -33,6 +33,6 @@ jobs:
           if [ -z "$(git status --porcelain)" ]; then echo "No change."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A tools-src/gold-data.json docs
+          git add -A tools-src/gold-data.json tools-src/fx-data.json docs
           git commit -m "Update gold price $(date -u +%Y-%m-%d)"
           git push

@@ -1,0 +1,152 @@
+<!--page
+{
+  "path": "/calorie-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-kalori/" },
+  "title": "Calorie Calculator Malaysia: BMR, Daily Calories and Weight Loss",
+  "description": "Work out your BMR, daily calorie needs and a calorie target to lose or gain weight, with carbs, protein and fat by Malaysia's RNI and the Asian BMI cut-offs.",
+  "llms": "Calorie calculator for Malaysians, verified 15 October 2026. Basal metabolic rate (BMR) by the Mifflin-St Jeor equation (1990): men 10 × weight (kg) + 6.25 × height (cm) − 5 × age + 5; women the same but −161. Daily need = BMR × activity factor: 1.2 sedentary, 1.375 lightly active (exercise 1 to 3 days a week), 1.55 moderately active (3 to 5 days), 1.725 very active (6 to 7 days), 1.9 extra active. Losing 0.5 kg a week needs about 550 kcal a day less (about 7,700 kcal per kg). Example: a man aged 30, 70 kg, 170 cm, moderately active: BMR 1,618 kcal, daily need 2,508 kcal, 1,958 kcal to lose 0.5 kg a week. A woman aged 30, 60 kg, 158 cm, sedentary: BMR 1,277 kcal, daily need 1,532 kcal. Macronutrient split by the Recommended Nutrient Intakes for Malaysia (RNI 2017): carbohydrate 50 to 65%, protein 10 to 20%, fat no more than 30% of energy. RNI 2017 for ages 19 to 29 at physical activity levels 1.4/1.6/1.8/2.0: men 1,960/2,240/2,520/2,800 kcal, women 1,610/1,840/2,080/2,310 kcal. BMI by the Malaysian CPG Asian cut-offs: below 18.5 underweight, 18.5 to 22.9 normal, 23 to 27.4 overweight, 27.5 and above obese. Malaysian Healthy Plate: a quarter rice or grains, a quarter protein, half vegetables and fruit.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "kalori",
+  "scripts": ["/assets/js/kalori.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Calorie Calculator", null]],
+  "about": ["Calories", "Basal metabolic rate", "Diet", "Healthy weight"],
+  "app": {
+    "name": "Calorie Calculator Malaysia",
+    "category": "HealthApplication",
+    "features": ["Mifflin-St Jeor BMR", "Calorie needs by activity", "Weight loss or gain target", "Carbs, protein and fat by Malaysia's RNI", "Asian BMI cut-offs", "Healthy weight for your height", "Works offline"]
+  },
+  "citations": [
+    ["Ministry of Health: Recommended Nutrient Intakes for Malaysia 2017", "https://hq.moh.gov.my/nutrition/wp-content/uploads/2023/12/FA-Buku-RNI.pdf"],
+    ["Ministry of Health: RNI energy chapter", "https://www.moh.gov.my/images/perkhidmatan-utama/info-kesihatan/pemakanan/2_chat.pdf"],
+    ["Ministry of Health: Clinical Practice Guidelines on Management of Obesity 2023", "https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/panduan-amalan-klinikal/CPG_Management_of_Obesity_Second_Edition_2023.pdf"],
+    ["FAO: Malaysian Dietary Guidelines", "https://www.fao.org/nutrition/education/dietary-guidelines/regions/malaysia/en/"],
+    ["Mifflin et al. 1990: BMR equation (PubMed)", "https://pubmed.ncbi.nlm.nih.gov/2305711/"],
+    ["WHO Expert Consultation 2004: BMI for Asian populations", "https://pubmed.ncbi.nlm.nih.gov/14726171/"]
+  ],
+  "faq": [
+    { "q": "How many calories do I need a day?", "a": "It depends on your BMR and activity. A moderately active man aged 30, 70 kg and 170 cm needs about {{K_EX_TDEE}} a day; a sedentary woman aged 30, 60 kg and 158 cm about {{K_F_TDEE}}. RNI 2017 gives 2,240 kcal (men) and 1,840 kcal (women) at ages 19 to 29 at activity level 1.6." },
+    { "q": "What is BMR?", "a": "The basal metabolic rate is the energy your body uses at complete rest for breathing, pumping blood and keeping warm. Example: a man aged 30, 70 kg, 170 cm has a BMR of {{K_EX_BMR}}." },
+    { "q": "How many calories to lose 0.5 kg a week?", "a": "About 550 kcal a day less than your daily need, as 1 kg of body fat is roughly 7,700 kcal. For the man above, the target is {{K_EX_LOSE}} a day. Do not go below your BMR without a doctor's advice." },
+    { "q": "How much carbohydrate, protein and fat a day?", "a": "Malaysia's RNI 2017 recommends carbohydrate at 50 to 65%, protein 10 to 20% and fat no more than 30% of energy. This calculator uses 55%, 15% and 30%, converted to grams (4 kcal a gram for carbohydrate and protein, 9 kcal for fat)." },
+    { "q": "What is a normal BMI for Malaysians?", "a": "18.5 to 22.9 by the Asian cut-offs in the Malaysian CPG. 23 to 27.4 is overweight and 27.5 and above obese, lower than the international WHO cut-offs (25 and 30)." },
+    { "q": "What is the Malaysian Healthy Plate?", "a": "The Suku-Suku Separuh idea in the Malaysian Dietary Guidelines 2020: a quarter plate of rice or grains, a quarter protein (fish, chicken, meat or legumes) and half vegetables and fruit." },
+    { "q": "How accurate is the formula?", "a": "Mifflin-St Jeor estimates BMR within 10% for about 82% of non-obese adults. Real needs vary by person; track your weight for 2 to 3 weeks and adjust." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Calorie Calculator</li></ol></nav>
+  <h1>Calorie Calculator Malaysia</h1>
+  <p class="answer">Daily calorie needs are <strong>BMR × activity level</strong>: a moderately active man aged 30, 70 kg and 170 cm needs about <strong>{{K_EX_TDEE}}</strong> a day, and {{K_EX_LOSE}} to lose 0.5 kg a week. The calculator also gives carbohydrate, protein and fat by Malaysia's RNI and the Asian BMI cut-offs. Enter your details.</p>
+  <p class="meta"><span>Verified <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Runs in your browser; no data sent</span><a href="/kalkulator-kalori/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="kaloriForm" novalidate aria-labelledby="kalori-h">
+      <h2 id="kalori-h">Your details</h2>
+      <div class="field-row">
+        <div class="field"><label for="sex">Sex</label><select class="input" id="sex" name="sex">{{K_SEX_OPTIONS}}</select></div>
+        <div class="field"><label for="age">Age</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="15" max="100" step="1" value="{{K_AGE}}"><span aria-hidden="true">years</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="weight">Weight</label><div class="input"><input id="weight" name="weight" type="number" inputmode="decimal" min="20" step="0.1" value="{{K_WEIGHT}}"><span aria-hidden="true">kg</span></div></div>
+        <div class="field"><label for="height">Height</label><div class="input"><input id="height" name="height" type="number" inputmode="decimal" min="100" step="0.5" value="{{K_HEIGHT}}"><span aria-hidden="true">cm</span></div></div>
+      </div>
+      <div class="field"><label for="activity">Activity level</label><select class="input" id="activity" name="activity">{{K_ACT_OPTIONS}}</select></div>
+      <div class="field"><label for="goal">Goal</label><select class="input" id="goal" name="goal">{{K_GOAL_OPTIONS}}</select></div>
+      <p class="help">For adults aged 18 and over. Pregnant or breastfeeding women should ask a dietitian.</p>
+    </form>
+
+    <section class="box" aria-labelledby="kalori-result-h">
+      <h2 id="kalori-result-h">Your calories</h2>
+      <div class="net">
+        <p>Daily calorie target</p>
+        <output id="kTarget" for="sex age weight height activity goal">{{K_TARGET}}</output>
+        <p id="kSub">{{K_SUB}}</p>
+      </div>
+      <p class="sr-only" id="kLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Summary</caption>
+        <tbody id="kLines">
+{{K_LINES}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>By activity level</caption>
+        <tbody id="kLevels">
+{{K_LEVELS}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="kaloriPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rni-h">Malaysia RNI 2017 energy needs (ages 19 to 29)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rni-h">
+    <table class="data">
+      <thead><tr><th scope="col">Physical activity level (PAL)</th><th scope="col">Men</th><th scope="col">Women</th></tr></thead>
+      <tbody>
+{{K_RNI}}
+      </tbody>
+    </table>
+  </div>
+  <p>The RNI recommends PAL 1.6 for most adults. Values for ages 30 and over could not be verified and are not listed.</p>
+
+  <h2 id="goals-h">Calorie targets by goal</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="goals-h">
+    <table class="data">
+      <thead><tr><th scope="col">Goal</th><th scope="col">Man 30, 70 kg, 170 cm</th><th scope="col">Woman 30, 60 kg, 158 cm</th></tr></thead>
+      <tbody>
+{{K_GOALS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Both moderately active (× 1.55).</p>
+
+  <h2 id="formula">How calories are worked out</h2>
+  <ol>
+    <li><strong>BMR</strong> (Mifflin-St Jeor) = 10 × weight + 6.25 × height − 5 × age + 5 (men) or − 161 (women).</li>
+    <li><strong>Daily need</strong> = BMR × activity factor (1.2 to 1.9).</li>
+    <li><strong>Target</strong> = daily need ± (kg a week × 7,700 ÷ 7).</li>
+    <li><strong>Macronutrients</strong>: 55% carbohydrate and 15% protein ÷ 4 kcal a gram, 30% fat ÷ 9 kcal a gram.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Malaysian healthy eating guidance</h2>
+  <ul>
+    <li><strong>Healthy Plate (Suku-Suku Separuh):</strong> a quarter grains, a quarter protein, half vegetables and fruit.</li>
+    <li><strong>Asian BMI:</strong> normal is 18.5 to 22.9; a waist over 90 cm (men) or 80 cm (women) signals risk.</li>
+    <li><strong>Gradual weight loss</strong> is easier to keep; ask your doctor if you have a chronic illness.</li>
+    <li>Check your BMI with the <a href="/bmi-calculator-malaysia/">BMI calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://hq.moh.gov.my/nutrition/wp-content/uploads/2023/12/FA-Buku-RNI.pdf" rel="noopener">Ministry of Health: RNI Malaysia 2017</a> and <a href="https://www.moh.gov.my/images/perkhidmatan-utama/info-kesihatan/pemakanan/2_chat.pdf" rel="noopener">energy chapter</a></li>
+    <li><a href="https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/panduan-amalan-klinikal/CPG_Management_of_Obesity_Second_Edition_2023.pdf" rel="noopener">Ministry of Health: CPG Management of Obesity 2023</a></li>
+    <li><a href="https://www.fao.org/nutrition/education/dietary-guidelines/regions/malaysia/en/" rel="noopener">FAO: Malaysian Dietary Guidelines</a></li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" rel="noopener">Mifflin et al. 1990</a> and <a href="https://pubmed.ncbi.nlm.nih.gov/14726171/" rel="noopener">WHO 2004: Asian BMI</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate for healthy adults, not medical advice. Ask a doctor or dietitian before a major diet change, especially if pregnant, breastfeeding or living with an illness.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/bmi-calculator-malaysia/">BMI Calculator Malaysia<small>Asian BMI cut-offs</small></a>
+    <a href="/due-date-calculator-malaysia/">Due Date Calculator<small>Due date and maternity leave</small></a>
+    <a href="/age-calculator-malaysia/">Age Calculator<small>Exact age and Hijri age</small></a>
+  </div>
+</section>
