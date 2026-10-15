@@ -63,6 +63,11 @@
       "description": "Browse all published tools"
     },
     {
+      "name": "Age Calculator Malaysia",
+      "url": "/age-calculator-malaysia/",
+      "description": "Your exact age in years, months and days, Hijri age and next birthday, plus Malaysia's official ages"
+    },
+    {
       "name": "AI Prompt Generator (Image & Video)",
       "url": "/ai-prompt-generator/",
       "description": "Free AI image and video prompt generator: pick style, lighting and camera, get 3 ready-to-paste prom"
@@ -121,6 +126,16 @@
       "name": "Debt Consolidation Calculator Malaysia",
       "url": "/debt-consolidation-calculator-malaysia/",
       "description": "Debt consolidation calculator for Malaysia: compare 15–18% credit card interest with one personal lo"
+    },
+    {
+      "name": "Driving Licence Cost Calculator Malaysia",
+      "url": "/driving-licence-cost-malaysia/",
+      "description": "Driving licence costs in 2026: JPJ learner and probationary fees (car RM30 + RM60), CDL renewal RM30"
+    },
+    {
+      "name": "Due Date and Maternity Leave Calculator Malaysia",
+      "url": "/due-date-calculator-malaysia/",
+      "description": "Work out your due date from your last period, pregnancy week and trimester, plus your 98-day materni"
     },
     {
       "name": "Education Cost Calculator Malaysia",
@@ -336,6 +351,11 @@
       "name": "Malaysia Salary Calculator 2026",
       "url": "/salary-calculator-malaysia/",
       "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"
+    },
+    {
+      "name": "Solar ATAP Calculator Malaysia",
+      "url": "/solar-calculator-malaysia/",
+      "description": "Work out your TNB bill saving and payback for home solar under Solar ATAP 2026: exports credited at "
     },
     {
       "name": "SSPA Salary Calculator",

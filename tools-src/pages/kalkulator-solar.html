@@ -1,0 +1,165 @@
+<!--page
+{
+  "path": "/kalkulator-solar/",
+  "lang": "ms",
+  "alternates": { "en": "/solar-calculator-malaysia/" },
+  "title": "Kalkulator Solar ATAP 2026: Jimat Bil TNB dan Tempoh Pulang Modal",
+  "description": "Kira jimat bil TNB dan pulang modal solar rumah di bawah Solar ATAP 2026: eksport dikreditkan 27.03 sen, had 5 kW atau 15 kW, rebat SuRIA RM3,000.",
+  "llms": "Kalkulator solar bumbung rumah di bawah Solar ATAP (Semenanjung Malaysia, mulai 1 Januari 2026, garis panduan Suruhanjaya Tenaga GP/ST/No. 60/2025, menggantikan NEM 3.0), disemak 15 Oktober 2026. Tenaga yang digunakan sendiri tidak diimport, jadi mengelak tarif penuh (caj tenaga 27.03 sen, kapasiti 4.55 sen dan rangkaian 12.85 sen sekWj); tenaga yang dieksport dikreditkan pada caj tenaga sahaja (27.03 sen/kWj bagi penggunaan hingga 1,500 kWj), hingga jumlah kWj yang diimport bulan itu dan kuantiti maksimum dibenarkan (kWac × 5 jam × hari), tanpa bawa ke hadapan dan tanpa bayaran tunai; caj kapasiti, rangkaian dan AFA tidak diimbangi. Had kapasiti: 5 kW satu fasa dan 15 kW tiga fasa tanpa semakan sambungan TNB (RM1,000). Tiada kuota atau tarikh tutup; tempoh kontrak 10 tahun. Rebat SuRIA Home RM600 sekWac hingga RM3,000 bagi sistem beroperasi 1 Jun hingga 31 Disember 2026. Tiada pelepasan cukai individu untuk solar. Contoh: sistem 6 kWp (5 kWac), hasil 1,200 kWj/kWp setahun, penggunaan 600 kWj sebulan, 60% digunakan sendiri: jana 600 kWj, import 240 kWj, eksport 240 kWj dikreditkan; bil RM215.98 menjadi RM41.76, jimat RM174.22 sebulan (RM2,090.64 setahun); pada RM3,000/kWp tolak rebat RM3,000, kos bersih RM15,000 dan pulang modal kira-kira 7.2 tahun. Rebat EEI dikira ikut yang lebih rendah antara kWj diimport dan kWj bersih. Kos pemasangan dan hasil panel ialah input pengguna.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "solar",
+  "scripts": ["/assets/js/solar.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Solar", null]],
+  "about": ["Solar ATAP", "Panel solar rumah", "Bil elektrik TNB", "Tenaga boleh baharu"],
+  "app": {
+    "name": "Kalkulator Solar ATAP",
+    "category": "FinanceApplication",
+    "features": ["Bil TNB dengan dan tanpa solar", "Kredit eksport ikut Solar ATAP 2026", "Had import dan kuantiti maksimum", "Eksport hangus", "Rebat SuRIA Home", "Tempoh pulang modal", "Semakan had 5 kW dan 15 kW", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Suruhanjaya Tenaga: Garis panduan Solar ATAP (GP/ST/No. 60/2025)", "https://www.st.gov.my/sites/default/files/2026-03/GUIDELINES-FOR-SOLAR-ACCELERATED_0.pdf"],
+    ["SEDA Malaysia: Program Solar ATAP", "https://www.seda.gov.my/reportal/atap/"],
+    ["SEDA Malaysia: Soalan lazim Solar ATAP", "https://www.seda.gov.my/reportal/?p=3338"],
+    ["TNB: Rebat tunai SuRIA Home hingga RM3,000", "https://www.mytnb.com.my/announcements/entry/SuRIA-Home-Up-to-RM3000-Cash-Rebate-for-Solar-ATAP-Installations"],
+    ["TNB: Perlindungan bil hingga 800 kWj (September hingga Disember 2026)", "https://www.tnb.com.my/assets/press_releases/20261002_25_bi.pdf"],
+    ["Bernama: Solar ATAP, kredit pada caj tenaga dan tiada kuota", "https://www.bernama.com/en/news.php?id=2504396"],
+    ["Bernama: SuRIA Home RM600 sekWac", "https://www.bernama.com/en/news.php?id=2560184"],
+    ["The Star: Solar ATAP bermula 1 Januari 2026", "https://www.thestar.com.my/news/nation/2025/12/20/embracing-rooftop-power"],
+    ["The Edge: Isi rumah dikreditkan pada caj tenaga", "https://theedgemalaysia.com/node/786549"],
+    ["Utusan: Rebat solar hingga RM3,000", "https://www.utusan.com.my/nasional/2026/05/pengguna-domestik-pasang-sistem-solar-layak-terima-rebat-sehingga-rm3000/"]
+  ],
+  "faq": [
+    { "q": "Berapa jimat bil TNB dengan solar?", "a": "Bagi sistem 6 kWp di rumah yang menggunakan 600 kWj sebulan dengan 60% tenaga digunakan sendiri, bil turun daripada {{O_WITHOUT}} kepada {{O_WITH}}, jimat {{O_YEARLY}} setahun. Penjimatan bergantung pada berapa banyak tenaga solar digunakan semasa siang." },
+    { "q": "Apakah Solar ATAP?", "a": "Skim solar bumbung Suruhanjaya Tenaga yang menggantikan NEM 3.0 mulai 1 Januari 2026 di Semenanjung. Tenaga yang dieksport dikreditkan pada caj tenaga (27.03 sen/kWj) hingga jumlah yang anda import bulan itu; baki hangus dan tidak dibawa ke bulan berikutnya." },
+    { "q": "Apa beza Solar ATAP dan NEM 3.0?", "a": "NEM 3.0 mengimbangi caj tenaga, kapasiti dan rangkaian serta membenarkan kredit dibawa 12 bulan. Solar ATAP hanya mengimbangi caj tenaga dan tidak membenarkan kredit dibawa ke hadapan, jadi menggunakan tenaga solar sendiri pada siang hari lebih bernilai daripada mengeksport." },
+    { "q": "Berapa had kapasiti solar rumah?", "a": "Hingga 5 kW bagi sambungan satu fasa dan 15 kW bagi tiga fasa. Melebihi had memerlukan semakan pengesahan sambungan TNB dengan fi RM1,000." },
+    { "q": "Berapa rebat SuRIA Home?", "a": "RM600 setiap kWac, maksimum RM3,000 (5 kWac), bagi pelanggan domestik TNB yang sistemnya mula beroperasi di bawah Solar ATAP dari 1 Jun hingga 31 Disember 2026 atau sehingga kuota 250 MW habis." },
+    { "q": "Berapa lama pulang modal panel solar?", "a": "Bagi contoh 6 kWp pada RM3,000 sekWp tolak rebat SuRIA RM3,000, kos bersih RM15,000 dan pulang modal kira-kira {{O_PAYBACK}} tahun. Masukkan sebut harga pemasang anda untuk anggaran sebenar." },
+    { "q": "Adakah pelepasan cukai untuk solar rumah?", "a": "Tidak. Pelepasan gaya hidup RM2,500 merangkumi pengecas kenderaan elektrik dan mesin kompos, bukan panel solar. Elaun modal untuk solar hanya bagi perniagaan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Solar</li></ol></nav>
+  <h1>Kalkulator Solar ATAP 2026</h1>
+  <p class="answer">Di bawah Solar ATAP, tenaga solar yang anda guna sendiri <strong>mengelak tarif penuh</strong>, manakala tenaga dieksport hanya dikreditkan <strong>27.03 sen/kWj</strong> hingga jumlah yang anda import. Sistem 6 kWp bagi rumah 600 kWj sebulan menurunkan bil daripada {{O_WITHOUT}} kepada <strong>{{O_WITH}}</strong>, pulang modal kira-kira {{O_PAYBACK}} tahun. Masukkan bil dan sistem anda.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{O_VERIFIED_ISO}}">{{O_VERIFIED}}</time></span><span>Tarif TNB RP4 mulai 1 Julai 2025</span><a href="/solar-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="solarForm" novalidate aria-labelledby="solar-h">
+      <h2 id="solar-h">Rumah dan sistem anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="usage">Penggunaan sebulan</label><div class="input"><input id="usage" name="usage" type="number" inputmode="numeric" min="0" max="1500" step="10" value="{{O_USAGE}}"><span aria-hidden="true">kWj</span></div></div>
+        <div class="field"><label for="phase">Sambungan</label><select class="input" id="phase" name="phase">{{O_PHASE_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="kwp">Saiz panel</label><div class="input"><input id="kwp" name="kwp" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_KWP}}"><span aria-hidden="true">kWp</span></div></div>
+        <div class="field"><label for="kwac">Saiz inverter</label><div class="input"><input id="kwac" name="kwac" type="number" inputmode="decimal" min="0" step="0.5" value="{{O_KWAC}}"><span aria-hidden="true">kWac</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="yield">Hasil setahun</label><div class="input"><input id="yield" name="yield" type="number" inputmode="numeric" min="0" step="50" value="{{O_YIELD}}"><span aria-hidden="true">kWj/kWp</span></div></div>
+        <div class="field"><label for="selfuse">Digunakan sendiri</label><div class="input"><input id="selfuse" name="selfuse" type="number" inputmode="numeric" min="0" max="100" step="5" value="{{O_SELF}}"><span aria-hidden="true">%</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="costKwp">Kos sekWp (sebut harga)</label><div class="input"><span aria-hidden="true">RM</span><input id="costKwp" name="costKwp" type="number" inputmode="numeric" min="0" step="100" value="{{O_COST}}"></div></div>
+        <div class="field"><label for="suria">Rebat SuRIA Home</label><select class="input" id="suria" name="suria">{{O_SURIA_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="afa">AFA bulan ini</label><div class="input"><input id="afa" name="afa" type="number" inputmode="decimal" step="0.01" value="{{O_AFA}}"><span aria-hidden="true">sen/kWj</span></div></div>
+      <p class="help">Hasil 1,200 kWj/kWp setahun ialah anggaran biasa di Semenanjung. Kos pemasangan berbeza ikut pemasang; masukkan sebut harga anda.</p>
+    </form>
+
+    <section class="box" aria-labelledby="solar-result-h">
+      <h2 id="solar-result-h">Penjimatan</h2>
+      <div class="net">
+        <p>Jimat bil sebulan</p>
+        <output id="oSave" for="usage kwp kwac yield selfuse costKwp suria afa phase">{{O_SAVE}}</output>
+        <p id="oSub">{{O_SUB}}</p>
+      </div>
+      <p class="sr-only" id="oLive" aria-live="polite"></p>
+      <table class="rows wrap">
+        <caption>Tenaga sebulan</caption>
+        <tbody id="oEnergy">
+{{O_ENERGY}}
+        </tbody>
+      </table>
+      <table class="rows wrap">
+        <caption>Bil dan pulangan</caption>
+        <tbody id="oMoney">
+{{O_MONEY}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solarPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Penjimatan solar ikut penggunaan elektrik</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Penggunaan sebulan</th><th scope="col">Sistem</th><th scope="col">Bil tanpa solar</th><th scope="col">Bil dengan solar</th><th scope="col">Jimat sebulan</th><th scope="col">Pulang modal (tahun)</th></tr></thead>
+      <tbody>
+{{O_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>60% digunakan sendiri, 1,200 kWj/kWp setahun, RM3,000 sekWp, rebat SuRIA, AFA 0, paras perlindungan {{O_LEVEL}} kWj.</p>
+
+  <h2 id="self-h">Kenapa penggunaan sendiri penting</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="self-h">
+    <table class="data">
+      <thead><tr><th scope="col">Digunakan sendiri</th><th scope="col">Import</th><th scope="col">Eksport dikreditkan</th><th scope="col">Eksport hangus</th><th scope="col">Jimat sebulan</th></tr></thead>
+      <tbody>
+{{O_SELFTABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Sistem 6 kWp, rumah 600 kWj sebulan. Eksport melebihi import bulan itu hangus, jadi menggunakan tenaga pada siang hari (penghawa dingin, mesin basuh, pemanas air) memberi pulangan terbaik.</p>
+
+  <h2 id="formula">Cara bil solar dikira</h2>
+  <ol>
+    <li><strong>Jana</strong> = kWp × hasil setahun ÷ 12; <strong>guna sendiri</strong> = jana × peratus guna sendiri.</li>
+    <li><strong>Import</strong> = penggunaan − guna sendiri; <strong>eksport</strong> = jana − guna sendiri.</li>
+    <li><strong>Kredit</strong> = terendah antara eksport, import dan kWac × 5 jam × 30 hari, pada 27.03 sen/kWj.</li>
+    <li><strong>Bil</strong> = caj tenaga, kapasiti dan rangkaian atas import − kredit − EEI, ditambah AFA, caj runcit, KWTBB dan SST jika berkenaan; tidak boleh kurang daripada sifar.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Peraturan Solar ATAP 2026</h2>
+  <ul>
+    <li><strong>Mohon</strong> melalui penyedia PV berdaftar di portal eATAP SEDA; tiada kuota atau tarikh tutup.</li>
+    <li><strong>Tiada bawa ke hadapan:</strong> kredit yang tidak digunakan dalam bulan bil hangus, dan bil negatif dijadikan sifar.</li>
+    <li><strong>Kontrak 10 tahun:</strong> selepas itu sistem untuk kegunaan sendiri sahaja.</li>
+    <li><strong>Rumah strata</strong> (kondominium, pangsapuri) dilaporkan tidak layak.</li>
+    <li>Kira bil TNB anda tanpa solar dengan <a href="/kalkulator-bil-elektrik-tnb/">kalkulator bil elektrik TNB</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.st.gov.my/sites/default/files/2026-03/GUIDELINES-FOR-SOLAR-ACCELERATED_0.pdf" rel="noopener">Suruhanjaya Tenaga: Garis panduan Solar ATAP</a></li>
+    <li><a href="https://www.seda.gov.my/reportal/atap/" rel="noopener">SEDA: Program Solar ATAP</a> dan <a href="https://www.seda.gov.my/reportal/?p=3338" rel="noopener">soalan lazim</a></li>
+    <li><a href="https://www.mytnb.com.my/announcements/entry/SuRIA-Home-Up-to-RM3000-Cash-Rebate-for-Solar-ATAP-Installations" rel="noopener">TNB: SuRIA Home</a> dan <a href="https://www.tnb.com.my/assets/press_releases/20261002_25_bi.pdf" rel="noopener">perlindungan 800 kWj</a></li>
+    <li><a href="https://www.bernama.com/en/news.php?id=2504396" rel="noopener">Bernama: Solar ATAP</a> dan <a href="https://www.bernama.com/en/news.php?id=2560184" rel="noopener">SuRIA Home</a></li>
+    <li><a href="https://www.thestar.com.my/news/nation/2025/12/20/embracing-rooftop-power" rel="noopener">The Star: ATAP bermula 1 Januari 2026</a>, <a href="https://theedgemalaysia.com/node/786549" rel="noopener">The Edge</a>, <a href="https://www.utusan.com.my/nasional/2026/05/pengguna-domestik-pasang-sistem-solar-layak-terima-rebat-sehingga-rm3000/" rel="noopener">Utusan</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran. Hasil panel bergantung pada arah bumbung, teduhan dan cuaca, dan cara rebat EEI dikira untuk eksport belum diterbitkan, jadi kami menggunakan bacaan yang lebih berhati-hati. Dapatkan sebut harga dan anggaran hasil bertulis daripada pemasang berdaftar SEDA.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-bil-elektrik-tnb/">Kalkulator Bil Elektrik TNB<small>Bil bulanan dan rebat EEI</small></a>
+    <a href="/kalkulator-pinjaman-peribadi/">Kalkulator Pinjaman Peribadi<small>Ansuran dan kadar sebenar</small></a>
+    <a href="/kalkulator-bil-air/">Kalkulator Bil Air<small>Tarif air ikut negeri</small></a>
+  </div>
+</section>

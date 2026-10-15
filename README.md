@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 97 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 101 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -117,6 +117,10 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-str/](https://tool.thebukitbesi.com/kalkulator-str/) + [/str-calculator-malaysia/](https://tool.thebukitbesi.com/str-calculator-malaysia/) | BM + English | kalkulator str 2026, berapa str saya dapat, sara 2026; str calculator |
 | [/kalkulator-gaji-sspa/](https://tool.thebukitbesi.com/kalkulator-gaji-sspa/) + [/sspa-salary-calculator/](https://tool.thebukitbesi.com/sspa-salary-calculator/) | BM + English | kalkulator gaji sspa, gaji baharu penjawat awam, pelarasan pencen; sspa salary calculator |
 | [/kalkulator-ar-rahnu/](https://tool.thebukitbesi.com/kalkulator-ar-rahnu/) + [/ar-rahnu-calculator-malaysia/](https://tool.thebukitbesi.com/ar-rahnu-calculator-malaysia/) | BM + English | kalkulator ar rahnu, upah simpan, pajak gadai emas; ar-rahnu calculator |
+| [/kalkulator-umur/](https://tool.thebukitbesi.com/kalkulator-umur/) + [/age-calculator-malaysia/](https://tool.thebukitbesi.com/age-calculator-malaysia/) | BM + English | kalkulator umur, kira umur, umur hijrah; age calculator malaysia |
+| [/kalkulator-tarikh-bersalin/](https://tool.thebukitbesi.com/kalkulator-tarikh-bersalin/) + [/due-date-calculator-malaysia/](https://tool.thebukitbesi.com/due-date-calculator-malaysia/) | BM + English | kalkulator tarikh bersalin, cuti bersalin 98 hari; due date calculator |
+| [/kalkulator-solar/](https://tool.thebukitbesi.com/kalkulator-solar/) + [/solar-calculator-malaysia/](https://tool.thebukitbesi.com/solar-calculator-malaysia/) | BM + English | kalkulator solar, solar atap, pulang modal solar; solar calculator malaysia |
+| [/kos-lesen-memandu/](https://tool.thebukitbesi.com/kos-lesen-memandu/) + [/driving-licence-cost-malaysia/](https://tool.thebukitbesi.com/driving-licence-cost-malaysia/) | BM + English | kos lesen memandu, renew lesen, yuran jpj; driving licence cost malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -210,6 +214,14 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (Bursa fees):** `bursa-core.js` holds the 0.03% clearing fee and the 0.1% contract-note stamp duty under the remission order to 12 July 2028; update when it expires or changes. Brokerage is a user input.
 
 **Upkeep (tenancy stamp duty):** `tenancy-core.js` holds the Finance Act 2024 rates (RM1/3/5/7 per RM250, RM10 minimum and copies). Recheck after Budgets and LHDN stamp duty guideline updates.
+
+**Upkeep (age):** `umur-core.js` holds the official age milestones (MyKad, licences, Undi18, alcohol, EPF 50/55/60, retirement). Recheck when EPF or retirement-age rules change; the Hijri age uses `hijri-core.js`.
+
+**Upkeep (due date):** `bersalin-core.js` holds the 98-day private-sector leave, the civil-service 60/90 days and the Budget 2027 announcement (98/490 days, pending a JPA circular). Switch the civil-service default when the circular is issued, and add PERKESO's post-maternity allowance if it is legislated.
+
+**Upkeep (solar):** `solar-core.js` holds the Solar ATAP rules and the SuRIA Home rebate (to 31 December 2026). Bills use `tnb-core.js`, so TNB tariff changes flow through. Remove SuRIA when it ends and recheck the ATAP guideline yearly.
+
+**Upkeep (driving licence):** `lesen-core.js` holds the JPJ LDL, PDL, CDL, print and IDP fees. Recheck the JPJ fee table yearly; test fees and school ceilings are left out until JPJ publishes them.
 
 **Upkeep (hajj):** `haji-core.js` holds the Muassasah cost and B40/M40/T20 payments (1447H/2026 and 1448H/2027), the RM15,000 offer threshold, the 31 December 2028 deadline and the hibah history. Update after Tabung Haji announces the next season's cost (usually September or October) and each year's hibah (usually March).
 
@@ -319,6 +331,10 @@ assets/js/haji-core.js      hajj cost by category, Tabung Haji savings to RM15,0
 assets/js/str-core.js       STR and SARA 2026 by income, children and category
 assets/js/sspa-core.js      SSPA salary and pension adjustment, phase 1 and phase 2
 assets/js/rahnu-core.js     Ar-Rahnu financing and charges by provider at the gold price
+assets/js/umur-core.js      exact age, Hijri age, next birthday, Malaysian age milestones
+assets/js/bersalin-core.js  due date, pregnancy week, maternity and paternity leave dates
+assets/js/solar-core.js     Solar ATAP bill saving, export credit and payback
+assets/js/lesen-core.js     JPJ driving licence fees and renewal
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
