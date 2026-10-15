@@ -1,0 +1,209 @@
+<!--page
+{
+  "path": "/road-tax-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-roadtax/" },
+  "title": "Road Tax Calculator Malaysia 2026: Cars, EVs and Motorcycles",
+  "description": "Malaysia road tax calculator: JPJ road tax (LKM) by engine cc or EV kW, saloon or non-saloon, private or company, Peninsular, Sabah, Sarawak or Labuan.",
+  "llms": "Calculates Malaysian road tax (LKM) from JPJ's rate tables. Private saloon, Peninsular: up to 1,000 cc RM20; 1,001–1,200 RM55; 1,201–1,400 RM70; 1,401–1,600 RM90; 1,601–1,800 RM200 + RM0.40 per cc above 1,600; 1,801–2,000 RM280 + RM0.50/cc above 1,800; 2,001–2,500 RM380 + RM1/cc above 2,000; 2,501–3,000 RM880 + RM2.50/cc above 2,500; above 3,000 RM2,130 + RM4.50/cc above 3,000. Private non-saloon (MPV, SUV, pickup) Peninsular: RM20, 85, 100, 120, then RM300 + 0.30, RM360 + 0.40, RM440 + 0.80, RM840 + 1.60, RM1,640 + 1.60. Company saloon Peninsular: RM20, 110, 140, 180, then RM400 + 0.80, RM560 + 1, RM760 + 3, RM2,260 + 7.50, RM6,010 + 13.50 (company non-saloon as private). Sabah and Sarawak saloon: RM20, 44, 56, 72, RM160 + 0.32, RM224 + 0.25, RM274 + 0.50, RM524 + 1, RM1,024 + 1.35; non-saloon RM20, 42.50, 50, 60, RM165 + 0.17, RM199 + 0.22, RM243 + 0.44, RM463 + 0.88, RM903 + 1.20. Labuan pays 50% of the Sabah and Sarawak rate and Langkawi and Pangkor 50% of the Peninsular rate above 1,000 cc. Electric cars from 1 January 2026 pay by total motor kW: RM20 up to 50 kW, then groups to RM20,000 above 1,010 kW (BYD Atto 3 150 kW RM160, Tesla Model 3 RWD 208 kW RM280, Model Y RWD 220 kW RM305, BMW iX xDrive50 385 kW RM965). Motorcycles: up to 150 cc RM2, 151–200 RM30 (RM9 in Sabah and Sarawak), 201–250 RM50, 501–800 RM250, above 800 RM350; electric motorcycles up to 7,500 W RM2. Examples: Perodua Myvi 1.5 RM90, Toyota Camry 2.5 RM867 (company RM2,221). Six-month renewal costs half; renew up to 2 months early on MyJPJ; no sticker needed since 10 February 2023; driving with expired road tax compounds RM150 to RM300.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "roadtax",
+  "scripts": ["/assets/js/road-tax.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Road Tax Calculator", null]],
+  "about": ["Road tax in Malaysia", "Lesen Kenderaan Motor (LKM)", "JPJ", "Electric vehicle road tax"],
+  "app": {
+    "name": "Road Tax Calculator Malaysia",
+    "category": "UtilitiesApplication",
+    "features": ["Cars by engine cc, saloon or non-saloon", "Private or company-registered", "Peninsular, Sabah and Sarawak, Labuan, Langkawi and Pangkor", "Electric cars by motor kW (2026 schedule)", "Motorcycles and electric motorcycles", "12- or 6-month renewal", "Popular models table", "Works offline"]
+  },
+  "citations": [
+    ["JPJ: LKM rate calculation guideline (cc tables, Peninsular, Sabah and Sarawak)", "https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-Pengiraan-LKM-Bajet-20092.pdf"],
+    ["JPJ: LKM guideline for electric vehicles", "https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-LKM-Kenderaan-Elektrik-v2.pdf"],
+    ["JPJ: Enforcement offences and compounds 2026", "https://www.jpj.gov.my/wp-content/uploads/2026/01/SENARAI-KESALAHAN-TINDAKAN-PENGUATKUASAAN-JPJ-2026.pdf"],
+    ["Bernama: JPJ flexible road tax rates for e-hailing vehicles (MOT rate chart)", "https://bernama.com/en/general/news.php?id=2518355"],
+    ["paultan.org: Road tax prices for all EV models from 1 January 2026", "https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/"],
+    ["Carlist.my: EV road tax 2026, kW-based structure explained", "https://www.carlist.my/news/ev-road-tax-malaysia-2026-new-kw-based-structure-explained-how-much-will-you-pay-149237/149237/"],
+    ["Malay Mail: Road tax goes digital, no physical display for private vehicles", "https://www.malaymail.com/news/malaysia/2023/02/10/road-tax-and-driving-licence-go-digital-from-today-no-physical-display-required-for-private-vehicles/54283"],
+    ["JPJ: Motor vehicle licence renewal guide", "https://www.jpj.gov.my/en/motor-vehicle-license-renewal-guide-lkm/"],
+    ["StashAway: How to calculate road tax in Malaysia", "https://www.stashaway.my/r/calculate-road-tax-malaysia"]
+  ],
+  "faq": [
+    { "q": "How much is road tax for a 1.5-litre car in Malaysia?", "a": "RM90 a year (RM45 for 6 months) for a privately owned saloon of 1,401 to 1,600 cc in Peninsular Malaysia, such as a Perodua Myvi 1.5 or Honda City. A non-saloon of the same size pays RM120, Sabah and Sarawak RM72 (saloon), Labuan {{RT_LABUAN15}} and Langkawi {{RT_LANGKAWI15}}." },
+    { "q": "How is road tax calculated in Malaysia?", "a": "By engine cc and the body type on your VOC (saloon or non-saloon). Up to 1,600 cc it is a flat rate; above that, a base plus a rate for every cc above the band's start. A 1,798 cc saloon pays RM200 + 198 × RM0.40 = {{RT_1800}}; a 1,998 cc saloon {{RT_2000}} and a 1,998 cc non-saloon {{RT_2000NS}}." },
+    { "q": "How much is EV road tax in 2026?", "a": "Since 1 January 2026, electric cars pay by total motor power: RM20 up to 50 kW, RM10 for each extra 10 kW to 100 kW, then higher steps. A BYD Atto 3 (150 kW) pays {{RT_ATTO}}, a Tesla Model 3 RWD (208 kW) {{RT_M3}}, and the top band above 1,010 kW is RM20,000." },
+    { "q": "Why do company cars pay more road tax?", "a": "Company-registered saloons have their own, higher table in Peninsular Malaysia. A Toyota Camry 2.5 pays {{RT_CAMRY}} privately but {{RT_CAMRY_CO}} when registered to a company. Company non-saloons pay the private rate." },
+    { "q": "How much is motorcycle road tax?", "a": "RM2 a year up to 150 cc, RM30 for 151 to 200 cc (RM9 in Sabah and Sarawak), RM50 for 201 to 250 cc, RM250 for 501 to 800 cc and RM350 above 800 cc. Sources disagree on 251 to 500 cc in the Peninsula (RM100 or RM180), so check MyJPJ. Electric motorcycles up to 7,500 W pay RM2." },
+    { "q": "How do I renew road tax?", "a": "On the MyJPJ app or website, at JPJ counters, Pos Malaysia or authorised agents, up to 2 months before it expires, with insurance or takaful valid for the whole period. You can renew for 12 months or for 6 months at half the price. Since 10 February 2023 private vehicles owned by Malaysians need not display a sticker; the digital LKM in MyJPJ is enough." },
+    { "q": "What is the fine for expired road tax?", "a": "JPJ's 2026 compound for an expired LKM with valid insurance is RM150 if paid within 15 days, RM200 within 30 days and RM300 within 60 days; in court the fine can reach RM2,000. If it expired more than 3 years ago, a private vehicle needs a PUSPAKOM inspection before renewal." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Road tax calculator</li></ol></nav>
+  <h1>Road Tax Calculator Malaysia</h1>
+  <p class="answer">Road tax for a privately owned 1.5-litre car (1,401–1,600 cc) in Peninsular Malaysia is <strong>RM90 a year</strong> (RM45 for 6 months), or RM120 for an SUV or MPV registered as non-saloon. Above 1,600 cc you pay a base plus a rate per cc; electric cars pay by motor power from RM20 (a BYD Atto 3 pays {{RT_ATTO}}), and motorcycles up to 150 cc pay RM2. Choose your vehicle below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{RT_VERIFIED_ISO}}">{{RT_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-roadtax/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="roadForm" novalidate aria-labelledby="rt-h">
+      <h2 id="rt-h">Your vehicle</h2>
+      <div class="field-row">
+        <div class="field"><label for="type">Vehicle</label><select class="input" id="type" name="type">{{RT_TYPE_OPTIONS}}</select></div>
+        <div class="field"><label for="region">Registered in</label><select class="input" id="region" name="region">{{RT_REGION_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row" id="rtCar">
+        <div class="field"><label for="body">Body type</label><select class="input" id="body" name="body">{{RT_BODY_OPTIONS}}</select></div>
+        <div class="field"><label for="owner">Owner</label><select class="input" id="owner" name="owner">{{RT_OWNER_OPTIONS}}</select></div>
+      </div>
+      <div class="field" id="rtCc"><label for="cc">Engine capacity</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" max="10000" step="1" value="{{RT_CC}}"><span aria-hidden="true">cc</span></div></div>
+      <div class="field" id="rtKw" hidden><label for="kw">Total motor power</label><div class="input"><input id="kw" name="kw" type="number" inputmode="decimal" min="0" max="2000" step="1" value="{{RT_KW}}"><span aria-hidden="true">kW</span></div></div>
+      <div class="field" id="rtW" hidden><label for="watts">Motor power</label><div class="input"><input id="watts" name="watts" type="number" inputmode="numeric" min="0" max="100000" step="100" value="{{RT_W}}"><span aria-hidden="true">W</span></div></div>
+      <div class="field"><label for="months">Renewal period</label><select class="input" id="months" name="months">{{RT_MONTHS_OPTIONS}}</select></div>
+      <p class="help">Use the engine cc and body type on your VOC (geran). Many crossovers are registered as saloons.</p>
+    </form>
+
+    <section class="box" aria-labelledby="rt-result-h">
+      <h2 id="rt-result-h">Your road tax</h2>
+      <div class="net">
+        <p>Road tax (LKM)</p>
+        <output id="rtTax" for="type region body owner cc kw watts months">{{RT_TAX}}</output>
+        <p id="rtSub">{{RT_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rtLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Calculation</caption>
+        <tbody id="rtLines">
+{{RT_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="rtWhy" hidden></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rtPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="models-h">Road tax for popular cars (private, Peninsular)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="models-h">
+    <table class="data">
+      <thead><tr><th scope="col">Model</th><th scope="col">Engine or motor</th><th scope="col">12 months</th><th scope="col">6 months</th></tr></thead>
+      <tbody>
+{{RT_MODELS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Check your own VOC: the cc and body type JPJ registered decide the rate.</p>
+
+  <h2 id="pen-h">Peninsular Malaysia road tax by engine cc</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pen-h">
+    <table class="data">
+      <thead><tr><th scope="col">Engine (cc)</th><th scope="col">Private saloon</th><th scope="col">Non-saloon (private or company)</th><th scope="col">Company saloon</th></tr></thead>
+      <tbody>
+{{RT_PEN}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How road tax is worked out</h2>
+  <ol>
+    <li><strong>Find the band</strong> for your engine cc in the table for your region, body type and owner.</li>
+    <li><strong>Up to 1,600 cc:</strong> a flat rate.</li>
+    <li><strong>Above 1,600 cc:</strong> the band's base + the rate × the cc above the band's start.</li>
+    <li><strong>Labuan:</strong> 50% of the Sabah and Sarawak rate; <strong>Langkawi and Pangkor:</strong> 50% of the Peninsular rate (above 1,000 cc).</li>
+    <li><strong>6-month renewal:</strong> half the yearly rate.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="east-h">Sabah and Sarawak road tax by engine cc</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="east-h">
+    <table class="data">
+      <thead><tr><th scope="col">Engine (cc)</th><th scope="col">Saloon</th><th scope="col">Non-saloon</th></tr></thead>
+      <tbody>
+{{RT_EAST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ev-h">Electric car road tax 2026 by motor power</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ev-h">
+    <table class="data">
+      <thead><tr><th scope="col">Group</th><th scope="col">Motor power</th><th scope="col">Base</th><th scope="col">Per extra 10 kW</th><th scope="col">Top of group</th></tr></thead>
+      <tbody>
+{{RT_EVT}}
+      </tbody>
+    </table>
+  </div>
+  <p>Group A is RM20 up to 50 kW. In other groups the base covers the first 10 kW; each started 10 kW block after that adds the step. Use the total of all motors.</p>
+
+  <h2 id="moto-h">Motorcycle road tax</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="moto-h">
+    <table class="data">
+      <thead><tr><th scope="col">Engine</th><th scope="col">Peninsular</th><th scope="col">Sabah and Sarawak</th></tr></thead>
+      <tbody>
+{{RT_MOTO}}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Electric motorcycle road tax">
+    <table class="data">
+      <thead><tr><th scope="col">Electric motorcycle</th><th scope="col">Road tax a year</th></tr></thead>
+      <tbody>
+{{RT_EMOTO}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="renew">Renewing road tax in Malaysia</h2>
+  <ul>
+    <li><strong>Where:</strong> the MyJPJ app or website, JPJ counters, Pos Malaysia and authorised online agents.</li>
+    <li><strong>When:</strong> up to 2 months before expiry, with insurance or takaful valid for the whole period.</li>
+    <li><strong>No sticker:</strong> since 10 February 2023, Malaysian-owned private cars and motorcycles need not display a road tax sticker; the digital LKM in MyJPJ is enough.</li>
+    <li><strong>Long lapse:</strong> if it expired more than 3 years ago, a PUSPAKOM inspection is needed first.</li>
+    <li><strong>Hybrids and diesel:</strong> hybrids pay by engine cc like petrol cars. Some sources say diesel cars pay more, which could not be confirmed, and the government is studying a cut for diesel vehicles.</li>
+    <li><strong>Coming change:</strong> the Road Transport (Amendment) Act 2026 will make owners declare where the vehicle is mainly used, ending cheaper registration in Sabah, Sarawak or the islands for cars used elsewhere; no start date yet.</li>
+  </ul>
+
+  <h2 id="fine-h">Compound for expired road tax (JPJ 2026)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fine-h">
+    <table class="data">
+      <thead><tr><th scope="col">Compound paid within</th><th scope="col">Amount</th></tr></thead>
+      <tbody>
+{{RT_COMPOUND}}
+      </tbody>
+    </table>
+  </div>
+  <p>For an expired LKM with valid insurance. Unpaid compounds go to court, where the fine can reach RM2,000, and outstanding summonses block renewal.</p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-Pengiraan-LKM-Bajet-20092.pdf" rel="noopener">JPJ: LKM rate calculation guideline</a></li>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-LKM-Kenderaan-Elektrik-v2.pdf" rel="noopener">JPJ: LKM guideline for electric vehicles</a></li>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2026/01/SENARAI-KESALAHAN-TINDAKAN-PENGUATKUASAAN-JPJ-2026.pdf" rel="noopener">JPJ: Offences and compounds 2026</a></li>
+    <li><a href="https://bernama.com/en/general/news.php?id=2518355" rel="noopener">Bernama: MOT road tax rate chart (January 2026)</a></li>
+    <li><a href="https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/" rel="noopener">paultan.org: EV road tax by model</a></li>
+    <li><a href="https://www.carlist.my/news/ev-road-tax-malaysia-2026-new-kw-based-structure-explained-how-much-will-you-pay-149237/149237/" rel="noopener">Carlist.my: EV road tax structure</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2023/02/10/road-tax-and-driving-licence-go-digital-from-today-no-physical-display-required-for-private-vehicles/54283" rel="noopener">Malay Mail: Digital road tax, no sticker</a></li>
+    <li><a href="https://www.jpj.gov.my/en/motor-vehicle-license-renewal-guide-lkm/" rel="noopener">JPJ: LKM renewal guide</a></li>
+    <li><a href="https://www.stashaway.my/r/calculate-road-tax-malaysia" rel="noopener">StashAway: Road tax tables</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate from JPJ's tables. The amount shown on MyJPJ when you renew is final.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/car-loan-calculator-malaysia/">Car Loan Calculator<small>Monthly instalment and total cost</small></a>
+    <a href="/ncd-calculator-malaysia/">NCD Calculator<small>No claim discount and premium</small></a>
+    <a href="/fuel-cost-calculator-malaysia/">Fuel Cost Calculator<small>Trip cost and RM per km</small></a>
+  </div>
+</section>

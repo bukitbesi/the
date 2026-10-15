@@ -1,0 +1,207 @@
+<!--page
+{
+  "path": "/kalkulator-roadtax/",
+  "lang": "ms",
+  "alternates": { "en": "/road-tax-calculator-malaysia/" },
+  "title": "Kalkulator Roadtax 2026: Cukai Jalan Kereta, EV dan Motosikal",
+  "description": "Kalkulator roadtax: kira cukai jalan (LKM) JPJ ikut cc enjin atau kW EV, saloon atau bukan saloon, persendirian atau syarikat, Semenanjung, Sabah dan Sarawak.",
+  "llms": "Mengira cukai jalan (LKM) Malaysia daripada jadual kadar JPJ. Saloon persendirian, Semenanjung: hingga 1,000 cc RM20; 1,001–1,200 RM55; 1,201–1,400 RM70; 1,401–1,600 RM90; 1,601–1,800 RM200 + RM0.40 setiap cc melebihi 1,600; 1,801–2,000 RM280 + RM0.50/cc melebihi 1,800; 2,001–2,500 RM380 + RM1/cc melebihi 2,000; 2,501–3,000 RM880 + RM2.50/cc melebihi 2,500; melebihi 3,000 RM2,130 + RM4.50/cc melebihi 3,000. Bukan saloon persendirian (MPV, SUV, pikap) Semenanjung: RM20, 85, 100, 120, kemudian RM300 + 0.30, RM360 + 0.40, RM440 + 0.80, RM840 + 1.60, RM1,640 + 1.60. Saloon syarikat Semenanjung: RM20, 110, 140, 180, kemudian RM400 + 0.80, RM560 + 1, RM760 + 3, RM2,260 + 7.50, RM6,010 + 13.50 (bukan saloon syarikat sama seperti persendirian). Saloon Sabah dan Sarawak: RM20, 44, 56, 72, RM160 + 0.32, RM224 + 0.25, RM274 + 0.50, RM524 + 1, RM1,024 + 1.35; bukan saloon RM20, 42.50, 50, 60, RM165 + 0.17, RM199 + 0.22, RM243 + 0.44, RM463 + 0.88, RM903 + 1.20. Labuan membayar 50% kadar Sabah dan Sarawak, dan Langkawi serta Pangkor 50% kadar Semenanjung melebihi 1,000 cc. Kereta elektrik mulai 1 Januari 2026 membayar ikut jumlah kuasa motor (kW): RM20 hingga 50 kW, kemudian kumpulan hingga RM20,000 melebihi 1,010 kW (BYD Atto 3 150 kW RM160, Tesla Model 3 RWD 208 kW RM280, Model Y RWD 220 kW RM305, BMW iX xDrive50 385 kW RM965). Motosikal: hingga 150 cc RM2, 151–200 RM30 (RM9 di Sabah dan Sarawak), 201–250 RM50, 501–800 RM250, melebihi 800 RM350; motosikal elektrik hingga 7,500 W RM2. Contoh: Perodua Myvi 1.5 RM90, Toyota Camry 2.5 RM867 (syarikat RM2,221). Pembaharuan 6 bulan berharga separuh; boleh diperbaharui hingga 2 bulan awal di MyJPJ; pelekat tidak perlu dipamer sejak 10 Februari 2023; memandu dengan LKM tamat tempoh dikompaun RM150 hingga RM300.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "roadtax",
+  "scripts": ["/assets/js/road-tax.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Roadtax", null]],
+  "about": ["Cukai jalan Malaysia", "Lesen Kenderaan Motor (LKM)", "JPJ", "Cukai jalan kenderaan elektrik"],
+  "app": {
+    "name": "Kalkulator Roadtax",
+    "category": "UtilitiesApplication",
+    "features": ["Kereta ikut cc enjin, saloon atau bukan saloon", "Persendirian atau berdaftar syarikat", "Semenanjung, Sabah dan Sarawak, Labuan, Langkawi dan Pangkor", "Kereta elektrik ikut kW motor (jadual 2026)", "Motosikal dan motosikal elektrik", "Pembaharuan 12 atau 6 bulan", "Jadual model popular", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["JPJ: Garis panduan pengiraan LKM (jadual cc, Semenanjung, Sabah dan Sarawak)", "https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-Pengiraan-LKM-Bajet-20092.pdf"],
+    ["JPJ: Garis panduan LKM kenderaan elektrik", "https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-LKM-Kenderaan-Elektrik-v2.pdf"],
+    ["JPJ: Senarai kesalahan dan tindakan penguatkuasaan 2026", "https://www.jpj.gov.my/wp-content/uploads/2026/01/SENARAI-KESALAHAN-TINDAKAN-PENGUATKUASAAN-JPJ-2026.pdf"],
+    ["Bernama: Kadar fleksibel cukai jalan kenderaan e-hailing (carta kadar MOT)", "https://bernama.com/en/general/news.php?id=2518355"],
+    ["paultan.org: Harga cukai jalan semua model EV mulai 1 Januari 2026", "https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/"],
+    ["Carlist.my: Panduan harga roadtax mengikut cc", "https://www.carlist.my/news/harga-roadtax-mengikut-cc-panduan-lengkap-untuk-pemilik-kenderaan-di-malaysia-138332/138332/"],
+    ["Malay Mail: Cukai jalan digital, tiada paparan fizikal bagi kenderaan persendirian", "https://www.malaymail.com/news/malaysia/2023/02/10/road-tax-and-driving-licence-go-digital-from-today-no-physical-display-required-for-private-vehicles/54283"],
+    ["JPJ: Panduan pembaharuan lesen kenderaan motor", "https://www.jpj.gov.my/en/motor-vehicle-license-renewal-guide-lkm/"]
+  ],
+  "faq": [
+    { "q": "Berapa roadtax kereta 1.5 liter?", "a": "RM90 setahun (RM45 bagi 6 bulan) bagi kereta saloon persendirian 1,401 hingga 1,600 cc di Semenanjung, seperti Perodua Myvi 1.5 atau Honda City. Bukan saloon saiz sama membayar RM120, Sabah dan Sarawak RM72 (saloon), Labuan {{RT_LABUAN15}} dan Langkawi {{RT_LANGKAWI15}}." },
+    { "q": "Bagaimana roadtax dikira?", "a": "Ikut cc enjin dan jenis badan dalam geran (saloon atau bukan saloon). Hingga 1,600 cc kadarnya tetap; melebihi itu, kadar asas campur kadar bagi setiap cc melebihi permulaan jalur. Saloon 1,798 cc membayar RM200 + 198 × RM0.40 = {{RT_1800}}; saloon 1,998 cc {{RT_2000}} dan bukan saloon 1,998 cc {{RT_2000NS}}." },
+    { "q": "Berapa roadtax kereta elektrik 2026?", "a": "Mulai 1 Januari 2026, kereta elektrik membayar ikut jumlah kuasa motor: RM20 hingga 50 kW, RM10 bagi setiap 10 kW tambahan hingga 100 kW, kemudian langkah lebih tinggi. BYD Atto 3 (150 kW) membayar {{RT_ATTO}}, Tesla Model 3 RWD (208 kW) {{RT_M3}}, dan jalur tertinggi melebihi 1,010 kW ialah RM20,000." },
+    { "q": "Kenapa roadtax kereta syarikat lebih mahal?", "a": "Kereta saloon berdaftar syarikat mempunyai jadual sendiri yang lebih tinggi di Semenanjung. Toyota Camry 2.5 membayar {{RT_CAMRY}} bagi persendirian tetapi {{RT_CAMRY_CO}} jika didaftarkan atas nama syarikat. Bukan saloon syarikat membayar kadar persendirian." },
+    { "q": "Berapa roadtax motosikal?", "a": "RM2 setahun hingga 150 cc, RM30 bagi 151 hingga 200 cc (RM9 di Sabah dan Sarawak), RM50 bagi 201 hingga 250 cc, RM250 bagi 501 hingga 800 cc dan RM350 melebihi 800 cc. Sumber bercanggah bagi 251 hingga 500 cc di Semenanjung (RM100 atau RM180), jadi semak di MyJPJ. Motosikal elektrik hingga 7,500 W membayar RM2." },
+    { "q": "Bagaimana cara renew roadtax?", "a": "Melalui aplikasi atau laman MyJPJ, kaunter JPJ, Pos Malaysia atau ejen dibenarkan, hingga 2 bulan sebelum tamat tempoh, dengan insurans atau takaful sah bagi seluruh tempoh. Anda boleh memperbaharui 12 bulan atau 6 bulan pada separuh harga. Sejak 10 Februari 2023 kenderaan persendirian milik rakyat Malaysia tidak perlu mempamerkan pelekat; LKM digital dalam MyJPJ sudah memadai." },
+    { "q": "Berapa saman roadtax tamat tempoh?", "a": "Kompaun JPJ 2026 bagi LKM tamat tempoh dengan insurans sah ialah RM150 jika dibayar dalam 15 hari, RM200 dalam 30 hari dan RM300 dalam 60 hari; di mahkamah, denda boleh mencecah RM2,000. Jika tamat lebih 3 tahun, kenderaan persendirian perlu pemeriksaan PUSPAKOM sebelum diperbaharui." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator roadtax</li></ol></nav>
+  <h1>Kalkulator Roadtax</h1>
+  <p class="answer">Roadtax kereta 1.5 liter (1,401–1,600 cc) milik persendirian di Semenanjung ialah <strong>RM90 setahun</strong> (RM45 bagi 6 bulan), atau RM120 bagi SUV atau MPV yang didaftarkan sebagai bukan saloon. Melebihi 1,600 cc, anda membayar kadar asas campur kadar setiap cc; kereta elektrik membayar ikut kuasa motor dari RM20 (BYD Atto 3 membayar {{RT_ATTO}}), dan motosikal hingga 150 cc membayar RM2. Pilih kenderaan anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{RT_VERIFIED_ISO}}">{{RT_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/road-tax-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="roadForm" novalidate aria-labelledby="rt-h">
+      <h2 id="rt-h">Kenderaan anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="type">Kenderaan</label><select class="input" id="type" name="type">{{RT_TYPE_OPTIONS}}</select></div>
+        <div class="field"><label for="region">Didaftarkan di</label><select class="input" id="region" name="region">{{RT_REGION_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row" id="rtCar">
+        <div class="field"><label for="body">Jenis badan</label><select class="input" id="body" name="body">{{RT_BODY_OPTIONS}}</select></div>
+        <div class="field"><label for="owner">Pemilik</label><select class="input" id="owner" name="owner">{{RT_OWNER_OPTIONS}}</select></div>
+      </div>
+      <div class="field" id="rtCc"><label for="cc">Kapasiti enjin</label><div class="input"><input id="cc" name="cc" type="number" inputmode="numeric" min="0" max="10000" step="1" value="{{RT_CC}}"><span aria-hidden="true">cc</span></div></div>
+      <div class="field" id="rtKw" hidden><label for="kw">Jumlah kuasa motor</label><div class="input"><input id="kw" name="kw" type="number" inputmode="decimal" min="0" max="2000" step="1" value="{{RT_KW}}"><span aria-hidden="true">kW</span></div></div>
+      <div class="field" id="rtW" hidden><label for="watts">Kuasa motor</label><div class="input"><input id="watts" name="watts" type="number" inputmode="numeric" min="0" max="100000" step="100" value="{{RT_W}}"><span aria-hidden="true">W</span></div></div>
+      <div class="field"><label for="months">Tempoh pembaharuan</label><select class="input" id="months" name="months">{{RT_MONTHS_OPTIONS}}</select></div>
+      <p class="help">Gunakan cc enjin dan jenis badan dalam geran (VOC). Banyak kereta crossover didaftarkan sebagai saloon.</p>
+    </form>
+
+    <section class="box" aria-labelledby="rt-result-h">
+      <h2 id="rt-result-h">Roadtax anda</h2>
+      <div class="net">
+        <p>Cukai jalan (LKM)</p>
+        <output id="rtTax" for="type region body owner cc kw watts months">{{RT_TAX}}</output>
+        <p id="rtSub">{{RT_SUB}}</p>
+      </div>
+      <p class="sr-only" id="rtLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Kiraan</caption>
+        <tbody id="rtLines">
+{{RT_LINES}}
+        </tbody>
+      </table>
+      <p class="callout" id="rtWhy" hidden></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="rtPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="models-h">Roadtax kereta popular (persendirian, Semenanjung)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="models-h">
+    <table class="data">
+      <thead><tr><th scope="col">Model</th><th scope="col">Enjin atau motor</th><th scope="col">12 bulan</th><th scope="col">6 bulan</th></tr></thead>
+      <tbody>
+{{RT_MODELS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Semak geran anda: cc dan jenis badan yang didaftarkan JPJ menentukan kadar.</p>
+
+  <h2 id="pen-h">Roadtax Semenanjung Malaysia ikut cc enjin</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pen-h">
+    <table class="data">
+      <thead><tr><th scope="col">Enjin (cc)</th><th scope="col">Saloon persendirian</th><th scope="col">Bukan saloon (persendirian atau syarikat)</th><th scope="col">Saloon syarikat</th></tr></thead>
+      <tbody>
+{{RT_PEN}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara roadtax dikira</h2>
+  <ol>
+    <li><strong>Cari jalur</strong> cc enjin anda dalam jadual bagi wilayah, jenis badan dan pemilik anda.</li>
+    <li><strong>Hingga 1,600 cc:</strong> kadar tetap.</li>
+    <li><strong>Melebihi 1,600 cc:</strong> kadar asas jalur + kadar × cc melebihi permulaan jalur.</li>
+    <li><strong>Labuan:</strong> 50% kadar Sabah dan Sarawak; <strong>Langkawi dan Pangkor:</strong> 50% kadar Semenanjung (melebihi 1,000 cc).</li>
+    <li><strong>Pembaharuan 6 bulan:</strong> separuh kadar setahun.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="east-h">Roadtax Sabah dan Sarawak ikut cc enjin</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="east-h">
+    <table class="data">
+      <thead><tr><th scope="col">Enjin (cc)</th><th scope="col">Saloon</th><th scope="col">Bukan saloon</th></tr></thead>
+      <tbody>
+{{RT_EAST}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="ev-h">Roadtax kereta elektrik 2026 ikut kuasa motor</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ev-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kumpulan</th><th scope="col">Kuasa motor</th><th scope="col">Asas</th><th scope="col">Setiap 10 kW tambahan</th><th scope="col">Maksimum kumpulan</th></tr></thead>
+      <tbody>
+{{RT_EVT}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kumpulan A ialah RM20 hingga 50 kW. Dalam kumpulan lain, kadar asas meliputi 10 kW pertama; setiap blok 10 kW yang dimulakan selepas itu menambah langkahnya. Gunakan jumlah semua motor.</p>
+
+  <h2 id="moto-h">Roadtax motosikal</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="moto-h">
+    <table class="data">
+      <thead><tr><th scope="col">Enjin</th><th scope="col">Semenanjung</th><th scope="col">Sabah dan Sarawak</th></tr></thead>
+      <tbody>
+{{RT_MOTO}}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Roadtax motosikal elektrik">
+    <table class="data">
+      <thead><tr><th scope="col">Motosikal elektrik</th><th scope="col">Roadtax setahun</th></tr></thead>
+      <tbody>
+{{RT_EMOTO}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="renew">Cara memperbaharui roadtax</h2>
+  <ul>
+    <li><strong>Di mana:</strong> aplikasi atau laman MyJPJ, kaunter JPJ, Pos Malaysia dan ejen dalam talian yang dibenarkan.</li>
+    <li><strong>Bila:</strong> hingga 2 bulan sebelum tamat tempoh, dengan insurans atau takaful sah bagi seluruh tempoh.</li>
+    <li><strong>Tiada pelekat:</strong> sejak 10 Februari 2023, kereta dan motosikal persendirian milik rakyat Malaysia tidak perlu mempamerkan pelekat; LKM digital dalam MyJPJ sudah memadai.</li>
+    <li><strong>Tamat lama:</strong> jika tamat lebih 3 tahun, pemeriksaan PUSPAKOM diperlukan dahulu.</li>
+    <li><strong>Hibrid dan diesel:</strong> hibrid membayar ikut cc enjin seperti kereta petrol. Sesetengah sumber menyatakan kereta diesel membayar lebih, yang tidak dapat disahkan, dan kerajaan sedang mengkaji pengurangan bagi kenderaan diesel.</li>
+    <li><strong>Perubahan akan datang:</strong> Akta Pengangkutan Jalan (Pindaan) 2026 akan mewajibkan pemilik mengisytiharkan tempat utama kenderaan digunakan, menamatkan pendaftaran lebih murah di Sabah, Sarawak atau pulau bagi kenderaan yang digunakan di tempat lain; tarikh mula belum diumumkan.</li>
+  </ul>
+
+  <h2 id="fine-h">Kompaun roadtax tamat tempoh (JPJ 2026)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fine-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kompaun dibayar dalam</th><th scope="col">Jumlah</th></tr></thead>
+      <tbody>
+{{RT_COMPOUND}}
+      </tbody>
+    </table>
+  </div>
+  <p>Bagi LKM tamat tempoh dengan insurans sah. Kompaun tidak dibayar dibawa ke mahkamah, dengan denda hingga RM2,000, dan saman tertunggak menyekat pembaharuan.</p>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-Pengiraan-LKM-Bajet-20092.pdf" rel="noopener">JPJ: Garis panduan pengiraan LKM</a></li>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2022/11/Garis-Panduan-LKM-Kenderaan-Elektrik-v2.pdf" rel="noopener">JPJ: Garis panduan LKM kenderaan elektrik</a></li>
+    <li><a href="https://www.jpj.gov.my/wp-content/uploads/2026/01/SENARAI-KESALAHAN-TINDAKAN-PENGUATKUASAAN-JPJ-2026.pdf" rel="noopener">JPJ: Kesalahan dan kompaun 2026</a></li>
+    <li><a href="https://bernama.com/en/general/news.php?id=2518355" rel="noopener">Bernama: Carta kadar cukai jalan MOT (Januari 2026)</a></li>
+    <li><a href="https://paultan.org/2026/01/07/road-tax-prices-for-all-ev-models-in-malaysia-effective-jan-1-2026/" rel="noopener">paultan.org: Roadtax EV ikut model</a></li>
+    <li><a href="https://www.carlist.my/news/harga-roadtax-mengikut-cc-panduan-lengkap-untuk-pemilik-kenderaan-di-malaysia-138332/138332/" rel="noopener">Carlist.my: Harga roadtax mengikut cc</a></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2023/02/10/road-tax-and-driving-licence-go-digital-from-today-no-physical-display-required-for-private-vehicles/54283" rel="noopener">Malay Mail: Roadtax digital, tiada pelekat</a></li>
+    <li><a href="https://www.jpj.gov.my/en/motor-vehicle-license-renewal-guide-lkm/" rel="noopener">JPJ: Panduan pembaharuan LKM</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran daripada jadual JPJ. Jumlah yang dipaparkan di MyJPJ semasa pembaharuan adalah muktamad.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-loan-kereta/">Kalkulator Loan Kereta<small>Ansuran bulanan dan kos keseluruhan</small></a>
+    <a href="/kalkulator-ncd/">Kalkulator NCD<small>Diskaun tanpa tuntutan dan premium</small></a>
+    <a href="/kalkulator-minyak/">Kalkulator Minyak<small>Kos perjalanan dan RM sekilometer</small></a>
+  </div>
+</section>

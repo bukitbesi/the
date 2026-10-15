@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 87 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 88 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -107,6 +107,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-simpanan-persaraan/](https://tool.thebukitbesi.com/kalkulator-simpanan-persaraan/) + [/retirement-savings-calculator-malaysia/](https://tool.thebukitbesi.com/retirement-savings-calculator-malaysia/) | BM + English | simpanan persaraan cukup, kwsp rm390k; retirement savings calculator malaysia |
 | [/kalkulator-cuti-tahunan/](https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/) + [/annual-leave-calculator-malaysia/](https://tool.thebukitbesi.com/annual-leave-calculator-malaysia/) | BM + English | kira cuti tahunan prorata, akta kerja; annual leave calculator malaysia |
 | [/kalkulator-faedah-penamatan/](https://tool.thebukitbesi.com/kalkulator-faedah-penamatan/) + [/termination-benefits-calculator-malaysia/](https://tool.thebukitbesi.com/termination-benefits-calculator-malaysia/) | BM + English | faedah penamatan, pampasan diberhentikan kerja; termination benefits calculator malaysia |
+| [/kalkulator-roadtax/](https://tool.thebukitbesi.com/kalkulator-roadtax/) + [/road-tax-calculator-malaysia/](https://tool.thebukitbesi.com/road-tax-calculator-malaysia/) | BM + English | kalkulator roadtax, harga roadtax ikut cc, roadtax ev 2026; road tax calculator malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -192,6 +193,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (retirement savings):** `nestegg-core.js` holds EPF's Retirement Income Adequacy benchmarks (RM390,000, RM650,000, RM1.3 million), reviewed by EPF every three years from 2029; update `FACTS` and both pages then.
 
 **Upkeep (annual leave, termination benefits):** `leave-core.js` and `termination-core.js` hold the Employment Act 1955 entitlements, the 1980 Regulations' 10/15/20 days and the RM4,000 First Schedule threshold. Recheck after any amendment to the Act or the First Schedule.
+
+**Upkeep (road tax):** `roadtax-core.js` holds every JPJ table (private and company cars, Sabah and Sarawak, island 50% rules, EV groups A to K, motorcycles, e-motorcycles) and the 2026 compound amounts. `carloan-core.js` keeps its own copy of the private car and EV bands for the car loan page; update both together. Open items: Peninsular motorcycles 251–500 cc (RM100 vs RM180), East Malaysia company saloons and EVs, island motorcycles, diesel surcharge, and the location-based rule in the Road Transport (Amendment) Act 2026.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
 
@@ -279,6 +282,7 @@ assets/js/qibla-core.js     qibla: great-circle bearing and distance to the Kaab
 assets/js/nestegg-core.js   retirement savings: amount needed with inflation, projection, shortfall, drawdown age
 assets/js/leave-core.js     leave: Employment Act annual leave tiers, pro rata with half-day rounding, other leave
 assets/js/termination-core.js termination: notice by service, pay in lieu, 1980 Regulations benefit
+assets/js/roadtax-core.js   road tax: JPJ cc tables, company and island rates, EV kW groups, motorcycles, 6-month renewal
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention

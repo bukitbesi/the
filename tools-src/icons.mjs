@@ -29,6 +29,7 @@ export const icons = {
   'kalkulator-simpanan-persaraan': p('M5 11a7 6 0 0 1 14 0v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3Z') + p('M9 16v3M15 16v3M12 8v4M10 10h4'),
   'kalkulator-cuti-tahunan': rect(3, 5, 18, 16) + p('M3 10h18M8 3v4M16 3v4') + p('M12 13v5M9.5 15.5h5'),
   'kalkulator-faedah-penamatan': rect(3, 8, 18, 12) + p('M8 8V5h8v3') + p('M3 13h18') + p('M12 11v4'),
+  'kalkulator-roadtax': rect(3, 6, 18, 12) + p('M7 10h6M7 14h4') + circle(17, 13, 2.5) + p('M3 9h18'),
   'kalkulator-bil-elektrik-tnb': p('M13 2 4 14h7l-1 8 9-12h-7l1-8Z'),
   'kalkulator-ptptn': p('m2 9 10-5 10 5-10 5Z') + p('M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5') + p('M22 9v6'),
   'kalkulator-fidyah': p('M4 11h16l-1.5 8a2 2 0 0 1-2 1.6H7.5a2 2 0 0 1-2-1.6Z') + p('M7 11c0-3 2-6 5-6s5 3 5 6') + p('M12 5V2'),
