@@ -1,0 +1,142 @@
+<!--page
+{
+  "path": "/kalkulator-saham-bursa/",
+  "lang": "ms",
+  "alternates": { "en": "/bursa-share-fee-calculator/" },
+  "title": "Kalkulator Saham Bursa: Caj Brokeraj, Duti Setem dan Untung",
+  "description": "Kalkulator saham Bursa Malaysia: brokeraj, fi penjelasan 0.03%, duti setem 0.1%, SST atas ETF dan REIT, untung bersih dan harga jual pulang modal.",
+  "llms": "Mengira kos dagangan saham Bursa Malaysia dan untung. Bagi setiap belian dan jualan: brokeraj (boleh dirunding, ditetapkan setiap broker sebagai kadar dengan minimum setiap kontrak), fi penjelasan 0.03% nilai kontrak dihadkan RM1,000, dan duti setem nota kontrak 0.10% dihadkan RM1,000 bagi saham tersenarai (perintah remitan P.U.(A) 208/2023, 13 Julai 2023 hingga 12 Julai 2028; kadar statutori RM1.50 setiap RM1,000). Cukai perkhidmatan 8% dikenakan atas brokeraj dan fi penjelasan bagi ETF, REIT, waran dan sekuriti seumpamanya; broker tidak mengenakannya atas saham biasa. Contoh: 1,000 saham dibeli pada RM2.00 dan dijual pada RM2.30 dengan brokeraj 0.08% dan minimum RM8: caj belian RM10.60, caj jualan RM10.99, untung bersih RM278.41 (13.85%), harga jual pulang modal RM2.022. Dividen satu peringkat bebas cukai bagi individu hingga RM100,000 setahun, dengan 2% atas lebihannya mulai TT2025; keuntungan saham tersenarai tidak tertakluk kepada cukai keuntungan modal.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "bursa",
+  "scripts": ["/assets/js/bursa-fees.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Saham Bursa", null]],
+  "about": ["Bursa Malaysia", "Caj dagangan saham", "Duti setem nota kontrak", "Brokeraj"],
+  "app": {
+    "name": "Kalkulator Saham Bursa",
+    "category": "FinanceApplication",
+    "features": ["Brokeraj dengan caj minimum", "Fi penjelasan dan duti setem dengan had", "SST 8% atas ETF, REIT dan waran", "Untung bersih dan pulangan", "Harga jual pulang modal", "Dividen", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["EY Malaysia: Remitan duti setem nota kontrak saham tersenarai", "https://ey.com/en_my/tax-alerts/remission-of-stamp-duty-on-contract-notes-for-the-trading-of-listed-shares-or-stocks"],
+    ["Skrine: Perintah remitan duti setem nota kontrak diwartakan", "https://www.skrine.com/insights/alerts/july-2023/stamp-duty-remission-order-for-contract-notes-gaze"],
+    ["moomoo Malaysia: Caj dagangan", "https://moomoo.com/my/support/topic9_137"],
+    ["Rakuten Trade: Caj dan yuran", "https://www.rakutentrade.my/faqs/charges-and-fees"],
+    ["Suruhanjaya Sekuriti: Komisen broker boleh dirunding", "https://www.sc.com.my/resources/media/media-release/new-stockbroking-commission-rate-structure-to-take-effect-on-1-jan-2008"],
+    ["RinggitPlus: Adakah anda perlu bayar cukai ke atas pulangan pelaburan", "https://ringgitplus.com/ms/blog/cukai-pendapatan/adakah-anda-perlu-bayar-cukai-ke-atas-pulangan-pelaburan.html"]
+  ],
+  "faq": [
+    { "q": "Berapa caj membeli saham di Bursa Malaysia?", "a": "Brokeraj (ditetapkan broker anda, biasanya peratusan dengan minimum), fi penjelasan 0.03% dihadkan RM1,000, dan duti setem 0.1% dihadkan RM1,000. Membeli saham bernilai RM2,000 dengan brokeraj 0.08% dan minimum RM8 berkos {{B_BUYFEES}} dalam caj." },
+    { "q": "Berapa duti setem saham Bursa?", "a": "0.1% nilai kontrak, dihadkan RM1,000 setiap nota kontrak, di bawah perintah remitan dari 13 Julai 2023 hingga 12 Julai 2028. Kadar statutori ialah RM1.50 setiap RM1,000, jadi sesetengah broker membundarkan ke blok RM1,000 berikutnya." },
+    { "q": "Apakah fi penjelasan Bursa?", "a": "0.03% nilai kontrak, dihadkan RM1,000 setiap kontrak, dibayar semasa membeli dan menjual. Bagi dagangan RM2 juta, had terpakai: {{B_BIG_CLEAR}}." },
+    { "q": "Adakah SST dikenakan atas dagangan saham?", "a": "Broker mengenakan cukai perkhidmatan 8% atas brokeraj dan fi penjelasan bagi ETF, REIT, waran, waran berstruktur dan sekuriti seumpamanya, tetapi tidak atas saham biasa tersenarai. Duti setem tidak tertakluk kepada SST." },
+    { "q": "Berapa harga pulang modal saya?", "a": "Harga jual yang membolehkan hasil jualan selepas kos jualan menampung jumlah yang dibayar termasuk kos belian. Membeli 1,000 saham pada RM2.00 dengan caj ini, anda pulang modal pada kira-kira {{B_BE}}." },
+    { "q": "Adakah dividen saham dicukai?", "a": "Dividen satu peringkat bebas cukai bagi individu hingga RM100,000 setahun. Mulai TT2025, individu membayar 2% atas pendapatan dividen bercukai melebihi RM100,000: dividen RM120,000 bermakna 2% daripada RM20,000, iaitu RM400." },
+    { "q": "Adakah cukai keuntungan modal atas saham Bursa?", "a": "Tidak bagi individu. Cukai keuntungan modal mulai 2024 dikenakan ke atas syarikat dan badan tertentu atas saham tidak tersenarai; keuntungan saham tersenarai tidak termasuk." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator saham Bursa</li></ol></nav>
+  <h1>Kalkulator Saham Bursa</h1>
+  <p class="answer">Setiap dagangan Bursa Malaysia membayar brokeraj, <strong>fi penjelasan 0.03%</strong> dan <strong>duti setem 0.1%</strong> (kedua-duanya dihadkan RM1,000) semasa membeli dan sekali lagi semasa menjual. Membeli 1,000 saham pada RM2.00 dan menjual pada RM2.30 dengan brokeraj 0.08% (minimum RM8) berkos {{B_FEES}} dalam caj dan meninggalkan untung <strong>{{B_PROFIT}}</strong>; anda pulang modal pada {{B_BE}}. Masukkan dagangan anda di bawah.</p>
+  <p class="meta"><span>Caj disemak <time datetime="{{B_VERIFIED_ISO}}">{{B_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/bursa-share-fee-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="bursaForm" novalidate aria-labelledby="bs-h">
+      <h2 id="bs-h">Dagangan anda</h2>
+      <div class="field"><label for="qty">Bilangan saham</label><div class="input"><input id="qty" name="qty" type="number" inputmode="numeric" min="0" step="100" value="{{B_QTY}}"><span aria-hidden="true">unit</span></div></div>
+      <div class="field-row">
+        <div class="field"><label for="buy">Harga beli</label><div class="input"><span aria-hidden="true">RM</span><input id="buy" name="buy" type="number" inputmode="decimal" min="0" step="0.005" value="{{B_BUY}}"></div></div>
+        <div class="field"><label for="sell">Harga jual</label><div class="input"><span aria-hidden="true">RM</span><input id="sell" name="sell" type="number" inputmode="decimal" min="0" step="0.005" value="{{B_SELL}}"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="brokerPct">Kadar brokeraj</label><div class="input"><input id="brokerPct" name="brokerPct" type="number" inputmode="decimal" min="0" max="2" step="0.01" value="{{B_PCT}}"><span aria-hidden="true">%</span></div></div>
+        <div class="field"><label for="brokerMin">Brokeraj minimum</label><div class="input"><span aria-hidden="true">RM</span><input id="brokerMin" name="brokerMin" type="number" inputmode="decimal" min="0" step="1" value="{{B_MIN}}"></div></div>
+      </div>
+      <p class="help">Gunakan kadar dan minimum broker anda; 1 lot = 100 saham.</p>
+      <div class="field-row">
+        <div class="field"><label for="asset">Sekuriti</label><select class="input" id="asset" name="asset">{{B_ASSET_OPTIONS}}</select></div>
+        <div class="field"><label for="dividend">Dividen sesaham</label><div class="input"><span aria-hidden="true">RM</span><input id="dividend" name="dividend" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="bs-result-h">
+      <h2 id="bs-result-h">Untung anda</h2>
+      <div class="net">
+        <p>Untung bersih</p>
+        <output id="bProfit" for="qty buy sell brokerPct brokerMin asset dividend">{{B_PROFIT}}</output>
+        <p id="bSub">{{B_SUB}}</p>
+      </div>
+      <p class="sr-only" id="bLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Belian dan jualan</caption>
+        <tbody id="bLines">
+{{B_LINES}}
+        </tbody>
+      </table>
+      <p class="note">Duti setem dipaparkan tepat pada 0.1%; sesetengah broker membundarkan setiap RM1,000.</p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="bursaPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Caj bagi satu dagangan ikut nilai (brokeraj 0.08%, minimum RM8)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Nilai dagangan</th><th scope="col">Brokeraj</th><th scope="col">Penjelasan</th><th scope="col">Duti setem</th><th scope="col">Jumlah</th><th scope="col">% nilai</th></tr></thead>
+      <tbody>
+{{B_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>Dagangan kecil membayar bahagian jauh lebih tinggi kerana brokeraj minimum. Kira kedua-dua pihak: satu pusingan beli dan jual berkos kira-kira dua kali ganda.</p>
+
+  <h2 id="formula">Cara kos dagangan Bursa dikira</h2>
+  <ol>
+    <li><strong>Nilai kontrak</strong> = harga × bilangan saham.</li>
+    <li><strong>Brokeraj</strong> = yang lebih tinggi antara nilai × kadar broker dan minimum broker.</li>
+    <li><strong>Fi penjelasan</strong> = 0.03% nilai, hingga RM1,000.</li>
+    <li><strong>Duti setem</strong> = 0.1% nilai, hingga RM1,000.</li>
+    <li><strong>SST</strong> = 8% brokeraj dan fi penjelasan bagi ETF, REIT dan waran.</li>
+    <li><strong>Untung bersih</strong> = nilai jualan − kos jualan − (nilai belian + kos belian) + dividen.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Cukai atas saham di Malaysia</h2>
+  <ul>
+    <li><strong>Dividen:</strong> dividen satu peringkat bebas cukai hingga RM100,000 setahun; mulai TT2025 individu membayar 2% atas lebihannya. Dividen asing serta agihan KWSP, ASNB dan unit amanah di luar peraturan ini.</li>
+    <li><strong>Keuntungan modal:</strong> keuntungan saham tersenarai tidak dikenakan cukai keuntungan modal bagi individu.</li>
+    <li><strong>Brokeraj</strong> boleh dirunding antara anda dan broker; broker dalam talian biasanya mengenakan peratusan dengan minimum rendah.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://ey.com/en_my/tax-alerts/remission-of-stamp-duty-on-contract-notes-for-the-trading-of-listed-shares-or-stocks" rel="noopener">EY Malaysia: Remitan duti setem nota kontrak</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/july-2023/stamp-duty-remission-order-for-contract-notes-gaze" rel="noopener">Skrine: Perintah remitan duti setem</a></li>
+    <li><a href="https://moomoo.com/my/support/topic9_137" rel="noopener">moomoo Malaysia: Caj dagangan</a></li>
+    <li><a href="https://www.rakutentrade.my/faqs/charges-and-fees" rel="noopener">Rakuten Trade: Caj dan yuran</a></li>
+    <li><a href="https://www.sc.com.my/resources/media/media-release/new-stockbroking-commission-rate-structure-to-take-effect-on-1-jan-2008" rel="noopener">Suruhanjaya Sekuriti: Komisen boleh dirunding</a></li>
+    <li><a href="https://ringgitplus.com/ms/blog/cukai-pendapatan/adakah-anda-perlu-bayar-cukai-ke-atas-pulangan-pelaburan.html" rel="noopener">RinggitPlus: Cukai atas pulangan pelaburan</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran, bukan nasihat pelaburan. Nota kontrak broker anda menunjukkan caj sebenar.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-unit-trust/">Kalkulator Unit Trust<small>Pulangan selepas caj dan yuran</small></a>
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Dividen tahunan dan unjuran</small></a>
+    <a href="/harga-emas-hari-ini/">Harga Emas Hari Ini<small>Harga emas segram</small></a>
+  </div>
+</section>

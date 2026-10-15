@@ -657,6 +657,42 @@
     "live": true
   },
   {
+    "name": "Kalkulator SST (SST Calculator)",
+    "desc": "Add or remove Malaysian sales and service tax at 8%, 6%, 10% or 5%, with the restaurant service charge rule, current rates and registration thresholds. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-sst/",
+    "cat": "calc",
+    "icon": "kalkulator-sst",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Saham Bursa (Bursa Share Fees)",
+    "desc": "Bursa Malaysia trading costs: brokerage with minimum, 0.03% clearing fee, 0.1% stamp duty, SST on ETFs and REITs, net profit and break-even price. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-saham-bursa/",
+    "cat": "calc",
+    "icon": "kalkulator-saham-bursa",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator Duti Setem Sewa (Tenancy Stamp Duty)",
+    "desc": "Tenancy agreement stamp duty at RM1, RM3, RM5 or RM7 per RM250 of yearly rent, copies, the old rule, and gross and net rental yield. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-duti-setem-sewa/",
+    "cat": "calc",
+    "icon": "kalkulator-duti-setem-sewa",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Kalkulator SIP PERKESO (EIS Calculator)",
+    "desc": "PERKESO EIS Job Search Allowance month by month (80% to 30% for 3 to 6 months), the 50% early re-employment allowance and mobility aid from October 2026. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/kalkulator-sip-perkeso/",
+    "cat": "calc",
+    "icon": "kalkulator-sip-perkeso",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Land Size Converter Malaysia",
     "desc": "Convert land between acres, hectares, square feet and square metres and the traditional relung and orlong, read acre-rood-pole titles and get the price per sq ft. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/land-size-converter-malaysia/",

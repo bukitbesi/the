@@ -83,6 +83,11 @@
       "description": "Free BMI calculator with Malaysian Ministry of Health cut-offs (overweight from 23): your category, "
     },
     {
+      "name": "Bursa Share Fee Calculator",
+      "url": "/bursa-share-fee-calculator/",
+      "description": "Bursa Malaysia share fee calculator: brokerage, 0.03% clearing fee, 0.1% stamp duty, SST on ETFs and"
+    },
+    {
       "name": "Car Loan Calculator Malaysia",
       "url": "/car-loan-calculator-malaysia/",
       "description": "Free car loan calculator for the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, roa"
@@ -116,6 +121,11 @@
       "name": "Education Cost Calculator Malaysia",
       "url": "/education-cost-calculator-malaysia/",
       "description": "Education cost calculator for Malaysian parents: your child's university cost at future prices and t"
+    },
+    {
+      "name": "EIS Calculator Malaysia",
+      "url": "/eis-calculator-malaysia/",
+      "description": "PERKESO EIS calculator: your monthly Job Search Allowance after losing a job (80% to 30% of wages fo"
     },
     {
       "name": "Employer Cost Calculator Malaysia",
@@ -316,6 +326,16 @@
       "name": "SSPN Calculator",
       "url": "/sspn-calculator/",
       "description": "SSPN calculator: project your Simpan SSPN balance with the 4.10% dividend for 2025, and the income t"
+    },
+    {
+      "name": "SST Calculator Malaysia",
+      "url": "/sst-calculator-malaysia/",
+      "description": "SST calculator for Malaysia: add sales and service tax to a price or take it out of a total at 8%, 6"
+    },
+    {
+      "name": "Tenancy Agreement Stamp Duty Calculator Malaysia",
+      "url": "/tenancy-stamp-duty-calculator-malaysia/",
+      "description": "Stamp duty on a tenancy agreement in Malaysia: RM1, RM3, RM5 or RM7 per RM250 of yearly rent by term"
     },
     {
       "name": "Termination Benefits Calculator Malaysia",

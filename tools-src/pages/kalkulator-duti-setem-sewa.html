@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/kalkulator-duti-setem-sewa/",
+  "lang": "ms",
+  "alternates": { "en": "/tenancy-stamp-duty-calculator-malaysia/" },
+  "title": "Kalkulator Duti Setem Perjanjian Sewa 2026: Kadar Baharu",
+  "description": "Duti setem perjanjian sewa rumah: RM1, RM3, RM5 atau RM7 bagi setiap RM250 sewa setahun ikut tempoh, salinan RM10, peraturan lama dan pulangan sewa anda.",
+  "llms": "Mengira duti setem perjanjian sewa atau pajakan di Malaysia di bawah Akta Setem 1949, Jadual Pertama butiran 49(a) seperti dipinda oleh Akta Kewangan 2024: duti dikenakan bagi setiap RM250 atau sebahagiannya daripada purata sewa setahun, tanpa had pengecualian (pengecualian RM2,400 lama dimansuhkan): RM1 setiap RM250 bagi tempoh hingga 1 tahun, RM3 bagi lebih 1 hingga 3 tahun, RM5 bagi lebih 3 hingga 5 tahun dan RM7 bagi lebih 5 tahun atau tanpa tempoh tetap; duti minimum RM10; RM10 bagi setiap salinan. Setemkan dalam 30 hari selepas ditandatangani melalui e-Duti Setem di MyTax (taksiran sendiri mulai 1 Januari 2026). Contoh: RM2,000 sebulan selama 1 tahun = RM96; RM1,800 selama 1 tahun = RM87 (+salinan RM10 = RM97); RM1,500 selama 2 tahun = 72 × RM3 = RM216 (RM126 di bawah peraturan lama RM1/RM2/RM4 dengan RM2,400 pertama dikecualikan). Juga memberi pulangan sewa: RM1,500 sebulan atas rumah RM350,000 ialah pulangan kasar 5.14%. Pengecualian cukai 50% atas sewa kediaman hanya terpakai bagi TT2018.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "tenancy",
+  "scripts": ["/assets/js/tenancy-stamp-duty.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Duti Setem Sewa", null]],
+  "about": ["Duti setem", "Perjanjian sewa", "Akta Setem 1949", "Pulangan sewa"],
+  "app": {
+    "name": "Kalkulator Duti Setem Perjanjian Sewa",
+    "category": "FinanceApplication",
+    "features": ["Duti setem ikut sewa dan tempoh", "Minimum RM10 dan salinan", "Perbandingan dengan peraturan lama", "Pulangan sewa kasar dan bersih", "Kekosongan dan kos pemilik", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Skrine: Cadangan pindaan Akta Setem 1949 (kadar perjanjian sewa)", "https://www.skrine.com/insights/alerts/november-2024/proposed-amendments-to-the-stamp-act-1949-part-1"],
+    ["KPMG Malaysia: Taksiran sendiri duti setem mulai 1 Januari 2026", "https://assets.kpmg.com/content/dam/kpmgsites/my/pdf/2025/12/stamp-duty-in-malaysia-are-you-ready-for-the-self-assessment-era.pdf.coredownload.inline.pdf"],
+    ["LHDN: Garis panduan pengenalan duti setem di bawah Akta Setem 1949", "https://www.hasil.gov.my/wp-content/uploads/20251106-garis-panduan-pengenalan-duti-setem-di-bawah-akta-setem-1949.pdf"],
+    ["Propcashflow: Panduan e-Duti Setem LHDN", "https://propcashflow.my/ms/blog/e-duti-setem-panduan-lhdn/"],
+    ["Speedhome: Duti setem perjanjian sewa", "https://speedhome.com/blog/stamp-duty-tenancy-agreement-calculator"],
+    ["Skrine: Pengecualian cukai bagi sewa bulanan hingga RM2,000 (TT2018)", "https://www.skrine.com/insights/alerts/february-2019/tax-exemption-for-tenancy-with-monthly-rent-not-ex"]
+  ],
+  "faq": [
+    { "q": "Berapa duti setem perjanjian sewa rumah?", "a": "RM1 bagi setiap RM250 (atau sebahagiannya) sewa setahun bagi tempoh hingga 1 tahun, RM3 bagi lebih 1 hingga 3 tahun, RM5 bagi lebih 3 hingga 5 tahun dan RM7 melebihi 5 tahun, dengan minimum RM10. RM1,500 sebulan selama 2 tahun: RM18,000 ÷ 250 = 72 × RM3 = {{T_DUTY}}." },
+    { "q": "Berapa duti setem bagi sewa RM2,000 sebulan?", "a": "Bagi perjanjian 1 tahun, RM24,000 ÷ 250 = 96 unit × RM1 = {{T_2000}}. Bagi 2 tahun, RM288 pada RM3 seunit." },
+    { "q": "Adakah RM2,400 sewa pertama masih dikecualikan?", "a": "Tidak. Akta Kewangan 2024 memansuhkan pengecualian RM2,400 dan menukar kepada RM1, RM3, RM5 dan RM7 setiap RM250. RM1,500 sebulan selama 2 tahun membayar {{T_OLD}} di bawah peraturan lama dan {{T_DUTY}} sekarang." },
+    { "q": "Berapa duti setem bagi salinan perjanjian?", "a": "RM10 bagi setiap salinan atau pendua yang disetemkan, jadi salinan tuan rumah dan penyewa biasanya menambah RM10 kepada duti perjanjian asal." },
+    { "q": "Siapa membayar dan bila perlu disetemkan?", "a": "Penyewa biasanya membayar, melainkan perjanjian menyatakan sebaliknya. Setemkan dalam 30 hari selepas ditandatangani melalui e-Duti Setem di MyTax LHDN, yang menggunakan taksiran sendiri mulai 1 Januari 2026; setem lewat dikenakan penalti." },
+    { "q": "Berapa pulangan sewa yang baik?", "a": "Pulangan kasar = sewa setahun ÷ harga rumah. RM1,500 sebulan atas rumah RM350,000 ialah {{T_GROSS}}%; selepas sebulan kosong dan kos RM2,400 setahun, pulangan bersih ialah {{T_NET}}%." },
+    { "q": "Adakah pendapatan sewa dicukai?", "a": "Ya, pendapatan sewa bersih dicukai pada kadar pemastautin biasa anda. Pengecualian 50% bagi sewa kediaman hingga RM2,000 sebulan hanya terpakai bagi TT2018 dan tidak diperbaharui." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator duti setem sewa</li></ol></nav>
+  <h1>Kalkulator Duti Setem Perjanjian Sewa</h1>
+  <p class="answer">Duti setem perjanjian sewa di Malaysia ialah <strong>RM1, RM3, RM5 atau RM7 bagi setiap RM250 sewa setahun</strong> bagi tempoh hingga 1, 3, 5 atau lebih 5 tahun, tanpa pengecualian RM2,400 dan dengan minimum RM10. Perjanjian 2 tahun pada RM1,500 sebulan membayar <strong>{{T_DUTY}}</strong>, serta RM10 bagi salinan. Masukkan sewa dan tempoh anda di bawah.</p>
+  <p class="meta"><span>Kadar disemak <time datetime="{{T_VERIFIED_ISO}}">{{T_VERIFIED}}</time></span><span>Dikira dalam pelayar; tiada data dihantar</span><a href="/tenancy-stamp-duty-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="tenancyForm" novalidate aria-labelledby="tn-h">
+      <h2 id="tn-h">Perjanjian sewa anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="rent">Sewa bulanan</label><div class="input"><span aria-hidden="true">RM</span><input id="rent" name="rent" type="number" inputmode="decimal" min="0" step="50" value="{{T_RENT}}"></div></div>
+        <div class="field"><label for="months">Tempoh sewa</label><div class="input"><input id="months" name="months" type="number" inputmode="numeric" min="1" max="360" step="1" value="{{T_MONTHS}}"><span aria-hidden="true">bulan</span></div></div>
+      </div>
+      <div class="field"><label for="copies">Salinan untuk disetem</label><div class="input"><input id="copies" name="copies" type="number" inputmode="numeric" min="0" max="10" step="1" value="{{T_COPIES}}"><span aria-hidden="true">salinan</span></div></div>
+      <fieldset class="field-group">
+        <legend>Pulangan sewa (pilihan)</legend>
+        <div class="field"><label for="price">Harga rumah</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="10000" value="{{T_PRICE}}"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="costs">Kos pemilik setahun</label><div class="input"><span aria-hidden="true">RM</span><input id="costs" name="costs" type="number" inputmode="decimal" min="0" step="100" value="{{T_COSTS}}"></div></div>
+          <div class="field"><label for="vacancy">Bulan kosong setahun</label><div class="input"><input id="vacancy" name="vacancy" type="number" inputmode="decimal" min="0" max="12" step="0.5" value="{{T_VACANCY}}"><span aria-hidden="true">bulan</span></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Kos pemilik: yuran penyelenggaraan, cukai taksiran, cukai tanah, insurans dan pembaikan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="tn-result-h">
+      <h2 id="tn-result-h">Duti setem</h2>
+      <div class="net">
+        <p>Jumlah duti setem</p>
+        <output id="tDuty" for="rent months copies">{{T_TOTAL}}</output>
+        <p id="tSub">{{T_SUB}}</p>
+      </div>
+      <p class="sr-only" id="tLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Pecahan</caption>
+        <tbody id="tLines">
+{{T_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tenancyPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grid-h">Duti setem perjanjian sewa ikut sewa bulanan dan tempoh</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Sewa bulanan</th><th scope="col">1 tahun</th><th scope="col">2 tahun</th><th scope="col">4 tahun</th><th scope="col">6 tahun</th></tr></thead>
+      <tbody>
+{{T_GRID}}
+      </tbody>
+    </table>
+  </div>
+  <p>Duti bagi perjanjian asal; tambah RM10 bagi setiap salinan yang disetemkan.</p>
+
+  <h2 id="formula">Cara duti setem perjanjian sewa dikira</h2>
+  <ol>
+    <li><strong>Sewa setahun</strong> = sewa bulanan × 12 (purata sewa setahun jika berubah).</li>
+    <li><strong>Unit</strong> = sewa setahun ÷ RM250, dibundar naik.</li>
+    <li><strong>Duti</strong> = unit × kadar bagi tempoh, sekurang-kurangnya RM10.</li>
+    <li><strong>Salinan</strong>: RM10 setiap satu.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rates-h">Kadar duti setem perjanjian sewa</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tempoh sewa</th><th scope="col">Duti setiap RM250 sewa setahun</th></tr></thead>
+      <tbody>
+{{T_BANDS}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Peraturan lama:</strong> RM2,400 pertama sewa setahun dikecualikan dan kadarnya RM1, RM2 dan RM4 setiap RM250. Kebanyakan sumber menyatakan perubahan berkuat kuasa 1 Januari 2025; sesetengahnya 1 Januari 2026. Perjanjian yang ditandatangani pada 2026 menggunakan kadar baharu dalam kedua-dua keadaan.</li>
+    <li><strong>Taksiran sendiri:</strong> mulai 1 Januari 2026 perjanjian sewa disetemkan melalui e-Duti Setem di MyTax, dalam 30 hari selepas ditandatangani.</li>
+    <li><strong>Cukai pendapatan sewa:</strong> sewa bersih dicukai pada kadar biasa; pengecualian 50% hanya terpakai bagi TT2018.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.skrine.com/insights/alerts/november-2024/proposed-amendments-to-the-stamp-act-1949-part-1" rel="noopener">Skrine: Pindaan Akta Setem 1949</a></li>
+    <li><a href="https://assets.kpmg.com/content/dam/kpmgsites/my/pdf/2025/12/stamp-duty-in-malaysia-are-you-ready-for-the-self-assessment-era.pdf.coredownload.inline.pdf" rel="noopener">KPMG Malaysia: Taksiran sendiri duti setem</a></li>
+    <li><a href="https://www.hasil.gov.my/wp-content/uploads/20251106-garis-panduan-pengenalan-duti-setem-di-bawah-akta-setem-1949.pdf" rel="noopener">LHDN: Garis panduan duti setem</a></li>
+    <li><a href="https://propcashflow.my/ms/blog/e-duti-setem-panduan-lhdn/" rel="noopener">Propcashflow: Panduan e-Duti Setem</a></li>
+    <li><a href="https://speedhome.com/blog/stamp-duty-tenancy-agreement-calculator" rel="noopener">Speedhome: Duti setem perjanjian sewa</a></li>
+    <li><a href="https://www.skrine.com/insights/alerts/february-2019/tax-exemption-for-tenancy-with-monthly-rent-not-ex" rel="noopener">Skrine: Pengecualian sewa 50% (TT2018)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran. Duti yang ditaksir di MyTax adalah muktamad; perjanjian dengan premium, tempoh bebas sewa atau syarat luar biasa mungkin berbeza.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-sewa-atau-beli-rumah/">Kalkulator Sewa atau Beli Rumah<small>Sewa berbanding beli rumah</small></a>
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Ansuran, duti setem dan yuran guaman</small></a>
+    <a href="/kalkulator-rpgt/">Kalkulator RPGT<small>Cukai semasa menjual hartanah</small></a>
+  </div>
+</section>

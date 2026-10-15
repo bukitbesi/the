@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/sst-calculator-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/kalkulator-sst/" },
+  "title": "SST Calculator Malaysia 2026: Add or Remove 8%, 6%, 10% or 5%",
+  "description": "SST calculator for Malaysia: add sales and service tax to a price or take it out of a total at 8%, 6%, 10% or 5%, with restaurant service charge and thresholds.",
+  "llms": "Adds or removes Malaysia's Sales and Service Tax (SST). Service tax: 8% general rate from 1 March 2024 (most taxable services, fee-based financial services); 6% for food and beverage, telecommunications, parking, logistics, construction, private healthcare for non-citizens, taxable private education and, from 1 January 2026, rental and leasing services. Sales tax: 10% standard rate and 5% for listed goods, with essential goods exempt (revised from 1 July 2025). Adding tax: total = price × (1 + rate); removing tax: price = total ÷ (1 + rate). Examples: RM100 + 8% = RM108; RM108 including 8% = RM100 + RM8 tax; at 6%, RM100 food with a 10% service charge = RM116, because service tax is charged on the food and drink, not on the service charge (RMCD F&B guide). Registration thresholds over 12 months: RM500,000 for most services and manufacturers, RM1.5 million for F&B, construction and private healthcare, RM1 million for rental and financial services. Budget 2027 cuts service tax on elderly care to 6% from 1 January 2027.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "render": "sst",
+  "scripts": ["/assets/js/sst.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["SST Calculator", null]],
+  "about": ["Sales and Service Tax", "Service tax", "Sales tax", "RMCD"],
+  "app": {
+    "name": "SST Calculator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Add SST to a price", "Remove SST from a total", "8% and 6% service tax", "10% and 5% sales tax", "Restaurant service charge", "Registration thresholds", "Works offline"]
+  },
+  "citations": [
+    ["Ministry of Finance: FAQ on the expanded service tax scope and rates", "https://mof.gov.my/portal/ms/berita/soalan-lazim/soalan-lazim-peluasan-skop-perkhidmatan-bercukai-dan-perubahan-kadar-cukai-perkhidmatan"],
+    ["Ministry of Finance: Updated SST policy (5 January 2026)", "https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf"],
+    ["KPMG Malaysia: 6% service tax rate for rental or leasing services", "https://kpmg.com/my/en/insights/2026/03/6-percent-service-tax-rate-for-rental-or-leasing-services.html"],
+    ["KPMG Malaysia: Review of sales tax and expansion of service tax (2025)", "https://kpmg.com/my/en/home/insights/2025/06/review-of-goods-for-sales-tax-and-expansion-of-scope-for-service-tax.html"],
+    ["RMCD: Guide on food and beverage services", "https://circulars.mia.org.my/2018/88/Guide_on_FnB_02112018_V3.pdf"],
+    ["Bernama: Budget 2027 service tax on elderly care", "https://www.bernama.com/en/news.php?id=2617695"]
+  ],
+  "faq": [
+    { "q": "What is the SST rate in Malaysia in 2026?", "a": "Service tax is 8% for most taxable services and 6% for food and beverage, telecommunications, parking, logistics, construction, rental and leasing (from 1 January 2026), private healthcare for non-citizens and taxable private education. Sales tax on goods is 10% or 5%, with essential goods exempt." },
+    { "q": "How do I add 8% SST to a price?", "a": "Multiply by 1.08. RM100 + 8% SST = {{S_TOTAL}}; the tax is RM8." },
+    { "q": "How do I remove SST from a total?", "a": "Divide by 1 + the rate. RM108 including 8% SST is {{S_REMOVE}} before tax, so the tax is RM8. Do not just take 8% off RM108, which gives RM8.64." },
+    { "q": "Is SST charged on a restaurant's service charge?", "a": "No. Under the customs F&B guide, service tax is charged on the food and drink, not on the 10% service charge. RM100 of food with a 10% service charge and 6% service tax totals {{S_REST}}." },
+    { "q": "When must a business register for SST?", "a": "When taxable sales or services pass the threshold over 12 months: RM500,000 for most services and for manufacturers, RM1.5 million for food and beverage, construction and private healthcare, and RM1 million for rental and financial services." },
+    { "q": "What changed in SST from July 2025?", "a": "Sales tax was revised to 5% and 10% for non-essential and premium goods, and service tax was extended to rental and leasing, construction, fee-based financial services, private healthcare for non-citizens, private education and beauty services. Rental and leasing fell from 8% to 6% from 1 January 2026." },
+    { "q": "Did Budget 2027 change SST?", "a": "Budget 2027 keeps SST. It cuts service tax on elderly care services from 8% to 6% from 1 January 2027, with fees up to RM96,000 per person a year exempt, and adds a sales tax refund for supplies of machinery and raw materials to manufacturers." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">SST calculator</li></ol></nav>
+  <h1>SST Calculator Malaysia</h1>
+  <p class="answer">Malaysia's service tax is <strong>8%</strong> for most services and <strong>6%</strong> for food and beverage, telecommunications, parking, logistics, construction and rental, and sales tax on goods is 10% or 5%. RM100 + 8% SST = <strong>{{S_TOTAL}}</strong>; to take 8% out of a total, divide by 1.08. Enter your amount below.</p>
+  <p class="meta"><span>Rates verified <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/kalkulator-sst/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="sstForm" novalidate aria-labelledby="sst-h">
+      <h2 id="sst-h">Your amount</h2>
+      <div class="field"><label for="mode">Calculation</label><select class="input" id="mode" name="mode">{{S_MODE_OPTIONS}}</select></div>
+      <div class="field"><label for="amount">Amount</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="0.01" value="100"></div></div>
+      <div class="field"><label for="rate">SST rate</label><select class="input" id="rate" name="rate">{{S_RATE_OPTIONS}}</select></div>
+      <div class="field"><label for="charge">Service charge (restaurants)</label><div class="input"><input id="charge" name="charge" type="number" inputmode="decimal" min="0" max="30" step="1" value="0"><span aria-hidden="true">%</span></div></div>
+      <p class="help">Service tax is charged on the food and drink, not on the service charge.</p>
+    </form>
+
+    <section class="box" aria-labelledby="sst-result-h">
+      <h2 id="sst-result-h">Result</h2>
+      <div class="net">
+        <p id="sMainLabel">Total including SST</p>
+        <output id="sMain" for="mode amount rate charge">{{S_TOTAL}}</output>
+        <p id="sSub">{{S_SUB}}</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Breakdown</caption>
+        <tbody id="sLines">
+{{S_LINES}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="sstPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="rates-h">SST rates in Malaysia (2026)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rates-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Rate</th><th scope="col">Applies to</th></tr></thead>
+      <tbody>
+{{S_RATES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How SST is worked out</h2>
+  <ol>
+    <li><strong>Add SST:</strong> tax = price × rate; total = price + tax.</li>
+    <li><strong>Remove SST:</strong> price = total ÷ (1 + rate); tax = total − price.</li>
+    <li><strong>Restaurants:</strong> service tax on the food and drink only; the service charge is added separately.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="grid-h">Prices with and without SST</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grid-h">
+    <table class="data">
+      <thead><tr><th scope="col">Amount</th><th scope="col">+ 6%</th><th scope="col">+ 8%</th><th scope="col">+ 10%</th><th scope="col">Before 6% (if inclusive)</th><th scope="col">Before 8% (if inclusive)</th></tr></thead>
+      <tbody>
+{{S_GRID}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="thresh-h">SST registration thresholds (12 months)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="thresh-h">
+    <table class="data">
+      <thead><tr><th scope="col">Business</th><th scope="col">Threshold</th></tr></thead>
+      <tbody>
+{{S_THRESH}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Residential letting</strong> is outside service tax; Malaysian students' private education fees are exempt below the set limit.</li>
+    <li><strong>Budget 2027:</strong> elderly care services move to 6% from 1 January 2027, with fees up to RM96,000 a year per person exempt.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://mof.gov.my/portal/ms/berita/soalan-lazim/soalan-lazim-peluasan-skop-perkhidmatan-bercukai-dan-perubahan-kadar-cukai-perkhidmatan" rel="noopener">Ministry of Finance: FAQ on service tax scope and rates</a></li>
+    <li><a href="https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf" rel="noopener">Ministry of Finance: Updated SST policy, January 2026</a></li>
+    <li><a href="https://kpmg.com/my/en/insights/2026/03/6-percent-service-tax-rate-for-rental-or-leasing-services.html" rel="noopener">KPMG Malaysia: 6% for rental and leasing</a></li>
+    <li><a href="https://kpmg.com/my/en/home/insights/2025/06/review-of-goods-for-sales-tax-and-expansion-of-scope-for-service-tax.html" rel="noopener">KPMG Malaysia: 2025 sales tax review and service tax expansion</a></li>
+    <li><a href="https://circulars.mia.org.my/2018/88/Guide_on_FnB_02112018_V3.pdf" rel="noopener">RMCD: Guide on food and beverage services</a></li>
+    <li><a href="https://www.bernama.com/en/news.php?id=2617695" rel="noopener">Bernama: Budget 2027 elderly care service tax</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Whether a service or product is taxable, and at which rate, depends on its exact classification; check MySST or your tax adviser.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/profit-margin-calculator-malaysia/">Profit Margin Calculator<small>Margin, markup and selling price</small></a>
+    <a href="/tenancy-stamp-duty-calculator-malaysia/">Tenancy Stamp Duty Calculator<small>Stamp duty and rental yield</small></a>
+    <a href="/income-tax-calculator-malaysia/">Income Tax Calculator<small>Tax with every relief</small></a>
+  </div>
+</section>
