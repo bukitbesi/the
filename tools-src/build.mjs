@@ -215,7 +215,7 @@ const byline = p => p.body.replace(/(<p class="meta"><span>[\s\S]*?<\/span>)/, `
 // The named person who builds and verifies the calculators (E-E-A-T); tool pages credit them as author.
 const person = {
   '@type': 'Person', '@id': site.origin + site.author.path, name: site.author.name, url: site.origin + site.author.path, jobTitle: site.author.jobTitle,
-  worksFor: { '@id': site.mainSite + '/#organization' },
+  worksFor: { '@id': site.mainSite + '/#organization' }, sameAs: [site.mainSite + '/p/about.html'],
   knowsAbout: ['Malaysian personal finance calculators', 'Malaysian tax and payroll rules', 'Islamic inheritance (faraid) and zakat calculation', 'Web development']
 };
 organization.founder = { '@id': person['@id'] };
