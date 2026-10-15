@@ -1,4 +1,4 @@
-# The Bukit Besi Tools — 92 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 93 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
@@ -112,6 +112,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-saham-bursa/](https://tool.thebukitbesi.com/kalkulator-saham-bursa/) + [/bursa-share-fee-calculator/](https://tool.thebukitbesi.com/bursa-share-fee-calculator/) | BM + English | kalkulator saham bursa, caj brokeraj; bursa share fee calculator |
 | [/kalkulator-duti-setem-sewa/](https://tool.thebukitbesi.com/kalkulator-duti-setem-sewa/) + [/tenancy-stamp-duty-calculator-malaysia/](https://tool.thebukitbesi.com/tenancy-stamp-duty-calculator-malaysia/) | BM + English | duti setem perjanjian sewa; tenancy agreement stamp duty calculator |
 | [/kalkulator-sip-perkeso/](https://tool.thebukitbesi.com/kalkulator-sip-perkeso/) + [/eis-calculator-malaysia/](https://tool.thebukitbesi.com/eis-calculator-malaysia/) | BM + English | sip perkeso hilang kerja, elaun mencari pekerjaan; eis calculator malaysia |
+| [/kalkulator-mas-kahwin/](https://tool.thebukitbesi.com/kalkulator-mas-kahwin/) + [/mas-kahwin-malaysia/](https://tool.thebukitbesi.com/mas-kahwin-malaysia/) | BM + English | kadar mas kahwin ikut negeri, mas kahwin selangor, kalkulator kos kahwin; mas kahwin malaysia |
 | [/land-size-converter-malaysia/](https://tool.thebukitbesi.com/land-size-converter-malaysia/) + [/kalkulator-ukuran-tanah/](https://tool.thebukitbesi.com/kalkulator-ukuran-tanah/) | English + BM | ekar to square feet, relung to ekar, kaki persegi ke ekar, hectare to acre |
 | [/personal-loan-calculator-malaysia/](https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/) + [/kalkulator-pinjaman-peribadi/](https://tool.thebukitbesi.com/kalkulator-pinjaman-peribadi/) | English + BM | personal loan calculator malaysia, flat rate to EIR; kalkulator pinjaman peribadi |
 | [/rpgt-calculator-malaysia/](https://tool.thebukitbesi.com/rpgt-calculator-malaysia/) + [/kalkulator-rpgt/](https://tool.thebukitbesi.com/kalkulator-rpgt/) | English + BM | rpgt calculator malaysia 2026; kalkulator rpgt, cukai keuntungan harta tanah |
@@ -206,6 +207,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (tenancy stamp duty):** `tenancy-core.js` holds the Finance Act 2024 rates (RM1/3/5/7 per RM250, RM10 minimum and copies). Recheck after Budgets and LHDN stamp duty guideline updates.
 
+**Upkeep (mas kahwin):** `maskahwin-core.js` holds the state rates confirmed by an official source (Selangor, WP, Melaka, Pahang, Negeri Sembilan; Terengganu and Perlis with no rate) and the nikah fees for Selangor, WP and Penang. Seven states are marked not confirmed because published figures conflict; add them only when the state religious office publishes a rate. The gold and dinar values follow the daily gold rebuild.
+
 **Upkeep (EIS):** `eis-core.js` holds the Job Search Allowance rates, the RM6,000 ceiling and the October 2026 amendment values (50% re-employment, RM7,000 training, RM1,000 mobility). Recheck after PERKESO announcements; the contribution-based duration tiers are not modelled because sources conflict.
 
 **Upkeep (personal loan):** `personal-core.js` reuses `carloan-core.js`. After 1 January 2027 (flat-rate ban for new personal financing) make reducing balance the default method and rewrite the 2027 copy on both pages.
@@ -299,6 +302,7 @@ assets/js/sst-core.js       SST: add or remove service and sales tax, restaurant
 assets/js/bursa-core.js     Bursa fees: brokerage, clearing, stamp duty, SST on ETFs, profit, break-even
 assets/js/tenancy-core.js   tenancy stamp duty (Finance Act 2024 rates), old rule, rental yield
 assets/js/eis-core.js       EIS: job search allowance schedule, re-employment and mobility allowances
+assets/js/maskahwin-core.js mas kahwin by state, gold and dinar value, wedding cost planner
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
