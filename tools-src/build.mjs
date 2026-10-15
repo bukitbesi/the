@@ -205,7 +205,8 @@ const faqSchema = (faq, id, pageId) => ({
 const organization = {
   '@type': 'Organization', '@id': site.mainSite + '/#organization', name: site.brand, url: site.mainSite + '/',
   logo: { '@type': 'ImageObject', url: abs(site.logo.local512), width: 512, height: 512 },
-  sameAs: [`https://x.com/${site.twitter.replace('@', '')}`]
+  sameAs: [`https://x.com/${site.twitter.replace('@', '')}`],
+  publishingPrinciples: site.origin + '/about/#method'
 };
 const website = {
   '@type': 'WebSite', '@id': site.origin + '/#website', url: site.origin + '/', name: site.brand + ' Tools',
@@ -2213,7 +2214,7 @@ for (const p of pages) {
   const xDefault = p.lang === 'en' ? p.path : (p.alternates && p.alternates.en) || p.path;
   const crumbs = p.breadcrumb.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, ...(href ? { item: abs(href) } : {}) }));
   const graph = [organization, website, {
-    '@type': 'WebPage', '@id': pageId, url, name: p.title, description: p.description,
+    '@type': p.schemaType || 'WebPage', '@id': pageId, url, name: p.title, description: p.description,
     inLanguage: p.lang === 'ms' ? 'ms-MY' : 'en-MY', isPartOf: { '@id': site.origin + '/#website' },
     breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.datePublished, dateModified: p.dateModified,
     author: { '@id': site.mainSite + '/#organization' }, publisher: { '@id': site.mainSite + '/#organization' },
@@ -2361,8 +2362,6 @@ const llms = [
   ]),
   '## Optional',
   '',
-  `- [About ${site.brand}](${site.mainSite}/p/about.html): Information about the publisher.`,
-  `- [Contact](${site.mainSite}/p/contact.html): Suggest a tool or report a problem.`,
   ...pages.filter(p => p.policy).map(p => `- [${p.title}](${site.origin + p.path}): ${p.description}`),
   ''
 ].join('\n');

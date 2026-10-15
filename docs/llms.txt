@@ -278,7 +278,7 @@ This site hosts its own calculators and a directory of free tools, most of which
 
 ## Optional
 
-- [About The Bukit Besi](https://www.thebukitbesi.com/p/about.html): Information about the publisher.
-- [Contact](https://www.thebukitbesi.com/p/contact.html): Suggest a tool or report a problem.
+- [About and Editorial Policy](https://tool.thebukitbesi.com/about/): Who runs The Bukit Besi Tools, how every Malaysian calculator is checked against official sources, how often rates are updated and how errors are corrected.
+- [Contact and Corrections](https://tool.thebukitbesi.com/contact/): Report an outdated rate or a wrong result, suggest a new Malaysian calculator, or ask about advertising on The Bukit Besi Tools.
 - [Privacy Policy](https://tool.thebukitbesi.com/privacy/): How The Bukit Besi Tools handles data: calculators run in your browser, no accounts or analytics, on-device storage and Google AdSense cookies.
 - [Terms of Use](https://tool.thebukitbesi.com/terms/): Terms for using The Bukit Besi Tools: free tools provided as is, calculator results are estimates and not financial, tax or legal advice, and external links.
