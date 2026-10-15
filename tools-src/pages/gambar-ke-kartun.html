@@ -1,0 +1,133 @@
+<!--page
+{
+  "path": "/gambar-ke-kartun/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/photo-to-cartoon/" },
+  "title": "Tukar Gambar Jadi Kartun Percuma: Kartun, Anime, Lakaran Pensel",
+  "description": "Tukar foto jadi kartun, komik, anime, pop art, lukisan cat atau lakaran pensel dalam pelayar, tanpa muat naik. Peluncur sebelum/selepas dan muat turun PNG.",
+  "llms": "Penukar foto ke kartun percuma yang berjalan sepenuhnya dalam pelayar: gambar tidak dimuat naik, jadi ia peribadi dan berfungsi luar talian. Enam gaya: kartun klasik (8 warna, garis kemas), komik (6 warna terang, garis dakwat tebal), anime lembut (12 warna, garis halus, sedikit lebih cerah), pop art (warna terang diposterkan), lukisan cat (16 warna, tanpa garis) dan lakaran pensel (lukisan kelabu colour-dodge). Kaedah: pelicinan Kuwahara yang mengekalkan tepi, pengelompokan warna k-means (kaedah pembelajaran mesin klasik) untuk memilih palet, pengesanan tepi Sobel untuk garis, kemudian digabungkan. Tiada AI generatif digunakan, jadi wajah tidak diubah atau direka. Kawalan: bilangan warna (2 hingga 32), kelicinan (0 hingga 8), kekuatan dan ketebalan garis. Gambar diproses hingga 1,200 piksel pada sisi terpanjang; foto biasa siap kurang sesaat pada komputer riba dan 1 hingga 2 saat pada telefon. Muat turun PNG; tetapan disimpan dalam pautan halaman.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "cartoon",
+  "scripts": ["/assets/js/cartoon.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Gambar ke Kartun", null]],
+  "about": ["Kesan kartun", "Penapis foto", "Pemprosesan imej", "Pengelompokan k-means"],
+  "app": {
+    "name": "Gambar ke Kartun",
+    "category": "DesignApplication",
+    "features": ["Enam gaya: kartun, komik, anime, pop art, lukisan cat, lakaran pensel", "Berjalan dalam pelayar, gambar tidak dimuat naik", "Peluncur sebelum/selepas", "Kawalan warna, kelicinan dan garis", "Pratonton palet", "Muat turun PNG", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["Wikipedia: Kuwahara filter", "https://en.wikipedia.org/wiki/Kuwahara_filter"],
+    ["Wikipedia: k-means clustering", "https://en.wikipedia.org/wiki/K-means_clustering"],
+    ["Wikipedia: Sobel operator", "https://en.wikipedia.org/wiki/Sobel_operator"],
+    ["W3C: Compositing and Blending (color-dodge)", "https://www.w3.org/TR/compositing-1/#blendingcolordodge"],
+    ["MDN: CanvasRenderingContext2D.getImageData()", "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData"]
+  ],
+  "faq": [
+    { "q": "Bagaimana tukar gambar jadi kartun secara percuma?", "a": "Pilih atau letakkan foto di atas, pilih gaya seperti kartun klasik, komik atau anime, dan kartun muncul dalam kira-kira sesaat. Seret peluncur sebelum/selepas untuk membandingkan, laraskan warna dan garis jika perlu, kemudian tekan Muat turun PNG." },
+    { "q": "Adakah gambar saya dimuat naik ke mana-mana?", "a": "Tidak. Seluruh proses berjalan dalam pelayar pada peranti anda sendiri. Gambar tidak dihantar ke pelayan, jadi ia juga berfungsi luar talian selepas halaman dimuatkan." },
+    { "q": "Adakah ini kartun AI?", "a": "Ia menggunakan pengelompokan k-means, kaedah pembelajaran mesin klasik, untuk memilih warna, serta penapis imej untuk pelicinan dan garis. Ia tidak menggunakan AI generatif, jadi wajah tidak pernah diubah atau direka dan hasilnya kekal setia kepada foto anda." },
+    { "q": "Gaya mana sesuai untuk gambar profil?", "a": "Anime lembut atau kartun klasik paling sesuai untuk wajah. Gunakan kelicinan 4 hingga 6 untuk melembutkan kulit dan kekalkan kekuatan garis sekitar 40 hingga 60% supaya mata dan rambut jelas." },
+    { "q": "Bagaimana menebalkan garis atau meratakan warna?", "a": "Naikkan ketebalan garis kepada 2 atau 3 untuk gaya komik, dan kurangkan bilangan warna kepada 4 hingga 6 untuk kawasan warna yang lebih rata seperti poster. Tekan Set semula gaya untuk kembali ke tetapan asal." },
+    { "q": "Berapa saiz gambar yang dimuat turun?", "a": "Hingga 1,200 piksel pada sisi terpanjang, disimpan sebagai PNG. Foto yang lebih besar dikecilkan dahulu supaya proses kekal pantas pada telefon." },
+    { "q": "Bolehkah saya guna kartun ini di WhatsApp atau Instagram?", "a": "Boleh, fail PNG boleh digunakan di mana-mana. Hanya gunakan foto yang anda berhak gunakan, dan minta izin sebelum berkongsi kartun orang lain." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Gambar ke Kartun</li></ol></nav>
+  <h1>Tukar Gambar Jadi Kartun</h1>
+  <p class="answer">Tukar mana-mana foto jadi <strong>kartun, komik, anime, pop art, lukisan cat atau lakaran pensel</strong> dalam kira-kira sesaat, terus dalam pelayar anda. Gambar <strong>tidak dimuat naik</strong>, jadi ia peribadi dan berfungsi luar talian. Bandingkan dengan peluncur sebelum/selepas dan muat turun PNG.</p>
+  <p class="meta"><span>Dikemas kini <time datetime="{{C_VERIFIED_ISO}}">{{C_VERIFIED}}</time></span><span>Berjalan pada peranti anda; tiada muat naik</span><a href="/photo-to-cartoon/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="cartoonForm" novalidate aria-labelledby="cartoon-h">
+      <h2 id="cartoon-h">Foto anda</h2>
+      <label class="drop" id="cDrop" for="cFile">
+        <input type="file" id="cFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        <img id="cPreview" alt="Foto yang anda pilih" hidden>
+        <span id="cDropText"><strong>Pilih foto</strong> atau letakkan di sini<small>JPG, PNG atau WebP. Anda juga boleh tampal.</small></span>
+      </label>
+      <fieldset class="field-group">
+        <legend>Gaya</legend>
+        <div class="chipset">{{C_CHIPS}}</div>
+      </fieldset>
+      <div class="field" id="w_colors"><label for="colors">Warna</label><div class="range"><input id="colors" name="colors" type="range" min="2" max="32" step="1" value="{{C_COLORS}}"><output id="o_colors" for="colors">{{C_COLORS}}</output></div></div>
+      <div class="field" id="w_smooth"><label for="smooth">Kelicinan</label><div class="range"><input id="smooth" name="smooth" type="range" min="0" max="8" step="1" value="{{C_SMOOTH}}"><output id="o_smooth" for="smooth">{{C_SMOOTH}}</output></div></div>
+      <div class="field" id="w_line"><label for="line">Kekuatan garis</label><div class="range"><input id="line" name="line" type="range" min="0" max="1" step="0.05" value="{{C_LINE}}"><output id="o_line" for="line">{{C_LINE_PCT}}</output></div></div>
+      <div class="field" id="w_thick"><label for="thick">Ketebalan garis</label><div class="range"><input id="thick" name="thick" type="range" min="0" max="4" step="1" value="{{C_THICK}}"><output id="o_thick" for="thick">{{C_THICK}}</output></div></div>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="cReset">Set semula gaya</button></div>
+    </form>
+
+    <section class="box" id="cResult" aria-labelledby="cartoon-result-h">
+      <h2 id="cartoon-result-h">Kartun anda</h2>
+      <div class="stage-empty" id="cEmpty">Pilih foto untuk melihatnya sebagai kartun di sini.</div>
+      <div class="stage" id="cStage" hidden>
+        <canvas id="cOut" role="img" aria-label="Versi kartun foto anda"></canvas>
+        <canvas id="cIn" role="img" aria-label="Foto asal anda"></canvas>
+        <span class="handle" id="cHandle" aria-hidden="true"></span>
+      </div>
+      <div class="field" id="cSplitWrap" hidden><label for="cSplit">Sebelum / selepas</label><div class="range"><input id="cSplit" type="range" min="0" max="100" step="1" value="50"></div></div>
+      <div class="palette" id="cPalette" hidden></div>
+      <p class="note" id="cStatus">Foto anda kekal pada peranti ini.</p>
+      <p class="sr-only" id="cLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="cDownload" disabled>Muat turun PNG</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="styles-h">Enam gaya</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="styles-h">
+    <table class="data">
+      <thead><tr><th scope="col">Gaya</th><th scope="col">Rupa</th><th scope="col">Warna</th><th scope="col">Garis</th></tr></thead>
+      <tbody>
+{{C_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara kartun dihasilkan</h2>
+  <ol>
+    <li><strong>Licinkan</strong> foto dengan penapis Kuwahara, yang meratakan kulit dan dinding tetapi mengekalkan tepi yang tajam.</li>
+    <li><strong>Pilih warna</strong> dengan pengelompokan k-means: warna yang serupa dikumpulkan dan setiap kumpulan menjadi satu warna rata.</li>
+    <li><strong>Lukis garis</strong> di tempat kecerahan berubah mendadak (pengesanan tepi Sobel), ditebalkan mengikut pilihan anda.</li>
+    <li><strong>Gabungkan</strong> warna rata dan garis gelap. Lakaran pensel pula membahagikan foto dengan negatif kabur dirinya sendiri (colour dodge).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips untuk kartun terbaik</h2>
+  <ul>
+    <li><strong>Wajah:</strong> guna foto yang terang, kemudian Anime lembut atau Kartun klasik dengan kelicinan 4 hingga 6.</li>
+    <li><strong>Latar yang sibuk</strong> menghasilkan banyak garis; kurangkan kekuatan garis atau pilih Lukisan cat.</li>
+    <li><strong>Pelekat:</strong> jadikan kartun, kemudian potong dan bungkus dengan pembuat pelekat WhatsApp.</li>
+    <li>Mahu gambar buatan AI? Cipta dengan <a href="/penjana-gambar-ai/">Penjana Gambar AI</a>, atau huraikan foto dengan <a href="/gambar-ke-prompt/">Gambar ke Prompt</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Kuwahara_filter" rel="noopener">Kuwahara filter</a>, <a href="https://en.wikipedia.org/wiki/K-means_clustering" rel="noopener">k-means clustering</a> dan <a href="https://en.wikipedia.org/wiki/Sobel_operator" rel="noopener">Sobel operator</a></li>
+    <li><a href="https://www.w3.org/TR/compositing-1/#blendingcolordodge" rel="noopener">W3C: Color dodge blending</a> dan <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData" rel="noopener">MDN: Canvas pixel data</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Hanya gunakan foto yang anda berhak gunakan, dan minta izin sebelum berkongsi kartun orang lain.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/penjana-gambar-ai/">Penjana Gambar AI<small>Teks ke gambar</small></a>
+    <a href="/gambar-ke-prompt/">Gambar ke Prompt<small>Foto ke prompt AI</small></a>
+    <a href="/penjana-prompt-ai/">Penjana Prompt AI<small>Prompt untuk Midjourney, Flux, Sora</small></a>
+  </div>
+</section>

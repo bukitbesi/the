@@ -99,6 +99,8 @@ export const icons = {
   'image-to-prompt': rect(2, 3, 10, 10) + p('m3 11 3-4 5 5M16 7h6m-3-3 3 3-3 3M3 18h18M3 22h13'),
   'ai-paraphraser-tool': chat + p('M7 8h9m-9 4h6M8 20l3 3m0-3-3 3'),
   'cartoonizer-ai-tool': circle(12, 12, 9) + p('M6 10h3m6 0h3m-11 6c3 3 7 3 10 0M12 3l2 4-4-1'),
+  'ai-summarizer': rect(4, 3, 16, 18) + p('M8 8h8M8 12h8M8 16h4') + '<path d="m18 14 1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor"/>',
+  'caption-generator': rect(3, 3, 18, 18, 5) + circle(12, 11, 3.5) + p('M7 18h10M17 6.5h.01'),
   'free-privacy-policy-generator': file('PP') + p('m7 18 2 2 4-4'),
   'secure-link-generator': rect(5, 10, 14, 12) + p('M8 10V6a4 4 0 0 1 8 0v4M12 15v3'),
   'whatsapp-link-creator': chat + p('M7 8c1 5 3 7 8 7l2-2-3-2-2 1-2-2 1-2-2-2Z'),

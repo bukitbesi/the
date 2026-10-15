@@ -262,8 +262,8 @@
   },
   {
     "name": "AI Image Generator",
-    "desc": "Create images from text prompts using the generation options on the tool page.",
-    "url": "https://www.thebukitbesi.com/p/free-ai-image-generator.html",
+    "desc": "Text to image with FLUX.1 schnell: prompts in English or Malay, AI prompt improver, 10 styles including Malaysian batik, download. No sign-up. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/ai-image-generator/",
     "cat": "ai",
     "icon": "free-ai-image-generator",
     "badge": "new",
@@ -280,20 +280,38 @@
   },
   {
     "name": "AI Paraphraser & Grammar Checker",
-    "desc": "Rewrite text and explore grammar, tone and other writing options on the tool page.",
-    "url": "https://www.thebukitbesi.com/p/ai-paraphraser-tool.html",
+    "desc": "Rewrite text in 8 modes or fix grammar in English or Bahasa Melayu, rewrite into the other language, with every changed word highlighted. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/paraphrasing-tool/",
     "cat": "ai",
     "icon": "ai-paraphraser-tool",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
-    "name": "AI Cartoonizer",
-    "desc": "Apply cartoon-style effects to an uploaded image and download the result.",
-    "url": "https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html",
+    "name": "Photo to Cartoon",
+    "desc": "Turn a photo into a cartoon, comic, anime, pop art, painting or pencil sketch in your browser, never uploaded, with a before/after slider. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/photo-to-cartoon/",
     "cat": "ai",
     "icon": "cartoonizer-ai-tool",
-    "badge": "",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "AI Summarizer",
+    "desc": "Summarize articles, essays and notes of up to 12,000 characters as bullets, a paragraph or key points, in English or Malay, with reading time saved. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/ai-summarizer/",
+    "cat": "ai",
+    "icon": "ai-summarizer",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "AI Caption Generator",
+    "desc": "Five captions for Instagram, TikTok, Facebook, X, LinkedIn or Threads in English, Malay or Manglish, with Malaysian occasions and hashtags within the 2026 limits. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/caption-generator/",
+    "cat": "ai",
+    "icon": "caption-generator",
+    "badge": "new",
     "live": true
   },
   {

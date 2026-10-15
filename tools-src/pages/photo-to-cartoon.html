@@ -1,0 +1,134 @@
+<!--page
+{
+  "path": "/photo-to-cartoon/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/gambar-ke-kartun/" },
+  "bloggerFrom": "https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html",
+  "title": "Photo to Cartoon: Free Cartoon Yourself Filter, No Upload",
+  "description": "Turn a photo into a cartoon, comic, anime, pop art, painting or pencil sketch in your browser. Never uploaded. Before/after slider and PNG download.",
+  "llms": "Free photo to cartoon converter that runs entirely in the browser: the picture is never uploaded, so it works offline and is private. Six styles: classic cartoon (8 colours, clean outlines), comic book (6 bold colours, thick ink lines), soft anime (12 colours, thin lines, slightly brighter), pop art (posterized bright colours), painting (16 colours, no outlines) and pencil sketch (grey colour-dodge drawing). Method: edge-preserving Kuwahara smoothing, k-means colour clustering (a classic machine-learning method) to pick the palette, Sobel edge detection for the outlines, then compositing. No generative AI is used, so faces are not changed or invented. Controls: number of colours (2 to 32), smoothness (0 to 8), line strength and line thickness. Pictures are processed at up to 1,200 pixels on the longest side; a typical photo takes under a second on a laptop and 1 to 2 seconds on a phone. Download as PNG; settings are kept in the page link.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "cartoon",
+  "scripts": ["/assets/js/cartoon.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["Photo to Cartoon", null]],
+  "about": ["Cartoon effect", "Photo filter", "Image processing", "k-means clustering"],
+  "app": {
+    "name": "Photo to Cartoon",
+    "category": "DesignApplication",
+    "features": ["Six styles: cartoon, comic, anime, pop art, painting, pencil sketch", "Runs in the browser, picture never uploaded", "Before/after slider", "Colour, smoothness and outline controls", "Palette preview", "PNG download", "Works offline"]
+  },
+  "citations": [
+    ["Wikipedia: Kuwahara filter", "https://en.wikipedia.org/wiki/Kuwahara_filter"],
+    ["Wikipedia: k-means clustering", "https://en.wikipedia.org/wiki/K-means_clustering"],
+    ["Wikipedia: Sobel operator", "https://en.wikipedia.org/wiki/Sobel_operator"],
+    ["W3C: Compositing and Blending (color-dodge)", "https://www.w3.org/TR/compositing-1/#blendingcolordodge"],
+    ["MDN: CanvasRenderingContext2D.getImageData()", "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData"]
+  ],
+  "faq": [
+    { "q": "How do I turn a photo into a cartoon for free?", "a": "Choose or drop a photo above, pick a style such as classic cartoon, comic or anime, and the cartoon appears in about a second. Drag the before/after slider to compare, adjust colours and outlines if you like, then press Download PNG." },
+    { "q": "Is my photo uploaded anywhere?", "a": "No. The whole conversion runs in your browser on your own device. The picture is never sent to a server, so it also works offline once the page has loaded." },
+    { "q": "Is this an AI cartoonizer?", "a": "It uses k-means clustering, a classic machine-learning method, to choose the colours, plus image filters for smoothing and outlines. It does not use generative AI, so it never changes or invents faces, which keeps the result true to your photo." },
+    { "q": "Which style should I use for a profile picture?", "a": "Soft anime or classic cartoon suits faces best. Use the smoothness slider to soften skin and keep line strength around 40 to 60% so eyes and hair stay defined." },
+    { "q": "How do I make the lines thicker or the colours flatter?", "a": "Raise line thickness to 2 or 3 for a comic look, and lower the number of colours to 4 to 6 for flatter, poster-like areas. Press Reset style to go back to the preset." },
+    { "q": "What size is the downloaded picture?", "a": "Up to 1,200 pixels on the longest side, saved as PNG. Larger photos are scaled down first so the conversion stays fast on phones." },
+    { "q": "Can I use the cartoon on WhatsApp or Instagram?", "a": "Yes, the PNG works anywhere. Only cartoonize photos you have the right to use, and ask before sharing a cartoon of someone else." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">Photo to Cartoon</li></ol></nav>
+  <h1>Photo to Cartoon</h1>
+  <p class="answer">Turn any photo into a <strong>cartoon, comic, anime, pop art, painting or pencil sketch</strong> in about a second, right in your browser. Your picture is <strong>never uploaded</strong>, so it is private and works offline. Compare with the before/after slider and download a PNG.</p>
+  <p class="meta"><span>Updated <time datetime="{{C_VERIFIED_ISO}}">{{C_VERIFIED}}</time></span><span>Runs on your device; nothing uploaded</span><a href="/gambar-ke-kartun/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="cartoonForm" novalidate aria-labelledby="cartoon-h">
+      <h2 id="cartoon-h">Your photo</h2>
+      <label class="drop" id="cDrop" for="cFile">
+        <input type="file" id="cFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        <img id="cPreview" alt="The photo you chose" hidden>
+        <span id="cDropText"><strong>Choose a photo</strong> or drop it here<small>JPG, PNG or WebP. You can also paste one.</small></span>
+      </label>
+      <fieldset class="field-group">
+        <legend>Style</legend>
+        <div class="chipset">{{C_CHIPS}}</div>
+      </fieldset>
+      <div class="field" id="w_colors"><label for="colors">Colours</label><div class="range"><input id="colors" name="colors" type="range" min="2" max="32" step="1" value="{{C_COLORS}}"><output id="o_colors" for="colors">{{C_COLORS}}</output></div></div>
+      <div class="field" id="w_smooth"><label for="smooth">Smoothness</label><div class="range"><input id="smooth" name="smooth" type="range" min="0" max="8" step="1" value="{{C_SMOOTH}}"><output id="o_smooth" for="smooth">{{C_SMOOTH}}</output></div></div>
+      <div class="field" id="w_line"><label for="line">Line strength</label><div class="range"><input id="line" name="line" type="range" min="0" max="1" step="0.05" value="{{C_LINE}}"><output id="o_line" for="line">{{C_LINE_PCT}}</output></div></div>
+      <div class="field" id="w_thick"><label for="thick">Line thickness</label><div class="range"><input id="thick" name="thick" type="range" min="0" max="4" step="1" value="{{C_THICK}}"><output id="o_thick" for="thick">{{C_THICK}}</output></div></div>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="cReset">Reset style</button></div>
+    </form>
+
+    <section class="box" id="cResult" aria-labelledby="cartoon-result-h">
+      <h2 id="cartoon-result-h">Your cartoon</h2>
+      <div class="stage-empty" id="cEmpty">Choose a photo to see it as a cartoon here.</div>
+      <div class="stage" id="cStage" hidden>
+        <canvas id="cOut" role="img" aria-label="Cartoon version of your photo"></canvas>
+        <canvas id="cIn" role="img" aria-label="Your original photo"></canvas>
+        <span class="handle" id="cHandle" aria-hidden="true"></span>
+      </div>
+      <div class="field" id="cSplitWrap" hidden><label for="cSplit">Before / after</label><div class="range"><input id="cSplit" type="range" min="0" max="100" step="1" value="50"></div></div>
+      <div class="palette" id="cPalette" hidden></div>
+      <p class="note" id="cStatus">Your photo stays on this device.</p>
+      <p class="sr-only" id="cLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="cDownload" disabled>Download PNG</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="styles-h">The six styles</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="styles-h">
+    <table class="data">
+      <thead><tr><th scope="col">Style</th><th scope="col">Look</th><th scope="col">Colours</th><th scope="col">Outlines</th></tr></thead>
+      <tbody>
+{{C_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the cartoon is made</h2>
+  <ol>
+    <li><strong>Smooth</strong> the photo with a Kuwahara filter, which flattens skin and walls but keeps edges sharp.</li>
+    <li><strong>Pick the colours</strong> with k-means clustering: similar colours are grouped and each group becomes one flat paint colour.</li>
+    <li><strong>Draw outlines</strong> where brightness changes sharply (Sobel edge detection), thickened to the width you choose.</li>
+    <li><strong>Combine</strong> the flat colours and dark lines. The pencil sketch instead divides the photo by a blurred negative of itself (colour dodge).</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips for the best cartoon</h2>
+  <ul>
+    <li><strong>Faces:</strong> use a well-lit photo, then Soft anime or Classic cartoon with smoothness 4 to 6.</li>
+    <li><strong>Busy backgrounds</strong> create many lines; lower line strength or choose Painting.</li>
+    <li><strong>Stickers:</strong> cartoonize, then cut out and pack them with the WhatsApp sticker maker.</li>
+    <li>Want an AI-made picture instead? Create one with the <a href="/ai-image-generator/">AI Image Generator</a>, or describe a photo with <a href="/image-to-prompt/">Image to Prompt</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Kuwahara_filter" rel="noopener">Kuwahara filter</a>, <a href="https://en.wikipedia.org/wiki/K-means_clustering" rel="noopener">k-means clustering</a> and <a href="https://en.wikipedia.org/wiki/Sobel_operator" rel="noopener">Sobel operator</a></li>
+    <li><a href="https://www.w3.org/TR/compositing-1/#blendingcolordodge" rel="noopener">W3C: Color dodge blending</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData" rel="noopener">MDN: Canvas pixel data</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Only cartoonize photos you have the right to use, and ask permission before sharing a cartoon of another person.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/ai-image-generator/">AI Image Generator<small>Text to image</small></a>
+    <a href="/image-to-prompt/">Image to Prompt<small>Photo to AI prompt</small></a>
+    <a href="/ai-prompt-generator/">AI Prompt Generator<small>Prompts for Midjourney, Flux, Sora</small></a>
+  </div>
+</section>

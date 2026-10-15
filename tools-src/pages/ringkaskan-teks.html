@@ -1,0 +1,125 @@
+<!--page
+{
+  "path": "/ringkaskan-teks/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/ai-summarizer/" },
+  "title": "Ringkaskan Teks dengan AI: Ringkasan Karangan dan Artikel Percuma",
+  "description": "Tampal artikel, karangan, laporan atau nota dan dapatkan ringkasan pendek, sederhana atau terperinci dalam bentuk poin atau perenggan, BM atau Inggeris.",
+  "llms": "Alat ringkasan teks AI percuma untuk Bahasa Melayu dan Inggeris. Tampal hingga 12,000 aksara (kira-kira 2,000 patah perkataan) artikel, karangan, laporan, minit mesyuarat atau bab buku, kemudian pilih panjang (pendek: 2 hingga 3 ayat; sederhana: 5 hingga 7; terperinci: 10 hingga 12) dan format (poin, satu perenggan, atau poin utama dengan baris kesimpulan). Ringkasan boleh dalam bahasa yang sama, Bahasa Melayu atau Inggeris, jadi ia juga boleh meringkaskan artikel Inggeris dalam Bahasa Melayu. Ia menunjukkan bilangan perkataan sebelum dan selepas, berapa peratus lebih pendek dan masa membaca yang dijimatkan (pada 230 patah perkataan seminit). Model diarahkan menggunakan maklumat dalam teks sahaja dan mengekalkan nama, nombor dan tarikh. Dijalankan pada Cloudflare Workers AI (Mistral Small 3.1, sandaran Llama 3.3 70B); teks diproses sekali dan tidak disimpan. Kuota harian percuma dikongsi semua pengunjung, ditetapkan semula jam 8 pagi waktu Malaysia; setiap sambungan boleh membuat hingga 40 permintaan AI sehari.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "summary",
+  "scripts": ["/assets/js/summary.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Ringkaskan Teks", null]],
+  "about": ["Ringkasan teks", "Ringkasan karangan", "Bahasa Melayu", "Model bahasa besar"],
+  "app": {
+    "name": "Ringkaskan Teks AI",
+    "category": "UtilitiesApplication",
+    "features": ["Hingga 12,000 aksara", "Pendek, sederhana atau terperinci", "Poin, perenggan atau poin utama dengan kesimpulan", "Bahasa Melayu dan Inggeris", "Ringkaskan ke bahasa lain", "Perkataan dan masa membaca dijimatkan", "Tanpa daftar"]
+  },
+  "citations": [
+    ["Cloudflare Workers AI: Mistral Small 3.1 24B Instruct", "https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/"],
+    ["Cloudflare Workers AI: Harga dan kuota percuma", "https://developers.cloudflare.com/workers-ai/platform/pricing/"],
+    ["Purdue OWL: Summarizing", "https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/index.html"],
+    ["Brysbaert (2019): Berapa perkataan kita baca seminit?", "https://doi.org/10.1016/j.jml.2019.104047"]
+  ],
+  "faq": [
+    { "q": "Bagaimana meringkaskan artikel secara percuma?", "a": "Tampal hingga 12,000 aksara (kira-kira 2,000 patah perkataan) di atas, pilih pendek, sederhana atau terperinci serta format, kemudian tekan Ringkaskan. Ringkasan muncul dalam beberapa saat bersama bilangan perkataan dan minit membaca yang dijimatkan." },
+    { "q": "Bolehkah ia membuat ringkasan karangan dalam Bahasa Melayu?", "a": "Boleh. Ia mengekalkan bahasa teks anda secara asal, atau anda boleh pilih Bahasa Melayu atau Inggeris, contohnya untuk mendapatkan ringkasan BM bagi artikel Inggeris." },
+    { "q": "Berapa panjang teks yang boleh diringkaskan?", "a": "Hingga 12,000 aksara, kira-kira 2,000 patah perkataan atau 4 hingga 5 muka surat. Untuk dokumen lebih panjang, ringkaskan setiap bahagian kemudian ringkaskan gabungan ringkasan tersebut." },
+    { "q": "Format mana terbaik untuk ulang kaji?", "a": "Poin utama dengan kesimpulan paling sesuai: setiap isi penting menjadi satu poin dan baris terakhir memberi kesimpulan keseluruhan. Pilih perenggan jika ringkasan perlu dimasukkan ke dalam karangan atau laporan." },
+    { "q": "Adakah ringkasan akan menambah perkara yang tiada dalam teks?", "a": "AI diarahkan menggunakan maklumat dalam teks sahaja dan mengekalkan nama, nombor dan tarikh, tetapi AI masih boleh tersilap. Semak angka penting dengan teks asal sebelum menggunakannya." },
+    { "q": "Adakah teks saya disimpan?", "a": "Tidak. Teks dihantar sekali kepada Cloudflare Workers AI dan tidak disimpan oleh laman ini. Elakkan menampal dokumen sulit atau data peribadi ke dalam mana-mana alat AI dalam talian." },
+    { "q": "Bagaimana masa membaca dijimatkan dikira?", "a": "Pada kelajuan purata membaca senyap 230 patah perkataan seminit. Artikel 1,500 patah perkataan mengambil kira-kira 6.5 minit untuk dibaca; ringkasan 150 patah perkataan kurang daripada seminit, menjimatkan kira-kira 6 minit." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Ringkaskan Teks</li></ol></nav>
+  <h1>Ringkaskan Teks dengan AI</h1>
+  <p class="answer">Tampal artikel, karangan, laporan atau nota hingga <strong>12,000 aksara</strong> dan dapatkan <strong>ringkasan pendek, sederhana atau terperinci</strong> dalam bentuk poin, perenggan atau poin utama dengan kesimpulan, dalam <strong>Bahasa Melayu atau Inggeris</strong>. Ia menunjukkan berapa perkataan dan minit membaca yang dijimatkan. Percuma, tanpa daftar.</p>
+  <p class="meta"><span>Dikemas kini <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Teks diproses, tidak disimpan</span><a href="/ai-summarizer/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="sumForm" novalidate aria-labelledby="sum-h" data-api="{{A_API}}">
+      <h2 id="sum-h">Teks anda</h2>
+      <label class="sr-only" for="text">Teks untuk diringkaskan</label>
+      <textarea class="prose-in" id="text" name="text" maxlength="12000" placeholder="Tampal artikel, karangan, laporan atau nota untuk diringkaskan…"></textarea>
+      <div class="count-row"><span>Ctrl + Enter untuk mula</span><span id="sCount">0 / {{A_LIMIT}}</span></div>
+      <div class="field-row">
+        <div class="field"><label for="size">Panjang</label><select class="input" id="size" name="size">{{A_SIZES}}</select></div>
+        <div class="field"><label for="format">Format</label><select class="input" id="format" name="format">{{A_FORMATS}}</select></div>
+      </div>
+      <div class="field"><label for="lang">Tulis ringkasan dalam</label><select class="input" id="lang" name="lang">{{A_LANGS}}</select></div>
+      <div class="tool-actions go"><button type="submit" class="btn" id="sGo">Ringkaskan</button><button type="button" class="btn ghost sm" id="sClear">Kosongkan</button></div>
+      <p class="note" id="sStatus" aria-live="polite"></p>
+    </form>
+
+    <section class="box" id="sResult" aria-labelledby="sum-result-h">
+      <h2 id="sum-result-h">Ringkasan <small id="sTitle">(contoh)</small></h2>
+      <div class="ai-out" id="sOut">{{A_OUT}}</div>
+      <p class="ai-stats" id="sStats"></p>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="sCopy">Salin</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="use-h">Apa yang boleh diringkaskan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="use-h">
+    <table class="data">
+      <thead><tr><th scope="col">Teks</th><th scope="col">Tetapan dicadangkan</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Artikel berita atau blog</th><td>Pendek, poin</td></tr>
+        <tr><th scope="row">Bab buku teks untuk ulang kaji</th><td>Terperinci, poin utama dengan kesimpulan</td></tr>
+        <tr><th scope="row">Nota atau minit mesyuarat</th><td>Sederhana, poin</td></tr>
+        <tr><th scope="row">Laporan untuk ketua</th><td>Pendek, perenggan</td></tr>
+        <tr><th scope="row">Artikel Inggeris untuk tugasan BM</th><td>Sederhana, perenggan, Bahasa Melayu</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara ia berfungsi</h2>
+  <ol>
+    <li>Teks, panjang dan format dihantar kepada Cloudflare Workers AI (<strong>Mistral Small 3.1</strong>, Llama 3.3 70B jika sibuk).</li>
+    <li>Model diarahkan menggunakan isi dalam teks sahaja serta mengekalkan nama, nombor dan tarikh.</li>
+    <li>Pelayar anda mengira perkataan sebelum dan selepas: <strong>masa membaca = perkataan ÷ 230 seminit</strong>.</li>
+    <li>Tiada apa disimpan: muat semula halaman dan teks hilang.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips ringkasan yang lebih baik</h2>
+  <ul>
+    <li><strong>Buang gangguan</strong> seperti menu, iklan dan komen sebelum menampal halaman web.</li>
+    <li><strong>Dokumen sangat panjang:</strong> ringkaskan setiap bahagian, kemudian ringkaskan ringkasan itu.</li>
+    <li><strong>Semak fakta penting</strong> dengan teks asal sebelum memetiknya.</li>
+    <li>Mahu menulis semula ringkasan dengan gaya anda? Gunakan <a href="/parafrasa-ayat/">alat parafrasa ayat</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/" rel="noopener">Cloudflare Workers AI: Mistral Small 3.1</a> dan <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">kuota percuma</a></li>
+    <li><a href="https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/index.html" rel="noopener">Purdue OWL: Quoting, paraphrasing and summarizing</a></li>
+    <li><a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert (2019): meta-analisis kadar membaca (238 patah perkataan seminit untuk bukan fiksyen)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Ringkasan AI boleh terlepas maksud halus atau tersilap. Semak butiran penting dengan teks asal, dan nyatakan sumber apabila menggunakan ideanya.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/parafrasa-ayat/">Parafrasa Ayat<small>Tulis semula dan semak tatabahasa</small></a>
+    <a href="/penjana-kapsyen/">Penjana Kapsyen AI<small>Kapsyen IG dan TikTok</small></a>
+  </div>
+</section>
