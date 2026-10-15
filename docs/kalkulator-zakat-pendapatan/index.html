@@ -479,6 +479,39 @@ select.input{max-width:100%;text-overflow:ellipsis}
 @media(max-width:560px){#promptForm .field-row:not(.keep),#imgForm .field-row:not(.keep){grid-template-columns:1fr}}
 .compass{display:block;width:160px;height:160px;margin:0 auto 12px;color:var(--text2)}
 .compass .needle{fill:var(--accent)}
+.range{display:flex;align-items:center;gap:10px;min-height:48px}
+.range input{flex:1;min-width:0;height:44px;accent-color:var(--accent)}
+.range output{min-width:3.2em;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.stage{position:relative;width:100%;border-radius:12px;overflow:hidden;background:var(--tint);touch-action:pan-y}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .handle{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.35);pointer-events:none}
+.stage-empty{display:grid;place-items:center;aspect-ratio:4/3;border:2px dashed var(--border2);border-radius:12px;padding:16px;text-align:center;color:var(--text3);font-size:.9rem}
+.palette{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.palette span{width:22px;height:22px;border-radius:6px;border:1px solid var(--border2)}
+textarea.prose-in{display:block;width:100%;min-height:180px;padding:12px 14px;border:1px solid var(--border2);border-radius:12px;background:var(--bg);color:var(--text);font:inherit;font-size:1rem;line-height:1.55;resize:vertical}
+textarea.prose-in:focus{outline:3px solid var(--tint-b);border-color:var(--accent2)}
+.count-row{display:flex;justify-content:space-between;gap:8px;margin:6px 0 12px;font-size:.78rem;color:var(--text3)}
+.count-row .over,.cap-meta .over{color:#c0392b;font-weight:700}
+.ai-out{min-height:140px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--bg);line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-out ul{margin:0;padding-left:1.2em;white-space:normal}.ai-out p{margin:0 0 .6em}
+.ai-out ins{background:rgba(46,160,67,.18);text-decoration:none;border-radius:3px}
+.ai-out del{background:rgba(220,53,69,.14);color:var(--text3);border-radius:3px}
+.ai-stats{margin:8px 0 0;font-size:.8rem;color:var(--text2)}
+.ideas{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ideas button{min-height:36px;padding:0 12px;border:1px dashed var(--border2);border-radius:99px;font-size:.78rem;color:var(--text2);background:none;cursor:pointer}
+.ideas button:hover{border-color:var(--accent2);color:var(--text)}
+.cap-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cap-list li{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
+.cap-list p{margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}
+.cap-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.cap-meta small{flex:1 1 100%;color:var(--text3);font-size:.75rem}
+.tagbox{margin-top:12px;padding:10px 14px;border-radius:12px;background:var(--tint);overflow-wrap:anywhere}
+.gen-frame{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:var(--tint)}
+.gen-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gen-frame .stage-empty{position:absolute;inset:0;aspect-ratio:auto;border:0}
+.thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.thumbs .thumb{padding:0;border:2px solid var(--border2);border-radius:8px;overflow:hidden;cursor:pointer;background:none;width:76px;height:76px}
+.thumbs .thumb img{display:block;width:72px;height:72px;object-fit:cover}
+textarea.prose-in.short{min-height:96px}
 </style>
 
 </head>
@@ -680,7 +713,7 @@ select.input{max-width:100%;text-overflow:ellipsis}
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
           <li><a href="/ai-prompt-generator/">AI Prompt Generator (Image &amp; Video)</a></li>
-          <li><a href="/image-to-prompt/">Image to Prompt</a></li>
+          <li><a href="/ai-image-generator/">AI Image Generator</a></li>
         </ul>
       </nav>
       <nav aria-label="Kategori">

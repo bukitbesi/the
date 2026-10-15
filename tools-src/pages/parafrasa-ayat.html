@@ -1,0 +1,132 @@
+<!--page
+{
+  "path": "/parafrasa-ayat/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/paraphrasing-tool/" },
+  "title": "Parafrasa Ayat Online Percuma: Penulis Semula AI dan Semak Tatabahasa",
+  "description": "Parafrasa ayat BM atau Inggeris dalam 8 mod (formal, mudah, akademik, ringkas dan lain-lain) atau semak tatabahasa, dengan setiap perkataan diubah ditanda.",
+  "llms": "Alat parafrasa ayat dan penyemak tatabahasa AI percuma untuk Bahasa Melayu dan Inggeris. Tampal hingga 2,400 aksara dan pilih mod: biasa (perkataan baharu, maksud dan panjang sama), lancar (ayat lebih licin), formal (surat, laporan, e-mel), mudah (ayat pendek dan jelas), ringkaskan (kira-kira 40% lebih pendek), kembangkan (kira-kira 50% lebih panjang tanpa fakta baharu), akademik (tugasan dan tesis) atau kreatif; atau semak tatabahasa, yang hanya membetulkan ejaan, tatabahasa dan tanda baca mengikut ejaan standard Dewan Bahasa dan Pustaka. Hasil boleh ditulis dalam bahasa yang sama, Bahasa Melayu atau Inggeris, jadi ia juga boleh menulis semula teks Inggeris ke dalam Bahasa Melayu. Setiap perkataan yang ditambah dan dibuang ditanda, bersama peratus perkataan diubah. Dijalankan pada Cloudflare Workers AI (Mistral Small 3.1, dengan Llama 3.3 70B sebagai sandaran); teks diproses sekali dan tidak disimpan. Kuota harian percuma dikongsi semua pengunjung dan ditetapkan semula jam 8 pagi waktu Malaysia; setiap sambungan boleh membuat hingga 40 permintaan AI sehari. Nama, nombor dan rujukan dikekalkan; sentiasa semak hasil sebelum menghantar tugasan kerana institusi mempunyai peraturan sendiri tentang penggunaan AI.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "paraphrase",
+  "scripts": ["/assets/js/paraphrase.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Parafrasa Ayat", null]],
+  "about": ["Parafrasa", "Semakan tatabahasa", "Bahasa Melayu", "Model bahasa besar"],
+  "app": {
+    "name": "Parafrasa Ayat dan Semak Tatabahasa AI",
+    "category": "UtilitiesApplication",
+    "features": ["8 mod tulis semula", "Semakan ejaan dan tatabahasa", "Bahasa Melayu dan Inggeris", "Tulis semula ke bahasa lain", "Setiap perkataan diubah ditanda", "Tulis semula sekali lagi", "Tanpa daftar"]
+  },
+  "citations": [
+    ["Cloudflare Workers AI: Mistral Small 3.1 24B Instruct", "https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/"],
+    ["Cloudflare Workers AI: Llama 3.3 70B Instruct", "https://developers.cloudflare.com/workers-ai/models/llama-3.3-70b-instruct-fp8-fast/"],
+    ["Cloudflare Workers AI: Harga dan kuota percuma", "https://developers.cloudflare.com/workers-ai/platform/pricing/"],
+    ["Purdue OWL: Paraphrasing", "https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/paraphrasing.html"],
+    ["Pusat Rujukan Persuratan Melayu (DBP)", "https://prpm.dbp.gov.my/"]
+  ],
+  "faq": [
+    { "q": "Bagaimana parafrasa ayat secara percuma?", "a": "Tampal hingga 2,400 aksara di atas, pilih mod seperti biasa, formal atau mudah, dan tekan Parafrasa. Teks baharu muncul dalam beberapa saat dengan setiap perkataan yang diubah ditanda, sedia untuk disalin. Tiada pendaftaran diperlukan." },
+    { "q": "Bolehkah alat ini parafrasa dalam Bahasa Melayu?", "a": "Boleh. Ia mengesan sama ada teks anda Bahasa Melayu atau Inggeris dan mengekalkan bahasa yang sama, atau anda boleh pilih Bahasa Melayu atau Inggeris sebagai hasil, contohnya untuk menulis semula perenggan Inggeris dalam Bahasa Melayu." },
+    { "q": "Apa beza setiap mod?", "a": "Biasa menukar perkataan pada panjang yang sama; lancar melicinkan ayat janggal; formal sesuai untuk surat dan laporan; mudah menggunakan ayat pendek; ringkaskan memotong kira-kira 40%; kembangkan menambah kira-kira 50% tanpa fakta baharu; akademik untuk tugasan; kreatif lebih bersemangat. Semak tatabahasa hanya membetulkan kesalahan." },
+    { "q": "Adakah semakan tatabahasa mengubah gaya tulisan saya?", "a": "Tidak. Semak tatabahasa hanya membetulkan ejaan, tatabahasa dan tanda baca mengikut ejaan standard DBP serta mengekalkan perkataan dan nada anda. Setiap pembetulan ditanda supaya anda nampak apa yang berubah." },
+    { "q": "Adakah teks saya disimpan?", "a": "Tidak. Teks dihantar sekali kepada Cloudflare Workers AI untuk ditulis semula dan tidak disimpan oleh laman ini. Elakkan menampal kata laluan atau data peribadi sulit ke dalam mana-mana alat AI dalam talian." },
+    { "q": "Adakah parafrasa dengan AI dikira plagiat?", "a": "Idea orang lain yang diparafrasa masih perlu dirujuk kepada sumber asal. Banyak universiti dan sekolah juga ada peraturan tentang alat penulisan AI, jadi semak peraturan anda dan baca semula hasilnya sebelum dihantar." },
+    { "q": "Kenapa kuota AI percuma habis?", "a": "Alat ini menggunakan kuota harian percuma yang dikongsi semua pengunjung dan ditetapkan semula jam 8 pagi waktu Malaysia; setiap sambungan boleh membuat hingga 40 permintaan AI sehari. Cuba lagi selepas waktu itu." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Parafrasa Ayat</li></ol></nav>
+  <h1>Parafrasa Ayat dan Semak Tatabahasa AI</h1>
+  <p class="answer">Tampal teks anda, pilih satu daripada <strong>8 mod tulis semula</strong> (formal, mudah, akademik, ringkas dan lain-lain) atau <strong>semak tatabahasa</strong>, dan dapatkan versi baharu dalam beberapa saat dengan <strong>setiap perkataan diubah ditanda</strong>. Berfungsi dalam <strong>Bahasa Melayu dan Inggeris</strong>, boleh menulis semula ke bahasa lain, dan tanpa pendaftaran.</p>
+  <p class="meta"><span>Dikemas kini <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Teks diproses, tidak disimpan</span><a href="/paraphrasing-tool/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="paraForm" novalidate aria-labelledby="para-h" data-api="{{A_API}}">
+      <h2 id="para-h">Teks anda</h2>
+      <label class="sr-only" for="text">Teks untuk diparafrasa</label>
+      <textarea class="prose-in" id="text" name="text" maxlength="2400" placeholder="Tampal atau taip teks yang ingin ditulis semula…">{{A_IN}}</textarea>
+      <div class="count-row"><span>Ctrl + Enter untuk mula</span><span id="pCount">{{A_COUNT}} / {{A_LIMIT}}</span></div>
+      <fieldset class="field-group">
+        <legend>Mod</legend>
+        <div class="chipset">{{A_MODES}}</div>
+      </fieldset>
+      <div class="field" id="wLang"><label for="lang">Tulis hasil dalam</label><select class="input" id="lang" name="lang">{{A_LANGS}}</select></div>
+      <div class="tool-actions go"><button type="submit" class="btn" id="pGo">Parafrasa</button></div>
+      <p class="note" id="pStatus" aria-live="polite"></p>
+    </form>
+
+    <section class="box" id="pResult" aria-labelledby="para-result-h">
+      <h2 id="para-result-h">Hasil <small id="pTitle">(contoh)</small></h2>
+      <label class="check"><input type="checkbox" id="pShow" checked> Tunjuk perubahan</label>
+      <div class="ai-out" id="pOut" data-source="{{A_SOURCE}}">{{A_OUT}}</div>
+      <p class="ai-stats" id="pStats">{{A_STATS}}</p>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="pCopy">Salin</button><button type="button" class="btn ghost sm" id="pAgain">Tulis semula lagi</button><button type="button" class="btn ghost sm" id="pUse">Sunting versi ini</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="modes-h">Mod mana untuk digunakan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-h">
+    <table class="data">
+      <thead><tr><th scope="col">Mod</th><th scope="col">Sesuai untuk</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Biasa</th><td>Perkataan baharu pada panjang yang sama</td></tr>
+        <tr><th scope="row">Lancar</th><td>Membaiki ayat janggal atau berbunyi terjemahan</td></tr>
+        <tr><th scope="row">Formal</th><td>Surat rasmi, e-mel kepada majikan, laporan</td></tr>
+        <tr><th scope="row">Mudah</th><td>Menerangkan kepada pelanggan, kanak-kanak atau pemula</td></tr>
+        <tr><th scope="row">Ringkaskan</th><td>Memotong kira-kira 40% untuk had perkataan</td></tr>
+        <tr><th scope="row">Kembangkan</th><td>Kira-kira 50% lebih panjang, menghuraikan isi sedia ada</td></tr>
+        <tr><th scope="row">Akademik</th><td>Tugasan, kertas cadangan dan tesis</td></tr>
+        <tr><th scope="row">Kreatif</th><td>Hantaran media sosial, cerita dan iklan</td></tr>
+        <tr><th scope="row">Semak tatabahasa</th><td>Membetulkan kesalahan sahaja, kekalkan perkataan anda</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara ia berfungsi</h2>
+  <ol>
+    <li>Teks dan mod anda dihantar kepada Cloudflare Workers AI, yang menjalankan <strong>Mistral Small 3.1</strong> (Llama 3.3 70B jika sibuk).</li>
+    <li>Model diarahkan mengekalkan maksud, nama, nombor dan rujukan, dan menganggap teks anda sebagai teks, bukan arahan.</li>
+    <li>Pelayar anda membandingkan teks lama dan baharu <strong>perkataan demi perkataan</strong> dan menanda tambahan serta pemadaman.</li>
+    <li>Tiada apa disimpan: muat semula halaman dan teks hilang.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips parafrasa yang lebih baik</h2>
+  <ul>
+    <li><strong>Dokumen panjang:</strong> parafrasa satu atau dua perenggan pada satu masa untuk kualiti terbaik.</li>
+    <li><strong>Masih terlalu serupa?</strong> Tekan Tulis semula lagi, atau tukar ke Mudah atau Kreatif.</li>
+    <li><strong>Rujuk sumber:</strong> idea yang diparafrasa masih perlu rujukan kepada sumber asal.</li>
+    <li>Perlu versi pendek artikel panjang? Gunakan <a href="/ringkaskan-teks/">alat ringkasan AI</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/" rel="noopener">Cloudflare Workers AI: Mistral Small 3.1</a> dan <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">kuota percuma</a></li>
+    <li><a href="https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/paraphrasing.html" rel="noopener">Purdue OWL: Paraphrasing</a></li>
+    <li><a href="https://prpm.dbp.gov.my/" rel="noopener">Pusat Rujukan Persuratan Melayu (DBP)</a> untuk ejaan standard</li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> AI boleh tersilap. Baca hasilnya sebelum digunakan, pastikan fakta tepat, dan ikut peraturan sekolah, universiti atau majikan anda tentang penulisan berbantu AI.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/ringkaskan-teks/">Ringkaskan Teks AI<small>Ringkasan karangan dan artikel</small></a>
+    <a href="/penjana-kapsyen/">Penjana Kapsyen AI<small>Kapsyen IG dan TikTok</small></a>
+    <a href="/penjana-gambar-ai/">Penjana Gambar AI<small>Teks ke gambar</small></a>
+  </div>
+</section>

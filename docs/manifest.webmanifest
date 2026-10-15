@@ -68,9 +68,19 @@
       "description": "Your exact age in years, months and days, Hijri age and next birthday, plus Malaysia's official ages"
     },
     {
+      "name": "AI Image Generator",
+      "url": "/ai-image-generator/",
+      "description": "Type an idea in English or Malay and get an AI picture in seconds with FLUX.1 schnell: 10 styles inc"
+    },
+    {
       "name": "AI Prompt Generator (Image & Video)",
       "url": "/ai-prompt-generator/",
       "description": "Free AI image and video prompt generator: pick style, lighting and camera, get 3 ready-to-paste prom"
+    },
+    {
+      "name": "AI Summarizer",
+      "url": "/ai-summarizer/",
+      "description": "Paste an article, essay, report or notes and get a short, medium or detailed summary as bullet point"
     },
     {
       "name": "Annual Leave Calculator Malaysia",
@@ -106,6 +116,11 @@
       "name": "Calorie Calculator Malaysia",
       "url": "/calorie-calculator-malaysia/",
       "description": "Work out your BMR, daily calorie needs and a calorie target to lose or gain weight, with carbs, prot"
+    },
+    {
+      "name": "AI Caption Generator",
+      "url": "/caption-generator/",
+      "description": "Describe your post and get 5 captions for Instagram, TikTok, Facebook, X or LinkedIn in English, Mal"
     },
     {
       "name": "Car Loan Calculator Malaysia",
@@ -298,6 +313,11 @@
       "description": "Free overtime calculator for Malaysia: OT, rest day and public holiday pay under the Employment Act "
     },
     {
+      "name": "AI Paraphrasing Tool and Grammar Checker",
+      "url": "/paraphrasing-tool/",
+      "description": "Rewrite text in 8 modes (formal, simple, academic, shorter and more) or fix grammar, in English or B"
+    },
+    {
       "name": "Parcel Tracking Malaysia",
       "url": "/parcel-tracking-malaysia/",
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
@@ -306,6 +326,11 @@
       "name": "Personal Loan Calculator Malaysia",
       "url": "/personal-loan-calculator-malaysia/",
       "description": "Free personal loan calculator: monthly instalment, total interest, the real EIR behind a flat rate, "
+    },
+    {
+      "name": "Photo to Cartoon",
+      "url": "/photo-to-cartoon/",
+      "description": "Turn a photo into a cartoon, comic, anime, pop art, painting or pencil sketch in your browser. Never"
     },
     {
       "name": "Pos Laju Near Me",

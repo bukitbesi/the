@@ -80,6 +80,8 @@ const kasutCore = require('../assets/js/kasut-core.js');
 const samanCore = require('../assets/js/saman-core.js');
 const taksiranCore = require('../assets/js/taksiran-core.js');
 const evCore = require('../assets/js/ev-core.js');
+const cartoonCore = require('../assets/js/cartoon-core.js');
+const aiCore = require('../assets/js/ai-core.js');
 const tracking = require('../assets/js/tracking-core.js');
 const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
@@ -2224,7 +2226,86 @@ function evMap(lang) {
     E_VERIFIED: longDate(E.FACTS.verified, lang), E_VERIFIED_ISO: E.FACTS.verified
   };
 }
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, track: trackMap, near: nearMap, css: cssMap };
+// ---- batch 12: AI and image tools (moved from the blog; see bloggerFrom).
+const CARTOON_NAMES = {
+  classic: ['Classic cartoon', 'Kartun klasik', 'Flat colours, clean black outlines', 'Warna rata, garis hitam kemas'],
+  comic: ['Comic book', 'Komik', 'Bold colours, thick ink lines', 'Warna terang, garis dakwat tebal'],
+  anime: ['Soft anime', 'Anime lembut', 'Smooth skin tones, thin lines, more shades', 'Rona kulit lembut, garis halus, lebih banyak warna'],
+  pop: ['Pop art', 'Pop art', 'Four bright colour levels, poster look', 'Empat tahap warna terang, gaya poster'],
+  paint: ['Painting', 'Lukisan cat', 'Brush-like smoothing, no outlines', 'Licin seperti berus, tanpa garis'],
+  sketch: ['Pencil sketch', 'Lakaran pensel', 'Grey pencil drawing', 'Lukisan pensel kelabu']
+};
+function cartoonMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, C = cartoonCore, S = C.STYLES.classic;
+  const chips = Object.keys(C.STYLES).map(k => `<label><input type="radio" name="style" value="${k}"${k === 'classic' ? ' checked' : ''}> ${CARTOON_NAMES[k][L]}</label>`).join('');
+  const table = Object.entries(C.STYLES).map(([k, s]) => `<tr><th scope="row">${CARTOON_NAMES[k][L]}</th><td>${CARTOON_NAMES[k][2 + L]}</td><td>${s.mode === 'sketch' ? '–' : s.mode === 'posterize' ? (L ? 'Poster' : 'Posterize') : s.colors}</td><td>${s.line ? (L ? 'Ya' : 'Yes') : (L ? 'Tiada' : 'None')}</td></tr>`).join('\n');
+  return { C_CHIPS: chips, C_COLORS: S.colors, C_SMOOTH: S.smooth, C_LINE: S.line, C_LINE_PCT: Math.round(S.line * 100) + '%', C_THICK: S.thick, C_TABLE: table, C_MAX: C.FACTS.maxSide,
+    C_VERIFIED: longDate(C.FACTS.verified, lang), C_VERIFIED_ISO: C.FACTS.verified };
+}
+const AI_LABELS = {
+  modes: { standard: ['Standard', 'Biasa'], fluent: ['Fluent', 'Lancar'], formal: ['Formal', 'Formal'], simple: ['Simple', 'Mudah'], shorten: ['Shorten', 'Ringkaskan'], expand: ['Expand', 'Kembangkan'], academic: ['Academic', 'Akademik'], creative: ['Creative', 'Kreatif'], grammar: ['Grammar check', 'Semak tatabahasa'] },
+  langs: { same: ['Same as the text', 'Sama seperti teks'], ms: ['Bahasa Melayu', 'Bahasa Melayu'], en: ['English', 'English'] },
+  sizes: { short: ['Short (2–3 sentences)', 'Pendek (2–3 ayat)'], medium: ['Medium (5–7 sentences)', 'Sederhana (5–7 ayat)'], long: ['Detailed (10–12 sentences)', 'Terperinci (10–12 ayat)'] },
+  formats: { bullets: ['Bullet points', 'Poin'], paragraph: ['Paragraph', 'Perenggan'], keypoints: ['Key points + takeaway', 'Poin utama + kesimpulan'] },
+  tones: { casual: ['Casual', 'Santai'], funny: ['Funny', 'Kelakar'], inspiring: ['Inspiring', 'Inspirasi'], sales: ['Selling / promo', 'Jualan / promosi'], grateful: ['Grateful (Alhamdulillah)', 'Syukur (Alhamdulillah)'], romantic: ['Romantic', 'Romantik'], professional: ['Professional', 'Profesional'] },
+  capLangs: { ms: ['Bahasa Melayu', 'Bahasa Melayu'], en: ['English', 'English'], manglish: ['Manglish', 'Manglish'], rojak: ['Rojak (BM + English)', 'Rojak (BM + English)'] },
+  occasions: { none: ['Any post', 'Sebarang hantaran'], raya: ['Hari Raya Aidilfitri', 'Hari Raya Aidilfitri'], haji: ['Hari Raya Aidiladha', 'Hari Raya Aidiladha'], ramadan: ['Ramadan', 'Ramadan'], merdeka: ['Merdeka / Malaysia Day', 'Merdeka / Hari Malaysia'], cny: ['Chinese New Year', 'Tahun Baru Cina'], deepavali: ['Deepavali', 'Deepavali'], newyear: ['New Year', 'Tahun Baru'], birthday: ['Birthday', 'Hari jadi'], wedding: ['Wedding / engagement', 'Perkahwinan / pertunangan'], graduation: ['Graduation', 'Konvokesyen'], travel: ['Travel', 'Percutian'], food: ['Food', 'Makanan'] },
+  styles: { none: ['No style', 'Tiada gaya'], photo: ['Photo', 'Foto'], cinematic: ['Cinematic', 'Sinematik'], anime: ['Anime', 'Anime'], toon3d: ['3D cartoon', 'Kartun 3D'], watercolour: ['Watercolour', 'Cat air'], oil: ['Oil painting', 'Cat minyak'], batik: ['Batik', 'Batik'], pixel: ['Pixel art', 'Seni piksel'], lineart: ['Line art', 'Lukisan garis'], poster: ['Flat poster', 'Poster rata'] }
+};
+const aiOpts = (map, L, sel) => Object.entries(map).map(([k, v]) => `<option value="${k}"${k === sel ? ' selected' : ''}>${v[L]}</option>`).join('');
+const aiChips = (map, name, L, sel) => Object.entries(map).map(([k, v]) => `<label><input type="radio" name="${name}" value="${k}"${k === sel ? ' checked' : ''}> ${v[L]}</label>`).join('');
+const diffHtml = parts => parts.map(p => p.t === 'same' ? esc(p.w) : `<${p.t === 'add' ? 'ins' : 'del'}>${esc(p.w)}</${p.t === 'add' ? 'ins' : 'del'}>`).join('');
+const PARA_EX = {
+  ms: ['Saya ingin memaklumkan bahawa mesyuarat yang dijadualkan pada hari esok terpaksa dibatalkan disebabkan oleh beberapa masalah teknikal yang tidak dapat dielakkan.', 'Dimaklumkan bahawa mesyuarat yang dijadualkan esok terpaksa dibatalkan kerana beberapa masalah teknikal yang tidak dapat dielakkan.'],
+  en: ['I am writing to let you know that the meeting that was scheduled for tomorrow has had to be cancelled because of some technical problems that could not be avoided.', "Please note that tomorrow's scheduled meeting has been cancelled due to unavoidable technical problems."]
+};
+function paraMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, A = aiCore, [inp, out] = PARA_EX[lang], d = A.diff(inp, out);
+  return { A_COUNT: new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY').format(inp.length), A_API: esc(site.visionApi || ''), A_MODES: aiChips(AI_LABELS.modes, 'mode', L, 'standard'), A_LANGS: aiOpts(AI_LABELS.langs, L, 'same'), A_IN: esc(inp), A_OUT: diffHtml(d), A_SOURCE: attr(inp),
+    A_STATS: L ? `${A.count(inp).words} → ${A.count(out).words} patah perkataan · ${Math.round((1 - A.similarity(inp, out)) * 100)}% perkataan diubah` : `${A.count(inp).words} → ${A.count(out).words} words · ${Math.round((1 - A.similarity(inp, out)) * 100)}% of words changed`,
+    A_LIMIT: new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY').format(A.FACTS.limits.paraphrase), A_VERIFIED: longDate(A.FACTS.verified, lang), A_VERIFIED_ISO: A.FACTS.verified };
+}
+const SUM_EX = {
+  ms: ['- Membaca 20 minit sehari membina kosa kata dan tumpuan.', '- Pilih bahan yang anda minati supaya tabiat itu kekal.', '- Catat satu idea penting selepas setiap bacaan.', 'Kesimpulan: tabiat kecil yang konsisten lebih berkesan daripada membaca banyak sekali-sekala.'],
+  en: ['- Reading for 20 minutes a day builds vocabulary and focus.', '- Choose material you enjoy so the habit lasts.', '- Note one key idea after each reading session.', 'Takeaway: a small, steady habit beats reading a lot once in a while.']
+};
+function sumMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, A = aiCore, ex = SUM_EX[lang];
+  const html = '<ul>' + ex.filter(l => l.startsWith('- ')).map(l => `<li>${esc(l.slice(2))}</li>`).join('') + '</ul><p>' + esc(ex[ex.length - 1]) + '</p>';
+  return { A_API: esc(site.visionApi || ''), A_SIZES: aiOpts(AI_LABELS.sizes, L, 'medium'), A_FORMATS: aiOpts(AI_LABELS.formats, L, 'keypoints'), A_LANGS: aiOpts(AI_LABELS.langs, L, 'same'), A_OUT: html,
+    A_LIMIT: new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY').format(A.FACTS.limits.summarize), A_VERIFIED: longDate(A.FACTS.verified, lang), A_VERIFIED_ISO: A.FACTS.verified };
+}
+const CAP_EX = {
+  ms: ['Pagi tak lengkap tanpa nasi lemak 🍛☀️', 'Sambal pedas, telur goreng, kopi panas. Hari ini dah menang 😋', 'Rezeki pagi: sepinggan nasi lemak dan hati yang tenang. Alhamdulillah 🤲', 'Siapa team sambal lebih? Angkat tangan 🙋‍♂️🌶️', 'Diet start esok. Hari ini nasi lemak dulu 😅'],
+  en: ['No morning is complete without nasi lemak 🍛☀️', 'Spicy sambal, fried egg, hot kopi. Today is already a win 😋', 'Simple breakfast, happy heart 💛', 'Team extra sambal, where you at? 🙋‍♂️🌶️', 'Diet starts tomorrow. Today is for nasi lemak 😅']
+};
+const CAP_TAGS = '#nasilemak #sarapan #makanmalaysia #kualalumpur #malaysianfood';
+const CAP_IDEAS = {
+  ms: ['Nasi lemak untuk sarapan di gerai tepi jalan', 'Kedai kek baru buka, promosi 20% minggu ini', 'Balik kampung beraya bersama keluarga', 'Hari konvokesyen, tamat ijazah sarjana muda', 'Percutian di Langkawi bersama kawan'],
+  en: ['Nasi lemak breakfast at a roadside stall', 'New cake shop opening, 20% off this week', 'Going back to my hometown for Raya with family', 'Graduation day, finished my degree', 'Holiday in Langkawi with friends']
+};
+function capMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, A = aiCore, lim = A.LIMITS.instagram, nf = new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY');
+  const caps = CAP_EX[lang].map(c => `<li><p>${esc(c)}</p><div class="cap-meta"><small>${Array.from(c).length} / ${nf.format(lim.max)} ${L ? 'aksara' : 'characters'}</small><button type="button" class="btn ghost sm">${L ? 'Salin' : 'Copy'}</button><button type="button" class="btn ghost sm">${L ? 'Salin dengan hashtag' : 'Copy with hashtags'}</button></div></li>`).join('\n');
+  const limits = Object.entries(A.LIMITS).map(([k, v]) => `<tr><th scope="row">${A.PLATFORMS[k]}</th><td>${nf.format(v.max)}</td><td>${k === 'instagram' || k === 'tiktok' ? v.tags : '–'}</td><td>${v.more ? (L ? 'kira-kira ' : 'about ') + v.more : '–'}</td></tr>`).join('\n');
+  return { A_API: esc(site.visionApi || ''), A_PLATFORMS: Object.entries(A.PLATFORMS).map(([k, v]) => `<option value="${k}"${k === 'instagram' ? ' selected' : ''}>${v}</option>`).join(''),
+    A_TONES: aiOpts(AI_LABELS.tones, L, 'casual'), A_CAPLANGS: aiOpts(AI_LABELS.capLangs, L, L ? 'ms' : 'en'), A_OCCASIONS: aiOpts(AI_LABELS.occasions, L, 'none'),
+    A_EMOJI: [`<option value="yes" selected>${L ? 'Ya' : 'Yes'}</option>`, `<option value="no">${L ? 'Tidak' : 'No'}</option>`].join(''), A_TAGS: lim.tags, A_TAGMAX: lim.tags,
+    A_IDEAS: CAP_IDEAS[lang].map(i => `<button type="button" data-idea="${attr(i)}">${esc(i)}</button>`).join(''), A_CAPS: caps, A_TAGLINE: CAP_TAGS, A_LIMITS: limits,
+    A_LIMIT: nf.format(A.FACTS.limits.caption), A_VERIFIED: longDate(A.FACTS.verified, lang), A_VERIFIED_ISO: A.FACTS.verified };
+}
+const GEN_IDEAS = {
+  ms: ['Kucing oren makan durian di jeti Pulau Pinang', 'Rumah kampung kayu waktu subuh berkabus', 'Angkasawan makan nasi lemak di bulan', 'Pasar malam Kuala Lumpur bawah lampu neon', 'Burung kenyalang terbang atas hutan Borneo'],
+  en: ['An orange cat eating durian on a Penang jetty', 'A wooden kampung house at a misty dawn', 'An astronaut eating nasi lemak on the moon', 'A Kuala Lumpur night market under neon lights', 'A hornbill flying over the Borneo rainforest']
+};
+function genMap(lang) {
+  const L = lang === 'ms' ? 1 : 0, A = aiCore;
+  const styles = Object.entries(A.IMAGE_STYLES).filter(([k]) => k !== 'none').map(([k, v]) => `<tr><th scope="row">${AI_LABELS.styles[k][L]}</th><td>${esc(v)}</td></tr>`).join('\n');
+  return { A_API: esc(site.visionApi || ''), A_STYLES: aiChips(AI_LABELS.styles, 'style', L, 'none'), A_IDEAS: GEN_IDEAS[lang].map(i => `<button type="button" data-idea="${attr(i)}">${esc(i)}</button>`).join(''),
+    A_STYLE_TABLE: styles, A_EX_PROMPT: esc(A.imagePrompt(GEN_IDEAS.en[0], 'watercolour')), A_LIMIT: new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY').format(A.FACTS.limits.image),
+    A_VERIFIED: longDate(A.FACTS.verified, lang), A_VERIFIED_ISO: A.FACTS.verified };
+}
+const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2405,6 +2486,11 @@ const bundles = {
   'saman.js': ['assets/js/saman-core.js', 'assets/js/saman-ui.js'],
   'taksiran.js': ['assets/js/taksiran-core.js', 'assets/js/taksiran-ui.js'],
   'ev.js': ['assets/js/tnb-core.js', 'assets/js/ev-core.js', 'assets/js/ev-ui.js'],
+  'cartoon.js': ['assets/js/cartoon-core.js', 'assets/js/cartoon-ui.js'],
+  'paraphrase.js': ['assets/js/ai-core.js', 'assets/js/ai-kit.js', 'assets/js/paraphrase-ui.js'],
+  'summary.js': ['assets/js/ai-core.js', 'assets/js/ai-kit.js', 'assets/js/summary-ui.js'],
+  'caption.js': ['assets/js/ai-core.js', 'assets/js/ai-kit.js', 'assets/js/caption-ui.js'],
+  'imagegen.js': ['assets/js/ai-core.js', 'assets/js/ai-kit.js', 'assets/js/imagegen-ui.js'],
   'tracking.js': ['assets/js/tracking-core.js', 'assets/js/tracking-ui.js'],
   'near.js': ['assets/js/tracking-core.js', 'assets/js/near-ui.js'],
   'css-minifier.js': ['assets/js/css-core.js', 'assets/js/css-ui.js'],

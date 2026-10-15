@@ -1,0 +1,131 @@
+<!--page
+{
+  "path": "/ai-image-generator/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/penjana-gambar-ai/" },
+  "bloggerFrom": "https://www.thebukitbesi.com/p/free-ai-image-generator.html",
+  "title": "Free AI Image Generator: Text to Image with FLUX, No Sign-Up",
+  "description": "Type an idea in English or Malay and get an AI picture in seconds with FLUX.1 schnell: 10 styles including photo, anime, watercolour and batik. Free.",
+  "llms": "Free AI image generator (text to image) using FLUX.1 [schnell] by Black Forest Labs on Cloudflare Workers AI. Type an idea in English or Bahasa Melayu; the optional 'Improve prompt' button uses a language model to translate and expand it into a detailed English prompt, which FLUX understands best. Ten one-tap styles add a tested style phrase: photo, cinematic, anime, 3D cartoon, watercolour, oil painting, Malaysian batik, pixel art, line art and flat poster. Quality: fast (4 steps) or detailed (8 steps, the model's maximum). Output is a square picture shown in the browser, with download and a strip of the last 6 pictures in the current tab; pictures and prompts are not stored by the site. Each connection may create up to 8 pictures a day (3 a minute) from a free daily allowance shared by all visitors that resets at 8am Malaysia time. Requests for sexual, nude or gory content are refused. FLUX.1 [schnell] is released under the Apache 2.0 licence.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "imagegen",
+  "scripts": ["/assets/js/imagegen.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["AI Image Generator", null]],
+  "about": ["Text-to-image generation", "FLUX.1", "AI art", "Prompt engineering"],
+  "app": {
+    "name": "AI Image Generator",
+    "category": "DesignApplication",
+    "features": ["FLUX.1 [schnell] text to image", "Prompts in English or Bahasa Melayu", "Improve prompt with AI", "10 styles including Malaysian batik", "Fast or detailed quality", "Download and session history", "No sign-up, nothing stored"]
+  },
+  "citations": [
+    ["Cloudflare Workers AI: FLUX.1 [schnell]", "https://developers.cloudflare.com/workers-ai/models/flux-1-schnell/"],
+    ["Hugging Face: black-forest-labs/FLUX.1-schnell (Apache 2.0)", "https://huggingface.co/black-forest-labs/FLUX.1-schnell"],
+    ["Cloudflare Workers AI: Pricing and free allocation", "https://developers.cloudflare.com/workers-ai/platform/pricing/"],
+    ["Black Forest Labs", "https://bfl.ai/"]
+  ],
+  "faq": [
+    { "q": "How do I make an AI image for free?", "a": "Type what you want to see above, for example an orange cat eating durian on a Penang jetty, pick a style such as watercolour, and press Create image. The picture appears in about 5 to 15 seconds, ready to download. No sign-up is needed." },
+    { "q": "Can I write the prompt in Malay?", "a": "Yes. Press Improve prompt and the AI translates your Malay idea into a detailed English prompt, which the image model understands best. You can edit it before creating the picture." },
+    { "q": "Which AI model makes the pictures?", "a": "FLUX.1 [schnell] by Black Forest Labs, a fast 12-billion-parameter text-to-image model, running on Cloudflare Workers AI. Detailed quality uses 8 steps, the model's maximum; fast uses 4." },
+    { "q": "How many pictures can I make?", "a": "Up to 8 pictures a day per connection and 3 a minute, from a free daily allowance shared by all visitors that resets at 8am Malaysia time. If it runs out, try again after 8am." },
+    { "q": "Can I use the pictures commercially?", "a": "FLUX.1 [schnell] is released under the Apache 2.0 licence, which allows commercial use. You are responsible for what you create: avoid real people's likenesses, trademarks and anything misleading." },
+    { "q": "Are my prompts and pictures stored?", "a": "No. The prompt is sent once to create the picture and the picture is returned to your browser. Only the last 6 pictures stay in this tab until you close it." },
+    { "q": "Why was my request refused?", "a": "Prompts asking for nudity, sexual or gory content are blocked so the tool stays family-friendly. Describe a different scene and try again." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">AI Image Generator</li></ol></nav>
+  <h1>AI Image Generator</h1>
+  <p class="answer">Type an idea in <strong>English or Bahasa Melayu</strong> and get an AI picture in about <strong>5 to 15 seconds</strong> with <strong>FLUX.1 [schnell]</strong>. Pick one of 10 styles, from photo and anime to watercolour and <strong>Malaysian batik</strong>, let the AI improve your prompt, and download the result. Free, no sign-up, nothing stored.</p>
+  <p class="meta"><span>Updated <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Up to 8 pictures a day</span><a href="/penjana-gambar-ai/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="genForm" novalidate aria-labelledby="gen-h" data-api="{{A_API}}">
+      <h2 id="gen-h">Your idea</h2>
+      <label class="sr-only" for="prompt">Describe the picture</label>
+      <textarea class="prose-in short" id="prompt" name="prompt" maxlength="2000" rows="3" placeholder="For example: an orange cat eating durian on a Penang jetty at sunset"></textarea>
+      <div class="count-row"><span>Ctrl + Enter to create</span><span id="gCount">0 / {{A_LIMIT}}</span></div>
+      <div class="ideas" aria-label="Ideas">{{A_IDEAS}}</div>
+      <fieldset class="field-group">
+        <legend>Style</legend>
+        <div class="chipset">{{A_STYLES}}</div>
+      </fieldset>
+      <div class="seg" role="radiogroup" aria-label="Quality"><label><input type="radio" name="quality" value="fast" checked> Fast</label><label><input type="radio" name="quality" value="detail"> Detailed</label></div>
+      <div class="tool-actions go"><button type="submit" class="btn" id="gGo">Create image</button><button type="button" class="btn ghost sm" id="gEnhance">Improve prompt</button></div>
+      <p class="note" id="gStatus" aria-live="polite"></p>
+    </form>
+
+    <section class="box" id="gResult" aria-labelledby="gen-result-h">
+      <h2 id="gen-result-h">Your picture</h2>
+      <div class="gen-frame">
+        <div class="stage-empty" id="gEmpty">Your picture will appear here.</div>
+        <img id="gImg" alt="" width="1024" height="1024" hidden>
+      </div>
+      <div class="thumbs" id="gHistory" hidden></div>
+      <div class="tagbox" id="gUsedBox" hidden><small>Prompt used:</small> <span id="gUsed"></span> <button type="button" class="btn ghost sm" id="gCopyPrompt">Copy prompt</button></div>
+      <p class="sr-only" id="gLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="gDownload" disabled>Download</button><button type="button" class="btn ghost sm" id="gAgain" disabled>Create another</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="styles-h">What each style adds to your prompt</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="styles-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Style</th><th scope="col">Words added</th></tr></thead>
+      <tbody>
+{{A_STYLE_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Example</h2>
+  <p>The idea "an orange cat eating durian on a Penang jetty" with the watercolour style is sent as: <em>{{A_EX_PROMPT}}</em>.</p>
+
+  <h2 id="formula">How it works</h2>
+  <ol>
+    <li><strong>Optional:</strong> Improve prompt asks a language model to translate and expand your idea into a 40 to 70 word English prompt.</li>
+    <li>The chosen style's words are added to the end of your prompt.</li>
+    <li>Cloudflare Workers AI runs <strong>FLUX.1 [schnell]</strong> for 4 steps (fast) or 8 steps (detailed) and returns the picture.</li>
+    <li>Your browser shows it and keeps the last 6 in this tab; nothing is saved on the server.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips for better AI pictures</h2>
+  <ul>
+    <li><strong>Describe, don't command:</strong> "a wooden kampung house at misty dawn, wide shot" works better than "make a house".</li>
+    <li><strong>Add lighting and camera:</strong> golden hour, neon night, close-up, aerial view.</li>
+    <li><strong>Text in pictures</strong> is often misspelled; add words later in an editor.</li>
+    <li>Build detailed prompts with the <a href="/ai-prompt-generator/">AI Prompt Generator</a>, or get one from a photo with <a href="/image-to-prompt/">Image to Prompt</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.cloudflare.com/workers-ai/models/flux-1-schnell/" rel="noopener">Cloudflare Workers AI: FLUX.1 [schnell]</a> and <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">free allocation</a></li>
+    <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-schnell" rel="noopener">Hugging Face: FLUX.1 [schnell] model card and Apache 2.0 licence</a></li>
+    <li><a href="https://bfl.ai/" rel="noopener">Black Forest Labs</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> AI pictures can contain errors and should not be presented as real photos. Do not create images of real people without consent, or anything that infringes trademarks or misleads.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/ai-prompt-generator/">AI Prompt Generator<small>Prompts for Midjourney, Flux, Sora</small></a>
+    <a href="/photo-to-cartoon/">Photo to Cartoon<small>Cartoon your photos</small></a>
+    <a href="/caption-generator/">Caption Generator<small>Captions and hashtags</small></a>
+  </div>
+</section>

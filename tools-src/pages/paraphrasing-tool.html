@@ -1,0 +1,133 @@
+<!--page
+{
+  "path": "/paraphrasing-tool/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/parafrasa-ayat/" },
+  "bloggerFrom": "https://www.thebukitbesi.com/p/ai-paraphraser-tool.html",
+  "title": "Free AI Paraphrasing Tool and Grammar Checker (English and Malay)",
+  "description": "Rewrite text in 8 modes (formal, simple, academic, shorter and more) or fix grammar, in English or Bahasa Melayu, with every changed word highlighted. Free.",
+  "llms": "Free AI paraphrasing tool and grammar checker for English and Bahasa Melayu. Paste up to 2,400 characters and choose a mode: standard (new wording, same meaning and length), fluent (smoother phrasing), formal (letters, reports, emails), simple (clear short sentences), shorten (about 40% shorter), expand (about 50% longer without new facts), academic (assignments and theses) or creative; or grammar check, which corrects only spelling, grammar and punctuation. The output can be written in the same language, in Malay or in English, so it can also rewrite an English text into Malay. Every added and removed word is highlighted (word-level diff) with the share of words changed. Runs on Cloudflare Workers AI (Mistral Small 3.1, with Llama 3.3 70B as a fallback); the text is processed once and not stored by the site. Free daily allowance shared by all visitors resets at 8am Malaysia time; each connection may make up to 40 AI requests a day. Names, numbers and citations are kept; always check the result before submitting coursework, as institutions have their own rules on AI use.",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "render": "paraphrase",
+  "scripts": ["/assets/js/paraphrase.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["Paraphrasing Tool", null]],
+  "about": ["Paraphrasing", "Grammar checking", "Bahasa Melayu", "Large language models"],
+  "app": {
+    "name": "AI Paraphrasing Tool and Grammar Checker",
+    "category": "UtilitiesApplication",
+    "features": ["8 rewriting modes", "Grammar and spelling check", "English and Bahasa Melayu", "Rewrite into the other language", "Every changed word highlighted", "Rewrite again in one tap", "No sign-up"]
+  },
+  "citations": [
+    ["Cloudflare Workers AI: Mistral Small 3.1 24B Instruct", "https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/"],
+    ["Cloudflare Workers AI: Llama 3.3 70B Instruct", "https://developers.cloudflare.com/workers-ai/models/llama-3.3-70b-instruct-fp8-fast/"],
+    ["Cloudflare Workers AI: Pricing and free allocation", "https://developers.cloudflare.com/workers-ai/platform/pricing/"],
+    ["Purdue OWL: Paraphrasing", "https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/paraphrasing.html"],
+    ["Pusat Rujukan Persuratan Melayu (DBP)", "https://prpm.dbp.gov.my/"]
+  ],
+  "faq": [
+    { "q": "How do I paraphrase text for free?", "a": "Paste up to 2,400 characters above, choose a mode such as standard, formal or simple, and press Paraphrase. The rewritten text appears in a few seconds with every changed word highlighted, ready to copy. There is no sign-up." },
+    { "q": "Can it paraphrase in Bahasa Melayu?", "a": "Yes. It detects whether your text is Malay or English and keeps the same language, or you can choose Bahasa Melayu or English as the output, for example to rewrite an English paragraph in Malay." },
+    { "q": "What is the difference between the modes?", "a": "Standard changes wording at a similar length; fluent smooths awkward phrasing; formal suits letters and reports; simple uses short clear sentences; shorten cuts about 40%; expand adds about 50% without new facts; academic suits assignments; creative is livelier. Grammar check changes only mistakes." },
+    { "q": "Does the grammar checker change my writing style?", "a": "No. Grammar check is told to correct only spelling, grammar and punctuation and to keep your wording and tone. Every correction is highlighted, so you can see exactly what changed." },
+    { "q": "Is my text stored?", "a": "No. The text is sent once to Cloudflare Workers AI to be rewritten and is not stored by this site. Avoid pasting passwords or confidential personal data into any online AI tool." },
+    { "q": "Is paraphrasing with AI plagiarism?", "a": "Paraphrasing someone else's ideas still needs a citation to the original source. Many universities and schools also have rules on AI writing tools, so check yours and review the result in your own words before submitting." },
+    { "q": "Why does it say the free AI allowance is used up?", "a": "The tool runs on a free daily allowance shared by all visitors, which resets at 8am Malaysia time, and each connection can make up to 40 AI requests a day. Try again after the reset." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">Paraphrasing Tool</li></ol></nav>
+  <h1>AI Paraphrasing Tool and Grammar Checker</h1>
+  <p class="answer">Paste your text, pick one of <strong>8 rewriting modes</strong> (formal, simple, academic, shorter and more) or <strong>grammar check</strong>, and get a new version in seconds with <strong>every changed word highlighted</strong>. Works in <strong>English and Bahasa Melayu</strong>, can rewrite into the other language, and needs no sign-up.</p>
+  <p class="meta"><span>Updated <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Text is processed, never stored</span><a href="/parafrasa-ayat/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="paraForm" novalidate aria-labelledby="para-h" data-api="{{A_API}}">
+      <h2 id="para-h">Your text</h2>
+      <label class="sr-only" for="text">Text to paraphrase</label>
+      <textarea class="prose-in" id="text" name="text" maxlength="2400" placeholder="Paste or type the text you want to rewrite…">{{A_IN}}</textarea>
+      <div class="count-row"><span>Ctrl + Enter to run</span><span id="pCount">{{A_COUNT}} / {{A_LIMIT}}</span></div>
+      <fieldset class="field-group">
+        <legend>Mode</legend>
+        <div class="chipset">{{A_MODES}}</div>
+      </fieldset>
+      <div class="field" id="wLang"><label for="lang">Write the result in</label><select class="input" id="lang" name="lang">{{A_LANGS}}</select></div>
+      <div class="tool-actions go"><button type="submit" class="btn" id="pGo">Paraphrase</button></div>
+      <p class="note" id="pStatus" aria-live="polite"></p>
+    </form>
+
+    <section class="box" id="pResult" aria-labelledby="para-result-h">
+      <h2 id="para-result-h">Result <small id="pTitle">(example)</small></h2>
+      <label class="check"><input type="checkbox" id="pShow" checked> Show changes</label>
+      <div class="ai-out" id="pOut" data-source="{{A_SOURCE}}">{{A_OUT}}</div>
+      <p class="ai-stats" id="pStats">{{A_STATS}}</p>
+      <p class="sr-only" id="pLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="pCopy">Copy</button><button type="button" class="btn ghost sm" id="pAgain">Rewrite again</button><button type="button" class="btn ghost sm" id="pUse">Edit this version</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="modes-h">Which mode to use</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-h">
+    <table class="data">
+      <thead><tr><th scope="col">Mode</th><th scope="col">Best for</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Standard</th><td>New wording at a similar length</td></tr>
+        <tr><th scope="row">Fluent</th><td>Fixing awkward, translated-sounding sentences</td></tr>
+        <tr><th scope="row">Formal</th><td>Letters, emails to bosses, reports</td></tr>
+        <tr><th scope="row">Simple</th><td>Explaining to customers, children or beginners</td></tr>
+        <tr><th scope="row">Shorten</th><td>Cutting about 40% to meet a word limit</td></tr>
+        <tr><th scope="row">Expand</th><td>About 50% longer, explaining existing points</td></tr>
+        <tr><th scope="row">Academic</th><td>Assignments, proposals and theses</td></tr>
+        <tr><th scope="row">Creative</th><td>Social posts, stories and marketing copy</td></tr>
+        <tr><th scope="row">Grammar check</th><td>Correcting mistakes only, keeping your words</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How it works</h2>
+  <ol>
+    <li>Your text and the mode are sent to Cloudflare Workers AI, which runs <strong>Mistral Small 3.1</strong> (Llama 3.3 70B if busy).</li>
+    <li>The model is told to keep the meaning, names, numbers and citations, and to treat your text as text, not instructions.</li>
+    <li>Your browser compares the old and new text <strong>word by word</strong> and highlights additions and deletions.</li>
+    <li>Nothing is saved: refresh the page and the text is gone.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Tips for a better paraphrase</h2>
+  <ul>
+    <li><strong>Long documents:</strong> paraphrase one or two paragraphs at a time for the best quality.</li>
+    <li><strong>Still too close?</strong> Press Rewrite again, or switch to Simple or Creative.</li>
+    <li><strong>Cite your sources:</strong> paraphrased ideas still need a reference to the original.</li>
+    <li>Need a shorter version of a long article? Use the <a href="/ai-summarizer/">AI summarizer</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.cloudflare.com/workers-ai/models/mistral-small-3.1-24b-instruct/" rel="noopener">Cloudflare Workers AI: Mistral Small 3.1</a> and <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">free allocation</a></li>
+    <li><a href="https://owl.purdue.edu/owl/research_and_citation/using_research/quoting_paraphrasing_and_summarizing/paraphrasing.html" rel="noopener">Purdue OWL: Paraphrasing</a></li>
+    <li><a href="https://prpm.dbp.gov.my/" rel="noopener">Pusat Rujukan Persuratan Melayu (DBP)</a> for standard Malay spelling</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> AI can make mistakes. Read the result before using it, keep facts accurate, and follow your school, university or employer's rules on AI-assisted writing.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/ai-summarizer/">AI Summarizer<small>Summarize articles and essays</small></a>
+    <a href="/caption-generator/">Caption Generator<small>Instagram and TikTok captions</small></a>
+    <a href="/ai-image-generator/">AI Image Generator<small>Text to image</small></a>
+  </div>
+</section>
