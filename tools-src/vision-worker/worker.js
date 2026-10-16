@@ -8,12 +8,14 @@ const ALLOWED_ORIGINS = ['https://tool.thebukitbesi.com'];
 const VISION = '@cf/meta/llama-3.2-11b-vision-instruct';
 // Tried in order: the first that answers wins, so a retired model never takes the tools down.
 const TEXT_MODELS = ['@cf/mistralai/mistral-small-3.1-24b-instruct', '@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/meta/llama-3.1-8b-instruct-fast'];
+// Malay needs the larger models: smaller ones pick wrong collocations (mengundurkan mesyuarat, mengucapkan maaf).
+const MS_MODELS = ['@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/openai/gpt-oss-120b', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const IMAGE_MODEL = '@cf/black-forest-labs/flux-1-schnell';
 const MAX_BODY = 1_500_000;
 // Per-IP limits (soft, per Cloudflare location): requests a minute and a day for each route.
 const LIMITS = { describe: [6, 60], text: [8, 40], image: [3, 8] };
 const TASKS = { paraphrase: 2400, grammar: 2400, summarize: 12000, caption: 1200, enhance: 1200 };
-const MAX_TOKENS = { paraphrase: 900, grammar: 900, summarize: 700, caption: 700, enhance: 300 };
+const MAX_TOKENS = { paraphrase: 900, grammar: 1600, summarize: 700, caption: 700, enhance: 300 };
 // Picture requests that are refused before reaching the model (English and Malay).
 const BLOCKED = /\b(nude|nudes|naked|nsfw|porn\w*|sex|sexual|sexy|erotic\w*|hentai|lingerie|topless|undress\w*|bogel|telanjang|lucah|seks|berahi|gore|beheading|decapitat\w*|dismember\w*|bloody corpse|child abuse|loli)\b/i;
 const SYSTEM_VISION = 'You describe a picture so someone can recreate it with an AI image or video generator. Reply with one JSON object only, no other text, with these string keys: ' +
@@ -47,6 +49,12 @@ const textOf = out => {
   if (typeof out.response === 'string') return out.response;
   if (out.choices && out.choices[0] && out.choices[0].message) return String(out.choices[0].message.content || '');
   if (typeof out.output_text === 'string') return out.output_text;
+  // Responses-style output (gpt-oss): [{ type: 'message', content: [{ type: 'output_text', text }] }]
+  if (Array.isArray(out.output)) {
+    const msg = out.output.filter(o => o && o.type === 'message').pop();
+    const part = msg && Array.isArray(msg.content) ? msg.content.filter(c => c && typeof c.text === 'string').pop() : null;
+    if (part) return part.text;
+  }
   return '';
 };
 
@@ -68,9 +76,9 @@ async function describe(env, image) {
   }
 }
 
-async function runText(env, task, system, user, temperature) {
+async function runText(env, task, system, user, temperature, lang) {
   let last;
-  for (const model of TEXT_MODELS) {
+  for (const model of lang === 'ms' ? MS_MODELS : TEXT_MODELS) {
     try {
       const out = await env.AI.run(model, { messages: [{ role: 'system', content: system + TEXT_GUARD }, { role: 'user', content: user }], max_tokens: MAX_TOKENS[task], temperature });
       const text = textOf(out).trim();
@@ -120,10 +128,10 @@ export default {
       }
       if (kind === 'text') {
         const task = body.task, system = body.system, user = body.user;
-        if (!TASKS[task] || typeof system !== 'string' || typeof user !== 'string' || system.length > 3000 || !user.trim()) return json({ ok: false, error: 'bad_request' }, 400, cors);
+        if (!TASKS[task] || typeof system !== 'string' || typeof user !== 'string' || system.length > 4000 || !user.trim()) return json({ ok: false, error: 'bad_request' }, 400, cors);
         if (user.length > TASKS[task]) return json({ ok: false, error: 'too_long', max: TASKS[task] }, 413, cors);
         const t = Math.min(1, Math.max(0, Number(body.temperature) || 0.4));
-        const out = await runText(env, task, system, user, t);
+        const out = await runText(env, task, system, user, t, body.lang === 'ms' ? 'ms' : 'en');
         if (/^\s*\[refused\]\s*$/i.test(out.text)) return json({ ok: false, error: 'refused' }, 422, cors);
         return json({ ok: true, text: out.text, model: out.model }, 200, cors);
       }

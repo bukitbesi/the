@@ -35,6 +35,12 @@ test('/text runs a task, validates it, falls back to the next model and reports 
   assert.equal((await post('/text', { task: 'summarize', system: 's', user: 'text' }, '3.3.3.7')).j.error, 'quota'); env.quota = false;
 });
 
+test('/text sends Malay requests to the larger model first', async () => {
+  calls.length = 0;
+  const r = await post('/text', { task: 'grammar', lang: 'ms', system: 's', user: 'teks' }, '6.6.6.6');
+  assert.equal(r.status, 200); assert.match(calls[0], /llama-3.3-70b/);
+});
+
 test('/image blocks unsafe prompts, returns base64 and limits each IP', async () => {
   assert.equal((await post('/image', { prompt: 'a nude person' }, '4.4.4.4')).j.error, 'blocked');
   assert.equal((await post('/image', { prompt: 'gambar bogel' }, '4.4.4.5')).j.error, 'blocked');

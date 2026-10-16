@@ -19,10 +19,23 @@
   function label() { $('pGo').textContent = mode() === 'grammar' ? T.check : T.go; $('wLang').hidden = mode() === 'grammar'; }
 
   function show() {
-    var d = A.diff(lastIn, lastOut), adds = d.filter(function (x) { return x.t === 'add'; }).length;
+    var d = A.diff(lastIn, lastOut), adds = $('pFixes').hidden ? d.filter(function (x) { return x.t === 'add'; }).length : $('pFixes').children.length;
     if ($('pShow').checked) K.renderDiff(out, d); else out.textContent = lastOut;
     var c1 = A.count(lastIn).words, c2 = A.count(lastOut).words;
     $('pStats').textContent = mode() === 'grammar' ? T.fixes(adds) : T.stats(c1, c2, A.similarity(lastIn, lastOut));
+  }
+
+  // Grammar mode: one line per correction with the model's reason.
+  function fixes(list) {
+    var box = $('pFixes'); box.textContent = '';
+    list.forEach(function (c) {
+      var li = document.createElement('li'), del = document.createElement('del'), ins = document.createElement('ins');
+      del.textContent = c.from; ins.textContent = c.to;
+      li.appendChild(del); li.appendChild(document.createTextNode(' → ')); li.appendChild(ins);
+      if (c.why) { var sm = document.createElement('small'); sm.textContent = ' ' + c.why; li.appendChild(sm); }
+      box.appendChild(li);
+    });
+    box.hidden = !list.length;
   }
 
   function run(text) {
@@ -33,8 +46,9 @@
     K.busy($('pGo'), true, T.working); $('pAgain').disabled = true;
     $('pStatus').textContent = T.working; $('pResult').setAttribute('aria-busy', 'true');
     A.request(api, '/text', body).then(function (j) {
-      lastIn = text; lastOut = A.clean(j.text);
-      $('pTitle').hidden = true; show();
+      var g = body.task === 'grammar' ? A.parseGrammar(j.text) : { text: A.clean(j.text), changes: [] };
+      lastIn = text; lastOut = g.text;
+      $('pTitle').hidden = true; fixes(g.changes); show();
       $('pStatus').textContent = '';
       $('pLive').textContent = lastOut.slice(0, 200);
     }, function (e) {

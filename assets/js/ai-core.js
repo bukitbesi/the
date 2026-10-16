@@ -50,25 +50,74 @@
   function langName(code, text) { return LANG[code === 'same' ? detectLang(text) : code] || LANG.en; }
 
   // Each builder returns the request body for the worker's POST /text.
+  // Standard Malay (bahasa baku, DBP) usage the model must follow; these are the collocation and word-choice slips
+  // general models make most often in Malay.
+  var MS_RULES = [
+    'Gunakan bahasa Melayu baku mengikut Dewan Bahasa dan Pustaka (DBP); elakkan bahasa basahan, bahasa rojak dan kata Inggeris yang ada padanan Melayu (contoh: sambungan internet, bukan koneksi).',
+    'Pilih kolokasi yang tepat: membatalkan mesyuarat (batal terus) atau menangguhkan mesyuarat (ke tarikh lain), bukan mengundurkan mesyuarat; mengadakan mesyuarat; mesyuarat berlangsung.',
+    'Meminta maaf atau memohon maaf, bukan mengucapkan maaf; atas kesulitan yang dialami, bukan kesusahan yang timbul.',
+    'Terdapat atau wujud masalah, bukan timbulnya masalah sebagai pembuka sebab.',
+    'Baharu untuk sesuatu yang baru wujud (pengumuman baharu, tarikh baharu); baru untuk masa (baru sahaja, baru tiba).',
+    'Membuat atau mengeluarkan pengumuman; mengemukakan cadangan atau soalan.',
+    'Daripada untuk perbandingan dan sumber bukan tempat (daripada kami); dari untuk tempat dan masa (dari Kuala Lumpur, dari pagi).',
+    'Elakkan penggunaan kata yang berlebihan seperti "adalah merupakan", "para-para hadirin", "sedang dalam proses".',
+    'Ejaan baku: mesyuarat, kerana, sahaja, sebarang, ketika, pelbagai, perisian, peralatan.'
+  ];
+  function isMalay(code, text) { return (code === 'same' || !code ? detectLang(text) : code) === 'ms'; }
+
+  // Each builder returns the request body for the worker's POST /text; lang lets the worker pick a model good at it.
   function paraphrase(o) {
     var text = String(o.text || '').trim(), mode = PARA_MODES[o.mode] ? o.mode : 'standard', lang = langName(o.lang || 'same', text);
-    if (mode === 'grammar' || o.mode === 'grammar') {
-      return { task: 'grammar', temperature: 0.1, user: text,
-        system: 'You are a careful proofreader. Correct spelling, grammar, punctuation and word choice errors in the text, which is in ' + langName('same', text) + '. Change only what is wrong and keep the wording, tone, meaning and language. Return only the corrected text, with no notes, quotes or preface.' };
+    if (o.mode === 'grammar') {
+      var srcMs = detectLang(text) === 'ms';
+      return { task: 'grammar', temperature: 0.1, user: text, lang: srcMs ? 'ms' : 'en',
+        system: srcMs
+          ? 'Anda penyunting bahasa Melayu yang teliti. Betulkan kesalahan ejaan, tatabahasa, tanda baca, pilihan kata dan kolokasi dalam teks. Kekalkan maksud, nada dan struktur ayat; ubah hanya yang salah atau tidak baku. Panduan:\n- ' + MS_RULES.join('\n- ') +
+            '\nBalas dengan satu objek JSON sahaja: {"text": "teks yang telah dibetulkan", "changes": [{"from": "perkataan asal", "to": "pembetulan", "why": "sebab ringkas dalam bahasa Melayu"}]}. Jika tiada kesalahan, "changes" ialah [].'
+          : 'You are a careful proofreader. Correct spelling, grammar, punctuation, word choice and collocation errors in the English text. Keep the meaning, tone and sentence structure; change only what is wrong. ' +
+            'Reply with one JSON object only: {"text": "the corrected text", "changes": [{"from": "original words", "to": "correction", "why": "short reason"}]}. If there are no mistakes, "changes" is [].' };
     }
-    return { task: 'paraphrase', temperature: mode === 'creative' ? 0.8 : 0.5, user: text,
-      system: 'You are an expert writer and paraphraser. ' + PARA_MODES[mode] + ' Write the result in ' + lang + '. Keep names, numbers, dates, citations and technical terms accurate. Return only the rewritten text, with no notes, quotes or preface.' };
+    var toMs = isMalay(o.lang || 'same', text);
+    return { task: 'paraphrase', temperature: mode === 'creative' ? 0.8 : 0.5, user: text, lang: toMs ? 'ms' : 'en',
+      system: toMs
+        ? 'Anda penulis bahasa Melayu yang mahir. ' + PARA_MODES_MS[mode] + ' Tulis hasil dalam bahasa Melayu baku. Kekalkan nama, nombor, tarikh, rujukan dan istilah teknikal. Panduan:\n- ' + MS_RULES.join('\n- ') + '\nBalas dengan teks yang ditulis semula sahaja, tanpa nota, petikan atau pengenalan.'
+        : 'You are an expert writer and paraphraser. ' + PARA_MODES[mode] + ' Write the result in ' + lang + '. Keep names, numbers, dates, citations and technical terms accurate. Return only the rewritten text, with no notes, quotes or preface.' };
+  }
+  var PARA_MODES_MS = {
+    standard: 'Tulis semula teks dengan perkataan dan struktur ayat yang berbeza tetapi maksud dan panjang yang sama.',
+    fluent: 'Tulis semula teks supaya lancar dan semula jadi, membaiki ayat yang janggal, pada panjang yang sama.',
+    formal: 'Tulis semula teks dalam nada rasmi dan profesional yang sesuai untuk surat rasmi, laporan atau e-mel.',
+    simple: 'Tulis semula teks dalam bahasa mudah dan jelas yang difahami kanak-kanak 12 tahun, dengan ayat pendek.',
+    shorten: 'Tulis semula teks kira-kira 40% lebih pendek dengan mengekalkan semua isi penting.',
+    expand: 'Tulis semula teks kira-kira 50% lebih panjang dengan menghuraikan isi sedia ada, tanpa fakta baharu.',
+    academic: 'Tulis semula teks dalam laras akademik yang sesuai untuk tugasan atau tesis, tepat dan objektif.',
+    creative: 'Tulis semula teks dengan gaya yang hidup, menarik dan kreatif tanpa mengubah maksud.'
+  };
+  // Grammar replies are JSON {text, changes}; falls back to plain text when a model ignores the format.
+  function parseGrammar(reply) {
+    var raw = String(reply || ''), m = raw.match(/\{[\s\S]*\}/);
+    if (m) {
+      try {
+        var j = JSON.parse(m[0]);
+        if (j && typeof j.text === 'string') {
+          var changes = (Array.isArray(j.changes) ? j.changes : []).filter(function (c) { return c && c.from && c.to && String(c.from).trim() !== String(c.to).trim(); })
+            .map(function (c) { return { from: String(c.from).trim(), to: String(c.to).trim(), why: String(c.why || '').trim() }; });
+          return { text: j.text.trim(), changes: changes };
+        }
+      } catch (e) { /* not JSON: fall through */ }
+    }
+    return { text: clean(raw), changes: [] };
   }
   function summarize(o) {
     var text = String(o.text || '').trim(), len = SUM_LENGTH[o.length] ? o.length : 'medium', fmt = SUM_FORMAT[o.format] ? o.format : 'bullets';
-    return { task: 'summarize', temperature: 0.2, user: text,
+    return { task: 'summarize', temperature: 0.2, user: text, lang: isMalay(o.lang || 'same', text) ? 'ms' : 'en',
       system: 'You summarize text accurately. Summarize the text ' + SUM_LENGTH[len] + ', ' + SUM_FORMAT[fmt] + ', in ' + langName(o.lang || 'same', text) + '. Use only information in the text, keep key names, numbers and dates, and do not add opinions. Return only the summary.' };
   }
   function caption(o) {
     var lim = LIMITS[o.platform] || LIMITS.instagram, topic = String(o.text || '').trim(), n = Math.max(1, Math.min(8, Math.round(Number(o.count) || 5))), tags = Math.round(Number(o.hashtags));
     tags = Math.max(0, Math.min(lim.tags, isFinite(tags) ? tags : lim.tags));
     var occ = OCCASIONS[o.occasion] || '', tone = TONES[o.tone] || TONES.casual, platform = PLATFORMS[o.platform] || 'Instagram';
-    return { task: 'caption', temperature: 0.9, user: topic,
+    return { task: 'caption', temperature: 0.9, user: topic, lang: o.lang === 'en' ? 'en' : 'ms',
       system: 'You write social media captions for Malaysians. Write ' + n + ' different ' + platform + ' captions about the post described by the user' + (occ ? ', for ' + occ : '') + '. Tone: ' + tone + '. Language: ' + (LANG[o.lang] || LANG.ms) + '. ' +
         (o.emoji === 'no' ? 'Do not use emoji. ' : 'Use a few fitting emoji. ') + (o.platform === 'x' || o.platform === 'threads' ? 'Keep each caption under 250 characters. ' : 'Vary the length from one line to three short lines. ') +
         'Number them "1." to "' + n + '.", one caption per number, with no hashtags inside the captions. ' + (tags ? 'After the captions, write one line starting with "Hashtags:" followed by ' + tags + ' relevant hashtags, mixing popular Malaysian and specific ones.' : 'Do not write hashtags.') };
@@ -169,7 +218,7 @@
   }
 
   var api = { FACTS: FACTS, LANG: LANG, PARA_MODES: PARA_MODES, SUM_LENGTH: SUM_LENGTH, SUM_FORMAT: SUM_FORMAT, TONES: TONES, OCCASIONS: OCCASIONS, PLATFORMS: PLATFORMS, LIMITS: LIMITS,
-    IMAGE_STYLES: IMAGE_STYLES, imagePrompt: imagePrompt, mimeOf: mimeOf, detectLang: detectLang, count: count, paraphrase: paraphrase, summarize: summarize, caption: caption, enhance: enhance, clean: clean, parseCaptions: parseCaptions,
+    IMAGE_STYLES: IMAGE_STYLES, imagePrompt: imagePrompt, mimeOf: mimeOf, detectLang: detectLang, count: count, paraphrase: paraphrase, summarize: summarize, caption: caption, enhance: enhance, clean: clean, parseCaptions: parseCaptions, parseGrammar: parseGrammar, MS_RULES: MS_RULES,
     diff: diff, similarity: similarity, errorText: errorText, request: request };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.TBBAi = api;

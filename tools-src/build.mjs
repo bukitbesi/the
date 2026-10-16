@@ -2243,7 +2243,7 @@ function cartoonMap(lang) {
     C_VERIFIED: longDate(C.FACTS.verified, lang), C_VERIFIED_ISO: C.FACTS.verified };
 }
 const AI_LABELS = {
-  modes: { standard: ['Standard', 'Biasa'], fluent: ['Fluent', 'Lancar'], formal: ['Formal', 'Formal'], simple: ['Simple', 'Mudah'], shorten: ['Shorten', 'Ringkaskan'], expand: ['Expand', 'Kembangkan'], academic: ['Academic', 'Akademik'], creative: ['Creative', 'Kreatif'], grammar: ['Grammar check', 'Semak tatabahasa'] },
+  modes: { standard: ['Standard', 'Biasa'], fluent: ['Fluent', 'Lancar'], formal: ['Formal', 'Formal'], simple: ['Simple', 'Mudah'], shorten: ['Shorten', 'Ringkaskan'], expand: ['Expand', 'Kembangkan'], academic: ['Academic', 'Akademik'], creative: ['Creative', 'Kreatif'], grammar: ['Grammar and word check', 'Semak tatabahasa dan kata'] },
   langs: { same: ['Same as the text', 'Sama seperti teks'], ms: ['Bahasa Melayu', 'Bahasa Melayu'], en: ['English', 'English'] },
   sizes: { short: ['Short (2–3 sentences)', 'Pendek (2–3 ayat)'], medium: ['Medium (5–7 sentences)', 'Sederhana (5–7 ayat)'], long: ['Detailed (10–12 sentences)', 'Terperinci (10–12 ayat)'] },
   formats: { bullets: ['Bullet points', 'Poin'], paragraph: ['Paragraph', 'Perenggan'], keypoints: ['Key points + takeaway', 'Poin utama + kesimpulan'] },
