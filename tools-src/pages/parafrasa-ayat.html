@@ -28,8 +28,8 @@
   "faq": [
     { "q": "Bagaimana parafrasa ayat secara percuma?", "a": "Tampal hingga 2,400 aksara di atas, pilih mod seperti biasa, formal atau mudah, dan tekan Parafrasa. Teks baharu muncul dalam beberapa saat dengan setiap perkataan yang diubah ditanda, sedia untuk disalin. Tiada pendaftaran diperlukan." },
     { "q": "Bolehkah alat ini parafrasa dalam Bahasa Melayu?", "a": "Boleh. Ia mengesan sama ada teks anda Bahasa Melayu atau Inggeris dan mengekalkan bahasa yang sama, atau anda boleh pilih Bahasa Melayu atau Inggeris sebagai hasil, contohnya untuk menulis semula perenggan Inggeris dalam Bahasa Melayu." },
-    { "q": "Apa beza setiap mod?", "a": "Biasa menukar perkataan pada panjang yang sama; lancar melicinkan ayat janggal; formal sesuai untuk surat dan laporan; mudah menggunakan ayat pendek; ringkaskan memotong kira-kira 40%; kembangkan menambah kira-kira 50% tanpa fakta baharu; akademik untuk tugasan; kreatif lebih bersemangat. Semak tatabahasa hanya membetulkan kesalahan." },
-    { "q": "Adakah semakan tatabahasa mengubah gaya tulisan saya?", "a": "Tidak. Semak tatabahasa hanya membetulkan ejaan, tatabahasa dan tanda baca mengikut ejaan standard DBP serta mengekalkan perkataan dan nada anda. Setiap pembetulan ditanda supaya anda nampak apa yang berubah." },
+    { "q": "Apa beza setiap mod?", "a": "Biasa menukar perkataan pada panjang yang sama; lancar melicinkan ayat janggal; formal sesuai untuk surat dan laporan; mudah menggunakan ayat pendek; ringkaskan memotong kira-kira 40%; kembangkan menambah kira-kira 50% tanpa fakta baharu; akademik untuk tugasan; kreatif lebih bersemangat. Semak tatabahasa dan kata hanya membetulkan kesalahan." },
+    { "q": "Adakah semakan tatabahasa mengubah gaya tulisan saya?", "a": "Tidak. Semak tatabahasa dan kata hanya membetulkan ejaan, tatabahasa, tanda baca dan pilihan kata yang salah mengikut bahasa baku DBP, serta mengekalkan nada anda. Setiap pembetulan ditanda dan disenaraikan dengan sebab, contohnya mengundurkan → membatalkan mesyuarat, mengucapkan → meminta maaf." },
     { "q": "Adakah teks saya disimpan?", "a": "Tidak. Teks dihantar sekali kepada Cloudflare Workers AI untuk ditulis semula dan tidak disimpan oleh laman ini. Elakkan menampal kata laluan atau data peribadi sulit ke dalam mana-mana alat AI dalam talian." },
     { "q": "Adakah parafrasa dengan AI dikira plagiat?", "a": "Idea orang lain yang diparafrasa masih perlu dirujuk kepada sumber asal. Banyak universiti dan sekolah juga ada peraturan tentang alat penulisan AI, jadi semak peraturan anda dan baca semula hasilnya sebelum dihantar." },
     { "q": "Kenapa kuota AI percuma habis?", "a": "Alat ini menggunakan kuota harian percuma yang dikongsi semua pengunjung dan ditetapkan semula jam 8 pagi waktu Malaysia; setiap sambungan boleh membuat hingga 40 permintaan AI sehari. Cuba lagi selepas waktu itu." }
@@ -40,7 +40,7 @@
 <div class="container">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Parafrasa Ayat</li></ol></nav>
   <h1>Parafrasa Ayat dan Semak Tatabahasa AI</h1>
-  <p class="answer">Tampal teks anda, pilih satu daripada <strong>8 mod tulis semula</strong> (formal, mudah, akademik, ringkas dan lain-lain) atau <strong>semak tatabahasa</strong>, dan dapatkan versi baharu dalam beberapa saat dengan <strong>setiap perkataan diubah ditanda</strong>. Berfungsi dalam <strong>Bahasa Melayu dan Inggeris</strong>, boleh menulis semula ke bahasa lain, dan tanpa pendaftaran.</p>
+  <p class="answer">Tampal teks anda, pilih satu daripada <strong>8 mod tulis semula</strong> (formal, mudah, akademik, ringkas dan lain-lain) atau <strong>semak tatabahasa dan kata</strong>, dan dapatkan versi baharu dalam beberapa saat dengan <strong>setiap perkataan diubah ditanda</strong>. Berfungsi dalam <strong>Bahasa Melayu dan Inggeris</strong>, boleh menulis semula ke bahasa lain, dan tanpa pendaftaran.</p>
   <p class="meta"><span>Dikemas kini <time datetime="{{A_VERIFIED_ISO}}">{{A_VERIFIED}}</time></span><span>Teks diproses, tidak disimpan</span><a href="/paraphrasing-tool/" hreflang="en" lang="en">Read in English</a></p>
 
   <div class="calc">
@@ -63,6 +63,7 @@
       <label class="check"><input type="checkbox" id="pShow" checked> Tunjuk perubahan</label>
       <div class="ai-out" id="pOut" data-source="{{A_SOURCE}}">{{A_OUT}}</div>
       <p class="ai-stats" id="pStats">{{A_STATS}}</p>
+      <ol class="fixes" id="pFixes" hidden></ol>
       <p class="sr-only" id="pLive" aria-live="polite"></p>
       <div class="tool-actions"><button type="button" class="btn sm" id="pCopy">Salin</button><button type="button" class="btn ghost sm" id="pAgain">Tulis semula lagi</button><button type="button" class="btn ghost sm" id="pUse">Sunting versi ini</button></div>
     </section>
@@ -83,7 +84,7 @@
         <tr><th scope="row">Kembangkan</th><td>Kira-kira 50% lebih panjang, menghuraikan isi sedia ada</td></tr>
         <tr><th scope="row">Akademik</th><td>Tugasan, kertas cadangan dan tesis</td></tr>
         <tr><th scope="row">Kreatif</th><td>Hantaran media sosial, cerita dan iklan</td></tr>
-        <tr><th scope="row">Semak tatabahasa</th><td>Membetulkan kesalahan sahaja, kekalkan perkataan anda</td></tr>
+        <tr><th scope="row">Semak tatabahasa dan kata</th><td>Membetulkan ejaan, tatabahasa, pilihan kata dan kolokasi, dengan sebab setiap pembetulan</td></tr>
       </tbody>
     </table>
   </div>
