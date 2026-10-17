@@ -81,15 +81,6 @@
     "live": true
   },
   {
-    "name": "JavaScript Minifier",
-    "desc": "Compress JavaScript and review the output size before copying or downloading your file.",
-    "url": "https://www.thebukitbesi.com/p/best-javascript-minifier-online.html",
-    "cat": "dev",
-    "icon": "best-javascript-minifier-online",
-    "badge": "",
-    "live": true
-  },
-  {
     "name": "JSON-LD Schema Markup Generator",
     "desc": "Generate structured data for articles, organizations, local businesses and other supported page types.",
     "url": "https://www.thebukitbesi.com/p/json-schema-markup-generator.html",
@@ -216,21 +207,12 @@
     "live": true
   },
   {
-    "name": "WebP Image Converter",
-    "desc": "Batch-convert images to WebP with resizing and compression controls.",
-    "url": "https://www.thebukitbesi.com/p/webp-image-converter.html",
-    "cat": "design",
-    "icon": "webp-image-converter",
-    "badge": "popular",
-    "live": true
-  },
-  {
-    "name": "Image Converter",
+    "name": "Image Converter (WebP, JPG, PNG)",
     "desc": "Batch convert JPG, PNG, WebP, AVIF, ICO and BMP with resizing, quality or target file size, and optional EXIF removal.",
     "url": "https://tool.thebukitbesi.com/image-converter/",
     "cat": "design",
     "icon": "image-converter",
-    "badge": "",
+    "badge": "popular",
     "live": true
   },
   {
