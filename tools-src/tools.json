@@ -126,21 +126,12 @@
     "live": true
   },
   {
-    "name": "Word Counter & Keyword Density Checker",
-    "desc": "Count words, inspect keyword frequency and estimate reading time for your content.",
-    "url": "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html",
-    "cat": "seo",
-    "icon": "free-word-counter-seo-keyword-density",
-    "badge": "popular",
-    "live": true
-  },
-  {
     "name": "Word Counter",
-    "desc": "Count words, characters and sentences and review reading-time estimates as you type.",
-    "url": "https://www.thebukitbesi.com/p/word-counter.html",
+    "desc": "Words, characters, reading and speaking time, keyword density, Flesch readability and X, Instagram and YouTube limits as you type.",
+    "url": "https://tool.thebukitbesi.com/word-counter/",
     "cat": "content",
     "icon": "word-counter",
-    "badge": "",
+    "badge": "popular",
     "live": true
   },
   {

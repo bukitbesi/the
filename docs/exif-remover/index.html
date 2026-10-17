@@ -605,6 +605,14 @@ body.np-focus .np-tool{border:0;box-shadow:none}body.np-focus .np-grid{grid-temp
 .pd-frame{width:100%;height:520px;border:1px solid var(--border);border-radius:10px;background:#fff;margin-top:10px}
 .pd-preview{white-space:pre-wrap;max-height:320px;overflow:auto;font-size:.82rem;background:var(--bg2);padding:10px;border-radius:8px}
 .pd-panel input[type=range]{width:100%;accent-color:var(--accent)}
+/* Word counter */
+.wc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:12px}@media(min-width:620px){.wc-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(min-width:900px){.wc-stats{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.wc-stat{padding:6px 8px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);min-width:0}.wc-stat b{display:block;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.wc-stat span{font-size:.75rem;color:var(--text3)}.wc-stat.big b{font-size:1.3rem}
+textarea.wc-text{min-height:260px}
+.wc-goal{display:flex;align-items:center;gap:6px;width:auto;padding:0 10px}.wc-goal input{width:80px;min-height:36px;border:0;background:none;color:inherit;font:inherit}.wc-goal span{font-size:.8rem;color:var(--text3)}
+.wc-progress{margin:8px 0}.wc-meter{margin:8px 0}
+.wc-grid{display:grid;gap:14px;margin-top:14px}@media(min-width:760px){.wc-grid{grid-template-columns:1fr 1fr}}
+.wc-table th small{display:block;font-weight:400;font-size:.75rem;color:var(--text3)}
 </style>
 
 </head>
@@ -773,7 +781,7 @@ body.np-focus .np-tool{border:0;box-shadow:none}body.np-focus .np-grid{grid-temp
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
           <li><a href="/robots-txt-generator/">Robots.txt Generator and Tester</a></li>
-          <li><a href="/online-notepad/">Online Notepad</a></li>
+          <li><a href="/word-counter/">Word Counter</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

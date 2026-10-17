@@ -158,6 +158,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/unused-css-remover/](https://tool.thebukitbesi.com/unused-css-remover/) | English | remove unused css, unused css remover, purify css online, purgecss online, reduce unused css |
 | [/robots-txt-generator/](https://tool.thebukitbesi.com/robots-txt-generator/) | English | robots.txt generator, robots.txt tester, custom robots.txt blogger, block gptbot / ai crawlers robots.txt |
 | [/online-notepad/](https://tool.thebukitbesi.com/online-notepad/) | English | online notepad, notepad online save, online notes autosave, markdown notepad, share notes link |
+| [/word-counter/](https://tool.thebukitbesi.com/word-counter/) | English | word counter, character counter, keyword density checker, reading time calculator, flesch readability |
 | [/image-converter/](https://tool.thebukitbesi.com/image-converter/) | English | image converter, jpg to png, png to jpg, webp to jpg, convert image to ico / favicon, compress image to 100kb |
 | [/photo-editor/](https://tool.thebukitbesi.com/photo-editor/) | English | online photo editor, photoshop online free alternative, add text to photo, crop photo for instagram, youtube thumbnail maker |
 | [/whatsapp-sticker-maker/](https://tool.thebukitbesi.com/whatsapp-sticker-maker/) | English | whatsapp sticker maker, make whatsapp sticker from photo, sticker maker online, whatsapp sticker size 512x512 |
@@ -457,3 +458,5 @@ this and copies `CNAME` into `docs/`. See [the domain migration](documentation/d
 ## License
 
 Copyright © The Bukit Besi. All rights reserved. The code and content are proprietary; see [LICENSE](LICENSE). No permission is given to copy, host or adapt them.
+
+**Upkeep (Word counter):** `words-core.js` holds reading (238 wpm, Brysbaert 2019) and speaking (150 wpm) rates and `LIMITS` for SMS, X, YouTube, Instagram and LinkedIn. Recheck platform limits every six months (TikTok is left out while sources disagree), then `FACTS.verified`. Replaces two Blogger pages (`/p/word-counter.html`, `/p/free-word-counter-seo-keyword-density.html`); English only by design.

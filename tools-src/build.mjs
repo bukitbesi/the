@@ -90,6 +90,7 @@ const purgeCore = require('../assets/js/purge-core.js');
 const exifCore = require('../assets/js/exif-core.js');
 const robotsCore = require('../assets/js/robots-core.js');
 const notesCore = require('../assets/js/notepad-core.js');
+const wordsCore = require('../assets/js/words-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
@@ -2399,6 +2400,23 @@ Start typing anywhere: every change is **saved in this browser** and nothing is 
 > Tip: select all and type to make this your own note.
 `;
 const NOTE_MD = ['# Heading', '**bold** and *italic*', '~~deleted~~', '- [ ] task\n- [x] done', '1. first\n2. second', '> quote', '`code`', '[link](https://tool.thebukitbesi.com/)'];
+// ---- Word counter: the sample text's counts, readability, density and limits are filled in at build time.
+const WC_SAMPLE = `A word counter does more than count words. It tells you how long your text takes to read, whether your sentences are easy to follow and which words you repeat too often.
+
+Paste an article, an essay or a social media post here. Every number updates as you type, and nothing leaves your browser.
+
+Short sentences help readers. Long sentences that pile clause upon clause, with commas everywhere and no clear point, make readers tired and make your readability score fall.`;
+function wordsMap() {
+  const W = wordsCore, V = W.views, a = W.analyze(WC_SAMPLE);
+  const bands = [['90 to 100', 'Very easy'], ['80 to 89', 'Easy'], ['70 to 79', 'Fairly easy'], ['60 to 69', 'Plain English'], ['50 to 59', 'Fairly difficult'], ['30 to 49', 'Difficult'], ['0 to 29', 'Very difficult']];
+  return {
+    WC_TEXT: esc(WC_SAMPLE), WC_WORDS: a.words, WC_CHARS: a.chars.toLocaleString('en-US'), WC_READ: a.reading, WC_VERIFIED: W.FACTS.verified,
+    WC_STATS: V.statsHtml(a), WC_READABILITY: V.readHtml(a), WC_DENSITY: V.densityRows(W.density(WC_SAMPLE, 1)), WC_LIMITS: V.limitRows(W.limits(WC_SAMPLE, a)),
+    WC_BANDS: bands.map(b => `        <tr><td>${b[0]}</td><td>${b[1]}</td></tr>`).join('\n'),
+    WC_LIMIT_ROWS: W.LIMITS.map(l => `        <tr><th scope="row">${esc(l.label)}</th><td>${l.max.toLocaleString('en-US')}${l.note ? ' (' + esc(l.note) + ')' : ''}</td></tr>`).join('\n')
+  };
+}
+
 function notepadMap() {
   const N = notesCore, s = N.stats(NOTE_WELCOME), n = { text: NOTE_WELCOME };
   return {
@@ -2472,7 +2490,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2677,6 +2695,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'word-counter.js': ['assets/js/zip-core.js', 'assets/js/words-core.js', 'assets/js/words-ui.js'],
   'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],
   'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js'],
   'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js'],

@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/word-counter/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Word Counter: Words, Characters, Keyword Density and Readability",
+  "description": "Free word counter: words, characters, sentences, reading and speaking time, keyword density, Flesch readability and limits for X, Instagram and YouTube.",
+  "llms": "Free online word counter that updates as you type and works offline. Counts words, characters with and without spaces, sentences, paragraphs, lines, unique words, average word and sentence length and the longest sentence. Reading time at 238 words per minute (Brysbaert 2019) and speaking time at 150 words per minute (conversational rate cited from the US National Center for Voice and Speech). Flesch Reading Ease and Flesch-Kincaid grade level. Keyword density for single words and 2- and 3-word phrases, skipping English and Malay stop words. Focus keyword check: count, density and whether it appears in the first 100 words. Character limits: SMS 160 (70 with emoji or non-Latin letters), X post 280 (free accounts), YouTube title 100, Instagram caption 2,200, LinkedIn post 3,000, YouTube description 5,000. Opens .txt, .md and Word .docx files; text is saved only in the browser.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/word-counter.html", "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html"],
+  "render": "words",
+  "shareTitle": "Share this word counter",
+  "scripts": ["/assets/js/word-counter.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Word Counter", null]],
+  "about": ["Word count", "Readability", "Flesch–Kincaid readability tests", "Keyword density", "Search engine optimization"],
+  "app": {
+    "name": "Word Counter",
+    "category": "UtilitiesApplication",
+    "features": ["Words, characters, sentences, paragraphs and unique words", "Reading time (238 wpm) and speaking time (150 wpm)", "Flesch reading ease and grade level", "Keyword density for 1, 2 and 3 word phrases with English and Malay stop words", "Focus keyword check", "Character limits for SMS, X, Instagram, LinkedIn and YouTube", "Word count goal with progress", "Opens .txt, .md and .docx; saved in your browser"]
+  },
+  "citations": [
+    ["Brysbaert (2019): How many words do we read per minute?", "https://doi.org/10.1016/j.jml.2019.104047"],
+    ["Flesch (1948): A new readability yardstick", "https://doi.org/10.1037/h0057532"],
+    ["Kincaid et al. (1975): Derivation of new readability formulas for Navy enlisted personnel", "https://stars.library.ucf.edu/istlibrary/56/"],
+    ["VirtualSpeech: average speaking rate (citing the National Center for Voice and Speech)", "https://virtualspeech.com/blog/average-speaking-rate-words-per-minute"],
+    ["3GPP TS 23.038: SMS alphabets and 160/70 character messages", "https://www.3gpp.org/DynaReport/23038.htm"]
+  ],
+  "faq": [
+    { "q": "How does the word counter count words?", "a": "A word is a run of letters or digits in any language, so contractions such as isn't, hyphenated words such as e-mail and numbers such as 3.5 count once. Punctuation, emoji and spaces are not words. The sample text on this page has {{WC_WORDS}} words and {{WC_CHARS}} characters. Counts update as you type and match Microsoft Word for ordinary prose." },
+    { "q": "How long does it take to read or say my text?", "a": "Reading time divides the words by 238 per minute, the average silent reading speed for non-fiction found in a 2019 review of 190 studies, so 1,000 words take about 4.2 minutes. Speaking time uses 150 words per minute, a normal conversational pace, so a 750-word speech lasts about 5 minutes. Slow down for presentations: many speakers aim for 120 to 140 words a minute." },
+    { "q": "What is a good keyword density for SEO?", "a": "There is no magic number: Google ranks pages on usefulness, not on a keyword percentage. Use your main phrase naturally, ideally in the title, the first 100 words and a heading, and use related words and synonyms elsewhere. Densities above about 3% usually read as repetitive. The density table shows which words and phrases you repeat most, with common English and Malay words such as the, and, yang and dan left out." },
+    { "q": "What is the Flesch reading ease score?", "a": "A 0 to 100 score from average sentence length and syllables per word: 206.835 minus 1.015 × words per sentence minus 84.6 × syllables per word. 60 to 70 is plain English that most adults read easily; 90 and above suits children; below 30 is academic. The Flesch-Kincaid grade turns the same inputs into a US school grade. Both formulas are designed for English, so treat scores for Malay text as rough." },
+    { "q": "How many characters can I use on X, Instagram and YouTube?", "a": "An X post allows 280 characters on a free account, an Instagram caption 2,200, a LinkedIn post 3,000, a YouTube title 100 and a YouTube description 5,000. One SMS holds 160 characters, or 70 if the message contains emoji or non-Latin letters. The limits table shows how many characters you have left for each." },
+    { "q": "Can I count words in a Word document?", "a": "Yes. Choose Open file and pick a .docx, .txt or .md file; the text is read in your browser and counted at once. Old .doc files must be saved as .docx first. You can also paste text copied from Google Docs, a PDF or a web page." },
+    { "q": "Is my text saved or uploaded?", "a": "Your text is never uploaded. The page keeps your last text in this browser's local storage so it is still there if you reload, and Clear removes it. For several long documents with version history, use the Online Notepad, which shows the same counts." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Word Counter</li></ol></nav>
+  <h1>Word Counter</h1>
+  <p class="answer">Paste or type your text and this <strong>word counter shows words, characters, sentences, reading time and keyword density as you type</strong>, plus a Flesch readability score and how much room you have left on X, Instagram and YouTube. The sample below has <strong>{{WC_WORDS}} words and {{WC_CHARS}} characters</strong>, about {{WC_READ}} to read. Nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{WC_VERIFIED}}</span><a href="#density">Keyword density</a></p>
+
+  <form class="box wc-tool" id="wcForm" novalidate aria-labelledby="wc-h">
+    <h2 id="wc-h" class="sr-only">Count words</h2>
+    <div class="wc-stats" id="wcStats" aria-live="polite">{{WC_STATS}}</div>
+    <div class="field">
+      <label for="wcText" class="sr-only">Your text</label>
+      <textarea class="prose-in wc-text" id="wcText" spellcheck="true" aria-describedby="wcStats">{{WC_TEXT}}</textarea>
+    </div>
+    <div class="tool-actions">
+      <label class="btn ghost sm file-btn">Open file<input type="file" id="wcFile" accept=".txt,.md,.markdown,.docx,text/plain,text/markdown,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="sr-only"></label>
+      <button type="button" class="btn ghost sm" id="wcCopy">Copy text</button>
+      <button type="button" class="btn ghost sm" id="wcClear">Clear</button>
+      <div class="input wc-goal"><input type="number" id="wcGoal" min="1" inputmode="numeric" placeholder="Goal" aria-label="Word count goal"><span>words goal</span></div>
+    </div>
+    <div class="meter wc-progress" id="wcGoalBar" hidden role="progressbar" aria-label="Progress to word goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+    <p class="error" id="wcError" role="alert" hidden></p>
+
+    <div class="wc-grid">
+      <section class="ex-set" aria-labelledby="wcReadH"><h3 class="sub-h" id="wcReadH">Readability</h3><div id="wcRead">{{WC_READABILITY}}</div></section>
+      <section class="ex-set" aria-labelledby="wcKwH"><h3 class="sub-h" id="wcKwH">Focus keyword</h3>
+        <div class="field"><label for="wcKw" class="sr-only">Focus keyword</label><input class="input" id="wcKw" placeholder="e.g. word counter" autocomplete="off"></div>
+        <div id="wcKwOut"><p class="help">Type a keyword to check how often it appears.</p></div>
+      </section>
+    </div>
+
+    <section class="ex-set" aria-labelledby="wcDenH">
+      <h3 class="sub-h" id="wcDenH">Keyword density</h3>
+      <div class="np-checks">
+        <fieldset class="seg seg3" aria-label="Phrase length"><label><input type="radio" name="n" value="1" checked> 1 word</label><label><input type="radio" name="n" value="2"> 2 words</label><label><input type="radio" name="n" value="3"> 3 words</label></fieldset>
+        <label class="check"><input type="checkbox" id="wcStop" checked> <span>Skip common words (English and Malay)</span></label>
+      </div>
+      <div class="table-wrap"><table class="data text wc-table"><thead><tr><th scope="col">Word or phrase</th><th scope="col">Times</th><th scope="col">Density</th></tr></thead><tbody id="wcDensity">{{WC_DENSITY}}</tbody></table></div>
+    </section>
+    <section class="ex-set" aria-labelledby="wcLimH">
+      <h3 class="sub-h" id="wcLimH">Character limits</h3>
+      <div class="table-wrap"><table class="data text wc-table"><thead><tr><th scope="col">Where</th><th scope="col">Limit</th><th scope="col">Your text</th></tr></thead><tbody id="wcLimits">{{WC_LIMITS}}</tbody></table></div>
+    </section>
+    <p class="sr-only" id="wcLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to use the word counter</h2>
+  <ol>
+    <li><strong>Paste, type or open a file</strong> (.txt, .md or Word .docx). Counts update as you type.</li>
+    <li><strong>Set a goal</strong> if you need a minimum or target length, such as a 1,500-word article or a 250-word essay.</li>
+    <li><strong>Check readability</strong> and shorten long sentences if the score is below 60.</li>
+    <li><strong>Check keyword density</strong> to spot repeated words, and type your focus keyword to see if it appears early.</li>
+    <li><strong>Check the limits</strong> before posting to X, Instagram, LinkedIn or YouTube.</li>
+  </ol>
+
+  <h2 id="density">How keyword density is calculated</h2>
+  <p>Density is the share of all words taken up by a word or phrase: times used × words in the phrase ÷ total words × 100. In a 500-word article, a two-word phrase used 5 times has a density of 2%. Phrases that start or end with a common word (<em>the</em>, <em>and</em>, <em>yang</em>, <em>dan</em>…) are skipped so the table shows topic words.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="flesch-cap">
+    <table class="data text"><caption id="flesch-cap">Flesch reading ease bands</caption>
+      <thead><tr><th scope="col">Score</th><th scope="col">Reading level</th></tr></thead>
+      <tbody>
+{{WC_BANDS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="limits">Character limits by platform</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="lim-cap">
+    <table class="data text"><caption id="lim-cap">Limits used by the counter</caption>
+      <thead><tr><th scope="col">Where</th><th scope="col">Characters</th></tr></thead>
+      <tbody>
+{{WC_LIMIT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>TikTok is left out because published figures disagree (2,200 or 4,000 characters); check the app. Paid X accounts allow longer posts.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> counts follow common rules and may differ slightly from Word or Google Docs on unusual text (URLs, code, emoji). Platform limits change; this page lists figures confirmed on {{WC_VERIFIED}}.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert (2019): How many words do we read per minute?</a></li>
+    <li><a href="https://doi.org/10.1037/h0057532" rel="noopener">Flesch (1948): A new readability yardstick</a></li>
+    <li><a href="https://stars.library.ucf.edu/istlibrary/56/" rel="noopener">Kincaid et al. (1975): Flesch-Kincaid grade level</a></li>
+    <li><a href="https://virtualspeech.com/blog/average-speaking-rate-words-per-minute" rel="noopener">VirtualSpeech: average speaking rate</a></li>
+    <li><a href="https://www.3gpp.org/DynaReport/23038.htm" rel="noopener">3GPP TS 23.038: SMS character sets</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/online-notepad/">Online Notepad<small>Write with autosave and the same counts</small></a>
+    <a href="/paraphrasing-tool/">Paraphrasing Tool<small>Rewrite repeated sentences</small></a>
+    <a href="/caption-generator/">Caption Generator<small>Captions within platform limits</small></a>
+  </div>
+</section>
+</div>
