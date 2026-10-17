@@ -57,6 +57,9 @@
 <b:case value='https://www.thebukitbesi.com/p/online-notepad.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/online-notepad/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/online-notepad/");</script>
+<b:case value='https://www.thebukitbesi.com/p/online-photoshop.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/photo-editor/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/photo-editor/");</script>
 <b:case value='https://www.thebukitbesi.com/p/robotstxt-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/robots-txt-generator/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/robots-txt-generator/");</script>

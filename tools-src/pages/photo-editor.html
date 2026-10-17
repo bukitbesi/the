@@ -1,0 +1,227 @@
+<!--page
+{
+  "path": "/photo-editor/",
+  "lang": "en",
+  "cat": "design",
+  "title": "Free Online Photo Editor: Crop, Filters, Text, Layers, No Signup",
+  "description": "Free online photo editor, a light Photoshop alternative: crop, rotate, adjust light and colour, 13 filters, text, shapes, drawing and layers. Nothing uploaded.",
+  "llms": "Free browser-based photo editor (a lightweight Photoshop alternative) that works on phones. Opens JPG, PNG, WebP, GIF and AVIF (HEIC in Safari) or starts a blank canvas (1080x1080 post, 1080x1350 portrait, 1080x1920 story, 1280x720 YouTube thumbnail, 1920x1080, A4 at 150 dpi). Tools: crop with free, original, 1:1, 4:5, 3:4, 9:16, 16:9, 3:2 and 2:3 ratios; rotate 90 degrees; flip; resize; 14 adjustments (exposure, brightness, contrast, highlights, shadows, saturation, vibrance, warmth, tint, hue, sharpen, blur, vignette, grain) plus auto enhance; 13 filter presets; text layers with fonts, outline, shadow, background box and alignment; rectangle, ellipse, line and arrow shapes; brush and eraser drawing; layers with order, visibility, opacity, blend modes, rotation and duplicate; undo and redo; hold-to-compare with the original; export JPG, PNG or WebP with quality and scale, or copy to clipboard. Edits are non-destructive and exports contain no EXIF or GPS data. Nothing is uploaded.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/online-photoshop.html",
+  "render": "photo",
+  "shareTitle": "Share this photo editor",
+  "scripts": ["/assets/js/photo-editor.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["Photo Editor", null]],
+  "about": ["Image editing", "Raster graphics editor", "Photograph manipulation", "Image filter"],
+  "app": {
+    "name": "Online Photo Editor",
+    "category": "MultimediaApplication",
+    "features": ["Crop with social media ratios, rotate, flip and resize", "14 adjustments and auto enhance", "13 filter presets with live previews", "Text layers with fonts, outline, shadow and background", "Rectangle, ellipse, line and arrow shapes", "Brush and eraser", "Layers with order, visibility, opacity and blend modes", "Undo, redo and hold-to-compare", "Blank canvases for posts, stories and thumbnails", "Export JPG, PNG or WebP without EXIF; copy to clipboard", "Runs in the browser; nothing is uploaded"]
+  },
+  "citations": [
+    ["WHATWG HTML Standard: The canvas element", "https://html.spec.whatwg.org/multipage/canvas.html"],
+    ["W3C Compositing and Blending Level 1", "https://www.w3.org/TR/compositing-1/"],
+    ["ITU-R BT.709: luma coefficients", "https://www.itu.int/rec/R-REC-BT.709"],
+    ["YouTube Help: Add video thumbnails (1280 x 720)", "https://support.google.com/youtube/answer/72431"]
+  ],
+  "faq": [
+    { "q": "Is this a free alternative to Photoshop?", "a": "For everyday edits, yes. It crops, rotates, resizes, fixes light and colour with 14 adjustments, applies 13 filters, adds text, shapes and drawings on layers with blend modes, and exports JPG, PNG or WebP, free and without an account. It is not a full replacement: there are no selections, masks, healing brush or RAW files. Photoshop is a trademark of Adobe, which is not connected with this tool." },
+    { "q": "How do I crop a photo for Instagram or TikTok?", "a": "Open the photo, choose Crop and pick a ratio: 1:1 for a square post, 4:5 for a portrait post or 9:16 for stories, Reels and TikTok. Drag the frame to place it, drag a corner to resize, then Apply crop. To get an exact size, use Resize afterwards, for example 1080 × 1350 for a 4:5 post." },
+    { "q": "How do I add text to a photo?", "a": "Choose Text, then Add text. Type in the box; pick a font, size, colour, outline and shadow, or a background box for captions. Drag the text on the picture to move it and drag the corner handle to make it bigger. Each text is its own layer, so it stays editable until you download." },
+    { "q": "Will editing reduce my photo's quality?", "a": "Edits are applied to a copy and your original stays untouched until you export. Exporting as PNG is lossless. JPG and WebP at 90% quality look the same as the original for most photos at a much smaller size; the Scale option lets you export smaller or larger. Exports never contain EXIF or GPS data." },
+    { "q": "Can I make a YouTube thumbnail or social media post?", "a": "Yes. Choose New canvas and pick YouTube thumbnail (1280 × 720, the size YouTube recommends), Square post (1080 × 1080), Portrait post (1080 × 1350) or Story (1080 × 1920). Add photos as layers, then text and shapes, and export as JPG." },
+    { "q": "Does it work on a phone?", "a": "Yes. The editor runs in any current browser on Android and iPhone. Drag with one finger to move layers and draw; the controls sit below the picture. Very large photos (over 8,192 pixels on a side) are scaled down to keep the phone responsive." },
+    { "q": "Are my photos uploaded or stored?", "a": "No. Photos are opened, edited and saved on your device with the browser's canvas, so they never leave it, and the page works offline after one visit. Nothing is kept after you close the page, so download your result before leaving." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">Photo Editor</li></ol></nav>
+  <h1>Online Photo Editor</h1>
+  <p class="answer">This <strong>free online photo editor crops, adjusts and decorates photos in your browser</strong>: {{PE_ADJ}} light and colour adjustments, {{PE_FILTERS}} filters, text, shapes, drawing and layers, with undo and export to JPG, PNG or WebP. It is a light, no-signup alternative to Photoshop for everyday edits, and nothing is uploaded. Open a photo below or start a blank canvas.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Photos stay on your device</span><a href="#guide">How to use it</a></p>
+
+  <form class="box pe-tool" id="peForm" novalidate aria-labelledby="pe-h">
+    <h2 id="pe-h" class="sr-only">Edit photo</h2>
+    <div class="tool-actions pe-top">
+      <label class="btn sm file-btn">Open photo<input type="file" id="peFile" accept="image/*,.heic,.heif" class="sr-only"></label>
+      <label class="btn ghost sm file-btn">Add image<input type="file" id="peAddImg" accept="image/*" multiple class="sr-only"></label>
+      <select class="input pe-new" id="peNew" aria-label="New blank canvas"><option value="">New canvas…</option>{{PE_CANVASES}}</select>
+      <button type="button" class="btn ghost sm" id="peUndo" disabled aria-label="Undo">↶ Undo</button>
+      <button type="button" class="btn ghost sm" id="peRedo" disabled aria-label="Redo">↷ Redo</button>
+      <button type="button" class="btn ghost sm" id="peCompare">Hold to compare</button>
+    </div>
+    <div class="pe-stage" id="peStage" data-sample="/assets/img/exif-sample-bukit-besi.jpg">
+      <img id="pePlaceholder" src="/assets/img/exif-sample-preview.webp" width="800" height="533" alt="Sample photo of hills at Bukit Besi, ready to edit">
+      <canvas id="peCanvas" aria-hidden="true"></canvas>
+      <canvas id="peOverlay" tabindex="0" aria-label="Photo canvas. Drag a layer to move it, drag its corner handle to resize, arrow keys nudge, Delete removes."></canvas>
+    </div>
+    <p class="code-stats" id="peInfo">800 × 533 px · 1 layer</p>
+    <p class="error" id="peError" role="alert" hidden></p>
+
+    <div class="pe-tabs" role="tablist" aria-label="Editing tools">
+      <button type="button" role="tab" data-tab="adjust" id="peTab-adjust" aria-controls="pePanel-adjust" aria-selected="true">Adjust</button>
+      <button type="button" role="tab" data-tab="filters" id="peTab-filters" aria-controls="pePanel-filters" aria-selected="false" tabindex="-1">Filters</button>
+      <button type="button" role="tab" data-tab="crop" id="peTab-crop" aria-controls="pePanel-crop" aria-selected="false" tabindex="-1">Crop</button>
+      <button type="button" role="tab" data-tab="text" id="peTab-text" aria-controls="pePanel-text" aria-selected="false" tabindex="-1">Text</button>
+      <button type="button" role="tab" data-tab="shapes" id="peTab-shapes" aria-controls="pePanel-shapes" aria-selected="false" tabindex="-1">Shapes</button>
+      <button type="button" role="tab" data-tab="draw" id="peTab-draw" aria-controls="pePanel-draw" aria-selected="false" tabindex="-1">Draw</button>
+      <button type="button" role="tab" data-tab="layers" id="peTab-layers" aria-controls="pePanel-layers" aria-selected="false" tabindex="-1">Layers</button>
+      <button type="button" role="tab" data-tab="export" id="peTab-export" aria-controls="pePanel-export" aria-selected="false" tabindex="-1">Export</button>
+    </div>
+
+    <div class="pe-panel" role="tabpanel" id="pePanel-adjust" aria-labelledby="peTab-adjust" data-panel="adjust">
+      <p class="help" id="peAdjNote" hidden>Select a photo layer to adjust it.</p>
+      <div class="tool-actions pe-row"><button type="button" class="btn ghost sm" id="peAuto">Auto enhance</button><button type="button" class="btn ghost sm" id="peAdjReset">Reset</button></div>
+      <div class="pe-sliders">{{PE_SLIDERS}}</div>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-filters" aria-labelledby="peTab-filters" data-panel="filters" hidden>
+      <div class="pe-filters">{{PE_FILTER_BTNS}}</div>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-crop" aria-labelledby="peTab-crop" data-panel="crop" hidden>
+      <fieldset class="pe-ratios"><legend class="sub-h">Aspect ratio</legend>{{PE_RATIOS}}</fieldset>
+      <p class="help">Drag the frame to move it; drag a corner to resize. <span id="peCropInfo"></span></p>
+      <div class="tool-actions pe-row">
+        <button type="button" class="btn sm" id="peCropApply">Apply crop</button>
+        <button type="button" class="btn ghost sm" data-rot="ccw">⟲ Rotate left</button>
+        <button type="button" class="btn ghost sm" data-rot="cw">⟳ Rotate right</button>
+        <button type="button" class="btn ghost sm" data-flip="x">⇋ Flip</button>
+        <button type="button" class="btn ghost sm" data-flip="y">⇵ Flip vertical</button>
+      </div>
+      <div class="field-row pe-resize">
+        <div class="input"><input type="number" id="peW" min="1" value="800" inputmode="numeric" aria-label="New width in pixels"><span>W px</span></div>
+        <div class="input"><input type="number" id="peH" min="1" value="533" inputmode="numeric" aria-label="New height in pixels"><span>H px</span></div>
+      </div>
+      <button type="button" class="btn ghost sm" id="peResize">Resize picture</button>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-text" aria-labelledby="peTab-text" data-panel="text" hidden>
+      <button type="button" class="btn sm" id="peAddText">Add text</button>
+      <div id="peTextProps" hidden>
+        <div class="field"><label for="peText">Text</label><textarea class="prose-in ex-desc" id="peText" rows="2"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label for="peFont">Font</label><select class="input" id="peFont"><option value="system-ui">Sans</option><option value="impact">Impact (meme)</option><option value="serif">Serif</option><option value="rounded">Rounded</option><option value="mono">Mono</option><option value="cursive">Script</option></select></div>
+          <div class="field"><label for="peSize">Size (px)</label><input class="input" type="number" id="peSize" min="6" max="2000" value="64"></div>
+        </div>
+        <div class="pe-colors">
+          <label>Colour <input type="color" id="peColor" value="#ffffff"></label>
+          <label>Outline <input type="color" id="peStroke" value="#000000"></label>
+          <label>Outline width <input type="range" id="peStrokeW" min="0" max="20" value="4"></label>
+        </div>
+        <div class="np-checks">
+          <label class="check"><input type="checkbox" id="peBold" checked> <span>Bold</span></label>
+          <label class="check"><input type="checkbox" id="peItalic"> <span>Italic</span></label>
+          <label class="check"><input type="checkbox" id="peShadow" checked> <span>Shadow</span></label>
+          <label class="check"><input type="checkbox" id="peBoxOn"> <span>Background</span></label>
+          <input type="color" id="peBox" value="#000000" aria-label="Background colour">
+        </div>
+        <fieldset class="seg seg3" aria-label="Alignment"><label><input type="radio" name="align" value="left"> Left</label><label><input type="radio" name="align" value="center" checked> Centre</label><label><input type="radio" name="align" value="right"> Right</label></fieldset>
+      </div>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-shapes" aria-labelledby="peTab-shapes" data-panel="shapes" hidden>
+      <div class="tool-actions pe-row">
+        <button type="button" class="btn ghost sm" data-shape="rect">▭ Rectangle</button>
+        <button type="button" class="btn ghost sm" data-shape="ellipse">◯ Ellipse</button>
+        <button type="button" class="btn ghost sm" data-shape="line">─ Line</button>
+        <button type="button" class="btn ghost sm" data-shape="arrow">→ Arrow</button>
+      </div>
+      <div id="peShapeProps" class="pe-colors" hidden>
+        <label>Fill <input type="color" id="peFill" value="#6c5ce7"></label>
+        <label>Border <input type="color" id="peLine" value="#000000"></label>
+        <label>Border width <input type="range" id="peLineW" min="0" max="60" value="0"></label>
+        <label>Corner radius <input type="range" id="peRadius" min="0" max="100" value="0"></label>
+      </div>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-draw" aria-labelledby="peTab-draw" data-panel="draw" hidden>
+      <fieldset class="seg" aria-label="Brush or eraser"><label><input type="radio" name="brush" value="brush" checked> Brush</label><label><input type="radio" name="brush" value="erase"> Eraser</label></fieldset>
+      <div class="pe-colors">
+        <label>Colour <input type="color" id="peBrushColor" value="#e17055"></label>
+        <label>Size <input type="range" id="peBrushSize" min="2" max="120" value="18"></label>
+      </div>
+      <p class="help">Draw on the picture with your finger or mouse. The eraser removes only drawing, never the photo.</p>
+      <button type="button" class="btn ghost sm" id="peClearDraw">Clear drawing</button>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-layers" aria-labelledby="peTab-layers" data-panel="layers" hidden>
+      <ul class="pe-layers" id="peLayers"><li class="help">No layers yet.</li></ul>
+    </div>
+    <div class="pe-panel" role="tabpanel" id="pePanel-export" aria-labelledby="peTab-export" data-panel="export" hidden>
+      <fieldset class="seg seg3" aria-label="Format"><label><input type="radio" name="fmt" value="jpeg" checked> JPG</label><label><input type="radio" name="fmt" value="png"> PNG</label><label><input type="radio" name="fmt" value="webp"> WebP</label></fieldset>
+      <div class="field-row">
+        <div class="field" id="peQualityWrap"><label for="peQuality">Quality %</label><input class="input" type="number" id="peQuality" min="10" max="100" value="90"></div>
+        <div class="field"><label for="peScale">Scale %</label><input class="input" type="number" id="peScale" min="1" max="400" value="100"></div>
+      </div>
+      <div class="field"><label for="peName">File name</label><input class="input" id="peName" value="sample-photo-edited" autocomplete="off"></div>
+      <div class="tool-actions"><button type="button" class="btn" id="peDownload">Download</button><button type="button" class="btn ghost sm" id="peCopy">Copy image</button></div>
+      <p class="code-stats" id="peSaved">Exports contain no EXIF or GPS data.</p>
+    </div>
+
+    <div class="pe-layerprops" id="peLayerProps" hidden>
+      <label>Opacity <input type="range" id="peOpacity" min="0" max="100" value="100"></label>
+      <label>Rotate <output id="peRotateOut">0°</output> <input type="range" id="peRotate" min="-180" max="180" value="0"></label>
+      <label>Blend <select class="input" id="peBlend">{{PE_BLENDS}}</select></label>
+    </div>
+    <p class="sr-only" id="peLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="guide">How to edit a photo online</h2>
+  <ol>
+    <li><strong>Open a photo</strong>, drop it on the picture or paste it (Ctrl+V). For a design from scratch, choose New canvas.</li>
+    <li><strong>Crop and straighten</strong> under Crop: pick a ratio for Instagram, TikTok or YouTube, rotate or flip.</li>
+    <li><strong>Fix light and colour</strong> under Adjust, or tap Auto enhance; try a look under Filters. Hold "Hold to compare" to see the original.</li>
+    <li><strong>Add text, shapes or drawing.</strong> Each is a layer you can move, resize, rotate, fade or blend.</li>
+    <li><strong>Export</strong> as JPG for photos, PNG for graphics with sharp text, or WebP for websites.</li>
+  </ol>
+
+  <h2 id="adjustments">What each adjustment does</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="adj-cap">
+    <table class="data text"><caption id="adj-cap">Adjustments and filters</caption>
+      <thead><tr><th scope="col">Control</th><th scope="col">Range</th><th scope="col">Effect</th></tr></thead>
+      <tbody>
+{{PE_ADJ_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Filters are starting points made of these same controls, so you can fine-tune any filter with the sliders. Colour maths uses the Rec. 709 luma weights (21% red, 72% green, 7% blue) for saturation and black and white.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="sizes">Image sizes for social media</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="size-cap">
+    <table class="data text"><caption id="size-cap">Blank canvas presets</caption>
+      <thead><tr><th scope="col">Preset</th><th scope="col">Size</th><th scope="col">Ratio</th></tr></thead>
+      <tbody>
+{{PE_SIZE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Platforms change their recommended sizes; when in doubt, keep the ratio and use at least 1080 pixels on the short side.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> Photoshop is a trademark of Adobe Inc.; this free editor is not affiliated with Adobe. It is provided as is; keep your original photos.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://html.spec.whatwg.org/multipage/canvas.html" rel="noopener">WHATWG HTML Standard: The canvas element</a></li>
+    <li><a href="https://www.w3.org/TR/compositing-1/" rel="noopener">W3C Compositing and Blending Level 1 (blend modes)</a></li>
+    <li><a href="https://www.itu.int/rec/R-REC-BT.709" rel="noopener">ITU-R BT.709 (luma coefficients)</a></li>
+    <li><a href="https://support.google.com/youtube/answer/72431" rel="noopener">YouTube Help: video thumbnails</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/image-converter/">Image Converter<small>JPG, PNG, WebP, ICO in batches</small></a>
+    <a href="/photo-to-cartoon/">Photo to Cartoon<small>Turn a photo into a cartoon</small></a>
+    <a href="/exif-remover/">EXIF Remover<small>Remove GPS from photos</small></a>
+  </div>
+</section>
+</div>

@@ -91,6 +91,7 @@ const exifCore = require('../assets/js/exif-core.js');
 const robotsCore = require('../assets/js/robots-core.js');
 const notesCore = require('../assets/js/notepad-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
+const photoCore = require('../assets/js/photo-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2417,7 +2418,27 @@ function imgconvMap() {
     IC_FORMAT_ROWS: Object.values(I.FORMATS).map(f => `        <tr><th scope="row">${f.label}</th><td>${f.lossy ? 'Lossy' : 'Lossless'}${f.label === 'WebP' || f.label === 'AVIF' ? ' or lossless' : ''}</td><td>${f.alpha ? 'Yes' : 'No'}</td><td>${esc(f.use)}</td><td>${esc(f.support)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- Photo editor: sliders, filters, ratios, canvases and the reference tables come from the page's core.
+const BLENDS = [['source-over', 'Normal'], ['multiply', 'Multiply'], ['screen', 'Screen'], ['overlay', 'Overlay'], ['darken', 'Darken'], ['lighten', 'Lighten'],
+  ['color-dodge', 'Colour dodge'], ['color-burn', 'Colour burn'], ['hard-light', 'Hard light'], ['soft-light', 'Soft light'], ['difference', 'Difference'],
+  ['exclusion', 'Exclusion'], ['hue', 'Hue'], ['saturation', 'Saturation'], ['color', 'Colour'], ['luminosity', 'Luminosity']];
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+function photoMap() {
+  const P = photoCore, filters = Object.entries(P.FILTERS);
+  return {
+    PE_ADJ: P.ADJUST.length, PE_FILTERS: filters.length - 1,
+    PE_SLIDERS: P.ADJUST.map(a => `<label class="pe-slider"><span>${esc(a.label)} <output data-adj-out="${a.key}">0</output></span><input type="range" data-adj="${a.key}" min="${a.min}" max="${a.max}" value="0"></label>`).join(''),
+    PE_FILTER_BTNS: filters.map(([k, f]) => `<button type="button" class="pe-filter" data-filter="${k}" aria-pressed="${k === 'none'}"><canvas width="72" height="72" aria-hidden="true"></canvas><span>${esc(f.label)}</span></button>`).join(''),
+    PE_RATIOS: P.CROPS.map(([l, v], i) => `<label class="ic-chip"><input type="radio" name="ratio" value="${v}"${i === 0 ? ' checked' : ''}> ${esc(l)}</label>`).join(''),
+    PE_CANVASES: P.CANVASES.map(([l, w, h]) => `<option value="${w}x${h}">${esc(l)} (${w} × ${h})</option>`).join(''),
+    PE_BLENDS: BLENDS.map(([v, l]) => `<option value="${v}">${l}</option>`).join(''),
+    PE_ADJ_ROWS: P.ADJUST.map(a => `        <tr><th scope="row">${esc(a.label)}</th><td>${a.min} to ${a.max}</td><td>${esc(a.desc)}</td></tr>`).join('\n') + '\n' +
+      `        <tr><th scope="row">Filters</th><td>${filters.length - 1} presets</td><td>${esc(filters.slice(1).map(([, f]) => f.label).join(', '))}</td></tr>`,
+    PE_SIZE_ROWS: P.CANVASES.map(([l, w, h]) => { const g = gcd(w, h); return `        <tr><th scope="row">${esc(l)}</th><td>${w} × ${h} px</td><td>${w / g}:${h / g}</td></tr>`; }).join('\n')
+  };
+}
+const RENDERERS = { photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2623,7 +2644,8 @@ const bundles = {
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
   'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],
-  'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js']
+  'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js'],
+  'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
