@@ -93,6 +93,7 @@ const notesCore = require('../assets/js/notepad-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
+const pdfCore = require('../assets/js/pdf-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2458,7 +2459,20 @@ function stickerMap() {
     ST_RULE_ROWS: rows.map(r => `        <tr><th scope="row">${r[0]}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- PDF converter: tabs, page sizes and the reference tables come from the page's core.
+function pdfMap() {
+  const P = pdfCore, mm = pt => Math.round(pt / 72 * 25.4);
+  const sizes = Object.entries(P.PAGES).filter(([k]) => k !== 'fit');
+  return {
+    PDF_MODES: P.MODES.length,
+    PDF_TABS: P.MODES.map((m, i) => `<button type="button" role="tab" data-tab="${m.key}" id="pdTab-${m.key}" aria-controls="pdPanel-${m.key}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${esc(m.label)}</button>`).join(''),
+    PDF_SIZES: Object.entries(P.PAGES).map(([k, p]) => `<option value="${k}"${k === 'a4' ? ' selected' : ''}>${esc(p.label)}</option>`).join(''),
+    PDF_SIZE_ROWS: sizes.map(([, p]) => `        <tr><th scope="row">${esc(p.label)}</th><td>${mm(p.w)} × ${mm(p.h)}</td><td>${p.w} × ${p.h}</td></tr>`).join('\n'),
+    PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2666,7 +2680,8 @@ const bundles = {
   'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],
   'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js'],
   'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js'],
-  'whatsapp-sticker-maker.js': ['assets/js/zip-core.js', 'assets/js/imgconv-core.js', 'assets/js/sticker-core.js', 'assets/js/sticker-ui.js']
+  'whatsapp-sticker-maker.js': ['assets/js/zip-core.js', 'assets/js/imgconv-core.js', 'assets/js/sticker-core.js', 'assets/js/sticker-ui.js'],
+  'pdf-converter.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/pdf-core.js', 'assets/js/pdf-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
@@ -2769,7 +2784,9 @@ fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
 ['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
-const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f);
+const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f)
+  .concat(fs.readdirSync(path.join(root, 'assets/vendor'), { withFileTypes: true }).filter(d => d.isDirectory())
+    .flatMap(d => fs.readdirSync(path.join(root, 'assets/vendor', d.name)).filter(f => f.endsWith('.mjs')).map(f => '/assets/vendor/' + d.name + '/' + f)));
 fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
 // Serve files exactly as built; Jekyll processing is unnecessary and slower.
 fs.writeFileSync(path.join(pub, '.nojekyll'), '');

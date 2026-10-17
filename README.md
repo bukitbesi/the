@@ -161,6 +161,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/image-converter/](https://tool.thebukitbesi.com/image-converter/) | English | image converter, jpg to png, png to jpg, webp to jpg, convert image to ico / favicon, compress image to 100kb |
 | [/photo-editor/](https://tool.thebukitbesi.com/photo-editor/) | English | online photo editor, photoshop online free alternative, add text to photo, crop photo for instagram, youtube thumbnail maker |
 | [/whatsapp-sticker-maker/](https://tool.thebukitbesi.com/whatsapp-sticker-maker/) | English | whatsapp sticker maker, make whatsapp sticker from photo, sticker maker online, whatsapp sticker size 512x512 |
+| [/pdf-converter/](https://tool.thebukitbesi.com/pdf-converter/) | English | pdf converter, jpg to pdf, pdf to jpg, merge pdf, split pdf, pdf to word, word to pdf, compress pdf |
 | [/exif-editor/](https://tool.thebukitbesi.com/exif-editor/) | English | exif editor online, exif viewer, edit photo metadata, change date taken, add copyright to image metadata, google images licensable |
 | [/exif-remover/](https://tool.thebukitbesi.com/exif-remover/) | English | remove exif data, exif remover, remove metadata from photo, remove gps location from photo, remove ai metadata png |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
@@ -273,6 +274,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (photo editor):** `photo-core.js` holds the adjustments, filter presets, crop ratios and blank-canvas sizes (`CANVASES`). Recheck the social media sizes yearly; the page says to keep the ratio when platforms change them.
 
 **Upkeep (WhatsApp sticker maker):** `sticker-core.js` `SPEC` holds WhatsApp's sticker rules from github.com/WhatsApp/stickers (512 px, 100 KB, 3–30 per pack, 96 px tray under 50 KB, 3 emoji, 125-character description). Recheck the Android and iOS READMEs every six months. Both old Blogger sticker pages (`whatsapp-sticker-maker` and `sticker-whatsapp-maker`) redirect here.
+
+**Upkeep (PDF converter):** `pdf-core.js` writes image PDFs itself; PDF.js (legacy build, with `standard_fonts/` and `wasm/`), pdf-lib and mammoth are self-hosted in `assets/vendor/` and pinned in `tools-src/vendor/package.json` (paths in `VENDOR` in `pdf-core.js`). To update a library, run `build-vendor.mjs`, update `VENDOR` and rerun the tests. PDF.js 6 needs its legacy build: the modern build uses JavaScript that current Chrome does not have yet.
 
 **Upkeep (EXIF editor and remover):** `exif-core.js` reads, strips and writes JPEG, PNG and WebP metadata losslessly (tests use ExifTool-made fixtures in `tools-src/tests/fixtures/`). `RIGHTS` lists the IPTC fields Google Images reads; recheck Google's image licence metadata page and the IPTC quick guide every six months, then `FACTS.verified`. The hero images in `assets/img/` (also each page's og:image) are rendered by `tools-src/images.mjs` and carry their own IPTC rights; their `license` page is `/terms/#images`. EXIF tools are English only by design (low BM search volume).
 
@@ -405,10 +408,11 @@ assets/js/docx-core.js      shared minimal .docx writer (uses zip-core.js)
 assets/js/imgconv-core.js   image converter: sniffing, resize maths, BMP/ICO writers, target-size quality search
 assets/js/photo-core.js     photo editor: pixel adjustments, filters, layer document (hit test, crop, rotate, flip, resize), history
 assets/js/sticker-core.js   WhatsApp stickers: rules, plain-background removal, outline (distance transform), framing, pack checks, contents.json
+assets/js/pdf-core.js       PDF converter: image-page PDF writer, page sizes, page ranges, PDF text to Word paragraphs
 assets/js/exif-core.js      EXIF editor and remover: JPEG/PNG/WebP metadata parse, lossless strip and write, XMP rights, ZIP
 assets/img/                 tool hero images (with embedded IPTC rights) and the EXIF sample photo
 tools-src/cors-proxy/       optional Cloudflare Worker that lets the remover load pages from sites without CORS
-assets/vendor/              Terser, javascript-obfuscator, js-beautify and html-minifier-terser builds with licences (loaded on demand)
+assets/vendor/              Terser, javascript-obfuscator, js-beautify, html-minifier-terser, PDF.js, pdf-lib and mammoth with licences (loaded on demand)
 tools-src/vendor/           pinned versions and the script that rebuilds assets/vendor
 assets/PWA/sw.js            service-worker source template
 ```

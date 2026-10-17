@@ -1,0 +1,171 @@
+<!--page
+{
+  "path": "/pdf-converter/",
+  "lang": "en",
+  "cat": "util",
+  "title": "PDF Converter: Merge, Split, PDF to Word, JPG to PDF, Compress",
+  "description": "Free PDF converter that runs in your browser: JPG to PDF, PDF to JPG, merge, split, rotate and reorder pages, PDF to Word, Word to PDF and compress. No upload.",
+  "llms": "Free browser-based PDF toolkit; files never leave the device. Images to PDF (JPG, PNG, WebP; JPEG photos embedded byte for byte; A4, Letter, Legal, A5 or image-sized pages; margins; portrait, landscape or automatic). PDF to JPG or PNG at 72, 150 or 300 dpi with a ZIP download. Merge several PDFs in any order. Split and organise one PDF: reorder, rotate and delete pages, extract page ranges such as 1-3, 5, 8-, split into single pages, every N pages or custom ranges. PDF to Word (.docx) and plain text by rebuilding lines, paragraphs, headings and bullet lists from the PDF's text layer (scanned PDFs without a text layer need OCR, which this tool does not do). Word (.docx) to PDF by converting the document to HTML (mammoth) and saving through the browser's print to PDF. Compress PDF by re-rendering pages as JPEG at a chosen resolution, which shrinks scanned PDFs but makes text unselectable. Uses PDF.js (Apache-2.0), pdf-lib (MIT) and mammoth (BSD-2-Clause), self-hosted and loaded only when needed; password-protected PDFs open in PDF.js with the password but cannot be merged or split.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/pdf-converter.html",
+  "render": "pdf",
+  "shareTitle": "Share this PDF converter",
+  "scripts": ["/assets/js/pdf-converter.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["PDF Converter", null]],
+  "about": ["PDF", "Office Open XML", "Document conversion", "Data compression"],
+  "app": {
+    "name": "PDF Converter",
+    "category": "BusinessApplication",
+    "features": ["JPG, PNG and WebP to PDF; JPEG photos embedded without re-compression", "PDF to JPG or PNG at 72, 150 or 300 dpi", "Merge PDFs in any order", "Split, extract, reorder, rotate and delete pages", "PDF to Word (.docx) and text with paragraphs and headings", "Word (.docx) to PDF", "Compress scanned PDFs", "Opens password-protected PDFs for reading", "Runs in the browser; files are never uploaded"]
+  },
+  "citations": [
+    ["ISO 32000-2: Document management, Portable document format", "https://www.iso.org/standard/75839.html"],
+    ["Mozilla PDF.js", "https://mozilla.github.io/pdf.js/"],
+    ["pdf-lib", "https://pdf-lib.js.org/"],
+    ["mammoth.js", "https://github.com/mwilliamson/mammoth.js"],
+    ["ISO 216: paper sizes (A4 210 x 297 mm)", "https://www.iso.org/standard/36631.html"]
+  ],
+  "faq": [
+    { "q": "Are my PDF files uploaded to a server?", "a": "No. Every conversion runs in your browser on your device with open-source libraries hosted on this site (PDF.js, pdf-lib and mammoth), so contracts, payslips and IC copies never leave your phone or computer. The libraries load only when you use a PDF feature, and the page works offline after that." },
+    { "q": "How do I convert JPG to PDF?", "a": "Choose Images to PDF, add your photos, put them in order and pick a page size: A4 (210 × 297 mm), Letter, Legal, A5, or Same as image for pages that fit each photo exactly. JPEG photos are placed in the PDF byte for byte, so there is no quality loss; PNG and WebP are converted to JPEG at the quality you choose. Rotated phone photos are turned upright first." },
+    { "q": "How do I convert PDF to Word?", "a": "Choose PDF to Word and add the PDF. The tool reads the PDF's text layer, rebuilds lines in reading order, joins them into paragraphs, turns larger text into headings and bullets into lists, and saves a .docx that Word, Google Docs and LibreOffice open. Tables, columns and images are not rebuilt. Scanned PDFs are pictures of text and need OCR, which this tool does not do; it tells you when a PDF has no text." },
+    { "q": "How do I merge PDF files?", "a": "Choose Merge, add two or more PDFs, use the arrows to set the order and download merged.pdf. Pages are copied as they are, so text stays selectable and links and fonts are kept. Password-protected PDFs cannot be merged; open them in a PDF reader, print them to a new PDF, then merge." },
+    { "q": "How do I split a PDF or extract pages?", "a": "Choose Split and organise and add the PDF. To keep some pages, type them like 1-3, 5, 8- (8- means page 8 to the end) and save. To split, choose every page, every N pages or your own ranges separated by semicolons, such as 1-2; 3-5, and download a ZIP of PDFs. You can also rotate, delete and reorder pages before saving." },
+    { "q": "How much can compressing a PDF save?", "a": "Compress re-renders each page as a JPEG image at the resolution you pick, which typically shrinks scanned PDFs and PDFs full of large photos a lot, for example a phone-scanned form at 150 dpi. Text-only PDFs are already small and may get bigger, in which case the tool tells you to keep the original. Text on compressed pages can no longer be selected or searched." },
+    { "q": "Can I convert Word to PDF without Microsoft Word?", "a": "Yes. Choose Word to PDF and add a .docx file. The document is converted to a web page with its headings, lists, tables, bold and italic text and images, then your browser's print dialog saves it as PDF (choose Save as PDF). Complex layouts, headers, footers and page numbers are simplified. Old .doc files must be saved as .docx first." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">PDF Converter</li></ol></nav>
+  <h1>PDF Converter</h1>
+  <p class="answer">This <strong>free PDF converter does {{PDF_MODES}} jobs in your browser without uploading your files</strong>: JPG to PDF, PDF to JPG, merge, split and organise pages, PDF to Word, Word to PDF and compress. JPEG photos go into PDFs byte for byte, so they lose no quality, and A4 pages are exactly 210 × 297 mm. Choose a job below and add your file.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Files stay on your device</span><a href="#which">Which option to use</a></p>
+
+  <form class="box pdf-tool" id="pdForm" novalidate aria-labelledby="pd-h">
+    <h2 id="pd-h" class="sr-only">Convert PDF</h2>
+    <div class="pe-tabs" role="tablist" aria-label="PDF jobs">{{PDF_TABS}}</div>
+
+    <div class="pd-panel" role="tabpanel" id="pdPanel-img2pdf" aria-labelledby="pdTab-img2pdf" data-panel="img2pdf">
+      <label class="drop" for="pdImgs"><span><strong>Choose images</strong> or drop them here</span><small>JPG, PNG, WebP; in the order you want</small><input type="file" id="pdImgs" accept="image/*" multiple class="sr-only" data-mode="img2pdf"></label>
+      <div class="adv-grid">
+        <div class="field"><label for="pdSize">Page size</label><select class="input" id="pdSize">{{PDF_SIZES}}</select></div>
+        <div class="field"><label for="pdOrient">Orientation</label><select class="input" id="pdOrient"><option value="auto">Automatic (follow each image)</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+        <div class="field"><label for="pdMargin">Margin</label><select class="input" id="pdMargin"><option value="0">None</option><option value="10" selected>10 mm</option><option value="20">20 mm</option></select></div>
+        <div class="field"><label for="pdFit">Image placement</label><select class="input" id="pdFit"><option value="contain">Fit whole image</option><option value="cover">Fill the page (crops edges)</option></select></div>
+        <div class="field"><label for="pdQ">Quality for PNG and WebP <output id="pdQOut">85%</output></label><input type="range" id="pdQ" min="40" max="100" value="85"></div>
+      </div>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-pdf2img" aria-labelledby="pdTab-pdf2img" data-panel="pdf2img" hidden>
+      <label class="drop" for="pdPdfImg"><span><strong>Choose a PDF</strong> or drop it here</span><input type="file" id="pdPdfImg" accept="application/pdf,.pdf" class="sr-only" data-mode="pdf2img"></label>
+      <div class="adv-grid">
+        <div class="field"><label for="pdImgFmt">Format</label><select class="input" id="pdImgFmt"><option value="jpeg">JPG</option><option value="png">PNG</option></select></div>
+        <div class="field"><label for="pdDpi">Resolution</label><select class="input" id="pdDpi"><option value="72">72 dpi (screen)</option><option value="150" selected>150 dpi (good)</option><option value="300">300 dpi (print)</option></select></div>
+        <div class="field"><label for="pdPagesImg">Pages (blank = all)</label><input class="input" id="pdPagesImg" placeholder="1-3, 5" autocomplete="off"></div>
+      </div>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-merge" aria-labelledby="pdTab-merge" data-panel="merge" hidden>
+      <label class="drop" for="pdMergeFiles"><span><strong>Choose PDFs</strong> or drop them here</span><small>Two or more; arrange them below</small><input type="file" id="pdMergeFiles" accept="application/pdf,.pdf" multiple class="sr-only" data-mode="merge"></label>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-organize" aria-labelledby="pdTab-organize" data-panel="organize" hidden>
+      <label class="drop" for="pdOrgFile"><span><strong>Choose a PDF</strong> or drop it here</span><input type="file" id="pdOrgFile" accept="application/pdf,.pdf" class="sr-only" data-mode="organize"></label>
+      <div class="adv-grid">
+        <div class="field"><label for="pdKeep">Keep only these pages (blank = all)</label><input class="input" id="pdKeep" placeholder="1-3, 5, 8-" autocomplete="off"></div>
+        <div class="field"><label for="pdSplit">Download as</label><select class="input" id="pdSplit"><option value="one">One PDF</option><option value="every">Split: every page</option><option value="chunks">Split: every N pages</option><option value="ranges">Split: my ranges</option></select></div>
+        <div class="field" id="pdSplitArgWrap" hidden><label for="pdSplitArg">N pages, or ranges like 1-2; 3-5</label><input class="input" id="pdSplitArg" autocomplete="off"></div>
+      </div>
+      <p class="help">Tap ↻ to rotate a page, ✕ to drop it, and the arrows to move it.</p>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-pdf2word" aria-labelledby="pdTab-pdf2word" data-panel="pdf2word" hidden>
+      <label class="drop" for="pdWordIn"><span><strong>Choose a PDF</strong> or drop it here</span><input type="file" id="pdWordIn" accept="application/pdf,.pdf" class="sr-only" data-mode="pdf2word"></label>
+      <div class="adv-grid">
+        <div class="field"><label for="pdWordFmt">Save as</label><select class="input" id="pdWordFmt"><option value="docx">Word (.docx)</option><option value="txt">Plain text (.txt)</option></select></div>
+        <label class="check"><input type="checkbox" id="pdBreaks" checked> <span>Start each PDF page on a new page</span></label>
+      </div>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-word2pdf" aria-labelledby="pdTab-word2pdf" data-panel="word2pdf" hidden>
+      <label class="drop" for="pdDocx"><span><strong>Choose a Word file (.docx)</strong> or drop it here</span><input type="file" id="pdDocx" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="sr-only" data-mode="word2pdf"></label>
+      <p class="help">The document opens as a print preview; choose <strong>Save as PDF</strong> as the printer.</p>
+    </div>
+    <div class="pd-panel" role="tabpanel" id="pdPanel-compress" aria-labelledby="pdTab-compress" data-panel="compress" hidden>
+      <label class="drop" for="pdCompIn"><span><strong>Choose a PDF</strong> or drop it here</span><small>Best for scanned PDFs and PDFs full of photos</small><input type="file" id="pdCompIn" accept="application/pdf,.pdf" class="sr-only" data-mode="compress"></label>
+      <div class="adv-grid">
+        <div class="field"><label for="pdCompDpi">Resolution</label><select class="input" id="pdCompDpi"><option value="72">72 dpi (smallest)</option><option value="110" selected>110 dpi (balanced)</option><option value="150">150 dpi (sharper)</option></select></div>
+        <div class="field"><label for="pdCompQ">JPEG quality <output id="pdCompQOut">70%</output></label><input type="range" id="pdCompQ" min="30" max="90" value="70"></div>
+      </div>
+      <p class="help">Pages become images: text is no longer selectable or searchable.</p>
+    </div>
+
+    <ul class="ex-files pd-list" id="pdList" aria-label="Files and pages"></ul>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="pdGo" disabled>Convert</button>
+      <button type="button" class="btn ghost sm" id="pdClear">Clear</button>
+    </div>
+    <div id="pdResult" class="pd-result"></div>
+    <p class="code-stats" id="pdStatus">Choose a job, then add your file. PDF tools load the first time you use them.</p>
+    <p class="error" id="pdError" role="alert" hidden></p>
+    <p class="sr-only" id="pdLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="which">Which option to use</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-cap">
+    <table class="data text"><caption id="modes-cap">What each job does and keeps</caption>
+      <thead><tr><th scope="col">Job</th><th scope="col">Result</th><th scope="col">Text stays selectable</th><th scope="col">Good to know</th></tr></thead>
+      <tbody>
+{{PDF_MODE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sizes">PDF page sizes</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sizes-cap">
+    <table class="data"><caption id="sizes-cap">Page sizes offered for Images to PDF</caption>
+      <thead><tr><th scope="col">Size</th><th scope="col">Millimetres</th><th scope="col">PDF points</th></tr></thead>
+      <tbody>
+{{PDF_SIZE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>PDF measures pages in points, 72 to the inch. "Same as image" makes each page fit its picture at 96 pixels per inch, the screen standard, so a 1080 px photo becomes a 810-point (285.75 mm) page.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="limits">Honest limits</h2>
+  <ul>
+    <li><strong>PDF to Word</strong> rebuilds text, paragraphs, headings and lists. It does not rebuild tables, columns, images or exact fonts, and scanned PDFs need OCR.</li>
+    <li><strong>Word to PDF</strong> keeps headings, lists, tables, images and basic formatting, but simplifies headers, footers, text boxes and page numbers.</li>
+    <li><strong>Compress</strong> helps scanned and photo-heavy PDFs; text PDFs are usually already small.</li>
+    <li><strong>Password-protected PDFs</strong> can be read and converted to images or Word after you enter the password, but merging and splitting need an unprotected copy.</li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> check converted documents before you submit or sign them. The tool is free and provided as is; it uses PDF.js (Apache-2.0), pdf-lib (MIT) and mammoth (BSD-2-Clause), whose licences are published in <a href="/assets/vendor/LICENSES.txt">LICENSES.txt</a>.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.iso.org/standard/75839.html" rel="noopener">ISO 32000-2: Portable Document Format</a></li>
+    <li><a href="https://mozilla.github.io/pdf.js/" rel="noopener">Mozilla PDF.js</a></li>
+    <li><a href="https://pdf-lib.js.org/" rel="noopener">pdf-lib</a></li>
+    <li><a href="https://github.com/mwilliamson/mammoth.js" rel="noopener">mammoth.js</a></li>
+    <li><a href="https://www.iso.org/standard/36631.html" rel="noopener">ISO 216: paper sizes</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/image-converter/">Image Converter<small>JPG, PNG, WebP and more</small></a>
+    <a href="/online-notepad/">Online Notepad<small>Notes with Word export</small></a>
+    <a href="/photo-editor/">Photo Editor<small>Crop a scan before converting</small></a>
+  </div>
+</section>
+</div>

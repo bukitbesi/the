@@ -60,6 +60,9 @@
 <b:case value='https://www.thebukitbesi.com/p/online-photoshop.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/photo-editor/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/photo-editor/");</script>
+<b:case value='https://www.thebukitbesi.com/p/pdf-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/pdf-converter/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/pdf-converter/");</script>
 <b:case value='https://www.thebukitbesi.com/p/robotstxt-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/robots-txt-generator/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/robots-txt-generator/");</script>

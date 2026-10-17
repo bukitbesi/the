@@ -343,6 +343,11 @@
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
     },
     {
+      "name": "PDF Converter",
+      "url": "/pdf-converter/",
+      "description": "Free PDF converter that runs in your browser: JPG to PDF, PDF to JPG, merge, split, rotate and reord"
+    },
+    {
       "name": "Personal Loan Calculator Malaysia",
       "url": "/personal-loan-calculator-malaysia/",
       "description": "Free personal loan calculator: monthly instalment, total interest, the real EIR behind a flat rate, "

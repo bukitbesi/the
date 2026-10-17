@@ -360,9 +360,9 @@
     "live": true
   },
   {
-    "name": "PDF & Word Converter",
-    "desc": "Convert PDF and Word documents or combine images into a PDF using supported options.",
-    "url": "https://www.thebukitbesi.com/p/pdf-converter.html",
+    "name": "PDF Converter",
+    "desc": "JPG to PDF, PDF to JPG, merge, split and organise pages, PDF to Word, Word to PDF and compress, all in your browser.",
+    "url": "https://tool.thebukitbesi.com/pdf-converter/",
     "cat": "util",
     "icon": "pdf-converter",
     "badge": "",
