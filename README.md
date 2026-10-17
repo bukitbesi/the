@@ -1,11 +1,11 @@
-# The Bukit Besi Tools — 107 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 106 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
 [![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
-directory of 107 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+directory of 106 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
 code minifiers, SEO and schema generators, writing utilities, image editors,
 AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
 No signup, no tracking scripts, works offline after one visit.
