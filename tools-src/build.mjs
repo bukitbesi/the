@@ -92,6 +92,7 @@ const robotsCore = require('../assets/js/robots-core.js');
 const notesCore = require('../assets/js/notepad-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
+const stickerCore = require('../assets/js/sticker-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2438,7 +2439,26 @@ function photoMap() {
     PE_SIZE_ROWS: P.CANVASES.map(([l, w, h]) => { const g = gcd(w, h); return `        <tr><th scope="row">${esc(l)}</th><td>${w} × ${h} px</td><td>${w / g}:${h / g}</td></tr>`; }).join('\n')
   };
 }
-const RENDERERS = { photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- WhatsApp sticker maker: the rules table is WhatsApp's README figures held in the page's core.
+function stickerMap() {
+  const T = stickerCore.SPEC, kb = n => n / 1024 + ' KB';
+  const rows = [
+    ['Sticker size', `Exactly ${T.size} × ${T.size} px`, 'Always exported at that size'],
+    ['Format', 'WebP (iOS also accepts PNG for still stickers)', 'WebP; PNG only where the browser cannot write WebP'],
+    ['File size', `At most ${kb(T.maxBytes)} per still sticker (500 KB animated)`, 'Highest WebP quality that fits under 100 KB'],
+    ['Stickers per pack', `${T.minPack} to ${T.maxPack}`, 'Checked before the pack downloads'],
+    ['Tray icon', `${T.tray} × ${T.tray} px, at most ${kb(T.trayMaxBytes)}`, 'Made from the sticker you choose, as PNG'],
+    ['Emoji tags', `Up to ${T.maxEmoji} per sticker`, 'Extra emoji are ignored'],
+    ['Accessibility text', `Up to ${T.maxAlt} characters for still stickers`, 'Saved in contents.json'],
+    ['Mixing', 'A pack is all still or all animated', 'Still stickers only']
+  ];
+  return {
+    ST_SIZE: T.size, ST_MIN: T.minPack, ST_MAX: T.maxPack, ST_TRAY: T.tray, ST_ALT: T.maxAlt, ST_VERIFIED: longDate(T.verified, 'en'),
+    ST_RULE_ROWS: rows.map(r => `        <tr><th scope="row">${r[0]}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2645,7 +2665,8 @@ const bundles = {
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
   'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],
   'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js'],
-  'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js']
+  'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js'],
+  'whatsapp-sticker-maker.js': ['assets/js/zip-core.js', 'assets/js/imgconv-core.js', 'assets/js/sticker-core.js', 'assets/js/sticker-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.

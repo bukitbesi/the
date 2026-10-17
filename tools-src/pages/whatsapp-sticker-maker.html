@@ -1,0 +1,170 @@
+<!--page
+{
+  "path": "/whatsapp-sticker-maker/",
+  "lang": "en",
+  "cat": "design",
+  "title": "WhatsApp Sticker Maker: Photo to Sticker Pack Online, Free",
+  "description": "Free WhatsApp sticker maker: remove the background, add a white outline and text, and download 512 px WebP stickers under 100 KB as a pack. No upload.",
+  "llms": "Free browser-based WhatsApp sticker maker and pack builder. Turns photos into stickers that meet WhatsApp's published rules: exactly 512 x 512 px, WebP, at most 100 KB each (encoded at the highest quality that fits), packs of 3 to 30 stickers, a 96 x 96 PNG tray icon under 50 KB, up to 3 emoji tags and an accessibility description of up to 125 characters per sticker. Removes plain backgrounds automatically (flood fill from the edges with adjustable tolerance), with eraser and restore brushes for touch-ups; adds the classic white sticker outline (adjustable width and colour) and a drop shadow; top and bottom meme-style captions; zoom, rotate and fit. Downloads single stickers or the whole pack as a ZIP with tray.png and a contents.json in the layout of WhatsApp's official sample sticker apps. Photos never leave the device.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html", "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html"],
+  "render": "sticker",
+  "shareTitle": "Share this WhatsApp sticker maker",
+  "scripts": ["/assets/js/whatsapp-sticker-maker.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["WhatsApp Sticker Maker", null]],
+  "about": ["WhatsApp", "Sticker (messaging)", "WebP", "Background removal"],
+  "app": {
+    "name": "WhatsApp Sticker Maker",
+    "category": "MultimediaApplication",
+    "features": ["512 × 512 WebP stickers under 100 KB, as WhatsApp requires", "Automatic background removal for plain backgrounds", "Eraser and restore brushes", "White sticker outline and drop shadow", "Top and bottom captions", "Zoom, rotate and auto-fit", "Packs of 3 to 30 stickers with a 96 × 96 tray icon", "Emoji tags and accessibility text", "ZIP with contents.json for WhatsApp's sample sticker app", "Runs in the browser; nothing is uploaded"]
+  },
+  "citations": [
+    ["WhatsApp: stickers sample app README (Android)", "https://github.com/WhatsApp/stickers/blob/main/Android/README.md"],
+    ["WhatsApp: stickers sample app README (iOS)", "https://github.com/WhatsApp/stickers/blob/main/iOS/README.md"],
+    ["WhatsApp: tag your stickers with emoji", "https://github.com/WhatsApp/stickers/wiki/Tag-your-stickers-with-Emojis"],
+    ["Google: WebP", "https://developers.google.com/speed/webp"]
+  ],
+  "faq": [
+    { "q": "What size should a WhatsApp sticker be?", "a": "Exactly 512 × 512 pixels in WebP format, with a transparent background, and no larger than 100 KB for a still sticker. A pack holds 3 to 30 stickers plus a 96 × 96 pixel tray icon of up to 50 KB. These are the rules in WhatsApp's official sticker README, and every sticker this tool makes meets them; WhatsApp notes its own stickers are around 15 KB each." },
+    { "q": "How do I make a WhatsApp sticker from a photo?", "a": "Add the photo; if it has a plain background the tool cuts it out at once. Touch up with the eraser and restore brushes, add a white outline and a caption if you like, then download the sticker or the whole pack. On WhatsApp Web or Desktop you can send the image through the attach menu's Sticker option; on a phone, recent WhatsApp versions have a Create option in the sticker tab, and sticker pack apps can import the downloaded WebP files." },
+    { "q": "How do I remove the background from a photo for a sticker?", "a": "The automatic removal clears every pixel connected to the photo's edges that is close to the edge colour, so it works best on a plain wall, sky or studio background. Raise the tolerance if some background remains, lower it if parts of the subject disappear, then use the eraser for leftovers and the restore brush to bring back anything removed by mistake." },
+    { "q": "Why is my sticker over 100 KB?", "a": "Large, detailed photos with many colours compress less. This tool lowers the WebP quality step by step until the sticker is under 100 KB, so downloads always fit. A tighter crop, a plain cut-out and a thinner outline also make files smaller. Browsers that cannot write WebP save PNG instead, which iPhone sticker apps accept but Android sticker apps do not." },
+    { "q": "Can I make animated stickers?", "a": "Not yet. This tool makes still stickers. WhatsApp's rules for animated stickers are stricter: animated WebP up to 500 KB, frames at least 8 milliseconds long, at most 10 seconds in total, and a pack cannot mix animated and still stickers." },
+    { "q": "What is in the downloaded pack?", "a": "A ZIP with stickers named 01.webp, 02.webp and so on, tray.png (96 × 96), contents.json with the pack name, publisher and each sticker's emoji and description in the layout of WhatsApp's official sample sticker app, and a short README. Developers can drop the folder into the sample app's assets to publish a sticker app." },
+    { "q": "Are my photos uploaded?", "a": "No. Background removal, outlines and WebP encoding all run in your browser on your device, so photos never leave it and the tool works offline after one visit. Nothing is stored after you close the page, so download your pack before leaving." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">WhatsApp Sticker Maker</li></ol></nav>
+  <h1>WhatsApp Sticker Maker</h1>
+  <p class="answer">A WhatsApp sticker must be <strong>exactly {{ST_SIZE}} × {{ST_SIZE}} pixels, WebP, and no more than 100 KB</strong>, in packs of {{ST_MIN}} to {{ST_MAX}} with a {{ST_TRAY}} × {{ST_TRAY}} tray icon. This free sticker maker turns photos into stickers that meet those rules: it removes plain backgrounds, adds the white outline and captions, and downloads single stickers or a whole pack. Nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{ST_VERIFIED}}</span><a href="#rules">WhatsApp's sticker rules</a></p>
+
+  <form class="box st-tool" id="stForm" novalidate aria-labelledby="st-h">
+    <h2 id="st-h" class="sr-only">Make stickers</h2>
+    <div class="st-grid">
+      <div class="st-left">
+        <div class="st-wrap" id="stWrap">
+          <img id="stPlaceholder" src="/assets/img/sticker-sample-cat-sticker.webp" width="512" height="512" fetchpriority="high" alt="Sample sticker: a cartoon cat with a white outline and the caption HAI!">
+          <canvas id="stCanvas" width="512" height="512" data-sample="/assets/img/sticker-sample-cat.png" aria-label="Sticker preview. Drag to move; with the eraser or restore tool, drag to paint."></canvas>
+        </div>
+        <p class="code-stats" id="stName">Sample sticker. Tap it or add photos to start.</p>
+        <div class="st-strip" id="stStrip" role="group" aria-label="Stickers in this pack"></div>
+        <p class="help" id="stCount">0 of {{ST_MAX}} stickers (a pack needs {{ST_MIN}} to {{ST_MAX}})</p>
+        <label class="drop st-drop" id="stDrop" for="stFile"><span><strong>Add photos</strong> or drop them here</span><input type="file" id="stFile" accept="image/*" multiple class="sr-only"></label>
+        <button type="button" class="link-btn" id="stSample">Add the sample cat</button>
+      </div>
+      <div class="st-right">
+        <fieldset class="ex-set">
+          <legend>Cut out</legend>
+          <fieldset class="seg seg3" aria-label="Tool"><label><input type="radio" name="tool" value="move" checked> Move</label><label><input type="radio" name="tool" value="erase"> Eraser</label><label><input type="radio" name="tool" value="restore"> Restore</label></fieldset>
+          <label class="pe-slider"><span>Brush size</span><input type="range" name="brush" min="4" max="80" value="24" data-needs></label>
+          <label class="pe-slider"><span>Background tolerance</span><input type="range" name="tol" min="1" max="60" value="12" data-needs></label>
+          <div class="tool-actions st-row"><button type="button" class="btn ghost sm" id="stRemove" data-needs>Remove background</button><button type="button" class="btn ghost sm" id="stReset" data-needs>Restore original</button></div>
+        </fieldset>
+        <fieldset class="ex-set">
+          <legend>Frame and outline</legend>
+          <label class="pe-slider"><span>Zoom</span><input type="range" name="zoom" min="10" max="400" value="100" data-needs></label>
+          <label class="pe-slider"><span>Rotate</span><input type="range" name="rot" min="-180" max="180" value="0" data-needs></label>
+          <label class="pe-slider"><span>Outline width</span><input type="range" name="outlineW" min="0" max="24" value="10" data-needs></label>
+          <div class="pe-colors">
+            <label>Outline colour <input type="color" name="outlineC" value="#ffffff" data-needs></label>
+            <label class="check"><input type="checkbox" name="shadow" checked data-needs> <span>Drop shadow</span></label>
+          </div>
+          <button type="button" class="btn ghost sm" id="stFit" data-needs>Fit to sticker</button>
+        </fieldset>
+        <fieldset class="ex-set">
+          <legend>Caption</legend>
+          <div class="field-row">
+            <div class="field"><label for="stTop">Top text</label><input class="input" id="stTop" name="top" maxlength="40" data-needs></div>
+            <div class="field"><label for="stBottom">Bottom text</label><input class="input" id="stBottom" name="bottom" maxlength="40" data-needs></div>
+          </div>
+          <div class="pe-colors">
+            <label>Text size <input type="range" name="textSize" min="24" max="120" value="64" data-needs></label>
+            <label>Text colour <input type="color" name="textColor" value="#ffffff" data-needs></label>
+          </div>
+        </fieldset>
+        <fieldset class="ex-set">
+          <legend>Tags</legend>
+          <div class="field"><label for="stEmoji">Emoji (up to 3, used by WhatsApp search)</label><input class="input" id="stEmoji" name="emoji" placeholder="😺👋" data-needs><p class="help">Tags: <span id="stEmojiOut">none yet</span></p></div>
+          <div class="field"><label for="stAlt">Description for screen readers (up to {{ST_ALT}} characters)</label><input class="input" id="stAlt" name="alt" maxlength="{{ST_ALT}}" data-needs></div>
+        </fieldset>
+        <div class="tool-actions st-row">
+          <button type="button" class="btn sm" id="stOne" data-needs>Download this sticker</button>
+          <button type="button" class="btn ghost sm" id="stTray" data-needs>Use as tray icon</button>
+          <button type="button" class="btn ghost sm" id="stDelete" data-needs>Delete</button>
+        </div>
+        <fieldset class="ex-set">
+          <legend>Pack</legend>
+          <div class="field-row">
+            <div class="field"><label for="stPackName">Pack name</label><input class="input" id="stPackName" name="packName" value="My stickers" maxlength="128"></div>
+            <div class="field"><label for="stPublisher">Publisher</label><input class="input" id="stPublisher" name="publisher" value="Me" maxlength="128"></div>
+          </div>
+          <div class="tool-actions"><button type="button" class="btn" id="stPack" data-needs>Download pack (.zip)</button><button type="button" class="btn ghost sm" id="stCheck" data-needs>Check pack</button></div>
+          <ul class="rb-audit" id="stChecks"></ul>
+        </fieldset>
+        <p class="error" id="stError" role="alert" hidden></p>
+      </div>
+    </div>
+    <p class="sr-only" id="stLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to make WhatsApp stickers</h2>
+  <ol>
+    <li><strong>Add photos</strong> (up to {{ST_MAX}}). Plain backgrounds are removed automatically.</li>
+    <li><strong>Touch up</strong> with the eraser and restore brushes; adjust the tolerance and press Remove background to try again.</li>
+    <li><strong>Frame it:</strong> drag to move, zoom and rotate, then set the outline and shadow. Add a caption if you want a meme sticker.</li>
+    <li><strong>Tag it</strong> with up to 3 emoji so WhatsApp's sticker search can find it.</li>
+    <li><strong>Download</strong> one sticker, or the whole pack once it has at least {{ST_MIN}} stickers.</li>
+  </ol>
+
+  <h2 id="rules">WhatsApp's sticker rules</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rules-cap">
+    <table class="data text"><caption id="rules-cap">Requirements from WhatsApp's official sticker README</caption>
+      <thead><tr><th scope="col">Item</th><th scope="col">Rule</th><th scope="col">This tool</th></tr></thead>
+      <tbody>
+{{ST_RULE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="add">Getting the stickers into WhatsApp</h2>
+  <ul>
+    <li><strong>WhatsApp Web or Desktop:</strong> open a chat, choose the attach menu's Sticker option and pick the downloaded image; WhatsApp sends it as a sticker you can then save as a favourite.</li>
+    <li><strong>On a phone:</strong> recent versions of WhatsApp have a Create option in the sticker tab for single stickers. For a whole pack in your sticker tray, use a sticker pack app that imports WebP files; the pack's 512 px WebP files and tray icon are in the format those apps expect.</li>
+    <li><strong>Developers:</strong> the ZIP's <code>contents.json</code> follows WhatsApp's <a href="https://github.com/WhatsApp/stickers" rel="noopener">official sample sticker app</a>, so the folder can go straight into its assets to publish your own sticker app.</li>
+  </ul>
+  <div class="callout"><p><strong>Use pictures you have the right to use.</strong> WhatsApp requires stickers to be legal, authorised and acceptable. Do not turn other people's photos, artwork or brands into stickers without permission. This tool is free, provided as is, and not affiliated with WhatsApp or Meta.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://github.com/WhatsApp/stickers/blob/main/Android/README.md" rel="noopener">WhatsApp stickers README (Android)</a></li>
+    <li><a href="https://github.com/WhatsApp/stickers/blob/main/iOS/README.md" rel="noopener">WhatsApp stickers README (iOS)</a></li>
+    <li><a href="https://github.com/WhatsApp/stickers/wiki/Tag-your-stickers-with-Emojis" rel="noopener">WhatsApp: tag your stickers with emoji</a></li>
+    <li><a href="https://developers.google.com/speed/webp" rel="noopener">Google: WebP</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/photo-editor/">Photo Editor<small>Crop, filters, text and layers</small></a>
+    <a href="/photo-to-cartoon/">Photo to Cartoon<small>Cartoon yourself, then make a sticker</small></a>
+    <a href="{{MAIN_SITE}}/p/whatsapp-link-creator.html">WhatsApp Link Creator<small>Click-to-chat links</small></a>
+  </div>
+</section>
+</div>

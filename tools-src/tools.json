@@ -252,18 +252,9 @@
     "live": true
   },
   {
-    "name": "WhatsApp Sticker Editor",
-    "desc": "Create individual stickers with text, filters, outlines and export controls.",
-    "url": "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html",
-    "cat": "design",
-    "icon": "sticker-whatsapp-maker",
-    "badge": "",
-    "live": true
-  },
-  {
-    "name": "WhatsApp Sticker Pack Maker",
-    "desc": "Prepare multiple stickers, customize pack details and download the files together.",
-    "url": "https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html",
+    "name": "WhatsApp Sticker Maker",
+    "desc": "Turn photos into WhatsApp stickers: background removal, white outline, captions, and 512 px WebP packs under 100 KB.",
+    "url": "https://tool.thebukitbesi.com/whatsapp-sticker-maker/",
     "cat": "design",
     "icon": "whatsapp-sticker-maker",
     "badge": "",
