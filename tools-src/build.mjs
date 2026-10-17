@@ -87,6 +87,7 @@ const cssCore = require('../assets/js/css-core.js');
 const jsCore = require('../assets/js/js-core.js');
 const htmlCore = require('../assets/js/html-core.js');
 const purgeCore = require('../assets/js/purge-core.js');
+const exifCore = require('../assets/js/exif-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2305,7 +2306,51 @@ function genMap(lang) {
     A_STYLE_TABLE: styles, A_EX_PROMPT: esc(A.imagePrompt(GEN_IDEAS.en[0], 'watercolour')), A_LIMIT: new Intl.NumberFormat(L ? 'ms-MY' : 'en-MY').format(A.FACTS.limits.image),
     A_VERIFIED: longDate(A.FACTS.verified, lang), A_VERIFIED_ISO: A.FACTS.verified };
 }
-const RENDERERS = { purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- EXIF editor and remover: the sample photo is read, edited and stripped by the same core the pages run.
+const EXIF_SAMPLE = '/assets/img/exif-sample-bukit-besi.jpg';
+const exifSample = new Uint8Array(fs.readFileSync(path.join(root, EXIF_SAMPLE)));
+const exifInfo = exifCore.read(exifSample);
+const exifStrip = exifCore.strip(exifSample);
+const exifName = path.basename(EXIF_SAMPLE);
+const exifShared = () => {
+  const n = x => x.toLocaleString('en-US');
+  return {
+    EX_SAMPLE: EXIF_SAMPLE, EX_NAME: esc(exifName), EX_W: exifInfo.width, EX_H: exifInfo.height,
+    EX_BEFORE: n(exifStrip.before), EX_AFTER: n(exifStrip.after), EX_PCT: Math.round((1 - exifStrip.after / exifStrip.before) * 1000) / 10,
+    EX_FOUND: exifInfo.privacy.length, EX_LAT: exifInfo.exif.gps.lat, EX_LON: exifInfo.exif.gps.lon, EX_VERIFIED: longDate(exifCore.FACTS.verified, 'en'),
+    EX_INFO: exifCore.views.fileInfo(exifName, exifInfo), EX_PRIVACY: exifCore.views.privacyList(exifInfo)
+  };
+};
+function exifEditorMap() {
+  const v = exifInfo.exif.values, r = exifInfo.rights, d = v.DateTimeOriginal.replace(/^(\d{4}):(\d{2}):(\d{2}) /, '$1-$2-$3T');
+  return {
+    ...exifShared(), EX_TABLES: exifCore.views.metaTables(exifInfo),
+    EX_CREATOR: esc(r.creator), EX_CREDIT: esc(r.credit), EX_COPYRIGHT: esc(r.copyright), EX_WEB: esc(r.webStatement), EX_LICENSOR: esc(r.licensorUrl),
+    EX_TITLE: esc(r.title), EX_DESC: esc(r.description), EX_KEYWORDS: esc(r.keywords),
+    EX_MAKE: esc(v.Make), EX_MODEL: esc(v.Model), EX_LENS: esc(v.LensModel), EX_SOFTWARE: esc(v.Software), EX_DATE: d,
+    EX_ALT: exifInfo.exif.gps.alt,
+    EX_RIGHTS_ROWS: exifCore.RIGHTS.map(f => `        <tr><th scope="row">${esc(f.label)}</th><td><code>${esc(f.xmp)}</code></td><td>${esc(f.iim || '–')}</td><td>${esc(f.exif || '–')}</td><td>${esc(f.google)}</td></tr>`).join('\n')
+  };
+}
+const EXIF_KINDS = [
+  ['exif', 'JPEG APP1, PNG eXIf, WebP EXIF', 'Camera, settings, dates, GPS, serial numbers, thumbnail', 'Removed (orientation can be kept)'],
+  ['xmp', 'JPEG APP1, PNG iTXt, WebP XMP', 'Creator, rights, keywords, editing software and history', 'Removed (credit can be kept)'],
+  ['iptc', 'JPEG APP13', 'Photographer, caption, copyright, location names', 'Removed'],
+  ['icc', 'JPEG APP2, PNG iCCP, WebP ICCP', 'How colours should be displayed', 'Kept (optional)'],
+  ['comment', 'JPEG COM', 'Free text written by the camera or software', 'Removed'],
+  ['text', 'PNG tEXt, zTXt, iTXt', 'Software name, AI generator prompts and settings', 'Removed'],
+  ['c2pa', 'JPEG APP11, PNG caBX', 'Signed history of how the image was made or edited', 'Removed'],
+  ['mpf', 'JPEG APP2', 'Index of extra images stored after the main one', 'Removed with them'],
+  ['trailer', 'After the end-of-image marker', 'Motion-photo video, HDR gain map, hidden files', 'Removed (optional)']
+];
+function exifRemoverMap() {
+  return {
+    ...exifShared(), EX_RESULT: exifCore.views.resultCard(exifName, exifStrip, ''),
+    EX_KIND_ROWS: EXIF_KINDS.map(k => `        <tr><th scope="row">${esc(exifCore.KIND_LABEL[k[0]])}</th><td>${esc(k[1])}</td><td>${esc(k[2])}</td><td>${esc(k[3])}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2351,6 +2396,13 @@ const shareScript = `<script>
 })();
 </script>`;
 
+// Page hero images carry Google's image licence properties; the same rights are embedded in the file as IPTC.
+const heroImage = img => ({
+  '@type': 'ImageObject', '@id': abs(img.url) + '#image', url: abs(img.url), contentUrl: abs(img.url), width: img.width, height: img.height,
+  caption: img.caption, description: img.alt, creditText: site.brand, creator: { '@id': site.mainSite + '/#org' },
+  copyrightNotice: `© ${img.year} ${site.brand}`, license: site.origin + '/terms/#images', acquireLicensePage: site.origin + '/contact/'
+});
+
 // ---- content pages
 const outputs = new Map([['/', homeHtml]]);
 for (const p of pages) {
@@ -2378,7 +2430,7 @@ for (const p of pages) {
     inLanguage: p.lang === 'ms' ? 'ms-MY' : 'en-MY', isPartOf: { '@id': site.origin + '/#website' },
     breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.datePublished, dateModified: p.dateModified,
     author: { '@id': p.policy ? site.mainSite + '/#org' : person['@id'] }, publisher: { '@id': site.mainSite + '/#org' },
-    primaryImageOfPage: { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
+    primaryImageOfPage: p.image ? heroImage(p.image) : { '@type': 'ImageObject', url: abs(site.ogImage.url), width: site.ogImage.width, height: site.ogImage.height },
     ...(p.about ? { about: p.about.map(name => ({ '@type': 'Thing', name })) } : {}),
     ...(p.citations ? { citation: p.citations.map(c => ({ '@type': 'CreativeWork', name: c[0], url: c[1] })) } : {}),
     ...(p.app ? { mainEntity: { '@id': url + '#app' } } : {})
@@ -2409,6 +2461,7 @@ for (const p of pages) {
     FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
     PAGE_SCRIPTS: (p.scripts || []).map(s => `<script src="${s}" defer></script>`).join('\n') + (p.app ? '\n' + shareScript : ''),
     ...(p.robots ? { ROBOTS: p.robots } : {}),
+    ...(p.image ? { OG_IMAGE: abs(p.image.url), OG_W: p.image.width, OG_H: p.image.height, OG_ALT: esc(p.image.alt) } : {}),
     ...(p.salary ? salaryMap(p.lang) : {}),
     ...rendered
   };
@@ -2498,7 +2551,9 @@ const bundles = {
   'js-minifier-worker.js': ['assets/js/js-core.js', 'assets/js/js-worker.js'],
   'html-beautifier.js': ['assets/js/html-core.js', 'assets/js/html-ui.js'],
   'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js'],
-  'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js']
+  'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js'],
+  'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
+  'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
@@ -2598,7 +2653,7 @@ const precache = [...new Set([
 const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub, to), { recursive: true });
 // Vendor libraries carry their version in the file name; a clean copy drops superseded versions.
 fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
-['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor'].forEach(f => copy(f));
+['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
 const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f);

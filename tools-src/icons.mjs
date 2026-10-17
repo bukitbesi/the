@@ -89,6 +89,8 @@ export const icons = {
   'convert-case': p('m2 19 5-14 5 14M4 14h6m7-2c6-1 6 8 0 7-5-1-4-6 1-6h3m0-1v7'),
   'online-notepad': rect(5, 3, 15, 18) + p('M3 7h4M3 12h4M3 17h4m3-9h6m-6 4h6m-6 4h4'),
   'webp-image-converter': file('WP') + p('M7 18h10'),
+  'exif-editor': rect(2, 4, 14, 12) + circle(6.5, 8.5, 1.5) + p('m2 14 4-3 3 2 3-3 4 3') + p('M14.5 20.5 20 15l2 2-5.5 5.5H14.5Z'),
+  'exif-remover': rect(2, 4, 14, 12) + p('M9 7.5a2.2 2.2 0 0 0-2.2 2.2c0 1.7 2.2 3.8 2.2 3.8s2.2-2.1 2.2-3.8A2.2 2.2 0 0 0 9 7.5Z') + p('m16 15 6 6m0-6-6 6'),
   'image-converter': image + p('m15 2 3 2-3 2M6 18l-3 2 3 2'),
   'color-contrast': circle(12, 12, 9) + '<path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor"/>',
   'online-photoshop': p('m15 3 6 6-9 9-6 2 2-6Zm-7 11 4 4M4 3v5M2 5h5'),

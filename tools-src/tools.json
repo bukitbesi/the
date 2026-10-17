@@ -198,6 +198,24 @@
     "live": true
   },
   {
+    "name": "EXIF Editor",
+    "desc": "View and edit photo metadata: date, camera, GPS, and the copyright and credit Google Images shows. JPEG, PNG, WebP.",
+    "url": "https://tool.thebukitbesi.com/exif-editor/",
+    "cat": "design",
+    "icon": "exif-editor",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "EXIF Remover",
+    "desc": "Remove GPS, camera and other metadata from photos without losing quality, one by one or as a ZIP.",
+    "url": "https://tool.thebukitbesi.com/exif-remover/",
+    "cat": "design",
+    "icon": "exif-remover",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "WebP Image Converter",
     "desc": "Batch-convert images to WebP with resizing and compression controls.",
     "url": "https://www.thebukitbesi.com/p/webp-image-converter.html",

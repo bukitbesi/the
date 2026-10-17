@@ -9,7 +9,7 @@
   "description": "Upload a picture and get 3 AI prompts for Midjourney, Stable Diffusion, ChatGPT, Flux, Veo or Sora: subject, style, lighting, camera angle, mood and colours.",
   "llms": "Turns an uploaded picture into AI image or video prompts. The browser reads the picture's colour palette, brightness and aspect ratio; a vision model (Meta Llama 3.2 11B Vision on Cloudflare Workers AI) describes the subject, action, setting, style, lighting, framing, mood and colours as JSON; if that service is busy or its free daily allowance is used up, the visitor can run a small captioning model in the browser instead (Transformers.js, about 250 MB downloaded once). The editable description is written as three prompt variations for Midjourney, Stable Diffusion, ChatGPT/DALL·E, Flux, Veo, Sora, Kling or Runway, and can be opened in the AI Prompt Generator. Pictures are resized to 560 px and not stored; it cannot recover the exact prompt that made an AI image, only describe what is visible.",
   "datePublished": "2026-10-13",
-  "dateModified": "2026-10-13",
+  "dateModified": "2026-10-17",
   "render": "img2prompt",
   "scripts": ["/assets/js/image-to-prompt.js"],
   "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["Image to Prompt", null]],
@@ -149,5 +149,6 @@
     <a href="https://www.thebukitbesi.com/p/free-ai-image-generator.html">AI Image Generator<small>Create images from your prompt</small></a>
     <a href="https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html">AI Cartoonizer<small>Turn a photo into a cartoon</small></a>
     <a href="/ai-image-generator/">AI Image Generator<small>Turn your prompt into a picture</small></a>
+    <a href="/exif-editor/">EXIF Editor<small>See and edit a photo's hidden data</small></a>
   </div>
 </section>

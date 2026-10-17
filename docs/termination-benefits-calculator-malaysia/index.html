@@ -515,6 +515,23 @@ textarea.prose-in.short{min-height:96px}
 .fixes{margin:10px 0 0;padding-left:1.4em;font-size:.88rem;line-height:1.5}
 .fixes li{margin-bottom:4px}.fixes del{color:var(--text3)}.fixes ins{text-decoration:none;font-weight:700}
 .fixes small{color:var(--text2)}
+.ex-top{display:grid;gap:16px}
+@media(min-width:760px){.ex-top{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}}
+.ex-drop{min-height:0;margin:0}.ex-drop img{width:100%;height:auto}
+.ex-info{font-size:.88rem;color:var(--text2);overflow-wrap:anywhere;margin-bottom:8px}
+.ex-priv{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;font-size:.82rem}.ex-priv li{padding:6px 9px;border-radius:10px;background:var(--tint);border:1px solid var(--tint-b)}
+.ex-priv strong{display:block}.ex-priv span{color:var(--text2);overflow-wrap:anywhere}.ex-clean{color:var(--text2);font-size:.9rem}
+.ex-set{border:1px solid var(--border);border-radius:var(--r);padding:12px 14px 2px;margin-top:16px;min-width:0}
+.ex-set legend{font-weight:700;padding:0 6px}.ex-set legend small{font-weight:400;color:var(--text3)}.ex-set .check{margin-bottom:12px}
+textarea.ex-desc{min-height:72px}
+.ex-group{border:1px solid var(--border);border-radius:var(--r);margin-top:8px}.ex-group summary{cursor:pointer;padding:10px 14px;font-weight:600}
+.ex-group .table-wrap{margin:0;border:0;border-top:1px solid var(--border);border-radius:0}
+.data.ex-table{min-width:0}.ex-table th{width:40%}.ex-table td{overflow-wrap:anywhere}.ex-sens th{color:var(--accent2)}
+.ex-files{list-style:none;display:grid;gap:10px}.ex-file{padding:12px 14px;border:1px solid var(--border);border-radius:var(--r)}
+.ex-file-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;overflow-wrap:anywhere}.ex-file-head span{color:var(--text2);font-size:.88rem}
+.ex-found{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.ex-found li{font-size:.78rem;padding:3px 9px;border-radius:99px;background:var(--tint);border:1px solid var(--tint-b)}
+.ex-figure{margin:18px 0}.ex-figure img{width:100%;height:auto;border-radius:var(--r);border:1px solid var(--border)}.ex-figure figcaption{font-size:.85rem;color:var(--text2);margin-top:6px}
+@media print{.ex-set,.ex-drop span,#exPickWrap,.drop,.adv-grid{display:none!important}.ex-group{break-inside:avoid}}
 </style>
 
 </head>
@@ -683,8 +700,8 @@ textarea.prose-in.short{min-height:96px}
           <li><a href="/css-minifier/">CSS Minifier</a></li>
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
-          <li><a href="/ai-prompt-generator/">AI Prompt Generator (Image &amp; Video)</a></li>
-          <li><a href="/ai-image-generator/">AI Image Generator</a></li>
+          <li><a href="/exif-editor/">EXIF Editor</a></li>
+          <li><a href="/exif-remover/">EXIF Remover</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

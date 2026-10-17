@@ -1,0 +1,146 @@
+<!--page
+{
+  "path": "/exif-remover/",
+  "lang": "en",
+  "cat": "design",
+  "title": "EXIF Remover: Remove Metadata and GPS From Photos Online",
+  "description": "Free EXIF remover: delete GPS location, date, camera serial and other metadata from JPEG, PNG and WebP without losing quality. Batch to ZIP. No upload.",
+  "llms": "Free browser-based EXIF and metadata remover for JPEG, PNG and WebP, single files or batches downloaded as a ZIP. Lists what each photo reveals (GPS location, date taken, camera, serial numbers, owner name, software, embedded thumbnail, XMP edit history, IPTC, PNG text such as Stable Diffusion prompts, C2PA Content Credentials, data after the image end such as motion-photo video) and removes it losslessly: the compressed image data is copied byte for byte, so quality is unchanged. By default it keeps the orientation tag (so phone photos do not turn sideways) and the ICC colour profile (so colours do not shift); both are optional, and the Google Images credit fields can be kept. Worked example: a 16,692-byte JPEG becomes 10,897 bytes (34.7% smaller) with identical pixels. Files are never uploaded.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "render": "exifRemover",
+  "shareTitle": "Share this EXIF remover",
+  "scripts": ["/assets/js/exif-remover.js"],
+  "image": { "url": "/assets/img/exif-remover-before-after.jpg", "width": 1200, "height": 630, "year": 2026,
+    "alt": "Before and after removing EXIF metadata: GPS, date, camera serial and thumbnail deleted while orientation and colour profile are kept",
+    "caption": "What the EXIF remover deletes from a photo and what it keeps" },
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["EXIF Remover", null]],
+  "about": ["Exif", "Metadata removal", "Geotagging", "Photo privacy", "Image file formats"],
+  "app": {
+    "name": "EXIF Remover",
+    "category": "MultimediaApplication",
+    "features": ["Removes EXIF, GPS, XMP, IPTC, comments, PNG text and C2PA data", "Lossless: image data copied byte for byte", "Keeps orientation so photos do not rotate (optional)", "Keeps the ICC colour profile (optional)", "Can keep Creator, Credit Line and Copyright for Google Images", "Removes motion-photo video and other data after the image (optional)", "Shows what each photo revealed before removal", "Batch: many photos at once, download all as a ZIP", "JPEG, PNG and WebP; runs in the browser, nothing uploaded"]
+  },
+  "citations": [
+    ["CIPA DC-008: Exchangeable image file format (Exif) 2.32", "https://www.cipa.jp/std/documents/download_e.html?DC-008-Translation-2019-E"],
+    ["W3C: Portable Network Graphics (PNG) Specification", "https://www.w3.org/TR/png-3/"],
+    ["Google: WebP container specification", "https://developers.google.com/speed/webp/docs/riff_container"],
+    ["IPTC Photo Metadata Standard", "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata"],
+    ["C2PA Technical Specification", "https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html"]
+  ],
+  "faq": [
+    { "q": "How do I remove EXIF data from a photo?", "a": "Choose or drop the photo on this page. The EXIF remover lists what the file reveals, removes it at once and gives you a clean copy named with -clean, for example holiday-clean.jpg. Choose several photos to clean them together and download them all as one ZIP. It works with JPEG, PNG and WebP and nothing is uploaded." },
+    { "q": "Does removing EXIF data reduce image quality?", "a": "No. The remover deletes only the metadata blocks and copies the compressed image data byte for byte, so every pixel is identical. The file just gets smaller: the sample photo goes from {{EX_BEFORE}} to {{EX_AFTER}} bytes, {{EX_PCT}}% smaller. Tools that redraw the photo on a canvas and save it again do recompress it, which loses detail." },
+    { "q": "Why did my photo turn sideways after removing metadata?", "a": "Phones often save the picture sideways and add an EXIF Orientation tag telling viewers to rotate it. Delete that tag and the photo shows as stored, on its side. This remover keeps the Orientation tag by default, writing a new EXIF block that holds only the orientation, so the photo still displays upright while the GPS, date and camera data are gone." },
+    { "q": "Does removing EXIF delete the GPS location?", "a": "Yes. GPS latitude, longitude, altitude, direction and the GPS time are all EXIF tags, and the remover deletes the whole EXIF block. It also removes XMP and IPTC, where some apps store place names, and the embedded thumbnail. To remove only the location and keep the date and camera details, use the EXIF editor and tick Remove location." },
+    { "q": "What is removed from AI-generated PNG images?", "a": "Stable Diffusion WebUI saves the full prompt, negative prompt, seed and settings in a PNG text chunk called parameters, and ComfyUI saves prompt and workflow chunks. The remover deletes all PNG text chunks, eXIf, XMP and the timestamp chunk, while keeping chunks that affect how the image looks, such as transparency, gamma and the colour profile." },
+    { "q": "Should I keep the colour profile?", "a": "Usually yes, so it is kept by default. The ICC profile tells browsers how to show the colours; photos in Display P3 or Adobe RGB look dull or shifted without it. It holds no personal data, only colour information, and costs a few hundred bytes to a few kilobytes. Untick Keep colour profile only for sRGB images where every byte counts." },
+    { "q": "Are my photos uploaded to a server?", "a": "No. The remover runs in your browser with JavaScript, so photos never leave your device and it works offline after one visit. Each file can be up to 50 MB. HEIC photos from iPhones are not supported; convert them to JPEG first, or set Settings, Camera, Formats to Most Compatible so the camera saves JPEG." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">EXIF Remover</li></ol></nav>
+  <h1>EXIF Remover</h1>
+  <p class="answer">An <strong>EXIF remover deletes the hidden data in a photo, such as the GPS location, date taken and camera serial number, without re-saving the image.</strong> The sample photo below drops from {{EX_BEFORE}} to {{EX_AFTER}} bytes, <strong>{{EX_PCT}}% smaller with every pixel unchanged</strong>. Drop JPEG, PNG or WebP photos to clean them one by one or as a ZIP; nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{EX_VERIFIED}}</span><a href="#kept">What it keeps</a></p>
+
+  <form class="box ex-tool" id="rmForm" novalidate aria-labelledby="rm-h">
+    <h2 id="rm-h" class="sr-only">Remove photo metadata</h2>
+    <label class="drop" id="rmDrop" for="rmFile">
+      <span><strong>Choose photos</strong> or drop them here</span>
+      <small>JPEG, PNG or WebP, up to 50 MB each</small>
+      <input type="file" id="rmFile" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple class="sr-only">
+    </label>
+    <div class="adv-grid">
+      <label class="check"><input type="checkbox" name="keepOrientation" checked> <span>Keep orientation (photos stay upright)</span></label>
+      <label class="check"><input type="checkbox" name="keepIcc" checked> <span>Keep colour profile (ICC)</span></label>
+      <label class="check"><input type="checkbox" name="keepRights"> <span>Keep creator and copyright (for Google Images)</span></label>
+      <label class="check"><input type="checkbox" name="keepTrailer"> <span>Keep data after the image (motion-photo video)</span></label>
+    </div>
+    <h3 class="sub-h" id="rmListH">Cleaned photos</h3>
+    <ul class="ex-files" id="rmList" aria-labelledby="rmListH">{{EX_RESULT}}</ul>
+    <p class="error" id="rmError" role="alert" hidden></p>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="rmZip" hidden>Download all (.zip)</button>
+      <button type="button" class="btn ghost sm" id="rmSample">Clean the sample photo</button>
+      <button type="button" class="btn ghost sm" id="rmPrint">Print report</button>
+      <button type="button" class="btn ghost sm" id="rmClear">Clear</button>
+    </div>
+    <p class="code-stats" id="rmStats">Sample: {{EX_NAME}}, {{EX_FOUND}} kinds of personal data removed.</p>
+    <p class="sr-only" id="rmLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to remove EXIF data from photos</h2>
+  <ol>
+    <li><strong>Choose or drop your photos.</strong> Each one is read on your device and listed with what it revealed: GPS location, date, camera, serial numbers, owner name, software, thumbnail and more.</li>
+    <li><strong>Check the options.</strong> The defaults keep orientation and the colour profile, which hold no personal data and stop photos from turning sideways or changing colour.</li>
+    <li><strong>Download.</strong> Each clean copy is named <code>-clean</code>. With several photos, <strong>Download all</strong> saves one ZIP.</li>
+    <li><strong>Check a result</strong> by opening it in the <a href="/exif-editor/">EXIF editor</a>: "Found in this photo" should say no personal metadata.</li>
+  </ol>
+
+  <h2 id="what">What the EXIF remover finds and removes</h2>
+  <p>Photos carry more than EXIF. This table lists every kind of metadata block the remover recognises, where it lives in each format and what happens to it by default.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kinds-cap">
+    <table class="data text"><caption id="kinds-cap">Metadata blocks in JPEG, PNG and WebP</caption>
+      <thead><tr><th scope="col">Metadata</th><th scope="col">Where it is stored</th><th scope="col">What it can contain</th><th scope="col">Default</th></tr></thead>
+      <tbody>
+{{EX_KIND_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <figure class="ex-figure">
+    <img src="/assets/img/exif-remover-before-after.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="Before and after removing EXIF metadata: GPS, date, camera serial and thumbnail deleted while orientation and colour profile are kept">
+    <figcaption>The sample photo before and after: personal data gone, orientation and colours kept, image data identical.</figcaption>
+  </figure>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="kept">What it keeps, and why</h2>
+  <ul>
+    <li><strong>Image data, byte for byte.</strong> Nothing is decoded or recompressed, so there is no quality loss and no change to the pixels.</li>
+    <li><strong>Orientation</strong> (optional, on). Without it, phone photos stored sideways display sideways. The remover writes a new, minimal EXIF block holding only the orientation.</li>
+    <li><strong>Colour profile</strong> (optional, on). Wide-gamut photos need it to show correct colours. It contains no personal data.</li>
+    <li><strong>Image structure</strong>: the JPEG JFIF and Adobe colour-transform markers, PNG transparency, gamma, physical size and animation chunks, and WebP alpha and animation chunks.</li>
+    <li><strong>Copyright credit</strong> (optional, off). Tick it to keep Creator, Credit Line, Copyright Notice and licence links in a fresh XMP block, so Google Images can still credit you while GPS and camera data go.</li>
+  </ul>
+
+  <h2 id="devices">Removing location on your phone or computer</h2>
+  <p>This page cleans any photo in seconds, but your device can also stop leaks at the source:</p>
+  <ul>
+    <li><strong>iPhone:</strong> when sharing, tap <em>Options</em> at the top of the share sheet and turn off <em>Location</em>. To stop recording it, go to Settings, Privacy and Security, Location Services, Camera and choose Never.</li>
+    <li><strong>Android (Google Camera):</strong> open the camera settings and turn off <em>Save location</em>. Other brands use a similar "location tags" switch.</li>
+    <li><strong>Windows:</strong> right-click the file, Properties, Details, <em>Remove Properties and Personal Information</em>.</li>
+    <li><strong>Mac:</strong> in Preview, Tools, Show Inspector, the info tab, GPS, <em>Remove Location Info</em>.</li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> the remover deletes the metadata it recognises (listed above). It cannot remove what is visible in the picture itself, such as street signs, faces or reflections, and a site you upload to may still record when and from where you uploaded. Keep your originals; this tool is provided as is.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.cipa.jp/std/documents/download_e.html?DC-008-Translation-2019-E" rel="noopener">CIPA DC-008: Exif 2.32</a></li>
+    <li><a href="https://www.w3.org/TR/png-3/" rel="noopener">W3C: PNG specification</a></li>
+    <li><a href="https://developers.google.com/speed/webp/docs/riff_container" rel="noopener">Google: WebP container specification</a></li>
+    <li><a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" rel="noopener">IPTC Photo Metadata Standard</a></li>
+    <li><a href="https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html" rel="noopener">C2PA Technical Specification</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/exif-editor/">EXIF Editor<small>View, edit and add copyright to photos</small></a>
+    <a href="{{MAIN_SITE}}/p/webp-image-converter.html">WebP Image Converter<small>Convert photos to smaller WebP</small></a>
+    <a href="/image-to-prompt/">Image to Prompt<small>Describe a picture as an AI prompt</small></a>
+  </div>
+</section>
+</div>
