@@ -88,6 +88,7 @@ const jsCore = require('../assets/js/js-core.js');
 const htmlCore = require('../assets/js/html-core.js');
 const purgeCore = require('../assets/js/purge-core.js');
 const exifCore = require('../assets/js/exif-core.js');
+const robotsCore = require('../assets/js/robots-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2350,7 +2351,35 @@ function exifRemoverMap() {
     EX_KIND_ROWS: EXIF_KINDS.map(k => `        <tr><th scope="row">${esc(exifCore.KIND_LABEL[k[0]])}</th><td>${esc(k[1])}</td><td>${esc(k[2])}</td><td>${esc(k[3])}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- Robots.txt generator: the Blogger preset, its audit and the tester results are rendered by the page's core.
+const ROBOTS_EXAMPLES = [
+  ['User-agent: *\nAllow: /p\nDisallow: /', '/page'],
+  ['User-agent: *\nAllow: /folder\nDisallow: /folder', '/folder/page'],
+  ['User-agent: *\nAllow: /page\nDisallow: /*.htm', '/page.htm'],
+  ['User-agent: *\nDisallow: /fish*', '/Fish.asp'],
+  ['User-agent: *\nDisallow: /*.php$', '/index.php?lang=en'],
+  ['User-agent: googlebot\nDisallow: /private/', '/private/a.jpg (Googlebot-Image)'],
+  ['User-agent: *\nDisallow: /', '/robots.txt']
+];
+function robotsMap() {
+  const R = robotsCore, V = R.views, cfg = R.fromPreset('blogger'), text = R.generate(cfg), url = '/search/label/SEO';
+  const opt = (v, l, sel) => `<option value="${esc(v)}"${sel ? ' selected' : ''}>${esc(l)}</option>`;
+  return {
+    RB_BOTS: R.BOTS.length, RB_VERIFIED: longDate(R.FACTS.verified, 'en'),
+    RB_PRESETS: Object.entries(R.PRESETS).map(([k, p]) => opt(k, p.label, k === 'blogger')).join(''),
+    RB_SITE: esc(cfg.site), RB_ROWS: V.rowsHtml(R.rowsFromCfg(cfg)), RB_BOT_CHECKS: V.botChecks({}), RB_MAPS: esc(cfg.sitemaps.join('\n')),
+    RB_OUT: esc(text), RB_AUDIT: V.auditHtml(R.audit(text, cfg.site).notes), RB_TEST_URL: url,
+    RB_UAS: R.TESTERS.map(t => opt(t, t, t === 'Googlebot')).join(''),
+    RB_VERDICT: V.verdictHtml(R.test(text, url, 'Googlebot'), 'Googlebot'), RB_ALL: V.allHtml(text, url),
+    RB_BOT_ROWS: R.BOTS.map(b => `        <tr><th scope="row"><code>${esc(b.token)}</code></th><td>${esc(b.owner)}</td><td>${esc(R.PURPOSE[b.purpose])}</td><td>${esc(b.note)}</td></tr>`).join('\n'),
+    RB_EXAMPLES: ROBOTS_EXAMPLES.map(([rules, u]) => {
+      const m = /^(\S+)(?: \((.+)\))?$/.exec(u), r = R.test(rules, m[1], m[2] || 'Googlebot');
+      return `        <tr><td><code>${esc(rules).replace(/\n/g, '<br>')}</code></td><td><code>${esc(u)}</code></td><td>${r.allowed ? 'Allowed' : 'Blocked'}${r.rule ? ` (${esc(V.ruleText(r.rule))})` : r.reason === 'robots' ? ' (always)' : ''}</td></tr>`;
+    }).join('\n')
+  };
+}
+const RENDERERS = { robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2553,7 +2582,8 @@ const bundles = {
   'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js'],
   'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js'],
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
-  'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js']
+  'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
+  'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.

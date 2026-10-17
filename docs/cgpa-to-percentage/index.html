@@ -531,6 +531,12 @@ textarea.ex-desc{min-height:72px}
 .ex-found{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.ex-found li{font-size:.78rem;padding:3px 9px;border-radius:99px;background:var(--tint);border:1px solid var(--tint-b)}
 .ex-figure{margin:18px 0}.ex-figure img{width:100%;height:auto;border-radius:var(--r);border:1px solid var(--border)}.ex-figure figcaption{font-size:.85rem;color:var(--text2);margin-top:6px}
 @media print{.ex-set,.ex-drop span,#exPickWrap,.drop,.adv-grid{display:none!important}.ex-group{break-inside:avoid}}
+.rb-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) minmax(0,1.4fr) auto;gap:6px;margin-bottom:6px}.rb-row .input{min-height:42px}
+@media(max-width:520px){.rb-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;padding-bottom:6px;border-bottom:1px dashed var(--border)}.rb-row input:nth-of-type(2){grid-column:1/4;grid-row:2}}
+.rb-bots{display:grid;gap:4px 14px;margin-bottom:10px}@media(min-width:640px){.rb-bots{grid-template-columns:1fr 1fr}}.rb-bots small{color:var(--text3)}
+.rb-out{height:220px}.rb-audit{list-style:none;display:grid;gap:6px;font-size:.86rem}.rb-n{padding:7px 10px;border-radius:10px;border:1px solid var(--border)}
+.rb-error{border-color:#e17055}.rb-warn{border-color:#fdcb6e}.rb-ok{border-color:var(--tint-b);background:var(--tint)}.rb-n code{overflow-wrap:anywhere}
+.rb-verdict{margin:6px 0 10px;overflow-wrap:anywhere}.rb-yes{color:#15803d}.rb-no{color:#b42318}:root[data-theme=dark] .rb-yes{color:#4ade80}:root[data-theme=dark] .rb-no{color:#ff9b8f}.data.rb-all{min-width:0}.rb-all th{width:45%}.rb-all small{display:block;color:var(--text3);overflow-wrap:anywhere}
 </style>
 
 </head>
@@ -757,8 +763,8 @@ textarea.ex-desc{min-height:72px}
           <li><a href="/css-minifier/">CSS Minifier</a></li>
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
+          <li><a href="/robots-txt-generator/">Robots.txt Generator and Tester</a></li>
           <li><a href="/exif-editor/">EXIF Editor</a></li>
-          <li><a href="/exif-remover/">EXIF Remover</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

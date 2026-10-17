@@ -51,6 +51,9 @@
 <b:case value='https://www.thebukitbesi.com/p/kalkulator-zakat.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/");</script>
+<b:case value='https://www.thebukitbesi.com/p/robotstxt-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/robots-txt-generator/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/robots-txt-generator/");</script>
 <b:case value='https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/semak-tracking-parcel/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/semak-tracking-parcel/");</script>

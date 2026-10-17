@@ -108,9 +108,9 @@
     "live": true
   },
   {
-    "name": "Robots.txt Generator",
-    "desc": "Build robots.txt rules for user agents, crawl paths and sitemap locations.",
-    "url": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+    "name": "Robots.txt Generator and Tester",
+    "desc": "Build and test robots.txt for Blogger or WordPress, block AI crawlers like GPTBot, and check any URL against Google's rules.",
+    "url": "https://tool.thebukitbesi.com/robots-txt-generator/",
     "cat": "seo",
     "icon": "robotstxt-generator",
     "badge": "",

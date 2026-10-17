@@ -156,6 +156,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/javascript-minifier/](https://tool.thebukitbesi.com/javascript-minifier/) | English | javascript minifier, minify js online, javascript obfuscator, uglify js, js beautifier |
 | [/html-beautifier/](https://tool.thebukitbesi.com/html-beautifier/) | English | html beautifier, html formatter, html minifier, find unclosed tags, minify blogger template |
 | [/unused-css-remover/](https://tool.thebukitbesi.com/unused-css-remover/) | English | remove unused css, unused css remover, purify css online, purgecss online, reduce unused css |
+| [/robots-txt-generator/](https://tool.thebukitbesi.com/robots-txt-generator/) | English | robots.txt generator, robots.txt tester, custom robots.txt blogger, block gptbot / ai crawlers robots.txt |
 | [/exif-editor/](https://tool.thebukitbesi.com/exif-editor/) | English | exif editor online, exif viewer, edit photo metadata, change date taken, add copyright to image metadata, google images licensable |
 | [/exif-remover/](https://tool.thebukitbesi.com/exif-remover/) | English | remove exif data, exif remover, remove metadata from photo, remove gps location from photo, remove ai metadata png |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
@@ -258,6 +259,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (STR):** `str-core.js` holds the 2026 STR and SARA rates and phases. Add Phase 4 when MOF announces it, and replace the rates when the 2027 table is published (Budget 2027 announced SARA up to RM150 a month only).
 
 **Upkeep (SSPA):** `sspa-core.js` holds the phase 1 and phase 2 rates, the RM240 floor and the grade map. No further phase is scheduled; add one only if JPA announces it.
+
+**Upkeep (robots.txt):** `robots-core.js` `BOTS` lists the AI crawler tokens published by OpenAI, Anthropic, Google, Apple, Perplexity, Meta and Common Crawl. Every six months check each operator's crawler page for new or renamed tokens, update `BOTS`, `FACTS.verified` and `tools-src/tests/robots.test.mjs`. Matching follows RFC 9309, which does not change.
 
 **Upkeep (EXIF editor and remover):** `exif-core.js` reads, strips and writes JPEG, PNG and WebP metadata losslessly (tests use ExifTool-made fixtures in `tools-src/tests/fixtures/`). `RIGHTS` lists the IPTC fields Google Images reads; recheck Google's image licence metadata page and the IPTC quick guide every six months, then `FACTS.verified`. The hero images in `assets/img/` (also each page's og:image) are rendered by `tools-src/images.mjs` and carry their own IPTC rights; their `license` page is `/terms/#images`. EXIF tools are English only by design (low BM search volume).
 
@@ -383,6 +386,7 @@ assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value s
 assets/js/js-core.js        JavaScript minifier options and runner (Terser / javascript-obfuscator), shared by page, worker, build and tests
 assets/js/html-core.js      HTML beautify/minify options, presets and the HTML checker
 assets/js/purge-core.js     unused CSS remover: selector decisions, safelists, pruning (uses css-core.js)
+assets/js/robots-core.js    robots.txt: presets, AI crawler tokens, RFC 9309 parser/tester, audit
 assets/js/exif-core.js      EXIF editor and remover: JPEG/PNG/WebP metadata parse, lossless strip and write, XMP rights, ZIP
 assets/img/                 tool hero images (with embedded IPTC rights) and the EXIF sample photo
 tools-src/cors-proxy/       optional Cloudflare Worker that lets the remover load pages from sites without CORS
