@@ -1,0 +1,203 @@
+<!--page
+{
+  "path": "/exif-editor/",
+  "lang": "en",
+  "cat": "design",
+  "title": "EXIF Editor Online: View and Edit Photo Metadata, Add Copyright",
+  "description": "Free EXIF editor: view and edit photo metadata, change date taken and GPS, and add the copyright and credit Google Images shows. JPEG, PNG, WebP. No upload.",
+  "llms": "Free browser-based EXIF editor and viewer for JPEG, PNG and WebP. Shows every EXIF, GPS, XMP, IPTC and PNG text field with a privacy summary; edits camera make and model, lens, software, date taken, orientation and GPS (add, change or remove), removes serial numbers, owner name and the embedded thumbnail, and writes the five IPTC photo metadata fields Google Images reads (Creator dc:creator, Credit Line photoshop:Credit, Copyright Notice dc:rights, Web Statement of Rights xmpRights:WebStatement, Licensor URL plus:LicensorURL) as XMP, plus title, description and keywords. Edits rewrite only the metadata blocks, so image data is copied byte for byte with no quality loss. Can stamp the same copyright on many photos and download a ZIP. Google says EXIF is not a ranking factor; the IPTC rights fields control the credit and Licensable badge in Google Images. Files are never uploaded.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "render": "exifEditor",
+  "shareTitle": "Share this EXIF editor",
+  "scripts": ["/assets/js/exif-editor.js"],
+  "image": { "url": "/assets/img/exif-editor-copyright-metadata.jpg", "width": 1200, "height": 630, "year": 2026,
+    "alt": "EXIF editor showing the IPTC Creator, Credit Line, Copyright Notice and licence fields that Google Images displays",
+    "caption": "The five IPTC fields Google Images reads, written into a photo with this editor" },
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["EXIF Editor", null]],
+  "about": ["Exif", "IPTC Photo Metadata", "Extensible Metadata Platform", "Image SEO", "Google Images"],
+  "app": {
+    "name": "EXIF Editor",
+    "category": "MultimediaApplication",
+    "features": ["View all EXIF, GPS, XMP, IPTC and PNG text metadata", "Privacy summary: GPS, date, camera, serial numbers, thumbnail", "Write Creator, Credit Line, Copyright Notice, Web Statement of Rights and Licensor URL for Google Images", "Edit title, description and keywords (XMP)", "Change camera, lens, software, date taken and orientation", "Add, change or remove GPS location", "Remove serial numbers, owner name and embedded thumbnail", "Lossless: image data copied byte for byte", "Copyright for many photos at once, downloaded as a ZIP", "JPEG, PNG and WebP; runs in the browser, nothing uploaded"]
+  },
+  "citations": [
+    ["Google Search Central: Image license metadata", "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"],
+    ["IPTC: Quick guide to IPTC Photo Metadata on Google Images", "https://iptc.org/standards/photo-metadata/quick-guide-to-iptc-photo-metadata-and-google-images/"],
+    ["IPTC Photo Metadata Standard", "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata"],
+    ["CIPA DC-008: Exchangeable image file format (Exif) 2.32", "https://www.cipa.jp/std/documents/download_e.html?DC-008-Translation-2019-E"],
+    ["Adobe XMP Specification", "https://github.com/adobe/XMP-Toolkit-SDK/tree/main/docs"],
+    ["Search Engine Journal: Google Images to show credit information (IPTC)", "https://www.searchenginejournal.com/google-iptc-metadata/271659/"]
+  ],
+  "faq": [
+    { "q": "What is EXIF data?", "a": "EXIF (Exchangeable image file format) is data a camera or phone writes inside a photo: make and model, lens, shutter speed, aperture, ISO, the date and time taken, orientation, often the GPS position and a small preview thumbnail. It sits in its own block next to the image data, so you can read or change it without touching the pixels. The sample photo on this page holds {{EX_FOUND}} kinds of personal data, including a GPS position at Bukit Besi, Terengganu ({{EX_LAT}}, {{EX_LON}})." },
+    { "q": "Does EXIF data help SEO or Google rankings?", "a": "No. Google has said EXIF is not used as a ranking factor, and camera settings or GPS tags will not lift a page. What Google Images does read is IPTC photo metadata: it shows the Creator, Credit Line and Copyright Notice next to an image, and the Web Statement of Rights and Licensor URL fields can add a Licensable badge with a link to where the image can be licensed. Rankings still come from the page: alt text, file name, captions, surrounding text and fast loading." },
+    { "q": "How do I get the Licensable badge in Google Images?", "a": "Give Google a licence link in one of two ways. Embed it in the file: fill Web Statement of Rights (the page that explains your licence) and Licensor URL (where to get a licence) in this editor and download. Or add ImageObject structured data with license and acquireLicensePage to the page that shows the image. Using both is safest, because many CMS and CDN resizers delete embedded metadata from the copies they serve. Google decides when to show the badge; the fields make an image eligible." },
+    { "q": "Does editing EXIF reduce image quality?", "a": "Not with this editor. It rewrites only the metadata blocks (EXIF, XMP and IPTC) and copies the compressed image data byte for byte, so nothing is decoded or recompressed. The file size changes only by the size of the metadata you add or remove. Editors that redraw the photo on a canvas and save it again lose quality and usually drop the colour profile too." },
+    { "q": "How do I change the date a photo was taken?", "a": "Load the photo, set Date taken under Camera and date, and download. The editor writes DateTimeOriginal and CreateDate in the EXIF format YYYY:MM:DD HH:MM:SS, for example 2026:08:31 07:42:10, which is what Google Photos, Windows and most galleries use to sort pictures. The file's modified date on your computer is separate and changes when you save the download." },
+    { "q": "How do I add or remove the GPS location of a photo?", "a": "To remove it, tick Remove location and download: every GPS tag is deleted while the rest stays. To add or correct it, type latitude and longitude in decimal degrees, such as 3.1390 and 101.6869 for Kuala Lumpur, and an altitude in metres if you want. The editor converts them to the degrees, minutes and seconds EXIF stores, with N/S and E/W references and the WGS-84 datum." },
+    { "q": "Are my photos uploaded to a server?", "a": "No. Reading, editing and saving happen in your browser with JavaScript, so photos never leave your device, and the page works offline after one visit. Only the copyright details you type can be kept, in the page link after #, so you can bookmark them and reuse them. JPEG, PNG and WebP up to 50 MB each are supported; HEIC must be converted to JPEG first." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">EXIF Editor</li></ol></nav>
+  <h1>EXIF Editor</h1>
+  <p class="answer"><strong>Google Images reads five IPTC fields from a photo: Creator, Credit Line, Copyright Notice, Web Statement of Rights and Licensor URL</strong>, and shows them as the image credit and the Licensable badge. This free EXIF editor writes all five, shows every EXIF, GPS and XMP field, and lets you change the date taken, camera and location or remove them, without recompressing the image. Drop a JPEG, PNG or WebP below; nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{EX_VERIFIED}}</span><a href="#google">What Google Images reads</a></p>
+
+  <form class="box ex-tool" id="exForm" novalidate aria-labelledby="ex-h">
+    <h2 id="ex-h" class="sr-only">Edit photo metadata</h2>
+    <div class="ex-top">
+      <label class="drop ex-drop" id="exDrop" for="exFile">
+        <img id="exPreview" src="/assets/img/exif-sample-preview.webp" data-sample="{{EX_SAMPLE}}" width="{{EX_W}}" height="{{EX_H}}" fetchpriority="low" alt="Sample photo of hills at Bukit Besi with camera and GPS metadata">
+        <span><strong>Choose photos</strong> or drop them here</span>
+        <input type="file" id="exFile" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple class="sr-only">
+      </label>
+      <div class="ex-side">
+        <p class="ex-info" id="exInfo">{{EX_INFO}}</p>
+        <div class="field" id="exPickWrap" hidden>
+          <label for="exPick">Photo to edit</label>
+          <select class="input" id="exPick"></select>
+        </div>
+        <h3 class="sub-h">Found in this photo</h3>
+        <div id="exPrivacy" aria-describedby="exInfo">{{EX_PRIVACY}}</div>
+        <p class="error" id="exError" role="alert" hidden></p>
+        <div class="tool-actions">
+          <button type="button" class="btn ghost sm" id="exSample">Load sample</button>
+          <button type="button" class="btn ghost sm" id="exPrint">Print report</button>
+        </div>
+      </div>
+    </div>
+
+    <fieldset class="ex-set" id="rights">
+      <legend>Copyright and credit <small>shown in Google Images</small></legend>
+      <div class="field-row">
+        <div class="field"><label for="exCreator">Creator</label><input class="input" id="exCreator" name="creator" value="{{EX_CREATOR}}" autocomplete="name" placeholder="Your name or brand"></div>
+        <div class="field"><label for="exCredit">Credit line</label><input class="input" id="exCredit" name="credit" value="{{EX_CREDIT}}" placeholder="Photo: Your Name / Site"></div>
+      </div>
+      <div class="field"><label for="exCopyright">Copyright notice</label><input class="input" id="exCopyright" name="copyright" value="{{EX_COPYRIGHT}}" placeholder="© 2026 Your Name. All rights reserved."></div>
+      <div class="field-row">
+        <div class="field"><label for="exWeb">Web Statement of Rights (licence page URL)</label><input class="input" type="url" id="exWeb" name="webStatement" value="{{EX_WEB}}" placeholder="https://yoursite.com/licence"></div>
+        <div class="field"><label for="exLicensor">Licensor URL (where to license)</label><input class="input" type="url" id="exLicensor" name="licensorUrl" value="{{EX_LICENSOR}}" placeholder="https://yoursite.com/contact"></div>
+      </div>
+      <div class="field"><label for="exTitle">Title</label><input class="input" id="exTitle" name="title" value="{{EX_TITLE}}" placeholder="Short title"></div>
+      <div class="field"><label for="exDesc">Description</label><textarea class="prose-in ex-desc" id="exDesc" name="description" rows="2" placeholder="What the photo shows, like good alt text">{{EX_DESC}}</textarea></div>
+      <div class="field"><label for="exKeywords">Keywords</label><input class="input" id="exKeywords" name="keywords" value="{{EX_KEYWORDS}}" placeholder="comma, separated"></div>
+      <label class="check"><input type="checkbox" id="exSync" name="sync" checked> <span>Also write Creator and Copyright to EXIF Artist and Copyright</span></label>
+      <p class="help">Bookmark the page after typing: your copyright details are kept in the link, ready for the next photo.</p>
+    </fieldset>
+
+    <fieldset class="ex-set">
+      <legend>Camera and date</legend>
+      <div class="field-row">
+        <div class="field"><label for="exMake">Camera make</label><input class="input" id="exMake" name="Make" value="{{EX_MAKE}}"></div>
+        <div class="field"><label for="exModel">Camera model</label><input class="input" id="exModel" name="Model" value="{{EX_MODEL}}"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="exLens">Lens</label><input class="input" id="exLens" name="LensModel" value="{{EX_LENS}}"></div>
+        <div class="field"><label for="exSoftware">Software</label><input class="input" id="exSoftware" name="Software" value="{{EX_SOFTWARE}}"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="exDate">Date taken</label><input class="input" type="datetime-local" step="1" id="exDate" name="DateTimeOriginal" value="{{EX_DATE}}"></div>
+        <div class="field"><label for="exOrient">Orientation</label>
+          <select class="input" id="exOrient" name="orientation">
+            <option value="1" selected>Normal</option><option value="6">Rotate 90° clockwise</option><option value="3">Rotate 180°</option><option value="8">Rotate 90° anticlockwise</option>
+            <option value="2">Mirror</option><option value="4">Mirror vertically</option><option value="5">Mirror, rotate 90° anticlockwise</option><option value="7">Mirror, rotate 90° clockwise</option>
+          </select></div>
+      </div>
+      <label class="check"><input type="checkbox" id="exIds" name="ids"> <span>Remove serial numbers and owner name</span></label>
+      <label class="check"><input type="checkbox" id="exThumb" name="thumb"> <span>Remove embedded thumbnail (it can show the photo before cropping)</span></label>
+    </fieldset>
+
+    <fieldset class="ex-set">
+      <legend>Location</legend>
+      <div class="field-row field-row-3">
+        <div class="field"><label for="exLat">Latitude</label><input class="input" id="exLat" name="lat" inputmode="decimal" value="{{EX_LAT}}" placeholder="3.1390"></div>
+        <div class="field"><label for="exLon">Longitude</label><input class="input" id="exLon" name="lon" inputmode="decimal" value="{{EX_LON}}" placeholder="101.6869"></div>
+        <div class="field"><label for="exAlt">Altitude (m)</label><input class="input" id="exAlt" name="alt" inputmode="decimal" value="{{EX_ALT}}"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="exNoGps" name="nogps"> <span>Remove location (all GPS tags)</span></label>
+      <p class="help" id="exMap"><a href="https://www.openstreetmap.org/?mlat={{EX_LAT}}&amp;mlon={{EX_LON}}#map=15/{{EX_LAT}}/{{EX_LON}}" rel="noopener nofollow" target="_blank">See this location on OpenStreetMap</a></p>
+    </fieldset>
+
+    <div class="tool-actions">
+      <button type="submit" class="btn" id="exSave">Save and download</button>
+      <button type="button" class="btn ghost" id="exAll" hidden>Copyright to all photos (.zip)</button>
+    </div>
+    <p class="code-stats" id="exStatus">Edits are written only to the metadata; the image data is copied unchanged.</p>
+    <p class="sr-only" id="exLive" aria-live="polite"></p>
+
+    <h3 class="sub-h" id="exAllH">All metadata in this photo</h3>
+    <div id="exTables" aria-labelledby="exAllH">{{EX_TABLES}}</div>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to edit EXIF data</h2>
+  <ol>
+    <li><strong>Choose a photo</strong> (JPEG, PNG or WebP) or drop it on the box. The list under "Found in this photo" shows what it reveals: GPS position, date, camera, serial numbers, a thumbnail, editing software.</li>
+    <li><strong>Fill Copyright and credit.</strong> Creator, Credit line and Copyright notice are what Google Images displays. Add a licence page URL and a contact or shop URL to make the photo eligible for the Licensable badge.</li>
+    <li><strong>Change or clear any other field.</strong> Empty a field to delete it. Tick Remove location to drop every GPS tag, or type new coordinates in decimal degrees.</li>
+    <li><strong>Save and download.</strong> The file keeps its format and its pixels; the name gets <code>-edited</code>. Load several photos and use <strong>Copyright to all photos</strong> to stamp the same credit on every one and get a ZIP.</li>
+  </ol>
+
+  <h2 id="google">What Google Images reads from a photo</h2>
+  <p>Google has said EXIF camera data is not a ranking factor. What it does use is <strong>IPTC photo metadata</strong>, the standard newsrooms and stock agencies use for credits. Google Images shows the Creator, Credit Line and Copyright Notice with the image, and uses Web Statement of Rights and Licensor URL for the Licensable badge (<a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata" rel="noopener">Google Search Central</a>, <a href="https://iptc.org/standards/photo-metadata/quick-guide-to-iptc-photo-metadata-and-google-images/" rel="noopener">IPTC</a>). This editor writes them as XMP, the modern home for IPTC fields, and removes any old IPTC IIM block so two copies cannot disagree.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rights-cap">
+    <table class="data text"><caption id="rights-cap">Fields written by the editor and where they live in the file</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">XMP property</th><th scope="col">IPTC IIM</th><th scope="col">EXIF</th><th scope="col">In Google Images</th></tr></thead>
+      <tbody>
+{{EX_RIGHTS_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <figure class="ex-figure">
+    <img src="/assets/img/exif-editor-copyright-metadata.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="EXIF editor showing the IPTC Creator, Credit Line, Copyright Notice and licence fields that Google Images displays">
+    <figcaption>This picture carries all five fields, written with this editor. <button type="button" class="link-btn" id="exHero" data-src="/assets/img/exif-editor-copyright-metadata.jpg">Open it in the editor</button> to see them.</figcaption>
+  </figure>
+  <div class="callout"><p><strong>Keep the metadata on your site.</strong> Image CDNs, WordPress thumbnail sizes and "optimise images" plugins often delete it from the copies they serve. Check a live image by downloading it from your page and opening it here; if the fields are gone, turn off metadata stripping in the optimiser or add ImageObject structured data with <code>license</code>, <code>acquireLicensePage</code>, <code>creditText</code>, <code>creator</code> and <code>copyrightNotice</code>, which Google reads from the page instead.</p></div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="lossless">Why this editor does not lose quality</h2>
+  <p>A photo file is a series of blocks: the compressed image, then separate blocks for EXIF, XMP, IPTC and the colour profile. This editor reads those blocks and rebuilds only the metadata ones. The compressed image data is copied byte for byte, so the picture is identical, not just "similar". Online editors that load the photo into a canvas and export it again recompress it, drop the colour profile and lose every field they do not rewrite.</p>
+  <ul>
+    <li><strong>JPEG:</strong> EXIF and XMP go in APP1 segments after the JFIF header; old IPTC (APP13) is replaced by the XMP when you edit copyright.</li>
+    <li><strong>PNG:</strong> EXIF goes in an <code>eXIf</code> chunk and XMP in an <code>iTXt</code> chunk, both before the image data.</li>
+    <li><strong>WebP:</strong> EXIF and XMP chunks are added at the end and the extended header flags are set, as the WebP container specification requires.</li>
+    <li><strong>Kept as they are:</strong> byte order, the maker note, the thumbnail (unless you remove it), the colour profile and every tag you did not edit. Other XMP, such as Lightroom edit history, is replaced when you change the copyright fields.</li>
+  </ul>
+
+  <h2 id="privacy">What your photos can reveal</h2>
+  <p>Phone photos usually carry the exact place and time they were taken. The sample on this page shows a GPS position good to a few metres, the camera's serial number, the owner's name, the editing software and a thumbnail that can still show the uncropped picture. Before posting a photo of your home, your children or a product you ship from home, remove the location here or strip everything with the <a href="/exif-remover/">EXIF remover</a>.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> embedded copyright details identify you as the owner but do not register or enforce copyright, and Google decides when to show credits or the Licensable badge. Keep your original files; this tool is provided as is.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata" rel="noopener">Google Search Central: Image license metadata</a></li>
+    <li><a href="https://iptc.org/standards/photo-metadata/quick-guide-to-iptc-photo-metadata-and-google-images/" rel="noopener">IPTC: Quick guide to IPTC Photo Metadata on Google Images</a></li>
+    <li><a href="https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" rel="noopener">IPTC Photo Metadata Standard</a></li>
+    <li><a href="https://www.cipa.jp/std/documents/download_e.html?DC-008-Translation-2019-E" rel="noopener">CIPA DC-008: Exif 2.32</a></li>
+    <li><a href="https://developers.google.com/speed/webp/docs/riff_container" rel="noopener">Google: WebP container specification</a></li>
+    <li><a href="https://www.w3.org/TR/png-3/" rel="noopener">W3C: PNG specification (eXIf and iTXt chunks)</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/exif-remover/">EXIF Remover<small>Strip GPS and metadata from many photos</small></a>
+    <a href="{{MAIN_SITE}}/p/webp-image-converter.html">WebP Image Converter<small>Smaller images for faster pages</small></a>
+    <a href="{{MAIN_SITE}}/p/json-schema-markup-generator.html">JSON-LD Schema Generator<small>Add ImageObject and other schema</small></a>
+  </div>
+</section>
+</div>

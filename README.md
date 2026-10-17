@@ -1,11 +1,11 @@
-# The Bukit Besi Tools — 101 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 107 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
 [![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
-directory of 74 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+directory of 107 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
 code minifiers, SEO and schema generators, writing utilities, image editors,
 AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
 No signup, no tracking scripts, works offline after one visit.
@@ -156,6 +156,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/javascript-minifier/](https://tool.thebukitbesi.com/javascript-minifier/) | English | javascript minifier, minify js online, javascript obfuscator, uglify js, js beautifier |
 | [/html-beautifier/](https://tool.thebukitbesi.com/html-beautifier/) | English | html beautifier, html formatter, html minifier, find unclosed tags, minify blogger template |
 | [/unused-css-remover/](https://tool.thebukitbesi.com/unused-css-remover/) | English | remove unused css, unused css remover, purify css online, purgecss online, reduce unused css |
+| [/exif-editor/](https://tool.thebukitbesi.com/exif-editor/) | English | exif editor online, exif viewer, edit photo metadata, change date taken, add copyright to image metadata, google images licensable |
+| [/exif-remover/](https://tool.thebukitbesi.com/exif-remover/) | English | remove exif data, exif remover, remove metadata from photo, remove gps location from photo, remove ai metadata png |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
 | [/ninja-van-near-me/](https://tool.thebukitbesi.com/ninja-van-near-me/) + [/ninja-van-terdekat/](https://tool.thebukitbesi.com/ninja-van-terdekat/) | English + BM | ninja van near me, ninja van near me drop off; ninja van terdekat |
 
@@ -257,6 +259,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 
 **Upkeep (SSPA):** `sspa-core.js` holds the phase 1 and phase 2 rates, the RM240 floor and the grade map. No further phase is scheduled; add one only if JPA announces it.
 
+**Upkeep (EXIF editor and remover):** `exif-core.js` reads, strips and writes JPEG, PNG and WebP metadata losslessly (tests use ExifTool-made fixtures in `tools-src/tests/fixtures/`). `RIGHTS` lists the IPTC fields Google Images reads; recheck Google's image licence metadata page and the IPTC quick guide every six months, then `FACTS.verified`. The hero images in `assets/img/` (also each page's og:image) are rendered by `tools-src/images.mjs` and carry their own IPTC rights; their `license` page is `/terms/#images`. EXIF tools are English only by design (low BM search volume).
+
 **Upkeep (Ar-Rahnu):** `rahnu-core.js` holds the published provider rates (Bank Muamalat, Bank Islam, TEKUN, YaPEIM Care and Bisnes). Recheck the product disclosure sheets yearly; Bank Rakyat, Agrobank and MAIDAM are left out until they publish rates. Gold values follow the daily gold rebuild.
 
 **Upkeep (mas kahwin):** `maskahwin-core.js` holds the state rates confirmed by an official source (Selangor, WP, Melaka, Pahang, Negeri Sembilan; Terengganu and Perlis with no rate) and the nikah fees for Selangor, WP and Penang. Seven states are marked not confirmed because published figures conflict; add them only when the state religious office publishes a rate. The gold and dinar values follow the daily gold rebuild.
@@ -315,7 +319,7 @@ tools-src/icons.mjs         one SVG icon per tool
 tools-src/build.mjs         writes the whole public site to docs/ (pages, bundles, crawl files, manifest, sw.js, assets)
 tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attribute or PWA drift
 tools-src/tests/            unit tests for calculation cores (node --test)
-tools-src/images.mjs        renders the social card and PWA screenshots (Playwright)
+tools-src/images.mjs        renders the social card, tool hero images and PWA screenshots (Playwright)
 assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
 assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/10 split, dividend method, RIA benchmarks
@@ -379,6 +383,8 @@ assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value s
 assets/js/js-core.js        JavaScript minifier options and runner (Terser / javascript-obfuscator), shared by page, worker, build and tests
 assets/js/html-core.js      HTML beautify/minify options, presets and the HTML checker
 assets/js/purge-core.js     unused CSS remover: selector decisions, safelists, pruning (uses css-core.js)
+assets/js/exif-core.js      EXIF editor and remover: JPEG/PNG/WebP metadata parse, lossless strip and write, XMP rights, ZIP
+assets/img/                 tool hero images (with embedded IPTC rights) and the EXIF sample photo
 tools-src/cors-proxy/       optional Cloudflare Worker that lets the remover load pages from sites without CORS
 assets/vendor/              Terser, javascript-obfuscator, js-beautify and html-minifier-terser builds with licences (loaded on demand)
 tools-src/vendor/           pinned versions and the script that rebuilds assets/vendor

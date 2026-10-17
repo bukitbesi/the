@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://tool.thebukitbesi.com/</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/about/</loc>
@@ -17,7 +17,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/ai-image-generator/</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ai-image-generator/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/penjana-gambar-ai/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ai-image-generator/"/>
@@ -193,6 +193,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ev-vs-petrol-cost-calculator-malaysia/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/exif-editor/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/exif-remover/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/faraid-calculator/</loc>
     <lastmod>2026-10-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/faraid-calculator/"/>
@@ -303,7 +311,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/image-to-prompt/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/image-to-prompt/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/gambar-ke-prompt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/image-to-prompt/"/>
@@ -846,7 +854,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/photo-to-cartoon/</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/photo-to-cartoon/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/gambar-ke-kartun/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/photo-to-cartoon/"/>
@@ -1067,7 +1075,7 @@
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/terms/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/tnb-bill-calculator/</loc>

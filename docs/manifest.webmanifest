@@ -193,6 +193,16 @@
       "description": "Compare an EV and a petrol car per month: the real rise in your TNB bill from home charging, public "
     },
     {
+      "name": "EXIF Editor",
+      "url": "/exif-editor/",
+      "description": "Free EXIF editor: view and edit photo metadata, change date taken and GPS, and add the copyright and"
+    },
+    {
+      "name": "EXIF Remover",
+      "url": "/exif-remover/",
+      "description": "Free EXIF remover: delete GPS location, date, camera serial and other metadata from JPEG, PNG and We"
+    },
+    {
       "name": "Faraid Calculator Malaysia",
       "url": "/faraid-calculator/",
       "description": "Work out faraid (Islamic inheritance) under the Shafi'i school: each heir's share as a fraction and "

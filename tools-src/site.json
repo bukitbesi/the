@@ -2,7 +2,7 @@
   "origin": "https://tool.thebukitbesi.com",
   "mainSite": "https://www.thebukitbesi.com",
   "brand": "The Bukit Besi",
-  "dateModified": "2026-10-16",
+  "dateModified": "2026-10-17",
   "corsProxy": "",
   "goldApi": "https://tbb-gold.bukitbesi.workers.dev/",
   "visionApi": "https://tbb-vision.bukitbesi.workers.dev/",
@@ -29,7 +29,7 @@
     },
     "design": {
       "label": "Design Tools",
-      "blurb": "Convert images, check color contrast, edit photos and prepare WhatsApp stickers."
+      "blurb": "Edit or remove photo EXIF metadata, convert images, check color contrast, edit photos and prepare WhatsApp stickers."
     },
     "ai": {
       "label": "AI Tools",
