@@ -298,6 +298,11 @@
       "description": "Track a J&T Express Malaysia parcel with your waybill number and learn what Picked Up, Departure, On"
     },
     {
+      "name": "JSON Formatter and Validator",
+      "url": "/json-formatter/",
+      "description": "Free JSON formatter and validator: beautify or minify JSON, see errors by line and column, fix commo"
+    },
+    {
       "name": "Land Size Converter Malaysia",
       "url": "/land-size-converter-malaysia/",
       "description": "Free land area converter for Malaysia: acres, square feet, square metres, hectares, relung, orlong a"

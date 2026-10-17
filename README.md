@@ -159,6 +159,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/robots-txt-generator/](https://tool.thebukitbesi.com/robots-txt-generator/) | English | robots.txt generator, robots.txt tester, custom robots.txt blogger, block gptbot / ai crawlers robots.txt |
 | [/online-notepad/](https://tool.thebukitbesi.com/online-notepad/) | English | online notepad, notepad online save, online notes autosave, markdown notepad, share notes link |
 | [/word-counter/](https://tool.thebukitbesi.com/word-counter/) | English | word counter, character counter, keyword density checker, reading time calculator, flesch readability |
+| [/json-formatter/](https://tool.thebukitbesi.com/json-formatter/) | English | json formatter, json validator, json beautifier, fix json online, json to csv |
 | [/image-converter/](https://tool.thebukitbesi.com/image-converter/) | English | image converter, jpg to png, png to jpg, webp to jpg, convert image to ico / favicon, compress image to 100kb |
 | [/photo-editor/](https://tool.thebukitbesi.com/photo-editor/) | English | online photo editor, photoshop online free alternative, add text to photo, crop photo for instagram, youtube thumbnail maker |
 | [/whatsapp-sticker-maker/](https://tool.thebukitbesi.com/whatsapp-sticker-maker/) | English | whatsapp sticker maker, make whatsapp sticker from photo, sticker maker online, whatsapp sticker size 512x512 |
@@ -460,3 +461,5 @@ this and copies `CNAME` into `docs/`. See [the domain migration](documentation/d
 Copyright © The Bukit Besi. All rights reserved. The code and content are proprietary; see [LICENSE](LICENSE). No permission is given to copy, host or adapt them.
 
 **Upkeep (Word counter):** `words-core.js` holds reading (238 wpm, Brysbaert 2019) and speaking (150 wpm) rates and `LIMITS` for SMS, X, YouTube, Instagram and LinkedIn. Recheck platform limits every six months (TikTok is left out while sources disagree), then `FACTS.verified`. Replaces two Blogger pages (`/p/word-counter.html`, `/p/free-word-counter-seo-keyword-density.html`); English only by design.
+
+**Upkeep (JSON formatter):** `json-core.js` is a strict RFC 8259 parser (tests compare it with `JSON.parse` on valid and invalid input). The error table on the page is generated from the parser and `repair()`, so changing a message updates the page. No yearly figures; recheck RFC 9535 (JSONPath) if the lookup syntax grows. English only by design.

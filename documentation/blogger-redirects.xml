@@ -42,6 +42,9 @@
 <b:case value='https://www.thebukitbesi.com/p/javascript-minifier-obfuscator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/javascript-minifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/javascript-minifier/");</script>
+<b:case value='https://www.thebukitbesi.com/p/json-formatter-validator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/json-formatter/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/json-formatter/");</script>
 <b:case value='https://www.thebukitbesi.com/p/kalkulator-bmi.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/kalkulator-bmi/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/kalkulator-bmi/");</script>

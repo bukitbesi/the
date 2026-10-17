@@ -54,12 +54,12 @@
     "live": true
   },
   {
-    "name": "JSON Formatter & Validator",
-    "desc": "Validate, beautify or minify JSON, sort keys and inspect formatting errors.",
-    "url": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+    "name": "JSON Formatter and Validator",
+    "desc": "Validate JSON with line and column errors, fix common mistakes, beautify, minify, tree view, JSONPath and JSON to CSV.",
+    "url": "https://tool.thebukitbesi.com/json-formatter/",
     "cat": "dev",
     "icon": "json-formatter-validator",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

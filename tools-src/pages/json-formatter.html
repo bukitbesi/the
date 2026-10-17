@@ -1,0 +1,167 @@
+<!--page
+{
+  "path": "/json-formatter/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "JSON Formatter and Validator: Beautify, Minify and Fix JSON",
+  "description": "Free JSON formatter and validator: beautify or minify JSON, see errors by line and column, fix common mistakes, tree view, JSONPath and JSON to CSV.",
+  "llms": "Free JSON formatter, validator and fixer that runs in the browser (nothing uploaded, files up to 20 MB). Validates against RFC 8259 and explains the first error with its line, column and a plain reason (trailing comma, single quotes, unquoted property name, missing comma, comment, line break inside a string, leading zero, True/None, NaN). Beautifies with 2 spaces, 4 spaces or tabs, minifies, and sorts keys. Keeps numbers exactly as written: JSON.parse rounds integers above 2^53 (9,007,199,254,740,991), for example 12345678901234567890 becomes 12345678901234567000, and the tool warns about it and about duplicate keys. Fix JSON repairs comments, trailing commas, single or curly quotes, unquoted keys, Python True/False/None, NaN, missing commas, colons and brackets, JSONP wrappers, JSON saved as a string, and several values on separate lines. Collapsible tree view with click-to-copy JSONPath, JSONPath lookup ($.items[*].price), JSON to CSV with dot-notation columns, and escape/unescape JSON strings.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+  "render": "json",
+  "shareTitle": "Share this JSON formatter",
+  "scripts": ["/assets/js/json-formatter.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["JSON Formatter", null]],
+  "about": ["JSON", "JSONPath", "Comma-separated values", "Data validation"],
+  "app": {
+    "name": "JSON Formatter and Validator",
+    "category": "DeveloperApplication",
+    "features": ["Validates JSON (RFC 8259) with the error's line, column and a plain reason", "Beautify with 2 spaces, 4 spaces or tabs, or minify", "Sort keys", "Keeps big numbers exact and warns about precision loss and duplicate keys", "Fix JSON: comments, trailing commas, quotes, unquoted keys, True/None, NaN, missing commas and brackets", "Collapsible tree view with JSONPath for every value", "JSONPath lookup with wildcards", "JSON to CSV export", "Escape and unescape JSON strings", "Runs in the browser; files up to 20 MB"]
+  },
+  "citations": [
+    ["IETF RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format", "https://www.rfc-editor.org/rfc/rfc8259"],
+    ["Ecma International: ECMA-404 The JSON data interchange syntax", "https://ecma-international.org/publications-and-standards/standards/ecma-404/"],
+    ["IETF RFC 9535: JSONPath, Query Expressions for JSON", "https://www.rfc-editor.org/rfc/rfc9535"],
+    ["IETF RFC 4180: Common Format and MIME Type for CSV Files", "https://www.rfc-editor.org/rfc/rfc4180"],
+    ["MDN: Number.MAX_SAFE_INTEGER", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER"],
+    ["OWASP: CSV Injection", "https://owasp.org/www-community/attacks/CSV_Injection"]
+  ],
+  "faq": [
+    { "q": "How do I format JSON online?", "a": "Paste your JSON into the box (or upload a .json file) and the formatted version appears at once with 2-space indentation. Choose 4 spaces or tabs, tick Sort keys to order properties alphabetically, or choose Minify to remove every space and line break. Copy the result or download it as a .json file. Nothing is uploaded." },
+    { "q": "Why is my JSON invalid?", "a": "The most common causes are a trailing comma after the last item, single quotes instead of double quotes, property names without quotes, a missing comma between items, comments, and True, None or NaN copied from Python or JavaScript. JSON allows none of these. The validator names the first problem with its line and column, for example: {{JF_ERR_EXAMPLE}}" },
+    { "q": "What does Fix JSON change?", "a": "Fix JSON removes comments and trailing commas, turns single, curly and backtick quotes into double quotes, quotes unquoted keys, changes True, False and None to true, false and null, replaces NaN and undefined with null, adds missing commas, colons and closing brackets, strips a JSONP callback, unwraps JSON saved as a string and wraps several values in an array. It lists every change it made; check the result before using it." },
+    { "q": "Does formatting change my numbers?", "a": "No. Numbers are kept exactly as written, so 2.50 stays 2.50 and 12345678901234567890 keeps every digit. Most online formatters run JSON.parse, which stores numbers as 64-bit floats and rounds integers above 9,007,199,254,740,991 (2^53 − 1): 12345678901234567890 becomes {{JF_BIG}}. The tool warns when your data has such numbers, so you can send IDs as strings." },
+    { "q": "How do I convert JSON to CSV?", "a": "Choose Download CSV. Each item of a top-level array becomes a row; if the JSON is an object such as {\"data\": [...]}, the first array of objects inside it is used. Nested keys become columns such as address.city, lists of values are joined with semicolons, and text starting with =, +, - or @ gets a leading apostrophe so Excel does not run it as a formula. The file is UTF-8 with a byte order mark so Excel shows Malay and other accents correctly." },
+    { "q": "What is JSONPath and how do I find the path to a value?", "a": "JSONPath (RFC 9535) is a way to point at a value inside JSON, such as $.items[0].price for the first item's price or $.items[*].name for every name. Switch to Tree view and click any value to see its path, or type a path into the JSONPath box to look values up. Negative indexes such as [-1] pick the last item." },
+    { "q": "Is my JSON uploaded or saved?", "a": "No. The formatter runs entirely in your browser with JavaScript, so API keys, tokens and customer data in your JSON never leave your device. Only your options (mode, indent, sort keys) are remembered in this browser. Files up to 20 MB work; output updates as you type for JSON up to 300 KB, and larger files update when you press Format or Ctrl+Enter." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">JSON Formatter</li></ol></nav>
+  <h1>JSON Formatter and Validator</h1>
+  <p class="answer">Paste JSON below to <strong>validate it, see any error with its exact line and column, and get it beautified or minified</strong> as you type. <strong>Fix JSON</strong> repairs trailing commas, single quotes, unquoted keys, comments and missing brackets, and big numbers such as IDs keep every digit instead of being rounded. Nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{JF_VERIFIED}}</span><a href="#errors">Common JSON errors</a></p>
+
+  <form class="box code-tool" id="jfForm" novalidate aria-labelledby="jf-h">
+    <h2 id="jf-h" class="sr-only">Format and validate JSON</h2>
+    <div class="code-opts">
+      <fieldset class="seg seg3" aria-label="Mode">
+        <label><input type="radio" name="mode" value="format" checked> Format</label>
+        <label><input type="radio" name="mode" value="minify"> Minify</label>
+        <label><input type="radio" name="mode" value="tree"> Tree</label>
+      </fieldset>
+      <label class="jf-indent">Indent <select class="input" name="indent" id="jfIndent"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="tab">Tab</option></select></label>
+      <label class="check"><input type="checkbox" name="sortKeys"> <span>Sort keys</span></label>
+    </div>
+    <div class="code-panes">
+      <div class="field">
+        <label for="jfIn">Your JSON</label>
+        <textarea class="code" id="jfIn" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="jfHelp">{{JF_IN}}</textarea>
+        <p class="help" id="jfHelp">Paste, type, or drop a .json file here. Ctrl+Enter formats it.</p>
+        <div class="tool-actions">
+          <button type="submit" class="btn sm">Format</button>
+          <button type="button" class="btn ghost sm" data-fix>Fix JSON</button>
+          <label class="btn ghost sm file-btn">Upload<input type="file" id="jfFile" accept=".json,.geojson,.txt,.map,application/json,text/plain" class="sr-only"></label>
+          <button type="button" class="btn ghost sm" id="jfSample">Sample</button>
+          <button type="button" class="btn ghost sm" id="jfClear">Clear</button>
+        </div>
+        <div class="tool-actions jf-str">
+          <button type="button" class="btn ghost sm" id="jfEscape">Escape as string</button>
+          <button type="button" class="btn ghost sm" id="jfUnescape">Unescape string</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="jfOut" id="jfOutLabel">Formatted JSON</label>
+        <textarea class="code" id="jfOut" readonly spellcheck="false" aria-describedby="jfStatus">{{JF_OUT}}</textarea>
+        <div class="jf-tree" id="jfTree" hidden></div>
+        <p class="code-stats" id="jfStatus">{{JF_STATUS}}</p>
+        <div class="error jf-err" id="jfErr" role="alert" hidden></div>
+        <p class="help jf-fixed" id="jfFixed" role="status" hidden></p>
+        <ul class="jf-warn" id="jfWarn" aria-label="Warnings">{{JF_WARN}}</ul>
+        <div class="tool-actions">
+          <button type="button" class="btn sm" id="jfCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="jfDownload">Download .json</button>
+          <button type="button" class="btn ghost sm" id="jfCsv">Download CSV</button>
+        </div>
+        <div class="field jf-path">
+          <label for="jfPath">JSONPath lookup</label>
+          <input class="input" id="jfPath" placeholder="$.items[*].price" autocomplete="off" spellcheck="false">
+          <pre class="jf-snip" id="jfPathOut" hidden></pre>
+        </div>
+      </div>
+    </div>
+    <p class="sr-only" id="jfLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to format and validate JSON</h2>
+  <ol>
+    <li><strong>Paste your JSON</strong>, upload a .json file or drop it on the box. Valid JSON is formatted at once.</li>
+    <li><strong>Read the error</strong> if it is invalid: it names the line, the column and the reason. Press <strong>Go to error</strong> to jump there.</li>
+    <li><strong>Press Fix JSON</strong> for common mistakes, then check the list of changes it made.</li>
+    <li><strong>Copy or download</strong> the result as formatted or minified .json, or as CSV for Excel and Google Sheets.</li>
+    <li><strong>Explore it in Tree view</strong>: click any value to get its JSONPath.</li>
+  </ol>
+
+  <h2 id="errors">Common JSON errors and how to fix them</h2>
+  <p>Every message and fix below comes from the same code that runs in the tool.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="err-cap">
+    <table class="data text jf-table"><caption id="err-cap">JSON mistakes, the validator's message and the Fix JSON result</caption>
+      <thead><tr><th scope="col">Mistake</th><th scope="col">Invalid JSON</th><th scope="col">Error message</th><th scope="col">After Fix JSON</th></tr></thead>
+      <tbody>
+{{JF_ERRORS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">JSON syntax rules in one table</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rules-cap">
+    <table class="data text"><caption id="rules-cap">What JSON allows (RFC 8259 and ECMA-404)</caption>
+      <thead><tr><th scope="col">Type</th><th scope="col">Valid</th><th scope="col">Not valid</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">String</th><td><code>"Kuala Lumpur"</code>, <code>"line\nbreak"</code></td><td><code>'single'</code>, a raw line break, <code>"\x41"</code></td></tr>
+        <tr><th scope="row">Number</th><td><code>42</code>, <code>-3.5</code>, <code>1.2e5</code></td><td><code>07</code>, <code>.5</code>, <code>+1</code>, <code>0x1F</code>, <code>NaN</code>, <code>Infinity</code></td></tr>
+        <tr><th scope="row">Literal</th><td><code>true</code>, <code>false</code>, <code>null</code></td><td><code>True</code>, <code>None</code>, <code>undefined</code></td></tr>
+        <tr><th scope="row">Object</th><td><code>{"a": 1, "b": 2}</code></td><td><code>{a: 1}</code>, <code>{"a": 1,}</code></td></tr>
+        <tr><th scope="row">Array</th><td><code>[1, 2, 3]</code></td><td><code>[1, 2,]</code>, <code>[1 2]</code></td></tr>
+        <tr><th scope="row">Comments</th><td>None</td><td><code>// note</code>, <code>/* note */</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 id="numbers">Why big numbers get rounded</h2>
+  <p>JavaScript, and most formatters built on <code>JSON.parse</code>, store every number as a 64-bit float, which holds whole numbers exactly only up to <strong>9,007,199,254,740,991</strong> (2^53 − 1). RFC 8259 warns about this. Order numbers, tweet IDs and bank references beyond that are silently changed: <code>12345678901234567890</code> becomes <code>{{JF_BIG}}</code>. This formatter reads numbers as text, so the output keeps every digit, and it warns you so you can store such IDs as strings.</p>
+  <div class="callout"><p><strong>Note:</strong> Fix JSON guesses what you meant. A missing comma or bracket can be fixed in more than one way, so always check the repaired data, and fix the program that produced broken JSON rather than repairing it by hand every time.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="noopener">IETF RFC 8259: The JSON Data Interchange Format</a></li>
+    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/" rel="noopener">ECMA-404: The JSON data interchange syntax</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc9535" rel="noopener">IETF RFC 9535: JSONPath</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc4180" rel="noopener">IETF RFC 4180: CSV files</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER" rel="noopener">MDN: Number.MAX_SAFE_INTEGER</a></li>
+    <li><a href="https://owasp.org/www-community/attacks/CSV_Injection" rel="noopener">OWASP: CSV Injection</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/javascript-minifier/">JavaScript Minifier<small>Minify and obfuscate JS</small></a>
+    <a href="/css-minifier/">CSS Minifier<small>Minify or beautify CSS</small></a>
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>Build and test robots.txt</small></a>
+  </div>
+</section>
+</div>
