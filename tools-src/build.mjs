@@ -89,6 +89,7 @@ const htmlCore = require('../assets/js/html-core.js');
 const purgeCore = require('../assets/js/purge-core.js');
 const exifCore = require('../assets/js/exif-core.js');
 const robotsCore = require('../assets/js/robots-core.js');
+const notesCore = require('../assets/js/notepad-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2379,7 +2380,32 @@ function robotsMap() {
     }).join('\n')
   };
 }
-const RENDERERS = { robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- Online notepad: the welcome note, its preview and counts come from the page's core.
+const NOTE_WELCOME = `# Welcome to your notepad
+
+Start typing anywhere: every change is **saved in this browser** and nothing is uploaded.
+
+## Try it
+- [x] Write a note
+- [ ] Switch to *Preview* to see Markdown
+- [ ] Press Ctrl+S to take a snapshot
+- [ ] Copy a **Share link** and open it on your phone
+
+> Tip: select all and type to make this your own note.
+`;
+const NOTE_MD = ['# Heading', '**bold** and *italic*', '~~deleted~~', '- [ ] task\n- [x] done', '1. first\n2. second', '> quote', '`code`', '[link](https://tool.thebukitbesi.com/)'];
+function notepadMap() {
+  const N = notesCore, s = N.stats(NOTE_WELCOME), n = { text: NOTE_WELCOME };
+  return {
+    NP_TEXT: esc(NOTE_WELCOME), NP_PREVIEW: N.html(NOTE_WELCOME, { shift: 2 }), NP_TITLE: esc(N.title(n)), NP_WORDS: s.words, NP_READ: s.reading,
+    NP_STATS: N.summary(s),
+    NP_LIST: `<li><button type="button" class="np-note on" aria-current="true"><strong>${esc(N.title(n))}</strong><small>Welcome · ${s.words} words</small></button></li>`,
+    NP_TRANSFORMS: Object.entries(N.TRANSFORMS).map(([k, t]) => `<button type="button" class="btn ghost sm" data-tf="${k}">${esc(t.label)}</button>`).join(''),
+    NP_MD_ROWS: NOTE_MD.map(m => `        <tr><td><code>${esc(m).replace(/\n/g, '<br>')}</code></td><td class="np-md">${N.html(m, { shift: 2 })}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2583,7 +2609,8 @@ const bundles = {
   'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js'],
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
-  'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js']
+  'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.

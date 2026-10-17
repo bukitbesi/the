@@ -538,6 +538,29 @@ textarea.ex-desc{min-height:72px}
 .rb-out{height:220px}.rb-audit{list-style:none;display:grid;gap:6px;font-size:.86rem}.rb-n{padding:7px 10px;border-radius:10px;border:1px solid var(--border)}
 .rb-error{border-color:#e17055}.rb-warn{border-color:#fdcb6e}.rb-ok{border-color:var(--tint-b);background:var(--tint)}.rb-n code{overflow-wrap:anywhere}
 .rb-verdict{margin:6px 0 10px;overflow-wrap:anywhere}.rb-yes{color:#15803d}.rb-no{color:#b42318}:root[data-theme=dark] .rb-yes{color:#4ade80}:root[data-theme=dark] .rb-no{color:#ff9b8f}.data.rb-all{min-width:0}.rb-all th{width:45%}.rb-all small{display:block;color:var(--text3);overflow-wrap:anywhere}
+.np-grid{display:grid;gap:14px}@media(min-width:900px){.np-grid{grid-template-columns:220px minmax(0,1fr)}}
+.np-side-top{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}.np-search{min-height:40px;margin-bottom:8px}
+.np-notes{list-style:none;display:grid;gap:4px;max-height:150px;overflow:auto}@media(min-width:900px){.np-notes{max-height:60vh}}
+.np-note{display:block;width:100%;text-align:left;padding:7px 9px;border-radius:10px;border:1px solid transparent;background:none;color:inherit;font:inherit;cursor:pointer}
+.np-note strong{display:block;font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.np-note small{color:var(--text3);font-size:.74rem}
+.np-note:hover,.np-note.on{border-color:var(--tint-b);background:var(--tint)}
+.np-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}.np-title{flex:1 1 200px;min-height:44px;font-weight:700}.np-view{flex:0 1 300px}
+.np-panes{display:grid;gap:10px}.np-panes[data-view=write] .np-preview,.np-panes[data-view=preview] .np-text{display:none}
+@media(min-width:760px){.np-panes[data-view=split]{grid-template-columns:1fr 1fr}}
+.np-text,.np-preview{width:100%;height:56vh;min-height:300px;padding:14px 16px;border:1px solid var(--border2);border-radius:12px;background:var(--bg);color:var(--text);overflow:auto}
+.np-text{resize:vertical;font:inherit;line-height:1.6;font-size:1rem}.np-text:focus{outline:3px solid var(--tint-b);border-color:var(--accent2)}
+[data-font=serif] .np-text{font-family:Georgia,"Times New Roman",serif}[data-font=mono] .np-text{font-family:ui-monospace,Consolas,monospace}
+[data-size=s] .np-text{font-size:.9rem}[data-size=l] .np-text{font-size:1.15rem}
+.np-preview h1,.np-preview h2,.np-preview h3{margin:.6em 0 .3em}.np-preview ul,.np-preview ol{padding-left:1.3em}.np-preview pre{overflow:auto;padding:10px;background:var(--bg2);border-radius:8px}
+.np-actions{align-items:center}.np-fmt{width:auto;min-height:40px}.np-checks{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:8px}
+.np-more{border:1px solid var(--border);border-radius:var(--r);padding:0 14px;margin-top:10px}.np-more>summary{cursor:pointer;padding:11px 0;font-weight:600}.np-more[open]{padding-bottom:12px}
+.np-snaps{list-style:none;display:grid;gap:4px;margin-top:8px;font-size:.86rem}
+body.np-focus .header,body.np-focus .footer,body.np-focus .ad,body.np-focus .crumbs,body.np-focus h1,body.np-focus .answer,body.np-focus .meta,body.np-focus .share,body.np-focus .np-side,body.np-focus .np-more,body.np-focus .container.prose,body.np-focus .faq-wrap{display:none!important}
+body.np-focus .np-tool{border:0;box-shadow:none}body.np-focus .np-grid{grid-template-columns:1fr}body.np-focus .np-text,body.np-focus .np-preview{height:78vh}
+.np-tool:fullscreen{overflow:auto;padding:24px;background:var(--surface)}
+@media print{body.np-printing *{visibility:hidden}body.np-printing #npPreview,body.np-printing #npPreview *{visibility:visible}body.np-printing #npPreview{display:block!important;position:absolute;left:0;top:0;height:auto;border:0;overflow:visible}}
+.np-md p,.np-md ul,.np-md ol,.np-md blockquote{margin:0}
+.np-preview .md-h1{font-size:1.6rem}.np-preview .md-h2{font-size:1.3rem}.np-preview .md-h3{font-size:1.1rem}.np-md .md-h1{font-size:1.3rem;margin:0}
 </style>
 
 </head>
@@ -748,7 +771,7 @@ textarea.ex-desc{min-height:72px}
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
           <li><a href="/robots-txt-generator/">Robots.txt Generator and Tester</a></li>
-          <li><a href="/exif-editor/">EXIF Editor</a></li>
+          <li><a href="/online-notepad/">Online Notepad</a></li>
         </ul>
       </nav>
       <nav aria-label="Categories">

@@ -318,6 +318,11 @@
       "description": "Track a Ninja Van Malaysia parcel by tracking ID (NVMY, MYNJV) and learn what Pending Pickup, Re-att"
     },
     {
+      "name": "Online Notepad",
+      "url": "/online-notepad/",
+      "description": "Free online notepad with autosave, many notes, Markdown preview, find and replace, version history, "
+    },
+    {
       "name": "Overtime Calculator Malaysia",
       "url": "/overtime-calculator-malaysia/",
       "description": "Free overtime calculator for Malaysia: OT, rest day and public holiday pay under the Employment Act "

@@ -190,8 +190,8 @@
   },
   {
     "name": "Online Notepad",
-    "desc": "Write notes with autosave, snapshots, word counts and TXT or Markdown import and export.",
-    "url": "https://www.thebukitbesi.com/p/online-notepad.html",
+    "desc": "Many notes with autosave, Markdown preview, find and replace, version history, share links and TXT, Markdown or Word export.",
+    "url": "https://tool.thebukitbesi.com/online-notepad/",
     "cat": "content",
     "icon": "online-notepad",
     "badge": "",
