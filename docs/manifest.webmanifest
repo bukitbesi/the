@@ -128,6 +128,11 @@
       "description": "Free car loan calculator for the 2026 hire purchase rules: monthly instalment, EIR vs flat rate, roa"
     },
     {
+      "name": "Case Converter",
+      "url": "/case-converter/",
+      "description": "Free case converter: change text to Title Case, Sentence case, UPPERCASE or lowercase, or to camelCa"
+    },
+    {
       "name": "CGPA Calculator",
       "url": "/cgpa-calculator/",
       "description": "Free CGPA calculator. Turn semester SGPAs into CGPA (credit-weighted), or course grades into GPA on "
@@ -296,6 +301,11 @@
       "name": "J&T Tracking",
       "url": "/jnt-tracking/",
       "description": "Track a J&T Express Malaysia parcel with your waybill number and learn what Picked Up, Departure, On"
+    },
+    {
+      "name": "JSON Formatter and Validator",
+      "url": "/json-formatter/",
+      "description": "Free JSON formatter and validator: beautify or minify JSON, see errors by line and column, fix commo"
     },
     {
       "name": "Land Size Converter Malaysia",
@@ -506,6 +516,11 @@
       "name": "WhatsApp Sticker Maker",
       "url": "/whatsapp-sticker-maker/",
       "description": "Free WhatsApp sticker maker: remove the background, add a white outline and text, and download 512 p"
+    },
+    {
+      "name": "Word Counter",
+      "url": "/word-counter/",
+      "description": "Free word counter: words, characters, sentences, reading and speaking time, keyword density, Flesch "
     },
     {
       "name": "Working Days Calculator Malaysia",

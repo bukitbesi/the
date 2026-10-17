@@ -54,12 +54,12 @@
     "live": true
   },
   {
-    "name": "JSON Formatter & Validator",
-    "desc": "Validate, beautify or minify JSON, sort keys and inspect formatting errors.",
-    "url": "https://www.thebukitbesi.com/p/json-formatter-validator.html",
+    "name": "JSON Formatter and Validator",
+    "desc": "Validate JSON with line and column errors, fix common mistakes, beautify, minify, tree view, JSONPath and JSON to CSV.",
+    "url": "https://tool.thebukitbesi.com/json-formatter/",
     "cat": "dev",
     "icon": "json-formatter-validator",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
@@ -77,15 +77,6 @@
     "url": "https://www.thebukitbesi.com/p/github-link-converter.html",
     "cat": "dev",
     "icon": "github-link-converter",
-    "badge": "",
-    "live": true
-  },
-  {
-    "name": "JavaScript Minifier",
-    "desc": "Compress JavaScript and review the output size before copying or downloading your file.",
-    "url": "https://www.thebukitbesi.com/p/best-javascript-minifier-online.html",
-    "cat": "dev",
-    "icon": "best-javascript-minifier-online",
     "badge": "",
     "live": true
   },
@@ -135,21 +126,12 @@
     "live": true
   },
   {
-    "name": "Word Counter & Keyword Density Checker",
-    "desc": "Count words, inspect keyword frequency and estimate reading time for your content.",
-    "url": "https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html",
-    "cat": "seo",
-    "icon": "free-word-counter-seo-keyword-density",
-    "badge": "popular",
-    "live": true
-  },
-  {
     "name": "Word Counter",
-    "desc": "Count words, characters and sentences and review reading-time estimates as you type.",
-    "url": "https://www.thebukitbesi.com/p/word-counter.html",
+    "desc": "Words, characters, reading and speaking time, keyword density, Flesch readability and X, Instagram and YouTube limits as you type.",
+    "url": "https://tool.thebukitbesi.com/word-counter/",
     "cat": "content",
     "icon": "word-counter",
-    "badge": "",
+    "badge": "popular",
     "live": true
   },
   {
@@ -180,9 +162,9 @@
     "live": true
   },
   {
-    "name": "Text Case Converter",
-    "desc": "Switch between uppercase, lowercase, title case and developer naming styles such as camelCase.",
-    "url": "https://www.thebukitbesi.com/p/convert-case.html",
+    "name": "Case Converter",
+    "desc": "Sentence case, AP-style Title Case, UPPERCASE, lowercase, camelCase, snake_case, kebab-case and URL slugs. Keeps acronyms.",
+    "url": "https://tool.thebukitbesi.com/case-converter/",
     "cat": "content",
     "icon": "convert-case",
     "badge": "",
@@ -216,21 +198,12 @@
     "live": true
   },
   {
-    "name": "WebP Image Converter",
-    "desc": "Batch-convert images to WebP with resizing and compression controls.",
-    "url": "https://www.thebukitbesi.com/p/webp-image-converter.html",
-    "cat": "design",
-    "icon": "webp-image-converter",
-    "badge": "popular",
-    "live": true
-  },
-  {
-    "name": "Image Converter",
+    "name": "Image Converter (WebP, JPG, PNG)",
     "desc": "Batch convert JPG, PNG, WebP, AVIF, ICO and BMP with resizing, quality or target file size, and optional EXIF removal.",
     "url": "https://tool.thebukitbesi.com/image-converter/",
     "cat": "design",
     "icon": "image-converter",
-    "badge": "",
+    "badge": "popular",
     "live": true
   },
   {

@@ -606,6 +606,32 @@ body.np-focus .np-tool{border:0;box-shadow:none}body.np-focus .np-grid{grid-temp
 .pd-frame{width:100%;height:520px;border:1px solid var(--border);border-radius:10px;background:#fff;margin-top:10px}
 .pd-preview{white-space:pre-wrap;max-height:320px;overflow:auto;font-size:.82rem;background:var(--bg2);padding:10px;border-radius:8px}
 .pd-panel input[type=range]{width:100%;accent-color:var(--accent)}
+/* Word counter */
+.wc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:12px}@media(min-width:620px){.wc-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(min-width:900px){.wc-stats{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.wc-stat{padding:6px 8px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);min-width:0}.wc-stat b{display:block;font-size:1.05rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.wc-stat span{font-size:.75rem;color:var(--text3)}.wc-stat.big b{font-size:1.3rem}
+textarea.wc-text{min-height:260px}
+.wc-goal{display:flex;align-items:center;gap:6px;width:auto;padding:0 10px}.wc-goal input{width:80px;min-height:36px;border:0;background:none;color:inherit;font:inherit}.wc-goal span{font-size:.8rem;color:var(--text3)}
+.wc-progress{margin:8px 0}.wc-meter{margin:8px 0}
+.wc-grid{display:grid;gap:14px;margin-top:14px}@media(min-width:760px){.wc-grid{grid-template-columns:1fr 1fr}}
+.wc-table{min-width:0}.wc-table th small{display:block;font-weight:400;font-size:.75rem;color:var(--text3)}
+/* JSON formatter */
+.jf-indent{display:flex;align-items:center;gap:8px;font-size:.9rem}.jf-indent select{width:auto;min-height:38px}
+.jf-str{margin-top:6px}
+.jf-tree{height:340px;overflow:auto;padding:10px 12px;border:1px solid var(--border2);border-radius:12px;background:var(--bg);font:.85rem/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.jf-tree summary,.jf-tree .jt-row{cursor:pointer;white-space:nowrap;border-radius:4px}.jf-tree summary:hover,.jf-tree .jt-row:hover{background:var(--bg2)}
+.jt-in{padding-left:18px;border-left:1px dashed var(--border2);margin-left:5px}
+.jt-k{color:var(--accent2)}.jt-s{color:#15803d}.jt-n{color:#b45309}.jt-l{color:#7c3aed}.jt-c{color:var(--text3)}
+:root[data-theme="dark"] .jt-s{color:#4ade80}:root[data-theme="dark"] .jt-n{color:#fbbf24}:root[data-theme="dark"] .jt-l{color:#c4b5fd}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .jt-s{color:#4ade80}:root:not([data-theme="light"]) .jt-n{color:#fbbf24}:root:not([data-theme="light"]) .jt-l{color:#c4b5fd}}
+.jf-snip{margin:8px 0 0;padding:8px 10px;overflow-x:auto;border-radius:8px;background:var(--bg2);font:.8rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.jf-err{display:block}.jf-err .btn{margin-top:8px}
+.jf-warn{margin:8px 0 0;padding-left:18px;font-size:.85rem;color:var(--text2)}.jf-warn:empty{display:none}
+.jf-path{margin-top:14px}
+.jf-table code{overflow-wrap:anywhere}
+/* Case converter */
+.cc-btns{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.cc-table{min-width:0;table-layout:fixed}.cc-table th:first-child{width:34%}.cc-table th:last-child{width:76px}.cc-table code{overflow-wrap:anywhere}.cc-table th,.cc-table td{padding:8px}
+@media(max-width:620px){.cc-table thead{display:none}.cc-table tr{display:grid;grid-template-columns:minmax(0,1fr) auto;border-bottom:1px solid var(--border)}.cc-table tbody tr:last-child{border-bottom:0}.cc-table th,.cc-table td{border:0;width:auto!important}.cc-table th{padding-bottom:0}.cc-table td:nth-child(2){grid-column:1;padding-top:2px}.cc-table td:last-child{grid-column:2;grid-row:1/3;align-self:center}}
 </style>
 
 </head>
@@ -778,8 +804,8 @@ body.np-focus .np-tool{border:0;box-shadow:none}body.np-focus .np-grid{grid-temp
           <li><a href="/css-minifier/">CSS Minifier</a></li>
           <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
           <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
+          <li><a href="/json-formatter/">JSON Formatter and Validator</a></li>
           <li><a href="/robots-txt-generator/">Robots.txt Generator and Tester</a></li>
-          <li><a href="/online-notepad/">Online Notepad</a></li>
         </ul>
       </nav>
       <nav aria-label="Kategori">
