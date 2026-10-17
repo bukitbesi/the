@@ -158,6 +158,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/unused-css-remover/](https://tool.thebukitbesi.com/unused-css-remover/) | English | remove unused css, unused css remover, purify css online, purgecss online, reduce unused css |
 | [/robots-txt-generator/](https://tool.thebukitbesi.com/robots-txt-generator/) | English | robots.txt generator, robots.txt tester, custom robots.txt blogger, block gptbot / ai crawlers robots.txt |
 | [/online-notepad/](https://tool.thebukitbesi.com/online-notepad/) | English | online notepad, notepad online save, online notes autosave, markdown notepad, share notes link |
+| [/image-converter/](https://tool.thebukitbesi.com/image-converter/) | English | image converter, jpg to png, png to jpg, webp to jpg, convert image to ico / favicon, compress image to 100kb |
 | [/exif-editor/](https://tool.thebukitbesi.com/exif-editor/) | English | exif editor online, exif viewer, edit photo metadata, change date taken, add copyright to image metadata, google images licensable |
 | [/exif-remover/](https://tool.thebukitbesi.com/exif-remover/) | English | remove exif data, exif remover, remove metadata from photo, remove gps location from photo, remove ai metadata png |
 | [/pos-laju-near-me/](https://tool.thebukitbesi.com/pos-laju-near-me/) + [/pos-laju-terdekat/](https://tool.thebukitbesi.com/pos-laju-terdekat/) | English + BM | pos laju near me open now, pejabat pos laju near me; pos laju terdekat |
@@ -264,6 +265,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (robots.txt):** `robots-core.js` `BOTS` lists the AI crawler tokens published by OpenAI, Anthropic, Google, Apple, Perplexity, Meta and Common Crawl. Every six months check each operator's crawler page for new or renamed tokens, update `BOTS`, `FACTS.verified` and `tools-src/tests/robots.test.mjs`. Matching follows RFC 9309, which does not change.
 
 **Upkeep (online notepad):** `notepad-core.js` holds the 238 wpm reading speed (Brysbaert 2019) and the snapshot policy; no yearly change. `zip-core.js` and `docx-core.js` are shared by the notepad, image, sticker and PDF tools.
+
+**Upkeep (image converter):** `imgconv-core.js` holds the output formats and Google's WebP study figures (`FACTS`). Encoding uses the browser's codecs; AVIF output appears automatically once a browser can encode it. Recheck the format support column yearly.
 
 **Upkeep (EXIF editor and remover):** `exif-core.js` reads, strips and writes JPEG, PNG and WebP metadata losslessly (tests use ExifTool-made fixtures in `tools-src/tests/fixtures/`). `RIGHTS` lists the IPTC fields Google Images reads; recheck Google's image licence metadata page and the IPTC quick guide every six months, then `FACTS.verified`. The hero images in `assets/img/` (also each page's og:image) are rendered by `tools-src/images.mjs` and carry their own IPTC rights; their `license` page is `/terms/#images`. EXIF tools are English only by design (low BM search volume).
 
@@ -393,6 +396,7 @@ assets/js/robots-core.js    robots.txt: presets, AI crawler tokens, RFC 9309 par
 assets/js/notepad-core.js   online notepad: stats, safe Markdown, find/replace, transforms, snapshots, share links
 assets/js/zip-core.js       shared ZIP writer/reader and CRC-32
 assets/js/docx-core.js      shared minimal .docx writer (uses zip-core.js)
+assets/js/imgconv-core.js   image converter: sniffing, resize maths, BMP/ICO writers, target-size quality search
 assets/js/exif-core.js      EXIF editor and remover: JPEG/PNG/WebP metadata parse, lossless strip and write, XMP rights, ZIP
 assets/img/                 tool hero images (with embedded IPTC rights) and the EXIF sample photo
 tools-src/cors-proxy/       optional Cloudflare Worker that lets the remover load pages from sites without CORS

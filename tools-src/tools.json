@@ -225,9 +225,9 @@
     "live": true
   },
   {
-    "name": "Image Format Converter",
-    "desc": "Convert images between supported formats and download batch results as a ZIP file.",
-    "url": "https://www.thebukitbesi.com/p/image-converter.html",
+    "name": "Image Converter",
+    "desc": "Batch convert JPG, PNG, WebP, AVIF, ICO and BMP with resizing, quality or target file size, and optional EXIF removal.",
+    "url": "https://tool.thebukitbesi.com/image-converter/",
     "cat": "design",
     "icon": "image-converter",
     "badge": "",

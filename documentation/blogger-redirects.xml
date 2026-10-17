@@ -27,6 +27,9 @@
 <b:case value='https://www.thebukitbesi.com/p/html-beautifier-online.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/html-beautifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/html-beautifier/");</script>
+<b:case value='https://www.thebukitbesi.com/p/image-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/image-converter/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/image-converter/");</script>
 <b:case value='https://www.thebukitbesi.com/p/image-to-prompt.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/image-to-prompt/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/image-to-prompt/");</script>

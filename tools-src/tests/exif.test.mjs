@@ -213,3 +213,17 @@ test('Every field in the Google Images rights table has an XMP property', () => 
   for (const r of X.RIGHTS) assert.ok(r.xmp && r.label && r.google);
   assert.match(X.FACTS.verified, /^\d{4}-\d{2}-\d{2}$/);
 });
+
+test('Transplant copies EXIF and rights into a converted copy, upright and without the thumbnail', () => {
+  const plain = X.strip(sample, { keepOrientation: false, keepIcc: false }).bytes;
+  const out = X.transplant(jpg, plain, { w: 120, h: 80 });
+  const r = X.read(out);
+  assert.equal(field(r, 'Model'), 'iPhone 15 Pro');
+  assert.equal(r.exif.orientation, 1);
+  assert.equal(field(r, 'ExifImageWidth'), '120');
+  assert.equal(r.tiff.thumbnail, null);
+  assert.deepEqual(r.exif.gps, { lat: 3.139, lon: 101.6869, alt: 56 });
+  assert.equal(r.rights.creator, 'Old Name');
+  assert.equal(X.transplant(plain, plain), plain, 'nothing to copy');
+  assert.equal(X.transplant(jpg, new Uint8Array([1, 2, 3])).length, 3, 'unsupported target returned as is');
+});
