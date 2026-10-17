@@ -92,6 +92,7 @@ const robotsCore = require('../assets/js/robots-core.js');
 const notesCore = require('../assets/js/notepad-core.js');
 const wordsCore = require('../assets/js/words-core.js');
 const jsonCore = require('../assets/js/json-core.js');
+const caseCore = require('../assets/js/case-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
@@ -1033,6 +1034,21 @@ function jsonMap() {
       if (!e || !r.ok) throw new Error('JSON error example is not an error or cannot be fixed: ' + bad);
       return `        <tr><th scope="row">${what}</th><td><code>${esc(bad).replace(/\n/g, '<br>')}</code></td><td>Line ${e.line}, column ${e.col}: ${esc(e.msg)}</td><td><code>${esc(J.stringify(r.ast, { indent: '' }))}</code></td></tr>`;
     }).join('\n')
+  };
+}
+
+// ---- Case converter: buttons, the developer table and every example come from the page's core.
+const CC_SAMPLE = 'how to calculate EPF contribution in malaysia: a step-by-step guide for 2026';
+const CC_USES = { sentence: 'Body text, Google-style headings', title: 'Headlines, book and article titles', upper: 'Labels, warnings', lower: 'Tags, email addresses', each: 'Names, product titles', alt: 'Memes', inverse: 'Fixing text typed with Caps Lock on', camel: 'JavaScript and Java variables', pascal: 'Class and component names', snake: 'Python, database columns', constant: 'Constants, environment variables', kebab: 'CSS classes, file names', train: 'HTTP headers', dot: 'Config keys', path: 'Folder paths, routes', slug: 'Web page URLs' };
+function caseMap() {
+  const C = caseCore, ex = 'User profile ID';
+  const btns = g => C.CASES.filter(c => c.group === g).map(c => `<button type="button" class="btn ghost sm" data-case="${c.key}">${esc(c.label)}</button>`).join('');
+  return {
+    CC_SAMPLE: esc(CC_SAMPLE), CC_TITLE: esc(C.title(CC_SAMPLE)), CC_VERIFIED: C.FACTS.verified, CC_COUNT: C.views.countsText(C.counts(CC_SAMPLE)),
+    CC_TEXT_BTNS: btns('text'), CC_DEV_BTNS: btns('dev'), CC_DEV_ROWS: C.views.devRows(CC_SAMPLE),
+    CC_TITLE_EXAMPLE: `"${C.title('the lord of the rings')}" and "${C.title(CC_SAMPLE)}".`, CC_SLUG_EXAMPLE: C.slug('Kuih Raya & Café Menu 2026!'),
+    CC_SMALL: C.SMALL.join(', '), CC_EXAMPLE_IN: ex,
+    CC_EXAMPLES: C.CASES.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td><code>${esc(C.convert(ex, c.key))}</code></td><td>${CC_USES[c.key]}</td></tr>`).join('\n')
   };
 }
 
@@ -2521,7 +2537,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2726,6 +2742,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'case-converter.js': ['assets/js/case-core.js', 'assets/js/case-ui.js'],
   'json-formatter.js': ['assets/js/json-core.js', 'assets/js/json-ui.js'],
   'word-counter.js': ['assets/js/zip-core.js', 'assets/js/words-core.js', 'assets/js/words-ui.js'],
   'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],

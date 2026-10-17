@@ -18,6 +18,9 @@
 <b:case value='https://www.thebukitbesi.com/p/cartoonizer-ai-tool.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/photo-to-cartoon/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/photo-to-cartoon/");</script>
+<b:case value='https://www.thebukitbesi.com/p/convert-case.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/case-converter/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/case-converter/");</script>
 <b:case value='https://www.thebukitbesi.com/p/css-minifier-tool.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/css-minifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/css-minifier/");</script>

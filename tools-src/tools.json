@@ -162,9 +162,9 @@
     "live": true
   },
   {
-    "name": "Text Case Converter",
-    "desc": "Switch between uppercase, lowercase, title case and developer naming styles such as camelCase.",
-    "url": "https://www.thebukitbesi.com/p/convert-case.html",
+    "name": "Case Converter",
+    "desc": "Sentence case, AP-style Title Case, UPPERCASE, lowercase, camelCase, snake_case, kebab-case and URL slugs. Keeps acronyms.",
+    "url": "https://tool.thebukitbesi.com/case-converter/",
     "cat": "content",
     "icon": "convert-case",
     "badge": "",

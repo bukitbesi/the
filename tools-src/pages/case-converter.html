@@ -1,0 +1,126 @@
+<!--page
+{
+  "path": "/case-converter/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Case Converter: Title Case, Sentence Case, camelCase and More",
+  "description": "Free case converter: change text to Title Case, Sentence case, UPPERCASE or lowercase, or to camelCase, snake_case, kebab-case and URL slugs. Keeps acronyms.",
+  "llms": "Free online case converter that runs in the browser. Text cases: Sentence case (capitalises after full stops, question marks and line breaks, and the pronoun I), Title Case following AP style (articles a, an, the and conjunctions and prepositions of three letters or fewer such as and, but, for, in, of, on, to stay lowercase unless first or last, or after a colon), UPPERCASE, lowercase, Capitalize Each Word, alternating and inverse case. Acronyms such as SEO, EPF or KWSP are kept in capitals unless the whole text is in capitals. Developer cases: camelCase, PascalCase, snake_case, CONSTANT_CASE, kebab-case, Train-Case, dot.case, path/case and URL slugs (accents removed, & becomes and); words are split at spaces, punctuation and camelCase humps, and each line converts separately. Also cleans extra spaces and has undo.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/convert-case.html",
+  "render": "case",
+  "shareTitle": "Share this case converter",
+  "scripts": ["/assets/js/case-converter.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Case Converter", null]],
+  "about": ["Letter case", "Title case", "Camel case", "Snake case", "Naming conventions (programming)"],
+  "app": {
+    "name": "Case Converter",
+    "category": "UtilitiesApplication",
+    "features": ["Sentence case, AP-style Title Case, UPPERCASE, lowercase, Capitalize Each Word", "Keeps acronyms such as SEO and KWSP", "camelCase, PascalCase, snake_case, CONSTANT_CASE, kebab-case, Train-Case, dot.case, path/case", "URL slug with accents removed", "Converts lists line by line", "Clean up extra spaces", "Undo and copy", "Runs in the browser"]
+  },
+  "citations": [
+    ["Wikipedia: Title case (AP Stylebook rules)", "https://en.wikipedia.org/wiki/Title_case"],
+    ["Writer's Digest: 10 important rules of AP style", "https://www.writersdigest.com/write-better-fiction/10-important-rules-and-conventions-of-associated-press-ap-style"],
+    ["Wikipedia: Naming conventions in programming (letter case-separated words)", "https://en.wikipedia.org/wiki/Naming_convention_(programming)"],
+    ["Google Search Central: URL structure best practices", "https://developers.google.com/search/docs/crawling-indexing/url-structure"]
+  ],
+  "faq": [
+    { "q": "What is title case?", "a": "Title case capitalises the main words of a heading. This converter follows AP style: articles (a, an, the) and conjunctions and prepositions of three letters or fewer (and, but, or, for, in, of, on, to, by…) stay lowercase unless they are the first or last word or follow a colon. Example: {{CC_TITLE_EXAMPLE}}" },
+    { "q": "What is the difference between sentence case and title case?", "a": "Sentence case capitalises only the first word of each sentence (and names you typed in capitals), like a normal sentence: \"How to calculate EPF contribution\". Title case capitalises every main word: \"How to Calculate EPF Contribution\". Google and many style guides use sentence case for headings because it is easier to read; newspapers and books often use title case." },
+    { "q": "Will it lowercase acronyms like SEO or KWSP?", "a": "No. Words already written fully in capitals, such as SEO, EPF, KWSP or NASA, are kept as they are in sentence case, title case and Capitalize Each Word. If the whole text is in capitals, it is treated as shouting and converted normally. Untick Keep acronyms to lowercase them too." },
+    { "q": "What are camelCase, snake_case and kebab-case?", "a": "They are ways to join words into one name without spaces. camelCase (userName) is used for JavaScript and Java variables, PascalCase (UserName) for class names, snake_case (user_name) for Python and database columns, CONSTANT_CASE (USER_NAME) for constants, and kebab-case (user-name) for CSS classes, file names and URLs." },
+    { "q": "How do I convert a list of variable names at once?", "a": "Paste one name per line. Developer cases convert each line separately, so firstName, last_name and Date-Of-Birth on three lines become first_name, last_name and date_of_birth in snake_case. Words are split at spaces, punctuation and camelCase humps, and XMLHttpRequest splits into XML, Http and Request." },
+    { "q": "How do I make a URL slug?", "a": "Use the URL slug row. It lowercases the text, removes accents (café becomes cafe), turns & into and, and replaces spaces and punctuation with hyphens, so \"Kuih Raya & Café Menu 2026!\" becomes {{CC_SLUG_EXAMPLE}}. Google recommends hyphens rather than underscores to separate words in URLs." },
+    { "q": "Is my text saved or uploaded?", "a": "Nothing is uploaded: conversion runs in your browser. The last text is kept in this browser's local storage so it survives a reload; Clear removes it. Undo steps back through up to 50 changes." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Case Converter</li></ol></nav>
+  <h1>Case Converter</h1>
+  <p class="answer">Paste your text and <strong>click a case to convert it instantly: Sentence case, Title Case, UPPERCASE, lowercase</strong>, or developer names such as <strong>camelCase, snake_case and kebab-case</strong>. Title case follows AP style and acronyms like EPF stay in capitals: <em>{{CC_SAMPLE}}</em> becomes <em>{{CC_TITLE}}</em>.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{CC_VERIFIED}}</span><a href="#dev">Developer cases</a></p>
+
+  <form class="box cc-tool" id="ccForm" novalidate aria-labelledby="cc-h">
+    <h2 id="cc-h" class="sr-only">Convert case</h2>
+    <div class="field">
+      <label for="ccText">Your text</label>
+      <textarea class="prose-in" id="ccText" spellcheck="true" aria-describedby="ccCount">{{CC_SAMPLE}}</textarea>
+      <p class="help" id="ccCount">{{CC_COUNT}}</p>
+    </div>
+    <div class="cc-btns" role="group" aria-label="Text cases">{{CC_TEXT_BTNS}}</div>
+    <div class="tool-actions">
+      <button type="button" class="btn sm" id="ccCopy">Copy text</button>
+      <button type="button" class="btn ghost sm" id="ccUndo" disabled>Undo</button>
+      <button type="button" class="btn ghost sm" id="ccClean">Remove extra spaces</button>
+      <button type="button" class="btn ghost sm" id="ccClear">Clear</button>
+      <label class="check"><input type="checkbox" id="ccKeep" checked> <span>Keep acronyms (SEO, KWSP)</span></label>
+    </div>
+    <section class="ex-set" aria-labelledby="ccDevH">
+      <h3 class="sub-h" id="ccDevH">Developer cases (live)</h3>
+      <div class="cc-btns" role="group" aria-label="Developer cases">{{CC_DEV_BTNS}}</div>
+      <div class="table-wrap"><table class="data text cc-table"><thead><tr><th scope="col">Case</th><th scope="col">Result</th><th scope="col"><span class="sr-only">Copy</span></th></tr></thead><tbody id="ccDev">{{CC_DEV_ROWS}}</tbody></table></div>
+    </section>
+    <p class="sr-only" id="ccLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to change text case</h2>
+  <ol>
+    <li><strong>Paste or type</strong> your text.</li>
+    <li><strong>Click a case.</strong> The text changes in place; press Undo to step back.</li>
+    <li><strong>For code names</strong>, copy any row of the developer table. Put one name per line to convert a list.</li>
+    <li><strong>Copy</strong> the result.</li>
+  </ol>
+
+  <h2 id="cases">Every case with an example</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cases-cap">
+    <table class="data text"><caption id="cases-cap">"{{CC_EXAMPLE_IN}}" in each case</caption>
+      <thead><tr><th scope="col">Case</th><th scope="col">Result</th><th scope="col">Used for</th></tr></thead>
+      <tbody>
+{{CC_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="title-rules">Title case rules used (AP style)</h2>
+  <ul>
+    <li><strong>Capitalise</strong> nouns, verbs, adjectives, adverbs, pronouns and any word of four letters or more.</li>
+    <li><strong>Lowercase</strong> these words unless they come first, last or after a colon: {{CC_SMALL}}.</li>
+    <li><strong>Hyphenated words</strong> follow the same rule for each part: Step-by-Step.</li>
+  </ul>
+  <p>AP style and the Chicago Manual of Style differ on longer prepositions (Chicago lowercases <em>with</em>, <em>from</em> and <em>about</em>; AP capitalises them). The converter cannot tell when <em>to</em>, <em>up</em> or <em>on</em> is part of a verb, so check phrasal verbs such as "Set Up" by hand.</p>
+  <h2 id="dev">Developer naming conventions</h2>
+  <p>Words are split at spaces, punctuation and lower-to-upper case changes, so <code>user profile</code>, <code>userProfile</code>, <code>user_profile</code> and <code>User-Profile</code> all convert the same way. Apostrophes are dropped (<code>don't</code> becomes <code>dont</code>). Letters with accents are kept in code cases and removed only in the URL slug.</p>
+  <div class="callout"><p><strong>Note:</strong> Malay headings follow their own capitalisation guidance; the Title Case button uses English AP rules, so check small words such as <em>di</em>, <em>dan</em> and <em>yang</em> in Malay titles by hand.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Title_case" rel="noopener">Wikipedia: Title case (AP Stylebook rules)</a></li>
+    <li><a href="https://www.writersdigest.com/write-better-fiction/10-important-rules-and-conventions-of-associated-press-ap-style" rel="noopener">Writer's Digest: rules of AP style</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Naming_convention_(programming)" rel="noopener">Wikipedia: Naming conventions in programming</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/url-structure" rel="noopener">Google Search Central: URL structure</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/word-counter/">Word Counter<small>Words, readability and keyword density</small></a>
+    <a href="/online-notepad/">Online Notepad<small>Write with autosave</small></a>
+    <a href="/json-formatter/">JSON Formatter<small>Validate, fix and beautify JSON</small></a>
+  </div>
+</section>
+</div>
