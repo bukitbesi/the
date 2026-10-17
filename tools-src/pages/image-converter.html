@@ -1,0 +1,158 @@
+<!--page
+{
+  "path": "/image-converter/",
+  "lang": "en",
+  "cat": "design",
+  "title": "Image Converter: JPG, PNG, WebP, ICO and BMP Online, Free and Batch",
+  "description": "Free image converter: JPG to PNG, PNG to JPG, WebP, AVIF, ICO and BMP in batches. Resize, set quality or a target file size, keep or strip EXIF. No upload.",
+  "llms": "Free browser-based batch image converter. Reads JPG, PNG, WebP, GIF (first frame), BMP, ICO, SVG and, where the browser can decode them, AVIF and HEIC. Writes JPG, PNG, WebP, AVIF (when the browser can encode it), multi-size ICO (16 to 256 px PNG entries, for favicon.ico) and 24-bit BMP. Options: quality, target file size (searches the highest quality that fits), resize to fit a box, to a width or by percent without enlarging, background colour for transparent images saved as JPG or BMP, keep or strip EXIF and copyright metadata (stripped by default; GPS removed with it), size suffix in file names, and a format comparison that encodes the first image in every format to find the smallest. Photos are auto-rotated from their EXIF orientation. Downloads one by one or as a ZIP. Google's study found lossy WebP 25-34% smaller than JPEG at equal quality and lossless WebP 26% smaller than PNG. Images never leave the device.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/image-converter.html",
+  "render": "imgconv",
+  "shareTitle": "Share this image converter",
+  "scripts": ["/assets/js/image-converter.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["Image Converter", null]],
+  "about": ["Image file formats", "JPEG", "Portable Network Graphics", "WebP", "Image compression"],
+  "app": {
+    "name": "Image Converter",
+    "category": "MultimediaApplication",
+    "features": ["JPG, PNG, WebP, AVIF, ICO and BMP output", "Reads JPG, PNG, WebP, GIF, BMP, ICO, SVG, AVIF and HEIC where supported", "Batch conversion with ZIP download", "Quality slider and target file size", "Resize to fit, to a width or by percent", "Background colour for transparent images", "Keep or strip EXIF and copyright metadata", "Multi-size favicon.ico (16 to 256 px)", "Compare formats to find the smallest file", "Auto-rotates phone photos; nothing is uploaded"]
+  },
+  "citations": [
+    ["Google: WebP compression study", "https://developers.google.com/speed/webp/docs/webp_study"],
+    ["Google: WebP lossless and alpha study", "https://developers.google.com/speed/webp/docs/webp_lossless_alpha_study"],
+    ["MDN: Image file type and format guide", "https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types"],
+    ["WHATWG HTML: canvas toBlob()", "https://html.spec.whatwg.org/multipage/canvas.html#dom-canvas-toblob"]
+  ],
+  "faq": [
+    { "q": "How do I convert JPG to PNG or PNG to JPG?", "a": "Drop the images on this page, choose PNG or JPG as the output format and download each file or all of them as a ZIP. PNG keeps every pixel exactly and supports transparency but makes photos several times larger; JPG makes photos small but has no transparency, so transparent areas are filled with the background colour you pick (white by default)." },
+    { "q": "Which image format is best for a website?", "a": "WebP for most images: Google's study found lossy WebP files 25–34% smaller than JPEG at the same quality and lossless WebP 26% smaller than PNG, and every current browser shows it. Use JPG where a platform does not accept WebP, PNG for screenshots and logos that must stay sharp, and SVG for icons. Compare formats encodes your own image in each format so you can see the smallest." },
+    { "q": "How do I make an image smaller than 100 KB?", "a": "Choose JPG or WebP, tick Target file size and type 100. The converter tries qualities from 100% down and keeps the highest one that fits, usually in 6 to 8 attempts. If even 5% quality is too big, it tells you; then reduce the size with Resize, for example to fit 1200 px wide, which cuts the file far more than quality does." },
+    { "q": "How do I convert HEIC photos from an iPhone?", "a": "Safari on iPhone and Mac can open HEIC, so convert there: drop the photos on this page in Safari and save them as JPG. Chrome and Edge cannot decode HEIC, and the page will say so. To avoid HEIC altogether, set the iPhone's Settings, Camera, Formats to Most Compatible, which saves JPG." },
+    { "q": "Does converting remove EXIF data and GPS location?", "a": "Yes, by default. The converter redraws the pixels, so the new file contains no camera details, date or GPS position. Tick Keep metadata to copy the EXIF and copyright fields from the original into JPG, PNG or WebP output; the orientation is reset because the pixels are already rotated upright. To remove metadata without re-encoding, use the EXIF Remover." },
+    { "q": "How do I make a favicon.ico?", "a": "Choose ICO, keep the sizes 16, 32 and 48 px (add 64 to 256 for Windows shortcuts) and convert a square PNG or SVG logo. The ICO stores each size as a PNG inside one file, which every browser and Windows since Vista read. Put favicon.ico in your site's root folder; Blogger has its own favicon setting under Settings, Basic." },
+    { "q": "Are my images uploaded?", "a": "No. Decoding, resizing and encoding use your browser's built-in image codecs on your device, so images never leave it and the page works offline after one visit. Each image can be up to 80 MB and 60 megapixels; larger photos are scaled down to fit the browser's canvas limit." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">Image Converter</li></ol></nav>
+  <h1>Image Converter</h1>
+  <p class="answer">Convert images between <strong>JPG, PNG, WebP, AVIF, ICO and BMP</strong> in one batch, with resizing, a quality slider or a target file size, right in your browser. For websites, <strong>WebP is usually the smallest: Google measured it {{IC_WEBP_JPEG}} smaller than JPEG</strong> at the same quality. Drop your images below; nothing is uploaded.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Images stay on your device</span><a href="#formats">Which format to choose</a></p>
+
+  <form class="box ic-tool" id="icForm" novalidate aria-labelledby="ic-h">
+    <h2 id="ic-h" class="sr-only">Convert images</h2>
+    <label class="drop" id="icDrop" for="icFile">
+      <span><strong>Choose images</strong> or drop them here</span>
+      <small>JPG, PNG, WebP, GIF, BMP, ICO, SVG, AVIF, HEIC (Safari)</small>
+      <input type="file" id="icFile" accept="image/*,.heic,.heif,.svg,.ico,.bmp,.avif" multiple class="sr-only">
+    </label>
+
+    <fieldset class="ic-fmt" aria-label="Convert to">
+      <legend class="sub-h">Convert to</legend>
+      <div class="ic-chips">{{IC_FORMATS}}</div>
+    </fieldset>
+    <div class="adv-grid ic-opts">
+      <div class="field" id="icQualityWrap"><label for="icQuality">Quality <output id="icQualityOut" for="icQuality">85%</output></label><input type="range" id="icQuality" name="quality" min="5" max="100" step="1" value="85"></div>
+      <div class="field" id="icTargetWrap">
+        <label class="check"><input type="checkbox" id="icTargetOn" name="targetOn"> <span>Target file size</span></label>
+        <div class="input"><input type="number" id="icTarget" name="target" min="5" step="1" value="100" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div>
+      </div>
+      <div class="field"><label for="icMode">Resize</label>
+        <select class="input" id="icMode" name="mode"><option value="none">Keep original size</option><option value="fit">Fit inside width × height</option><option value="width">Set width</option><option value="percent">Scale by percent</option></select></div>
+      <div class="field ic-dims" id="icDims" hidden>
+        <div class="field-row">
+          <div class="input"><input type="number" id="icW" name="w" min="1" value="1200" inputmode="numeric" aria-label="Width in pixels"><span>px W</span></div>
+          <div class="input" id="icHWrap"><input type="number" id="icH" name="h" min="1" value="1200" inputmode="numeric" aria-label="Height in pixels"><span>px H</span></div>
+        </div>
+        <div class="input" id="icPctWrap" hidden><input type="number" id="icPct" name="percent" min="1" max="400" value="50" inputmode="numeric" aria-label="Scale percent"><span>%</span></div>
+        <label class="check"><input type="checkbox" name="enlarge"> <span>Allow enlarging small images</span></label>
+      </div>
+      <div class="field" id="icBgWrap"><label for="icBg">Background for transparent areas</label><input type="color" id="icBg" name="bg" value="#ffffff" class="ic-color"></div>
+      <div class="field" id="icIcoWrap" hidden>
+        <span class="sub-h">Icon sizes</span>
+        <div class="ic-sizes">{{IC_ICO}}</div>
+      </div>
+      <div class="field">
+        <label class="check"><input type="checkbox" name="keepMeta"> <span>Keep metadata (EXIF, copyright, GPS)</span></label>
+        <label class="check"><input type="checkbox" name="suffix"> <span>Add width×height to file names</span></label>
+      </div>
+    </div>
+
+    <h3 class="sub-h" id="icListH">Converted images</h3>
+    <ul class="ex-files ic-list" id="icList" aria-labelledby="icListH"><li class="help">Choose images above, or <button type="button" class="link-btn" id="icSample">convert a sample photo</button>.</li></ul>
+    <p class="error" id="icError" role="alert" hidden></p>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="icZip" hidden>Download all (.zip)</button>
+      <button type="button" class="btn ghost sm" id="icCompare" disabled>Compare formats</button>
+      <button type="button" class="btn ghost sm" id="icClear">Clear</button>
+    </div>
+    <div id="icCompareOut"></div>
+    <p class="code-stats" id="icStats">Settings are kept in the page link, so you can bookmark them.</p>
+    <p class="sr-only" id="icLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to convert images</h2>
+  <ol>
+    <li><strong>Choose or drop images.</strong> Phone photos are turned upright using their EXIF orientation.</li>
+    <li><strong>Pick the output format.</strong> WebP for websites, JPG for photos that must open anywhere, PNG for screenshots and logos, ICO for favicons.</li>
+    <li><strong>Set quality or a target size, and resize if needed.</strong> Results update as you change settings.</li>
+    <li><strong>Download</strong> each image, or all of them as a ZIP.</li>
+  </ol>
+
+  <h2 id="formats">Which image format to choose</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fmt-cap">
+    <table class="data text"><caption id="fmt-cap">Output formats compared</caption>
+      <thead><tr><th scope="col">Format</th><th scope="col">Compression</th><th scope="col">Transparency</th><th scope="col">Best for</th><th scope="col">Opens in</th></tr></thead>
+      <tbody>
+{{IC_FORMAT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>In Google's own tests, <a href="https://developers.google.com/speed/webp/docs/webp_study" rel="noopener">lossy WebP was {{IC_WEBP_JPEG}} smaller than JPEG</a> at equal visual quality, and <a href="https://developers.google.com/speed/webp/docs/webp_lossless_alpha_study" rel="noopener">lossless WebP {{IC_WEBP_PNG}} smaller than PNG</a>. Your images will vary: use Compare formats to see the real sizes for your picture.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="quality">Quality, size and resizing</h2>
+  <ul>
+    <li><strong>Resize first.</strong> A 4000 px phone photo shown 1200 px wide wastes about 90% of its pixels; fitting it to 1200 px cuts the file far more than lowering quality.</li>
+    <li><strong>Quality 75–85%</strong> looks the same as 100% for most photos at a fraction of the size. Below about 60%, blocks and smudges appear around edges and text.</li>
+    <li><strong>Target file size</strong> finds the highest quality that fits a limit, useful for forms that reject files over 100 KB or 1 MB.</li>
+    <li><strong>PNG, ICO and BMP are lossless:</strong> quality does not apply, and only resizing makes them smaller.</li>
+  </ul>
+  <div class="callout"><p><strong>Converting does not restore quality.</strong> A JPG turned into PNG keeps its JPEG artefacts and just gets bigger. Keep your originals, and convert from the best copy you have.</p></div>
+
+  <h2 id="metadata">Metadata and privacy</h2>
+  <p>Converting redraws the pixels, so camera details, dates and GPS location are left behind unless you tick Keep metadata. To clean photos without re-encoding them, use the <a href="/exif-remover/">EXIF Remover</a>; to add copyright that Google Images shows, use the <a href="/exif-editor/">EXIF Editor</a>.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> results depend on your browser's built-in encoders, which differ slightly between Chrome, Safari and Firefox. This tool is provided as is.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.google.com/speed/webp/docs/webp_study" rel="noopener">Google: WebP compression study</a></li>
+    <li><a href="https://developers.google.com/speed/webp/docs/webp_lossless_alpha_study" rel="noopener">Google: WebP lossless and alpha study</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types" rel="noopener">MDN: Image file type and format guide</a></li>
+    <li><a href="https://html.spec.whatwg.org/multipage/canvas.html#dom-canvas-toblob" rel="noopener">WHATWG HTML: canvas toBlob()</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/exif-remover/">EXIF Remover<small>Strip GPS without re-encoding</small></a>
+    <a href="/exif-editor/">EXIF Editor<small>Add copyright for Google Images</small></a>
+    <a href="{{MAIN_SITE}}/p/webp-image-converter.html">WebP Image Converter<small>Batch WebP with more options</small></a>
+  </div>
+</section>
+</div>

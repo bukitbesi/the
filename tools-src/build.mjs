@@ -88,6 +88,12 @@ const jsCore = require('../assets/js/js-core.js');
 const htmlCore = require('../assets/js/html-core.js');
 const purgeCore = require('../assets/js/purge-core.js');
 const exifCore = require('../assets/js/exif-core.js');
+const robotsCore = require('../assets/js/robots-core.js');
+const notesCore = require('../assets/js/notepad-core.js');
+const imgCore = require('../assets/js/imgconv-core.js');
+const photoCore = require('../assets/js/photo-core.js');
+const stickerCore = require('../assets/js/sticker-core.js');
+const pdfCore = require('../assets/js/pdf-core.js');
 const site = JSON.parse(read('site.json'));
 const catalog = JSON.parse(read('tools.json'));
 const tools = catalog.filter(t => t.live === true);
@@ -2350,7 +2356,123 @@ function exifRemoverMap() {
     EX_KIND_ROWS: EXIF_KINDS.map(k => `        <tr><th scope="row">${esc(exifCore.KIND_LABEL[k[0]])}</th><td>${esc(k[1])}</td><td>${esc(k[2])}</td><td>${esc(k[3])}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+
+// ---- Robots.txt generator: the Blogger preset, its audit and the tester results are rendered by the page's core.
+const ROBOTS_EXAMPLES = [
+  ['User-agent: *\nAllow: /p\nDisallow: /', '/page'],
+  ['User-agent: *\nAllow: /folder\nDisallow: /folder', '/folder/page'],
+  ['User-agent: *\nAllow: /page\nDisallow: /*.htm', '/page.htm'],
+  ['User-agent: *\nDisallow: /fish*', '/Fish.asp'],
+  ['User-agent: *\nDisallow: /*.php$', '/index.php?lang=en'],
+  ['User-agent: googlebot\nDisallow: /private/', '/private/a.jpg (Googlebot-Image)'],
+  ['User-agent: *\nDisallow: /', '/robots.txt']
+];
+function robotsMap() {
+  const R = robotsCore, V = R.views, cfg = R.fromPreset('blogger'), text = R.generate(cfg), url = '/search/label/SEO';
+  const opt = (v, l, sel) => `<option value="${esc(v)}"${sel ? ' selected' : ''}>${esc(l)}</option>`;
+  return {
+    RB_BOTS: R.BOTS.length, RB_VERIFIED: longDate(R.FACTS.verified, 'en'),
+    RB_PRESETS: Object.entries(R.PRESETS).map(([k, p]) => opt(k, p.label, k === 'blogger')).join(''),
+    RB_SITE: esc(cfg.site), RB_ROWS: V.rowsHtml(R.rowsFromCfg(cfg)), RB_BOT_CHECKS: V.botChecks({}), RB_MAPS: esc(cfg.sitemaps.join('\n')),
+    RB_OUT: esc(text), RB_AUDIT: V.auditHtml(R.audit(text, cfg.site).notes), RB_TEST_URL: url,
+    RB_UAS: R.TESTERS.map(t => opt(t, t, t === 'Googlebot')).join(''),
+    RB_VERDICT: V.verdictHtml(R.test(text, url, 'Googlebot'), 'Googlebot'), RB_ALL: V.allHtml(text, url),
+    RB_BOT_ROWS: R.BOTS.map(b => `        <tr><th scope="row"><code>${esc(b.token)}</code></th><td>${esc(b.owner)}</td><td>${esc(R.PURPOSE[b.purpose])}</td><td>${esc(b.note)}</td></tr>`).join('\n'),
+    RB_EXAMPLES: ROBOTS_EXAMPLES.map(([rules, u]) => {
+      const m = /^(\S+)(?: \((.+)\))?$/.exec(u), r = R.test(rules, m[1], m[2] || 'Googlebot');
+      return `        <tr><td><code>${esc(rules).replace(/\n/g, '<br>')}</code></td><td><code>${esc(u)}</code></td><td>${r.allowed ? 'Allowed' : 'Blocked'}${r.rule ? ` (${esc(V.ruleText(r.rule))})` : r.reason === 'robots' ? ' (always)' : ''}</td></tr>`;
+    }).join('\n')
+  };
+}
+
+// ---- Online notepad: the welcome note, its preview and counts come from the page's core.
+const NOTE_WELCOME = `# Welcome to your notepad
+
+Start typing anywhere: every change is **saved in this browser** and nothing is uploaded.
+
+## Try it
+- [x] Write a note
+- [ ] Switch to *Preview* to see Markdown
+- [ ] Press Ctrl+S to take a snapshot
+- [ ] Copy a **Share link** and open it on your phone
+
+> Tip: select all and type to make this your own note.
+`;
+const NOTE_MD = ['# Heading', '**bold** and *italic*', '~~deleted~~', '- [ ] task\n- [x] done', '1. first\n2. second', '> quote', '`code`', '[link](https://tool.thebukitbesi.com/)'];
+function notepadMap() {
+  const N = notesCore, s = N.stats(NOTE_WELCOME), n = { text: NOTE_WELCOME };
+  return {
+    NP_TEXT: esc(NOTE_WELCOME), NP_PREVIEW: N.html(NOTE_WELCOME, { shift: 2 }), NP_TITLE: esc(N.title(n)), NP_WORDS: s.words, NP_READ: s.reading,
+    NP_STATS: N.summary(s),
+    NP_LIST: `<li><button type="button" class="np-note on" aria-current="true"><strong>${esc(N.title(n))}</strong><small>Welcome · ${s.words} words</small></button></li>`,
+    NP_TRANSFORMS: Object.entries(N.TRANSFORMS).map(([k, t]) => `<button type="button" class="btn ghost sm" data-tf="${k}">${esc(t.label)}</button>`).join(''),
+    NP_MD_ROWS: NOTE_MD.map(m => `        <tr><td><code>${esc(m).replace(/\n/g, '<br>')}</code></td><td class="np-md">${N.html(m, { shift: 2 })}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Image converter: format chips, icon sizes and the format table come from the page's core.
+function imgconvMap() {
+  const I = imgCore;
+  return {
+    IC_WEBP_JPEG: I.FACTS.webpVsJpeg, IC_WEBP_PNG: I.FACTS.webpVsPng,
+    IC_FORMATS: Object.entries(I.FORMATS).map(([k, f]) => `<label class="ic-chip"><input type="radio" name="fmt" value="${k}"${k === 'webp' ? ' checked' : ''}> ${f.label}</label>`).join(''),
+    IC_ICO: I.ICO_SIZES.map(s => `<label class="check"><input type="checkbox" name="ico" value="${s}"${s <= 48 ? ' checked' : ''}> <span>${s}</span></label>`).join(''),
+    IC_FORMAT_ROWS: Object.values(I.FORMATS).map(f => `        <tr><th scope="row">${f.label}</th><td>${f.lossy ? 'Lossy' : 'Lossless'}${f.label === 'WebP' || f.label === 'AVIF' ? ' or lossless' : ''}</td><td>${f.alpha ? 'Yes' : 'No'}</td><td>${esc(f.use)}</td><td>${esc(f.support)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Photo editor: sliders, filters, ratios, canvases and the reference tables come from the page's core.
+const BLENDS = [['source-over', 'Normal'], ['multiply', 'Multiply'], ['screen', 'Screen'], ['overlay', 'Overlay'], ['darken', 'Darken'], ['lighten', 'Lighten'],
+  ['color-dodge', 'Colour dodge'], ['color-burn', 'Colour burn'], ['hard-light', 'Hard light'], ['soft-light', 'Soft light'], ['difference', 'Difference'],
+  ['exclusion', 'Exclusion'], ['hue', 'Hue'], ['saturation', 'Saturation'], ['color', 'Colour'], ['luminosity', 'Luminosity']];
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+function photoMap() {
+  const P = photoCore, filters = Object.entries(P.FILTERS);
+  return {
+    PE_ADJ: P.ADJUST.length, PE_FILTERS: filters.length - 1,
+    PE_SLIDERS: P.ADJUST.map(a => `<label class="pe-slider"><span>${esc(a.label)} <output data-adj-out="${a.key}">0</output></span><input type="range" data-adj="${a.key}" min="${a.min}" max="${a.max}" value="0"></label>`).join(''),
+    PE_FILTER_BTNS: filters.map(([k, f]) => `<button type="button" class="pe-filter" data-filter="${k}" aria-pressed="${k === 'none'}"><canvas width="72" height="72" aria-hidden="true"></canvas><span>${esc(f.label)}</span></button>`).join(''),
+    PE_RATIOS: P.CROPS.map(([l, v], i) => `<label class="ic-chip"><input type="radio" name="ratio" value="${v}"${i === 0 ? ' checked' : ''}> ${esc(l)}</label>`).join(''),
+    PE_CANVASES: P.CANVASES.map(([l, w, h]) => `<option value="${w}x${h}">${esc(l)} (${w} × ${h})</option>`).join(''),
+    PE_BLENDS: BLENDS.map(([v, l]) => `<option value="${v}">${l}</option>`).join(''),
+    PE_ADJ_ROWS: P.ADJUST.map(a => `        <tr><th scope="row">${esc(a.label)}</th><td>${a.min} to ${a.max}</td><td>${esc(a.desc)}</td></tr>`).join('\n') + '\n' +
+      `        <tr><th scope="row">Filters</th><td>${filters.length - 1} presets</td><td>${esc(filters.slice(1).map(([, f]) => f.label).join(', '))}</td></tr>`,
+    PE_SIZE_ROWS: P.CANVASES.map(([l, w, h]) => { const g = gcd(w, h); return `        <tr><th scope="row">${esc(l)}</th><td>${w} × ${h} px</td><td>${w / g}:${h / g}</td></tr>`; }).join('\n')
+  };
+}
+
+// ---- WhatsApp sticker maker: the rules table is WhatsApp's README figures held in the page's core.
+function stickerMap() {
+  const T = stickerCore.SPEC, kb = n => n / 1024 + ' KB';
+  const rows = [
+    ['Sticker size', `Exactly ${T.size} × ${T.size} px`, 'Always exported at that size'],
+    ['Format', 'WebP (iOS also accepts PNG for still stickers)', 'WebP; PNG only where the browser cannot write WebP'],
+    ['File size', `At most ${kb(T.maxBytes)} per still sticker (500 KB animated)`, 'Highest WebP quality that fits under 100 KB'],
+    ['Stickers per pack', `${T.minPack} to ${T.maxPack}`, 'Checked before the pack downloads'],
+    ['Tray icon', `${T.tray} × ${T.tray} px, at most ${kb(T.trayMaxBytes)}`, 'Made from the sticker you choose, as PNG'],
+    ['Emoji tags', `Up to ${T.maxEmoji} per sticker`, 'Extra emoji are ignored'],
+    ['Accessibility text', `Up to ${T.maxAlt} characters for still stickers`, 'Saved in contents.json'],
+    ['Mixing', 'A pack is all still or all animated', 'Still stickers only']
+  ];
+  return {
+    ST_SIZE: T.size, ST_MIN: T.minPack, ST_MAX: T.maxPack, ST_TRAY: T.tray, ST_ALT: T.maxAlt, ST_VERIFIED: longDate(T.verified, 'en'),
+    ST_RULE_ROWS: rows.map(r => `        <tr><th scope="row">${r[0]}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('\n')
+  };
+}
+
+// ---- PDF converter: tabs, page sizes and the reference tables come from the page's core.
+function pdfMap() {
+  const P = pdfCore, mm = pt => Math.round(pt / 72 * 25.4);
+  const sizes = Object.entries(P.PAGES).filter(([k]) => k !== 'fit');
+  return {
+    PDF_MODES: P.MODES.length,
+    PDF_TABS: P.MODES.map((m, i) => `<button type="button" role="tab" data-tab="${m.key}" id="pdTab-${m.key}" aria-controls="pdPanel-${m.key}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${esc(m.label)}</button>`).join(''),
+    PDF_SIZES: Object.entries(P.PAGES).map(([k, p]) => `<option value="${k}"${k === 'a4' ? ' selected' : ''}>${esc(p.label)}</option>`).join(''),
+    PDF_SIZE_ROWS: sizes.map(([, p]) => `        <tr><th scope="row">${esc(p.label)}</th><td>${mm(p.w)} × ${mm(p.h)}</td><td>${p.w} × ${p.h}</td></tr>`).join('\n'),
+    PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
+  };
+}
+const RENDERERS = { pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2553,7 +2675,13 @@ const bundles = {
   'html-beautifier-worker.js': ['assets/js/html-core.js', 'assets/js/html-worker.js'],
   'unused-css.js': ['assets/js/css-core.js', 'assets/js/purge-core.js', 'assets/js/purge-ui.js'],
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
-  'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js']
+  'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
+  'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'online-notepad.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/notepad-ui.js'],
+  'image-converter.js': ['assets/js/zip-core.js', 'assets/js/exif-core.js', 'assets/js/imgconv-core.js', 'assets/js/imgconv-ui.js'],
+  'photo-editor.js': ['assets/js/photo-core.js', 'assets/js/photo-ui.js'],
+  'whatsapp-sticker-maker.js': ['assets/js/zip-core.js', 'assets/js/imgconv-core.js', 'assets/js/sticker-core.js', 'assets/js/sticker-ui.js'],
+  'pdf-converter.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/pdf-core.js', 'assets/js/pdf-ui.js']
 };
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
@@ -2656,7 +2784,9 @@ fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
 ['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
-const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f);
+const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f)
+  .concat(fs.readdirSync(path.join(root, 'assets/vendor'), { withFileTypes: true }).filter(d => d.isDirectory())
+    .flatMap(d => fs.readdirSync(path.join(root, 'assets/vendor', d.name)).filter(f => f.endsWith('.mjs')).map(f => '/assets/vendor/' + d.name + '/' + f)));
 fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
 // Serve files exactly as built; Jekyll processing is unnecessary and slower.
 fs.writeFileSync(path.join(pub, '.nojekyll'), '');

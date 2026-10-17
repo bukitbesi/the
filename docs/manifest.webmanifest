@@ -268,6 +268,11 @@
       "description": "Free iddah calculator: when a Muslim woman's iddah ends after divorce (three periods, three months, "
     },
     {
+      "name": "Image Converter",
+      "url": "/image-converter/",
+      "description": "Free image converter: JPG to PNG, PNG to JPG, WebP, AVIF, ICO and BMP in batches. Resize, set qualit"
+    },
+    {
       "name": "Image to Prompt",
       "url": "/image-to-prompt/",
       "description": "Upload a picture and get 3 AI prompts for Midjourney, Stable Diffusion, ChatGPT, Flux, Veo or Sora: "
@@ -318,6 +323,11 @@
       "description": "Track a Ninja Van Malaysia parcel by tracking ID (NVMY, MYNJV) and learn what Pending Pickup, Re-att"
     },
     {
+      "name": "Online Notepad",
+      "url": "/online-notepad/",
+      "description": "Free online notepad with autosave, many notes, Markdown preview, find and replace, version history, "
+    },
+    {
       "name": "Overtime Calculator Malaysia",
       "url": "/overtime-calculator-malaysia/",
       "description": "Free overtime calculator for Malaysia: OT, rest day and public holiday pay under the Employment Act "
@@ -333,9 +343,19 @@
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
     },
     {
+      "name": "PDF Converter",
+      "url": "/pdf-converter/",
+      "description": "Free PDF converter that runs in your browser: JPG to PDF, PDF to JPG, merge, split, rotate and reord"
+    },
+    {
       "name": "Personal Loan Calculator Malaysia",
       "url": "/personal-loan-calculator-malaysia/",
       "description": "Free personal loan calculator: monthly instalment, total interest, the real EIR behind a flat rate, "
+    },
+    {
+      "name": "Online Photo Editor",
+      "url": "/photo-editor/",
+      "description": "Free online photo editor, a light Photoshop alternative: crop, rotate, adjust light and colour, 13 f"
     },
     {
       "name": "Photo to Cartoon",
@@ -401,6 +421,11 @@
       "name": "ROAS Calculator",
       "url": "/roas-calculator/",
       "description": "ROAS calculator for Facebook, TikTok, Google and Shopee ads in Malaysia: return on ad spend, ROI, br"
+    },
+    {
+      "name": "Robots.txt Generator and Tester",
+      "url": "/robots-txt-generator/",
+      "description": "Free robots.txt generator and tester: Blogger and WordPress presets, block AI crawlers like GPTBot, "
     },
     {
       "name": "RPGT Calculator Malaysia",
@@ -476,6 +501,11 @@
       "name": "Water Bill Calculator Malaysia",
       "url": "/water-bill-calculator-malaysia/",
       "description": "Water bill calculator for Malaysia: your domestic bill from m³ used in Selangor, KL, Johor, Penang, "
+    },
+    {
+      "name": "WhatsApp Sticker Maker",
+      "url": "/whatsapp-sticker-maker/",
+      "description": "Free WhatsApp sticker maker: remove the background, add a white outline and text, and download 512 p"
     },
     {
       "name": "Working Days Calculator Malaysia",

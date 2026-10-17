@@ -1,0 +1,193 @@
+<!--page
+{
+  "path": "/online-notepad/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Online Notepad: Free Notes With Autosave, Markdown and Share Links",
+  "description": "Free online notepad with autosave, many notes, Markdown preview, find and replace, version history, share-by-link and export to TXT, Markdown or Word.",
+  "llms": "Free online notepad that saves every keystroke in the browser (localStorage, nothing uploaded, works offline). Many notes with search; titles from the first line; Markdown preview (headings, bold, italic, strikethrough, lists, task lists, quotes, code, links) rendered safely; live counts of words, characters, characters without spaces, lines, paragraphs, sentences and reading time at 238 words per minute; find and replace with case, whole-word and regex options; transforms (UPPERCASE, lowercase, Title Case, Sentence case, remove extra spaces or blank lines, sort, remove duplicate lines, number lines); version history with automatic snapshots every 2 minutes of changes (20 per note) and manual snapshots; share a note as a link whose text is compressed into the URL fragment, which is never sent to a server; export to .txt, .md, .html or Word .docx; backup and restore all notes as JSON; focus mode, font, size, wrap and spellcheck settings.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/online-notepad.html",
+  "render": "notepad",
+  "shareTitle": "Share this online notepad",
+  "scripts": ["/assets/js/online-notepad.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Online Notepad", null]],
+  "about": ["Text editor", "Markdown", "Note-taking", "Web storage"],
+  "app": {
+    "name": "Online Notepad",
+    "category": "UtilitiesApplication",
+    "features": ["Autosave in the browser; works offline", "Many notes with search", "Markdown preview with task lists", "Word, character, sentence and reading-time counts", "Find and replace with regex", "Case and line transforms", "Version history with automatic snapshots", "Share a note as a link without uploading it", "Export to TXT, Markdown, HTML and Word (.docx)", "Backup and restore all notes", "Focus mode, fonts, size, wrap and spellcheck settings"]
+  },
+  "citations": [
+    ["WHATWG HTML Standard: Web storage", "https://html.spec.whatwg.org/multipage/webstorage.html"],
+    ["Brysbaert (2019): How many words do we read per minute?", "https://doi.org/10.1016/j.jml.2019.104047"],
+    ["CommonMark Spec", "https://spec.commonmark.org/"],
+    ["ECMA-376: Office Open XML file formats", "https://ecma-international.org/publications-and-standards/standards/ecma-376/"]
+  ],
+  "faq": [
+    { "q": "Where are my notes saved?", "a": "In your browser's local storage on this device, under tool.thebukitbesi.com. Nothing is uploaded, so the notepad works offline and nobody else can read your notes. They stay until you delete them or clear this site's data. Notes do not sync between devices or browsers: use Backup to download a .json file and Restore on the other device." },
+    { "q": "Does the notepad save automatically?", "a": "Yes. Every change is saved within half a second and the status line shows Saved with the time. The notepad also keeps up to 20 snapshots per note, taken at most every 2 minutes while you write, so you can go back to an earlier version under Version history. Press Ctrl+S (Cmd+S on Mac) to take a snapshot at any time." },
+    { "q": "How do I share a note without an account?", "a": "Choose Share link. The note is compressed and placed after the # in the link, a part of the URL that browsers never send to a server, so the text travels only inside the link itself. Whoever opens it gets a copy as a new note in their own notepad. Anyone with the link can read the note, so share it only with people you trust." },
+    { "q": "How is reading time calculated?", "a": "Words divided by 238 words per minute, the average silent reading speed for non-fiction found in Brysbaert's 2019 meta-analysis of 190 studies. A 1,000-word article shows 4 min. Words are runs of letters or digits, so contractions such as isn't and hyphenated words such as e-mail count once, and Malay, Chinese and other scripts are counted too." },
+    { "q": "Can I write in Markdown?", "a": "Yes. Use # for headings, **bold**, *italic*, ~~strikethrough~~, - or 1. for lists, - [ ] and - [x] for checklists, > for quotes, backticks for code and [text](https://link) for links. Switch to Preview or Split to see it formatted. Export as .md keeps the Markdown, .html and Word .docx keep the formatting, and .txt keeps the plain text." },
+    { "q": "How much can I store?", "a": "Browsers give each site about 5 MB of local storage, shared by all notes and their snapshots; that holds hundreds of thousands of words of plain text. If storage fills up the notepad says so; download a backup and delete old notes or snapshots to make room. Very long single notes, such as whole books, are better kept as files." },
+    { "q": "Is this the same as Windows Notepad?", "a": "It works like Windows Notepad for plain text, but adds what Notepad lacks: several notes in one place, automatic saving and version history, Markdown formatting, counts and reading time, regex find and replace, line tools such as sort and remove duplicates, share links and Word export. It runs on phones and any computer with a browser." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Online Notepad</li></ol></nav>
+  <h1>Online Notepad</h1>
+  <p class="answer">This <strong>online notepad saves every note in your browser as you type</strong>, so nothing is uploaded and it works offline. Keep many notes, format them with Markdown, count words and reading time, find and replace, go back to earlier versions, share a note as a link, and download it as TXT, Markdown or Word. The welcome note below has {{NP_WORDS}} words: {{NP_READ}} to read.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Notes stay on your device</span><a href="#markdown">Markdown guide</a></p>
+
+  <form class="box np-tool" id="npForm" novalidate aria-labelledby="np-h">
+    <h2 id="np-h" class="sr-only">Notepad</h2>
+    <div class="np-grid">
+      <div class="np-side">
+        <div class="np-side-top">
+          <button type="button" class="btn sm" id="npNew">New note</button>
+          <label class="btn ghost sm file-btn">Open file<input type="file" id="npFile" multiple accept=".txt,.md,.markdown,.json,text/plain,text/markdown,application/json" class="sr-only"></label>
+        </div>
+        <input type="search" class="input np-search" id="npSearch" aria-label="Search notes" placeholder="Search notes">
+        <ul class="np-notes" id="npNotes" aria-label="Your notes">{{NP_LIST}}</ul>
+      </div>
+      <div class="np-main">
+        <div class="np-bar">
+          <input class="input np-title" id="npTitle" aria-label="Note title" placeholder="{{NP_TITLE}}" autocomplete="off">
+          <fieldset class="seg seg3 np-view" aria-label="View">
+            <label><input type="radio" name="view" value="write" checked> Write</label>
+            <label><input type="radio" name="view" value="preview"> Preview</label>
+            <label><input type="radio" name="view" value="split"> Split</label>
+          </fieldset>
+        </div>
+        <div class="np-panes" id="npPanes" data-view="write">
+          <textarea class="np-text" id="npText" aria-label="Note text" aria-describedby="npStats" spellcheck="true">{{NP_TEXT}}</textarea>
+          <div class="np-preview prose" id="npPreview" aria-label="Formatted preview" tabindex="0">{{NP_PREVIEW}}</div>
+        </div>
+        <p class="code-stats" id="npStats">{{NP_STATS}}</p>
+        <div class="tool-actions np-actions">
+          <select class="input np-fmt" id="npFmt" aria-label="Download format">
+            <option value="txt">Text (.txt)</option><option value="md">Markdown (.md)</option><option value="docx">Word (.docx)</option><option value="html">Web page (.html)</option>
+          </select>
+          <button type="button" class="btn sm" id="npDownload">Download</button>
+          <button type="button" class="btn ghost sm" id="npCopy">Copy</button>
+          <button type="button" class="btn ghost sm" id="npShare">Share link</button>
+          <button type="button" class="btn ghost sm" id="npPrint">Print</button>
+          <button type="button" class="btn ghost sm" id="npFocus" aria-pressed="false">Focus</button>
+        </div>
+        <p class="error" id="npError" role="alert" hidden></p>
+
+        <details class="np-more" id="npFind">
+          <summary>Find and replace</summary>
+          <div class="field-row">
+            <div class="field"><label for="npQ">Find</label><input class="input" id="npQ" autocomplete="off"></div>
+            <div class="field"><label for="npR">Replace with</label><input class="input" id="npR" autocomplete="off"></div>
+          </div>
+          <div class="np-checks">
+            <label class="check"><input type="checkbox" id="npCase"> <span>Match case</span></label>
+            <label class="check"><input type="checkbox" id="npWord"> <span>Whole words</span></label>
+            <label class="check"><input type="checkbox" id="npRegex"> <span>Regular expression</span></label>
+          </div>
+          <div class="tool-actions">
+            <button type="button" class="btn ghost sm" id="npNext">Find next</button>
+            <button type="button" class="btn ghost sm" id="npRep">Replace</button>
+            <button type="button" class="btn ghost sm" id="npRepAll">Replace all</button>
+            <span class="code-stats" id="npCount"></span>
+          </div>
+        </details>
+        <details class="np-more">
+          <summary>Transform text</summary>
+          <p class="help">Applies to the selected text, or the whole note if nothing is selected. Ctrl+Z undoes it.</p>
+          <div class="tool-actions" id="npTransforms">{{NP_TRANSFORMS}}</div>
+        </details>
+        <details class="np-more">
+          <summary>Version history</summary>
+          <p class="help">Snapshots are taken at most every 2 minutes while you write (20 kept per note). Ctrl+S takes one now.</p>
+          <button type="button" class="btn ghost sm" id="npSnap">Take snapshot now</button>
+          <ul class="np-snaps" id="npSnaps"><li class="help">No snapshots yet.</li></ul>
+        </details>
+        <details class="np-more">
+          <summary>Settings and backup</summary>
+          <div class="field-row">
+            <div class="field"><label for="npFont">Font</label><select class="input" id="npFont"><option value="sans">Sans</option><option value="serif">Serif</option><option value="mono">Monospace</option></select></div>
+            <div class="field"><label for="npSize">Text size</label><select class="input" id="npSize"><option value="s">Small</option><option value="m" selected>Medium</option><option value="l">Large</option></select></div>
+          </div>
+          <div class="np-checks">
+            <label class="check"><input type="checkbox" id="npWrap" checked> <span>Wrap long lines</span></label>
+            <label class="check"><input type="checkbox" id="npSpell" checked> <span>Spellcheck</span></label>
+          </div>
+          <div class="tool-actions">
+            <button type="button" class="btn ghost sm" id="npBackup">Backup all notes (.json)</button>
+            <label class="btn ghost sm file-btn">Restore backup<input type="file" id="npRestore" accept=".json,application/json" class="sr-only"></label>
+            <button type="button" class="btn ghost sm" id="npDelete">Delete this note</button>
+          </div>
+        </details>
+      </div>
+    </div>
+    <p class="sr-only" id="npLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to use the online notepad</h2>
+  <ol>
+    <li><strong>Start typing.</strong> The note saves itself; the first line becomes its title unless you type one.</li>
+    <li><strong>Keep several notes.</strong> New note adds one; the list and search box find them again. Open file imports .txt, .md or a backup.</li>
+    <li><strong>Format with Markdown</strong> and switch to Preview or Split to see it formatted.</li>
+    <li><strong>Use the tools:</strong> find and replace, case and line transforms, version history.</li>
+    <li><strong>Share or download.</strong> Share link copies a link that carries the note; Download saves TXT, Markdown, HTML or Word.</li>
+  </ol>
+
+  <h2 id="markdown">Markdown quick guide</h2>
+  <p>Every example below is rendered by the notepad's own formatter.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="md-cap">
+    <table class="data text"><caption id="md-cap">What you type and what you get</caption>
+      <thead><tr><th scope="col">Type</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{NP_MD_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="counts">How the counts work</h2>
+  <ul>
+    <li><strong>Words</strong> are runs of letters or digits in any script; <em>isn't</em>, <em>e-mail</em> and <em>3.5</em> count once.</li>
+    <li><strong>Characters</strong> count what you see, so an emoji is one character, not two.</li>
+    <li><strong>Sentences</strong> end with . ! or ? followed by a space or the end of the text.</li>
+    <li><strong>Reading time</strong> uses 238 words per minute, the average silent reading speed for non-fiction in <a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert (2019)</a>.</li>
+  </ul>
+
+  <h2 id="privacy">Privacy and storage</h2>
+  <p>Notes are stored with the browser's <a href="https://html.spec.whatwg.org/multipage/webstorage.html" rel="noopener">Web Storage</a> on your device. This site has no account system and never receives your text. Share links keep the note after the <code>#</code>, which browsers do not send to servers; the note is only as private as the link. Private or incognito windows delete notes when closed, and clearing this site's data deletes them too, so keep backups of anything important.</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> browser storage can be cleared by you, your browser or cleaning apps. Download a backup regularly; this tool is provided as is.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://html.spec.whatwg.org/multipage/webstorage.html" rel="noopener">WHATWG HTML Standard: Web storage</a></li>
+    <li><a href="https://doi.org/10.1016/j.jml.2019.104047" rel="noopener">Brysbaert, M. (2019). How many words do we read per minute? Journal of Memory and Language</a></li>
+    <li><a href="https://spec.commonmark.org/" rel="noopener">CommonMark Spec</a></li>
+    <li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-376/" rel="noopener">ECMA-376: Office Open XML</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/paraphrasing-tool/">Paraphrasing Tool<small>Rewrite text in a new way</small></a>
+    <a href="/ai-summarizer/">AI Summarizer<small>Shorten long notes</small></a>
+    <a href="{{MAIN_SITE}}/p/word-counter.html">Word Counter<small>Counts and keyword density</small></a>
+  </div>
+</section>
+</div>

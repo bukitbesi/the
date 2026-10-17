@@ -108,9 +108,9 @@
     "live": true
   },
   {
-    "name": "Robots.txt Generator",
-    "desc": "Build robots.txt rules for user agents, crawl paths and sitemap locations.",
-    "url": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+    "name": "Robots.txt Generator and Tester",
+    "desc": "Build and test robots.txt for Blogger or WordPress, block AI crawlers like GPTBot, and check any URL against Google's rules.",
+    "url": "https://tool.thebukitbesi.com/robots-txt-generator/",
     "cat": "seo",
     "icon": "robotstxt-generator",
     "badge": "",
@@ -190,8 +190,8 @@
   },
   {
     "name": "Online Notepad",
-    "desc": "Write notes with autosave, snapshots, word counts and TXT or Markdown import and export.",
-    "url": "https://www.thebukitbesi.com/p/online-notepad.html",
+    "desc": "Many notes with autosave, Markdown preview, find and replace, version history, share links and TXT, Markdown or Word export.",
+    "url": "https://tool.thebukitbesi.com/online-notepad/",
     "cat": "content",
     "icon": "online-notepad",
     "badge": "",
@@ -225,9 +225,9 @@
     "live": true
   },
   {
-    "name": "Image Format Converter",
-    "desc": "Convert images between supported formats and download batch results as a ZIP file.",
-    "url": "https://www.thebukitbesi.com/p/image-converter.html",
+    "name": "Image Converter",
+    "desc": "Batch convert JPG, PNG, WebP, AVIF, ICO and BMP with resizing, quality or target file size, and optional EXIF removal.",
+    "url": "https://tool.thebukitbesi.com/image-converter/",
     "cat": "design",
     "icon": "image-converter",
     "badge": "",
@@ -244,26 +244,17 @@
   },
   {
     "name": "Online Photo Editor",
-    "desc": "Edit images with layers, brushes, shapes and filters, then export your work.",
-    "url": "https://www.thebukitbesi.com/p/online-photoshop.html",
+    "desc": "Crop, adjust and filter photos, add text, shapes and drawings on layers, then export JPG, PNG or WebP. A free Photoshop alternative.",
+    "url": "https://tool.thebukitbesi.com/photo-editor/",
     "cat": "design",
     "icon": "online-photoshop",
     "badge": "",
     "live": true
   },
   {
-    "name": "WhatsApp Sticker Editor",
-    "desc": "Create individual stickers with text, filters, outlines and export controls.",
-    "url": "https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html",
-    "cat": "design",
-    "icon": "sticker-whatsapp-maker",
-    "badge": "",
-    "live": true
-  },
-  {
-    "name": "WhatsApp Sticker Pack Maker",
-    "desc": "Prepare multiple stickers, customize pack details and download the files together.",
-    "url": "https://www.thebukitbesi.com/p/whatsapp-sticker-maker.html",
+    "name": "WhatsApp Sticker Maker",
+    "desc": "Turn photos into WhatsApp stickers: background removal, white outline, captions, and 512 px WebP packs under 100 KB.",
+    "url": "https://tool.thebukitbesi.com/whatsapp-sticker-maker/",
     "cat": "design",
     "icon": "whatsapp-sticker-maker",
     "badge": "",
@@ -369,9 +360,9 @@
     "live": true
   },
   {
-    "name": "PDF & Word Converter",
-    "desc": "Convert PDF and Word documents or combine images into a PDF using supported options.",
-    "url": "https://www.thebukitbesi.com/p/pdf-converter.html",
+    "name": "PDF Converter",
+    "desc": "JPG to PDF, PDF to JPG, merge, split and organise pages, PDF to Word, Word to PDF and compress, all in your browser.",
+    "url": "https://tool.thebukitbesi.com/pdf-converter/",
     "cat": "util",
     "icon": "pdf-converter",
     "badge": "",

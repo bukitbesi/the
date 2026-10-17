@@ -785,8 +785,8 @@
     if (info.error) throw new Error(info.error);
     var errs = validate(edits);
     if (errs.length) throw new Error('invalid:' + errs.join(','));
-    var p = parse(b), le = info.tiff ? info.tiff.le : false;
-    var t = info.tiff ? { le: le, ifd0: info.tiff.ifd0.slice(), exif: info.tiff.exif.slice(), gps: info.tiff.gps.slice(), interop: info.tiff.interop.slice(), ifd1: info.tiff.ifd1.slice(), thumbnail: info.tiff.thumbnail }
+    var p = parse(b), base = edits.tiff || info.tiff, le = base ? base.le : false;
+    var t = base ? { le: le, ifd0: base.ifd0.slice(), exif: base.exif.slice(), gps: base.gps.slice(), interop: base.interop.slice(), ifd1: base.ifd1.slice(), thumbnail: base.thumbnail }
       : { le: false, ifd0: [], exif: [], gps: [], interop: [], ifd1: [], thumbnail: null };
     var set = function (ifd, tag, e) { t[ifd] = t[ifd].filter(function (x) { return x.tag !== tag; }); if (e) t[ifd].push(e); };
     Object.keys(edits.exif || {}).forEach(function (k) {
@@ -824,6 +824,24 @@
       return true;
     };
     return rebuild(b, p, keep, { exif: tiff, xmp: xml || null });
+  }
+  // Copies EXIF and the rights fields from an original photo into a converted copy (JPEG, PNG or WebP). The copy's
+  // pixels are already upright and resized, so Orientation becomes 1, pixel dimensions are updated and the old
+  // thumbnail is dropped. Returns dst unchanged when there is nothing to copy or dst cannot hold metadata.
+  function transplant(src, dst, size) {
+    var from = read(src);
+    if (from.error || !detect(dst) || detect(dst) === 'heif') return dst;
+    var r = from.rights, hasRights = Object.keys(r).some(function (k) { return r[k]; });
+    if (!from.tiff && !hasRights) return dst;
+    var e = {};
+    if (from.tiff) {
+      var le = from.tiff.le, drop = function (l, tags) { return l.filter(function (x) { return tags.indexOf(x.tag) < 0; }); };
+      e.tiff = { le: le, ifd0: drop(from.tiff.ifd0, [0x0112, 0x0100, 0x0101, 0x0103]), exif: drop(from.tiff.exif, [0xa002, 0xa003]), gps: from.tiff.gps, interop: from.tiff.interop, ifd1: [], thumbnail: null };
+      if (size) e.tiff.exif = e.tiff.exif.concat([entry(0xa002, 4, size.w, le), entry(0xa003, 4, size.h, le)]);
+      e.orientation = 1;
+    }
+    if (hasRights) e.rights = r;
+    try { return write(dst, e); } catch (err) { return dst; }
   }
   function utf16(s, le) {
     var out = new Uint8Array(s.length * 2);
@@ -902,7 +920,7 @@
 
   var api = {
     FACTS: FACTS, TAGS: TAGS, GROUP_LABEL: GROUP_LABEL, RIGHTS: RIGHTS, KIND_LABEL: KIND_LABEL, FIELDS: FIELDS, ENUMS: ENUMS,
-    detect: detect, read: read, strip: strip, write: write, validate: validate, zip: zip, crc32: crc32,
+    detect: detect, read: read, strip: strip, write: write, transplant: transplant, validate: validate, zip: zip, crc32: crc32,
     parseTiff: parseTiff, buildTiff: buildTiff, buildXmp: buildXmp, xmpProps: xmpProps, exifDate: exifDate, gpsDecimal: gpsDecimal,
     keywordList: keywordList, DATE_RE: DATE_RE,
     views: { fileInfo: fileInfo, privacyList: privacyList, metaTables: metaTables, resultCard: resultCard, size: size, mapUrl: mapUrl, cleanName: cleanName, esc: h }

@@ -1,0 +1,179 @@
+<!--page
+{
+  "path": "/robots-txt-generator/",
+  "lang": "en",
+  "cat": "seo",
+  "title": "Robots.txt Generator and Tester for Blogger, WordPress and AI Bots",
+  "description": "Free robots.txt generator and tester: Blogger and WordPress presets, block AI crawlers like GPTBot, test any URL against Google's matching rules.",
+  "llms": "Free robots.txt generator, validator and tester. Presets: Blogger (Mediapartners-Google allowed, /search disallowed, sitemap.xml and sitemap-pages.xml), WordPress (/wp-admin/ disallowed except admin-ajax.php), allow all, block all. Toggles for 12 AI crawler tokens: GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User, Google-Extended, Applebot-Extended, PerplexityBot, Perplexity-User, meta-externalagent and CCBot. The tester applies RFC 9309 and Google's rules: most specific user-agent group, merged duplicate groups, longest matching path, Allow wins ties, * and $ wildcards, /robots.txt always allowed; it tests one URL against every major crawler. The audit flags blocked home pages, blocked CSS/JS, blocked AdSense, unsupported noindex, crawl-delay (ignored by Google), relative sitemaps and files over 500 KiB. Blocking Google-Extended does not affect Google Search. Runs in the browser.",
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/robotstxt-generator.html",
+  "render": "robots",
+  "shareTitle": "Share this robots.txt generator",
+  "scripts": ["/assets/js/robots-txt.js"],
+  "breadcrumb": [["Tools", "/"], ["SEO Tools", "/?cat=seo#tools"], ["Robots.txt Generator", null]],
+  "about": ["Robots exclusion standard", "Web crawler", "Search engine optimization", "Blogger", "WordPress"],
+  "app": {
+    "name": "Robots.txt Generator and Tester",
+    "category": "DeveloperApplication",
+    "features": ["Blogger, WordPress, allow-all and block-all presets", "Rule editor for any user agent", "Block or allow 12 AI crawlers and AI training tokens", "Absolute sitemap lines from relative paths", "Tester using RFC 9309 and Google's matching rules", "Test one URL against every major crawler", "Audit for blocked pages, CSS/JS, AdSense, noindex and size", "Copy, download and print; settings kept in the link"]
+  },
+  "citations": [
+    ["IETF RFC 9309: Robots Exclusion Protocol", "https://datatracker.ietf.org/doc/html/rfc9309"],
+    ["Google Search Central: How Google interprets the robots.txt specification", "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"],
+    ["Google Search Central: Google's common crawlers (Google-Extended)", "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers"],
+    ["OpenAI: Overview of OpenAI crawlers", "https://platform.openai.com/docs/bots"],
+    ["Anthropic: Does Anthropic crawl data from the web?", "https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"]
+  ],
+  "faq": [
+    { "q": "What is a robots.txt file?", "a": "Robots.txt is a plain text file at the root of a site, such as https://www.example.com/robots.txt, that tells crawlers which paths they may fetch. Each group starts with one or more User-agent lines followed by Allow and Disallow rules, and Sitemap lines can point to your sitemaps. It is a public request, not a lock: well-behaved crawlers follow it, but it does not hide or protect pages." },
+    { "q": "What is the best custom robots.txt for Blogger?", "a": "Use Blogger's default plus your pages sitemap: allow Mediapartners-Google (AdSense) everywhere, disallow /search for everyone else so label and search pages are not crawled, allow /, and list /sitemap.xml and /sitemap-pages.xml. Paste it in Settings, Crawlers and indexing, Enable custom robots.txt. Do not disallow / or your posts will drop out of Google." },
+    { "q": "How do I block ChatGPT and other AI crawlers?", "a": "Add a group for each AI user agent with Disallow: /. GPTBot (OpenAI training), ClaudeBot (Anthropic training), CCBot (Common Crawl), meta-externalagent (Meta) and the control tokens Google-Extended and Applebot-Extended cover AI training. OAI-SearchBot, Claude-SearchBot and PerplexityBot index pages for AI search, so blocking them can remove you from AI answers. Tick the crawlers in the tool and it writes the group for you." },
+    { "q": "Does blocking Google-Extended affect my Google rankings?", "a": "No. Google-Extended is a control token, not a separate crawler: blocking it stops content crawled by Googlebot from being used to train Gemini models and for grounding, but Google states it does not affect inclusion or ranking in Google Search. Keep Googlebot allowed." },
+    { "q": "Does robots.txt remove a page from Google?", "a": "No. Disallow stops Google from crawling a page, but the URL can still be indexed without its content if other pages link to it. To remove a page from search, allow crawling and add a noindex meta robots tag or X-Robots-Tag header. Google stopped supporting noindex lines inside robots.txt in 2019." },
+    { "q": "How do wildcards work in robots.txt?", "a": "An asterisk matches any sequence of characters and a dollar sign at the end anchors the end of the URL. Disallow: /*.pdf$ blocks /files/guide.pdf but not /guide.pdf?download=1. When several rules match, the longest rule wins, and when an Allow and a Disallow rule are equally long, Allow wins. Rules are case-sensitive: /Fish and /fish are different paths." },
+    { "q": "Is there a size limit or crawl-delay in robots.txt?", "a": "Google reads only the first 500 KiB of a robots.txt file and ignores the rest. Google ignores Crawl-delay; Bing and Yandex read it. Google generally caches robots.txt for up to 24 hours, so changes can take a day to apply. The audit in this tool warns about all three." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=seo#tools">SEO Tools</a></li><li aria-current="page">Robots.txt Generator</li></ol></nav>
+  <h1>Robots.txt Generator and Tester</h1>
+  <p class="answer">A <strong>robots.txt file tells crawlers which paths of your site they may fetch</strong>, using User-agent groups with Allow and Disallow rules and Sitemap lines. Pick a preset for Blogger or WordPress, choose which of {{RB_BOTS}} AI crawlers to block, then test any URL: the tester applies the same longest-match rules Google uses. The Blogger example below blocks <code>/search/label/SEO</code> for Googlebot but keeps it open to AdSense.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{RB_VERIFIED}}</span><a href="#ai">AI crawler list</a></p>
+
+  <form class="box rb-tool" id="rbForm" novalidate aria-labelledby="rb-h">
+    <h2 id="rb-h" class="sr-only">Build robots.txt</h2>
+    <div class="field-row">
+      <div class="field"><label for="rbPreset">Start from</label>
+        <select class="input" id="rbPreset" name="preset">{{RB_PRESETS}}</select></div>
+      <div class="field"><label for="rbSite">Site address</label><input class="input" type="url" id="rbSite" name="site" value="{{RB_SITE}}" placeholder="https://www.yoursite.com"></div>
+    </div>
+
+    <fieldset class="ex-set">
+      <legend>Rules</legend>
+      <div class="rb-rows" id="rbRows">{{RB_ROWS}}</div>
+      <button type="button" class="btn ghost sm" id="rbAdd">Add rule</button>
+    </fieldset>
+
+    <fieldset class="ex-set" id="ai-block">
+      <legend>AI crawlers <small>tick to block</small></legend>
+      <div class="tool-actions rb-quick">
+        <button type="button" class="btn ghost sm" data-ai="training">Block AI training only</button>
+        <button type="button" class="btn ghost sm" data-ai="all">Block all AI</button>
+        <button type="button" class="btn ghost sm" data-ai="none">Allow all AI</button>
+      </div>
+      <div class="rb-bots">{{RB_BOT_CHECKS}}</div>
+    </fieldset>
+
+    <div class="field">
+      <label for="rbMaps">Sitemaps <small>one per line; paths are joined to the site address</small></label>
+      <textarea class="prose-in ex-desc" id="rbMaps" name="sitemaps" rows="2">{{RB_MAPS}}</textarea>
+    </div>
+
+    <div class="field">
+      <label for="rbOut">Your robots.txt <small>edit freely; the tester and audit use this text</small></label>
+      <textarea class="code rb-out" id="rbOut" spellcheck="false" autocomplete="off" autocapitalize="off">{{RB_OUT}}</textarea>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn sm" id="rbCopy">Copy</button>
+      <button type="button" class="btn ghost sm" id="rbDownload">Download robots.txt</button>
+      <button type="button" class="btn ghost sm" id="rbPrint">Print</button>
+    </div>
+    <h3 class="sub-h" id="rbAuditH">Audit</h3>
+    <ul class="rb-audit" id="rbAudit" aria-labelledby="rbAuditH">{{RB_AUDIT}}</ul>
+
+    <fieldset class="ex-set">
+      <legend>Test a URL</legend>
+      <div class="field-row">
+        <div class="field"><label for="rbUrl">URL or path</label><input class="input" id="rbUrl" name="url" value="{{RB_TEST_URL}}" autocomplete="off"></div>
+        <div class="field"><label for="rbUa">Crawler</label><select class="input" id="rbUa" name="ua">{{RB_UAS}}</select></div>
+      </div>
+      <p class="rb-verdict" id="rbVerdict" aria-live="polite">{{RB_VERDICT}}</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rbAllCap">
+        <table class="data text rb-all"><caption id="rbAllCap">This URL for every crawler</caption>
+          <thead><tr><th scope="col">Crawler</th><th scope="col">Result and matching rule</th></tr></thead>
+          <tbody id="rbAll">{{RB_ALL}}</tbody>
+        </table>
+      </div>
+    </fieldset>
+    <p class="sr-only" id="rbLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to make and test a robots.txt file</h2>
+  <ol>
+    <li><strong>Choose a preset</strong> and type your site address. Blogger and WordPress presets match each platform's own defaults.</li>
+    <li><strong>Adjust the rules.</strong> Each row is one Allow or Disallow line for a user agent; rows with the same agent become one group.</li>
+    <li><strong>Pick AI crawlers to block.</strong> "Block AI training only" stops training crawlers but keeps you visible in ChatGPT, Claude and Perplexity search.</li>
+    <li><strong>Read the audit</strong> and <strong>test your important URLs</strong>: a post, a label page, an image, your CSS. Fix anything blocked by mistake.</li>
+    <li><strong>Publish</strong> it at the root of your domain (not in a folder), then check it in Google Search Console's robots.txt report.</li>
+  </ol>
+
+  <h2 id="ai">AI crawler user agents</h2>
+  <p>Each company publishes the user agent tokens its crawlers obey. Training crawlers collect pages for model training; search crawlers index pages so they can be cited in AI answers; user-requested fetchers load a page when someone asks the assistant to read it, and some of them do not follow robots.txt.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bots-cap">
+    <table class="data text"><caption id="bots-cap">AI crawler tokens and what blocking them stops</caption>
+      <thead><tr><th scope="col">User agent</th><th scope="col">Company</th><th scope="col">Type</th><th scope="col">What it does</th></tr></thead>
+      <tbody>
+{{RB_BOT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Blocking AI search crawlers has a cost.</strong> OAI-SearchBot, Claude-SearchBot and PerplexityBot are how pages get cited in AI answers. If you want AI visibility but not AI training, use "Block AI training only".</p></div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">How crawlers read robots.txt</h2>
+  <p>These are the rules the tester applies, from <a href="https://datatracker.ietf.org/doc/html/rfc9309" rel="noopener">RFC 9309</a> and <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt" rel="noopener">Google's documentation</a>. Every example is checked by the tool's own tests.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ex-cap">
+    <table class="data text"><caption id="ex-cap">Matching examples</caption>
+      <thead><tr><th scope="col">Rules</th><th scope="col">URL</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{RB_EXAMPLES}}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>One group per crawler.</strong> A crawler uses the group with the most specific matching user agent (Googlebot-Image falls back to Googlebot) and ignores the <code>*</code> group if a specific one exists. Groups for the same agent are merged.</li>
+    <li><strong>Longest rule wins,</strong> whatever the order. On a tie, Allow wins.</li>
+    <li><strong>Paths are case-sensitive;</strong> user agent names are not.</li>
+    <li><strong>Limits:</strong> Google reads the first 500 KiB, caches the file for up to 24 hours and ignores Crawl-delay and Noindex lines.</li>
+  </ul>
+
+  <h2 id="platforms">Where to put robots.txt</h2>
+  <h3>Blogger</h3>
+  <p><strong>Settings → Crawlers and indexing → Enable custom robots.txt</strong>, then paste the file. Keep custom robots header tags off unless you know you need them. Blogger serves it at <code>/robots.txt</code> on your blog's domain.</p>
+  <h3>WordPress</h3>
+  <p>WordPress serves a virtual robots.txt until a real file exists. Upload <code>robots.txt</code> to the site root by FTP or the host's file manager, or use your SEO plugin's editor (Yoast: Tools → File editor; Rank Math: General Settings → Edit robots.txt).</p>
+  <div class="callout"><p><strong>Disclaimer:</strong> robots.txt is a request that reputable crawlers follow; it does not secure private content. Crawler names and behaviour change; this page lists tokens published by their operators as of {{RB_VERIFIED}}.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc9309" rel="noopener">IETF RFC 9309: Robots Exclusion Protocol</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt" rel="noopener">Google: How Google interprets the robots.txt specification</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" rel="noopener">Google: common crawlers and Google-Extended</a></li>
+    <li><a href="https://platform.openai.com/docs/bots" rel="noopener">OpenAI: crawlers and user agents</a></li>
+    <li><a href="https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler" rel="noopener">Anthropic: crawlers and how to block them</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="{{MAIN_SITE}}/p/json-schema-markup-generator.html">JSON-LD Schema Generator<small>Structured data for rich results</small></a>
+    <a href="/exif-editor/">EXIF Editor<small>Copyright that Google Images shows</small></a>
+    <a href="/unused-css-remover/">Unused CSS Remover<small>Faster pages for Core Web Vitals</small></a>
+  </div>
+</section>
+</div>

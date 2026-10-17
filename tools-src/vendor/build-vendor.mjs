@@ -2,6 +2,7 @@
 // packages that actually end up in each file. Only needed to update a library:
 //   cd tools-src/vendor && npm install && node build-vendor.mjs && cd ../.. && node tools-src/build.mjs
 // Then update VENDOR in the matching assets/js/*-core.js if a version changed, and run the tests.
+// pdf-lib, mammoth and PDF.js (with its standard fonts and WebAssembly image decoders) are copied as published.
 import * as esbuild from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,7 +22,14 @@ const BUNDLES = [
   { pkg: 'js-beautify', global: 'import b from "js-beautify"; globalThis.jsBeautify = { html: b.html, css: b.css, js: b.js };' },
   { pkg: 'html-minifier-terser', global: 'import { minify } from "html-minifier-terser"; globalThis.HTMLMinifier = { minify };' }
 ];
-const COPIES = [{ pkg: 'javascript-obfuscator', file: 'dist/index.browser.js' }];
+const COPIES = [
+  { pkg: 'javascript-obfuscator', file: 'dist/index.browser.js' },
+  { pkg: 'pdf-lib', file: 'dist/pdf-lib.min.js' },
+  { pkg: 'mammoth', file: 'mammoth.browser.min.js' }
+];
+// PDF.js is an ES module with a worker; it fetches fonts and WebAssembly decoders from folders next to it on demand.
+// The legacy build supports the browsers people actually use; the modern one needs brand-new JavaScript features.
+const FOLDERS = [{ pkg: 'pdfjs-dist', files: ['legacy/build/pdf.min.mjs', 'legacy/build/pdf.worker.min.mjs'], dirs: ['standard_fonts', 'wasm'] }];
 
 const licenceOf = p => {
   const d = path.join(nm, p), j = JSON.parse(fs.readFileSync(path.join(d, 'package.json'), 'utf8'));
@@ -53,8 +61,17 @@ for (const c of COPIES) {
   sections.push({ name, lic: [licenceOf(c.pkg)] });
   console.log(name, 'copied');
 }
+for (const f of FOLDERS) {
+  const dir = `${f.pkg}-${version(f.pkg)}`, dest = path.join(out, dir);
+  fs.rmSync(dest, { recursive: true, force: true });
+  fs.mkdirSync(dest, { recursive: true });
+  for (const file of f.files) fs.writeFileSync(path.join(dest, path.basename(file)), fs.readFileSync(path.join(nm, f.pkg, file), 'utf8').replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n'));
+  for (const d of f.dirs) fs.cpSync(path.join(nm, f.pkg, d), path.join(dest, d), { recursive: true });
+  sections.push({ name: dir + '/', lic: [licenceOf(f.pkg)] });
+  console.log(dir + '/ copied');
+}
 const bar = '='.repeat(64);
 fs.writeFileSync(path.join(out, 'LICENSES.txt'), 'Third-party code served from /assets/vendor/ by The Bukit Besi Tools.\n\n' +
   sections.map(s => `## ${s.name}\n\n` + s.lic.map(l => `${bar}\n${l.name} ${l.version} (${l.license})\n${bar}\n${l.text}\n`).join('\n')).join('\n'));
-for (const f of fs.readdirSync(out)) if (f.endsWith('.js') && !sections.some(s => s.name === f)) console.log('Stale vendor file, delete it:', f);
+for (const f of fs.readdirSync(out)) if ((f.endsWith('.js') || fs.statSync(path.join(out, f)).isDirectory()) && !sections.some(s => s.name === f || s.name === f + '/')) console.log('Stale vendor file, delete it:', f);
 fs.rmSync(empty); fs.rmSync(proc);
