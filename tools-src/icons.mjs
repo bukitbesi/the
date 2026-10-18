@@ -25,6 +25,7 @@ export const icons = {
   'kalkulator-bil-air': p('M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z') + p('M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5'),
   'kalkulator-unit-trust': p('M3 20h18') + rect(5, 12, 3, 8, 0.5) + rect(10.5, 8, 3, 12, 0.5) + rect(16, 4, 3, 16, 0.5),
   'kalkulator-kos-pendidikan-anak': p('M4 19V6a2 2 0 0 1 2-2h12v15H6a2 2 0 0 0-2 2Z') + p('M4 19a2 2 0 0 0 2 2h12') + p('M9 8h6M9 12h4'),
+  'waktu-solat': p('M5 21v-9a7 7 0 0 1 14 0v9') + p('M3 21h18M12 5V2') + p('M10 21v-4a2 2 0 0 1 4 0v4'),
   'arah-kiblat': circle(12, 12, 9) + p('m12 12-6-2.5') + p('M12 3v2M12 19v2M3 12h2M19 12h2') + rect(4.5, 7.5, 3, 3, 0.5),
   'kalkulator-simpanan-persaraan': p('M5 11a7 6 0 0 1 14 0v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3Z') + p('M9 16v3M15 16v3M12 8v4M10 10h4'),
   'kalkulator-cuti-tahunan': rect(3, 5, 18, 16) + p('M3 10h18M8 3v4M16 3v4') + p('M12 13v5M9.5 15.5h5'),

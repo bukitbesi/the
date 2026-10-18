@@ -1,0 +1,20 @@
+{
+  "fetchedAt": "2026-10-18T13:25:01.408Z",
+  "source": "JAKIM e-Solat",
+  "years": {
+    "2026": {
+      "zones": 60,
+      "fromMirror": 0
+    },
+    "2027": {
+      "zones": 47,
+      "fromMirror": 0
+    }
+  },
+  "check": {
+    "month": "2026-10",
+    "against": "waktusolat.app (JAKIM mirror)",
+    "days": 1860,
+    "differences": 0
+  }
+}
