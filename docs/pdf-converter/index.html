@@ -10,6 +10,22 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("tbb-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="theme-color"]').content="#0a0a0f"}}catch(e){}</script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",wait_for_update:500,region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted",analytics_storage:"granted"});
+(function(w,d){
+  var done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    w.dataLayer.push({"gtm.start":Date.now(),event:"gtm.js"});
+    var s=d.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-M3WSN44C";d.head.appendChild(s);
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+  addEventListener("load",function(){setTimeout(function(){(w.requestIdleCallback||setTimeout)(load)},3500)});
+})(window,document);
+</script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="application-name" content="The Bukit Besi Tools">
 <link rel="canonical" href="https://tool.thebukitbesi.com/pdf-converter/">
@@ -638,6 +654,7 @@ textarea.wc-text{min-height:260px}
 
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3WSN44C" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <a class="skip" href="#main">Skip to main content</a>
 
 <header class="header">

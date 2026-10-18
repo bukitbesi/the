@@ -40,49 +40,11 @@
   <p class="answer">Waktu solat Kuala Lumpur dan Putrajaya hari ini, <time datetime="{{S_DAY_ISO}}">{{S_DAY}}</time>: <strong>{{S_KL}}</strong> (zon JAKIM WLY01). Pilih mana-mana 60 zon JAKIM untuk waktu solat kawasan anda, kiraan detik ke waktu seterusnya dan jadual bulan ini.</p>
   <p class="meta"><span>Waktu JAKIM, disemak <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Zon anda kekal dalam peranti</span><a href="/prayer-times-malaysia/" hreflang="en" lang="en">Read in English</a></p>
 
-  <div class="calc">
-    <form class="box" id="solatForm" novalidate aria-labelledby="sl-h">
-      <h2 id="sl-h">Zon anda</h2>
-      <div class="field"><label for="zone">Zon JAKIM</label><select class="input" id="zone" name="zone">{{S_ZONE_OPTIONS}}</select></div>
-      <div class="field"><label class="check"><input type="checkbox" id="h24" name="h24" value="1" checked><span>Format 24 jam</span></label></div>
-      <div class="field"><button type="button" class="btn sm" id="sLocate">Guna lokasi saya</button></div>
-      <p class="help" id="sMsg" aria-live="polite">Lokasi anda dipadankan dengan zon dalam peranti dan tidak dihantar ke mana-mana.</p>
-    </form>
-
-    <section class="box" aria-labelledby="sl-result-h">
-      <h2 id="sl-result-h">Hari ini</h2>
-      <p class="help" id="sZone">{{S_ZONE}}</p>
-      <p class="help" id="sDate">{{S_DATE}}</p>
-      <div class="net">
-        <p id="sNow">Waktu solat pertama hari ini</p>
-        <output id="sNext" for="zone">{{S_NEXT}}</output>
-        <p id="sCount">Zon JAKIM WLY01</p>
-      </div>
-      <p class="sr-only" id="sLive" aria-live="polite"></p>
-      <p class="help" id="sMsg2" aria-live="polite"></p>
-      <table class="rows">
-        <caption>Waktu hari ini</caption>
-        <tbody id="sToday">
-{{S_TODAY}}
-        </tbody>
-      </table>
-      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">Cetak atau simpan PDF</button></div>
-    </section>
-  </div>
+{{T_CALC}}
 </div>
 {{AD_TOP}}
 <div class="container prose">
-  <h2 id="month-h">Jadual waktu solat <span id="sMonthName">{{S_MONTH_NAME}}</span></h2>
-  <div class="tool-actions"><button type="button" class="btn ghost sm" id="mPrev">Bulan sebelum</button><button type="button" class="btn ghost sm" id="mNext">Bulan seterusnya</button></div>
-  <p class="help" id="sMonthMsg" aria-live="polite"></p>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="month-h">
-    <table class="data">
-      <thead><tr><th scope="col">Tarikh</th><th scope="col">Imsak</th><th scope="col">Subuh</th><th scope="col">Syuruk</th><th scope="col">Zohor</th><th scope="col">Asar</th><th scope="col">Maghrib</th><th scope="col">Isyak</th></tr></thead>
-      <tbody id="sMonth">
-{{S_MONTH}}
-      </tbody>
-    </table>
-  </div>
+{{T_MONTH}}
 </div>
 <div class="container prose cv">
   <h2 id="zones-h">Waktu solat hari ini di setiap zon JAKIM</h2>
@@ -94,6 +56,11 @@
 {{S_ALL}}
       </tbody>
     </table>
+  </div>
+
+  <h2 id="by-state">Waktu solat ikut negeri</h2>
+  <div class="related">
+{{S_STATES}}
   </div>
 
   <h2 id="times">Maksud setiap waktu</h2>

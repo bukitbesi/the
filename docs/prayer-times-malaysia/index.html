@@ -10,6 +10,22 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("tbb-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="theme-color"]').content="#0a0a0f"}}catch(e){}</script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",wait_for_update:500,region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted",analytics_storage:"granted"});
+(function(w,d){
+  var done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    w.dataLayer.push({"gtm.start":Date.now(),event:"gtm.js"});
+    var s=d.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-M3WSN44C";d.head.appendChild(s);
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+  addEventListener("load",function(){setTimeout(function(){(w.requestIdleCallback||setTimeout)(load)},3500)});
+})(window,document);
+</script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="application-name" content="The Bukit Besi Tools">
 <link rel="canonical" href="https://tool.thebukitbesi.com/prayer-times-malaysia/">
@@ -639,6 +655,7 @@ textarea.wc-text{min-height:260px}
 
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3WSN44C" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <a class="skip" href="#main">Skip to main content</a>
 
 <header class="header">
@@ -694,7 +711,7 @@ textarea.wc-text{min-height:260px}
 <tr><th scope="row">Isyak (Isha)</th><td>8:11 PM</td></tr>
         </tbody>
       </table>
-      <div class="tool-actions"><button type="button" class="btn sm" data-share="result" data-done="Link copied"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share result</button><button type="button" class="btn ghost sm" id="solatPrint">Print or save as PDF</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">Print or save as PDF</button></div>
     </section>
   </div>
 </div>
@@ -811,6 +828,25 @@ textarea.wc-text{min-height:260px}
 <tr><th scope="row">WLY02<small>Labuan, Wilayah Persekutuan</small></th><td>4:56 AM</td><td>12:06 PM</td><td>3:24 PM</td><td>6:05 PM</td><td>7:15 PM</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <h2 id="by-state">Prayer times by state</h2>
+  <div class="related">
+    <a href="/prayer-times-johor/">Prayer Times Johor<small>4 zones</small></a>
+    <a href="/prayer-times-kedah/">Prayer Times Kedah<small>7 zones</small></a>
+    <a href="/prayer-times-kelantan/">Prayer Times Kelantan<small>2 zones</small></a>
+    <a href="/prayer-times-kuala-lumpur/">Prayer Times Kuala Lumpur and Putrajaya<small>1 zone</small></a>
+    <a href="/prayer-times-labuan/">Prayer Times Labuan<small>1 zone</small></a>
+    <a href="/prayer-times-melaka/">Prayer Times Melaka<small>1 zone</small></a>
+    <a href="/prayer-times-negeri-sembilan/">Prayer Times Negeri Sembilan<small>3 zones</small></a>
+    <a href="/prayer-times-pahang/">Prayer Times Pahang<small>7 zones</small></a>
+    <a href="/prayer-times-perak/">Prayer Times Perak<small>7 zones</small></a>
+    <a href="/prayer-times-perlis/">Prayer Times Perlis<small>1 zone</small></a>
+    <a href="/prayer-times-penang/">Prayer Times Penang<small>1 zone</small></a>
+    <a href="/prayer-times-sabah/">Prayer Times Sabah<small>9 zones</small></a>
+    <a href="/prayer-times-sarawak/">Prayer Times Sarawak<small>9 zones</small></a>
+    <a href="/prayer-times-selangor/">Prayer Times Selangor<small>3 zones</small></a>
+    <a href="/prayer-times-terengganu/">Prayer Times Terengganu<small>4 zones</small></a>
   </div>
 
   <h2 id="times">The prayer times explained</h2>

@@ -95,6 +95,7 @@
     "local512": "/assets/favicon-image/bukit-besi-512.webp"
   },
   "indexNowKey": "a23a48e05a9411b3da9c72fc138a6206",
+  "gtm": "GTM-M3WSN44C",
   "adsense": {
     "_comment": "Publisher ID plus the data-ad-slot NUMBER of each display unit (digits only, not the full ad code).",
     "client": "ca-pub-0182550701431501",

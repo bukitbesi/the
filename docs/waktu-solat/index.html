@@ -10,6 +10,22 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("tbb-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="theme-color"]').content="#0a0a0f"}}catch(e){}</script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",wait_for_update:500,region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted",analytics_storage:"granted"});
+(function(w,d){
+  var done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    w.dataLayer.push({"gtm.start":Date.now(),event:"gtm.js"});
+    var s=d.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-M3WSN44C";d.head.appendChild(s);
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+  addEventListener("load",function(){setTimeout(function(){(w.requestIdleCallback||setTimeout)(load)},3500)});
+})(window,document);
+</script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="application-name" content="The Bukit Besi Tools">
 <link rel="canonical" href="https://tool.thebukitbesi.com/waktu-solat/">
@@ -639,6 +655,7 @@ textarea.wc-text{min-height:260px}
 
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3WSN44C" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 <a class="skip" href="#main">Langkau ke kandungan utama</a>
 
 <header class="header">
@@ -694,7 +711,7 @@ textarea.wc-text{min-height:260px}
 <tr><th scope="row">Isyak</th><td>20:11</td></tr>
         </tbody>
       </table>
-      <div class="tool-actions"><button type="button" class="btn sm" data-share="result" data-done="Pautan disalin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Kongsi keputusan</button><button type="button" class="btn ghost sm" id="solatPrint">Cetak atau simpan PDF</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">Cetak atau simpan PDF</button></div>
     </section>
   </div>
 </div>
@@ -811,6 +828,25 @@ textarea.wc-text{min-height:260px}
 <tr><th scope="row">WLY02<small>Labuan, Wilayah Persekutuan</small></th><td>04:56</td><td>12:06</td><td>15:24</td><td>18:05</td><td>19:15</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <h2 id="by-state">Waktu solat ikut negeri</h2>
+  <div class="related">
+    <a href="/waktu-solat-johor/">Waktu Solat Johor<small>4 zon</small></a>
+    <a href="/waktu-solat-kedah/">Waktu Solat Kedah<small>7 zon</small></a>
+    <a href="/waktu-solat-kelantan/">Waktu Solat Kelantan<small>2 zon</small></a>
+    <a href="/waktu-solat-kuala-lumpur/">Waktu Solat Kuala Lumpur dan Putrajaya<small>1 zon</small></a>
+    <a href="/waktu-solat-labuan/">Waktu Solat Labuan<small>1 zon</small></a>
+    <a href="/waktu-solat-melaka/">Waktu Solat Melaka<small>1 zon</small></a>
+    <a href="/waktu-solat-negeri-sembilan/">Waktu Solat Negeri Sembilan<small>3 zon</small></a>
+    <a href="/waktu-solat-pahang/">Waktu Solat Pahang<small>7 zon</small></a>
+    <a href="/waktu-solat-perak/">Waktu Solat Perak<small>7 zon</small></a>
+    <a href="/waktu-solat-perlis/">Waktu Solat Perlis<small>1 zon</small></a>
+    <a href="/waktu-solat-pulau-pinang/">Waktu Solat Pulau Pinang<small>1 zon</small></a>
+    <a href="/waktu-solat-sabah/">Waktu Solat Sabah<small>9 zon</small></a>
+    <a href="/waktu-solat-sarawak/">Waktu Solat Sarawak<small>9 zon</small></a>
+    <a href="/waktu-solat-selangor/">Waktu Solat Selangor<small>3 zon</small></a>
+    <a href="/waktu-solat-terengganu/">Waktu Solat Terengganu<small>4 zon</small></a>
   </div>
 
   <h2 id="times">Maksud setiap waktu</h2>
