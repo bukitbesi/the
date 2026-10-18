@@ -134,6 +134,16 @@ if (ads.client) {
 } else {
   assert(!html.includes('adsbygoogle'), 'No ad markup without a publisher ID');
 }
+if (site.gtm) {
+  // GTM loads on interaction or idle from an inline loader, after Consent Mode defaults; never a blocking tag.
+  for (const page of [html, ...pageHtml.values()]) {
+    assert(!/<script[^>]+googletagmanager\.com/.test(page), 'GTM is lazy-loaded, never render-blocking');
+    assert(page.includes(`gtm.js?id=${site.gtm}`) && page.indexOf('gtag("consent","default"') < page.indexOf('gtm.js?id='), 'GTM loader after consent defaults');
+    assert(page.includes(`ns.html?id=${site.gtm}`), 'GTM noscript fallback');
+  }
+} else {
+  assert(!html.includes('googletagmanager'), 'No GTM markup without a container ID');
+}
 assert(html.includes('id="themeToggle"'), 'Theme toggle present');
 assert(read('CNAME').trim() === new URL(site.origin).hostname, 'CNAME matches canonical host');
 assert(fs.existsSync(path.join(pub, '.nojekyll')), 'Pages serves docs/ without Jekyll');

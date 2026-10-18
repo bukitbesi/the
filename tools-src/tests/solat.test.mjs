@@ -103,3 +103,16 @@ test('Maghrib in SBH03 is 72 to 78 minutes earlier than Langkawi all year', () =
   assert.equal(Math.min(...gaps), 72);
   assert.equal(Math.max(...gaps), 78);
 });
+
+test('State pages cover all 60 zones exactly once', async () => {
+  const { solatStates, statePages } = await import('../solat-states.mjs');
+  const zones = solatStates.flatMap(st => st.zones).sort();
+  assert.deepEqual(zones, S.ZONES.map(z => z[0]).sort());
+  for (const st of solatStates) assert(st.zones.includes(st.main), `${st.bm} main zone`);
+  const pages = statePages('2026-10-18', '2026-10-18');
+  assert.equal(pages.length, 30);
+  for (const p of pages) {
+    assert(p.title.length <= 70, `${p.path} title ${p.title.length}`);
+    assert(p.description.length <= 160, `${p.path} description ${p.description.length}`);
+  }
+});

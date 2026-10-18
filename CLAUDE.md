@@ -35,5 +35,7 @@ correct maths, SEO/E-E-A-T/AEO/LLM-ready content, and top Core Web Vitals. Never
 - Don't cannibalise: check `tools.json` and existing pages before adding a tool that overlaps (e.g. DSR lives in the
   home loan calculator; zakat lives on the main blog).
 - No frameworks, no third-party scripts on tool pages, system fonts, inline SVG. Keep pages static and light.
+  The one exception is Google Tag Manager (`gtm` in `site.json`), lazy-loaded by the layout after Consent Mode
+  defaults; add GA4 and other tags inside GTM, never as page scripts.
 - Never edit `docs/` by hand; it is generated.
 - Yearly upkeep items are listed in README.md; update them when budgets, rates or laws change.

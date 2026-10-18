@@ -9,6 +9,7 @@ import { createRequire } from 'node:module';
 import vm from 'node:vm';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
+import { statePages as solatStatePages, stateMap, solatStates } from './solat-states.mjs';
 import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
@@ -122,6 +123,8 @@ const pages = fs.readdirSync(path.join(dir, 'pages')).filter(f => f.endsWith('.h
   if (!m) throw new Error(`Missing front matter in pages/${file}`);
   return { file, ...JSON.parse(m[1]), body: src.slice(m[0].length) };
 });
+// Waktu solat state pages are generated from JAKIM's zones (tools-src/solat-states.mjs).
+pages.push(...solatStatePages('2026-10-18', new Date(Date.parse(JSON.parse(read('gold-data.json')).fetchedAt) + 8 * 3600e3).toISOString().slice(0, 10)));
 const pageByPath = new Map(pages.map(p => [p.path, p]));
 
 // ---- validate inputs
@@ -207,6 +210,30 @@ const adLoader = !ads.client ? '' : `<script>
 })();
 </script>`;
 
+// ---- Google Tag Manager (GA4 and other tags are set up inside GTM, never as extra snippets). Consent Mode v2:
+// denied by default for the EEA, UK and Switzerland, granted elsewhere. gtm.js (~100 KB) loads on the visitor's first
+// scroll, tap, key or mouse move, or once the page has been idle 3.5 s after load, so it never competes with LCP,
+// INP or the page's own scripts; visits shorter than that with no interaction are not counted.
+const gtmId = /^GTM-[A-Z0-9]+$/.test(site.gtm || '') ? site.gtm : '';
+const EEA = 'AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE IS LI NO GB CH'.split(' ');
+const gtmHead = !gtmId ? '' : `<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied",wait_for_update:500,region:${JSON.stringify(EEA)}});
+gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_personalization:"granted",analytics_storage:"granted"});
+(function(w,d){
+  var done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(e){removeEventListener(e,load)});
+    w.dataLayer.push({"gtm.start":Date.now(),event:"gtm.js"});
+    var s=d.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=${gtmId}";d.head.appendChild(s);
+  }
+  ev.forEach(function(e){addEventListener(e,load,{passive:true})});
+  addEventListener("load",function(){setTimeout(function(){(w.requestIdleCallback||setTimeout)(load)},3500)});
+})(window,document);
+</script>`;
+const gtmBody = !gtmId ? '' : `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>`;
+
 // ---- shared fragments
 const localTools = tools.filter(t => t.url.startsWith(site.origin + '/'));
 const footerPopular = [...new Set([...localTools, ...tools.filter(t => t.badge === 'popular' || t.badge === 'hot')])].slice(0, 6)
@@ -246,7 +273,7 @@ function render(map) {
     LOGO_72: site.logo.local72, LOGO_192: site.logo.local192,
     OG_IMAGE: abs(site.ogImage.url), OG_W: site.ogImage.width, OG_H: site.ogImage.height, OG_ALT: esc(site.ogImage.alt),
     TWITTER_CARD: site.ogImage.width / site.ogImage.height >= 1.5 ? 'summary_large_image' : 'summary',
-    TWITTER: site.twitter, BASE_CSS: read('css/base.css').trim(), FOOTER_POPULAR: footerPopular, AD_LOADER: adLoader,
+    TWITTER: site.twitter, BASE_CSS: read('css/base.css').trim(), FOOTER_POPULAR: footerPopular, AD_LOADER: adLoader, GTM_HEAD: gtmHead, GTM_BODY: gtmBody,
     ROBOTS: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1', HEAD_EXTRA: '', PAGE_SCRIPTS: ''
   };
   const lang = map.LANG;
@@ -1737,34 +1764,89 @@ const solatTimes = (zone, iso) => {
   if (!t) throw new Error(`No prayer times for ${zone} on ${iso}: run node tools-src/solat-fetch.mjs`);
   return t;
 };
+// The calculator and month table shared by /waktu-solat/ and the state pages: `zone` is shown first, `zones` are listed.
+function solatCalc(lang, zone, zones) {
+  const { L, tr } = b3(lang), S = solatCore, H = hijriCore, day = solatDay, t = solatTimes(zone, day), tm = m => S.time(m, !!L);
+  const option = code => `<option value="${code}"${code === zone ? ' selected' : ''}>${code} · ${esc(S.zone(code).areas)}</option>`;
+  const states = [...new Set(zones.map(code => code.slice(0, 3)))];
+  const options = states.length === 1 ? zones.map(option).join('')
+    : states.map(k => `<optgroup label="${S.STATES[k]}">${zones.filter(code => code.startsWith(k)).map(option).join('')}</optgroup>`).join('');
+  const month = S.month(solatYears.get(zone + day.slice(0, 4)), day).map(([iso, x]) =>
+    `<tr${iso === day ? ' class="now"' : ''}><th scope="row">${H.formatGregorian(iso, lang).replace(/ \d{4}$/, '')}</th>${[0, 1, 2, 4, 5, 6, 7].map(i => `<td>${S.hhmm(x[i])}</td>`).join('')}</tr>`).join('\n');
+  const head = (L ? ['Tarikh', 'Imsak', 'Subuh', 'Syuruk', 'Zohor', 'Asar', 'Maghrib', 'Isyak'] : ['Date', 'Imsak', 'Subuh', 'Syuruk', 'Zohor', 'Asar', 'Maghrib', 'Isyak']).map(h => `<th scope="col">${h}</th>`).join('');
+  const z = S.zone(zone);
+  return {
+    T_CALC: `  <div class="calc">
+    <form class="box" id="solatForm" novalidate aria-labelledby="sl-h">
+      <h2 id="sl-h">${L ? 'Zon anda' : 'Your zone'}</h2>
+      <div class="field"><label for="zone">${L ? 'Zon JAKIM' : 'JAKIM zone'}</label><select class="input" id="zone" name="zone">${options}</select></div>
+      <div class="field"><label class="check"><input type="checkbox" id="h24" name="h24" value="1"${L ? ' checked' : ''}><span>${L ? 'Format 24 jam' : '24-hour clock'}</span></label></div>
+      <div class="field"><button type="button" class="btn sm" id="sLocate">${L ? 'Guna lokasi saya' : 'Use my location'}</button></div>
+      <p class="help" id="sMsg" aria-live="polite">${L ? 'Lokasi anda dipadankan dengan zon dalam peranti dan tidak dihantar ke mana-mana.' : 'Your location is matched to a zone on your device and never sent.'}</p>
+    </form>
+
+    <section class="box" aria-labelledby="sl-result-h">
+      <h2 id="sl-result-h">${L ? 'Hari ini' : 'Today'}</h2>
+      <p class="help" id="sZone">${zone} · ${esc(z.areas)}, ${z.state}</p>
+      <p class="help" id="sDate">${H.formatGregorian(day, lang, true)} · ${H.formatHijri(H.toHijri(day), lang)}</p>
+      <div class="net">
+        <p id="sNow">${L ? 'Waktu solat pertama hari ini' : "Today's first prayer"}</p>
+        <output id="sNext" for="zone">${S.name(1, lang).split(' (')[0]} ${tm(t[1])}</output>
+        <p id="sCount">${L ? 'Zon JAKIM' : 'JAKIM zone'} ${zone}</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <p class="help" id="sMsg2" aria-live="polite"></p>
+      <table class="rows">
+        <caption>${L ? 'Waktu hari ini' : "Today's times"}</caption>
+        <tbody id="sToday">
+${S.KEYS.map((k, i) => tr(S.name(i, lang), tm(t[i]))).join('\n')}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">${L ? 'Cetak atau simpan PDF' : 'Print or save as PDF'}</button></div>
+    </section>
+  </div>`,
+    T_MONTH: `  <h2 id="month-h">${L ? 'Jadual waktu solat' : 'Prayer timetable for'} <span id="sMonthName">${H.GMONTHS[lang][+day.slice(5, 7) - 1]} ${day.slice(0, 4)}</span></h2>
+  <div class="tool-actions"><button type="button" class="btn ghost sm" id="mPrev">${L ? 'Bulan sebelum' : 'Previous month'}</button><button type="button" class="btn ghost sm" id="mNext">${L ? 'Bulan seterusnya' : 'Next month'}</button></div>
+  <p class="help" id="sMonthMsg" aria-live="polite"></p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="month-h">
+    <table class="data">
+      <thead><tr>${head}</tr></thead>
+      <tbody id="sMonth">
+${month}
+      </tbody>
+    </table>
+  </div>`
+  };
+}
+const solatShared = lang => ({ S_VERIFIED: longDate(solatData.fetchedAt.slice(0, 10), lang), S_VERIFIED_ISO: solatData.fetchedAt.slice(0, 10) });
 function solatMap(lang) {
-  const { L, tr } = b3(lang), S = solatCore, H = hijriCore, day = solatDay, z = S.FACTS.defaultZone, t = solatTimes(z, day);
+  const { L } = b3(lang), S = solatCore, H = hijriCore, day = solatDay, z = S.FACTS.defaultZone, t = solatTimes(z, day);
   const tm = m => S.time(m, !!L), five = S.PRAYERS;
   const listed = x => five.map(i => `${S.name(i, lang).split(' (')[0]} ${tm(x[i])}`).join(', ');
-  const groups = Object.entries(S.STATES).map(([k, name]) => `<optgroup label="${name}">${S.ZONES.filter(x => x[0].startsWith(k))
-    .map(x => `<option value="${x[0]}"${x[0] === z ? ' selected' : ''}>${x[0]} · ${esc(x[1])}</option>`).join('')}</optgroup>`).join('');
   const all = S.ZONES.map(([code, areas]) => { const x = solatTimes(code, day);
     return `<tr><th scope="row">${code}<small>${esc(areas)}, ${S.STATES[code.slice(0, 3)]}</small></th>${five.map(i => `<td>${tm(x[i])}</td>`).join('')}</tr>`; }).join('\n');
-  const monthRows = S.month(solatYears.get(z + day.slice(0, 4)), day).map(([iso, x]) =>
-    `<tr${iso === day ? ' class="now"' : ''}><th scope="row">${H.formatGregorian(iso, lang).replace(/ \d{4}$/, '')}</th>${[0, 1, 2, 4, 5, 6, 7].map(i => `<td>${S.hhmm(x[i])}</td>`).join('')}</tr>`).join('\n');
   const mag = code => solatTimes(code, day)[6];
   const byMaghrib = S.ZONES.map(x => [x[0], mag(x[0])]).sort((a, b) => a[1] - b[1]);
   const first = byMaghrib[0], last = byMaghrib[byMaghrib.length - 1];
   const zl = code => `${code} (${S.zone(code).areas.split(', ').slice(0, 2).join(', ')})`;
   const check = solatData.check || {};
+  const stateLinks = solatStates.map(o => `    <a href="${L ? o.bm : o.en}">${L ? 'Waktu Solat ' + o.name.ms : 'Prayer Times ' + o.name.en}<small>${o.zones.length} ${L ? 'zon' : o.zones.length > 1 ? 'zones' : 'zone'}</small></a>`).join('\n');
   return {
-    S_ZONE_OPTIONS: groups, S_ZONE: `${z} · ${S.zone(z).areas}, ${S.zone(z).state}`, S_DATE: `${H.formatGregorian(day, lang, true)} · ${H.formatHijri(H.toHijri(day), lang)}`,
+    ...solatCalc(lang, z, S.ZONES.map(x => x[0])), ...solatShared(lang),
     S_DAY: H.formatGregorian(day, lang), S_DAY_ISO: day,
-    S_TODAY: S.KEYS.map((k, i) => tr(S.name(i, lang), tm(t[i]))).join('\n'), S_NEXT: `${S.name(1, lang).split(' (')[0]} ${tm(t[1])}`,
     S_KL: listed(t), S_KL_SUBUH: tm(t[1]), S_KL_MAGHRIB: tm(t[6]), S_KL_IMSAK: tm(t[0]), S_KL_SYURUK: tm(t[2]), S_KL_ZOHOR: tm(t[4]),
-    S_SGR: listed(solatTimes('SGR01', day)), S_JHR: listed(solatTimes('JHR02', day)), S_PNG: listed(solatTimes('PNG01', day)),
-    S_KK_MAGHRIB: tm(mag('SBH07')), S_KUCHING_MAGHRIB: tm(mag('SWK08')), S_LGK_MAGHRIB: tm(mag('KDH06')),
+    S_SGR: listed(solatTimes('SGR01', day)),
+    S_KK_MAGHRIB: tm(mag('SBH07')), S_KUCHING_MAGHRIB: tm(mag('SWK08')),
     S_FIRST: zl(first[0]), S_FIRST_T: tm(first[1]), S_LAST: zl(last[0]), S_LAST_T: tm(last[1]), S_SPREAD: S.duration(last[1] - first[1], lang),
-    S_ALL: all, S_MONTH: monthRows, S_MONTH_NAME: `${H.GMONTHS[lang][+day.slice(5, 7) - 1]} ${day.slice(0, 4)}`,
-    S_CHECK_DAYS: (check.days || 0).toLocaleString('en'), S_CHECK_DIFF: check.differences ?? 0,
-    S_VERIFIED: longDate(solatData.fetchedAt.slice(0, 10), lang), S_VERIFIED_ISO: solatData.fetchedAt.slice(0, 10)
+    S_ALL: all, S_STATES: stateLinks,
+    S_CHECK_DAYS: (check.days || 0).toLocaleString('en'), S_CHECK_DIFF: check.differences ?? 0
   };
 }
+const solatStateMap = (lang, p) => ({
+  ...solatShared(lang),
+  ...stateMap(lang, p, { day: solatDay, times: solatTimes, esc, longDate, calc: solatCalc,
+    year: (solatTimes(p.solatState.main, solatDay), solatYears.get(p.solatState.main + solatDay.slice(0, 4))) })
+});
 const NEST_EXAMPLE = { age: 35, retire: 60, until: 85, expense: 3000, inflation: 2.5, pre: 5, post: 4, saved: 80000, monthly: 1000 };
 function nesteggMap(lang) {
   const { L, m, nf, tr } = b3(lang), N = nesteggCore, r = N.calculate(NEST_EXAMPLE);
@@ -2578,7 +2660,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { solat: solatMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2643,7 +2725,7 @@ for (const p of pages) {
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
   // The prayer time pages show today's times.
-  if (p.render === 'solat') p.dateModified = solatDay;
+  if (p.render === 'solat' || p.render === 'solatState') p.dateModified = solatDay;
   if (p.render === 'hijri') p.dateModified = [p.dateModified, goldDate, fuelLatest.date].filter(Boolean).sort().pop();
   // Renderer values can appear in FAQ answers as {{KEY}} (plain text), so schema and page quote the same figures.
   const rendered = p.render ? RENDERERS[p.render](p.lang, p) : {};
@@ -2856,7 +2938,8 @@ else fs.rmSync(adsTxt, { force: true });
 fs.writeFileSync(path.join(pub, site.indexNowKey + '.txt'), site.indexNowKey + '\n');
 
 // ---- Installable PWA. Stable app ID and root worker scope match the custom host.
-const appPages = pages.filter(p => p.app);
+// State prayer time pages are reached from /waktu-solat/, not as app shortcuts.
+const appPages = pages.filter(p => p.app && !p.solatState);
 const manifest = {
   id: '/', name: site.brand + ' Tools', short_name: 'Bukit Besi Tools',
   description: 'Free online tools and Malaysian calculators for code, content, design, AI and payroll.',
