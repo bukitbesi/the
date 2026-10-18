@@ -103,6 +103,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kalkulator-bil-air/](https://tool.thebukitbesi.com/kalkulator-bil-air/) + [/water-bill-calculator-malaysia/](https://tool.thebukitbesi.com/water-bill-calculator-malaysia/) | BM + English | kira bil air, tarif air selangor 2025; water bill calculator malaysia |
 | [/kalkulator-unit-trust/](https://tool.thebukitbesi.com/kalkulator-unit-trust/) + [/unit-trust-calculator-malaysia/](https://tool.thebukitbesi.com/unit-trust-calculator-malaysia/) | BM + English | kalkulator unit trust, caj jualan; unit trust calculator malaysia |
 | [/kalkulator-kos-pendidikan-anak/](https://tool.thebukitbesi.com/kalkulator-kos-pendidikan-anak/) + [/education-cost-calculator-malaysia/](https://tool.thebukitbesi.com/education-cost-calculator-malaysia/) | BM + English | kos pendidikan anak, simpanan universiti; education cost calculator malaysia |
+| [/waktu-solat/](https://tool.thebukitbesi.com/waktu-solat/) + [/prayer-times-malaysia/](https://tool.thebukitbesi.com/prayer-times-malaysia/) | BM + English | waktu solat hari ini, waktu solat kl, jadual waktu solat, zon jakim; prayer times malaysia |
 | [/arah-kiblat/](https://tool.thebukitbesi.com/arah-kiblat/) + [/qibla-direction-malaysia/](https://tool.thebukitbesi.com/qibla-direction-malaysia/) | BM + English | arah kiblat, darjah kiblat kuala lumpur; qibla direction malaysia |
 | [/kalkulator-simpanan-persaraan/](https://tool.thebukitbesi.com/kalkulator-simpanan-persaraan/) + [/retirement-savings-calculator-malaysia/](https://tool.thebukitbesi.com/retirement-savings-calculator-malaysia/) | BM + English | simpanan persaraan cukup, kwsp rm390k; retirement savings calculator malaysia |
 | [/kalkulator-cuti-tahunan/](https://tool.thebukitbesi.com/kalkulator-cuti-tahunan/) + [/annual-leave-calculator-malaysia/](https://tool.thebukitbesi.com/annual-leave-calculator-malaysia/) | BM + English | kira cuti tahunan prorata, akta kerja; annual leave calculator malaysia |
@@ -223,6 +224,8 @@ and FAQPage JSON-LD, cite their official sources and work offline.
 **Upkeep (water bill):** `water-core.js` `STATES` holds each operator's block rates, minimum charge and effective date. Recheck after each SPAN tariff review (about every three years) and add Perak, Negeri Sembilan, Pahang, Perlis, Labuan, Sabah and Sarawak once their full tables are confirmed from two sources.
 
 **Upkeep (unit trust):** `unittrust-core.js` holds the EPF i-Invest sales charge cap (0.5%); everything else is user input.
+
+**Upkeep (waktu solat):** `.github/workflows/solat-monthly.yml` runs `tools-src/solat-fetch.mjs` on the 2nd of each month (Malaysia time): it downloads this year's and next year's JAKIM e-Solat timetable for all 60 zones into `assets/solat/<year>/<ZONE>.json`, checks the month against waktusolat.app and writes `tools-src/solat-data.json`. Next year fills in as JAKIM publishes it (late in the year); check the run log in December. JAKIM typos (imsak after Subuh, a PM time written as AM) are repaired by `tidy()` in `solat-core.js` and logged. If JAKIM changes zones, update `ZONES` and the town points in `solat-core.js`. The page's "today" moves with the daily gold rebuild.
 
 **Upkeep (qibla):** `qibla-core.js` holds the Kaaba coordinates and the town list; no yearly change. Istiwa' a'zam dates in the copy (27–28 May, 15–16 July) are stable; the exact minute comes from JAKIM each year.
 
@@ -370,6 +373,7 @@ assets/js/sspn-core.js      SSPN: balance with yearly dividend, RM8,000 relief a
 assets/js/water-core.js     water bill: domestic block tariffs and minimum charge by state
 assets/js/unittrust-core.js unit trust: sales charge, yearly fees, net return (IRR), EPF i-Invest comparison
 assets/js/edu-core.js       education cost: inflated yearly costs and monthly saving needed
+assets/js/solat-core.js     waktu solat: JAKIM zones, year files, next prayer, countdown, zone from GPS, typo repair
 assets/js/qibla-core.js     qibla: great-circle bearing and distance to the Kaaba, Malaysian towns
 assets/js/nestegg-core.js   retirement savings: amount needed with inflation, projection, shortfall, drawdown age
 assets/js/leave-core.js     leave: Employment Act annual leave tiers, pro rata with half-day rounding, other leave

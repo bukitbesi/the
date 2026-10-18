@@ -905,6 +905,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/pos-laju-tracking/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/prayer-times-malaysia/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/prayer-times-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/waktu-solat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/prayer-times-malaysia/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/privacy/</loc>
     <lastmod>2026-10-16</lastmod>
   </url>
@@ -1136,6 +1143,13 @@
   <url>
     <loc>https://tool.thebukitbesi.com/unused-css-remover/</loc>
     <lastmod>2026-10-13</lastmod>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/waktu-solat/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/waktu-solat/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/prayer-times-malaysia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/prayer-times-malaysia/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/water-bill-calculator-malaysia/</loc>

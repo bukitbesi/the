@@ -56,6 +56,8 @@ const unittrustCore = require('../assets/js/unittrust-core.js');
 const eduCore = require('../assets/js/edu-core.js');
 const waterCore = require('../assets/js/water-core.js');
 const qiblaCore = require('../assets/js/qibla-core.js');
+const solatCore = require('../assets/js/solat-core.js');
+const solatData = JSON.parse(read('solat-data.json'));
 const nesteggCore = require('../assets/js/nestegg-core.js');
 const leaveCore = require('../assets/js/leave-core.js');
 const terminationCore = require('../assets/js/termination-core.js');
@@ -1724,6 +1726,45 @@ function qiblaMap(lang) {
     Q_VERIFIED: longDate(Q.FACTS.verified, lang), Q_VERIFIED_ISO: Q.FACTS.verified
   };
 }
+// ---- Waktu solat (prayer times), BM + EN. JAKIM's timetables live in assets/solat/<year>/<ZONE>.json (solat-fetch.mjs);
+// the pages bake in the day of the latest daily data run (Malaysia time), and the script takes over with the live clock.
+const solatDay = new Date(Date.parse(goldData.fetchedAt) + 8 * 3600e3).toISOString().slice(0, 10);
+const solatYears = new Map();
+const solatTimes = (zone, iso) => {
+  const key = zone + iso.slice(0, 4), file = path.join(root, 'assets/solat', iso.slice(0, 4), zone + '.json');
+  if (!solatYears.has(key)) solatYears.set(key, fs.existsSync(file) ? solatCore.decodeYear(fs.readFileSync(file, 'utf8')) : null);
+  const t = solatCore.day(solatYears.get(key), iso);
+  if (!t) throw new Error(`No prayer times for ${zone} on ${iso}: run node tools-src/solat-fetch.mjs`);
+  return t;
+};
+function solatMap(lang) {
+  const { L, tr } = b3(lang), S = solatCore, H = hijriCore, day = solatDay, z = S.FACTS.defaultZone, t = solatTimes(z, day);
+  const tm = m => S.time(m, !!L), five = S.PRAYERS;
+  const listed = x => five.map(i => `${S.name(i, lang).split(' (')[0]} ${tm(x[i])}`).join(', ');
+  const groups = Object.entries(S.STATES).map(([k, name]) => `<optgroup label="${name}">${S.ZONES.filter(x => x[0].startsWith(k))
+    .map(x => `<option value="${x[0]}"${x[0] === z ? ' selected' : ''}>${x[0]} · ${esc(x[1])}</option>`).join('')}</optgroup>`).join('');
+  const all = S.ZONES.map(([code, areas]) => { const x = solatTimes(code, day);
+    return `<tr><th scope="row">${code}<small>${esc(areas)}, ${S.STATES[code.slice(0, 3)]}</small></th>${five.map(i => `<td>${tm(x[i])}</td>`).join('')}</tr>`; }).join('\n');
+  const monthRows = S.month(solatYears.get(z + day.slice(0, 4)), day).map(([iso, x]) =>
+    `<tr${iso === day ? ' class="now"' : ''}><th scope="row">${H.formatGregorian(iso, lang).replace(/ \d{4}$/, '')}</th>${[0, 1, 2, 4, 5, 6, 7].map(i => `<td>${S.hhmm(x[i])}</td>`).join('')}</tr>`).join('\n');
+  const mag = code => solatTimes(code, day)[6];
+  const byMaghrib = S.ZONES.map(x => [x[0], mag(x[0])]).sort((a, b) => a[1] - b[1]);
+  const first = byMaghrib[0], last = byMaghrib[byMaghrib.length - 1];
+  const zl = code => `${code} (${S.zone(code).areas.split(', ').slice(0, 2).join(', ')})`;
+  const check = solatData.check || {};
+  return {
+    S_ZONE_OPTIONS: groups, S_ZONE: `${z} · ${S.zone(z).areas}, ${S.zone(z).state}`, S_DATE: `${H.formatGregorian(day, lang, true)} · ${H.formatHijri(H.toHijri(day), lang)}`,
+    S_DAY: H.formatGregorian(day, lang), S_DAY_ISO: day,
+    S_TODAY: S.KEYS.map((k, i) => tr(S.name(i, lang), tm(t[i]))).join('\n'), S_NEXT: `${S.name(1, lang).split(' (')[0]} ${tm(t[1])}`,
+    S_KL: listed(t), S_KL_SUBUH: tm(t[1]), S_KL_MAGHRIB: tm(t[6]), S_KL_IMSAK: tm(t[0]), S_KL_SYURUK: tm(t[2]), S_KL_ZOHOR: tm(t[4]),
+    S_SGR: listed(solatTimes('SGR01', day)), S_JHR: listed(solatTimes('JHR02', day)), S_PNG: listed(solatTimes('PNG01', day)),
+    S_KK_MAGHRIB: tm(mag('SBH07')), S_KUCHING_MAGHRIB: tm(mag('SWK08')), S_LGK_MAGHRIB: tm(mag('KDH06')),
+    S_FIRST: zl(first[0]), S_FIRST_T: tm(first[1]), S_LAST: zl(last[0]), S_LAST_T: tm(last[1]), S_SPREAD: S.duration(last[1] - first[1], lang),
+    S_ALL: all, S_MONTH: monthRows, S_MONTH_NAME: `${H.GMONTHS[lang][+day.slice(5, 7) - 1]} ${day.slice(0, 4)}`,
+    S_CHECK_DAYS: (check.days || 0).toLocaleString('en'), S_CHECK_DIFF: check.differences ?? 0,
+    S_VERIFIED: longDate(solatData.fetchedAt.slice(0, 10), lang), S_VERIFIED_ISO: solatData.fetchedAt.slice(0, 10)
+  };
+}
 const NEST_EXAMPLE = { age: 35, retire: 60, until: 85, expense: 3000, inflation: 2.5, pre: 5, post: 4, saved: 80000, monthly: 1000 };
 function nesteggMap(lang) {
   const { L, m, nf, tr } = b3(lang), N = nesteggCore, r = N.calculate(NEST_EXAMPLE);
@@ -2537,7 +2578,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { solat: solatMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2601,6 +2642,8 @@ for (const p of pages) {
   // The fuel pages change every week with the prices.
   if (p.render === 'fuel' && fuelLatest.date > p.dateModified) p.dateModified = fuelLatest.date;
   // The Hijri pages show "today" and the next Islamic dates; they move with the daily gold rebuild (deterministic per commit).
+  // The prayer time pages show today's times.
+  if (p.render === 'solat') p.dateModified = solatDay;
   if (p.render === 'hijri') p.dateModified = [p.dateModified, goldDate, fuelLatest.date].filter(Boolean).sort().pop();
   // Renderer values can appear in FAQ answers as {{KEY}} (plain text), so schema and page quote the same figures.
   const rendered = p.render ? RENDERERS[p.render](p.lang, p) : {};
@@ -2702,6 +2745,7 @@ const bundles = {
   'education-cost.js': ['assets/js/edu-core.js', 'assets/js/edu-ui.js'],
   'water-bill.js': ['assets/js/water-core.js', 'assets/js/water-ui.js'],
   'qibla.js': ['assets/js/qibla-core.js', 'assets/js/qibla-ui.js'],
+  'solat.js': ['assets/js/hijri-core.js', 'assets/js/solat-core.js', 'assets/js/solat-ui.js'],
   'retirement-savings.js': ['assets/js/nestegg-core.js', 'assets/js/nestegg-ui.js'],
   'annual-leave.js': ['assets/js/leave-core.js', 'assets/js/leave-ui.js'],
   'termination-benefits.js': ['assets/js/termination-core.js', 'assets/js/termination-ui.js'],
@@ -2849,12 +2893,16 @@ const precache = [...new Set([
 const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub, to), { recursive: true });
 // Vendor libraries carry their version in the file name; a clean copy drops superseded versions.
 fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
-['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img'].forEach(f => copy(f));
+// Prayer time years roll over; a clean copy drops years no longer in the source.
+fs.rmSync(path.join(pub, 'assets/solat'), { recursive: true, force: true });
+['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img', 'assets/solat'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
 const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f)
   .concat(fs.readdirSync(path.join(root, 'assets/vendor'), { withFileTypes: true }).filter(d => d.isDirectory())
-    .flatMap(d => fs.readdirSync(path.join(root, 'assets/vendor', d.name)).filter(f => f.endsWith('.mjs')).map(f => '/assets/vendor/' + d.name + '/' + f)));
+    .flatMap(d => fs.readdirSync(path.join(root, 'assets/vendor', d.name)).filter(f => f.endsWith('.mjs')).map(f => '/assets/vendor/' + d.name + '/' + f)))
+  // A visitor's prayer time zone is kept after first use, so the app shows the times offline.
+  .concat(fs.readdirSync(path.join(root, 'assets/solat')).flatMap(y => fs.readdirSync(path.join(root, 'assets/solat', y)).map(f => `/assets/solat/${y}/${f}`)));
 fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
 // Serve files exactly as built; Jekyll processing is unnecessary and slower.
 fs.writeFileSync(path.join(pub, '.nojekyll'), '');

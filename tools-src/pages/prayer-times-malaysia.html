@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/prayer-times-malaysia/",
+  "lang": "en",
+  "alternates": { "ms": "/waktu-solat/" },
+  "title": "Prayer Times Malaysia Today: Waktu Solat for All 60 JAKIM Zones",
+  "description": "Today's prayer times for every JAKIM zone in Malaysia: Subuh, Zohor, Asar, Maghrib and Isyak, a live countdown to the next prayer and the monthly timetable.",
+  "llms": "Prayer times (waktu solat) for Malaysia's 60 JAKIM zones from JAKIM's official e-Solat timetable, with each zone's whole year stored on the site and checked against the waktusolat.app copy of JAKIM's data. Shows imsak, Subuh, syuruk, dhuha, Zohor, Asar, Maghrib and Isyak for today, a live countdown to the next prayer, the month's timetable, and every zone's times for today. Kuala Lumpur and Putrajaya are zone WLY01; Shah Alam, Petaling, Gombak, Sepang and Hulu Langat SGR01; Klang and Kuala Langat SGR03; Johor Bahru JHR02; all of Penang PNG01; all of Melaka MLK01; Ipoh PRK02; Kota Kinabalu SBH07; Kuching SWK08. Imsak is 10 minutes before Subuh in JAKIM's timetable for almost every zone (Perlis sets imsak at Subuh), and Subuh ends at syuruk (sunrise). Maghrib in eastern Sabah (zone SBH03, Lahad Datu and Semporna) is 72 to 78 minutes earlier than in Langkawi all year. A 'use my location' button finds the zone of the nearest district centre or town on the device; the zone is remembered for the next visit and the page works offline once installed.",
+  "datePublished": "2026-10-18",
+  "dateModified": "2026-10-18",
+  "render": "solat",
+  "scripts": ["/assets/js/solat.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Prayer Times Malaysia", null]],
+  "about": ["Salah", "Prayer times", "JAKIM", "Islam in Malaysia"],
+  "app": {
+    "name": "Prayer Times Malaysia",
+    "category": "LifestyleApplication",
+    "features": ["All 60 JAKIM zones", "Live countdown to the next prayer", "Imsak, syuruk and dhuha", "Monthly timetable to print", "Find your zone from your location (stays on your device)", "Remembers your zone", "12- or 24-hour clock", "Hijri date", "Works offline once installed"]
+  },
+  "citations": [
+    ["JAKIM e-Solat: official prayer times by zone", "https://www.e-solat.gov.my/"],
+    ["Federal Territories Mufti Office: Kuala Lumpur and Putrajaya prayer timetable 2024", "https://www.muftiwp.gov.my/images/falak/takwim/jadual-waktu-solat/KL-dan-Putrajaya/JADUAL-WAKTU-SOLAT-WPKLPTJ-2024.pdf"],
+    ["Waktu Solat Project: JAKIM prayer time data and zones", "https://waktusolat.app/"]
+  ],
+  "faq": [
+    { "q": "What are the prayer times in Kuala Lumpur today?", "a": "On {{S_DAY}}, Kuala Lumpur and Putrajaya (JAKIM zone WLY01) pray at: {{S_KL}}. Imsak is {{S_KL_IMSAK}} and syuruk (sunrise) {{S_KL_SYURUK}}. The calculator above shows the live time and a countdown." },
+    { "q": "What are the prayer times in Shah Alam and Petaling Jaya today?", "a": "Gombak, Petaling (including Petaling Jaya and Subang Jaya), Sepang, Hulu Langat, Hulu Selangor and Shah Alam are JAKIM zone SGR01. On {{S_DAY}} the times are: {{S_SGR}}. Klang and Kuala Langat are zone SGR03, and Kuala Selangor and Sabak Bernam SGR02." },
+    { "q": "Where do these prayer times come from?", "a": "From JAKIM's official e-Solat timetable, the same times state religious departments and mosques use. The site keeps each zone's full year and checks every time this month against the waktusolat.app copy of JAKIM's data: {{S_CHECK_DAYS}} zone-days, {{S_CHECK_DIFF}} differences on the last check." },
+    { "q": "Which JAKIM zone am I in?", "a": "Malaysia has 60 zones grouped by district. Kuala Lumpur and Putrajaya are WLY01, Johor Bahru, Kulai, Kota Tinggi and Mersing JHR02, all of Penang PNG01, all of Melaka MLK01, Ipoh and Kampar PRK02, Kota Kinabalu SBH07 and Kuching SWK08. Tap 'Use my location' to find the zone of the nearest district, or pick your area from the list." },
+    { "q": "What is imsak and when does it start?", "a": "Imsak is a reminder to stop eating sahur before dawn, set 10 minutes before Subuh in JAKIM's timetable for Kuala Lumpur and almost every other zone; Perlis sets imsak at Subuh itself. In Kuala Lumpur today imsak is {{S_KL_IMSAK}} and Subuh {{S_KL_SUBUH}}. The fast itself begins at Subuh." },
+    { "q": "When does Subuh end?", "a": "Subuh ends at syuruk, sunrise. In Kuala Lumpur today Subuh is from {{S_KL_SUBUH}} until syuruk at {{S_KL_SYURUK}}, and the next obligatory prayer, Zohor, is at {{S_KL_ZOHOR}}." },
+    { "q": "Why are prayer times different across Malaysia?", "a": "They follow the sun, which sets earlier further east. Today the earliest Maghrib is in {{S_FIRST}} at {{S_FIRST_T}} and the latest in {{S_LAST}} at {{S_LAST_T}}, {{S_SPREAD}} apart. Kota Kinabalu's Maghrib is {{S_KK_MAGHRIB}}, Kuching's {{S_KUCHING_MAGHRIB}} and Kuala Lumpur's {{S_KL_MAGHRIB}}." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Prayer times</li></ol></nav>
+  <h1>Prayer Times Malaysia Today</h1>
+  <p class="answer">Prayer times in Kuala Lumpur and Putrajaya today, <time datetime="{{S_DAY_ISO}}">{{S_DAY}}</time>: <strong>{{S_KL}}</strong> (JAKIM zone WLY01). Choose any of Malaysia's 60 JAKIM zones for your area's times, a live countdown to the next prayer and this month's timetable.</p>
+  <p class="meta"><span>JAKIM times, checked <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Your zone stays on your device</span><a href="/waktu-solat/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="solatForm" novalidate aria-labelledby="sl-h">
+      <h2 id="sl-h">Your zone</h2>
+      <div class="field"><label for="zone">JAKIM zone</label><select class="input" id="zone" name="zone">{{S_ZONE_OPTIONS}}</select></div>
+      <div class="field"><label class="check"><input type="checkbox" id="h24" name="h24" value="1"><span>24-hour clock</span></label></div>
+      <div class="field"><button type="button" class="btn sm" id="sLocate">Use my location</button></div>
+      <p class="help" id="sMsg" aria-live="polite">Your location is matched to a zone on your device and never sent.</p>
+    </form>
+
+    <section class="box" aria-labelledby="sl-result-h">
+      <h2 id="sl-result-h">Today</h2>
+      <p class="help" id="sZone">{{S_ZONE}}</p>
+      <p class="help" id="sDate">{{S_DATE}}</p>
+      <div class="net">
+        <p id="sNow">Today's first prayer</p>
+        <output id="sNext" for="zone">{{S_NEXT}}</output>
+        <p id="sCount">JAKIM zone WLY01</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <p class="help" id="sMsg2" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Today's times</caption>
+        <tbody id="sToday">
+{{S_TODAY}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">Print or save as PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="month-h">Prayer timetable for <span id="sMonthName">{{S_MONTH_NAME}}</span></h2>
+  <div class="tool-actions"><button type="button" class="btn ghost sm" id="mPrev">Previous month</button><button type="button" class="btn ghost sm" id="mNext">Next month</button></div>
+  <p class="help" id="sMonthMsg" aria-live="polite"></p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="month-h">
+    <table class="data">
+      <thead><tr><th scope="col">Date</th><th scope="col">Imsak</th><th scope="col">Subuh</th><th scope="col">Syuruk</th><th scope="col">Zohor</th><th scope="col">Asar</th><th scope="col">Maghrib</th><th scope="col">Isyak</th></tr></thead>
+      <tbody id="sMonth">
+{{S_MONTH}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container prose cv">
+  <h2 id="zones-h">Prayer times today in every JAKIM zone</h2>
+  <p>All 60 zones on <time datetime="{{S_DAY_ISO}}">{{S_DAY}}</time>, grouped by state, from JAKIM's timetable.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="zones-h">
+    <table class="data">
+      <thead><tr><th scope="col">Zone</th><th scope="col">Subuh</th><th scope="col">Zohor</th><th scope="col">Asar</th><th scope="col">Maghrib</th><th scope="col">Isyak</th></tr></thead>
+      <tbody>
+{{S_ALL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="times">The prayer times explained</h2>
+  <ul>
+    <li><strong>Imsak:</strong> a reminder to stop eating sahur, 10 minutes before Subuh (at Subuh in Perlis). Not a prayer.</li>
+    <li><strong>Subuh (Fajr):</strong> from true dawn until syuruk.</li>
+    <li><strong>Syuruk:</strong> sunrise, when Subuh time ends.</li>
+    <li><strong>Dhuha:</strong> the start of the time for the voluntary dhuha prayer, after the sun has risen.</li>
+    <li><strong>Zohor (Dhuhr):</strong> just after the sun passes its highest point; Friday prayers are held at this time.</li>
+    <li><strong>Asar (Asr):</strong> in the afternoon, when shadows have lengthened.</li>
+    <li><strong>Maghrib:</strong> just after sunset; the time to break the fast in Ramadan.</li>
+    <li><strong>Isyak (Isha):</strong> when the twilight has gone, until Subuh.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="how">How this prayer time calculator works</h2>
+  <ol>
+    <li><strong>Pick your zone</strong> or tap 'Use my location'. Your position is matched on your device to the nearest of 235 district centres and towns, and its JAKIM zone.</li>
+    <li><strong>The year's timetable for that zone</strong> loads once (a few kilobytes) from this site, then works offline.</li>
+    <li><strong>The countdown</strong> runs on Malaysia time (UTC+8) and moves to the next prayer at each azan; after Isyak it counts to tomorrow's Subuh.</li>
+    <li><strong>Your zone and clock format</strong> are remembered on this device, so the times are ready on your next visit.</li>
+  </ol>
+
+  <h2 id="zone-guide">Which zone covers my town?</h2>
+  <ul>
+    <li><strong>Klang Valley:</strong> Kuala Lumpur and Putrajaya WLY01; Shah Alam, Petaling Jaya, Subang Jaya, Gombak, Sepang, Kajang and Rawang SGR01; Klang and Banting SGR03.</li>
+    <li><strong>Johor:</strong> Johor Bahru, Kulai, Kota Tinggi and Mersing JHR02; Kluang and Pontian JHR03; Batu Pahat, Muar, Segamat and Tangkak JHR04.</li>
+    <li><strong>North:</strong> all of Penang PNG01; Alor Setar KDH01; Sungai Petani KDH02; Kulim KDH05; Langkawi KDH06; Perlis PLS01; Ipoh PRK02; Taiping PRK06.</li>
+    <li><strong>East coast:</strong> Kota Bharu KTN01; Kuala Terengganu TRG01; Kuantan PHG02.</li>
+    <li><strong>Sabah and Sarawak:</strong> Kota Kinabalu SBH07; Sandakan SBH01; Tawau SBH04; Kuching SWK08; Miri SWK02; Sibu SWK04; Bintulu SWK03.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.e-solat.gov.my/" rel="noopener">JAKIM e-Solat: official prayer times by zone</a></li>
+    <li><a href="https://www.muftiwp.gov.my/images/falak/takwim/jadual-waktu-solat/KL-dan-Putrajaya/JADUAL-WAKTU-SOLAT-WPKLPTJ-2024.pdf" rel="noopener">Federal Territories Mufti Office: Kuala Lumpur and Putrajaya prayer timetable</a></li>
+    <li><a href="https://waktusolat.app/" rel="noopener">Waktu Solat Project: JAKIM prayer time data and zones</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Times follow JAKIM's official timetable for each zone. Mosques may call the azan a minute or two later, and special zones such as Genting, Cameron Highlands, Bukit Larut and Gunung Kinabalu have their own times: choose them from the list.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/qibla-direction-malaysia/">Qibla Direction<small>Qibla bearing for your location</small></a>
+    <a href="/hijri-date-converter/">Hijri Date Converter<small>Islamic dates on Malaysia's calendar</small></a>
+    <a href="/fidyah-calculator/">Fidyah Calculator<small>Fidyah for missed fasts</small></a>
+  </div>
+</section>

@@ -1,0 +1,153 @@
+<!--page
+{
+  "path": "/waktu-solat/",
+  "lang": "ms",
+  "alternates": { "en": "/prayer-times-malaysia/" },
+  "title": "Waktu Solat Hari Ini: Jadual Waktu Solat Malaysia Ikut Zon JAKIM",
+  "description": "Waktu solat hari ini bagi semua 60 zon JAKIM: Subuh, Zohor, Asar, Maghrib dan Isyak, kiraan detik ke waktu seterusnya dan jadual waktu solat bulanan.",
+  "llms": "Waktu solat bagi 60 zon JAKIM di Malaysia daripada jadual rasmi e-Solat JAKIM, dengan jadual setahun setiap zon disimpan di laman ini dan disemak dengan salinan data JAKIM di waktusolat.app. Memaparkan imsak, Subuh, syuruk, dhuha, Zohor, Asar, Maghrib dan Isyak hari ini, kiraan detik ke waktu solat seterusnya, jadual bulanan dan waktu hari ini bagi setiap zon. Kuala Lumpur dan Putrajaya ialah zon WLY01; Shah Alam, Petaling, Gombak, Sepang dan Hulu Langat SGR01; Klang dan Kuala Langat SGR03; Johor Bahru JHR02; seluruh Pulau Pinang PNG01; seluruh Melaka MLK01; Ipoh PRK02; Kota Kinabalu SBH07; Kuching SWK08. Imsak ialah 10 minit sebelum Subuh dalam jadual JAKIM bagi hampir semua zon (Perlis menetapkan imsak pada waktu Subuh), dan waktu Subuh tamat pada syuruk (matahari terbit). Maghrib di timur Sabah (zon SBH03, Lahad Datu dan Semporna) 72 hingga 78 minit lebih awal berbanding Langkawi sepanjang tahun. Butang 'guna lokasi saya' mencari zon pusat daerah atau bandar terdekat dalam peranti; zon diingat untuk lawatan seterusnya dan laman berfungsi luar talian selepas dipasang.",
+  "datePublished": "2026-10-18",
+  "dateModified": "2026-10-18",
+  "render": "solat",
+  "scripts": ["/assets/js/solat.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Waktu Solat", null]],
+  "about": ["Solat", "Waktu solat", "JAKIM", "Islam di Malaysia"],
+  "app": {
+    "name": "Waktu Solat Malaysia",
+    "category": "LifestyleApplication",
+    "features": ["Semua 60 zon JAKIM", "Kiraan detik ke waktu solat seterusnya", "Imsak, syuruk dan dhuha", "Jadual bulanan untuk dicetak", "Cari zon dari lokasi anda (kekal dalam peranti)", "Mengingati zon anda", "Format 12 atau 24 jam", "Tarikh Hijrah", "Berfungsi luar talian selepas dipasang"]
+  },
+  "citations": [
+    ["JAKIM e-Solat: waktu solat rasmi mengikut zon", "https://www.e-solat.gov.my/"],
+    ["Pejabat Mufti Wilayah Persekutuan: Jadual waktu solat Kuala Lumpur dan Putrajaya 2024", "https://www.muftiwp.gov.my/images/falak/takwim/jadual-waktu-solat/KL-dan-Putrajaya/JADUAL-WAKTU-SOLAT-WPKLPTJ-2024.pdf"],
+    ["Projek Waktu Solat: data waktu solat dan zon JAKIM", "https://waktusolat.app/"]
+  ],
+  "faq": [
+    { "q": "Pukul berapa waktu solat di Kuala Lumpur hari ini?", "a": "Pada {{S_DAY}}, waktu solat Kuala Lumpur dan Putrajaya (zon JAKIM WLY01) ialah: {{S_KL}}. Imsak pukul {{S_KL_IMSAK}} dan syuruk (matahari terbit) pukul {{S_KL_SYURUK}}. Kalkulator di atas memaparkan waktu semasa dan kiraan detik." },
+    { "q": "Bilakah waktu solat Selangor hari ini?", "a": "Gombak, Petaling (termasuk Petaling Jaya dan Subang Jaya), Sepang, Hulu Langat, Hulu Selangor dan Shah Alam ialah zon JAKIM SGR01. Pada {{S_DAY}} waktunya: {{S_SGR}}. Klang dan Kuala Langat ialah zon SGR03, manakala Kuala Selangor dan Sabak Bernam SGR02." },
+    { "q": "Dari mana waktu solat ini diambil?", "a": "Daripada jadual rasmi e-Solat JAKIM, waktu yang sama digunakan oleh jabatan agama negeri dan masjid. Laman ini menyimpan jadual setahun setiap zon dan menyemak setiap waktu bulan ini dengan salinan data JAKIM di waktusolat.app: {{S_CHECK_DAYS}} hari-zon, {{S_CHECK_DIFF}} perbezaan pada semakan terakhir." },
+    { "q": "Saya berada di zon JAKIM yang mana?", "a": "Malaysia mempunyai 60 zon mengikut daerah. Kuala Lumpur dan Putrajaya WLY01, Johor Bahru, Kulai, Kota Tinggi dan Mersing JHR02, seluruh Pulau Pinang PNG01, seluruh Melaka MLK01, Ipoh dan Kampar PRK02, Kota Kinabalu SBH07 dan Kuching SWK08. Tekan 'Guna lokasi saya' untuk mencari zon daerah terdekat, atau pilih kawasan anda dari senarai." },
+    { "q": "Apakah imsak dan bila bermula?", "a": "Imsak ialah peringatan untuk berhenti bersahur sebelum fajar, ditetapkan 10 minit sebelum Subuh dalam jadual JAKIM bagi Kuala Lumpur dan hampir semua zon lain; Perlis menetapkan imsak pada waktu Subuh. Di Kuala Lumpur hari ini imsak pukul {{S_KL_IMSAK}} dan Subuh pukul {{S_KL_SUBUH}}. Puasa bermula pada waktu Subuh." },
+    { "q": "Bilakah waktu Subuh tamat?", "a": "Waktu Subuh tamat pada syuruk, iaitu matahari terbit. Di Kuala Lumpur hari ini waktu Subuh dari {{S_KL_SUBUH}} hingga syuruk pukul {{S_KL_SYURUK}}, dan solat fardu seterusnya, Zohor, pukul {{S_KL_ZOHOR}}." },
+    { "q": "Kenapa waktu solat berbeza di seluruh Malaysia?", "a": "Waktu solat mengikut kedudukan matahari, yang terbenam lebih awal di sebelah timur. Hari ini Maghrib paling awal di {{S_FIRST}} pukul {{S_FIRST_T}} dan paling lewat di {{S_LAST}} pukul {{S_LAST_T}}, beza {{S_SPREAD}}. Maghrib di Kota Kinabalu pukul {{S_KK_MAGHRIB}}, Kuching {{S_KUCHING_MAGHRIB}} dan Kuala Lumpur {{S_KL_MAGHRIB}}." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Waktu solat</li></ol></nav>
+  <h1>Waktu Solat Hari Ini</h1>
+  <p class="answer">Waktu solat Kuala Lumpur dan Putrajaya hari ini, <time datetime="{{S_DAY_ISO}}">{{S_DAY}}</time>: <strong>{{S_KL}}</strong> (zon JAKIM WLY01). Pilih mana-mana 60 zon JAKIM untuk waktu solat kawasan anda, kiraan detik ke waktu seterusnya dan jadual bulan ini.</p>
+  <p class="meta"><span>Waktu JAKIM, disemak <time datetime="{{S_VERIFIED_ISO}}">{{S_VERIFIED}}</time></span><span>Zon anda kekal dalam peranti</span><a href="/prayer-times-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="solatForm" novalidate aria-labelledby="sl-h">
+      <h2 id="sl-h">Zon anda</h2>
+      <div class="field"><label for="zone">Zon JAKIM</label><select class="input" id="zone" name="zone">{{S_ZONE_OPTIONS}}</select></div>
+      <div class="field"><label class="check"><input type="checkbox" id="h24" name="h24" value="1" checked><span>Format 24 jam</span></label></div>
+      <div class="field"><button type="button" class="btn sm" id="sLocate">Guna lokasi saya</button></div>
+      <p class="help" id="sMsg" aria-live="polite">Lokasi anda dipadankan dengan zon dalam peranti dan tidak dihantar ke mana-mana.</p>
+    </form>
+
+    <section class="box" aria-labelledby="sl-result-h">
+      <h2 id="sl-result-h">Hari ini</h2>
+      <p class="help" id="sZone">{{S_ZONE}}</p>
+      <p class="help" id="sDate">{{S_DATE}}</p>
+      <div class="net">
+        <p id="sNow">Waktu solat pertama hari ini</p>
+        <output id="sNext" for="zone">{{S_NEXT}}</output>
+        <p id="sCount">Zon JAKIM WLY01</p>
+      </div>
+      <p class="sr-only" id="sLive" aria-live="polite"></p>
+      <p class="help" id="sMsg2" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Waktu hari ini</caption>
+        <tbody id="sToday">
+{{S_TODAY}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="solatPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose">
+  <h2 id="month-h">Jadual waktu solat <span id="sMonthName">{{S_MONTH_NAME}}</span></h2>
+  <div class="tool-actions"><button type="button" class="btn ghost sm" id="mPrev">Bulan sebelum</button><button type="button" class="btn ghost sm" id="mNext">Bulan seterusnya</button></div>
+  <p class="help" id="sMonthMsg" aria-live="polite"></p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="month-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tarikh</th><th scope="col">Imsak</th><th scope="col">Subuh</th><th scope="col">Syuruk</th><th scope="col">Zohor</th><th scope="col">Asar</th><th scope="col">Maghrib</th><th scope="col">Isyak</th></tr></thead>
+      <tbody id="sMonth">
+{{S_MONTH}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container prose cv">
+  <h2 id="zones-h">Waktu solat hari ini di setiap zon JAKIM</h2>
+  <p>Semua 60 zon pada <time datetime="{{S_DAY_ISO}}">{{S_DAY}}</time>, mengikut negeri, daripada jadual JAKIM.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="zones-h">
+    <table class="data">
+      <thead><tr><th scope="col">Zon</th><th scope="col">Subuh</th><th scope="col">Zohor</th><th scope="col">Asar</th><th scope="col">Maghrib</th><th scope="col">Isyak</th></tr></thead>
+      <tbody>
+{{S_ALL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="times">Maksud setiap waktu</h2>
+  <ul>
+    <li><strong>Imsak:</strong> peringatan berhenti bersahur, 10 minit sebelum Subuh (pada waktu Subuh di Perlis). Bukan waktu solat.</li>
+    <li><strong>Subuh:</strong> dari terbit fajar sadiq hingga syuruk.</li>
+    <li><strong>Syuruk:</strong> matahari terbit, tamatnya waktu Subuh.</li>
+    <li><strong>Dhuha:</strong> permulaan waktu solat sunat dhuha selepas matahari naik.</li>
+    <li><strong>Zohor:</strong> sejurus matahari tergelincir dari tengah langit; solat Jumaat diadakan pada waktu ini.</li>
+    <li><strong>Asar:</strong> waktu petang apabila bayang-bayang memanjang.</li>
+    <li><strong>Maghrib:</strong> sejurus matahari terbenam; waktu berbuka puasa pada bulan Ramadan.</li>
+    <li><strong>Isyak:</strong> apabila hilang mega merah, hingga Subuh.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="how">Cara kalkulator waktu solat ini berfungsi</h2>
+  <ol>
+    <li><strong>Pilih zon anda</strong> atau tekan 'Guna lokasi saya'. Kedudukan anda dipadankan dalam peranti dengan pusat daerah atau bandar terdekat (235 lokasi) dan zon JAKIM lokasi itu.</li>
+    <li><strong>Jadual setahun zon itu</strong> dimuat sekali sahaja (beberapa kilobait) dari laman ini, kemudian berfungsi luar talian.</li>
+    <li><strong>Kiraan detik</strong> mengikut waktu Malaysia (UTC+8) dan beralih ke waktu seterusnya pada setiap azan; selepas Isyak ia mengira ke Subuh esok.</li>
+    <li><strong>Zon dan format jam anda</strong> diingat dalam peranti ini, jadi waktu solat sedia pada lawatan seterusnya.</li>
+  </ol>
+
+  <h2 id="zone-guide">Zon mana untuk bandar saya?</h2>
+  <ul>
+    <li><strong>Lembah Klang:</strong> Kuala Lumpur dan Putrajaya WLY01; Shah Alam, Petaling Jaya, Subang Jaya, Gombak, Sepang, Kajang dan Rawang SGR01; Klang dan Banting SGR03.</li>
+    <li><strong>Johor:</strong> Johor Bahru, Kulai, Kota Tinggi dan Mersing JHR02; Kluang dan Pontian JHR03; Batu Pahat, Muar, Segamat dan Tangkak JHR04.</li>
+    <li><strong>Utara:</strong> seluruh Pulau Pinang PNG01; Alor Setar KDH01; Sungai Petani KDH02; Kulim KDH05; Langkawi KDH06; Perlis PLS01; Ipoh PRK02; Taiping PRK06.</li>
+    <li><strong>Pantai timur:</strong> Kota Bharu KTN01; Kuala Terengganu TRG01; Kuantan PHG02.</li>
+    <li><strong>Sabah dan Sarawak:</strong> Kota Kinabalu SBH07; Sandakan SBH01; Tawau SBH04; Kuching SWK08; Miri SWK02; Sibu SWK04; Bintulu SWK03.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.e-solat.gov.my/" rel="noopener">JAKIM e-Solat: waktu solat rasmi mengikut zon</a></li>
+    <li><a href="https://www.muftiwp.gov.my/images/falak/takwim/jadual-waktu-solat/KL-dan-Putrajaya/JADUAL-WAKTU-SOLAT-WPKLPTJ-2024.pdf" rel="noopener">Pejabat Mufti Wilayah Persekutuan: Jadual waktu solat Kuala Lumpur dan Putrajaya</a></li>
+    <li><a href="https://waktusolat.app/" rel="noopener">Projek Waktu Solat: data waktu solat dan zon JAKIM</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Waktu mengikut jadual rasmi JAKIM bagi setiap zon. Masjid mungkin melaungkan azan seminit dua kemudian, dan zon khas seperti Genting, Cameron Highlands, Bukit Larut dan Gunung Kinabalu mempunyai waktu tersendiri: pilih dari senarai.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/arah-kiblat/">Arah Kiblat<small>Darjah kiblat lokasi anda</small></a>
+    <a href="/tukar-tarikh-hijrah/">Tukar Tarikh Hijrah<small>Takwim Islam Malaysia</small></a>
+    <a href="/kalkulator-fidyah/">Kalkulator Fidyah<small>Fidyah puasa ikut negeri</small></a>
+  </div>
+</section>

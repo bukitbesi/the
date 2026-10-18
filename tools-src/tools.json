@@ -612,6 +612,15 @@
     "live": true
   },
   {
+    "name": "Waktu Solat (Prayer Times)",
+    "desc": "Today's prayer times for all 60 JAKIM zones with a live countdown, monthly timetable, imsak and syuruk, and your zone from GPS. Bahasa Melayu and English.",
+    "url": "https://tool.thebukitbesi.com/waktu-solat/",
+    "cat": "calc",
+    "icon": "waktu-solat",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Arah Kiblat (Qibla Direction)",
     "desc": "Qibla bearing from true north for 18 Malaysian towns or your GPS location, with a compass, degrees and minutes, and distance to the Kaaba. Bahasa Melayu and English.",
     "url": "https://tool.thebukitbesi.com/arah-kiblat/",

@@ -1,0 +1,38 @@
+name: Monthly prayer times
+
+# Refreshes JAKIM e-Solat timetables for all 60 zones (this year and next) and rebuilds the prayer time pages.
+on:
+  schedule:
+    - cron: '20 19 1 * *'   # 03:20 Malaysia time on the 2nd of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shares the daily gold job's group so the two never push at the same time.
+concurrency:
+  group: gold-daily
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch timetables, test, build and validate
+        run: |
+          node tools-src/solat-fetch.mjs
+          node --test tools-src/tests/solat.test.mjs
+          node tools-src/build.mjs
+          node tools-src/validate.mjs
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No change."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/solat tools-src/solat-data.json docs
+          git commit -m "Update prayer times $(date -u +%Y-%m-%d)"
+          git push
