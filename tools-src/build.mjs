@@ -105,6 +105,7 @@ const textHtmlCore = require('../assets/js/texthtml-core.js');
 const tableCore = require('../assets/js/table-core.js');
 const escapeCore = require('../assets/js/escape-core.js');
 const ghCore = require('../assets/js/ghcdn-core.js');
+const metaCore = require('../assets/js/metacheck-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1282,6 +1283,24 @@ function ghcdnMap() {
     GC_VERIFIED: G.FACTS.verified, GC_IN: esc(GC_SAMPLE.join('\n')), GC_OUT: GC_SAMPLE.map((l, i) => G.views.resultHtml(G.convert(l), i)).join(''),
     GC_FROM: GC_SAMPLE[0], GC_TO: first.cdn, GC_ALIAS_DAYS: G.FACTS.aliasCacheDays, GC_BRANCH_HOURS: G.FACTS.branchCacheHours, GC_MAX_MB: G.FACTS.maxFileMB,
     GC_ROWS: GC_FORMATS.map(u => { const r = G.convert(u); if (!r.ok) throw new Error('jsDelivr example failed: ' + u); return `        <tr><td><code>${esc(u)}</code></td><td><code>${esc(r.cdn)}</code></td></tr>`; }).join('\n')
+  };
+}
+
+// ---- Meta tag checker: the preview, counts and the sample check table come from the page's core.
+const MC_SAMPLE = { title: 'Kalkulator Zakat Pendapatan 2026: Kira Zakat Gaji Bulanan', description: 'Kira zakat pendapatan 2026 dengan nisab terkini, kaedah tanpa tolakan atau dengan tolakan, dan jumlah potongan gaji bulanan anda.', url: 'https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/', site: 'The Bukit Besi', keyword: 'zakat pendapatan' };
+const MC_BAD = '<html><head><title>Home</title><meta name="robots" content="noindex"><link rel="canonical" href="/blog/"><meta property="og:title" content="Blog"><meta property="og:image" content="/og.jpg">' +
+  '<script type="application/ld+json">{"@type": "BlogPosting",}</script></head><body><h1>Welcome</h1><h1>Latest posts</h1><img src="a.jpg"><img src="b.jpg" alt="Kopi"></body></html>';
+function metacheckMap() {
+  const M = metaCore, S = MC_SAMPLE, base = { title: S.title, titles: [S.title], description: S.description, h1: [], hreflang: [], og: {}, twitter: {}, ld: [], images: 0, noAlt: 0 };
+  const list = M.check(base, { keyword: S.keyword, url: S.url }).filter(c => ['title', 'description', 'keyword'].includes(c.id));
+  const bad = M.check(M.extract(MC_BAD)), word = { pass: 'Pass', warn: 'Warning', fail: 'Error', info: 'Info' };
+  return {
+    MC_VERIFIED: M.FACTS.verified, MC_CHECKS: M.check(M.extract('<title>a</title><title>b</title><link rel="alternate" hreflang="ms" href="/ms/"><meta property="og:image" content="/i.jpg"><img src="x">'), { keyword: 'x' }).length,
+    MC_TITLE: esc(S.title), MC_DESC: esc(S.description), MC_URL: esc(S.url), MC_SITE: esc(S.site), MC_KW: esc(S.keyword),
+    MC_TITLE_N: `${Array.from(S.title).length} characters`, MC_DESC_N: `${Array.from(S.description).length} characters`,
+    MC_PREVIEW: M.views.serpHtml(S), MC_CHECK_LIST: M.views.checksHtml(list),
+    MC_T0: M.FACTS.title[0], MC_T1: M.FACTS.title[1], MC_D0: M.FACTS.description[0], MC_D1: M.FACTS.description[1],
+    MC_ROWS: bad.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td class="mc-${c.status}">${word[c.status]}</td><td>${esc(c.detail)}</td></tr>`).join('\n')
   };
 }
 
@@ -2864,7 +2883,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { metacheck: metacheckMap, ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3072,6 +3091,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'meta-tag-checker.js': ['assets/js/metacheck-core.js', 'assets/js/metacheck-ui.js'],
   'github-jsdelivr.js': ['assets/js/ghcdn-core.js', 'assets/js/ghcdn-ui.js'],
   'parse-html.js': ['assets/js/escape-core.js', 'assets/js/escape-ui.js'],
   'html-table.js': ['assets/js/table-core.js', 'assets/js/table-ui.js'],

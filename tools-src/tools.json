@@ -90,12 +90,12 @@
     "live": true
   },
   {
-    "name": "SEO Meta Analyzer",
-    "desc": "Check title and description lengths and preview how your text could appear in search results.",
-    "url": "https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html",
+    "name": "Meta Tag Checker and SERP Preview",
+    "desc": "Preview your Google result on mobile and desktop and check title, description, Open Graph, canonical, robots and JSON-LD.",
+    "url": "https://tool.thebukitbesi.com/meta-tag-checker/",
     "cat": "seo",
     "icon": "seo-meta-analyzer-tool",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

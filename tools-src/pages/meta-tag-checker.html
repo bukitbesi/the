@@ -1,0 +1,130 @@
+<!--page
+{
+  "path": "/meta-tag-checker/",
+  "lang": "en",
+  "cat": "seo",
+  "title": "Meta Tag Checker: SERP Preview, Title and Description Length",
+  "description": "Free meta tag checker: preview your Google result on mobile and desktop, check title and description length, Open Graph, canonical, robots and JSON-LD.",
+  "llms": "Free meta tag checker and SERP preview that runs in the browser. Type a title and meta description to see a Google-style result on a phone or desktop width with character counts, or paste a page's HTML (from View Source) to extract and check: title (one title tag; 30 to 60 characters is common practice), meta description (70 to 160 characters common practice), robots noindex and nosnippet, canonical as a full URL, viewport, html lang, charset, H1 headings, image alt attributes, Open Graph (og:title, og:type, og:image and og:url, required by the Open Graph protocol, plus og:image as a full URL), Twitter/X card, hreflang language versions, JSON-LD validity and types, favicon and an optional focus keyword in the title, description, H1 and URL. Google's own guidance: there is no length limit on title elements or meta descriptions; Google truncates them to fit the device width, and may rewrite them. Score out of 100. Nothing is uploaded.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html",
+  "render": "metacheck",
+  "shareTitle": "Share this meta tag checker",
+  "scripts": ["/assets/js/meta-tag-checker.js"],
+  "breadcrumb": [["Tools", "/"], ["SEO Tools", "/?cat=seo#tools"], ["Meta Tag Checker", null]],
+  "about": ["Meta element", "Search engine results page", "Open Graph protocol", "Search engine optimization"],
+  "app": {
+    "name": "Meta Tag Checker",
+    "category": "DeveloperApplication",
+    "features": ["Google-style result preview on mobile and desktop", "Title and description character counts", "Checks robots, canonical, viewport, lang, charset and H1", "Open Graph and Twitter card checks with a social preview", "JSON-LD validity and types", "Image alt text count", "Focus keyword placement", "Score out of 100; runs in the browser"]
+  },
+  "citations": [
+    ["Google Search Central: Influencing your title links", "https://developers.google.com/search/docs/appearance/title-link"],
+    ["Google Search Central: Control your snippets (meta description)", "https://developers.google.com/search/docs/appearance/snippet"],
+    ["Google Search Central: Meta tags and attributes Google supports", "https://developers.google.com/search/docs/crawling-indexing/special-tags"],
+    ["The Open Graph protocol", "https://ogp.me/"]
+  ],
+  "faq": [
+    { "q": "How long should a title tag be?", "a": "Google sets no limit: its documentation says the title link is truncated as needed to fit the device width. In practice about 30 to 60 characters usually shows in full, so the checker flags titles outside that range. Put the most important words first, make each page's title unique, and avoid repeating keywords." },
+    { "q": "How long should a meta description be?", "a": "There is no limit, but Google cuts the snippet to fit the screen, so 70 to 160 characters is a common target. Write a specific summary of the page with the key fact first. Google may still show different text taken from the page if it matches the search better." },
+    { "q": "Why does Google show a different title or description?", "a": "Google writes title links and snippets from several sources: the title tag, the main heading, other prominent text and the meta description. It rewrites them when they are missing, too long, stuffed with keywords or do not match the query. A clear, unique title that matches your H1 is shown as written more often." },
+    { "q": "How do I check the meta tags of any page?", "a": "Open the page, press Ctrl+U (or add view-source: before the address on a phone) to see the HTML, copy everything and paste it into the HTML box. The checker reads the head and body without loading the page, so it also works for pages on your own computer or behind a login." },
+    { "q": "What are Open Graph tags?", "a": "Open Graph tags (og:title, og:type, og:image and og:url, which the protocol requires, plus og:description) control the title, picture and text that Facebook, WhatsApp, LinkedIn and Telegram show when your link is shared. og:image must be a full https:// address. X uses twitter:card and falls back to Open Graph." },
+    { "q": "Does the meta keywords tag help SEO?", "a": "No. Google does not use the keywords meta tag for ranking, so the checker ignores it. Use the focus keyword box instead: it checks whether your main phrase appears in the title, description, H1 and URL, where it helps people choose your result." },
+    { "q": "What does the score mean?", "a": "Each check counts as a pass (full point), a warning (half) or an error (zero); information-only items are not scored. 100 means every check passed. An error such as noindex or a missing viewport matters far more than a title that is a few characters long, so fix errors first." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=seo#tools">SEO Tools</a></li><li aria-current="page">Meta Tag Checker</li></ol></nav>
+  <h1>Meta Tag Checker and SERP Preview</h1>
+  <p class="answer">Type a title and description to <strong>see how your page could look in Google on a phone or desktop</strong>, or paste the page's HTML to <strong>check {{MC_CHECKS}} things at once</strong>: title, description, robots, canonical, Open Graph, JSON-LD, headings and image alt text. Google sets no length limit; it cuts titles and snippets to fit the screen.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{MC_VERIFIED}}</span><a href="#checks">What is checked</a></p>
+
+  <form class="box mc-tool" id="mcForm" novalidate aria-labelledby="mc-h">
+    <h2 id="mc-h" class="sr-only">Check meta tags</h2>
+    <div class="mc-grid">
+      <div>
+        <div class="field"><label for="mcTitle">Title</label><input class="input" id="mcTitle" value="{{MC_TITLE}}" autocomplete="off"><p class="help mc-count" id="mcTitleN">{{MC_TITLE_N}}</p></div>
+        <div class="field"><label for="mcDesc">Meta description</label><textarea class="prose-in short" id="mcDesc">{{MC_DESC}}</textarea><p class="help mc-count" id="mcDescN">{{MC_DESC_N}}</p></div>
+        <div class="field"><label for="mcUrl">Page URL</label><input class="input" id="mcUrl" type="url" value="{{MC_URL}}" autocomplete="off"></div>
+        <div class="mc-two">
+          <div class="field"><label for="mcSite">Site name</label><input class="input" id="mcSite" value="{{MC_SITE}}" autocomplete="off"></div>
+          <div class="field"><label for="mcKw">Focus keyword</label><input class="input" id="mcKw" value="{{MC_KW}}" autocomplete="off"></div>
+        </div>
+      </div>
+      <div>
+        <fieldset class="seg" aria-label="Device"><label><input type="radio" name="device" value="mobile" checked> Mobile</label><label><input type="radio" name="device" value="desktop"> Desktop</label></fieldset>
+        <div class="mc-preview mc-mobile" id="mcPreview" aria-label="Search result preview">{{MC_PREVIEW}}</div>
+        <p class="help" id="mcScore" aria-live="polite">Paste the page HTML below for the full check.</p>
+        <div id="mcChecks">{{MC_CHECK_LIST}}</div>
+        <div class="mc-social" id="mcSocial" hidden aria-label="Social share preview"></div>
+      </div>
+    </div>
+    <div class="field"><label for="mcHtml">Check a whole page: paste its HTML (Ctrl+U, View Source)</label><textarea class="code mc-html" id="mcHtml" spellcheck="false" autocomplete="off" placeholder="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;…"></textarea></div>
+    <div class="tool-actions mc-row"><button type="submit" class="btn sm">Check page</button></div>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to check your meta tags</h2>
+  <ol>
+    <li><strong>Type your title and description</strong> to preview them and see the character counts.</li>
+    <li><strong>For a full check, open your page</strong> and press Ctrl+U (or type view-source: before the address).</li>
+    <li><strong>Copy all the HTML and paste it</strong> into the box. The fields fill themselves and every check runs.</li>
+    <li><strong>Fix the red items first</strong> (noindex, missing viewport, broken JSON-LD), then the orange ones.</li>
+    <li><strong>Edit your title and description</strong> here until the preview reads well, then copy them into Blogger or WordPress.</li>
+  </ol>
+
+  <h2 id="checks">What is checked</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="checks-cap">
+    <table class="data text"><caption id="checks-cap">Checks on a sample page with problems, run by the tool</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Result</th><th scope="col">Detail</th></tr></thead>
+      <tbody>
+{{MC_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="lengths">Title and description lengths</h2>
+  <p>Google's documentation says there is no limit on the length of a title element or a meta description; both are truncated as needed to fit the device width. The ranges below are common practice that usually shows in full, not Google rules.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="len-cap">
+    <table class="data text"><caption id="len-cap">Guideline ranges used by the checker</caption>
+      <thead><tr><th scope="col">Tag</th><th scope="col">Usually shows in full</th><th scope="col">Google limit</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Title</th><td>{{MC_T0}} to {{MC_T1}} characters</td><td>None (truncated to fit)</td></tr>
+        <tr><th scope="row">Meta description</th><td>{{MC_D0}} to {{MC_D1}} characters</td><td>None (truncated to fit)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Note:</strong> the preview imitates the layout of a search result to help you write; Google's real result can use different text, sitelinks or images, and changes its design over time.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.google.com/search/docs/appearance/title-link" rel="noopener">Google Search Central: title links</a></li>
+    <li><a href="https://developers.google.com/search/docs/appearance/snippet" rel="noopener">Google Search Central: snippets and meta descriptions</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/special-tags" rel="noopener">Google Search Central: meta tags Google supports</a></li>
+    <li><a href="https://ogp.me/" rel="noopener">The Open Graph protocol</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/schema-markup-generator/">Schema Markup Generator<small>JSON-LD checked against Google rules</small></a>
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>Control crawlers and AI bots</small></a>
+    <a href="/word-counter/">Word Counter<small>Keyword density and readability</small></a>
+  </div>
+</section>
+</div>
