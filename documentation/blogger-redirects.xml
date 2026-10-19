@@ -54,6 +54,9 @@
 <b:case value='https://www.thebukitbesi.com/p/json-formatter-validator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/json-formatter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/json-formatter/");</script>
+<b:case value='https://www.thebukitbesi.com/p/json-schema-markup-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/");</script>
 <b:case value='https://www.thebukitbesi.com/p/kalkulator-bmi.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/kalkulator-bmi/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/kalkulator-bmi/");</script>
@@ -90,6 +93,9 @@
 <b:case value='https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/whatsapp-sticker-maker/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/whatsapp-sticker-maker/");</script>
+<b:case value='https://www.thebukitbesi.com/p/video-schema-markup-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/#type=video' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/#type=video");</script>
 <b:case value='https://www.thebukitbesi.com/p/webp-image-converter.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/image-converter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/image-converter/");</script>

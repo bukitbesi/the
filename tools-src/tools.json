@@ -81,20 +81,11 @@
     "live": true
   },
   {
-    "name": "JSON-LD Schema Markup Generator",
-    "desc": "Generate structured data for articles, organizations, local businesses and other supported page types.",
-    "url": "https://www.thebukitbesi.com/p/json-schema-markup-generator.html",
+    "name": "Schema Markup Generator (JSON-LD)",
+    "desc": "JSON-LD for Article, Product, Local Business, Event, Recipe, Video and more, checked against Google's required properties.",
+    "url": "https://tool.thebukitbesi.com/schema-markup-generator/",
     "cat": "seo",
     "icon": "json-schema-markup-generator",
-    "badge": "new",
-    "live": true
-  },
-  {
-    "name": "Video Schema Markup Generator",
-    "desc": "Create VideoObject JSON-LD from your video details for use on your website.",
-    "url": "https://www.thebukitbesi.com/p/video-schema-markup-generator.html",
-    "cat": "seo",
-    "icon": "video-schema-markup-generator",
     "badge": "new",
     "live": true
   },

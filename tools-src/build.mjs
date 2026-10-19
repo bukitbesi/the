@@ -99,6 +99,7 @@ const caseCore = require('../assets/js/case-core.js');
 const contrastCore = require('../assets/js/contrast-core.js');
 const waCore = require('../assets/js/wa-core.js');
 const privacyCore = require('../assets/js/privacy-core.js');
+const schemaCore = require('../assets/js/schema-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1171,6 +1172,26 @@ function privacyMap() {
     PP_VERIFIED: P.FACTS.verified, PP_SITE: esc(d.site), PP_URL: esc(d.url), PP_OWNER: esc(d.owner), PP_EMAIL: esc(d.email), PP_DATE: d.date,
     PP_PREVIEW: P.html(docs, 3), PP_ISSUES: '<li>Replace the example name, owner or email with your own before publishing.</li>',
     PP_FRAMEWORK: PP_FRAMEWORK.map(([item, id], i) => `        <tr><th scope="row">${i + 1}. ${esc(item)}</th><td>${esc(titles[id])}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Schema markup generator: type buttons, the first form, its JSON-LD and the requirements table come from the core.
+function schemaMap() {
+  const S = schemaCore, first = 'article', r = S.generate(first, S.defaults(first));
+  const label = (t, k) => (S.TYPES[t].fields.find(f => f[0] === k) || [k, k])[1].replace(/ \(.*\)$/, '');
+  const PROPS = { article: [[], 'headline, image, datePublished, dateModified, author'], product: [['name', 'offers, review or aggregateRating'], 'image, description, brand'],
+    local: [['name', 'address'], 'telephone, url, image, openingHoursSpecification, geo, priceRange'], organization: [[], 'name, url, logo, sameAs'],
+    event: [['name', 'startDate', 'location (with address)'], 'description, endDate, image, organizer, offers, eventStatus'], recipe: [['name', 'image'], 'author, prepTime, cookTime, recipeIngredient, recipeInstructions, recipeYield'],
+    video: [['name', 'thumbnailUrl', 'uploadDate'], 'description, duration, contentUrl or embedUrl, creator'], software: [['name', 'offers.price', 'aggregateRating or review'], 'applicationCategory, operatingSystem'],
+    breadcrumb: [['itemListElement (position, name, item)'], ''], website: [['name', 'url'], 'alternateName'], faq: [['mainEntity (Question, acceptedAnswer)'], '']
+  };
+  if (Object.keys(PROPS).join() !== Object.keys(S.TYPES).join()) throw new Error('schema requirement table out of step with TYPES');
+  const vid = S.generate('video', S.defaults('video'));
+  return {
+    SC_VERIFIED: S.FACTS.verified, SC_COUNT: Object.keys(S.TYPES).length, SC_LABEL: esc(S.TYPES[first].label), SC_RICH: esc(S.TYPES[first].rich),
+    SC_TYPE_BTNS: Object.entries(S.TYPES).map(([k, t]) => `<button type="button" class="btn ghost sm" data-type="${k}" aria-pressed="${k === first}">${esc(t.label)}</button>`).join(''),
+    SC_FIELDS: S.views.formHtml(first), SC_CHECKS: S.views.checksHtml(r), SC_OUT: esc(S.scriptTag(r.text)), SC_EXAMPLE: esc(S.scriptTag(vid.text)),
+    SC_TYPE_ROWS: Object.entries(PROPS).map(([k, [req, rec]]) => `        <tr><th scope="row">${esc(S.TYPES[k].label)}</th><td>${req.length ? req.map(x => `<code>${esc(x)}</code>`).join(', ') : 'None'}</td><td>${esc(rec) || '–'}</td><td>${esc(S.TYPES[k].rich)}</td></tr>`).join('\n')
   };
 }
 
@@ -2753,7 +2774,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2961,6 +2982,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'schema-markup.js': ['assets/js/schema-core.js', 'assets/js/schema-ui.js'],
   'privacy-policy.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/privacy-core.js', 'assets/js/privacy-ui.js'],
   'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],
   'color-contrast.js': ['assets/js/contrast-core.js', 'assets/js/contrast-ui.js'],

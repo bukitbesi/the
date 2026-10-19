@@ -1,0 +1,135 @@
+<!--page
+{
+  "path": "/schema-markup-generator/",
+  "lang": "en",
+  "cat": "seo",
+  "title": "Schema Markup Generator: JSON-LD for Article, Product, Video",
+  "description": "Free JSON-LD schema generator for Article, Product, Local Business, Event, Recipe, Video and more, checked against Google's required properties.",
+  "llms": "Free JSON-LD schema markup generator that checks each type against Google Search Central's required and recommended properties. Types: Article/BlogPosting/NewsArticle (no required properties; recommended headline, image, datePublished, dateModified, author), Product (name plus one of offers, review or aggregateRating), Local business (name and address; opening hours from text like Mon-Fri 09:00-18:00), Organization, Event (name, startDate and location with address; online, offline or mixed attendance), Recipe (name and image; prep and cook times converted to ISO 8601), Video (name, thumbnailUrl and uploadDate; a YouTube link fills the embed URL and thumbnail; durations like 3:25 become PT3M25S), Software app (name, offers.price and a rating or review), Breadcrumb, WebSite site name, and FAQPage. Google stopped showing FAQ rich results on 7 May 2026, but FAQPage markup is still read by other search engines and AI assistants. Times default to Malaysia time (+08:00) and prices to MYR. Copy the script tag or download JSON.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/json-schema-markup-generator.html", ["https://www.thebukitbesi.com/p/video-schema-markup-generator.html", "#type=video"]],
+  "render": "schema",
+  "shareTitle": "Share this schema markup generator",
+  "scripts": ["/assets/js/schema-markup.js"],
+  "breadcrumb": [["Tools", "/"], ["SEO Tools", "/?cat=seo#tools"], ["Schema Markup Generator", null]],
+  "about": ["Schema.org", "JSON-LD", "Structured data", "Rich results", "Search engine optimization"],
+  "app": {
+    "name": "Schema Markup Generator",
+    "category": "DeveloperApplication",
+    "features": ["JSON-LD for 11 types including Article, Product, Local business, Event, Recipe, Video and Software app", "Checks Google's required and recommended properties as you type", "YouTube link fills video embed URL and thumbnail", "Opening hours, durations and dates converted to schema.org formats", "Malaysia time zone and MYR by default", "Copy the script tag or download JSON", "Answers saved per type in your browser"]
+  },
+  "citations": [
+    ["Google Search Central: Structured data markup that Google Search supports", "https://developers.google.com/search/docs/appearance/structured-data/search-gallery"],
+    ["Google Search Central: Video (VideoObject) structured data", "https://developers.google.com/search/docs/appearance/structured-data/video"],
+    ["Google Search Central: Product snippet structured data", "https://developers.google.com/search/docs/appearance/structured-data/product-snippet"],
+    ["Google Search Central: Latest documentation updates (FAQ rich result removed)", "https://developers.google.com/search/updates"],
+    ["Google Search Central Blog: Simplifying the search results page (June 2025)", "https://developers.google.com/search/blog/2025/06/simplifying-search-results"],
+    ["Schema.org", "https://schema.org/"]
+  ],
+  "faq": [
+    { "q": "What is schema markup?", "a": "Schema markup is structured data, written in the schema.org vocabulary, that tells search engines exactly what a page is about: an article, a product with a price, a business with opening hours, a recipe, a video. Google recommends the JSON-LD format, a script block you paste into the page's HTML. Correct markup makes a page eligible for rich results such as prices, ratings, video thumbnails and recipe cards." },
+    { "q": "Does schema markup improve rankings?", "a": "Not directly. Google uses structured data to understand a page and to show rich results, and says markup does not guarantee that a rich result will appear. It can make your result richer, with a price, rating, video thumbnail or event date, which can earn more clicks, and it helps search engines and AI assistants understand and quote your content accurately." },
+    { "q": "Does FAQ schema still work in Google?", "a": "No longer for rich results. Google stopped showing FAQ rich results in Search on 7 May 2026 and removed the documentation, after limiting them to government and health sites in 2023. FAQPage markup is still valid schema.org, does not hurt, and other search engines and AI assistants can still read it, so the generator keeps it, clearly labelled." },
+    { "q": "Which properties does Google require for video schema?", "a": "VideoObject needs name, thumbnailUrl and uploadDate. Description, duration, contentUrl or embedUrl, and the creator are recommended. Paste a YouTube link and the generator fills the embed URL and thumbnail, and converts a duration like 3:25 into the ISO 8601 form PT3M25S that Google expects." },
+    { "q": "How do I add JSON-LD to Blogger or WordPress?", "a": "Copy the script tag. In Blogger, switch the post editor to HTML view and paste it at the end of the post, or for site-wide markup (Organization, WebSite) paste it in Theme, Edit HTML, just before </head>. In WordPress, use a Custom HTML block in the post or your SEO plugin's schema settings. Then test the page in Google's Rich Results Test." },
+    { "q": "Can I add review stars to my own product or app?", "a": "Only with genuine ratings from real customers that are shown on the page. Google's review snippet guidelines forbid self-written or made-up reviews, and fake ratings can lead to a manual action. Leave the rating fields empty if you do not collect reviews; a product can still show price and availability with offers alone." },
+    { "q": "Which schema types did Google stop supporting?", "a": "Besides FAQ (May 2026), Google phased out Book Actions, Course Info, Claim Review, Estimated Salary, Learning Video, Special Announcement and Vehicle Listing in 2025, and HowTo rich results earlier. This generator only offers types Google still uses, plus FAQPage for other search engines and AI assistants." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=seo#tools">SEO Tools</a></li><li aria-current="page">Schema Markup Generator</li></ol></nav>
+  <h1>Schema Markup Generator (JSON-LD)</h1>
+  <p class="answer">Pick a type, fill in the form and get <strong>ready-to-paste JSON-LD schema markup, checked against the properties Google requires</strong> for rich results. It covers <strong>{{SC_COUNT}} types</strong>, including Article, Product, Local Business, Event, Recipe and Video. Paste a YouTube link and the video thumbnail and embed URL fill themselves.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{SC_VERIFIED}}</span><a href="#types">Required properties</a></p>
+
+  <form class="box sc-tool" id="scForm" novalidate aria-labelledby="sc-h">
+    <h2 id="sc-h" class="sr-only">Generate schema markup</h2>
+    <div class="sc-types" role="group" aria-label="Schema type">{{SC_TYPE_BTNS}}</div>
+    <p class="help sc-rich" id="scRich">{{SC_RICH}}</p>
+    <div class="sc-grid">
+      <section aria-labelledby="scFieldsH">
+        <h3 class="sub-h" id="scFieldsH">{{SC_LABEL}} details</h3>
+        <div class="sc-fields" id="scFields">{{SC_FIELDS}}</div>
+        <div class="field sc-tzf"><label for="scTz">Time zone for dates</label><select class="input" id="scTz"><option value="+08:00" selected>Malaysia, Singapore (+08:00)</option><option value="+07:00">Indonesia WIB, Thailand (+07:00)</option><option value="+09:00">Japan, Korea (+09:00)</option><option value="+00:00">UTC (+00:00)</option><option value="+01:00">UK summer, Central Europe (+01:00)</option></select></div>
+      </section>
+      <section class="sc-out" aria-labelledby="scOutH">
+        <h3 class="sub-h" id="scOutH">JSON-LD</h3>
+        <div id="scChecks" aria-live="polite">{{SC_CHECKS}}</div>
+        <label for="scOut" class="sr-only">JSON-LD script</label>
+        <textarea class="code sc-code" id="scOut" readonly spellcheck="false">{{SC_OUT}}</textarea>
+        <div class="tool-actions sc-row">
+          <button type="button" class="btn sm" id="scCopy">Copy code</button>
+          <button type="button" class="btn ghost sm" id="scDownload">Download .json</button>
+          <a class="btn ghost sm" href="https://search.google.com/test/rich-results" rel="noopener">Rich Results Test</a>
+          <button type="button" class="btn ghost sm" id="scReset">Reset form</button>
+        </div>
+      </section>
+    </div>
+    <p class="sr-only" id="scLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to add schema markup to your page</h2>
+  <ol>
+    <li><strong>Choose the type</strong> that matches the main content of the page: one article, one product, one recipe.</li>
+    <li><strong>Fill in the form</strong> with exactly what is visible on the page. Markup must match the page content.</li>
+    <li><strong>Fix the red items:</strong> they are properties Google requires. Orange items are recommended.</li>
+    <li><strong>Copy the script tag</strong> and paste it into the page's HTML (in the post body or before &lt;/head&gt;).</li>
+    <li><strong>Test the live page</strong> in Google's Rich Results Test, then request indexing in Search Console.</li>
+  </ol>
+
+  <h2 id="types">Required properties by type</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="types-cap">
+    <table class="data text"><caption id="types-cap">What Google requires and recommends (from Google Search Central)</caption>
+      <thead><tr><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Recommended</th><th scope="col">What it can show</th></tr></thead>
+      <tbody>
+{{SC_TYPE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="example">Example: video schema</h2>
+  <p>A YouTube video embedded in a blog post, with the duration 3:25 converted to ISO 8601:</p>
+  <pre class="code-block"><code>{{SC_EXAMPLE}}</code></pre>
+  <h2 id="retired">Rich results Google no longer shows</h2>
+  <ul>
+    <li><strong>FAQ:</strong> removed from Google Search on 7 May 2026 (limited to government and health sites since 2023).</li>
+    <li><strong>HowTo:</strong> removed in 2023.</li>
+    <li><strong>Book Actions, Course Info, Claim Review, Estimated Salary, Learning Video, Special Announcement, Vehicle Listing:</strong> phased out from June 2025.</li>
+  </ul>
+  <p>The markup is still valid schema.org and does no harm; it simply no longer produces a special result in Google.</p>
+  <div class="callout"><p><strong>Rules:</strong> only mark up content visitors can see on the page, never invent reviews or ratings, and use one main type per page. Misleading structured data can lead to a manual action that removes your rich results.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery" rel="noopener">Google Search Central: Structured data Google Search supports</a></li>
+    <li><a href="https://developers.google.com/search/docs/appearance/structured-data/video" rel="noopener">Google Search Central: Video structured data</a></li>
+    <li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet" rel="noopener">Google Search Central: Product snippets</a></li>
+    <li><a href="https://developers.google.com/search/updates" rel="noopener">Google Search Central: Latest documentation updates</a></li>
+    <li><a href="https://developers.google.com/search/blog/2025/06/simplifying-search-results" rel="noopener">Google Search Central Blog: Simplifying the search results page</a></li>
+    <li><a href="https://schema.org/" rel="noopener">Schema.org vocabulary</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/json-formatter/">JSON Formatter<small>Validate and fix JSON</small></a>
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>Control crawlers and AI bots</small></a>
+    <a href="/exif-editor/">EXIF Editor<small>Image metadata for Google Images</small></a>
+  </div>
+</section>
+</div>
