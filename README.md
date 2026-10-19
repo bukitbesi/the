@@ -181,6 +181,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/text-to-html/](https://tool.thebukitbesi.com/text-to-html/) | English | text to html converter, convert text to html, markdown to html, html to text |
 | [/html-table-generator/](https://tool.thebukitbesi.com/html-table-generator/) | English | html table generator, excel to html table, responsive table html, markdown table generator |
 | [/parse-html/](https://tool.thebukitbesi.com/parse-html/) | English | parse html blogger, html escape, html entity encoder decoder, url encode decode, base64 decode |
+| [/github-to-jsdelivr/](https://tool.thebukitbesi.com/github-to-jsdelivr/) | English | github to jsdelivr, github cdn, raw github to cdn, jsdelivr link converter |
 | [/color-contrast-checker/](https://tool.thebukitbesi.com/color-contrast-checker/) | English | color contrast checker, wcag contrast checker, contrast ratio, accessible colors, color blind simulator |
 | [/whatsapp-link-generator/](https://tool.thebukitbesi.com/whatsapp-link-generator/) | English | whatsapp link generator, wa.me link, whatsapp qr code, whatsapp button for website, link whatsapp |
 | [/privacy-policy-generator/](https://tool.thebukitbesi.com/privacy-policy-generator/) | English (output EN + BM) | privacy policy generator, privacy policy malaysia, pdpa privacy notice, adsense privacy policy, dasar privasi |
@@ -509,3 +510,5 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 **Upkeep (HTML table generator):** `table-core.js` has no yearly figures; the five styles live in `THEMES`. English only by design.
 
 **Upkeep (Parse HTML):** `escape-core.js` has no yearly figures; tests check every mode round-trips. Replaces two Blogger pages (parse-html to `#mode=html`, parser-unparser to `#mode=js`). English only by design.
+
+**Upkeep (GitHub to jsDelivr):** `ghcdn-core.js` `FACTS` holds jsDelivr's cache times (branches 12 h, aliases 7 days) and the 20 MB GitHub file limit from jsDelivr's documentation; recheck it and the acceptable use policy yearly, then `FACTS.verified`.

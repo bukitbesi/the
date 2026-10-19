@@ -45,6 +45,9 @@
 <b:case value='https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/word-counter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/word-counter/");</script>
+<b:case value='https://www.thebukitbesi.com/p/github-link-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/github-to-jsdelivr/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/github-to-jsdelivr/");</script>
 <b:case value='https://www.thebukitbesi.com/p/html-beautifier-online.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/html-beautifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/html-beautifier/");</script>

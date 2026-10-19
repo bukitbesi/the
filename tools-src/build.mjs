@@ -104,6 +104,7 @@ const textCore = require('../assets/js/textclean-core.js');
 const textHtmlCore = require('../assets/js/texthtml-core.js');
 const tableCore = require('../assets/js/table-core.js');
 const escapeCore = require('../assets/js/escape-core.js');
+const ghCore = require('../assets/js/ghcdn-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1268,6 +1269,19 @@ function escapeMap() {
     ES_EXAMPLE: `For example ${ES_SAMPLE} becomes ${out}.`,
     ES_ROWS: Object.entries(E.MODES).map(([k, m]) => `        <tr><th scope="row">${esc(m.label)}</th><td><code>${esc(E.run(k, 'encode', ES_SAMPLE).text)}</code></td><td>${ES_USE[k]}</td></tr>`).join('\n'),
     ES_ENTITIES: ents.map(c => `        <tr><th scope="row">${c === '\u00A0' ? '(non-breaking space)' : esc(c)}</th><td><code>&amp;${named(c)};</code></td><td><code>&amp;#${c.codePointAt(0)};</code></td></tr>`).join('\n')
+  };
+}
+
+// ---- GitHub to jsDelivr: sample results and the formats table come from the page's core.
+const GC_SAMPLE = ['https://github.com/jquery/jquery/blob/3.6.4/dist/jquery.js', 'https://github.com/bukitbesi/theme/blob/main/css/style.css'];
+const GC_FORMATS = ['https://github.com/user/repo/blob/main/js/app.js', 'https://raw.githubusercontent.com/user/repo/main/js/app.js', 'https://raw.githubusercontent.com/user/repo/refs/heads/main/js/app.js',
+  'https://github.com/user/repo/blob/1.2.0/dist/app.css', 'https://github.com/user/repo/tree/main/fonts', 'https://github.com/user/repo/blob/32b00373b3f42e5cdcb709df53f3b08b7184a944/js/app.js'];
+function ghcdnMap() {
+  const G = ghCore, first = G.convert(GC_SAMPLE[0]);
+  return {
+    GC_VERIFIED: G.FACTS.verified, GC_IN: esc(GC_SAMPLE.join('\n')), GC_OUT: GC_SAMPLE.map((l, i) => G.views.resultHtml(G.convert(l), i)).join(''),
+    GC_FROM: GC_SAMPLE[0], GC_TO: first.cdn, GC_ALIAS_DAYS: G.FACTS.aliasCacheDays, GC_BRANCH_HOURS: G.FACTS.branchCacheHours, GC_MAX_MB: G.FACTS.maxFileMB,
+    GC_ROWS: GC_FORMATS.map(u => { const r = G.convert(u); if (!r.ok) throw new Error('jsDelivr example failed: ' + u); return `        <tr><td><code>${esc(u)}</code></td><td><code>${esc(r.cdn)}</code></td></tr>`; }).join('\n')
   };
 }
 
@@ -2850,7 +2864,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3058,6 +3072,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'github-jsdelivr.js': ['assets/js/ghcdn-core.js', 'assets/js/ghcdn-ui.js'],
   'parse-html.js': ['assets/js/escape-core.js', 'assets/js/escape-ui.js'],
   'html-table.js': ['assets/js/table-core.js', 'assets/js/table-ui.js'],
   'text-to-html.js': ['assets/js/notepad-core.js', 'assets/js/texthtml-core.js', 'assets/js/texthtml-ui.js'],

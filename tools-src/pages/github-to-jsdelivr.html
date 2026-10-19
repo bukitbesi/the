@@ -1,0 +1,114 @@
+<!--page
+{
+  "path": "/github-to-jsdelivr/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "GitHub to jsDelivr: Convert GitHub File Links to a Free CDN",
+  "description": "Free GitHub to jsDelivr converter: turn GitHub file and raw links into fast jsDelivr CDN URLs with minified versions and ready script or link tags.",
+  "llms": "Free converter from GitHub links to jsDelivr CDN URLs. Accepts github.com blob, raw and tree links, raw.githubusercontent.com links (including refs/heads and refs/tags) and existing cdn.jsdelivr.net/gh/ links, several at once, and writes jsDelivr's documented format https://cdn.jsdelivr.net/gh/user/repo@version/file. For .js and .css files it also gives the .min version (jsDelivr minifies on demand), plus a ready <script defer>, <link rel=stylesheet>, <img> or @font-face tag. For semver tags it offers range URLs (@3, @3.6). Notes from jsDelivr's documentation: branch links are cached up to 12 hours and version-aliased or latest links up to 7 days, while exact versions and commit hashes never change; GitHub files over 20 MB are not served; HTML files are served as plain text; jsDelivr must not be used as general image or file hosting. Why: GitHub serves raw files as text/plain with nosniff, so browsers refuse to run them as scripts or styles.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/github-link-converter.html",
+  "render": "ghcdn",
+  "shareTitle": "Share this GitHub to jsDelivr converter",
+  "scripts": ["/assets/js/github-jsdelivr.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["GitHub to jsDelivr", null]],
+  "about": ["jsDelivr", "GitHub", "Content delivery network"],
+  "app": {
+    "name": "GitHub to jsDelivr Converter",
+    "category": "DeveloperApplication",
+    "features": ["Converts github.com, raw.githubusercontent.com and jsDelivr links", "Several links at once", "Minified .min.js and .min.css URLs", "Ready script, link, img and font-face code", "Semver range URLs", "Caching notes for branches, tags and commits"]
+  },
+  "citations": [
+    ["jsDelivr documentation: GitHub", "https://www.jsdelivr.com/documentation"],
+    ["jsDelivr: Purge cache tool", "https://www.jsdelivr.com/tools/purge"],
+    ["jsDelivr Acceptable Use Policy", "https://www.jsdelivr.com/terms/acceptable-use-policy-jsdelivr-net"],
+    ["GitHub Blog: nosniff header for raw files", "https://github.blog/2013-04-24-heads-up-nosniff-header-support-coming-to-chrome-and-firefox/"]
+  ],
+  "faq": [
+    { "q": "How do I convert a GitHub link to jsDelivr?", "a": "Paste the link to the file on GitHub, such as {{GC_FROM}}, and you get {{GC_TO}}. The pattern is https://cdn.jsdelivr.net/gh/user/repo@version/file, where version is a release tag, a branch or a commit hash. Several links can be pasted at once, one per line." },
+    { "q": "Why can't I use raw.githubusercontent.com links on my site?", "a": "GitHub serves raw files as plain text with the X-Content-Type-Options: nosniff header, so browsers refuse to run them as JavaScript or apply them as CSS. Raw links are also rate-limited and not built for website traffic. jsDelivr serves the same files with the right content type from a global CDN." },
+    { "q": "Why don't my changes show on the jsDelivr link?", "a": "jsDelivr caches branch links (such as @main) for up to 12 hours and latest or version-range links for up to 7 days. Links to an exact version or commit never change. For a live website, tag a release (for example 1.0.1) and update the link, or use the commit hash; jsDelivr's purge tool can refresh @latest and alias links sooner." },
+    { "q": "Can jsDelivr minify my JavaScript or CSS?", "a": "Yes. Add .min before .js or .css (app.js becomes app.min.js) and jsDelivr generates a minified copy if the repository does not have one. The converter gives the minified URL first for JS and CSS files." },
+    { "q": "Can I host images for Blogger on GitHub with jsDelivr?", "a": "Theme assets such as a logo, icons, fonts, CSS and JavaScript are fine. jsDelivr's acceptable use policy forbids using it as a general-purpose file or media hosting service, for example as storage for all the images of a site, so keep post photos on Blogger's own image hosting. Files over 20 MB from GitHub are not served." },
+    { "q": "Does it work with private repositories?", "a": "No. jsDelivr only serves public GitHub repositories and the files must be meant for public use. Do not put API keys or secrets in a repository you load through a CDN." },
+    { "q": "Is jsDelivr free?", "a": "Yes, jsDelivr is a free, open-source public CDN for files from npm and public GitHub repositories, with no sign-up. It serves billions of requests a month through several CDN providers." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">GitHub to jsDelivr</li></ol></nav>
+  <h1>GitHub to jsDelivr Converter</h1>
+  <p class="answer">Paste a GitHub file link to get a <strong>free jsDelivr CDN URL that browsers can load as a script or stylesheet</strong>: <code>github.com/user/repo/blob/main/app.js</code> becomes <code>cdn.jsdelivr.net/gh/user/repo@main/app.js</code>. You also get the minified version and a ready HTML tag.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{GC_VERIFIED}}</span><a href="#caching">Caching rules</a></p>
+
+  <form class="box gc-tool" id="gcForm" novalidate aria-labelledby="gc-h">
+    <h2 id="gc-h" class="sr-only">Convert GitHub links</h2>
+    <div class="field"><label for="gcIn">GitHub links (one per line)</label><textarea class="code gc-in" id="gcIn" spellcheck="false" autocomplete="off" autocapitalize="off">{{GC_IN}}</textarea></div>
+    <div class="tool-actions gc-row"><button type="submit" class="btn sm">Convert</button><button type="button" class="btn ghost sm" id="gcClear">Clear</button></div>
+    <div class="gc-out" id="gcOut" aria-live="polite">{{GC_OUT}}</div>
+    <p class="sr-only" id="gcLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to use GitHub files as a CDN</h2>
+  <ol>
+    <li><strong>Upload the file to a public GitHub repository</strong> (CSS, JavaScript, fonts or theme images).</li>
+    <li><strong>Open the file on GitHub and copy the address</strong> from the browser bar.</li>
+    <li><strong>Paste it here</strong> and copy the jsDelivr URL or the ready HTML tag.</li>
+    <li><strong>For a live site, use a release tag or commit</strong> instead of a branch, so a change on GitHub cannot break your site and the file is cached forever.</li>
+    <li><strong>Paste the tag</strong> into Blogger (Theme, Edit HTML, before &lt;/head&gt;) or your site's template.</li>
+  </ol>
+
+  <h2 id="formats">Link formats it understands</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fmt-cap">
+    <table class="data text gc-table"><caption id="fmt-cap">Input link and the jsDelivr URL it becomes</caption>
+      <thead><tr><th scope="col">You paste</th><th scope="col">jsDelivr URL</th></tr></thead>
+      <tbody>
+{{GC_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="caching">jsDelivr caching rules</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cache-cap">
+    <table class="data text"><caption id="cache-cap">How long changes take to appear (jsDelivr documentation)</caption>
+      <thead><tr><th scope="col">Link type</th><th scope="col">Example</th><th scope="col">Updates</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Exact version or commit</th><td><code>@1.2.0</code>, <code>@32b0037…</code></td><td>Never: cached permanently</td></tr>
+        <tr><th scope="row">Version range or latest</th><td><code>@1</code>, <code>@1.2</code>, no @</td><td>Up to {{GC_ALIAS_DAYS}} days, or sooner with the purge tool</td></tr>
+        <tr><th scope="row">Branch</th><td><code>@main</code></td><td>Up to {{GC_BRANCH_HOURS}} hours</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Rules:</strong> jsDelivr serves public, open files only. Do not use it to host every image of a website, do not load files over {{GC_MAX_MB}} MB, and remember HTML files are served as plain text.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.jsdelivr.com/documentation" rel="noopener">jsDelivr documentation</a></li>
+    <li><a href="https://www.jsdelivr.com/tools/purge" rel="noopener">jsDelivr purge cache tool</a></li>
+    <li><a href="https://www.jsdelivr.com/terms/acceptable-use-policy-jsdelivr-net" rel="noopener">jsDelivr acceptable use policy</a></li>
+    <li><a href="https://github.blog/2013-04-24-heads-up-nosniff-header-support-coming-to-chrome-and-firefox/" rel="noopener">GitHub Blog: nosniff on raw files</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/javascript-minifier/">JavaScript Minifier<small>Minify before you upload</small></a>
+    <a href="/css-minifier/">CSS Minifier<small>Smaller stylesheets</small></a>
+    <a href="/parse-html/">Parse HTML<small>Escape code for Blogger</small></a>
+  </div>
+</section>
+</div>

@@ -63,12 +63,12 @@
     "live": true
   },
   {
-    "name": "GitHub Link Converter",
-    "desc": "Turn public GitHub file links into jsDelivr CDN URLs for embedding assets.",
-    "url": "https://www.thebukitbesi.com/p/github-link-converter.html",
+    "name": "GitHub to jsDelivr Converter",
+    "desc": "Turn GitHub file and raw links into jsDelivr CDN URLs with minified versions and ready script or link tags.",
+    "url": "https://tool.thebukitbesi.com/github-to-jsdelivr/",
     "cat": "dev",
     "icon": "github-link-converter",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

@@ -248,6 +248,11 @@
       "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX"
     },
     {
+      "name": "GitHub to jsDelivr Converter",
+      "url": "/github-to-jsdelivr/",
+      "description": "Free GitHub to jsDelivr converter: turn GitHub file and raw links into fast jsDelivr CDN URLs with m"
+    },
+    {
       "name": "Gold Price Malaysia Today",
       "url": "/gold-price-malaysia/",
       "description": "Today's gold price in Malaysia per gram for 999, 916, 750 and more, updated every minute, with Bank "
