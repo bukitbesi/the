@@ -176,7 +176,9 @@ const T = {
     POPULAR: 'Popular tools', CATEGORIES: 'Categories', RESOURCES: 'Resources', ABOUT: 'About', CONTACT: 'Contact',
     PRIVACY: 'Privacy policy', TERMS: 'Terms of use', RIGHTS: 'All rights reserved.', TAGLINE: 'Free tools for the creator community',
     UPDATE: 'Update', OPEN_ANYWAY: 'Open tool anyway', DISMISS: 'Dismiss', AD: 'Advertisement', ALL_TOOLS: 'All tools', OG_LOCALE: 'en_US',
-    SHARE_H: 'Share this calculator', SHARE_RESULT: 'Share result', COPY: 'Copy link', COPIED: 'Link copied', MORE: 'More options'
+    SHARE_H: 'Share this calculator', SHARE_RESULT: 'Share result', COPY: 'Copy link', COPIED: 'Link copied', MORE: 'More options',
+    SEARCH: 'Search tools', SEARCH_PH: 'Search tools, e.g. zakat, JSON, WebP', MENU: 'Menu', CLOSE: 'Close',
+    TRUST_1: 'Free, no sign-up', TRUST_2: 'Rates checked against official Malaysian sources', TRUST_3: 'Installs as an app and works offline'
   },
   ms: {
     SKIP: 'Langkau ke kandungan utama', NAV: 'Laman', DARK: 'Mod gelap', INSTALL: 'Pasang aplikasi',
@@ -184,7 +186,9 @@ const T = {
     POPULAR: 'Alat popular', CATEGORIES: 'Kategori', RESOURCES: 'Sumber', ABOUT: 'Tentang kami', CONTACT: 'Hubungi',
     PRIVACY: 'Dasar privasi', TERMS: 'Terma penggunaan', RIGHTS: 'Hak cipta terpelihara.', TAGLINE: 'Alat percuma untuk komuniti pencipta',
     UPDATE: 'Kemas kini', OPEN_ANYWAY: 'Buka juga', DISMISS: 'Tutup', AD: 'Iklan', ALL_TOOLS: 'Semua alat', OG_LOCALE: 'ms_MY',
-    SHARE_H: 'Kongsi kalkulator ini', SHARE_RESULT: 'Kongsi keputusan', COPY: 'Salin pautan', COPIED: 'Pautan disalin', MORE: 'Pilihan lain'
+    SHARE_H: 'Kongsi kalkulator ini', SHARE_RESULT: 'Kongsi keputusan', COPY: 'Salin pautan', COPIED: 'Pautan disalin', MORE: 'Pilihan lain',
+    SEARCH: 'Cari alat', SEARCH_PH: 'Cari alat, cth. zakat, KWSP, cukai', MENU: 'Menu', CLOSE: 'Tutup',
+    TRUST_1: 'Percuma, tanpa daftar', TRUST_2: 'Kadar disemak dengan sumber rasmi Malaysia', TRUST_3: 'Boleh dipasang sebagai aplikasi dan berfungsi luar talian'
   }
 };
 const CAT_MS = { dev: 'Alat Pembangun', seo: 'Alat SEO', content: 'Alat Kandungan', design: 'Alat Reka Bentuk', ai: 'Alat AI', util: 'Utiliti', calc: 'Kalkulator' };
@@ -234,13 +238,39 @@ gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_persona
 </script>`;
 const gtmBody = !gtmId ? '' : `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>`;
 
-// ---- shared fragments
+// ---- shared fragments: header navigation, mobile menu, footer widgets
+const CAT_SHORT = {
+  en: { calc: 'Calculators', dev: 'Developer', seo: 'SEO', content: 'Content', design: 'Design', ai: 'AI', util: 'Utilities' },
+  ms: { calc: 'Kalkulator', dev: 'Pembangun', seo: 'SEO', content: 'Kandungan', design: 'Reka bentuk', ai: 'AI', util: 'Utiliti' }
+};
+const CAT_ICON = {
+  calc: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2m4 0h2M8 16h2m4 0h2"/>',
+  dev: '<path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/>',
+  seo: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/>',
+  content: '<path d="M5 4h14M5 9h14M5 14h9M5 19h6"/>',
+  design: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/>',
+  ai: '<path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M6 18l2.5-2.5m7-7L18 6"/>',
+  util: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>'
+};
+const catSvg = c => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAT_ICON[c] || CAT_ICON.util}</svg>`;
+const catHref = (c, home) => home ? '#tools' : `/?cat=${c}#tools`;
 const localTools = tools.filter(t => t.url.startsWith(site.origin + '/'));
-const footerPopular = [...new Set([...localTools, ...tools.filter(t => t.badge === 'popular' || t.badge === 'hot')])].slice(0, 6)
-  .map(t => `          <li><a href="${esc(local(t.url))}">${esc(t.name)}</a></li>`).join('\n');
+const popular = [...new Set([...tools.filter(t => t.badge === 'popular' || t.badge === 'hot'), ...localTools])].slice(0, 8);
+const footerPopular = popular.map(t => `          <li><a href="${esc(local(t.url))}"><i class="dot t-${t.cat}" aria-hidden="true"></i>${esc(t.name)}</a></li>`).join('\n');
 // On the home page category links filter in place; elsewhere they open the home page pre-filtered.
 const footerCats = (lang, home) => liveCats.map(c =>
-  `          <li><a href="${home ? '' : `/?cat=${c}`}#tools" data-filter="${c}">${esc(catLabel(c, lang))}</a></li>`).join('\n');
+  `          <li><a href="${catHref(c, home)}" data-filter="${c}"><i class="dot t-${c}" aria-hidden="true"></i>${esc(catLabel(c, lang))}<small>${byCat(c).length}</small></a></li>`).join('\n');
+const navCats = (lang, home, current) => liveCats.map(c =>
+  `      <a href="${catHref(c, home)}" data-filter="${c}"${c === current ? ' class="on"' : ''}>${esc(CAT_SHORT[lang][c])}</a>`).join('\n');
+const menuCats = (lang, home) => liveCats.map(c =>
+  `        <li><a href="${catHref(c, home)}" data-filter="${c}"><span class="mi t-${c}">${catSvg(c)}</span>${esc(CAT_SHORT[lang][c])}<small>${byCat(c).length}</small></a></li>`).join('\n');
+const menuPopular = popular.slice(0, 6).map(t => `        <li><a href="${esc(local(t.url))}">${esc(t.name)}</a></li>`).join('\n');
+const SOCIAL = [
+  ['X', 'https://x.com/' + site.twitter.replace('@', ''), '<path d="M4 4l16 16M20 4 4 20" />'],
+  ['Instagram', 'https://instagram.com/bukitbesi', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>'],
+  ['LinkedIn', 'https://www.linkedin.com/in/bukitbesi/', '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>']
+];
+const footerSocial = SOCIAL.map(([n, u, d]) => `          <a class="hbtn" href="${u}" rel="me noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">${d}</svg><span class="sr-only">${n}</span></a>`).join('\n');
 const faqHtml = faq => faq.map(f => `      <details><summary>${esc(f.q)}</summary><p>${f.html || esc(f.a)}</p></details>`).join('\n');
 const faqSchema = (faq, id, pageId) => ({
   '@type': 'FAQPage', '@id': id, isPartOf: { '@id': pageId },
@@ -278,7 +308,8 @@ function render(map) {
   };
   const lang = map.LANG;
   const all = { ...shared, ...Object.fromEntries(Object.entries(T[lang]).map(([k, v]) => ['T_' + k, v])),
-    FOOTER_CATS: footerCats(lang, map.CANONICAL === site.origin + '/'), AD_TOP: adUnit('top', lang), AD_MIDDLE: adUnit('middle', lang), AD_BOTTOM: adUnit('bottom', lang),
+    FOOTER_CATS: footerCats(lang, map.CANONICAL === site.origin + '/'), MENU_CATS: menuCats(lang, map.CANONICAL === site.origin + '/'), MENU_POPULAR: menuPopular,
+    FOOTER_SOCIAL: footerSocial, NAV: navCats(lang, map.CANONICAL === site.origin + '/', map.CAT), HEADER_CTA: '', AD_TOP: adUnit('top', lang), AD_MIDDLE: adUnit('middle', lang), AD_BOTTOM: adUnit('bottom', lang),
     OG_LOCALE: T[lang].OG_LOCALE, ...map };
   // Two passes: MAIN may itself contain placeholders.
   let html = layout.replace('{{MAIN}}', all.MAIN);
@@ -322,8 +353,6 @@ const homeHtml = render({
   LANG: 'en', TITLE: esc(homeTitle + ' | ' + site.brand), DESCRIPTION: esc(homeDescription), CANONICAL: site.origin + '/',
   HREFLANG: `<link rel="alternate" hreflang="en" href="${site.origin}/">\n<link rel="alternate" hreflang="x-default" href="${site.origin}/">`,
   JSONLD: ldJson(homeGraph), PAGE_CSS: read('css/home.css').trim(), HEAD_EXTRA: '<noscript><style>.chips{display:none}</style></noscript>',
-  NAV: ['tools', 'categories', 'why', 'faq'].map((id, i) => `      <a href="#${id}">${['Tools', 'Categories', 'Why use it', 'FAQ'][i]}</a>`).join('\n'),
-  HEADER_CTA: '    <a href="#tools" class="btn sm">Explore tools</a>',
   MAIN: read('home.html'), COUNT: tools.length, CAT_COUNT: liveCats.length, DATE_ISO: site.dateModified,
   DATE_TEXT: longDate(site.dateModified, 'en'), CHIPS: chips, CARDS: cards, CATEGORY_BLOCKS: categoryBlocks, FAQ_HTML: faqHtml(site.faq),
   PAGE_SCRIPTS: `<script>
@@ -2766,8 +2795,7 @@ for (const p of pages) {
     HREFLANG: [...hreflang.map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${site.origin + u}">`),
       `<link rel="alternate" hreflang="x-default" href="${site.origin + xDefault}">`].join('\n'),
     JSONLD: ldJson(graph), PAGE_CSS: read('css/page.css').trim(),
-    NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=${p.cat || 'calc'}#tools">${catLabel(p.cat || 'calc', p.lang)}</a>`,
-    HEADER_CTA: switcher || `    <a href="/" class="btn sm">${T[p.lang].ALL_TOOLS}</a>`,
+    CAT: p.cat, HEADER_CTA: switcher.replace(/class="btn ghost sm"/g, 'class="btn ghost sm lang"'),
     // Tool pages get a share bar after the article and a "Share result" button beside the calculator's actions.
     MAIN: p.app ? byline(p).replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
     FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
@@ -2786,6 +2814,7 @@ for (const p of pages) {
 // ---- page scripts: concatenate sources into one deferred, cacheable file per tool
 fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
 const bundles = {
+  'site.js': ['assets/js/site-ui.js'],
   'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
@@ -2961,12 +2990,22 @@ const manifest = {
     ...appPages.filter(p => p.lang === 'en').map(p => ({ name: p.app.name, url: p.path, description: p.description.slice(0, 100) }))
   ]
 };
+// ---- search index for the header search: every catalogued tool plus the Malay pages, with each page's title as
+// extra keywords. Fetched only when a visitor opens search, so it never touches first paint.
+const searchIndex = tools.map(t => {
+  const pg = pageByPath.get(local(t.url));
+  return { n: t.name, d: t.desc, u: local(t.url), c: t.cat, l: pg ? pg.lang : 'en', b: t.badge || '', k: pg ? pg.title : '' };
+}).concat(pages.filter(p => p.app && p.lang === 'ms' && !p.solatState).map(p => ({ n: p.app.name, d: p.description, u: p.path, c: p.cat || 'calc', l: 'ms', b: '', k: p.title })));
+const catNames = Object.fromEntries(liveCats.map(c => [c, [CAT_SHORT.en[c], CAT_SHORT.ms[c]]]));
+const searchItems = searchIndex.filter((t, i) => searchIndex.findIndex(x => x.u === t.u) === i);
+fs.writeFileSync(path.join(pub, 'search-index.json'), JSON.stringify({ cats: catNames, items: searchItems }));
+
 const manifestJSON = JSON.stringify(manifest, null, 2) + '\n';
 fs.writeFileSync(path.join(pub, 'manifest.webmanifest'), manifestJSON);
 
 const pagePaths = ['/', ...pages.map(p => p.path)];
 const precache = [...new Set([
-  ...pagePaths, '/offline.html', '/manifest.webmanifest', '/assets/PWA/pwa.min.js',
+  ...pagePaths, '/offline.html', '/manifest.webmanifest', '/assets/PWA/pwa.min.js', '/search-index.json',
   ...Object.keys(bundles).map(n => '/assets/js/' + n),
   site.logo.local72, '/assets/favicon-image/favicon.ico',
   '/assets/favicon-image/apple-touch-icon.png', '/assets/favicon-image/favicon-96x96.png',
