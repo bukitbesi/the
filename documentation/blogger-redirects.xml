@@ -90,6 +90,12 @@
 <b:case value='https://www.thebukitbesi.com/p/online-photoshop.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/photo-editor/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/photo-editor/");</script>
+<b:case value='https://www.thebukitbesi.com/p/parse-html.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/parse-html/#mode=html&dir=encode' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/parse-html/#mode=html&dir=encode");</script>
+<b:case value='https://www.thebukitbesi.com/p/parser-unparser.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/parse-html/#mode=js&dir=encode' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/parse-html/#mode=js&dir=encode");</script>
 <b:case value='https://www.thebukitbesi.com/p/pdf-converter.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/pdf-converter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/pdf-converter/");</script>

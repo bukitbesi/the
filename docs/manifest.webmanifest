@@ -368,6 +368,11 @@
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
     },
     {
+      "name": "Parse HTML and Encoder/Decoder",
+      "url": "/parse-html/",
+      "description": "Free parse HTML tool: escape HTML to show code in Blogger posts, and encode or decode HTML entities,"
+    },
+    {
       "name": "PDF Converter",
       "url": "/pdf-converter/",
       "description": "Free PDF converter that runs in your browser: JPG to PDF, PDF to JPG, merge, split, rotate and reord"

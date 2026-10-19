@@ -528,3 +528,6 @@ textarea.wc-text{min-height:260px}
 .tg-grid2{display:grid;gap:16px}@media(min-width:900px){.tg-grid2{grid-template-columns:1fr 1fr}}
 .tg-preview{overflow:auto;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#12131a}
 .tg-code{min-height:260px;font-size:.78rem}.tg-import{min-height:120px}
+/* Parse HTML */
+.es-modes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.es-table code{overflow-wrap:anywhere}

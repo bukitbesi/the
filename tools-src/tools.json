@@ -36,12 +36,12 @@
     "live": true
   },
   {
-    "name": "Parse HTML Online",
-    "desc": "Escape HTML and AdSense snippets for use in Blogger XML templates.",
-    "url": "https://www.thebukitbesi.com/p/parse-html.html",
+    "name": "Parse HTML (Escape, Encode, Decode)",
+    "desc": "Escape HTML to show code in Blogger posts; encode or decode HTML entities, URLs, Base64, JavaScript strings and Unicode.",
+    "url": "https://tool.thebukitbesi.com/parse-html/",
     "cat": "dev",
     "icon": "parse-html",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
@@ -60,15 +60,6 @@
     "cat": "dev",
     "icon": "json-formatter-validator",
     "badge": "new",
-    "live": true
-  },
-  {
-    "name": "Parser & Unparser Tool",
-    "desc": "Convert structured data into strings and parse supported data formats back into usable values.",
-    "url": "https://www.thebukitbesi.com/p/parser-unparser.html",
-    "cat": "dev",
-    "icon": "parser-unparser",
-    "badge": "popular",
     "live": true
   },
   {
