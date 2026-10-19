@@ -558,6 +558,11 @@
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
     },
     {
+      "name": "UTM Builder",
+      "url": "/utm-builder/",
+      "description": "Free UTM builder for GA4: tag links with utm_source, medium and campaign, see which GA4 channel the "
+    },
+    {
       "name": "Water Bill Calculator Malaysia",
       "url": "/water-bill-calculator-malaysia/",
       "description": "Water bill calculator for Malaysia: your domestic bill from m³ used in Selangor, KL, Johor, Penang, "

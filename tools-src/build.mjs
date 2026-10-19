@@ -106,6 +106,7 @@ const tableCore = require('../assets/js/table-core.js');
 const escapeCore = require('../assets/js/escape-core.js');
 const ghCore = require('../assets/js/ghcdn-core.js');
 const metaCore = require('../assets/js/metacheck-core.js');
+const utmCore = require('../assets/js/utm-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1301,6 +1302,22 @@ function metacheckMap() {
     MC_PREVIEW: M.views.serpHtml(S), MC_CHECK_LIST: M.views.checksHtml(list),
     MC_T0: M.FACTS.title[0], MC_T1: M.FACTS.title[1], MC_D0: M.FACTS.description[0], MC_D1: M.FACTS.description[1],
     MC_ROWS: bad.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td class="mc-${c.status}">${word[c.status]}</td><td>${esc(c.detail)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- UTM builder: first link, channel, QR code and the channel table come from the page's core.
+const UT_SAMPLE = { url: 'https://www.example.com/raya-sale', source: 'instagram', medium: 'social', campaign: 'raya_sale_2026' };
+const UT_ROWS = [['newsletter', 'email'], ['facebook', 'social'], ['whatsapp', 'social'], ['facebook', 'paid_social'], ['instagram', 'cpc'], ['google', 'cpc'], ['youtube', 'video'],
+  ['tiktok', 'paid'], ['partner_site', 'affiliate'], ['blog_kopi', 'referral'], ['sms', 'sms'], ['partner_site', 'banner'], ['poster_dungun', 'qr']];
+function utmMap() {
+  const U = utmCore, W = waCore, S = UT_SAMPLE, r = U.build(S.url, S);
+  return {
+    UT_VERIFIED: U.FACTS.verified, UT_URL: esc(S.url), UT_SOURCE: S.source, UT_MEDIUM: S.medium, UT_CAMPAIGN: S.campaign, UT_OUT: esc(r.url), UT_CHANNEL: r.channel,
+    UT_QR: W.qrSvg(W.qrMatrix(qrVm.qrcode, r.url), 'QR code for ' + r.url),
+    UT_PRESETS: U.PRESETS.map(([n], i) => `<button type="button" class="btn ghost sm" data-preset="${i}">${esc(n)}</button>`).join(''),
+    UT_EXAMPLE: U.build('https://www.example.com/promo', { source: 'facebook', medium: 'social', campaign: 'raya_sale' }).url,
+    UT_UNASSIGNED: `A medium that matches no rule, such as qr or offline, lands in ${U.channel('poster', 'qr')}.`,
+    UT_ROWS: UT_ROWS.map(([s, m]) => `        <tr><td><code>${s}</code></td><td><code>${m}</code></td><td>${U.channel(s, m)}</td></tr>`).join('\n')
   };
 }
 
@@ -2883,7 +2900,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { metacheck: metacheckMap, ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { utm: utmMap, metacheck: metacheckMap, ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3091,6 +3108,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'utm-builder.js': ['assets/js/wa-core.js', 'assets/js/utm-core.js', 'assets/js/utm-ui.js'],
   'meta-tag-checker.js': ['assets/js/metacheck-core.js', 'assets/js/metacheck-ui.js'],
   'github-jsdelivr.js': ['assets/js/ghcdn-core.js', 'assets/js/ghcdn-ui.js'],
   'parse-html.js': ['assets/js/escape-core.js', 'assets/js/escape-ui.js'],

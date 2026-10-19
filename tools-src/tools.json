@@ -270,12 +270,12 @@
     "live": true
   },
   {
-    "name": "Link Generator & Protector",
-    "desc": "Create encoded links, UTM tracking URLs and QR codes. Encoding is not encryption.",
-    "url": "https://www.thebukitbesi.com/p/secure-link-generator.html",
+    "name": "UTM Builder for GA4",
+    "desc": "Tag links with utm_source, medium and campaign, see which GA4 channel the visits land in, and get a QR code.",
+    "url": "https://tool.thebukitbesi.com/utm-builder/",
     "cat": "util",
     "icon": "secure-link-generator",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
