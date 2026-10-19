@@ -127,11 +127,11 @@
   },
   {
     "name": "Text to HTML Converter",
-    "desc": "Convert plain text into HTML paragraphs, lists and links, then copy or download the output.",
-    "url": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
+    "desc": "Plain text or Markdown to clean HTML paragraphs, line breaks, lists and links with a live preview; also HTML back to text.",
+    "url": "https://tool.thebukitbesi.com/text-to-html/",
     "cat": "content",
     "icon": "text-to-html-converter",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

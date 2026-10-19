@@ -99,6 +99,9 @@
 <b:case value='https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/whatsapp-sticker-maker/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/whatsapp-sticker-maker/");</script>
+<b:case value='https://www.thebukitbesi.com/p/text-to-html-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/text-to-html/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/text-to-html/");</script>
 <b:case value='https://www.thebukitbesi.com/p/video-schema-markup-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/#type=video' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/#type=video");</script>
