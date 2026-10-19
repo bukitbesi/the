@@ -30,6 +30,9 @@
 <b:case value='https://www.thebukitbesi.com/p/currency-converter-malaysia.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/currency-converter-malaysia/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/currency-converter-malaysia/");</script>
+<b:case value='https://www.thebukitbesi.com/p/faq-formatter-tool.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/#type=faq' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/#type=faq");</script>
 <b:case value='https://www.thebukitbesi.com/p/find-replace-text.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/find-and-replace/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/find-and-replace/");</script>

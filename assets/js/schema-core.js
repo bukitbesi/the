@@ -246,7 +246,14 @@
     if (type === 'video' && trim(v.duration) && !duration(v.duration)) errors.push('Duration must look like 3:25 or 1:02:03.');
     if (type === 'breadcrumb' && lines(v.items).slice(0, -1).some(function (s) { return !isUrl((s.split('|')[1] || '').trim()); })) errors.push('Every breadcrumb level except the last needs a URL after |.');
     if (type === 'faq' && trim(v.qa) && !faqPairs(v.qa).length) errors.push('Write each question on one line with its answer on the next line.');
-    return { json: json, text: JSON.stringify(json, null, 2), errors: errors, warnings: errors.length ? [] : warnings };
+    var res = { json: json, text: JSON.stringify(json, null, 2), errors: errors, warnings: errors.length ? [] : warnings };
+    if (type === 'faq') res.html = faqHtml(faqPairs(v.qa));
+    return res;
+  }
+  // The visible FAQ that matches the FAQPage markup: native <details> accordions, no script needed.
+  function faqHtml(pairs) {
+    var e = function (x) { return String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    return '<div class="faq">\n' + pairs.map(function (p) { return '  <details>\n    <summary>' + e(p[0]) + '</summary>\n    <p>' + e(p[1]) + '</p>\n  </details>'; }).join('\n') + '\n</div>';
   }
   function scriptTag(text) { return '<script type="application/ld+json">\n' + text.replace(/<\/(script)/gi, '<\\/$1') + '\n</script>'; }
 
@@ -268,7 +275,7 @@
   }
 
   var api = {
-    FACTS: FACTS, TYPES: TYPES, defaults: defaults, generate: generate, scriptTag: scriptTag, clean: clean, duration: duration, dateTime: dateTime, hours: hours, youtubeId: youtubeId,
+    FACTS: FACTS, TYPES: TYPES, defaults: defaults, faqHtml: faqHtml, generate: generate, scriptTag: scriptTag, clean: clean, duration: duration, dateTime: dateTime, hours: hours, youtubeId: youtubeId,
     views: { formHtml: formHtml, checksHtml: checksHtml, esc: esc }
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

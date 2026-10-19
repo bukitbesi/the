@@ -108,15 +108,6 @@
     "live": true
   },
   {
-    "name": "FAQ Formatter",
-    "desc": "Turn question-and-answer text into HTML and matching FAQPage JSON-LD markup.",
-    "url": "https://www.thebukitbesi.com/p/faq-formatter-tool.html",
-    "cat": "seo",
-    "icon": "faq-formatter-tool",
-    "badge": "",
-    "live": true
-  },
-  {
     "name": "Word Counter",
     "desc": "Words, characters, reading and speaking time, keyword density, Flesch readability and X, Instagram and YouTube limits as you type.",
     "url": "https://tool.thebukitbesi.com/word-counter/",

@@ -498,7 +498,7 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 
 **Upkeep (Privacy policy generator):** `privacy-core.js` holds the English and Malay policy text (keep the two `sections` lists in step; a test checks the ids match). Recheck yearly: the AdSense required-content page, the Google Analytics privacy disclosures policy, and the PDPA guidelines the Commissioner issues under the 2024 amendments; then `FACTS.verified`.
 
-**Upkeep (Schema markup generator):** `schema-core.js` `TYPES` lists Google's required (`req`) and recommended (`rec`) properties per type from Google Search Central; recheck the structured data gallery and the documentation updates log every six months (Google retired FAQ rich results on 7 May 2026 and seven more types in 2025), then `FACTS.verified`. Replaces two Blogger pages; the video one redirects to `#type=video`.
+**Upkeep (Schema markup generator):** `schema-core.js` `TYPES` lists Google's required (`req`) and recommended (`rec`) properties per type from Google Search Central; recheck the structured data gallery and the documentation updates log every six months (Google retired FAQ rich results on 7 May 2026 and seven more types in 2025), then `FACTS.verified`. Replaces three Blogger pages; the video one redirects to `#type=video` and the FAQ formatter to `#type=faq` (FAQ type also outputs the matching HTML accordion).
 
 **Upkeep (Find and replace):** `textclean-core.js` has no yearly figures. The regex recipes and clean-up examples on the page are generated from the core, so a change in behaviour shows up there. Replaces two Blogger pages (find-replace-text, remove-characters-from-text). English only by design.
 

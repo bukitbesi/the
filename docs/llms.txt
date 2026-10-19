@@ -1,6 +1,6 @@
 # The Bukit Besi Tools
 
-> 102 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
+> 101 free online tools for code, SEO, writing, images and AI, plus Malaysian salary, zakat and BMI calculators. No signup needed.
 
 This site hosts its own calculators and a directory of free tools, most of which run on https://www.thebukitbesi.com/. Tools on this site run in the browser and do not send inputs to this site. Last updated 2026-10-17.
 
@@ -207,7 +207,6 @@ This site hosts its own calculators and a directory of free tools, most of which
 - [Schema Markup Generator (JSON-LD)](https://tool.thebukitbesi.com/schema-markup-generator/): JSON-LD for Article, Product, Local Business, Event, Recipe, Video and more, checked against Google's required properties.
 - [Robots.txt Generator and Tester](https://tool.thebukitbesi.com/robots-txt-generator/): Build and test robots.txt for Blogger or WordPress, block AI crawlers like GPTBot, and check any URL against Google's rules.
 - [SEO Meta Analyzer](https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html): Check title and description lengths and preview how your text could appear in search results.
-- [FAQ Formatter](https://www.thebukitbesi.com/p/faq-formatter-tool.html): Turn question-and-answer text into HTML and matching FAQPage JSON-LD markup.
 
 ## Content Tools
 

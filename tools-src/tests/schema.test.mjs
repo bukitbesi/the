@@ -69,6 +69,8 @@ test('Recipe, breadcrumb, FAQ, software and output', () => {
   const f = S.generate('faq', S.defaults('faq')).json;
   assert.equal(f.mainEntity.length, 2);
   assert.equal(f.mainEntity[1].acceptedAnswer.text, '2.5% daripada pendapatan yang layak.');
+  assert.equal(S.generate('faq', { qa: 'Is 5 < 6?\nYes & always.' }).html, '<div class="faq">\n  <details>\n    <summary>Is 5 &lt; 6?</summary>\n    <p>Yes &amp; always.</p>\n  </details>\n</div>');
+  assert.equal(S.generate('article', S.defaults('article')).html, undefined);
   assert.match(S.generate('software', S.defaults('software')).errors.join(), /rating or review from real users/);
   assert.match(S.generate('article', { headline: 'x', url: 'example.com' }).errors.join(), /full URL/);
   assert.equal(S.scriptTag('{"a":"</script>"}'), '<script type="application/ld+json">\n{"a":"<\\/script>"}\n</script>');

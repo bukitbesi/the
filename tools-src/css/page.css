@@ -518,3 +518,4 @@ textarea.wc-text{min-height:260px}
 .th-in{min-height:240px}
 .th-preview{max-height:420px;overflow:auto;padding:14px 18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg)}
 .th-table code{overflow-wrap:anywhere}.th-table th code{font-weight:400}
+.sc-htmlf{margin-top:14px}.sc-code-sm{min-height:160px;font-size:.78rem}
