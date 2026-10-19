@@ -97,6 +97,9 @@ const wordsCore = require('../assets/js/words-core.js');
 const jsonCore = require('../assets/js/json-core.js');
 const caseCore = require('../assets/js/case-core.js');
 const contrastCore = require('../assets/js/contrast-core.js');
+const waCore = require('../assets/js/wa-core.js');
+const qrVm = {};
+vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
@@ -1129,6 +1132,26 @@ function contrastMap() {
     CT_GREY_ROWS: greys.map(g => { const x = C.check(g, '#fff'); return `        <tr><th scope="row"><i class="ct-chip" style="background:${g}"></i>${g}</th><td>${x.text}:1</td>${yes(x.pass.aaNormal)}${yes(x.pass.aaLarge)}${yes(x.pass.aaaNormal)}</tr>`; }).join('\n'),
     CT_GREY: `#767676 at ${grey.text}:1 is the lightest grey that passes AA for normal text on white, and #595959 (${C.check('#595959', '#fff').text}:1) is the lightest for AAA.`,
     CT_777: C.check('#777777', '#fff').text, CT_BRAND_FIX: `${fix('#5b9bd5', '#ffffff', 4.5).hex} (${C.show(fix('#5b9bd5', '#ffffff', 4.5).ratio)}:1)`
+  };
+}
+
+// ---- WhatsApp link generator: link, preview, QR code (from the same vendored encoder the page loads) and tables.
+const WA_MSG = "Hi, I'm interested in your product. Is it still available?";
+function waMap() {
+  const W = waCore, n = W.normalize('012-345 6789', '60'), url = W.link(n.digits, WA_MSG);
+  const fmt = [['Bold', '*text*'], ['Italic', '_text_'], ['Strikethrough', '~text~'], ['Monospace', '```text```'], ['Inline code', '`text`'], ['Bulleted list', '- text'], ['Quote', '> text']];
+  const nums = [['012-345 6789', ''], ['011-2345 6789', '011 numbers have one more digit'], ['+60 12-345 6789', ''], ['+60 012-345 6789', 'Extra 0 after +60 removed'], ['0060 12 345 6789', '00 international prefix removed'], ['03-2345 6789', 'Landline: needs WhatsApp Business']];
+  return {
+    WA_VERIFIED: W.FACTS.verified, WA_MSG: esc(WA_MSG), WA_LINK: esc(url), WA_SAMPLE_LINK: 'wa.me/' + n.digits,
+    WA_COUNTRIES: W.COUNTRIES.map(c => `<option value="${c[2]}"${c[0] === 'MY' ? ' selected' : ''}>${esc(c[1])} (+${c[2]})</option>`).join(''),
+    WA_TEMPLATES: W.TEMPLATES.map((t, i) => `<button type="button" class="btn ghost sm" data-tpl="${i}"${/^(Pertanyaan|Tempahan)$/.test(t[0]) ? ' lang="ms"' : ''}>${esc(t[0])}</button>`).join(''),
+    WA_BUBBLE: W.formatHtml(WA_MSG), WA_COUNT: `${Array.from(WA_MSG).length} characters · link ${url.length} characters`,
+    WA_QR: W.qrSvg(W.qrMatrix(qrVm.qrcode, url), 'QR code for ' + url), WA_CODE: esc(W.snippet(url, 'Chat on WhatsApp')),
+    WA_EXAMPLE: W.link('60123456789', 'Hi, is this available?'),
+    WA_FORMAT_ROWS: [['Chat with a number', W.link('60123456789', '')], ['Number and message', W.link('60123456789', 'Hi, is this available?')], ['Message only (choose contact)', W.link('', 'Check out this tool')]]
+      .map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td></tr>`).join('\n'),
+    WA_NUMBER_ROWS: nums.map(([a, note]) => { const x = W.normalize(a, '60'); return `        <tr><th scope="row">${esc(a)}</th><td><code>${x.digits}</code></td><td>${note || 'Leading 0 replaced by 60'}</td></tr>`; }).join('\n'),
+    WA_FMT_ROWS: fmt.map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td><td>${W.formatHtml(b)}</td></tr>`).join('\n')
   };
 }
 
@@ -2711,7 +2734,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2919,6 +2942,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],
   'color-contrast.js': ['assets/js/contrast-core.js', 'assets/js/contrast-ui.js'],
   'case-converter.js': ['assets/js/case-core.js', 'assets/js/case-ui.js'],
   'json-formatter.js': ['assets/js/json-core.js', 'assets/js/json-ui.js'],

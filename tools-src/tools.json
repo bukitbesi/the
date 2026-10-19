@@ -315,12 +315,12 @@
     "live": true
   },
   {
-    "name": "WhatsApp Link Creator",
-    "desc": "Create WhatsApp chat links with a preset message, QR code and bulk link options.",
-    "url": "https://www.thebukitbesi.com/p/whatsapp-link-creator.html",
+    "name": "WhatsApp Link Generator",
+    "desc": "wa.me click-to-chat link with a pre-filled message, QR code and website button. Converts Malaysian numbers like 012.",
+    "url": "https://tool.thebukitbesi.com/whatsapp-link-generator/",
     "cat": "util",
     "icon": "whatsapp-link-creator",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {
