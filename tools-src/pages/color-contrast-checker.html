@@ -1,0 +1,139 @@
+<!--page
+{
+  "path": "/color-contrast-checker/",
+  "lang": "en",
+  "cat": "design",
+  "title": "Color Contrast Checker: WCAG AA and AAA Contrast Ratio",
+  "description": "Free WCAG color contrast checker: contrast ratio, AA and AAA pass or fail for text and UI, nearest passing color, color-blind preview and palette grid.",
+  "llms": "Free color contrast checker using the WCAG 2.2 formula: contrast ratio (L1 + 0.05) / (L2 + 0.05) from relative luminance. Pass or fail for AA normal text (4.5:1), AA large text (3:1; large is at least 24px, or 18.66px bold), AAA normal text (7:1), AAA large text (4.5:1) and non-text UI components and graphics (3:1, SC 1.4.11). Ratios are truncated, not rounded up, so 4.499 fails. Accepts hex, rgb(), hsl() and CSS color names; transparent colors are blended over the background. Suggests the nearest passing text or background color keeping the same hue. Simulates protanopia, deuteranopia and tritanopia (Machado et al. 2009). Checks every pair in a palette of up to 8 colors. Reference values: #767676 on white is 4.54:1, the lightest grey that passes AA for normal text; #595959 on white is 7:1 for AAA.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/color-contrast.html",
+  "render": "contrast",
+  "shareTitle": "Share this contrast checker",
+  "scripts": ["/assets/js/color-contrast.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["Color Contrast Checker", null]],
+  "about": ["Web Content Accessibility Guidelines", "Contrast ratio", "Color blindness", "Web accessibility"],
+  "app": {
+    "name": "Color Contrast Checker",
+    "category": "DesignApplication",
+    "features": ["WCAG 2.2 contrast ratio", "AA and AAA pass or fail for normal text, large text and UI components", "Hex, rgb(), hsl() and CSS color names with transparency", "Nearest passing text or background color with the same hue", "Protanopia, deuteranopia and tritanopia preview", "Palette grid of every color pair", "Shareable link with the colors"]
+  },
+  "citations": [
+    ["W3C: Understanding SC 1.4.3 Contrast (Minimum)", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"],
+    ["W3C: Understanding SC 1.4.6 Contrast (Enhanced)", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html"],
+    ["W3C: Understanding SC 1.4.11 Non-text Contrast", "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"],
+    ["W3C WCAG 2.2: definition of relative luminance", "https://www.w3.org/TR/WCAG22/#dfn-relative-luminance"],
+    ["Machado, Oliveira and Fernandes (2009): A physiologically-based model for simulation of color vision deficiency", "https://doi.org/10.1109/TVCG.2009.113"]
+  ],
+  "faq": [
+    { "q": "What contrast ratio do I need to pass WCAG?", "a": "WCAG 2.2 level AA needs 4.5:1 for normal text and 3:1 for large text, buttons, form borders, icons and charts. Level AAA needs 7:1 for normal text and 4.5:1 for large text. Large text means at least 24px (18pt), or at least 18.66px (14pt) in bold. Logos and disabled controls are exempt." },
+    { "q": "What is the lightest grey text I can use on white?", "a": "{{CT_GREY}} Anything lighter, such as #777777 at {{CT_777}}:1, fails AA for normal text." },
+    { "q": "How is the contrast ratio calculated?", "a": "Each color is converted to relative luminance: the sRGB values are linearised and weighted 0.2126 red, 0.7152 green and 0.0722 blue. The ratio is (lighter + 0.05) divided by (darker + 0.05), from 1:1 (same color) to 21:1 (black on white). This checker truncates the result to two decimals instead of rounding, so 4.499:1 shows 4.49 and fails, as WCAG intends." },
+    { "q": "My brand color fails. How do I fix it without changing the brand?", "a": "Use the suggested fix. It keeps the hue and saturation and changes only lightness until the pair passes, so a light blue such as #5b9bd5 on white becomes {{CT_BRAND_FIX}} for AA text. You can also keep the brand color for large headings, buttons and icons, which only need 3:1." },
+    { "q": "Does contrast matter for SEO?", "a": "Indirectly. Lighthouse flags low-contrast text in its Accessibility score, and text people cannot read hurts engagement on mobile, especially outdoors in bright light. Google Search does not rank pages on a contrast score, but accessible pages are easier to use for everyone, including older readers." },
+    { "q": "How do people with color blindness see my colors?", "a": "The table simulates the three full forms of color blindness (protanopia, deuteranopia and tritanopia) with the Machado 2009 model. Contrast between light and dark mostly survives, but pairs that differ only in hue, such as red text on green, can lose most of their contrast. Never use color alone to carry meaning." },
+    { "q": "Does it support transparency and CSS color names?", "a": "Yes. Enter hex (#rgb, #rrggbb or #rrggbbaa), rgb(), rgba(), hsl() or any of the 148 CSS color names such as rebeccapurple. Semi-transparent text is blended over the background first, which is how the browser shows it. A transparent background is blended over white." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">Color Contrast Checker</li></ol></nav>
+  <h1>Color Contrast Checker</h1>
+  <p class="answer">Enter a text and background color to get the <strong>WCAG contrast ratio and an instant AA or AAA pass or fail</strong>. Normal text needs <strong>4.5:1</strong> for AA and 7:1 for AAA; large text and UI parts need 3:1. If your colors fail, the checker suggests the nearest passing color in the same hue.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{CT_VERIFIED}}</span><a href="#rules">WCAG rules</a></p>
+
+  <form class="box ct-tool" id="ctForm" novalidate aria-labelledby="ct-h">
+    <h2 id="ct-h" class="sr-only">Check color contrast</h2>
+    <div class="ct-inputs">
+      <div class="field"><label for="ctFg">Text color</label><div class="ct-in"><input type="color" id="ctFgPick" value="{{CT_FG}}" aria-label="Pick text color"><input class="input" id="ctFg" value="{{CT_FG}}" autocomplete="off" spellcheck="false" aria-describedby="ctHelp"></div></div>
+      <button type="button" class="hbtn ct-swap" id="ctSwap" aria-label="Swap colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4m4 4H7"/></svg></button>
+      <div class="field"><label for="ctBg">Background color</label><div class="ct-in"><input type="color" id="ctBgPick" value="{{CT_BG}}" aria-label="Pick background color"><input class="input" id="ctBg" value="{{CT_BG}}" autocomplete="off" spellcheck="false" aria-describedby="ctHelp"></div></div>
+    </div>
+    <p class="help" id="ctHelp">Hex, rgb(), hsl() or a CSS color name. Transparency is supported.</p>
+    <div class="ct-grid">
+      <div id="ctResult" aria-live="polite">{{CT_RESULT}}</div>
+      <div class="ct-preview" id="ctPreview" style="color:{{CT_FG}};background:{{CT_BG}};--ct-fg:{{CT_FG}}">
+        <p class="ct-large">Large text 24px</p>
+        <p class="ct-bold">Bold text 18.66px</p>
+        <p>Normal text at 16px. The quick brown fox jumps over the lazy dog.</p>
+        <p class="ct-ui"><span class="ct-btn">Button</span><span class="ct-field">Input border</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></p>
+      </div>
+    </div>
+    <section class="ex-set" aria-labelledby="ctFixH"><h3 class="sub-h" id="ctFixH">Nearest passing colors</h3><div class="ct-fixes" id="ctFixes">{{CT_FIXES}}</div></section>
+    <section class="ex-set" aria-labelledby="ctCvdH"><h3 class="sub-h" id="ctCvdH">Color blindness preview</h3>
+      <div class="table-wrap"><table class="data text ct-table"><thead><tr><th scope="col">Vision</th><th scope="col">Looks like</th><th scope="col">Ratio</th><th scope="col">Text</th></tr></thead><tbody id="ctCvd">{{CT_CVD}}</tbody></table></div>
+    </section>
+    <div class="tool-actions"><button type="button" class="btn ghost sm" id="ctCopy">Copy link</button></div>
+    <details class="ex-set ct-pal"><summary class="sub-h">Check a whole palette</summary>
+      <div class="field"><label for="ctPalette">Up to 8 colors, one per line or separated by commas</label><textarea class="prose-in short" id="ctPalette" spellcheck="false">{{CT_PALETTE}}</textarea></div>
+      <div class="table-wrap" id="ctMatrix">{{CT_MATRIX}}</div>
+      <p class="help">Rows are the text color, columns the background.</p>
+    </details>
+    <p class="sr-only" id="ctLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to check color contrast</h2>
+  <ol>
+    <li><strong>Enter the text color and the background color</strong>, or pick them. Paste hex codes straight from your CSS or design tool.</li>
+    <li><strong>Read the ratio</strong> and the five WCAG results. Body text must pass AA normal (4.5:1).</li>
+    <li><strong>Click a suggested fix</strong> if it fails. It keeps your hue and changes only lightness.</li>
+    <li><strong>Check the color-blind preview</strong> and, for a design system, paste your whole palette.</li>
+    <li><strong>Copy the link</strong> to share the exact pair with your designer or client.</li>
+  </ol>
+
+  <h2 id="rules">WCAG contrast requirements</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rules-cap">
+    <table class="data text"><caption id="rules-cap">Minimum contrast ratios in WCAG 2.2</caption>
+      <thead><tr><th scope="col">What</th><th scope="col">Level</th><th scope="col">Minimum</th><th scope="col">Success criterion</th></tr></thead>
+      <tbody>
+{{CT_RULES}}
+      </tbody>
+    </table>
+  </div>
+  <p>Large text is at least 24px (18pt) regular or 18.66px (14pt) bold. Text in logos, disabled controls and pure decoration is exempt.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="greys">Grey text on white: which shades pass?</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grey-cap">
+    <table class="data text"><caption id="grey-cap">Contrast of grey text on #ffffff, calculated by this checker</caption>
+      <thead><tr><th scope="col">Text color</th><th scope="col">Ratio</th><th scope="col">AA normal</th><th scope="col">AA large and UI</th><th scope="col">AAA normal</th></tr></thead>
+      <tbody>
+{{CT_GREY_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <h2 id="formula">The contrast formula</h2>
+  <p>Relative luminance L = 0.2126 R + 0.7152 G + 0.0722 B, where each channel is first linearised: c / 12.92 if c ≤ 0.04045, otherwise ((c + 0.055) / 1.055)^2.4, with c from 0 to 1. Contrast ratio = (L lighter + 0.05) / (L darker + 0.05).</p>
+  <div class="callout"><p><strong>Note:</strong> WCAG 3 is still a draft and proposes a different method (APCA). WCAG 2.2, used here, is the current W3C Recommendation and the standard most accessibility laws and audits refer to.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" rel="noopener">W3C: Understanding SC 1.4.3 Contrast (Minimum)</a></li>
+    <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html" rel="noopener">W3C: Understanding SC 1.4.6 Contrast (Enhanced)</a></li>
+    <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html" rel="noopener">W3C: Understanding SC 1.4.11 Non-text Contrast</a></li>
+    <li><a href="https://www.w3.org/TR/WCAG22/#dfn-relative-luminance" rel="noopener">W3C WCAG 2.2: relative luminance</a></li>
+    <li><a href="https://doi.org/10.1109/TVCG.2009.113" rel="noopener">Machado et al. (2009): simulation of color vision deficiency</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/photo-editor/">Online Photo Editor<small>Edit and resize photos</small></a>
+    <a href="/image-converter/">Image Converter<small>WebP, JPG and PNG</small></a>
+    <a href="/css-minifier/">CSS Minifier<small>Minify your stylesheet</small></a>
+  </div>
+</section>
+</div>

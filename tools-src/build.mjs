@@ -96,6 +96,7 @@ const notesCore = require('../assets/js/notepad-core.js');
 const wordsCore = require('../assets/js/words-core.js');
 const jsonCore = require('../assets/js/json-core.js');
 const caseCore = require('../assets/js/case-core.js');
+const contrastCore = require('../assets/js/contrast-core.js');
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
@@ -1107,6 +1108,27 @@ function caseMap() {
     CC_TITLE_EXAMPLE: `"${C.title('the lord of the rings')}" and "${C.title(CC_SAMPLE)}".`, CC_SLUG_EXAMPLE: C.slug('Kuih Raya & Café Menu 2026!'),
     CC_SMALL: C.SMALL.join(', '), CC_EXAMPLE_IN: ex,
     CC_EXAMPLES: C.CASES.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td><code>${esc(C.convert(ex, c.key))}</code></td><td>${CC_USES[c.key]}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Color contrast checker: the first result, fixes, colour-blind rows and every table come from the page's core.
+const CT_FG = '#2b6cb0', CT_BG = '#ffffff', CT_PALETTE = ['#1a1a2e', '#ffffff', '#5b4bd5', '#08807c', '#f0ad28'];
+function contrastMap() {
+  const C = contrastCore, V = C.views, r = C.check(CT_FG, CT_BG);
+  const fix = (c, o, t) => C.suggest(C.parse(c), C.parse(o), t);
+  const btn = (which, s, label, level) => `<button type="button" class="btn ghost sm ct-fix" data-set="${which}" data-hex="${s.hex}"><i class="ct-chip" style="background:${s.hex}"></i>${label} ${s.hex} · ${C.show(s.ratio)}:1 ${level}</button>`;
+  const fixes = [[4.5, 'AA'], [7, 'AAA']].filter(([t]) => r.ratio < t)
+    .flatMap(([t, l]) => [['fg', fix(CT_FG, CT_BG, t), 'Text'], ['bg', fix(CT_BG, CT_FG, t), 'Background']].filter(x => x[1]).map(([w, f, n]) => btn(w, f, n, l))).join('');
+  const yes = ok => `<td class="${ok ? 'rb-yes' : 'rb-no'}">${ok ? 'Pass' : 'Fail'}</td>`;
+  const greys = ['#000000', '#333333', '#595959', '#666666', '#757575', '#767676', '#777777', '#808080', '#949494', '#999999', '#aaaaaa'];
+  const grey = C.check('#767676', '#fff');
+  return {
+    CT_FG, CT_BG, CT_VERIFIED: C.FACTS.verified, CT_RESULT: V.resultHtml(r), CT_FIXES: fixes, CT_CVD: V.cvdRows(r),
+    CT_PALETTE: CT_PALETTE.join('\n'), CT_MATRIX: V.matrixHtml(C.matrix(CT_PALETTE)),
+    CT_RULES: C.LEVELS.map(l => `        <tr><th scope="row">${esc(l.label.replace(/^AAA? /, ''))}</th><td>${l.key.startsWith('aaa') ? 'AAA' : 'AA'}</td><td>${l.min}:1</td><td>${l.sc}</td></tr>`).join('\n'),
+    CT_GREY_ROWS: greys.map(g => { const x = C.check(g, '#fff'); return `        <tr><th scope="row"><i class="ct-chip" style="background:${g}"></i>${g}</th><td>${x.text}:1</td>${yes(x.pass.aaNormal)}${yes(x.pass.aaLarge)}${yes(x.pass.aaaNormal)}</tr>`; }).join('\n'),
+    CT_GREY: `#767676 at ${grey.text}:1 is the lightest grey that passes AA for normal text on white, and #595959 (${C.check('#595959', '#fff').text}:1) is the lightest for AAA.`,
+    CT_777: C.check('#777777', '#fff').text, CT_BRAND_FIX: `${fix('#5b9bd5', '#ffffff', 4.5).hex} (${C.show(fix('#5b9bd5', '#ffffff', 4.5).ratio)}:1)`
   };
 }
 
@@ -2689,7 +2711,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2897,6 +2919,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'color-contrast.js': ['assets/js/contrast-core.js', 'assets/js/contrast-ui.js'],
   'case-converter.js': ['assets/js/case-core.js', 'assets/js/case-ui.js'],
   'json-formatter.js': ['assets/js/json-core.js', 'assets/js/json-ui.js'],
   'word-counter.js': ['assets/js/zip-core.js', 'assets/js/words-core.js', 'assets/js/words-ui.js'],

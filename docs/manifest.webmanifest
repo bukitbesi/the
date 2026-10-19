@@ -148,6 +148,11 @@
       "description": "Track a City-Link Express parcel with your consignment number, see what each status means and what t"
     },
     {
+      "name": "Color Contrast Checker",
+      "url": "/color-contrast-checker/",
+      "description": "Free WCAG color contrast checker: contrast ratio, AA and AAA pass or fail for text and UI, nearest p"
+    },
+    {
       "name": "CSS Minifier",
       "url": "/css-minifier/",
       "description": "Free CSS minifier. Paste or upload CSS to remove comments and whitespace safely, see bytes saved and"

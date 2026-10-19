@@ -711,6 +711,29 @@ textarea.wc-text{min-height:260px}
 /* Prayer times: the current prayer and today's row in the month */
 .rows tr.now th,.rows tr.now td,.data tr.now th,.data tr.now td{color:var(--accent2);font-weight:800}
 .data th small{white-space:normal;min-width:180px}
+/* Color contrast checker */
+.ct-inputs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:10px}
+.ct-in{display:flex;gap:8px}.ct-in input[type=color]{width:48px;height:48px;padding:3px;border:1px solid var(--border2);border-radius:12px;background:var(--surface);cursor:pointer;flex-shrink:0}
+.ct-in .input{min-width:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ct-swap{margin-bottom:3px}
+.ct-grid{display:grid;gap:14px;margin-top:14px}@media(min-width:760px){.ct-grid{grid-template-columns:1fr 1fr}}
+.ct-ratio{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.ct-ratio b{font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}.ct-ratio b small{font-size:1.2rem;color:var(--text3)}.ct-ratio span{font-weight:600;color:var(--text2)}
+.ct-levels{display:grid;gap:6px;margin-top:12px}
+.ct-levels li{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:.9rem;font-weight:600}
+.ct-levels li span{min-width:44px;text-align:center;padding:2px 8px;border-radius:99px;font-size:.75rem;font-weight:800}
+.ct-levels .ok span{background:var(--new-bg);color:var(--new)}.ct-levels .no span{background:var(--hot-bg);color:var(--hot)}
+.ct-levels small{margin-left:auto;font-weight:500;color:var(--text3);font-size:.78rem}
+.ct-preview{padding:18px;border-radius:var(--r);border:1px solid var(--border2)}
+.ct-preview p{margin:0 0 10px;line-height:1.5}.ct-large{font-size:24px}.ct-bold{font-size:18.66px;font-weight:700}
+.ct-ui{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.ct-ui svg{width:28px;height:28px}
+.ct-btn{padding:6px 14px;border-radius:8px;border:2px solid var(--ct-fg);font-weight:700}.ct-field{padding:6px 10px;border-radius:6px;border:1px solid var(--ct-fg)}
+.ct-fixes{display:flex;flex-wrap:wrap;gap:8px}.ct-fix{gap:8px}
+.ct-chip{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--border2);vertical-align:-2px;margin-right:6px}
+.ct-swatch{display:inline-block;padding:2px 12px;border-radius:6px;font-weight:800;border:1px solid var(--border)}
+.ct-table{min-width:0}
+.ct-pal summary{cursor:pointer}
+.ct-matrix{min-width:0}.ct-matrix td{text-align:center;font-size:.85rem}.ct-matrix td small{display:block;font-size:.7rem;opacity:.9}.ct-matrix th{font-size:.75rem;white-space:nowrap}.ct-same{color:var(--text3)}
+@media(max-width:480px){.ct-inputs{grid-template-columns:1fr}.ct-swap{justify-self:center;transform:rotate(90deg)}}
 </style>
 
 </head>
@@ -1002,7 +1025,7 @@ textarea.wc-text{min-height:260px}
   <h2 id="related-h">Related tools</h2>
   <div class="related">
     <a href="/image-converter/">Image Converter<small>JPG, PNG, WebP, ICO in batches</small></a>
-    <a href="/photo-to-cartoon/">Photo to Cartoon<small>Turn a photo into a cartoon</small></a>
+    <a href="/color-contrast-checker/">Color Contrast Checker<small>WCAG AA and AAA for text on photos</small></a>
     <a href="/exif-remover/">EXIF Remover<small>Remove GPS from photos</small></a>
   </div>
 </section>

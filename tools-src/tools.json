@@ -208,11 +208,11 @@
   },
   {
     "name": "Color Contrast Checker",
-    "desc": "Compare text and background colors and check WCAG AA and AAA contrast ratios.",
-    "url": "https://www.thebukitbesi.com/p/color-contrast.html",
+    "desc": "WCAG AA and AAA contrast ratio for text and UI, nearest passing color, color-blind preview and palette grid.",
+    "url": "https://tool.thebukitbesi.com/color-contrast-checker/",
     "cat": "design",
     "icon": "color-contrast",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

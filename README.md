@@ -177,6 +177,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/word-counter/](https://tool.thebukitbesi.com/word-counter/) | English | word counter, character counter, keyword density checker, reading time calculator, flesch readability |
 | [/json-formatter/](https://tool.thebukitbesi.com/json-formatter/) | English | json formatter, json validator, json beautifier, fix json online, json to csv |
 | [/case-converter/](https://tool.thebukitbesi.com/case-converter/) | English | case converter, title case converter, sentence case, uppercase to lowercase, camelcase converter |
+| [/color-contrast-checker/](https://tool.thebukitbesi.com/color-contrast-checker/) | English | color contrast checker, wcag contrast checker, contrast ratio, accessible colors, color blind simulator |
 | [/image-converter/](https://tool.thebukitbesi.com/image-converter/) | English | image converter, jpg to png, png to jpg, webp to jpg, convert image to ico / favicon, compress image to 100kb |
 | [/photo-editor/](https://tool.thebukitbesi.com/photo-editor/) | English | online photo editor, photoshop online free alternative, add text to photo, crop photo for instagram, youtube thumbnail maker |
 | [/whatsapp-sticker-maker/](https://tool.thebukitbesi.com/whatsapp-sticker-maker/) | English | whatsapp sticker maker, make whatsapp sticker from photo, sticker maker online, whatsapp sticker size 512x512 |
@@ -485,3 +486,5 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 **Upkeep (JSON formatter):** `json-core.js` is a strict RFC 8259 parser (tests compare it with `JSON.parse` on valid and invalid input). The error table on the page is generated from the parser and `repair()`, so changing a message updates the page. No yearly figures; recheck RFC 9535 (JSONPath) if the lookup syntax grows. English only by design.
 
 **Upkeep (Case converter):** `case-core.js` `SMALL` lists the AP Stylebook small words (articles, and conjunctions and prepositions of three letters or fewer); recheck when a new AP Stylebook changes title rules. A Malay title-case rule was left out because no Malaysian (DBP) source was confirmed; add it as an option if one is. English only by design.
+
+**Upkeep (Color contrast checker):** `contrast-core.js` uses WCAG 2.2 thresholds (`LEVELS`) and the Machado 2009 colour-vision matrices (`CVD`, checked against the colour-science dataset). Recheck when W3C publishes WCAG 3 as a Recommendation (APCA is still a draft and is left out), then `FACTS.verified`.
