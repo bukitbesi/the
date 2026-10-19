@@ -35,10 +35,3 @@ h1{font-size:clamp(2.1rem,6vw,3.75rem);font-weight:900;line-height:1.08;letter-s
 .tag.new{background:var(--new-bg);color:var(--new)}
 .tag.popular{background:var(--pop-bg);color:var(--pop)}
 .tag.hot{background:var(--hot-bg);color:var(--hot)}
-.t-dev{background:var(--c-dev-bg);color:var(--c-dev)}
-.t-seo{background:var(--c-seo-bg);color:var(--c-seo)}
-.t-content{background:var(--c-content-bg);color:var(--c-content)}
-.t-design{background:var(--c-design-bg);color:var(--c-design)}
-.t-ai{background:var(--c-ai-bg);color:var(--c-ai)}
-.t-util{background:var(--c-util-bg);color:var(--c-util)}
-.t-calc{background:var(--c-calc-bg);color:var(--c-calc)}

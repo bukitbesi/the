@@ -96,6 +96,12 @@ const notesCore = require('../assets/js/notepad-core.js');
 const wordsCore = require('../assets/js/words-core.js');
 const jsonCore = require('../assets/js/json-core.js');
 const caseCore = require('../assets/js/case-core.js');
+const contrastCore = require('../assets/js/contrast-core.js');
+const waCore = require('../assets/js/wa-core.js');
+const privacyCore = require('../assets/js/privacy-core.js');
+const schemaCore = require('../assets/js/schema-core.js');
+const qrVm = {};
+vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
 const photoCore = require('../assets/js/photo-core.js');
 const stickerCore = require('../assets/js/sticker-core.js');
@@ -176,7 +182,9 @@ const T = {
     POPULAR: 'Popular tools', CATEGORIES: 'Categories', RESOURCES: 'Resources', ABOUT: 'About', CONTACT: 'Contact',
     PRIVACY: 'Privacy policy', TERMS: 'Terms of use', RIGHTS: 'All rights reserved.', TAGLINE: 'Free tools for the creator community',
     UPDATE: 'Update', OPEN_ANYWAY: 'Open tool anyway', DISMISS: 'Dismiss', AD: 'Advertisement', ALL_TOOLS: 'All tools', OG_LOCALE: 'en_US',
-    SHARE_H: 'Share this calculator', SHARE_RESULT: 'Share result', COPY: 'Copy link', COPIED: 'Link copied', MORE: 'More options'
+    SHARE_H: 'Share this calculator', SHARE_RESULT: 'Share result', COPY: 'Copy link', COPIED: 'Link copied', MORE: 'More options',
+    SEARCH: 'Search tools', SEARCH_PH: 'Search tools, e.g. zakat, JSON, WebP', MENU: 'Menu', CLOSE: 'Close',
+    TRUST_1: 'Free, no sign-up', TRUST_2: 'Rates checked against official Malaysian sources', TRUST_3: 'Installs as an app and works offline'
   },
   ms: {
     SKIP: 'Langkau ke kandungan utama', NAV: 'Laman', DARK: 'Mod gelap', INSTALL: 'Pasang aplikasi',
@@ -184,7 +192,9 @@ const T = {
     POPULAR: 'Alat popular', CATEGORIES: 'Kategori', RESOURCES: 'Sumber', ABOUT: 'Tentang kami', CONTACT: 'Hubungi',
     PRIVACY: 'Dasar privasi', TERMS: 'Terma penggunaan', RIGHTS: 'Hak cipta terpelihara.', TAGLINE: 'Alat percuma untuk komuniti pencipta',
     UPDATE: 'Kemas kini', OPEN_ANYWAY: 'Buka juga', DISMISS: 'Tutup', AD: 'Iklan', ALL_TOOLS: 'Semua alat', OG_LOCALE: 'ms_MY',
-    SHARE_H: 'Kongsi kalkulator ini', SHARE_RESULT: 'Kongsi keputusan', COPY: 'Salin pautan', COPIED: 'Pautan disalin', MORE: 'Pilihan lain'
+    SHARE_H: 'Kongsi kalkulator ini', SHARE_RESULT: 'Kongsi keputusan', COPY: 'Salin pautan', COPIED: 'Pautan disalin', MORE: 'Pilihan lain',
+    SEARCH: 'Cari alat', SEARCH_PH: 'Cari alat, cth. zakat, KWSP, cukai', MENU: 'Menu', CLOSE: 'Tutup',
+    TRUST_1: 'Percuma, tanpa daftar', TRUST_2: 'Kadar disemak dengan sumber rasmi Malaysia', TRUST_3: 'Boleh dipasang sebagai aplikasi dan berfungsi luar talian'
   }
 };
 const CAT_MS = { dev: 'Alat Pembangun', seo: 'Alat SEO', content: 'Alat Kandungan', design: 'Alat Reka Bentuk', ai: 'Alat AI', util: 'Utiliti', calc: 'Kalkulator' };
@@ -234,13 +244,39 @@ gtag("consent","default",{ad_storage:"granted",ad_user_data:"granted",ad_persona
 </script>`;
 const gtmBody = !gtmId ? '' : `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>`;
 
-// ---- shared fragments
+// ---- shared fragments: header navigation, mobile menu, footer widgets
+const CAT_SHORT = {
+  en: { calc: 'Calculators', dev: 'Developer', seo: 'SEO', content: 'Content', design: 'Design', ai: 'AI', util: 'Utilities' },
+  ms: { calc: 'Kalkulator', dev: 'Pembangun', seo: 'SEO', content: 'Kandungan', design: 'Reka bentuk', ai: 'AI', util: 'Utiliti' }
+};
+const CAT_ICON = {
+  calc: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2m4 0h2M8 16h2m4 0h2"/>',
+  dev: '<path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/>',
+  seo: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/>',
+  content: '<path d="M5 4h14M5 9h14M5 14h9M5 19h6"/>',
+  design: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/>',
+  ai: '<path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M6 18l2.5-2.5m7-7L18 6"/>',
+  util: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>'
+};
+const catSvg = c => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAT_ICON[c] || CAT_ICON.util}</svg>`;
+const catHref = (c, home) => home ? '#tools' : `/?cat=${c}#tools`;
 const localTools = tools.filter(t => t.url.startsWith(site.origin + '/'));
-const footerPopular = [...new Set([...localTools, ...tools.filter(t => t.badge === 'popular' || t.badge === 'hot')])].slice(0, 6)
-  .map(t => `          <li><a href="${esc(local(t.url))}">${esc(t.name)}</a></li>`).join('\n');
+const popular = [...new Set([...tools.filter(t => t.badge === 'popular' || t.badge === 'hot'), ...localTools])].slice(0, 8);
+const footerPopular = popular.map(t => `          <li><a href="${esc(local(t.url))}"><i class="dot t-${t.cat}" aria-hidden="true"></i>${esc(t.name)}</a></li>`).join('\n');
 // On the home page category links filter in place; elsewhere they open the home page pre-filtered.
 const footerCats = (lang, home) => liveCats.map(c =>
-  `          <li><a href="${home ? '' : `/?cat=${c}`}#tools" data-filter="${c}">${esc(catLabel(c, lang))}</a></li>`).join('\n');
+  `          <li><a href="${catHref(c, home)}" data-filter="${c}"><i class="dot t-${c}" aria-hidden="true"></i>${esc(catLabel(c, lang))}<small>${byCat(c).length}</small></a></li>`).join('\n');
+const navCats = (lang, home, current) => liveCats.map(c =>
+  `      <a href="${catHref(c, home)}" data-filter="${c}"${c === current ? ' class="on"' : ''}>${esc(CAT_SHORT[lang][c])}</a>`).join('\n');
+const menuCats = (lang, home) => liveCats.map(c =>
+  `        <li><a href="${catHref(c, home)}" data-filter="${c}"><span class="mi t-${c}">${catSvg(c)}</span>${esc(CAT_SHORT[lang][c])}<small>${byCat(c).length}</small></a></li>`).join('\n');
+const menuPopular = popular.slice(0, 6).map(t => `        <li><a href="${esc(local(t.url))}">${esc(t.name)}</a></li>`).join('\n');
+const SOCIAL = [
+  ['X', 'https://x.com/' + site.twitter.replace('@', ''), '<path d="M4 4l16 16M20 4 4 20" />'],
+  ['Instagram', 'https://instagram.com/bukitbesi', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>'],
+  ['LinkedIn', 'https://www.linkedin.com/in/bukitbesi/', '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>']
+];
+const footerSocial = SOCIAL.map(([n, u, d]) => `          <a class="hbtn" href="${u}" rel="me noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">${d}</svg><span class="sr-only">${n}</span></a>`).join('\n');
 const faqHtml = faq => faq.map(f => `      <details><summary>${esc(f.q)}</summary><p>${f.html || esc(f.a)}</p></details>`).join('\n');
 const faqSchema = (faq, id, pageId) => ({
   '@type': 'FAQPage', '@id': id, isPartOf: { '@id': pageId },
@@ -278,7 +314,8 @@ function render(map) {
   };
   const lang = map.LANG;
   const all = { ...shared, ...Object.fromEntries(Object.entries(T[lang]).map(([k, v]) => ['T_' + k, v])),
-    FOOTER_CATS: footerCats(lang, map.CANONICAL === site.origin + '/'), AD_TOP: adUnit('top', lang), AD_MIDDLE: adUnit('middle', lang), AD_BOTTOM: adUnit('bottom', lang),
+    FOOTER_CATS: footerCats(lang, map.CANONICAL === site.origin + '/'), MENU_CATS: menuCats(lang, map.CANONICAL === site.origin + '/'), MENU_POPULAR: menuPopular,
+    FOOTER_SOCIAL: footerSocial, NAV: navCats(lang, map.CANONICAL === site.origin + '/', map.CAT), HEADER_CTA: '', AD_TOP: adUnit('top', lang), AD_MIDDLE: adUnit('middle', lang), AD_BOTTOM: adUnit('bottom', lang),
     OG_LOCALE: T[lang].OG_LOCALE, ...map };
   // Two passes: MAIN may itself contain placeholders.
   let html = layout.replace('{{MAIN}}', all.MAIN);
@@ -322,8 +359,6 @@ const homeHtml = render({
   LANG: 'en', TITLE: esc(homeTitle + ' | ' + site.brand), DESCRIPTION: esc(homeDescription), CANONICAL: site.origin + '/',
   HREFLANG: `<link rel="alternate" hreflang="en" href="${site.origin}/">\n<link rel="alternate" hreflang="x-default" href="${site.origin}/">`,
   JSONLD: ldJson(homeGraph), PAGE_CSS: read('css/home.css').trim(), HEAD_EXTRA: '<noscript><style>.chips{display:none}</style></noscript>',
-  NAV: ['tools', 'categories', 'why', 'faq'].map((id, i) => `      <a href="#${id}">${['Tools', 'Categories', 'Why use it', 'FAQ'][i]}</a>`).join('\n'),
-  HEADER_CTA: '    <a href="#tools" class="btn sm">Explore tools</a>',
   MAIN: read('home.html'), COUNT: tools.length, CAT_COUNT: liveCats.length, DATE_ISO: site.dateModified,
   DATE_TEXT: longDate(site.dateModified, 'en'), CHIPS: chips, CARDS: cards, CATEGORY_BLOCKS: categoryBlocks, FAQ_HTML: faqHtml(site.faq),
   PAGE_SCRIPTS: `<script>
@@ -1078,6 +1113,85 @@ function caseMap() {
     CC_TITLE_EXAMPLE: `"${C.title('the lord of the rings')}" and "${C.title(CC_SAMPLE)}".`, CC_SLUG_EXAMPLE: C.slug('Kuih Raya & Café Menu 2026!'),
     CC_SMALL: C.SMALL.join(', '), CC_EXAMPLE_IN: ex,
     CC_EXAMPLES: C.CASES.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td><code>${esc(C.convert(ex, c.key))}</code></td><td>${CC_USES[c.key]}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Color contrast checker: the first result, fixes, colour-blind rows and every table come from the page's core.
+const CT_FG = '#2b6cb0', CT_BG = '#ffffff', CT_PALETTE = ['#1a1a2e', '#ffffff', '#5b4bd5', '#08807c', '#f0ad28'];
+function contrastMap() {
+  const C = contrastCore, V = C.views, r = C.check(CT_FG, CT_BG);
+  const fix = (c, o, t) => C.suggest(C.parse(c), C.parse(o), t);
+  const btn = (which, s, label, level) => `<button type="button" class="btn ghost sm ct-fix" data-set="${which}" data-hex="${s.hex}"><i class="ct-chip" style="background:${s.hex}"></i>${label} ${s.hex} · ${C.show(s.ratio)}:1 ${level}</button>`;
+  const fixes = [[4.5, 'AA'], [7, 'AAA']].filter(([t]) => r.ratio < t)
+    .flatMap(([t, l]) => [['fg', fix(CT_FG, CT_BG, t), 'Text'], ['bg', fix(CT_BG, CT_FG, t), 'Background']].filter(x => x[1]).map(([w, f, n]) => btn(w, f, n, l))).join('');
+  const yes = ok => `<td class="${ok ? 'rb-yes' : 'rb-no'}">${ok ? 'Pass' : 'Fail'}</td>`;
+  const greys = ['#000000', '#333333', '#595959', '#666666', '#757575', '#767676', '#777777', '#808080', '#949494', '#999999', '#aaaaaa'];
+  const grey = C.check('#767676', '#fff');
+  return {
+    CT_FG, CT_BG, CT_VERIFIED: C.FACTS.verified, CT_RESULT: V.resultHtml(r), CT_FIXES: fixes, CT_CVD: V.cvdRows(r),
+    CT_PALETTE: CT_PALETTE.join('\n'), CT_MATRIX: V.matrixHtml(C.matrix(CT_PALETTE)),
+    CT_RULES: C.LEVELS.map(l => `        <tr><th scope="row">${esc(l.label.replace(/^AAA? /, ''))}</th><td>${l.key.startsWith('aaa') ? 'AAA' : 'AA'}</td><td>${l.min}:1</td><td>${l.sc}</td></tr>`).join('\n'),
+    CT_GREY_ROWS: greys.map(g => { const x = C.check(g, '#fff'); return `        <tr><th scope="row"><i class="ct-chip" style="background:${g}"></i>${g}</th><td>${x.text}:1</td>${yes(x.pass.aaNormal)}${yes(x.pass.aaLarge)}${yes(x.pass.aaaNormal)}</tr>`; }).join('\n'),
+    CT_GREY: `#767676 at ${grey.text}:1 is the lightest grey that passes AA for normal text on white, and #595959 (${C.check('#595959', '#fff').text}:1) is the lightest for AAA.`,
+    CT_777: C.check('#777777', '#fff').text, CT_BRAND_FIX: `${fix('#5b9bd5', '#ffffff', 4.5).hex} (${C.show(fix('#5b9bd5', '#ffffff', 4.5).ratio)}:1)`
+  };
+}
+
+// ---- WhatsApp link generator: link, preview, QR code (from the same vendored encoder the page loads) and tables.
+const WA_MSG = "Hi, I'm interested in your product. Is it still available?";
+function waMap() {
+  const W = waCore, n = W.normalize('012-345 6789', '60'), url = W.link(n.digits, WA_MSG);
+  const fmt = [['Bold', '*text*'], ['Italic', '_text_'], ['Strikethrough', '~text~'], ['Monospace', '```text```'], ['Inline code', '`text`'], ['Bulleted list', '- text'], ['Quote', '> text']];
+  const nums = [['012-345 6789', ''], ['011-2345 6789', '011 numbers have one more digit'], ['+60 12-345 6789', ''], ['+60 012-345 6789', 'Extra 0 after +60 removed'], ['0060 12 345 6789', '00 international prefix removed'], ['03-2345 6789', 'Landline: needs WhatsApp Business']];
+  return {
+    WA_VERIFIED: W.FACTS.verified, WA_MSG: esc(WA_MSG), WA_LINK: esc(url), WA_SAMPLE_LINK: 'wa.me/' + n.digits,
+    WA_COUNTRIES: W.COUNTRIES.map(c => `<option value="${c[2]}"${c[0] === 'MY' ? ' selected' : ''}>${esc(c[1])} (+${c[2]})</option>`).join(''),
+    WA_TEMPLATES: W.TEMPLATES.map((t, i) => `<button type="button" class="btn ghost sm" data-tpl="${i}"${/^(Pertanyaan|Tempahan)$/.test(t[0]) ? ' lang="ms"' : ''}>${esc(t[0])}</button>`).join(''),
+    WA_BUBBLE: W.formatHtml(WA_MSG), WA_COUNT: `${Array.from(WA_MSG).length} characters · link ${url.length} characters`,
+    WA_QR: W.qrSvg(W.qrMatrix(qrVm.qrcode, url), 'QR code for ' + url), WA_CODE: esc(W.snippet(url, 'Chat on WhatsApp')),
+    WA_EXAMPLE: W.link('60123456789', 'Hi, is this available?'),
+    WA_FORMAT_ROWS: [['Chat with a number', W.link('60123456789', '')], ['Number and message', W.link('60123456789', 'Hi, is this available?')], ['Message only (choose contact)', W.link('', 'Check out this tool')]]
+      .map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td></tr>`).join('\n'),
+    WA_NUMBER_ROWS: nums.map(([a, note]) => { const x = W.normalize(a, '60'); return `        <tr><th scope="row">${esc(a)}</th><td><code>${x.digits}</code></td><td>${note || 'Leading 0 replaced by 60'}</td></tr>`; }).join('\n'),
+    WA_FMT_ROWS: fmt.map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td><td>${W.formatHtml(b)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Privacy policy generator: the default policy and the PDPA checklist come from the page's core.
+const PP_FRAMEWORK = [
+  ['Brief information on the company and its data protection practice', 'intro'], ['Collection and processing of personal data', 'sources'],
+  ['Description of the personal data collected', 'data'], ['Purposes of collection', 'purposes'], ['Sources of personal data', 'sources'],
+  ['Disclosure to third parties', 'disclosure'], ['Transfer of personal data overseas', 'transfer'], ['Security measures', 'security'],
+  ['Retention of personal data', 'retention'], ['Access and correction of personal data', 'rights'], ['Consequences of failing to supply personal data', 'obligatory'],
+  ['Marketing and promotional activities', 'purposes'], ["Data subject's obligations", 'obligatory'], ['Contact for enquiries', 'contact']
+];
+function privacyMap() {
+  const P = privacyCore, d = P.DEFAULTS, docs = P.generate(d), titles = Object.fromEntries(P.TEXT.en.sections.map(s => [s[0], s[1]]));
+  if (PP_FRAMEWORK.some(([, id]) => !titles[id])) throw new Error('PDPA framework row points at a missing section');
+  return {
+    PP_VERIFIED: P.FACTS.verified, PP_SITE: esc(d.site), PP_URL: esc(d.url), PP_OWNER: esc(d.owner), PP_EMAIL: esc(d.email), PP_DATE: d.date,
+    PP_PREVIEW: P.html(docs, 3), PP_ISSUES: '<li>Replace the example name, owner or email with your own before publishing.</li>',
+    PP_FRAMEWORK: PP_FRAMEWORK.map(([item, id], i) => `        <tr><th scope="row">${i + 1}. ${esc(item)}</th><td>${esc(titles[id])}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Schema markup generator: type buttons, the first form, its JSON-LD and the requirements table come from the core.
+function schemaMap() {
+  const S = schemaCore, first = 'article', r = S.generate(first, S.defaults(first));
+  const label = (t, k) => (S.TYPES[t].fields.find(f => f[0] === k) || [k, k])[1].replace(/ \(.*\)$/, '');
+  const PROPS = { article: [[], 'headline, image, datePublished, dateModified, author'], product: [['name', 'offers, review or aggregateRating'], 'image, description, brand'],
+    local: [['name', 'address'], 'telephone, url, image, openingHoursSpecification, geo, priceRange'], organization: [[], 'name, url, logo, sameAs'],
+    event: [['name', 'startDate', 'location (with address)'], 'description, endDate, image, organizer, offers, eventStatus'], recipe: [['name', 'image'], 'author, prepTime, cookTime, recipeIngredient, recipeInstructions, recipeYield'],
+    video: [['name', 'thumbnailUrl', 'uploadDate'], 'description, duration, contentUrl or embedUrl, creator'], software: [['name', 'offers.price', 'aggregateRating or review'], 'applicationCategory, operatingSystem'],
+    breadcrumb: [['itemListElement (position, name, item)'], ''], website: [['name', 'url'], 'alternateName'], faq: [['mainEntity (Question, acceptedAnswer)'], '']
+  };
+  if (Object.keys(PROPS).join() !== Object.keys(S.TYPES).join()) throw new Error('schema requirement table out of step with TYPES');
+  const vid = S.generate('video', S.defaults('video'));
+  return {
+    SC_VERIFIED: S.FACTS.verified, SC_COUNT: Object.keys(S.TYPES).length, SC_LABEL: esc(S.TYPES[first].label), SC_RICH: esc(S.TYPES[first].rich),
+    SC_TYPE_BTNS: Object.entries(S.TYPES).map(([k, t]) => `<button type="button" class="btn ghost sm" data-type="${k}" aria-pressed="${k === first}">${esc(t.label)}</button>`).join(''),
+    SC_FIELDS: S.views.formHtml(first), SC_CHECKS: S.views.checksHtml(r), SC_OUT: esc(S.scriptTag(r.text)), SC_EXAMPLE: esc(S.scriptTag(vid.text)),
+    SC_TYPE_ROWS: Object.entries(PROPS).map(([k, [req, rec]]) => `        <tr><th scope="row">${esc(S.TYPES[k].label)}</th><td>${req.length ? req.map(x => `<code>${esc(x)}</code>`).join(', ') : 'None'}</td><td>${esc(rec) || '–'}</td><td>${esc(S.TYPES[k].rich)}</td></tr>`).join('\n')
   };
 }
 
@@ -2660,7 +2774,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2766,8 +2880,7 @@ for (const p of pages) {
     HREFLANG: [...hreflang.map(([l, u]) => `<link rel="alternate" hreflang="${l}" href="${site.origin + u}">`),
       `<link rel="alternate" hreflang="x-default" href="${site.origin + xDefault}">`].join('\n'),
     JSONLD: ldJson(graph), PAGE_CSS: read('css/page.css').trim(),
-    NAV: `      <a href="/">${T[p.lang].ALL_TOOLS}</a>\n      <a href="/?cat=${p.cat || 'calc'}#tools">${catLabel(p.cat || 'calc', p.lang)}</a>`,
-    HEADER_CTA: switcher || `    <a href="/" class="btn sm">${T[p.lang].ALL_TOOLS}</a>`,
+    CAT: p.cat, HEADER_CTA: switcher.replace(/class="btn ghost sm"/g, 'class="btn ghost sm lang"'),
     // Tool pages get a share bar after the article and a "Share result" button beside the calculator's actions.
     MAIN: p.app ? byline(p).replace('{{AD_BOTTOM}}', shareBlock(p, url) + '\n{{AD_BOTTOM}}').replace('<div class="tool-actions">', '<div class="tool-actions">' + shareResult(p.lang)) : p.body,
     FAQ_HTML: faqHtml(p.faq || []), DATE_ISO: p.dateModified, DATE_TEXT: longDate(p.dateModified, p.lang),
@@ -2786,6 +2899,7 @@ for (const p of pages) {
 // ---- page scripts: concatenate sources into one deferred, cacheable file per tool
 fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
 const bundles = {
+  'site.js': ['assets/js/site-ui.js'],
   'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
@@ -2868,6 +2982,10 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'schema-markup.js': ['assets/js/schema-core.js', 'assets/js/schema-ui.js'],
+  'privacy-policy.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/privacy-core.js', 'assets/js/privacy-ui.js'],
+  'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],
+  'color-contrast.js': ['assets/js/contrast-core.js', 'assets/js/contrast-ui.js'],
   'case-converter.js': ['assets/js/case-core.js', 'assets/js/case-ui.js'],
   'json-formatter.js': ['assets/js/json-core.js', 'assets/js/json-ui.js'],
   'word-counter.js': ['assets/js/zip-core.js', 'assets/js/words-core.js', 'assets/js/words-ui.js'],
@@ -2961,12 +3079,22 @@ const manifest = {
     ...appPages.filter(p => p.lang === 'en').map(p => ({ name: p.app.name, url: p.path, description: p.description.slice(0, 100) }))
   ]
 };
+// ---- search index for the header search: every catalogued tool plus the Malay pages, with each page's title as
+// extra keywords. Fetched only when a visitor opens search, so it never touches first paint.
+const searchIndex = tools.map(t => {
+  const pg = pageByPath.get(local(t.url));
+  return { n: t.name, d: t.desc, u: local(t.url), c: t.cat, l: pg ? pg.lang : 'en', b: t.badge || '', k: pg ? pg.title : '' };
+}).concat(pages.filter(p => p.app && p.lang === 'ms' && !p.solatState).map(p => ({ n: p.app.name, d: p.description, u: p.path, c: p.cat || 'calc', l: 'ms', b: '', k: p.title })));
+const catNames = Object.fromEntries(liveCats.map(c => [c, [CAT_SHORT.en[c], CAT_SHORT.ms[c]]]));
+const searchItems = searchIndex.filter((t, i) => searchIndex.findIndex(x => x.u === t.u) === i);
+fs.writeFileSync(path.join(pub, 'search-index.json'), JSON.stringify({ cats: catNames, items: searchItems }));
+
 const manifestJSON = JSON.stringify(manifest, null, 2) + '\n';
 fs.writeFileSync(path.join(pub, 'manifest.webmanifest'), manifestJSON);
 
 const pagePaths = ['/', ...pages.map(p => p.path)];
 const precache = [...new Set([
-  ...pagePaths, '/offline.html', '/manifest.webmanifest', '/assets/PWA/pwa.min.js',
+  ...pagePaths, '/offline.html', '/manifest.webmanifest', '/assets/PWA/pwa.min.js', '/search-index.json',
   ...Object.keys(bundles).map(n => '/assets/js/' + n),
   site.logo.local72, '/assets/favicon-image/favicon.ico',
   '/assets/favicon-image/apple-touch-icon.png', '/assets/favicon-image/favicon-96x96.png',

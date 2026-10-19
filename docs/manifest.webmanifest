@@ -148,6 +148,11 @@
       "description": "Track a City-Link Express parcel with your consignment number, see what each status means and what t"
     },
     {
+      "name": "Color Contrast Checker",
+      "url": "/color-contrast-checker/",
+      "description": "Free WCAG color contrast checker: contrast ratio, AA and AAA pass or fail for text and UI, nearest p"
+    },
+    {
       "name": "CSS Minifier",
       "url": "/css-minifier/",
       "description": "Free CSS minifier. Paste or upload CSS to remove comments and whitespace safely, see bytes saved and"
@@ -388,6 +393,11 @@
       "description": "Today's prayer times for every JAKIM zone in Malaysia: Subuh, Zohor, Asar, Maghrib and Isyak, a live"
     },
     {
+      "name": "Privacy Policy Generator",
+      "url": "/privacy-policy-generator/",
+      "description": "Free privacy policy generator for Malaysian websites and blogs: PDPA 2010 notice, Google AdSense and"
+    },
+    {
       "name": "Profit Margin Calculator Malaysia",
       "url": "/profit-margin-calculator-malaysia/",
       "description": "Profit margin calculator for Malaysian sellers: profit per unit after Shopee, Lazada or TikTok Shop "
@@ -453,6 +463,11 @@
       "description": "Free 2026 Malaysia salary calculator. Work out take-home pay after EPF, SOCSO, EIS, LINDUNG 24 Jam a"
     },
     {
+      "name": "Schema Markup Generator",
+      "url": "/schema-markup-generator/",
+      "description": "Free JSON-LD schema generator for Article, Product, Local Business, Event, Recipe, Video and more, c"
+    },
+    {
       "name": "Shoe Size Converter",
       "url": "/shoe-size-converter/",
       "description": "Find your shoe size from your foot length in cm, or convert between UK, EU, US men's and women's, ki"
@@ -516,6 +531,11 @@
       "name": "Water Bill Calculator Malaysia",
       "url": "/water-bill-calculator-malaysia/",
       "description": "Water bill calculator for Malaysia: your domestic bill from m³ used in Selangor, KL, Johor, Penang, "
+    },
+    {
+      "name": "WhatsApp Link Generator",
+      "url": "/whatsapp-link-generator/",
+      "description": "Free WhatsApp link generator: make a wa.me click-to-chat link with a pre-filled message, QR code and"
     },
     {
       "name": "WhatsApp Sticker Maker",

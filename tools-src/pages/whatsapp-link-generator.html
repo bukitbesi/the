@@ -1,0 +1,156 @@
+<!--page
+{
+  "path": "/whatsapp-link-generator/",
+  "lang": "en",
+  "cat": "util",
+  "title": "WhatsApp Link Generator: wa.me Link, QR Code and Chat Button",
+  "description": "Free WhatsApp link generator: make a wa.me click-to-chat link with a pre-filled message, QR code and website button. Fixes Malaysian numbers like 012.",
+  "llms": "Free WhatsApp link generator. Builds click-to-chat links in the official format from the WhatsApp Help Center: https://wa.me/ followed by the full international number with digits only (no +, spaces, dashes, brackets or leading zeros), and an optional pre-filled message URL-encoded after ?text=. A link without a number (https://wa.me/?text=...) lets the person choose the contact. Converts Malaysian local numbers automatically: 012-345 6789 becomes 60123456789 and +60 012... drops the extra 0; warns about Malaysian landlines and wrong lengths. Live preview of WhatsApp formatting (*bold*, _italic_, ~strikethrough~, ```monospace```, `inline code`, > quote, lists), message templates in English and Malay, QR code as PNG or SVG, and HTML code for a chat button or a floating button. Paste an existing wa.me link to edit it. Numbers are kept only in the browser.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/whatsapp-link-creator.html",
+  "render": "wa",
+  "shareTitle": "Share this WhatsApp link generator",
+  "scripts": ["/assets/js/whatsapp-link.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["WhatsApp Link Generator", null]],
+  "about": ["WhatsApp", "Click-to-chat", "QR code", "E.164"],
+  "app": {
+    "name": "WhatsApp Link Generator",
+    "category": "UtilitiesApplication",
+    "features": ["wa.me click-to-chat link with a pre-filled message", "Converts local numbers such as 012-345 6789 to international format", "Live WhatsApp formatting preview", "Message templates in English and Malay", "QR code download as PNG or SVG", "HTML code for a chat button or floating button", "Paste an existing link to edit it", "Works without a number (choose contact)"]
+  },
+  "citations": [
+    ["WhatsApp Help Center: How to use click to chat", "https://faq.whatsapp.com/5913398998672934"],
+    ["WhatsApp Help Center: How to format your messages", "https://faq.whatsapp.com/539178204879377"],
+    ["ITU-T Recommendation E.164: the international public telecommunication numbering plan", "https://www.itu.int/rec/T-REC-E.164"]
+  ],
+  "faq": [
+    { "q": "How do I create a WhatsApp link?", "a": "Type your number with the country selected, for example Malaysia and 012-345 6789, and the tool builds https://wa.me/60123456789. WhatsApp's own rule is a full international number with digits only: no plus sign, spaces, dashes, brackets or leading zeros. Anyone who taps the link opens a chat with you without saving your number first." },
+    { "q": "How do I add a pre-filled message?", "a": "Type the message in the box. It is URL-encoded and added after ?text=, so spaces become %20 and line breaks %0A, for example {{WA_EXAMPLE}}. The message appears in the chat box and the person can edit it before pressing send." },
+    { "q": "How do I write a Malaysian number for WhatsApp?", "a": "Drop the first 0 and put 60 in front: 012-345 6789 becomes 60123456789 and 011-2345 6789 becomes 601123456789. Do not keep both, as in +60 012…; the tool removes that extra 0 for you. Landlines such as 03 numbers only work if that line has WhatsApp Business." },
+    { "q": "Can I make a WhatsApp link without a phone number?", "a": "Yes. Leave the number empty and the link becomes https://wa.me/?text= followed by your message. Tapping it opens WhatsApp with the message ready and lets the person choose who to send it to, which is useful for share buttons." },
+    { "q": "How do I add a WhatsApp button to my website or Blogger?", "a": "Copy the button code and paste it into an HTML widget (Blogger: Layout, Add a Gadget, HTML/JavaScript) or a WordPress Custom HTML block. The floating version stays in the bottom-right corner on every page. The code is plain HTML and CSS, with no script, so it does not slow the page down." },
+    { "q": "Can I make bold or italic text in the message?", "a": "Yes, with WhatsApp's own symbols: *bold*, _italic_, ~strikethrough~, ```monospace``` and `inline code`; start a line with \"- \" for a list or \"> \" for a quote. Select text and use the buttons, and the preview shows how it will look in the chat." },
+    { "q": "Is the QR code free and does it expire?", "a": "Yes, it is free and never expires: the QR code simply contains your wa.me link, with no redirect through another service. Download it as PNG for print and posters or SVG for any size. Scan it with a phone camera to test it before printing. If your number changes, make a new code." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">WhatsApp Link Generator</li></ol></nav>
+  <h1>WhatsApp Link Generator</h1>
+  <p class="answer">Enter your number and an optional message to get a <strong>wa.me link that opens a WhatsApp chat with you</strong>, plus a QR code and a button for your website. Malaysian numbers are converted for you: <strong>012-345 6789 becomes {{WA_SAMPLE_LINK}}</strong>.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{WA_VERIFIED}}</span><a href="#format">Link format</a></p>
+
+  <form class="box wa-tool" id="waForm" novalidate aria-labelledby="wa-h">
+    <h2 id="wa-h" class="sr-only">Create a WhatsApp link</h2>
+    <div class="wa-grid">
+      <div>
+        <div class="wa-phone">
+          <div class="field"><label for="waCc">Country</label><select class="input" id="waCc">{{WA_COUNTRIES}}</select></div>
+          <div class="field"><label for="waPhone">WhatsApp number</label><input class="input" id="waPhone" type="tel" inputmode="tel" autocomplete="tel" value="012-345 6789" aria-describedby="waNote"></div>
+        </div>
+        <p class="help wa-note" id="waNote" role="status" hidden></p>
+        <div class="field">
+          <label for="waMsg">Pre-filled message (optional)</label>
+          <div class="wa-fmt" role="group" aria-label="Formatting"><button type="button" class="btn ghost sm" data-wrap="*"><strong>B</strong><span class="sr-only"> bold</span></button><button type="button" class="btn ghost sm" data-wrap="_"><em>I</em><span class="sr-only"> italic</span></button><button type="button" class="btn ghost sm" data-wrap="~"><s>S</s><span class="sr-only"> strikethrough</span></button><button type="button" class="btn ghost sm" data-wrap="```">Mono</button><button type="button" class="btn ghost sm" data-wrap="- ">List</button></div>
+          <textarea class="prose-in short" id="waMsg" aria-describedby="waCount">{{WA_MSG}}</textarea>
+          <p class="help" id="waCount">{{WA_COUNT}}</p>
+        </div>
+        <div class="wa-tpl" role="group" aria-label="Message templates">{{WA_TEMPLATES}}</div>
+      </div>
+      <div class="wa-chat" aria-label="Chat preview">
+        <p class="wa-to"><span aria-hidden="true">●</span> <span id="waNum">+60123456789</span></p>
+        <div class="wa-bubble" id="waBubble">{{WA_BUBBLE}}</div>
+      </div>
+    </div>
+
+    <div class="field wa-out">
+      <label for="waLink">Your WhatsApp link</label>
+      <input class="input wa-link" id="waLink" readonly value="{{WA_LINK}}">
+      <div class="tool-actions wa-row">
+        <button type="button" class="btn sm" id="waCopy">Copy link</button>
+        <a class="btn ghost sm" id="waTest" href="{{WA_LINK}}" rel="noopener">Test link</a>
+      </div>
+    </div>
+    <div class="wa-grid">
+      <section class="ex-set" aria-labelledby="waQrH"><h3 class="sub-h" id="waQrH">QR code</h3>
+        <div class="wa-qr" id="waQr">{{WA_QR}}</div>
+        <div class="tool-actions wa-row"><button type="button" class="btn ghost sm" id="waPng">Download PNG</button><button type="button" class="btn ghost sm" id="waSvg">Download SVG</button></div>
+      </section>
+      <section class="ex-set" aria-labelledby="waCodeH"><h3 class="sub-h" id="waCodeH">Button for your website</h3>
+        <fieldset class="seg" aria-label="Button style"><label><input type="radio" name="kind" value="button" checked> Button</label><label><input type="radio" name="kind" value="floating"> Floating</label></fieldset>
+        <div class="field"><label for="waLabel">Button text</label><input class="input" id="waLabel" placeholder="Chat on WhatsApp" autocomplete="off"></div>
+        <div class="field"><label for="waCode" class="sr-only">HTML code</label><textarea class="code wa-code" id="waCode" readonly spellcheck="false">{{WA_CODE}}</textarea></div>
+        <div class="tool-actions wa-row"><button type="button" class="btn ghost sm" id="waCopyCode">Copy code</button></div>
+      </section>
+    </div>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to create a WhatsApp click-to-chat link</h2>
+  <ol>
+    <li><strong>Choose the country and type the number</strong> the way you normally write it. The tool converts it to international format.</li>
+    <li><strong>Add a message</strong> customers will send you, or pick a template. Use the buttons for bold and italic.</li>
+    <li><strong>Copy the link</strong> for your Instagram bio, Facebook page, TikTok profile or emails, and press Test link to check it.</li>
+    <li><strong>Download the QR code</strong> for posters, flyers, packaging and shop counters.</li>
+    <li><strong>Copy the button code</strong> for your website or Blogger.</li>
+  </ol>
+
+  <h2 id="format">WhatsApp link format</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="fmt-cap">
+    <table class="data text"><caption id="fmt-cap">Click-to-chat links (WhatsApp Help Center rules)</caption>
+      <thead><tr><th scope="col">Link type</th><th scope="col">Example</th></tr></thead>
+      <tbody>
+{{WA_FORMAT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="numbers">Malaysian numbers in WhatsApp format</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="num-cap">
+    <table class="data text"><caption id="num-cap">How the tool converts what you type</caption>
+      <thead><tr><th scope="col">You type</th><th scope="col">In the link</th><th scope="col">Note</th></tr></thead>
+      <tbody>
+{{WA_NUMBER_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <h2 id="formatting">WhatsApp text formatting</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="txt-cap">
+    <table class="data text"><caption id="txt-cap">Formatting symbols from the WhatsApp Help Center</caption>
+      <thead><tr><th scope="col">Style</th><th scope="col">Type</th><th scope="col">Shows as</th></tr></thead>
+      <tbody>
+{{WA_FMT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Privacy:</strong> anyone with your link or QR code can message you, so use a business number for public posters. This page keeps your number only in your browser's storage; it is not added to the page address or sent anywhere.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://faq.whatsapp.com/5913398998672934" rel="noopener">WhatsApp Help Center: How to use click to chat</a></li>
+    <li><a href="https://faq.whatsapp.com/539178204879377" rel="noopener">WhatsApp Help Center: How to format your messages</a></li>
+    <li><a href="https://www.itu.int/rec/T-REC-E.164" rel="noopener">ITU-T E.164: international numbering plan (15 digits maximum)</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/whatsapp-sticker-maker/">WhatsApp Sticker Maker<small>Turn photos into stickers</small></a>
+    <a href="/caption-generator/">Caption Generator<small>Captions for your posts</small></a>
+    <a href="/image-converter/">Image Converter<small>WebP, JPG and PNG</small></a>
+  </div>
+</section>
+</div>

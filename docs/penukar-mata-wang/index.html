@@ -125,26 +125,77 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 @supports(-webkit-background-clip:text) or (background-clip:text){.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}}
 .center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
 
-/* Header */
+/* Header: logo, category nav (wide screens), search, dark mode, language, menu button (narrow screens) */
 .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:var(--bg);border-bottom:1px solid var(--border)}
-.header .container{height:100%;display:flex;align-items:center;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;min-height:44px;margin-right:auto}
+.header::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--grad)}
+.header>.container{height:100%;display:flex;align-items:center;gap:6px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;min-height:44px;margin-right:auto;white-space:nowrap}
 .logo img{width:36px;height:36px;border-radius:10px}
-.nav{display:none;gap:6px}
-.theme{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border-radius:50%;border:1px solid var(--border2);color:var(--text2)}
-.theme:hover{color:var(--text);border-color:var(--accent2)}
-.theme svg{width:20px;height:20px}
+.nav{display:none;gap:2px;margin-right:8px}
+.nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;font-size:.88rem;font-weight:600;color:var(--text2);border-radius:8px}
+.nav a::after{content:"";position:absolute;left:11px;right:11px;bottom:6px;height:2px;border-radius:2px;background:var(--grad);transform:scaleX(0);transition:transform .2s}
+.nav a:hover,.nav a.on{color:var(--text)}.nav a:hover::after,.nav a.on::after{transform:none}
+@media(min-width:1100px){.nav{display:flex}.burger{display:none!important}}
+.hbtn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;flex-shrink:0;border-radius:12px;border:1px solid var(--border2);color:var(--text2);background:var(--surface)}
+.hbtn:hover{color:var(--text);border-color:var(--accent2)}
+.hbtn svg{width:20px;height:20px}
 .theme .moon,:root[data-theme=dark] .theme .sun{display:block}
 .theme .sun,:root[data-theme=dark] .theme .moon{display:none}
-.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:.9rem;font-weight:500;color:var(--text2);border-radius:8px}
-.nav a:hover{color:var(--text)}
-@media(min-width:768px){.nav{display:flex}}
+.burger path{transition:transform .2s,opacity .2s;transform-origin:12px 12px}
+.menu-open .burger .b1{transform:translateY(5px) rotate(45deg)}.menu-open .burger .b2{opacity:0}.menu-open .burger .b3{transform:translateY(-5px) rotate(-45deg)}
+.btn.lang{min-width:44px;min-height:42px;padding:0 12px}
+@media(max-width:400px){.header>.container{padding:0 12px;gap:5px}.logo{font-size:.9rem;gap:8px}.hbtn{width:40px;height:40px}.btn.lang{min-width:40px;padding:0 10px}}
+@media(max-width:350px){.logo span{display:none}}
+
+/* Mobile menu */
+.menu{position:fixed;top:64px;left:0;right:0;max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain;background:var(--bg);border-bottom:1px solid var(--border);box-shadow:var(--shadow);padding:16px 0 22px}
+.menu-search{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border:1px solid var(--border2);border-radius:12px;background:var(--bg2);color:var(--text3);font-size:.92rem}
+.menu-search svg{width:18px;height:18px;flex-shrink:0}
+.menu-h{margin:18px 0 8px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.menu-cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(min-width:600px){.menu-cats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.menu-cats a{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 10px;border:1px solid var(--border);border-radius:12px;font-weight:600;font-size:.9rem;background:var(--surface)}
+.menu-cats a:hover{border-color:var(--card-hover)}
+.menu-cats small{margin-left:auto;font-size:.75rem;color:var(--text3);font-weight:600}
+.mi{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;flex-shrink:0}.mi svg{width:18px;height:18px}
+.menu-pop{display:grid;grid-template-columns:1fr;gap:2px}@media(min-width:600px){.menu-pop{grid-template-columns:1fr 1fr}}
+.menu-pop a{display:flex;align-items:center;min-height:42px;padding:0 4px;color:var(--text2);font-size:.92rem}.menu-pop a:hover{color:var(--accent2)}
+.menu-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.menu-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--border2);font-size:.85rem;font-weight:600}
+.menu-open body,.search-open body{overflow:hidden}
+
+/* Search */
+.search{position:fixed;inset:0;z-index:1500;display:flex;justify-content:center;align-items:flex-start;padding:72px 16px 16px;background:rgba(10,10,20,.55)}
+.search-box{width:100%;max-width:640px;max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);display:flex;flex-direction:column;border-radius:var(--r2);background:var(--surface);border:1px solid var(--border2);box-shadow:var(--shadow);overflow:hidden}
+.search-form{display:flex;align-items:center;gap:10px;padding:0 10px 0 16px;border-bottom:1px solid var(--border)}
+.search-form>svg{width:20px;height:20px;color:var(--accent2);flex-shrink:0}
+.search-form input{flex:1;min-width:0;height:58px;border:0;background:none;color:var(--text);font:inherit;font-size:1.05rem;outline:0}
+.search-form input::-webkit-search-cancel-button{display:none}
+.search-x{min-height:34px;padding:0 10px;border-radius:8px;border:1px solid var(--border2);font-size:.75rem;font-weight:700;color:var(--text3)}
+.search-status{padding:10px 18px 4px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.search-status:empty{display:none}
+.search-list{overflow-y:auto;padding:4px 8px 10px}
+.search-list a{display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:12px}
+.search-list a:hover,.search-list a:focus-visible{background:var(--tint);outline-offset:-2px}
+.search-list .dot{margin-top:8px}
+.search-list strong{font-size:.95rem}.search-list em{font-style:normal;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:99px;background:var(--pop-bg);color:var(--pop);vertical-align:2px}
+.search-list small{display:block;font-size:.82rem;color:var(--text3);line-height:1.45}
+.search-none{padding:14px 10px;color:var(--text2);font-size:.92rem}.search-none a{color:var(--accent2);font-weight:600;text-decoration:underline}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--accent)}
+.dot[class*=" t-"]{background:currentColor}
+.t-dev{background:var(--c-dev-bg);color:var(--c-dev)}
+.t-seo{background:var(--c-seo-bg);color:var(--c-seo)}
+.t-content{background:var(--c-content-bg);color:var(--c-content)}
+.t-design{background:var(--c-design-bg);color:var(--c-design)}
+.t-ai{background:var(--c-ai-bg);color:var(--c-ai)}
+.t-util{background:var(--c-util-bg);color:var(--c-util)}
+.t-calc{background:var(--c-calc-bg);color:var(--c-calc)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 24px;border-radius:99px;font-size:.95rem;font-weight:700;color:#fff;background:var(--btn);box-shadow:var(--btn-shadow)}
 .btn:hover{filter:brightness(1.1)}
 .btn.ghost{background:transparent;border:1px solid var(--border2);box-shadow:none;color:var(--text)}
 .btn.ghost:hover{border-color:var(--accent2);filter:none}
 .btn.sm{padding:0 18px;font-size:.85rem}
-@media(max-width:380px){.header .container{gap:8px}.logo{font-size:.92rem;gap:8px}.btn.sm{padding:0 12px;font-size:.8rem}}
+@media(max-width:380px){.btn.sm{padding:0 12px;font-size:.8rem}}
 
 /* Content blocks */
 .cats{display:grid;grid-template-columns:1fr;gap:16px;margin-top:36px}
@@ -178,16 +229,26 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 /* CTA + footer */
 .cta{padding:56px 28px;border-radius:24px;text-align:center;background:var(--cta);border:1px solid var(--tint-b)}
 .cta .lead{margin:0 auto 26px}
-.footer{padding:48px 0 28px;border-top:1px solid var(--border)}
-.fgrid{display:grid;grid-template-columns:1fr;gap:28px;margin-bottom:28px}
-@media(min-width:640px){.fgrid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.fgrid{grid-template-columns:2fr 1fr 1fr 1fr}}
-.fgrid p{font-size:.88rem;color:var(--text3);margin-top:10px;max-width:300px}
-.fgrid h2{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:8px}
-.fgrid li a{display:inline-flex;align-items:center;min-height:36px;font-size:.9rem;color:var(--text2)}
-.fgrid li a:hover{color:var(--accent2)}
-.fbot{padding-top:20px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
-.pwa-actions{margin-top:16px}
+.footer{padding:48px 0 28px;border-top:1px solid var(--border);background:var(--bg2)}
+.fgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:24px}
+@media(min-width:760px){.fgrid{grid-template-columns:repeat(2,1fr)}.fgrid>:first-child{grid-column:1/-1}}
+@media(min-width:1000px){.fgrid{grid-template-columns:1.25fr 1fr 1fr}.fgrid>:first-child{grid-column:auto}}
+.fbox{position:relative;padding:24px;border-radius:var(--r2);background:var(--surface);border:1px solid var(--border);overflow:hidden}
+.fbox::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--grad);opacity:.85}
+.fbox p{font-size:.88rem;color:var(--text2);margin-top:10px}
+.fbox h2{display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text);margin-bottom:10px}
+.ftrust{margin-top:14px;display:grid;gap:6px}
+.ftrust li{position:relative;padding-left:24px;font-size:.85rem;color:var(--text2)}
+.ftrust li::before{content:"";position:absolute;left:2px;top:.35em;width:12px;height:7px;border-left:2px solid var(--accent3);border-bottom:2px solid var(--accent3);transform:rotate(-45deg)}
+.fsocial{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.flist li a{display:flex;align-items:center;gap:10px;min-height:40px;font-size:.9rem;color:var(--text2);border-bottom:1px dashed var(--border)}
+.flist li:last-child a{border-bottom:0}
+.flist li a:hover{color:var(--accent2)}
+.flist small{margin-left:auto;min-width:28px;text-align:center;padding:1px 8px;border-radius:99px;background:var(--bg2);font-size:.75rem;font-weight:700;color:var(--text3)}
+.fbot{padding-top:18px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.flinks{display:flex;flex-wrap:wrap;gap:0 4px}
+.flinks a{display:inline-flex;align-items:center;min-height:40px;padding:0 8px;color:var(--text2);font-weight:600}
+.flinks a:hover{color:var(--accent2)}
 .pwa-notice{position:fixed;bottom:16px;right:16px;width:min(380px,calc(100% - 32px));z-index:1100;padding:18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);font-size:.9rem}
 .pwa-notice p{color:var(--text2);margin-bottom:12px}
 .pwa-notice .actions{justify-content:flex-start}
@@ -651,6 +712,61 @@ textarea.wc-text{min-height:260px}
 /* Prayer times: the current prayer and today's row in the month */
 .rows tr.now th,.rows tr.now td,.data tr.now th,.data tr.now td{color:var(--accent2);font-weight:800}
 .data th small{white-space:normal;min-width:180px}
+/* Color contrast checker */
+.ct-inputs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:10px}
+.ct-in{display:flex;gap:8px}.ct-in input[type=color]{width:48px;height:48px;padding:3px;border:1px solid var(--border2);border-radius:12px;background:var(--surface);cursor:pointer;flex-shrink:0}
+.ct-in .input{min-width:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.ct-swap{margin-bottom:3px}
+.ct-grid{display:grid;gap:14px;margin-top:14px}@media(min-width:760px){.ct-grid{grid-template-columns:1fr 1fr}}
+.ct-ratio{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.ct-ratio b{font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}.ct-ratio b small{font-size:1.2rem;color:var(--text3)}.ct-ratio span{font-weight:600;color:var(--text2)}
+.ct-levels{display:grid;gap:6px;margin-top:12px}
+.ct-levels li{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:.9rem;font-weight:600}
+.ct-levels li span{min-width:44px;text-align:center;padding:2px 8px;border-radius:99px;font-size:.75rem;font-weight:800}
+.ct-levels .ok span{background:var(--new-bg);color:var(--new)}.ct-levels .no span{background:var(--hot-bg);color:var(--hot)}
+.ct-levels small{margin-left:auto;font-weight:500;color:var(--text3);font-size:.78rem}
+.ct-preview{padding:18px;border-radius:var(--r);border:1px solid var(--border2)}
+.ct-preview p{margin:0 0 10px;line-height:1.5}.ct-large{font-size:24px}.ct-bold{font-size:18.66px;font-weight:700}
+.ct-ui{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.ct-ui svg{width:28px;height:28px}
+.ct-btn{padding:6px 14px;border-radius:8px;border:2px solid var(--ct-fg);font-weight:700}.ct-field{padding:6px 10px;border-radius:6px;border:1px solid var(--ct-fg)}
+.ct-fixes{display:flex;flex-wrap:wrap;gap:8px}.ct-fix{gap:8px}
+.ct-chip{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--border2);vertical-align:-2px;margin-right:6px}
+.ct-swatch{display:inline-block;padding:2px 12px;border-radius:6px;font-weight:800;border:1px solid var(--border)}
+.ct-table{min-width:0}
+.ct-pal summary{cursor:pointer}
+.ct-matrix{min-width:0}.ct-matrix td{text-align:center;font-size:.85rem}.ct-matrix td small{display:block;font-size:.7rem;opacity:.9}.ct-matrix th{font-size:.75rem;white-space:nowrap}.ct-same{color:var(--text3)}
+@media(max-width:480px){.ct-inputs{grid-template-columns:1fr}.ct-swap{justify-self:center;transform:rotate(90deg)}}
+/* WhatsApp link generator */
+.wa-grid{display:grid;gap:16px}@media(min-width:820px){.wa-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}}
+.wa-phone{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px}@media(max-width:420px){.wa-phone{grid-template-columns:1fr}}
+.wa-fmt,.wa-tpl{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.wa-fmt .btn{min-width:44px;padding:0 12px}
+.wa-chat{padding:14px;border-radius:var(--r);background:#e7ded6;background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1px);background-size:14px 14px;min-height:180px}
+:root[data-theme=dark] .wa-chat{background-color:#0b141a}
+.wa-to{font-size:.8rem;font-weight:700;color:#111b21;margin-bottom:10px}.wa-to span:first-child{color:#25d366}:root[data-theme=dark] .wa-to{color:#e9edef}
+.wa-bubble{margin-left:auto;max-width:92%;width:fit-content;padding:8px 10px 10px;border-radius:10px 0 10px 10px;background:#d9fdd3;color:#111b21;font-size:.92rem;line-height:1.45;overflow-wrap:anywhere;box-shadow:0 1px 1px rgba(0,0,0,.12)}
+:root[data-theme=dark] .wa-bubble{background:#005c4b;color:#e9edef}
+.wa-bubble code{font-size:.85em}.wa-quote{display:block;padding-left:8px;border-left:3px solid #25d366;opacity:.85}.wa-li{display:block}.wa-empty{opacity:.6}
+.wa-out{margin-top:16px}.wa-link{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem}
+.wa-note:not(.error){color:var(--text2)}
+.wa-qr{width:min(220px,100%);aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:#fff}.wa-qr svg{display:block;width:100%;height:100%}
+.wa-code{min-height:120px;font-size:.78rem}
+/* Privacy policy generator */
+.pp-grid{display:grid;gap:16px}@media(min-width:960px){.pp-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
+.pp-form .ex-set{margin-top:0;margin-bottom:12px;border:1px solid var(--border);border-radius:var(--r);padding:12px 14px}
+.pp-form legend{padding:0 6px}.pp-form .check{display:flex;margin:4px 0}
+.pp-issues{margin:0 0 10px;padding:10px 14px 10px 30px;border-radius:10px;background:var(--hot-bg);color:var(--hot);font-size:.88rem;list-style:disc}
+.pp-preview{max-height:640px;overflow:auto;padding:16px 18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg);font-size:.92rem}
+.pp-preview h3{font-size:1.25rem;margin:0 0 4px}.pp-preview h4{font-size:1rem;margin:18px 0 6px}.pp-preview hr{margin:24px 0;border:0;border-top:2px dashed var(--border2)}
+@media(min-width:960px){.pp-out{position:sticky;top:80px;align-self:start}}
+/* Schema markup generator */
+.sc-types{display:flex;flex-wrap:wrap;gap:6px}.sc-types .btn[aria-pressed=true]{background:var(--tint);border-color:var(--chip-on-b);color:var(--accent2)}
+.sc-rich{margin:8px 0 14px}
+.sc-grid{display:grid;gap:18px}@media(min-width:960px){.sc-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.sc-out{position:sticky;top:80px;align-self:start}}
+.sc-fields{display:grid;grid-template-columns:1fr;gap:0 12px}@media(min-width:560px){.sc-fields{grid-template-columns:1fr 1fr}.sc-fields .sc-wide{grid-column:1/-1}}
+.sc-req{font-size:.7rem;font-weight:700;color:var(--hot);margin-left:4px}
+.sc-code{min-height:340px;font-size:.78rem}
+.sc-checks{margin:0 0 10px;display:grid;gap:4px;font-size:.86rem}.sc-checks li{padding:6px 10px;border-radius:8px}.sc-checks .no{background:var(--hot-bg);color:var(--hot)}.sc-checks .warn{background:var(--c-content-bg);color:var(--c-content)}
+.sc-ok{margin:0 0 10px;padding:6px 10px;border-radius:8px;background:var(--new-bg);color:var(--new);font-size:.88rem;font-weight:600}
+.code-block{overflow-x:auto;padding:14px 16px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--border);font:.8rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
 </style>
 
 </head>
@@ -662,13 +778,64 @@ textarea.wc-text{min-height:260px}
   <div class="container">
     <a href="/" class="logo" aria-label="The Bukit Besi Tools home"><img src="/assets/favicon-image/bukit-besi-72.webp" width="36" height="36" alt="" decoding="async"><span>The Bukit Besi</span></a>
     <nav class="nav" aria-label="Laman">
-      <a href="/">Semua alat</a>
-      <a href="/?cat=calc#tools">Kalkulator</a>
+      <a href="/?cat=dev#tools" data-filter="dev">Pembangun</a>
+      <a href="/?cat=seo#tools" data-filter="seo">SEO</a>
+      <a href="/?cat=content#tools" data-filter="content">Kandungan</a>
+      <a href="/?cat=design#tools" data-filter="design">Reka bentuk</a>
+      <a href="/?cat=ai#tools" data-filter="ai">AI</a>
+      <a href="/?cat=util#tools" data-filter="util">Utiliti</a>
+      <a href="/?cat=calc#tools" data-filter="calc">Kalkulator</a>
     </nav>
-    <button type="button" class="theme" id="themeToggle" aria-pressed="false" aria-label="Mod gelap"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-    <a href="/currency-converter-malaysia/" class="btn ghost sm" hreflang="en" lang="en">EN<span class="sr-only"> – Read in English</span></a>
+    <a href="/#tools" class="hbtn" id="searchOpen" aria-haspopup="dialog" aria-controls="siteSearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="sr-only">Cari alat</span></a>
+    <button type="button" class="hbtn theme" id="themeToggle" aria-pressed="false" aria-label="Mod gelap"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a href="/currency-converter-malaysia/" class="btn ghost sm lang" hreflang="en" lang="en">EN<span class="sr-only"> – Read in English</span></a>
+    <button type="button" class="hbtn burger" id="menuOpen" aria-expanded="false" aria-controls="siteMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="b1" d="M4 7h16"/><path class="b2" d="M4 12h16"/><path class="b3" d="M4 17h16"/></svg><span class="sr-only">Menu</span></button>
   </div>
+  <nav class="menu" id="siteMenu" aria-label="Menu" hidden>
+    <div class="container">
+      <a href="/#tools" class="menu-search" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cari alat, cth. zakat, KWSP, cukai</a>
+      <p class="menu-h">Kategori</p>
+      <ul class="menu-cats">
+        <li><a href="/?cat=dev#tools" data-filter="dev"><span class="mi t-dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/></svg></span>Pembangun<small>9</small></a></li>
+        <li><a href="/?cat=seo#tools" data-filter="seo"><span class="mi t-seo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/></svg></span>SEO<small>4</small></a></li>
+        <li><a href="/?cat=content#tools" data-filter="content"><span class="mi t-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></span>Kandungan<small>6</small></a></li>
+        <li><a href="/?cat=design#tools" data-filter="design"><span class="mi t-design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/></svg></span>Reka bentuk<small>6</small></a></li>
+        <li><a href="/?cat=ai#tools" data-filter="ai"><span class="mi t-ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M6 18l2.5-2.5m7-7L18 6"/></svg></span>AI<small>7</small></a></li>
+        <li><a href="/?cat=util#tools" data-filter="util"><span class="mi t-util"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>Utiliti<small>8</small></a></li>
+        <li><a href="/?cat=calc#tools" data-filter="calc"><span class="mi t-calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2m4 0h2M8 16h2m4 0h2"/></svg></span>Kalkulator<small>63</small></a></li>
+      </ul>
+      <p class="menu-h">Alat popular</p>
+      <ul class="menu-pop">
+        <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
+        <li><a href="/css-minifier/">CSS Minifier</a></li>
+        <li><a href="https://www.thebukitbesi.com/p/html-table-generator.html">HTML Table Generator</a></li>
+        <li><a href="https://www.thebukitbesi.com/p/parser-unparser.html">Parser &amp; Unparser Tool</a></li>
+        <li><a href="/word-counter/">Word Counter</a></li>
+        <li><a href="/image-converter/">Image Converter (WebP, JPG, PNG)</a></li>
+      </ul>
+      <ul class="menu-links">
+        <li><a href="/">Semua alat</a></li>
+        <li><a href="https://www.thebukitbesi.com/">Blog</a></li>
+        <li><a href="/about/">Tentang kami</a></li>
+        <li><a href="/contact/">Hubungi</a></li>
+      </ul>
+    </div>
+  </nav>
 </header>
+
+<div class="search" id="siteSearch" role="dialog" aria-modal="true" aria-labelledby="searchH" hidden>
+  <div class="search-box">
+    <h2 id="searchH" class="sr-only">Cari alat</h2>
+    <form class="search-form" role="search" action="/" method="get">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="searchQ" class="sr-only">Cari alat</label>
+      <input type="search" id="searchQ" name="q" placeholder="Cari alat, cth. zakat, KWSP, cukai" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-controls="searchList" aria-describedby="searchStatus">
+      <button type="button" class="search-x" id="searchClose"><span aria-hidden="true">Esc</span><span class="sr-only">Tutup</span></button>
+    </form>
+    <p class="search-status" id="searchStatus" aria-live="polite"></p>
+    <ul class="search-list" id="searchList"></ul>
+  </div>
+</div>
 
 <main id="main">
 <div class="page">
@@ -814,48 +981,57 @@ textarea.wc-text{min-height:260px}
 <footer class="footer">
   <div class="container">
     <div class="fgrid">
-      <div>
+      <section class="fbox" aria-labelledby="ft-about">
+        <h2 id="ft-about" class="sr-only">Tentang kami</h2>
         <a href="/" class="logo"><img src="/assets/favicon-image/bukit-besi-72.webp" width="36" height="36" alt="" loading="lazy" decoding="async"><span>The Bukit Besi</span></a>
         <p>Alat dalam talian percuma dan kalkulator Malaysia untuk pembangun, penulis blog dan urusan harian.</p>
-        <div class="pwa-actions"><button type="button" class="btn ghost sm" id="pwaInstall" hidden>Pasang aplikasi</button></div>
-      </div>
-      <nav aria-label="Alat popular">
-        <h2>Alat popular</h2>
-        <ul>
-          <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
-          <li><a href="/css-minifier/">CSS Minifier</a></li>
-          <li><a href="/unused-css-remover/">Unused CSS Remover</a></li>
-          <li><a href="/html-beautifier/">HTML Beautifier &amp; Minifier</a></li>
-          <li><a href="/json-formatter/">JSON Formatter and Validator</a></li>
-          <li><a href="/robots-txt-generator/">Robots.txt Generator and Tester</a></li>
+        <ul class="ftrust">
+          <li>Percuma, tanpa daftar</li>
+          <li>Kadar disemak dengan sumber rasmi Malaysia</li>
+          <li>Boleh dipasang sebagai aplikasi dan berfungsi luar talian</li>
+        </ul>
+        <div class="fsocial">
+          <a class="hbtn" href="https://x.com/BukitBesiBlog" rel="me noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" /></svg><span class="sr-only">X</span></a>
+          <a class="hbtn" href="https://instagram.com/bukitbesi" rel="me noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg><span class="sr-only">Instagram</span></a>
+          <a class="hbtn" href="https://www.linkedin.com/in/bukitbesi/" rel="me noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg><span class="sr-only">LinkedIn</span></a>
+          <button type="button" class="btn ghost sm" id="pwaInstall" hidden>Pasang aplikasi</button>
+        </div>
+      </section>
+      <nav class="fbox" aria-labelledby="ft-pop">
+        <h2 id="ft-pop">Alat popular</h2>
+        <ul class="flist">
+          <li><a href="/javascript-minifier/"><i class="dot t-dev" aria-hidden="true"></i>JavaScript Minifier &amp; Obfuscator</a></li>
+          <li><a href="/css-minifier/"><i class="dot t-dev" aria-hidden="true"></i>CSS Minifier</a></li>
+          <li><a href="https://www.thebukitbesi.com/p/html-table-generator.html"><i class="dot t-dev" aria-hidden="true"></i>HTML Table Generator</a></li>
+          <li><a href="https://www.thebukitbesi.com/p/parser-unparser.html"><i class="dot t-dev" aria-hidden="true"></i>Parser &amp; Unparser Tool</a></li>
+          <li><a href="/word-counter/"><i class="dot t-content" aria-hidden="true"></i>Word Counter</a></li>
+          <li><a href="/image-converter/"><i class="dot t-design" aria-hidden="true"></i>Image Converter (WebP, JPG, PNG)</a></li>
+          <li><a href="/ai-prompt-generator/"><i class="dot t-ai" aria-hidden="true"></i>AI Prompt Generator (Image &amp; Video)</a></li>
+          <li><a href="/unused-css-remover/"><i class="dot t-dev" aria-hidden="true"></i>Unused CSS Remover</a></li>
         </ul>
       </nav>
-      <nav aria-label="Kategori">
-        <h2>Kategori</h2>
-        <ul>
-          <li><a href="/?cat=dev#tools" data-filter="dev">Alat Pembangun</a></li>
-          <li><a href="/?cat=seo#tools" data-filter="seo">Alat SEO</a></li>
-          <li><a href="/?cat=content#tools" data-filter="content">Alat Kandungan</a></li>
-          <li><a href="/?cat=design#tools" data-filter="design">Alat Reka Bentuk</a></li>
-          <li><a href="/?cat=ai#tools" data-filter="ai">Alat AI</a></li>
-          <li><a href="/?cat=util#tools" data-filter="util">Utiliti</a></li>
-          <li><a href="/?cat=calc#tools" data-filter="calc">Kalkulator</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="Sumber">
-        <h2>Sumber</h2>
-        <ul>
-          <li><a href="https://www.thebukitbesi.com/">Blog</a></li>
-          <li><a href="/about/">Tentang kami</a></li>
-          <li><a href="/contact/">Hubungi</a></li>
-          <li><a href="/privacy/">Dasar privasi</a></li>
-          <li><a href="/terms/">Terma penggunaan</a></li>
+      <nav class="fbox" aria-labelledby="ft-cats">
+        <h2 id="ft-cats">Kategori</h2>
+        <ul class="flist">
+          <li><a href="/?cat=dev#tools" data-filter="dev"><i class="dot t-dev" aria-hidden="true"></i>Alat Pembangun<small>9</small></a></li>
+          <li><a href="/?cat=seo#tools" data-filter="seo"><i class="dot t-seo" aria-hidden="true"></i>Alat SEO<small>4</small></a></li>
+          <li><a href="/?cat=content#tools" data-filter="content"><i class="dot t-content" aria-hidden="true"></i>Alat Kandungan<small>6</small></a></li>
+          <li><a href="/?cat=design#tools" data-filter="design"><i class="dot t-design" aria-hidden="true"></i>Alat Reka Bentuk<small>6</small></a></li>
+          <li><a href="/?cat=ai#tools" data-filter="ai"><i class="dot t-ai" aria-hidden="true"></i>Alat AI<small>7</small></a></li>
+          <li><a href="/?cat=util#tools" data-filter="util"><i class="dot t-util" aria-hidden="true"></i>Utiliti<small>8</small></a></li>
+          <li><a href="/?cat=calc#tools" data-filter="calc"><i class="dot t-calc" aria-hidden="true"></i>Kalkulator<small>63</small></a></li>
         </ul>
       </nav>
     </div>
     <div class="fbot">
+      <nav class="flinks" aria-label="Sumber">
+        <a href="https://www.thebukitbesi.com/">Blog</a>
+        <a href="/about/">Tentang kami</a>
+        <a href="/contact/">Hubungi</a>
+        <a href="/privacy/">Dasar privasi</a>
+        <a href="/terms/">Terma penggunaan</a>
+      </nav>
       <span>&copy; 2026 The Bukit Besi. Hak cipta terpelihara.</span>
-      <span>Alat percuma untuk komuniti pencipta</span>
     </div>
   </div>
 </footer>
@@ -884,18 +1060,7 @@ textarea.wc-text{min-height:260px}
   });
 })();
 </script>
-<script>
-(function(){
-  var root=document.documentElement,btn=document.getElementById("themeToggle"),meta=document.querySelector('meta[name="theme-color"]');
-  function sync(){var d=root.getAttribute("data-theme")==="dark";btn.setAttribute("aria-pressed",d?"true":"false");meta.content=d?"#0a0a0f":"#ffffff"}
-  btn.addEventListener("click",function(){
-    if(root.getAttribute("data-theme")==="dark")root.removeAttribute("data-theme");else root.setAttribute("data-theme","dark");
-    try{localStorage.setItem("tbb-theme",root.getAttribute("data-theme")||"light")}catch(e){}
-    sync();
-  });
-  sync();
-})();
-</script>
+<script src="/assets/js/site.js" defer></script>
 <script>
 (function(){
   var slots=document.querySelectorAll("ins.adsbygoogle"),done=false,ev=["scroll","pointerdown","keydown","touchstart","mousemove"];

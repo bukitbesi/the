@@ -20,7 +20,8 @@ const proc = shim('process', "export const process = { env: {}, cwd: () => '/', 
 const BUNDLES = [
   { pkg: 'terser', global: 'import { minify } from "terser"; globalThis.Terser = { minify };' },
   { pkg: 'js-beautify', global: 'import b from "js-beautify"; globalThis.jsBeautify = { html: b.html, css: b.css, js: b.js };' },
-  { pkg: 'html-minifier-terser', global: 'import { minify } from "html-minifier-terser"; globalThis.HTMLMinifier = { minify };' }
+  { pkg: 'html-minifier-terser', global: 'import { minify } from "html-minifier-terser"; globalThis.HTMLMinifier = { minify };' },
+  { pkg: 'qrcode-generator', global: 'import qrcode from "qrcode-generator"; globalThis.qrcode = qrcode;' }
 ];
 const COPIES = [
   { pkg: 'javascript-obfuscator', file: 'dist/index.browser.js' },

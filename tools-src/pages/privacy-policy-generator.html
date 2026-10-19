@@ -1,0 +1,160 @@
+<!--page
+{
+  "path": "/privacy-policy-generator/",
+  "lang": "en",
+  "cat": "util",
+  "title": "Privacy Policy Generator Malaysia: PDPA, AdSense, English and BM",
+  "description": "Free privacy policy generator for Malaysian websites and blogs: PDPA 2010 notice, Google AdSense and Analytics statements, GDPR, in English and Bahasa Melayu.",
+  "llms": "Free privacy policy generator for Malaysian websites, blogs and online shops. Produces a privacy notice in English, Bahasa Melayu or both (the Personal Data Protection Act 2010 section 7(3) requires notices in the national language and English), structured on the Personal Data Protection Commissioner's framework of a notice: data collected, sources, purposes, disclosure to third parties, transfer outside Malaysia, security, retention, access and correction rights, whether supplying data is obligatory, contact details. Adds the three statements Google requires in AdSense publishers' privacy policies (third-party vendors including Google use cookies to serve ads based on prior visits; Google's advertising cookies; opting out via Ads Settings or aboutads.info), the Google Analytics disclosure with the opt-out add-on, optional GDPR legal bases and rights, children, affiliate links and embedded content. Copy as HTML or text, or download HTML, Markdown or Word. Not legal advice.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/free-privacy-policy-generator.html",
+  "render": "privacy",
+  "shareTitle": "Share this privacy policy generator",
+  "scripts": ["/assets/js/privacy-policy.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Privacy Policy Generator", null]],
+  "about": ["Privacy policy", "Personal Data Protection Act 2010", "Google AdSense", "General Data Protection Regulation"],
+  "app": {
+    "name": "Privacy Policy Generator",
+    "category": "BusinessApplication",
+    "features": ["PDPA 2010 notice structure from the Personal Data Protection Commissioner", "English, Bahasa Melayu or both", "Google AdSense required statements", "Google Analytics disclosure and opt-out", "Optional GDPR legal bases and rights", "Contact forms, comments, newsletters, accounts and online orders", "Copy HTML or text; download HTML, Markdown or Word", "Answers saved in your browser"]
+  },
+  "citations": [
+    ["Personal Data Protection Commissioner: Compliance to PDPA, a quick guide (framework of a notice)", "https://mohre.um.edu.my/img/files/Compliance%20to%20Personal%20Data%20Protection%20Act%20(PDPA)%20a%20quick%20guide.pdf"],
+    ["Google AdSense Help: Required content (privacy policy)", "https://support.google.com/adsense/answer/1348695?hl=en"],
+    ["Google Analytics Help: Privacy Disclosures Policy", "https://support.google.com/analytics/answer/7318509?hl=en"],
+    ["Baker McKenzie: Personal Data Protection (Amendment) Act 2024 to come into force", "https://insightplus.bakermckenzie.com/bm/data-technology/malaysia-personal-data-protection-amendment-act-2024-to-come-into-force"],
+    ["EUR-Lex: GDPR Article 13, information to be provided", "https://eur-lex.europa.eu/eli/reg/2016/679/oj"]
+  ],
+  "faq": [
+    { "q": "Do Malaysian websites need a privacy policy?", "a": "If you collect personal data in commercial transactions, such as through an online shop, enquiry forms or a newsletter for your business, the Personal Data Protection Act 2010 requires a written notice telling people what you collect, why, who you share it with and how they can access and correct it. Google AdSense and Google Analytics also require a privacy policy that discloses their cookies, so a monetised blog needs one too." },
+    { "q": "Does the privacy policy have to be in Bahasa Melayu?", "a": "Under section 7(3) of the PDPA, the notice must be in the national language and in English. Choose Both and the generator writes the full policy in English and Bahasa Melayu, one after the other, ready to paste on one page." },
+    { "q": "What must a privacy policy include for Google AdSense?", "a": "Google requires three points: that third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your site or other sites; that Google's advertising cookies let it and its partners serve ads based on those visits; and that users can opt out of personalised advertising at Ads Settings (or aboutads.info). The generator adds all three, with the links, when you tick Google AdSense." },
+    { "q": "How do I add the privacy policy to Blogger?", "a": "In Blogger, open Pages, create a new page titled Privacy Policy, switch to HTML view, paste the copied HTML and publish. Then link the page in your footer or menu. On WordPress, paste the HTML into a Custom HTML block on a new page and choose it under Settings, Privacy. Keep the link visible on every page." },
+    { "q": "What changed in the PDPA in 2025?", "a": "The Personal Data Protection (Amendment) Act 2024 came into force in three phases in 2025. From 1 April 2025 a \"data user\" is called a \"data controller\" and data processors are directly bound by the security principle; from 1 June 2025 controllers must notify data breaches, appoint a data protection officer where required, and give people a right to data portability. Update your policy date when you review it." },
+    { "q": "Do I need GDPR in my policy?", "a": "Only if you target or monitor visitors in the European Economic Area, for example by selling to them or using analytics and personalised ads on their visits. Leaving GDPR ticked adds the legal bases and the extra EU rights (erasure, restriction, portability, objection and complaint). It does no harm for a Malaysian site with international visitors." },
+    { "q": "Is this generated policy legal advice?", "a": "No. It is a clear starting template that follows the PDPA notice framework and Google's requirements, but every business is different. Read it, delete anything that does not apply, add what you really do with data, and ask a lawyer if you handle sensitive data such as health or financial records or run a large online business." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Privacy Policy Generator</li></ol></nav>
+  <h1>Privacy Policy Generator for Malaysian Websites</h1>
+  <p class="answer">Answer a few questions to get a <strong>free privacy policy that follows the PDPA 2010 notice framework and includes the statements Google AdSense and Analytics require</strong>, in <strong>English, Bahasa Melayu or both</strong>. Copy it into Blogger or WordPress, or download it as HTML or Word.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{PP_VERIFIED}}</span><a href="#pdpa">PDPA checklist</a></p>
+
+  <form class="box pp-tool" id="ppForm" novalidate aria-labelledby="pp-h">
+    <h2 id="pp-h" class="sr-only">Generate a privacy policy</h2>
+    <div class="pp-grid">
+      <div class="pp-form">
+        <fieldset class="ex-set"><legend class="sub-h">Your website</legend>
+          <div class="field"><label for="ppSite">Website name</label><input class="input" id="ppSite" name="site" value="{{PP_SITE}}" autocomplete="organization"></div>
+          <div class="field"><label for="ppUrl">Website address</label><input class="input" id="ppUrl" name="url" type="url" inputmode="url" value="{{PP_URL}}"></div>
+          <div class="field"><label for="ppOwner">Owner (your name or company)</label><input class="input" id="ppOwner" name="owner" value="{{PP_OWNER}}" autocomplete="name"></div>
+          <div class="field"><label for="ppEmail">Contact email</label><input class="input" id="ppEmail" name="email" type="email" inputmode="email" value="{{PP_EMAIL}}" autocomplete="email"></div>
+          <div class="field"><label for="ppAddress">Business address (optional)</label><input class="input" id="ppAddress" name="address" autocomplete="street-address"></div>
+          <div class="field"><label for="ppDate">Effective date</label><input class="input" id="ppDate" name="date" type="date" value="{{PP_DATE}}"></div>
+          <fieldset class="seg seg3" aria-label="Language"><label><input type="radio" name="lang" value="both" checked> Both</label><label><input type="radio" name="lang" value="en"> English</label><label><input type="radio" name="lang" value="ms"> BM</label></fieldset>
+        </fieldset>
+        <fieldset class="ex-set"><legend class="sub-h">Data you collect</legend>
+          <label class="check"><input type="checkbox" name="c_contact" checked> <span>Contact form</span></label>
+          <label class="check"><input type="checkbox" name="c_comments" checked> <span>Comments</span></label>
+          <label class="check"><input type="checkbox" name="c_newsletter"> <span>Email newsletter</span></label>
+          <label class="check"><input type="checkbox" name="c_accounts"> <span>User accounts</span></label>
+          <label class="check"><input type="checkbox" name="c_orders"> <span>Online orders and payments</span></label>
+        </fieldset>
+        <fieldset class="ex-set"><legend class="sub-h">Services and options</legend>
+          <label class="check"><input type="checkbox" name="s_adsense" checked> <span>Google AdSense ads</span></label>
+          <label class="check"><input type="checkbox" name="s_analytics" checked> <span>Google Analytics</span></label>
+          <label class="check"><input type="checkbox" name="s_affiliate"> <span>Affiliate links (Shopee, Lazada, Amazon…)</span></label>
+          <label class="check"><input type="checkbox" name="s_embeds" checked> <span>YouTube or social media embeds</span></label>
+          <label class="check"><input type="checkbox" name="s_cdn"> <span>Cloudflare or another CDN</span></label>
+          <label class="check"><input type="checkbox" name="gdpr" checked> <span>Include GDPR (EU visitors)</span></label>
+          <label class="check"><input type="checkbox" name="children" checked> <span>Not for children under 13</span></label>
+        </fieldset>
+      </div>
+      <div class="pp-out">
+        <div role="status"><ul class="pp-issues" id="ppIssues">{{PP_ISSUES}}</ul></div>
+        <div class="tool-actions pp-row">
+          <button type="button" class="btn sm" id="ppCopyHtml">Copy HTML</button>
+          <button type="button" class="btn ghost sm" id="ppCopyText">Copy text</button>
+          <button type="button" class="btn ghost sm" id="ppDocx">Word</button>
+          <button type="button" class="btn ghost sm" id="ppHtml">HTML file</button>
+          <button type="button" class="btn ghost sm" id="ppMd">Markdown</button>
+          <button type="button" class="btn ghost sm" id="ppReset">Start again</button>
+        </div>
+        <div class="pp-preview prose" id="ppPreview" tabindex="0" aria-label="Privacy policy preview">{{PP_PREVIEW}}</div>
+      </div>
+    </div>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to create and publish your privacy policy</h2>
+  <ol>
+    <li><strong>Fill in your website name, owner and contact email.</strong> The email is how people exercise their PDPA rights, so use one you check.</li>
+    <li><strong>Tick what your site really does:</strong> forms, comments, newsletter, accounts, orders, AdSense, Analytics, affiliate links.</li>
+    <li><strong>Choose Both</strong> for an English and Bahasa Melayu policy on one page, as section 7(3) of the PDPA asks.</li>
+    <li><strong>Read the preview</strong> and fix anything the checklist flags.</li>
+    <li><strong>Copy the HTML</strong> into a new Blogger or WordPress page called Privacy Policy and link it in your footer.</li>
+  </ol>
+
+  <h2 id="pdpa">PDPA privacy notice checklist</h2>
+  <p>The Personal Data Protection Commissioner's guide lists what a notice should cover. Every item maps to a section of the generated policy:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pdpa-cap">
+    <table class="data text"><caption id="pdpa-cap">Commissioner's framework of a notice and where the generator covers it</caption>
+      <thead><tr><th scope="col">Notice item</th><th scope="col">Section in your policy</th></tr></thead>
+      <tbody>
+{{PP_FRAMEWORK}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="google">What Google requires</h2>
+  <ul>
+    <li><strong>AdSense:</strong> say that third-party vendors, including Google, use cookies to serve ads based on prior visits; that Google's advertising cookies let it and its partners serve ads; and how to opt out at Ads Settings or aboutads.info. If other ad networks serve ads on your site, name them and link to their opt-outs too.</li>
+    <li><strong>Google Analytics:</strong> disclose that you use Google Analytics and how it collects and processes data.</li>
+  </ul>
+  <h2 id="amendment">PDPA amendments in force since 2025</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="amd-cap">
+    <table class="data text"><caption id="amd-cap">Personal Data Protection (Amendment) Act 2024</caption>
+      <thead><tr><th scope="col">From</th><th scope="col">Change</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1 January 2025</th><td>Administrative changes, including notices served electronically</td></tr>
+        <tr><th scope="row">1 April 2025</th><td>"Data user" becomes "data controller"; data processors bound by the security principle; higher penalties; new cross-border transfer rules</td></tr>
+        <tr><th scope="row">1 June 2025</th><td>Data breach notification, data protection officers and the right to data portability</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Not legal advice:</strong> this generator produces a template based on the PDPA notice framework and Google's published requirements as of {{PP_VERIFIED}}. Review it against what your business really does, and consult a lawyer for sensitive data or a large online business.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://mohre.um.edu.my/img/files/Compliance%20to%20Personal%20Data%20Protection%20Act%20(PDPA)%20a%20quick%20guide.pdf" rel="noopener">Personal Data Protection Commissioner: Compliance to PDPA, a quick guide</a></li>
+    <li><a href="https://support.google.com/adsense/answer/1348695?hl=en" rel="noopener">Google AdSense Help: Required content</a></li>
+    <li><a href="https://support.google.com/analytics/answer/7318509?hl=en" rel="noopener">Google Analytics Help: Privacy Disclosures Policy</a></li>
+    <li><a href="https://insightplus.bakermckenzie.com/bm/data-technology/malaysia-personal-data-protection-amendment-act-2024-to-come-into-force" rel="noopener">Baker McKenzie: PDPA (Amendment) Act 2024 in force</a></li>
+    <li><a href="https://www.dfdl.com/insights/legal-and-tax-updates/malaysia-implementation-of-the-personal-data-protection-amendment-act-2024/" rel="noopener">DFDL: Implementation of the PDPA (Amendment) Act 2024</a></li>
+    <li><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" rel="noopener">EUR-Lex: General Data Protection Regulation</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>Control crawlers and AI bots</small></a>
+    <a href="/online-notepad/">Online Notepad<small>Edit your policy and export to Word</small></a>
+    <a href="/whatsapp-link-generator/">WhatsApp Link Generator<small>Let customers contact you</small></a>
+  </div>
+</section>
+</div>
