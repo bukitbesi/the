@@ -100,6 +100,7 @@ const contrastCore = require('../assets/js/contrast-core.js');
 const waCore = require('../assets/js/wa-core.js');
 const privacyCore = require('../assets/js/privacy-core.js');
 const schemaCore = require('../assets/js/schema-core.js');
+const textCore = require('../assets/js/textclean-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1192,6 +1193,36 @@ function schemaMap() {
     SC_TYPE_BTNS: Object.entries(S.TYPES).map(([k, t]) => `<button type="button" class="btn ghost sm" data-type="${k}" aria-pressed="${k === first}">${esc(t.label)}</button>`).join(''),
     SC_FIELDS: S.views.formHtml(first), SC_CHECKS: S.views.checksHtml(r), SC_OUT: esc(S.scriptTag(r.text)), SC_EXAMPLE: esc(S.scriptTag(vid.text)),
     SC_TYPE_ROWS: Object.entries(PROPS).map(([k, [req, rec]]) => `        <tr><th scope="row">${esc(S.TYPES[k].label)}</th><td>${req.length ? req.map(x => `<code>${esc(x)}</code>`).join(', ') : 'None'}</td><td>${esc(rec) || '–'}</td><td>${esc(S.TYPES[k].rich)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Find and replace: sample, first preview, recipes and clean-up examples all come from the page's core.
+const FR_SAMPLE = 'Harga kopi: RM2.50\nHarga teh: RM2.00\nHarga kopi susu: RM3.20';
+const FR_RECIPES = [
+  ['Swap a date to day/month/year', '(\\d{4})-(\\d{2})-(\\d{2})', '$3/$2/$1', 'Due 2026-10-19'],
+  ['Remove trailing spaces', '[ \\t]+$', '', 'end   '],
+  ['Collapse three or more blank lines', '\\n{3,}', '\\n\\n', 'a\n\n\n\nb'],
+  ['Remove numbering at the start of lines', '^\\d+[.)]\\s*', '', '1. Nasi\n2) Teh'],
+  ['Put each item on its own line', ',\\s*', '\\n', 'kopi, teh, milo'],
+  ['Wrap every number in bold HTML', '\\d+(?:\\.\\d+)?', '<b>$&</b>', 'RM2.50 x 3'],
+  ['Change RM10 to 10 ringgit', 'RM(\\d+)', '$1 ringgit', 'RM10 or RM25']
+];
+const FR_CLEAN = [['linebreaks', 'Line one\nline two.\n\nNew paragraph'], ['spaces', 'Too    many   spaces'], ['dupes', 'apple\nbanana\napple'], ['sort', 'item 10\nitem 9\nItem 1'],
+  ['emoji', 'Terima kasih 🙏🏽 🇲🇾!'], ['html', '<p>Hello <b>world</b></p>'], ['accents', 'Café crème'], ['numbers', 'Bilik 12A, tingkat 3'], ['punctuation', 'Hi! (Ok?) #tag'], ['urls', 'See https://example.com now']];
+function textcleanMap() {
+  const T = textCore, rule = { find: 'kopi', replace: 'coffee' }, h = T.highlight(FR_SAMPLE, rule);
+  const show = s => esc(s).replace(/\n/g, '<span class="fr-nl">↵</span><br>');
+  const lb = T.clean('Baris pertama\nbaris kedua.\n\nPerenggan baru', ['linebreaks']);
+  return {
+    FR_VERIFIED: T.FACTS.verified, FR_TEXT: esc(FR_SAMPLE), FR_RULES: T.views.ruleRow(rule, 0), FR_PREVIEW: h.html, FR_SUMMARY: `${h.count} replacements ready. Press Replace all.`,
+    FR_OPS: T.OPS.map(([k, label]) => `<label class="check"><input type="checkbox" name="op" value="${k}"${['spaces', 'trim'].includes(k) ? ' checked' : ''}> <span>${esc(label)}</span></label>`).join(''),
+    FR_LB_EXAMPLE: `For example "Baris pertama / baris kedua. / (blank line) / Perenggan baru" becomes "${lb.split('\n\n')[0]}" followed by "${lb.split('\n\n')[1]}" as its own paragraph.`,
+    FR_RECIPES: FR_RECIPES.map(([what, find, rep, input]) => {
+      const out = T.replaceAll(input, [{ find, replace: rep, regex: true, multiline: true, escapes: true }]);
+      if (out.errors[0] || !out.counts[0]) throw new Error('find-and-replace recipe failed: ' + what);
+      return `        <tr><th scope="row">${esc(what)}</th><td><code>${esc(find)}</code></td><td><code>${esc(rep) || '(empty)'}</code></td><td><code>${show(input)}</code> → <code>${show(out.text) || '(empty)'}</code></td></tr>`;
+    }).join('\n'),
+    FR_CLEAN_ROWS: FR_CLEAN.map(([k, input]) => `        <tr><th scope="row">${esc(T.OPS.find(o => o[0] === k)[1])}</th><td><code>${show(input)}</code></td><td><code>${show(T.clean(input, [k]))}</code></td></tr>`).join('\n')
   };
 }
 
@@ -2774,7 +2805,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2982,6 +3013,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'find-replace.js': ['assets/js/textclean-core.js', 'assets/js/textclean-ui.js'],
   'schema-markup.js': ['assets/js/schema-core.js', 'assets/js/schema-ui.js'],
   'privacy-policy.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/privacy-core.js', 'assets/js/privacy-ui.js'],
   'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],

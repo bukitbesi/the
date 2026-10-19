@@ -126,15 +126,6 @@
     "live": true
   },
   {
-    "name": "Text & Character Remover",
-    "desc": "Clean text by removing selected characters, numbers, punctuation or extra spaces.",
-    "url": "https://www.thebukitbesi.com/p/remove-characters-from-text.html",
-    "cat": "content",
-    "icon": "remove-characters-from-text",
-    "badge": "",
-    "live": true
-  },
-  {
     "name": "Text to HTML Converter",
     "desc": "Convert plain text into HTML paragraphs, lists and links, then copy or download the output.",
     "url": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
@@ -144,12 +135,12 @@
     "live": true
   },
   {
-    "name": "Find & Replace Text",
-    "desc": "Apply multiple replacement rules to text, with regular expressions and highlighted matches.",
-    "url": "https://www.thebukitbesi.com/p/find-replace-text.html",
+    "name": "Find and Replace Text",
+    "desc": "Several find-and-replace rules with regex, plus one-click removal of line breaks, extra spaces, emoji, duplicates and special characters.",
+    "url": "https://tool.thebukitbesi.com/find-and-replace/",
     "cat": "content",
     "icon": "find-replace-text",
-    "badge": "",
+    "badge": "new",
     "live": true
   },
   {

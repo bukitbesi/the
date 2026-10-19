@@ -501,3 +501,15 @@ textarea.wc-text{min-height:260px}
 .sc-checks{margin:0 0 10px;display:grid;gap:4px;font-size:.86rem}.sc-checks li{padding:6px 10px;border-radius:8px}.sc-checks .no{background:var(--hot-bg);color:var(--hot)}.sc-checks .warn{background:var(--c-content-bg);color:var(--c-content)}
 .sc-ok{margin:0 0 10px;padding:6px 10px;border-radius:8px;background:var(--new-bg);color:var(--new);font-size:.88rem;font-weight:600}
 .code-block{overflow-x:auto;padding:14px 16px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--border);font:.8rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+/* Find and replace */
+.fr-text{min-height:200px}
+.fr-grid{display:grid;gap:16px;margin-top:8px}@media(min-width:900px){.fr-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.fr-rule{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;padding:10px 0;border-bottom:1px dashed var(--border)}
+.fr-opts{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.fr-opt{display:inline-flex;align-items:center;min-height:36px;padding:0 10px;border:1px solid var(--border2);border-radius:8px;font:600 .8rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;cursor:pointer}
+.fr-opt input{position:absolute;opacity:0;width:1px;height:1px}.fr-opt:has(input:checked){background:var(--tint);border-color:var(--chip-on-b);color:var(--accent2)}.fr-opt:has(input:focus-visible){outline:3px solid var(--accent3)}
+.fr-count{margin-left:auto;font-size:.8rem;color:var(--text3)}.fr-del{width:36px;height:36px;font-size:1.2rem}.fr-err{grid-column:1/-1}
+.fr-preview{max-height:260px;overflow:auto;margin-top:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);font:.85rem/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.fr-preview mark{background:#ffe08a;color:#1a1a1a;border-radius:3px}
+.fr-ops{display:grid;gap:2px}.fr-ops .check{display:flex}
+.fr-table code{overflow-wrap:anywhere}.fr-nl{color:var(--text3)}

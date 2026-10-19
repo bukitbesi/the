@@ -223,6 +223,11 @@
       "description": "Fidyah calculator for Malaysia: fidyah for missed fasts at each state's 2026 rate, multiplied for de"
     },
     {
+      "name": "Find and Replace Text",
+      "url": "/find-and-replace/",
+      "description": "Free find and replace tool with several rules and regex, plus one-click removal of line breaks, extr"
+    },
+    {
       "name": "Fixed Deposit Calculator Malaysia",
       "url": "/fixed-deposit-calculator-malaysia/",
       "description": "Fixed deposit calculator for Malaysia: FD interest for 1 to 60 months, maturity amount, monthly inte"

@@ -767,6 +767,18 @@ textarea.wc-text{min-height:260px}
 .sc-checks{margin:0 0 10px;display:grid;gap:4px;font-size:.86rem}.sc-checks li{padding:6px 10px;border-radius:8px}.sc-checks .no{background:var(--hot-bg);color:var(--hot)}.sc-checks .warn{background:var(--c-content-bg);color:var(--c-content)}
 .sc-ok{margin:0 0 10px;padding:6px 10px;border-radius:8px;background:var(--new-bg);color:var(--new);font-size:.88rem;font-weight:600}
 .code-block{overflow-x:auto;padding:14px 16px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--border);font:.8rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+/* Find and replace */
+.fr-text{min-height:200px}
+.fr-grid{display:grid;gap:16px;margin-top:8px}@media(min-width:900px){.fr-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.fr-rule{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;padding:10px 0;border-bottom:1px dashed var(--border)}
+.fr-opts{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.fr-opt{display:inline-flex;align-items:center;min-height:36px;padding:0 10px;border:1px solid var(--border2);border-radius:8px;font:600 .8rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;cursor:pointer}
+.fr-opt input{position:absolute;opacity:0;width:1px;height:1px}.fr-opt:has(input:checked){background:var(--tint);border-color:var(--chip-on-b);color:var(--accent2)}.fr-opt:has(input:focus-visible){outline:3px solid var(--accent3)}
+.fr-count{margin-left:auto;font-size:.8rem;color:var(--text3)}.fr-del{width:36px;height:36px;font-size:1.2rem}.fr-err{grid-column:1/-1}
+.fr-preview{max-height:260px;overflow:auto;margin-top:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);font:.85rem/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.fr-preview mark{background:#ffe08a;color:#1a1a1a;border-radius:3px}
+.fr-ops{display:grid;gap:2px}.fr-ops .check{display:flex}
+.fr-table code{overflow-wrap:anywhere}.fr-nl{color:var(--text3)}
 </style>
 
 </head>
@@ -798,7 +810,7 @@ textarea.wc-text{min-height:260px}
       <ul class="menu-cats">
         <li><a href="/?cat=dev#tools" data-filter="dev"><span class="mi t-dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/></svg></span>Developer<small>9</small></a></li>
         <li><a href="/?cat=seo#tools" data-filter="seo"><span class="mi t-seo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/></svg></span>SEO<small>4</small></a></li>
-        <li><a href="/?cat=content#tools" data-filter="content"><span class="mi t-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></span>Content<small>6</small></a></li>
+        <li><a href="/?cat=content#tools" data-filter="content"><span class="mi t-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></span>Content<small>5</small></a></li>
         <li><a href="/?cat=design#tools" data-filter="design"><span class="mi t-design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/></svg></span>Design<small>6</small></a></li>
         <li><a href="/?cat=ai#tools" data-filter="ai"><span class="mi t-ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M6 18l2.5-2.5m7-7L18 6"/></svg></span>AI<small>7</small></a></li>
         <li><a href="/?cat=util#tools" data-filter="util"><span class="mi t-util"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>Utilities<small>8</small></a></li>
@@ -1038,7 +1050,7 @@ textarea.wc-text{min-height:260px}
         <ul class="flist">
           <li><a href="/?cat=dev#tools" data-filter="dev"><i class="dot t-dev" aria-hidden="true"></i>Developer Tools<small>9</small></a></li>
           <li><a href="/?cat=seo#tools" data-filter="seo"><i class="dot t-seo" aria-hidden="true"></i>SEO Tools<small>4</small></a></li>
-          <li><a href="/?cat=content#tools" data-filter="content"><i class="dot t-content" aria-hidden="true"></i>Content Tools<small>6</small></a></li>
+          <li><a href="/?cat=content#tools" data-filter="content"><i class="dot t-content" aria-hidden="true"></i>Content Tools<small>5</small></a></li>
           <li><a href="/?cat=design#tools" data-filter="design"><i class="dot t-design" aria-hidden="true"></i>Design Tools<small>6</small></a></li>
           <li><a href="/?cat=ai#tools" data-filter="ai"><i class="dot t-ai" aria-hidden="true"></i>AI Tools<small>7</small></a></li>
           <li><a href="/?cat=util#tools" data-filter="util"><i class="dot t-util" aria-hidden="true"></i>Utilities<small>8</small></a></li>
