@@ -483,3 +483,11 @@ textarea.wc-text{min-height:260px}
 .wa-note:not(.error){color:var(--text2)}
 .wa-qr{width:min(220px,100%);aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:#fff}.wa-qr svg{display:block;width:100%;height:100%}
 .wa-code{min-height:120px;font-size:.78rem}
+/* Privacy policy generator */
+.pp-grid{display:grid;gap:16px}@media(min-width:960px){.pp-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
+.pp-form .ex-set{margin-top:0;margin-bottom:12px;border:1px solid var(--border);border-radius:var(--r);padding:12px 14px}
+.pp-form legend{padding:0 6px}.pp-form .check{display:flex;margin:4px 0}
+.pp-issues{margin:0 0 10px;padding:10px 14px 10px 30px;border-radius:10px;background:var(--hot-bg);color:var(--hot);font-size:.88rem;list-style:disc}
+.pp-preview{max-height:640px;overflow:auto;padding:16px 18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg);font-size:.92rem}
+.pp-preview h3{font-size:1.25rem;margin:0 0 4px}.pp-preview h4{font-size:1rem;margin:18px 0 6px}.pp-preview hr{margin:24px 0;border:0;border-top:2px dashed var(--border2)}
+@media(min-width:960px){.pp-out{position:sticky;top:80px;align-self:start}}

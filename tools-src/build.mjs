@@ -98,6 +98,7 @@ const jsonCore = require('../assets/js/json-core.js');
 const caseCore = require('../assets/js/case-core.js');
 const contrastCore = require('../assets/js/contrast-core.js');
 const waCore = require('../assets/js/wa-core.js');
+const privacyCore = require('../assets/js/privacy-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1152,6 +1153,24 @@ function waMap() {
       .map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td></tr>`).join('\n'),
     WA_NUMBER_ROWS: nums.map(([a, note]) => { const x = W.normalize(a, '60'); return `        <tr><th scope="row">${esc(a)}</th><td><code>${x.digits}</code></td><td>${note || 'Leading 0 replaced by 60'}</td></tr>`; }).join('\n'),
     WA_FMT_ROWS: fmt.map(([a, b]) => `        <tr><th scope="row">${a}</th><td><code>${esc(b)}</code></td><td>${W.formatHtml(b)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Privacy policy generator: the default policy and the PDPA checklist come from the page's core.
+const PP_FRAMEWORK = [
+  ['Brief information on the company and its data protection practice', 'intro'], ['Collection and processing of personal data', 'sources'],
+  ['Description of the personal data collected', 'data'], ['Purposes of collection', 'purposes'], ['Sources of personal data', 'sources'],
+  ['Disclosure to third parties', 'disclosure'], ['Transfer of personal data overseas', 'transfer'], ['Security measures', 'security'],
+  ['Retention of personal data', 'retention'], ['Access and correction of personal data', 'rights'], ['Consequences of failing to supply personal data', 'obligatory'],
+  ['Marketing and promotional activities', 'purposes'], ["Data subject's obligations", 'obligatory'], ['Contact for enquiries', 'contact']
+];
+function privacyMap() {
+  const P = privacyCore, d = P.DEFAULTS, docs = P.generate(d), titles = Object.fromEntries(P.TEXT.en.sections.map(s => [s[0], s[1]]));
+  if (PP_FRAMEWORK.some(([, id]) => !titles[id])) throw new Error('PDPA framework row points at a missing section');
+  return {
+    PP_VERIFIED: P.FACTS.verified, PP_SITE: esc(d.site), PP_URL: esc(d.url), PP_OWNER: esc(d.owner), PP_EMAIL: esc(d.email), PP_DATE: d.date,
+    PP_PREVIEW: P.html(docs, 3), PP_ISSUES: '<li>Replace the example name, owner or email with your own before publishing.</li>',
+    PP_FRAMEWORK: PP_FRAMEWORK.map(([item, id], i) => `        <tr><th scope="row">${i + 1}. ${esc(item)}</th><td>${esc(titles[id])}</td></tr>`).join('\n')
   };
 }
 
@@ -2734,7 +2753,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2942,6 +2961,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'privacy-policy.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/privacy-core.js', 'assets/js/privacy-ui.js'],
   'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],
   'color-contrast.js': ['assets/js/contrast-core.js', 'assets/js/contrast-ui.js'],
   'case-converter.js': ['assets/js/case-core.js', 'assets/js/case-ui.js'],

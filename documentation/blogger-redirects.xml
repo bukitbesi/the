@@ -33,6 +33,9 @@
 <b:case value='https://www.thebukitbesi.com/p/free-ai-image-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/ai-image-generator/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/ai-image-generator/");</script>
+<b:case value='https://www.thebukitbesi.com/p/free-privacy-policy-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/privacy-policy-generator/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/privacy-policy-generator/");</script>
 <b:case value='https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/word-counter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/word-counter/");</script>
