@@ -1,0 +1,130 @@
+<!--page
+{
+  "path": "/html-table-generator/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "HTML Table Generator: Paste from Excel, Responsive Table Code",
+  "description": "Free HTML table generator: edit cells or paste from Excel, Google Sheets, CSV or Markdown, pick a style, and copy responsive, accessible table HTML.",
+  "llms": "Free HTML table generator that runs in the browser. Edit cells in a grid or paste a block copied from Excel or Google Sheets (tab-separated), CSV (commas or semicolons, RFC 4180 quoting) or a Markdown table. Output is accessible HTML with a caption, thead and th scope=\"col\" headers, optional first-column row headers (th scope=\"row\"), numeric columns right-aligned automatically (RM, $, %, thousands separators), and a scrolling wrapper so wide tables do not break mobile layouts. Five styles (clean, striped, bordered, minimal, green) as a small scoped stylesheet, or as inline styles for Blogger posts and email newsletters where <style> is stripped. Also exports Markdown (with right-aligned numeric columns) and CSV. Live preview, copy and download.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/html-table-generator.html",
+  "render": "table",
+  "shareTitle": "Share this HTML table generator",
+  "scripts": ["/assets/js/html-table.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["HTML Table Generator", null]],
+  "about": ["HTML table", "Responsive web design", "Web accessibility", "Comma-separated values"],
+  "app": {
+    "name": "HTML Table Generator",
+    "category": "DeveloperApplication",
+    "features": ["Edit cells in a grid", "Paste from Excel, Google Sheets, CSV or Markdown", "Accessible HTML: caption, thead, th scope", "Responsive scrolling wrapper", "Five styles as scoped CSS or inline styles for Blogger and email", "Numbers right-aligned automatically", "Export Markdown and CSV"]
+  },
+  "citations": [
+    ["W3C WAI: Tables tutorial (headers and captions)", "https://www.w3.org/WAI/tutorials/tables/"],
+    ["MDN: The table element", "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table"],
+    ["IETF RFC 4180: CSV files", "https://www.rfc-editor.org/rfc/rfc4180"],
+    ["GitHub Docs: Organizing information with tables (Markdown)", "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables"]
+  ],
+  "faq": [
+    { "q": "How do I make an HTML table?", "a": "Type your data into the grid, or copy cells from Excel or Google Sheets and paste them into the first cell: the grid grows to fit. Tick Header row for column titles, choose a style, and copy the code. The output uses <table>, <thead> and <tbody> with <th scope=\"col\"> headers, which screen readers and Google understand." },
+    { "q": "How do I convert Excel to an HTML table?", "a": "Select the cells in Excel or Google Sheets, copy, and paste into any cell of the grid or into the Import box. Copied cells arrive as tab-separated text, which the generator splits into rows and columns. CSV files (with commas or semicolons) and Markdown tables work too." },
+    { "q": "How do I make a table responsive on mobile?", "a": "Keep Responsive wrapper ticked. The table is placed in a container with overflow-x:auto, so a wide table scrolls sideways inside its box instead of stretching the whole page. This prevents the horizontal page scroll that hurts mobile usability." },
+    { "q": "Why use inline styles?", "a": "Blogger posts, some page builders and most email tools remove or ignore <style> blocks, so the table appears unstyled. Tick Inline styles and every cell carries its own style attribute, which survives copy and paste. Use the default scoped stylesheet for your own website, where it keeps the HTML smaller." },
+    { "q": "Do tables help SEO?", "a": "A real HTML table with header cells makes comparison data easy for people and search engines to read, and Google sometimes shows table data as a featured snippet for comparison queries. Use a caption and clear column headers, keep one header row, and never use an image of a table for important numbers." },
+    { "q": "Can I make a Markdown table?", "a": "Yes. Choose Markdown output to get a GitHub-style table with the first row as the header and | escaped inside cells; numeric columns are marked right-aligned with ---:. Paste it into GitHub, Notion, Obsidian or any Markdown editor. You can also paste a Markdown table into the Import box to turn it into HTML." },
+    { "q": "Is there a limit on table size?", "a": "The grid holds up to 60 rows and 20 columns, which covers comparison and price tables. For bigger data, paste it into the Import box: the code is generated in your browser, and nothing is uploaded." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">HTML Table Generator</li></ol></nav>
+  <h1>HTML Table Generator</h1>
+  <p class="answer">Type into the grid or <strong>paste straight from Excel, Google Sheets, CSV or Markdown</strong>, choose a style, and copy <strong>responsive, accessible HTML table code</strong> with a caption and proper header cells. Inline styles keep the design intact in Blogger posts and emails.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{TG_VERIFIED}}</span><a href="#structure">Table structure</a></p>
+
+  <form class="box tg-tool" id="tgForm" novalidate aria-labelledby="tg-h">
+    <h2 id="tg-h" class="sr-only">Generate an HTML table</h2>
+    <div class="tg-opts">
+      <label class="check"><input type="checkbox" name="header" checked> <span>Header row</span></label>
+      <label class="check"><input type="checkbox" name="firstCol"> <span>First column as headers</span></label>
+      <label class="check"><input type="checkbox" name="responsive" checked> <span>Responsive wrapper</span></label>
+      <label class="check"><input type="checkbox" name="alignNumbers" checked> <span>Right-align numbers</span></label>
+      <label class="check"><input type="checkbox" name="inline"> <span>Inline styles (Blogger, email)</span></label>
+      <label class="tg-sel">Style <select class="input" name="theme">{{TG_THEMES}}</select></label>
+      <div class="field tg-cap"><label for="tgCaption">Caption</label><input class="input" id="tgCaption" name="caption" value="{{TG_CAPTION}}" autocomplete="off"></div>
+    </div>
+    <div class="tg-gridwrap" id="tgGrid">{{TG_GRID}}</div>
+    <div class="tool-actions tg-row">
+      <button type="button" class="btn ghost sm" id="tgAddRow">+ Row</button><button type="button" class="btn ghost sm" id="tgDelRow">− Row</button>
+      <button type="button" class="btn ghost sm" id="tgAddCol">+ Column</button><button type="button" class="btn ghost sm" id="tgDelCol">− Column</button>
+      <button type="button" class="btn ghost sm" id="tgClear">Clear</button><span class="help" id="tgSize">{{TG_SIZE}}</span>
+    </div>
+    <details class="ex-set"><summary class="sub-h">Import from Excel, Sheets, CSV or Markdown</summary>
+      <div class="field"><label for="tgImport">Paste data</label><textarea class="code tg-import" id="tgImport" spellcheck="false" placeholder="Item,Price&#10;Kopi O,RM2.50"></textarea></div>
+      <div class="tool-actions tg-row"><button type="button" class="btn sm" id="tgDoImport">Import</button></div>
+    </details>
+    <div class="tg-grid2">
+      <section class="ex-set" aria-labelledby="tgPrevH"><h3 class="sub-h" id="tgPrevH">Preview</h3><div class="tg-preview" id="tgPreview">{{TG_PREVIEW}}</div></section>
+      <section class="ex-set" aria-labelledby="tgCodeH"><h3 class="sub-h" id="tgCodeH">Code</h3>
+        <fieldset class="seg seg3" aria-label="Output"><label><input type="radio" name="out" value="html" checked> HTML</label><label><input type="radio" name="out" value="md"> Markdown</label><label><input type="radio" name="out" value="csv"> CSV</label></fieldset>
+        <label for="tgCode" class="sr-only">Table code</label><textarea class="code tg-code" id="tgCode" readonly spellcheck="false">{{TG_CODE}}</textarea>
+        <div class="tool-actions tg-row"><button type="button" class="btn sm" id="tgCopy">Copy code</button><button type="button" class="btn ghost sm" id="tgDownload">Download</button></div>
+      </section>
+    </div>
+    <p class="sr-only" id="tgLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to create an HTML table</h2>
+  <ol>
+    <li><strong>Type or paste your data.</strong> Copy cells from Excel or Google Sheets and paste into the first cell, or use Import for CSV and Markdown.</li>
+    <li><strong>Mark the headers:</strong> header row for column titles, first column for row titles.</li>
+    <li><strong>Add a caption</strong> that says what the table shows; it helps screen readers and search engines.</li>
+    <li><strong>Choose a style.</strong> Tick Inline styles for Blogger or email.</li>
+    <li><strong>Copy the code</strong> and paste it into the HTML view of your editor.</li>
+  </ol>
+
+  <h2 id="structure">Accessible table structure</h2>
+  <p>The generator follows the W3C table tutorial: one header row in <code>&lt;thead&gt;</code>, header cells as <code>&lt;th scope="col"&gt;</code>, optional row headers as <code>&lt;th scope="row"&gt;</code>, and a <code>&lt;caption&gt;</code>. This is the code for the example in the grid:</p>
+  <pre class="code-block"><code>{{TG_EXAMPLE}}</code></pre>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="styles">Table styles</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="styles-cap">
+    <table class="data text"><caption id="styles-cap">Built-in styles</caption>
+      <thead><tr><th scope="col">Style</th><th scope="col">Header</th><th scope="col">Rows</th><th scope="col">Best for</th></tr></thead>
+      <tbody>
+{{TG_STYLE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Tip:</strong> use tables for data, not for page layout. A table with one header row and short cells reads well on phones; for long text, a list is usually better.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.w3.org/WAI/tutorials/tables/" rel="noopener">W3C WAI: Tables tutorial</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table" rel="noopener">MDN: the table element</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc4180" rel="noopener">IETF RFC 4180: CSV</a></li>
+    <li><a href="https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables" rel="noopener">GitHub Docs: Markdown tables</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/text-to-html/">Text to HTML Converter<small>Paragraphs, lists and links</small></a>
+    <a href="/json-formatter/">JSON Formatter<small>JSON to CSV and back</small></a>
+    <a href="/html-beautifier/">HTML Beautifier and Minifier<small>Format or compress HTML</small></a>
+  </div>
+</section>
+</div>

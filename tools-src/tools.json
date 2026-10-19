@@ -46,8 +46,8 @@
   },
   {
     "name": "HTML Table Generator",
-    "desc": "Build HTML tables with customizable styles and copy the generated markup.",
-    "url": "https://www.thebukitbesi.com/p/html-table-generator.html",
+    "desc": "Edit cells or paste from Excel, Sheets, CSV or Markdown; copy responsive, accessible table HTML, with inline styles for Blogger.",
+    "url": "https://tool.thebukitbesi.com/html-table-generator/",
     "cat": "dev",
     "icon": "html-table-generator",
     "badge": "hot",

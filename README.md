@@ -179,6 +179,7 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/case-converter/](https://tool.thebukitbesi.com/case-converter/) | English | case converter, title case converter, sentence case, uppercase to lowercase, camelcase converter |
 | [/find-and-replace/](https://tool.thebukitbesi.com/find-and-replace/) | English | find and replace online, remove line breaks, remove special characters, regex replace, text cleaner |
 | [/text-to-html/](https://tool.thebukitbesi.com/text-to-html/) | English | text to html converter, convert text to html, markdown to html, html to text |
+| [/html-table-generator/](https://tool.thebukitbesi.com/html-table-generator/) | English | html table generator, excel to html table, responsive table html, markdown table generator |
 | [/color-contrast-checker/](https://tool.thebukitbesi.com/color-contrast-checker/) | English | color contrast checker, wcag contrast checker, contrast ratio, accessible colors, color blind simulator |
 | [/whatsapp-link-generator/](https://tool.thebukitbesi.com/whatsapp-link-generator/) | English | whatsapp link generator, wa.me link, whatsapp qr code, whatsapp button for website, link whatsapp |
 | [/privacy-policy-generator/](https://tool.thebukitbesi.com/privacy-policy-generator/) | English (output EN + BM) | privacy policy generator, privacy policy malaysia, pdpa privacy notice, adsense privacy policy, dasar privasi |
@@ -503,3 +504,5 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 **Upkeep (Find and replace):** `textclean-core.js` has no yearly figures. The regex recipes and clean-up examples on the page are generated from the core, so a change in behaviour shows up there. Replaces two Blogger pages (find-replace-text, remove-characters-from-text). English only by design.
 
 **Upkeep (Text to HTML):** `texthtml-core.js` reuses `notepad-core.js` for Markdown, so Markdown changes in the notepad show up here too. No yearly figures. English only by design.
+
+**Upkeep (HTML table generator):** `table-core.js` has no yearly figures; the five styles live in `THEMES`. English only by design.

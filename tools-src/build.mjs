@@ -102,6 +102,7 @@ const privacyCore = require('../assets/js/privacy-core.js');
 const schemaCore = require('../assets/js/schema-core.js');
 const textCore = require('../assets/js/textclean-core.js');
 const textHtmlCore = require('../assets/js/texthtml-core.js');
+const tableCore = require('../assets/js/table-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1237,6 +1238,19 @@ function texthtmlMap() {
   return {
     TH_VERIFIED: H.FACTS.verified, TH_IN: esc(TH_SAMPLE), TH_OUT: esc(out), TH_PREVIEW: out, TH_STATS: `${Array.from(out).length.toLocaleString('en-US')} characters`,
     TH_RULES: TH_RULES.map(([what, input]) => `        <tr><th scope="row">${esc(what)}<br><code>${code(input)}</code></th><td><code>${code(H.fromText(input))}</code></td></tr>`).join('\n')
+  };
+}
+
+// ---- HTML table generator: grid, preview, code and the styles table come from the page's core.
+const TG_ROWS = [['Drink', 'Size', 'Price'], ['Kopi O', 'Regular', 'RM2.50'], ['Teh tarik', 'Regular', 'RM2.80'], ['Milo ais', 'Large', 'RM4.20']];
+const TG_USE = { clean: 'Blog posts and documentation', striped: 'Long price lists, easy to follow across a row', bordered: 'Data-heavy and printable tables', minimal: 'Simple two- or three-column facts', green: 'Highlighting a comparison or plan table' };
+function tableMap() {
+  const T = tableCore, o = { caption: 'Drink prices' }, html = T.html(TG_ROWS, o);
+  return {
+    TG_VERIFIED: T.FACTS.verified, TG_CAPTION: esc(o.caption), TG_GRID: T.views.gridHtml(TG_ROWS, { header: true }), TG_SIZE: `${TG_ROWS.length} × ${TG_ROWS[0].length}`,
+    TG_THEMES: Object.entries(T.THEMES).map(([k, t]) => `<option value="${k}"${k === 'clean' ? ' selected' : ''}>${t.label}</option>`).join(''),
+    TG_PREVIEW: html, TG_CODE: esc(html), TG_EXAMPLE: esc(T.html(TG_ROWS, { ...o, responsive: false, inline: false }).replace(/^<style>[\s\S]*?<\/style>\n/, '')),
+    TG_STYLE_ROWS: Object.entries(T.THEMES).map(([k, t]) => `        <tr><th scope="row">${t.label}</th><td>${t.head ? `<i class="ct-chip" style="background:${t.head}"></i>${t.head}` : 'No fill'}</td><td>${t.stripe ? 'Striped ' + t.stripe : 'Plain'}</td><td>${TG_USE[k]}</td></tr>`).join('\n')
   };
 }
 
@@ -2819,7 +2833,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3027,6 +3041,7 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'html-table.js': ['assets/js/table-core.js', 'assets/js/table-ui.js'],
   'text-to-html.js': ['assets/js/notepad-core.js', 'assets/js/texthtml-core.js', 'assets/js/texthtml-ui.js'],
   'find-replace.js': ['assets/js/textclean-core.js', 'assets/js/textclean-ui.js'],
   'schema-markup.js': ['assets/js/schema-core.js', 'assets/js/schema-ui.js'],

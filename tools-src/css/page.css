@@ -519,3 +519,12 @@ textarea.wc-text{min-height:260px}
 .th-preview{max-height:420px;overflow:auto;padding:14px 18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg)}
 .th-table code{overflow-wrap:anywhere}.th-table th code{font-weight:400}
 .sc-htmlf{margin-top:14px}.sc-code-sm{min-height:160px;font-size:.78rem}
+/* HTML table generator */
+.tg-opts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;margin-bottom:12px}.tg-sel{display:flex;align-items:center;gap:8px;font-size:.9rem}.tg-sel select{width:auto;min-height:38px}.tg-cap{flex:1 1 220px;margin:0}
+.tg-gridwrap{overflow-x:auto;border:1px solid var(--border2);border-radius:10px}
+.tg-grid{border-collapse:collapse;min-width:100%}.tg-grid td{padding:0;border:1px solid var(--border);min-width:110px}.tg-grid td.tg-h{background:var(--tint)}
+.tg-grid input{width:100%;min-height:40px;padding:6px 8px;border:0;background:transparent;color:var(--text);font:inherit;font-size:.9rem}.tg-grid .tg-h input{font-weight:700}
+.tg-grid input:focus{outline:2px solid var(--accent2);outline-offset:-2px}
+.tg-grid2{display:grid;gap:16px}@media(min-width:900px){.tg-grid2{grid-template-columns:1fr 1fr}}
+.tg-preview{overflow:auto;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#12131a}
+.tg-code{min-height:260px;font-size:.78rem}.tg-import{min-height:120px}
