@@ -1,164 +1,182 @@
 {
-  "fetchedAt": "2026-10-18T09:41:14.036Z",
+  "fetchedAt": "2026-10-19T02:50:30.176Z",
   "date": "2026-10-16",
-  "session": "1200",
-  "source": "BNM",
+  "session": "ECB",
+  "source": "ECB",
   "rates": {
-    "VND": {
-      "unit": 100,
-      "buy": 0.0158,
-      "sell": 0.0158,
-      "mid": 0.0158
-    },
-    "USD": {
+    "AUD": {
       "unit": 1,
-      "buy": 4.081,
-      "sell": 4.086,
-      "mid": 4.0835
+      "buy": null,
+      "sell": null,
+      "mid": 2.840182907779261
     },
-    "TWD": {
-      "unit": 100,
-      "buy": 12.5736,
-      "sell": 12.6006,
-      "mid": 12.5871
-    },
-    "THB": {
-      "unit": 100,
-      "buy": 12.1894,
-      "sell": 12.2116,
-      "mid": 12.2005
-    },
-    "SGD": {
+    "BRL": {
       "unit": 1,
-      "buy": 3.1853,
-      "sell": 3.1894,
-      "mid": 3.1874
-    },
-    "SAR": {
-      "unit": 100,
-      "buy": 108.7368,
-      "sell": 108.8845,
-      "mid": 108.8106
-    },
-    "PKR": {
-      "unit": 100,
-      "buy": 1.472,
-      "sell": 1.4764,
-      "mid": 1.4742
-    },
-    "PHP": {
-      "unit": 100,
-      "buy": 6.4737,
-      "sell": 6.4884,
-      "mid": 6.481
-    },
-    "NZD": {
-      "unit": 1,
-      "buy": 2.3066,
-      "sell": 2.3106,
-      "mid": 2.3086
-    },
-    "NPR": {
-      "unit": 100,
-      "buy": 2.6925,
-      "sell": 2.6961,
-      "mid": 2.6943
-    },
-    "MMK": {
-      "unit": 100,
-      "buy": 0.1949,
-      "sell": 0.1952,
-      "mid": 0.195
-    },
-    "KRW": {
-      "unit": 100,
-      "buy": 0.3038,
-      "sell": 0.3043,
-      "mid": 0.304
-    },
-    "KHR": {
-      "unit": 100,
-      "buy": 0.0995,
-      "sell": 0.1007,
-      "mid": 0.1001
-    },
-    "JPY": {
-      "unit": 100,
-      "buy": 2.5845,
-      "sell": 2.588,
-      "mid": 2.5863
-    },
-    "INR": {
-      "unit": 100,
-      "buy": 4.3081,
-      "sell": 4.3139,
-      "mid": 4.311
-    },
-    "IDR": {
-      "unit": 100,
-      "buy": 0.0226,
-      "sell": 0.0227,
-      "mid": 0.0226
-    },
-    "HKD": {
-      "unit": 100,
-      "buy": 52.0012,
-      "sell": 52.0689,
-      "mid": 52.035
-    },
-    "GBP": {
-      "unit": 1,
-      "buy": 5.4277,
-      "sell": 5.4364,
-      "mid": 5.4321
-    },
-    "EUR": {
-      "unit": 1,
-      "buy": 4.5858,
-      "sell": 4.5918,
-      "mid": 4.5888
-    },
-    "EGP": {
-      "unit": 1,
-      "buy": 0.0763,
-      "sell": 0.0765,
-      "mid": 0.0764
-    },
-    "CNY": {
-      "unit": 1,
-      "buy": 0.61,
-      "sell": 0.6109,
-      "mid": 0.6104
-    },
-    "CHF": {
-      "unit": 1,
-      "buy": 4.9359,
-      "sell": 4.9443,
-      "mid": 4.9401
+      "buy": null,
+      "sell": null,
+      "mid": 0.8030193527664016
     },
     "CAD": {
       "unit": 1,
-      "buy": 2.8788,
-      "sell": 2.8832,
-      "mid": 2.881
+      "buy": null,
+      "sell": null,
+      "mid": 2.8822596915982133
     },
-    "BND": {
+    "CHF": {
       "unit": 1,
-      "buy": 3.1853,
-      "sell": 3.1894,
-      "mid": 3.1874
+      "buy": null,
+      "sell": null,
+      "mid": 4.953437685753913
     },
-    "AUD": {
+    "CNY": {
       "unit": 1,
-      "buy": 2.8347,
-      "sell": 2.839,
-      "mid": 2.8368
+      "buy": null,
+      "sell": null,
+      "mid": 0.6104260774020266
     },
-    "AED": {
-      "unit": 100,
-      "buy": 111.1172,
-      "sell": 111.2594,
-      "mid": 111.1883
+    "CZK": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.18882888326598438
+    },
+    "DKK": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.6144393241167435
+    },
+    "EUR": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 4.592844348505029
+    },
+    "GBP": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 5.442769281010178
+    },
+    "HKD": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.5200478444016849
+    },
+    "HUF": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.012649901330769618
+    },
+    "IDR": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.00022636264654151832
+    },
+    "ILS": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 1.3189654035374652
+    },
+    "INR": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.0429811742456804
+    },
+    "ISK": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.03372226343832198
+    },
+    "JPY": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.025829114577952266
+    },
+    "KRW": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.0030639132299773273
+    },
+    "MXN": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.22201993739037765
+    },
+    "NOK": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.43232026285071984
+    },
+    "NZD": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 2.311711128577373
+    },
+    "PHP": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.06481847585835866
+    },
+    "PLN": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 1.0510052865565913
+    },
+    "RON": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.8615490652192642
+    },
+    "SEK": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.4120992334954257
+    },
+    "SGD": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 3.1906068534235215
+    },
+    "THB": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.12214486380847686
+    },
+    "TRY": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.0824089792823826
+    },
+    "USD": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 4.08146606260969
+    },
+    "ZAR": {
+      "unit": 1,
+      "buy": null,
+      "sell": null,
+      "mid": 0.24836081859725812
     }
   }
 }
