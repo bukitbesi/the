@@ -1,0 +1,119 @@
+<!--page
+{
+  "path": "/cabutan-bertuah/",
+  "lang": "ms",
+  "cat": "util",
+  "alternates": { "en": "/spin-the-wheel/" },
+  "title": "Cabutan Bertuah Online: Roda Putar Nama Rawak Percuma",
+  "description": "Roda putar dan cabutan bertuah percuma: masukkan nama, putar atau cabut beberapa pemenang serentak tanpa ulangan. Rawak adil dengan crypto, boleh dikongsi.",
+  "llms": "Roda putar (spin the wheel) dan cabutan bertuah dalam talian percuma dalam Bahasa Melayu. Masukkan satu nama atau pilihan setiap baris (hingga 500 entri); tulis 'Nama x3' untuk memberi entri itu tiga kali peluang (berat 1 hingga 100). Dua mod: Putar memilih seorang pemenang dengan animasi roda; Cabutan bertuah memilih beberapa pemenang serentak tanpa ulangan. Peluang setiap entri = beratnya ÷ jumlah berat; dengan 8 nama yang sama berat, setiap nama ada 12.5% peluang. Pemenang dipilih dengan crypto.getRandomValues pelayar (rawak kriptografi) dan pensampelan penolakan supaya tiada bias modulo; roda kemudian berhenti tepat pada pemenang itu. Pilihan: buang pemenang daripada senarai selepas cabutan, kocok atau susun nama, kelajuan putaran 3, 5 atau 8 saat, bunyi tik, skrin penuh untuk projektor, dan pautan kongsi yang menyimpan senarai dalam URL. Nama tidak dihantar ke pelayan.",
+  "datePublished": "2026-10-20",
+  "dateModified": "2026-10-20",
+  "render": "wheel",
+  "scripts": ["/assets/js/wheel.js"],
+  "breadcrumb": [["Alat", "/"], ["Utiliti", "/?cat=util#tools"], ["Cabutan Bertuah", null]],
+  "about": ["Cabutan bertuah", "Roda putar", "Pemilih nama rawak", "Nombor rawak"],
+  "app": {
+    "name": "Cabutan Bertuah dan Roda Putar",
+    "category": "UtilitiesApplication",
+    "features": ["Roda putar dengan animasi dan bunyi", "Cabutan beberapa pemenang tanpa ulangan", "Berat peluang (Nama x3)", "Buang pemenang selepas cabutan", "Kocok dan susun nama", "Skrin penuh untuk projektor", "Pautan kongsi", "Rawak kriptografi"]
+  },
+  "citations": [
+    ["MDN: Crypto.getRandomValues()", "https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues"],
+    ["W3C: Web Cryptography API", "https://www.w3.org/TR/WebCryptoAPI/"],
+    ["Wikipedia: Fisher–Yates shuffle (modulo bias)", "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle"],
+    ["Wikipedia: Rejection sampling", "https://en.wikipedia.org/wiki/Rejection_sampling"]
+  ],
+  "faq": [
+    { "q": "Bagaimana buat cabutan bertuah secara online?", "a": "Taip atau tampal satu nama setiap baris dalam kotak Nama, pilih mod Cabutan bertuah, tetapkan bilangan pemenang (contohnya 3), dan tekan Putar. Semua pemenang dipilih serentak tanpa ulangan dan disenaraikan di bawah roda." },
+    { "q": "Adakah roda putar ini benar-benar rawak dan adil?", "a": "Ya. Pemenang dipilih dengan crypto.getRandomValues, penjana rawak kriptografi dalam pelayar, dengan pensampelan penolakan supaya tiada nama lebih bernasib baik. Dengan 8 nama, setiap nama ada tepat 12.5% peluang. Animasi hanya menunjukkan keputusan yang sudah dipilih." },
+    { "q": "Berapa banyak nama boleh dimasukkan?", "a": "Hingga 500 entri. Roda tetap boleh berputar dengan 500 nama, tetapi label kecil disingkatkan; untuk senarai panjang, mod Cabutan bertuah lebih mudah dibaca kerana pemenang disenaraikan dengan jelas." },
+    { "q": "Bagaimana beri seseorang lebih banyak peluang?", "a": "Tulis x dan nombor selepas nama, contohnya 'Ali x3'. Ali kemudian ada tiga kali peluang berbanding nama lain dan hirisannya tiga kali lebih besar. Berat dibenarkan dari 1 hingga 100." },
+    { "q": "Bolehkah pemenang dibuang supaya tidak menang dua kali?", "a": "Boleh. Tandakan Buang pemenang daripada senarai. Selepas setiap putaran atau cabutan, nama pemenang dikeluarkan dan roda dilukis semula untuk pusingan seterusnya." },
+    { "q": "Bagaimana kongsi roda dengan orang lain?", "a": "Tekan Salin pautan. Senarai nama dan tetapan disimpan dalam pautan halaman, jadi sesiapa yang membukanya melihat roda yang sama. Nama tidak disimpan di pelayan kami." },
+    { "q": "Bolehkah saya guna untuk cabutan bertuah majlis atau kelas?", "a": "Boleh. Tekan Skrin penuh untuk paparan projektor, pilih kelajuan Dramatik (8 saat) dan hidupkan bunyi. Untuk peraduan berhadiah perniagaan, semak syarat undang-undang dan peraturan peraduan sendiri; alat ini hanya membuat pilihan rawak yang adil." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Cabutan Bertuah</li></ol></nav>
+  <h1>Cabutan Bertuah dan Roda Putar</h1>
+  <p class="answer">Masukkan nama, satu setiap baris, dan tekan <strong>Putar</strong>: roda memilih pemenang secara rawak dengan peluang yang sama, iaitu <strong>{{W_CHANCE}}% setiap nama</strong> untuk 8 nama. Mod <strong>Cabutan bertuah</strong> memilih beberapa pemenang serentak tanpa ulangan. Rawak kriptografi, percuma, dan nama tidak dihantar ke mana-mana.</p>
+  <p class="meta"><span>Disemak <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Berjalan dalam pelayar; nama tidak dihantar</span><a href="/spin-the-wheel/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="wheelForm" novalidate aria-labelledby="wheel-h">
+      <h2 id="wheel-h">Nama atau pilihan</h2>
+      <div class="field"><label for="entries">Satu setiap baris (tulis "Nama x3" untuk 3 kali peluang)</label><textarea class="prose-in wh-entries" id="entries" name="entries" rows="8" spellcheck="false">{{W_ENTRIES}}</textarea></div>
+      <p class="help"><span id="wCount">{{W_COUNT}}</span> <span id="wCountMsg" class="muted"></span></p>
+      <div class="wh-presets" role="group" aria-label="Senarai contoh">{{W_PRESETS}}</div>
+      <div class="field"><label for="mode">Mod</label><select class="input" id="mode" name="mode">{{W_MODE_OPTIONS}}</select></div>
+      <div class="field" id="wCountF"><label for="count">Bilangan pemenang</label><div class="input"><input id="count" name="count" type="number" inputmode="numeric" min="1" max="500" step="1" value="3"></div></div>
+      <div class="field"><label for="speed">Kelajuan putaran</label><select class="input" id="speed" name="speed">{{W_SPEED_OPTIONS}}</select></div>
+      <label class="check"><input type="checkbox" name="remove"> Buang pemenang daripada senarai</label>
+      <label class="check"><input type="checkbox" name="sound" checked> Bunyi tik</label>
+      <div class="tool-actions go wh-tools"><button type="button" class="btn ghost sm" id="wShuffle">Kocok</button><button type="button" class="btn ghost sm" id="wSort">Susun A–Z</button><button type="button" class="btn ghost sm" id="wShare">Salin pautan</button></div>
+    </form>
+
+    <section class="box" aria-labelledby="wheel-result-h">
+      <h2 id="wheel-result-h">Roda</h2>
+      <div class="wh-stage" id="wStage">
+        <span class="wh-pointer" aria-hidden="true"></span>
+        <div class="wh-disc">{{W_SVG}}<canvas id="wCanvas" hidden role="img" aria-label="Roda putar dengan nama anda"></canvas></div>
+      </div>
+      <div class="tool-actions go wh-spin"><button type="submit" form="wheelForm" class="btn" id="wSpin">Putar</button></div>
+      <div class="wh-result" id="wResult" hidden><h3 id="wResultTitle">Pemenang</h3><ol id="wWinners"></ol></div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <div id="wHistBox" hidden><h3>Keputusan terdahulu</h3><ol class="wh-history" id="wHistory"></ol></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="wFull">Skrin penuh</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="example">Contoh: cabutan 3 pemenang daripada 8 nama</h2>
+  <p>Kelas ada 8 murid: Aisyah, Ben, Chong, Devi, Farid, Grace, Hafiz dan Imran. Pilih <strong>Cabutan bertuah</strong>, tetapkan 3 pemenang dan tekan Putar. Setiap murid ada {{W_CHANCE}}% peluang menjadi pemenang pertama, dan peluang untuk berada dalam 3 pemenang ialah 3 ÷ 8 = <strong>37.5%</strong>. Tiada nama boleh menang dua kali dalam satu cabutan.</p>
+  <p>Jika Farid menyumbang tiga kali, tulis <code>Farid x3</code>. Jumlah berat menjadi 10, jadi peluang Farid untuk putaran tunggal naik ke 3 ÷ 10 = <strong>30%</strong> dan setiap nama lain 10%.</p>
+
+  <h2 id="formula">Cara roda memilih pemenang</h2>
+  <ol>
+    <li><strong>Baca senarai:</strong> setiap baris menjadi satu entri; "x3", "*3" atau "(3)" di hujung memberi berat 3. Baris kosong dan baris bermula dengan # diabaikan.</li>
+    <li><strong>Pilih secara rawak:</strong> nombor 32-bit diambil daripada crypto.getRandomValues. Nombor dalam hujung yang berat sebelah ditolak dan diambil semula, jadi setiap entri mendapat tepat berat ÷ jumlah berat.</li>
+    <li><strong>Pusing ke pemenang:</strong> sudut berhenti dikira daripada hirisan pemenang, ditambah 5 pusingan penuh dan kedudukan rawak dalam hirisan, kemudian roda diperlahankan (ease-out).</li>
+    <li><strong>Cabutan bertuah:</strong> pemenang diambil satu demi satu dan dikeluarkan daripada kumpulan, jadi tiada ulangan.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="uses">Idea penggunaan</h2>
+  <ul>
+    <li><strong>Guru:</strong> pilih murid untuk menjawab, bahagikan kumpulan, atau tentukan giliran pembentangan.</li>
+    <li><strong>Majlis dan hari keluarga:</strong> cabutan bertuah hadiah pintu dengan skrin penuh pada projektor.</li>
+    <li><strong>Media sosial:</strong> pilih pemenang giveaway daripada senarai nama komen; rakam skrin sebagai bukti.</li>
+    <li><strong>Hari-hari:</strong> butang Makan apa? memilih antara nasi lemak, roti canai, laksa dan lain-lain.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues" rel="noopener">MDN: Crypto.getRandomValues()</a> dan <a href="https://www.w3.org/TR/WebCryptoAPI/" rel="noopener">W3C: Web Cryptography API</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" rel="noopener">Fisher–Yates shuffle dan bias modulo</a> serta <a href="https://en.wikipedia.org/wiki/Rejection_sampling" rel="noopener">pensampelan penolakan</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Alat ini membuat pilihan rawak yang adil sahaja. Untuk peraduan atau cabutan berhadiah anjuran perniagaan, pastikan syarat peraduan dan keperluan undang-undang dipatuhi.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/sukatan-cawan-ke-gram/">Sukatan Cawan ke Gram<small>Tukar resipi ke gram</small></a>
+    <a href="/kalkulator-hari-bekerja/">Kalkulator Hari Bekerja<small>Kira hari kerja dan cuti</small></a>
+    <a href="/kalkulator-umur/">Kalkulator Umur<small>Umur tepat hari ini</small></a>
+  </div>
+</section>

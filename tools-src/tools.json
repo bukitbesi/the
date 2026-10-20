@@ -243,6 +243,42 @@
     "live": true
   },
   {
+    "name": "Background Remover",
+    "desc": "Remove the background from any photo with AI that runs in your browser, never uploaded: transparent PNG, white, colour or blur backgrounds, brush touch-ups and crop. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/remove-background/",
+    "cat": "ai",
+    "icon": "remove-background",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Passport Photo Maker",
+    "desc": "Make a 35 × 50 mm Malaysian passport photo on white from a phone photo, a MyOnline Passport JPG of 100–300 KB, visa sizes and 4R or A4 print sheets. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/passport-photo-malaysia/",
+    "cat": "design",
+    "icon": "passport-photo-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Cups to Grams Converter",
+    "desc": "Convert cups, tablespoons and teaspoons to grams for 23 ingredients with a 250 ml, 240 ml or US cup, convert whole recipes and resize for a different cake tin. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/cups-to-grams/",
+    "cat": "calc",
+    "icon": "cups-to-grams",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Spin the Wheel",
+    "desc": "Spin a wheel of names or run a lucky draw of several winners with no repeats, using fair cryptographic randomness, weights, full screen and a share link. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/spin-the-wheel/",
+    "cat": "util",
+    "icon": "spin-the-wheel",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "AI Summarizer",
     "desc": "Summarize articles, essays and notes of up to 12,000 characters as bullets, a paragraph or key points, in English or Malay, with reading time saved. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/ai-summarizer/",

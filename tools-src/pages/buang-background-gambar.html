@@ -1,0 +1,167 @@
+<!--page
+{
+  "path": "/buang-background-gambar/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/remove-background/" },
+  "title": "Buang Background Gambar Percuma: AI, Tanpa Muat Naik, PNG Lutsinar",
+  "description": "Buang background gambar dengan AI terus dalam pelayar: foto tidak dimuat naik. PNG lutsinar, latar putih, warna atau kabur, berus pembetulan dan potong subjek.",
+  "llms": "Alat buang background (latar belakang) gambar percuma yang berjalan sepenuhnya dalam pelayar: foto tidak dimuat naik ke mana-mana pelayan. Tiga mod: Orang (AI MODNet, lesen Apache-2.0, model kira-kira 7 MB dimuat turun sekali dan disimpan dalam pelayar; terbaik untuk potret, selfie dan rambut), Objek (AI BiRefNet-lite, lesen MIT, kira-kira 115 MB, perlukan WebGPU dalam Chrome atau Edge pada komputer; untuk produk, kereta, haiwan dan logo) dan Latar polos (isian banjir dari tepi, tiada muat turun, serta-merta; untuk latar putih atau satu warna). Model dijalankan dengan Transformers.js 3.8.1; jika WebGPU tiada, ia berjalan pada CPU (WebAssembly). Kawalan: ketegasan tepi, kembang atau kecutkan subjek (−10 hingga +10 px), lembutkan tepi (0 hingga 10 px), berus padam dan pulihkan dengan buat asal, latar baharu (lutsinar, putih, hitam, biru, merah, warna sendiri, kabur seperti mod potret atau gambar sendiri), potong ke subjek, dan muat turun PNG (lutsinar), WebP (lutsinar, lebih kecil) atau JPG (latar putih). Gambar diproses hingga 2,048 piksel pada sisi terpanjang.",
+  "datePublished": "2026-10-20",
+  "dateModified": "2026-10-20",
+  "render": "bgremove",
+  "scripts": ["/assets/js/bgremove.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Buang Background Gambar", null]],
+  "about": ["Buang latar belakang gambar", "PNG lutsinar", "Segmentasi imej", "Matting potret"],
+  "app": {
+    "name": "Buang Background Gambar",
+    "category": "DesignApplication",
+    "features": ["AI untuk orang (MODNet) dan objek (BiRefNet-lite)", "Mod latar polos serta-merta", "Foto tidak dimuat naik", "Berus padam dan pulihkan dengan buat asal", "Latar lutsinar, putih, warna, kabur atau gambar sendiri", "Potong ke subjek", "Muat turun PNG, WebP atau JPG", "Peluncur sebelum/selepas"]
+  },
+  "citations": [
+    ["Hugging Face: Xenova/modnet (Apache-2.0)", "https://huggingface.co/Xenova/modnet"],
+    ["Hugging Face: onnx-community/BiRefNet_lite-ONNX (MIT)", "https://huggingface.co/onnx-community/BiRefNet_lite-ONNX"],
+    ["Ke et al.: MODNet, Real-Time Trimap-Free Portrait Matting via Objective Decomposition", "https://arxiv.org/abs/2011.11961"],
+    ["Zheng et al.: Bilateral Reference for High-Resolution Dichotomous Image Segmentation (BiRefNet)", "https://arxiv.org/abs/2401.03407"],
+    ["Hugging Face: Transformers.js", "https://huggingface.co/docs/transformers.js/index"]
+  ],
+  "faq": [
+    { "q": "Bagaimana buang background gambar secara percuma?", "a": "Pilih, letakkan atau tampal foto di atas. Mod Orang membuang latar secara automatik dalam beberapa saat; kali pertama, model AI kira-kira 7 MB dimuat turun sekali sahaja. Pilih latar baharu atau biarkan lutsinar, kemudian tekan Muat turun." },
+    { "q": "Adakah gambar saya dimuat naik ke pelayan?", "a": "Tidak. Model AI dimuat turun ke pelayar anda dan foto diproses pada peranti anda sendiri. Hanya fail model (dari Hugging Face) dan pustaka Transformers.js (dari jsDelivr) dimuat turun; gambar anda tidak dihantar ke mana-mana." },
+    { "q": "Mod mana patut saya pilih?", "a": "Orang untuk potret, selfie dan foto produk yang ada orang, termasuk rambut. Objek untuk produk, kereta, haiwan dan logo; ia perlukan WebGPU (Chrome atau Edge pada komputer) dan model kira-kira 115 MB. Latar polos untuk foto dengan latar putih atau satu warna; ia serta-merta tanpa muat turun." },
+    { "q": "Bagaimana buat PNG lutsinar atau latar putih untuk Shopee?", "a": "Untuk PNG lutsinar, pilih latar Lutsinar dan format PNG atau WebP. Untuk gambar produk Shopee atau Lazada, pilih latar Putih, tandakan Potong ke subjek, dan muat turun JPG yang lebih kecil." },
+    { "q": "Tepi rambut atau bahu kurang kemas, bagaimana membetulkannya?", "a": "Gunakan peluncur Ketegasan tepi untuk membuang sisa latar, Kembang/kecut untuk menebalkan atau menipiskan subjek, dan Lembutkan tepi 1 hingga 3 px. Untuk bahagian tertentu, pilih berus Padam atau Pulihkan dan lukis terus pada gambar; Buat asal membatalkan setiap lukisan." },
+    { "q": "Berapa besar gambar yang boleh diproses?", "a": "Gambar diproses hingga 2,048 piksel pada sisi terpanjang; gambar lebih besar dikecilkan dahulu supaya kekal pantas pada telefon. Muat turun PNG mengekalkan saiz itu, atau saiz kawasan subjek jika Potong ke subjek ditandakan." },
+    { "q": "Adakah ia berfungsi pada telefon?", "a": "Ya. Mod Orang dan Latar polos berfungsi pada telefon Android dan iPhone dalam pelayar terkini; foto pertama mengambil masa lebih lama kerana model dimuat turun. Mod Objek perlukan WebGPU dan paling sesuai pada komputer." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Buang Background Gambar</li></ol></nav>
+  <h1>Buang Background Gambar</h1>
+  <p class="answer">Buang background gambar secara automatik dengan <strong>AI yang berjalan dalam pelayar anda</strong>: foto <strong>tidak dimuat naik</strong> ke mana-mana. Pilih foto, dan latar dibuang dalam beberapa saat; simpan sebagai <strong>PNG lutsinar</strong>, atau tukar ke latar putih, warna, kabur atau gambar lain. Berus padam/pulihkan membetulkan tepi rambut.</p>
+  <p class="meta"><span>Dikemas kini <time datetime="{{B_VERIFIED_ISO}}">{{B_VERIFIED}}</time></span><span>Foto kekal pada peranti anda</span><a href="/remove-background/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="bgForm" novalidate aria-labelledby="bg-h">
+      <h2 id="bg-h">Foto anda</h2>
+      <label class="drop" id="bgDrop" for="bgFile">
+        <input type="file" id="bgFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        <img id="bgPreview" alt="Foto yang anda pilih" hidden>
+        <span id="bgDropText"><strong>Pilih foto</strong> atau letakkan di sini<small>JPG, PNG atau WebP. Anda juga boleh tampal.</small></span>
+      </label>
+      <fieldset class="field-group">
+        <legend>Mod</legend>
+        <div class="chipset"><label><input type="radio" name="engine" value="person" checked> Orang (AI, 7 MB)</label><label><input type="radio" name="engine" value="object"> Objek (AI, 115 MB)</label><label><input type="radio" name="engine" value="plain"> Latar polos</label></div>
+      </fieldset>
+      <div class="field" id="w_tol" hidden><label for="tol">Toleransi warna latar</label><div class="range"><input id="tol" name="tol" type="range" min="1" max="40" step="1" value="12"><output id="o_tol" for="tol">12</output></div></div>
+      <fieldset class="field-group">
+        <legend>Latar baharu</legend>
+        <div class="chipset"><label><input type="radio" name="bg" value="transparent" checked> Lutsinar</label><label><input type="radio" name="bg" value="#ffffff"> Putih</label><label><input type="radio" name="bg" value="#000000"> Hitam</label><label><input type="radio" name="bg" value="#1e5aa8"> Biru</label><label><input type="radio" name="bg" value="#d62828"> Merah</label><label><input type="radio" name="bg" value="color"> Warna lain</label><label><input type="radio" name="bg" value="blur"> Kabur</label><label><input type="radio" name="bg" value="image"> Gambar</label></div>
+      </fieldset>
+      <div class="field" id="w_color" hidden><label for="color">Warna latar</label><input class="color-in" id="color" name="color" type="color" value="#1e5aa8"></div>
+      <div class="field" id="w_blur" hidden><label for="blur">Kekaburan</label><div class="range"><input id="blur" name="blur" type="range" min="2" max="40" step="1" value="12"><output id="o_blur" for="blur">12 px</output></div></div>
+      <div class="field" id="w_img" hidden><label for="bgfile">Gambar latar</label><input id="bgfile" name="bgfile" type="file" accept="image/*"></div>
+      <fieldset class="field-group">
+        <legend>Kemaskan tepi</legend>
+        <div class="field"><label for="cut">Ketegasan tepi</label><div class="range"><input id="cut" name="cut" type="range" min="0" max="100" step="1" value="50"><output id="o_cut" for="cut">50</output></div></div>
+        <div class="field"><label for="shift">Kembang (+) / kecut (−)</label><div class="range"><input id="shift" name="shift" type="range" min="-10" max="10" step="1" value="0"><output id="o_shift" for="shift">0 px</output></div></div>
+        <div class="field"><label for="feather">Lembutkan tepi</label><div class="range"><input id="feather" name="feather" type="range" min="0" max="10" step="1" value="1"><output id="o_feather" for="feather">1 px</output></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Berus pembetulan</legend>
+        <div class="chipset"><label><input type="radio" name="brush" value="off" checked> Tutup</label><label><input type="radio" name="brush" value="erase"> Padam</label><label><input type="radio" name="brush" value="restore"> Pulihkan</label></div>
+        <div class="field" id="w_size" hidden><label for="size">Saiz berus</label><div class="range"><input id="size" name="size" type="range" min="4" max="120" step="2" value="30"><output id="o_size" for="size">30 px</output></div></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="bgUndo">Buat asal</button></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Muat turun</legend>
+        <div class="field"><label for="fmt">Format</label><select class="input" id="fmt" name="fmt"><option value="png" selected>PNG (lutsinar)</option><option value="webp">WebP (lutsinar, lebih kecil)</option><option value="jpeg">JPG (latar putih)</option></select></div>
+        <label class="check"><input type="checkbox" name="crop"> Potong ke subjek</label>
+      </fieldset>
+    </form>
+
+    <section class="box" id="bgResult" aria-labelledby="bg-result-h">
+      <h2 id="bg-result-h">Hasil</h2>
+      <div class="stage-empty" id="bgEmpty">Pilih foto untuk melihatnya tanpa latar di sini.</div>
+      <div class="stage bg-stage" id="bgStage" hidden>
+        <canvas id="bgOut" role="img" aria-label="Foto anda tanpa latar belakang"></canvas>
+        <canvas id="bgIn" role="img" aria-label="Foto asal anda"></canvas>
+        <span class="handle" id="bgHandle" aria-hidden="true"></span>
+      </div>
+      <div class="field" id="bgSplitWrap" hidden><label for="bgSplit">Sebelum / selepas</label><div class="range"><input id="bgSplit" type="range" min="0" max="100" step="1" value="0"></div></div>
+      <progress class="bg-prog" id="bgProg" max="100" value="0" hidden></progress>
+      <p class="note" id="bgStatus">Foto anda kekal pada peranti ini.</p>
+      <p class="sr-only" id="bgLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="bgDownload" disabled>Muat turun</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="modes-h">Tiga mod membuang latar</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Mod</th><th scope="col">Kaedah</th><th scope="col">Muat turun</th><th scope="col">Lesen</th><th scope="col">Terbaik untuk</th></tr></thead>
+      <tbody>
+{{B_MODES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Contoh: gambar produk untuk Shopee</h2>
+  <p>Anda mengambil gambar beg tangan di atas meja. Pilih mod <strong>Objek</strong> (pada komputer dengan Chrome) atau <strong>Latar polos</strong> jika mejanya satu warna, kemudian latar <strong>Putih</strong>, tandakan <strong>Potong ke subjek</strong> dan muat turun <strong>JPG</strong>. Hasilnya beg tangan pada latar putih bersih, dipotong rapat dengan jidar 2%, sedia untuk dimuat naik ke kedai dalam talian.</p>
+
+  <h2 id="formula">Cara ia berfungsi</h2>
+  <ol>
+    <li><strong>Segmentasi:</strong> model AI (MODNet atau BiRefNet-lite) meramal, untuk setiap piksel, sejauh mana ia milik subjek: 0 latar, 255 subjek, nilai di antara untuk tepi rambut yang lembut.</li>
+    <li><strong>Kemaskan:</strong> ketegasan tepi menetapkan ambang, kembang/kecut mengembangkan atau menghakis topeng, dan lembutkan tepi mengaburkannya sedikit.</li>
+    <li><strong>Berus:</strong> lukisan Padam menurunkan topeng ke 0, Pulihkan menaikkannya ke 255, dengan tepi lembut.</li>
+    <li><strong>Gabungkan:</strong> setiap piksel = subjek × topeng + latar baharu × (1 − topeng), atau saluran alfa untuk PNG lutsinar.</li>
+  </ol>
+
+  <h2 id="formats-h">Format muat turun</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="formats-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Format</th><th scope="col">Lutsinar</th><th scope="col">Saiz fail</th><th scope="col">Sesuai untuk</th></tr></thead>
+      <tbody>
+{{B_FORMATS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips untuk hasil terbaik</h2>
+  <ul>
+    <li><strong>Kontras:</strong> subjek yang berbeza warna daripada latar memberi tepi paling kemas.</li>
+    <li><strong>Rambut:</strong> kekalkan Lembutkan tepi pada 1 hingga 2 px; nilai lebih tinggi menjadikan tepi berbayang.</li>
+    <li><strong>Gambar pasport:</strong> gunakan <a href="/gambar-passport/">Pembuat Gambar Passport</a>, yang membuang latar, meletakkan kepala ikut saiz rasmi dan menyediakan helaian cetak 4R.</li>
+    <li><strong>Pelekat WhatsApp:</strong> muat turun PNG lutsinar, kemudian bungkus dengan <a href="/whatsapp-sticker-maker/">WhatsApp Sticker Maker</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://huggingface.co/Xenova/modnet" rel="noopener">Xenova/modnet</a> (Apache-2.0) dan <a href="https://arxiv.org/abs/2011.11961" rel="noopener">kertas MODNet</a></li>
+    <li><a href="https://huggingface.co/onnx-community/BiRefNet_lite-ONNX" rel="noopener">BiRefNet_lite-ONNX</a> (MIT) dan <a href="https://arxiv.org/abs/2401.03407" rel="noopener">kertas BiRefNet</a></li>
+    <li><a href="https://huggingface.co/docs/transformers.js/index" rel="noopener">Transformers.js</a>: menjalankan model dalam pelayar dengan WebGPU atau WebAssembly</li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Hanya gunakan foto yang anda berhak gunakan. Model AI boleh tersilap pada subjek yang sama warna dengan latar; semak tepi sebelum menggunakan hasilnya.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/gambar-passport/">Gambar Passport<small>Saiz rasmi dan cetak 4R</small></a>
+    <a href="/gambar-ke-kartun/">Gambar ke Kartun<small>Kartun, anime, lakaran</small></a>
+    <a href="/penjana-gambar-ai/">Penjana Gambar AI<small>Teks ke gambar</small></a>
+  </div>
+</section>

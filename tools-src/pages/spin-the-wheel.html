@@ -1,0 +1,119 @@
+<!--page
+{
+  "path": "/spin-the-wheel/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/cabutan-bertuah/" },
+  "title": "Spin the Wheel: Random Name Picker and Lucky Draw Wheel",
+  "description": "Free spin the wheel and lucky draw: enter names, spin for one winner or draw several at once with no repeats. Fair crypto randomness, weights, shareable link.",
+  "llms": "Free online spin the wheel and lucky draw (random name picker). Enter one name or option per line (up to 500 entries); write 'Name x3' to give that entry three times the chance (weights 1 to 100). Two modes: Spin picks one winner with a wheel animation; Lucky draw picks several winners at once with no repeats. Each entry's chance = its weight ÷ the total weight; with 8 equal names each has a 12.5% chance. Winners are chosen with the browser's crypto.getRandomValues (cryptographic randomness) and rejection sampling so there is no modulo bias; the wheel then stops exactly on that winner. Options: remove winners from the list after each draw, shuffle or sort names, spin speed 3, 5 or 8 seconds, tick sound, full screen for projectors, and a share link that keeps the list in the URL. Names are not sent to a server. Bahasa Melayu version: cabutan bertuah.",
+  "datePublished": "2026-10-20",
+  "dateModified": "2026-10-20",
+  "render": "wheel",
+  "scripts": ["/assets/js/wheel.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Spin the Wheel", null]],
+  "about": ["Spin the wheel", "Random name picker", "Lucky draw", "Random number generator"],
+  "app": {
+    "name": "Spin the Wheel and Lucky Draw",
+    "category": "UtilitiesApplication",
+    "features": ["Spinning wheel with animation and sound", "Lucky draw of several winners with no repeats", "Weighted chances (Name x3)", "Remove winners after each draw", "Shuffle and sort names", "Full screen for projectors", "Share link", "Cryptographic randomness"]
+  },
+  "citations": [
+    ["MDN: Crypto.getRandomValues()", "https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues"],
+    ["W3C: Web Cryptography API", "https://www.w3.org/TR/WebCryptoAPI/"],
+    ["Wikipedia: Fisher–Yates shuffle (modulo bias)", "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle"],
+    ["Wikipedia: Rejection sampling", "https://en.wikipedia.org/wiki/Rejection_sampling"]
+  ],
+  "faq": [
+    { "q": "How do I spin the wheel to pick a random name?", "a": "Type or paste one name per line in the Names box and press Spin, or tap the wheel. The wheel slows down and stops on the winner, which is shown below it. With 8 names each has a 12.5% chance." },
+    { "q": "Is this wheel really random and fair?", "a": "Yes. The winner is chosen with crypto.getRandomValues, the browser's cryptographic random generator, with rejection sampling so no name is favoured. The animation only shows a result that has already been drawn fairly." },
+    { "q": "How do I pick several winners at once?", "a": "Choose Lucky draw mode, set the number of winners (for example 3) and press Spin. All winners are drawn together with no repeats and listed in order below the wheel." },
+    { "q": "How many names can I add?", "a": "Up to 500 entries. The wheel still spins with 500 names, but small labels are shortened; for long lists, Lucky draw mode is easier to read because the winners are listed in full." },
+    { "q": "Can I give someone more chances?", "a": "Yes. Write x and a number after the name, for example 'Ali x3'. Ali then has three times the chance of a single entry and a slice three times as large. Weights from 1 to 100 are allowed." },
+    { "q": "How do I stop the same person winning twice?", "a": "Tick Remove winners from the list. After every spin or draw, the winners are taken off the list and the wheel is redrawn for the next round." },
+    { "q": "Can I share my wheel or show it on a projector?", "a": "Press Copy link: the names and settings are saved in the page link, so anyone who opens it sees the same wheel. Press Full screen for a projector, choose Dramatic (8 s) speed and keep the tick sound on." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Spin the Wheel</li></ol></nav>
+  <h1>Spin the Wheel: Random Name Picker</h1>
+  <p class="answer">Enter names, one per line, and press <strong>Spin</strong>: the wheel picks a winner at random with equal chances, <strong>{{W_CHANCE}}% each</strong> for 8 names. <strong>Lucky draw</strong> mode picks several winners at once with no repeats. Cryptographic randomness, free, and your names are never sent anywhere.</p>
+  <p class="meta"><span>Checked <time datetime="{{W_VERIFIED_ISO}}">{{W_VERIFIED}}</time></span><span>Runs in your browser; names stay on your device</span><a href="/cabutan-bertuah/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="wheelForm" novalidate aria-labelledby="wheel-h">
+      <h2 id="wheel-h">Names or options</h2>
+      <div class="field"><label for="entries">One per line (write "Name x3" for 3 times the chance)</label><textarea class="prose-in wh-entries" id="entries" name="entries" rows="8" spellcheck="false">{{W_ENTRIES}}</textarea></div>
+      <p class="help"><span id="wCount">{{W_COUNT}}</span> <span id="wCountMsg" class="muted"></span></p>
+      <div class="wh-presets" role="group" aria-label="Sample lists">{{W_PRESETS}}</div>
+      <div class="field"><label for="mode">Mode</label><select class="input" id="mode" name="mode">{{W_MODE_OPTIONS}}</select></div>
+      <div class="field" id="wCountF" hidden><label for="count">Number of winners</label><div class="input"><input id="count" name="count" type="number" inputmode="numeric" min="1" max="500" step="1" value="3"></div></div>
+      <div class="field"><label for="speed">Spin speed</label><select class="input" id="speed" name="speed">{{W_SPEED_OPTIONS}}</select></div>
+      <label class="check"><input type="checkbox" name="remove"> Remove winners from the list</label>
+      <label class="check"><input type="checkbox" name="sound" checked> Tick sound</label>
+      <div class="tool-actions go wh-tools"><button type="button" class="btn ghost sm" id="wShuffle">Shuffle</button><button type="button" class="btn ghost sm" id="wSort">Sort A–Z</button><button type="button" class="btn ghost sm" id="wShare">Copy link</button></div>
+    </form>
+
+    <section class="box" aria-labelledby="wheel-result-h">
+      <h2 id="wheel-result-h">The wheel</h2>
+      <div class="wh-stage" id="wStage">
+        <span class="wh-pointer" aria-hidden="true"></span>
+        <div class="wh-disc">{{W_SVG}}<canvas id="wCanvas" hidden role="img" aria-label="Spinning wheel with your names"></canvas></div>
+      </div>
+      <div class="tool-actions go wh-spin"><button type="submit" form="wheelForm" class="btn" id="wSpin">Spin</button></div>
+      <div class="wh-result" id="wResult" hidden><h3 id="wResultTitle">Winner</h3><ol id="wWinners"></ol></div>
+      <p class="sr-only" id="wLive" aria-live="polite"></p>
+      <div id="wHistBox" hidden><h3>Earlier results</h3><ol class="wh-history" id="wHistory"></ol></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="wFull">Full screen</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="example">Example: drawing 3 winners from 8 names</h2>
+  <p>A class has 8 pupils: Aisyah, Ben, Chong, Devi, Farid, Grace, Hafiz and Imran. Choose <strong>Lucky draw</strong>, set 3 winners and press Spin. Each pupil has a {{W_CHANCE}}% chance of being the first winner and a 3 ÷ 8 = <strong>37.5%</strong> chance of being among the 3. Nobody can win twice in one draw.</p>
+  <p>If Farid bought three tickets, write <code>Farid x3</code>. The total weight becomes 10, so Farid's chance on a single spin rises to 3 ÷ 10 = <strong>30%</strong> and every other name gets 10%.</p>
+
+  <h2 id="formula">How the wheel picks a winner</h2>
+  <ol>
+    <li><strong>Read the list:</strong> each line becomes an entry; "x3", "*3" or "(3)" at the end gives weight 3. Blank lines and lines starting with # are skipped.</li>
+    <li><strong>Draw at random:</strong> a 32-bit number comes from crypto.getRandomValues. Numbers in the biased tail are rejected and redrawn, so each entry gets exactly its weight ÷ the total.</li>
+    <li><strong>Spin to the winner:</strong> the stopping angle is worked out from the winner's slice, plus 5 full turns and a random point inside the slice, and the wheel eases out to it.</li>
+    <li><strong>Lucky draw:</strong> winners are drawn one at a time and taken out of the pool, so there are no repeats.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="uses">Ways to use it</h2>
+  <ul>
+    <li><strong>Teachers:</strong> pick who answers next, split groups, or set presentation order.</li>
+    <li><strong>Events and family days:</strong> door-gift lucky draws in full screen on a projector.</li>
+    <li><strong>Social media:</strong> pick a giveaway winner from the commenters' names and screen-record the spin as proof.</li>
+    <li><strong>Everyday:</strong> the What to eat? button chooses between nasi lemak, roti canai, laksa and more.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues" rel="noopener">MDN: Crypto.getRandomValues()</a> and <a href="https://www.w3.org/TR/WebCryptoAPI/" rel="noopener">W3C: Web Cryptography API</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" rel="noopener">Fisher–Yates shuffle and modulo bias</a> and <a href="https://en.wikipedia.org/wiki/Rejection_sampling" rel="noopener">rejection sampling</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> This tool only makes a fair random choice. For prize contests or draws run by a business, make sure the contest terms and any legal requirements are met.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/cups-to-grams/">Cups to Grams<small>Convert recipes to grams</small></a>
+    <a href="/working-days-calculator-malaysia/">Working Days Calculator<small>Workdays and holidays</small></a>
+    <a href="/age-calculator-malaysia/">Age Calculator<small>Exact age today</small></a>
+  </div>
+</section>

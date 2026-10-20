@@ -1,0 +1,178 @@
+<!--page
+{
+  "path": "/cups-to-grams/",
+  "lang": "en",
+  "cat": "calc",
+  "alternates": { "ms": "/sukatan-cawan-ke-gram/" },
+  "title": "Cups to Grams Converter: Flour, Sugar, Butter (250 ml Cup)",
+  "description": "1 cup flour = 127 g, sugar 209 g, butter 240 g in a 250 ml cup (120 g flour in a US cup). Convert cups, tablespoons and teaspoons to grams for 23 ingredients.",
+  "llms": "Cups to grams converter for baking and cooking, checked 20 October 2026. Malaysian measuring cups are mostly 250 ml (metric cup); some recipe sites use 240 ml (US legal cup); the US customary cup is 236.6 ml. Tablespoon = 15 ml, teaspoon = 5 ml. Weights for a 250 ml cup (range across two sources, King Arthur Baking and USDA): all-purpose flour 127 g (127–132 g), self-raising flour 119 g, cornflour 118 g, granulated sugar 209 g, packed brown sugar 225 g, icing sugar 119 g, butter and margarine 240 g, cooking oil 230 g, water 250 g, milk 258 g, coconut milk 239 g, sweetened condensed milk 330 g, cocoa powder 89 g, raw rice 195 g, desiccated coconut 90 g, honey 355 g, rolled oats 94 g, salt 304 g. For a US cup: flour 120 g, sugar 198 g, butter 227 g. Per tablespoon: butter 14 g, sugar 13 g, flour 7.5 g, salt 18 g. Malaysian egg grades (P.U.(A) 223/2022): Grade A 65–69.9 g, B 60–64.9 g, C 55–59.9 g. The tool also converts a whole recipe, multiplies servings and resizes for a different cake tin (area ratio: 8-inch round to 9-inch round = ×1.27). Cake flour, rice flour, glutinous rice flour, gula melaka and fresh grated coconut are left out because published figures conflict.",
+  "datePublished": "2026-10-20",
+  "dateModified": "2026-10-20",
+  "render": "sukatan",
+  "scripts": ["/assets/js/sukatan.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Cups to Grams", null]],
+  "about": ["Cups to grams", "Baking conversion", "Recipe scaling", "Measuring cups"],
+  "app": {
+    "name": "Cups to Grams Converter",
+    "category": "LifestyleApplication",
+    "features": ["23 common ingredients", "250 ml, 240 ml or 236.6 ml cup", "Tablespoons and teaspoons", "Grams to cups", "Whole-recipe converter", "Multiply servings", "Cake tin resizing", "Egg weights by grade"]
+  },
+  "citations": [
+    ["King Arthur Baking: Ingredient weight chart", "https://www.kingarthurbaking.com/learn/ingredient-weight-chart"],
+    ["USDA FoodData Central", "https://fdc.nal.usda.gov/"],
+    ["US FDA: Metric equivalents of household measures", "https://www.fda.gov/food/guidance-documents-regulatory-information-topic/guidance-industry-guidelines-determining-metric-equivalents-household-measures"],
+    ["KPDN: Egg grades and prices (Malaysia)", "https://www.kpdn.gov.my/images/2024/pengumuman/shmmp/booklet%20harga%20telur%20ayam.pdf"]
+  ],
+  "faq": [
+    { "q": "How many grams is 1 cup of flour?", "a": "1 cup of all-purpose flour is about 127 g in a 250 ml metric cup (range 127 to 132 g) and 120 g in a 236.6 ml US cup. Spoon the flour into the cup and level it; scooping straight from the bag packs it and can add 10 to 20%." },
+    { "q": "How many grams is 1 cup of sugar?", "a": "1 cup of granulated sugar is about 209 g in a 250 ml cup and 198 g in a US cup. Packed brown sugar is heavier, about 225 g, and icing sugar lighter, about 119 g, in a 250 ml cup." },
+    { "q": "How many grams is 1 cup of butter?", "a": "1 cup of butter or margarine is about 240 g in a 250 ml cup and 227 g in a US cup, which is two 113 g sticks. One tablespoon of butter is about 14 g." },
+    { "q": "How many grams is a tablespoon?", "a": "A tablespoon is a volume of 15 ml, so the weight depends on the ingredient: water 15 g, sugar 13 g, butter 14 g, flour 7.5 g and salt 18 g. A teaspoon is 5 ml, one third of a tablespoon." },
+    { "q": "Is a cup 250 ml or 240 ml?", "a": "Measuring cups sold in Malaysia, Australia and the UK are usually 250 ml metric cups. US recipes use the 236.6 ml customary cup, and US nutrition labels use 240 ml. Pick the cup size in the converter; the difference is about 5% per cup." },
+    { "q": "How much does an egg weigh?", "a": "It depends on the grade: in Malaysia Grade A is 65 to 69.9 g, Grade B 60 to 64.9 g and Grade C 55 to 59.9 g per egg in the shell. Most recipes assume a medium egg, Grade B, so the converter counts 2 eggs as 120 to 130 g." },
+    { "q": "How do I scale a recipe for a bigger cake tin?", "a": "Multiply every ingredient by the ratio of the tin areas. An 8-inch round to a 9-inch round is ×1.27, and an 8-inch square to an 8-inch round is ×0.79. Tick Resize for a different tin and the converter works out the ratio and scales the whole recipe." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Cups to Grams</li></ol></nav>
+  <h1>Cups to Grams Converter</h1>
+  <p class="answer"><strong>1 cup of all-purpose flour = {{K_FLOUR_250}}</strong>, 1 cup of sugar = {{K_SUGAR_250}} and 1 cup of butter = {{K_BUTTER_250}} in a 250 ml metric cup, the size sold in Malaysia. In a US cup (236.6 ml) flour is {{K_FLOUR_US}}. Pick an ingredient and amount below for 23 common ingredients, or paste a whole recipe to convert it to grams at once.</p>
+  <p class="meta"><span>Checked <time datetime="{{K_VERIFIED_ISO}}">{{K_VERIFIED}}</time></span><span>Calculated in your browser</span><a href="/sukatan-cawan-ke-gram/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="sukForm" novalidate aria-labelledby="suk-h">
+      <h2 id="suk-h">Ingredient and amount</h2>
+      <div class="field"><label for="ing">Ingredient</label><select class="input" id="ing" name="ing">{{K_ING_OPTIONS}}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="amount">Amount</label><div class="input"><input id="amount" name="amount" type="text" inputmode="decimal" value="1" autocomplete="off"></div></div>
+        <div class="field"><label for="unit">Unit</label><select class="input" id="unit" name="unit">{{K_UNIT_OPTIONS}}</select></div>
+      </div>
+      <div class="field"><label for="cup">Cup size</label><select class="input" id="cup" name="cup">{{K_CUP_OPTIONS}}</select></div>
+      <p class="help">Fractions like 1/2, ½ or 1 1/2 work. Tablespoon 15 ml, teaspoon 5 ml.</p>
+    </form>
+
+    <section class="box" aria-labelledby="suk-result-h">
+      <h2 id="suk-result-h">Weight</h2>
+      <div class="net">
+        <p>Estimated weight</p>
+        <output id="kG" for="ing amount unit cup">{{K_G}}</output>
+        <p id="kSub">{{K_SUB}}</p>
+      </div>
+      <p class="sr-only" id="kLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Other measures: <span id="kAllName">{{K_NAME}}</span></caption>
+        <tbody id="kAll">
+{{K_ALL}}
+        </tbody>
+      </table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="kPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+
+  <div class="calc">
+    <form class="box" id="recForm" novalidate aria-labelledby="rec-h">
+      <h2 id="rec-h">Convert a whole recipe</h2>
+      <div class="field"><label for="recipe">Paste a recipe (one ingredient per line)</label><textarea class="prose-in" id="recipe" name="recipe" rows="8" spellcheck="false">{{K_RECIPE}}</textarea></div>
+      <div class="field"><label for="serve">Multiply the recipe (2 to double, 0.5 to halve)</label><div class="input"><input id="serve" name="serve" type="number" inputmode="decimal" min="0.1" max="20" step="0.25" value="1"></div></div>
+      <label class="check"><input type="checkbox" name="tin"> Resize for a different tin</label>
+      <fieldset class="field-group" id="rTin" hidden>
+        <legend>Tin size (inches or cm, the same for both)</legend>
+        <div class="field-row">
+          <div class="field"><label for="fromShape">Recipe tin</label><select class="input" id="fromShape" name="fromShape"><option value="round" selected>Round</option><option value="square">Square</option><option value="rect">Rectangle</option></select></div>
+          <div class="field"><label for="fromA">Diameter / side</label><div class="input"><input id="fromA" name="fromA" type="number" inputmode="decimal" min="1" step="0.5" value="8"></div></div>
+          <div class="field" id="rFromB" hidden><label for="fromB">Width</label><div class="input"><input id="fromB" name="fromB" type="number" inputmode="decimal" min="1" step="0.5" value="8"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="toShape">Your tin</label><select class="input" id="toShape" name="toShape"><option value="round" selected>Round</option><option value="square">Square</option><option value="rect">Rectangle</option></select></div>
+          <div class="field"><label for="toA">Diameter / side</label><div class="input"><input id="toA" name="toA" type="number" inputmode="decimal" min="1" step="0.5" value="9"></div></div>
+          <div class="field" id="rToB" hidden><label for="toB">Width</label><div class="input"><input id="toB" name="toB" type="number" inputmode="decimal" min="1" step="0.5" value="9"></div></div>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="rec-result-h">
+      <h2 id="rec-result-h">Recipe in grams <span id="rFactor">× 1</span></h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rec-result-h">
+        <table class="data text">
+          <thead><tr><th scope="col">Recipe line</th><th scope="col">Amount</th><th scope="col">Weight</th></tr></thead>
+          <tbody id="rOut">
+{{K_RECIPE_ROWS}}
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Eggs count as Grade B (60–64.9 g each). Ingredients the converter does not know are left without a weight.</p>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="rCopy">Copy recipe</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Cups to grams chart</h2>
+  <p>Click an ingredient to load it into the converter. Ranges show the difference between the two sources (King Arthur Baking and USDA).</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data">
+      <thead><tr><th scope="col">Ingredient</th><th scope="col">1 cup (250 ml)</th><th scope="col">1 cup (240 ml)</th><th scope="col">1 tbsp</th></tr></thead>
+      <tbody>
+{{K_TABLE}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Example: a chocolate cake with 2 cups of flour</h2>
+  <p>The recipe asks for 2 cups flour, 1 cup sugar, ½ cup oil, 1 cup milk, ¼ cup cocoa, 2 eggs and 1 tsp salt. In a 250 ml cup that is <strong>254 g</strong> flour, <strong>209 g</strong> sugar, <strong>115 g</strong> oil, <strong>258 g</strong> milk, <strong>22 g</strong> cocoa, 120 to 130 g of egg and <strong>6 g</strong> salt. Baking it in a 9-inch round tin instead of an 8-inch one? Multiply everything by 1.27.</p>
+
+  <h2 id="formula">How the conversion works</h2>
+  <ol>
+    <li><strong>Volume:</strong> cups × the cup size (250, 240 or 236.6 ml), tablespoons × 15 ml, teaspoons × 5 ml.</li>
+    <li><strong>Density:</strong> grams per US cup from King Arthur Baking and USDA, divided by 236.6 ml, gives grams per ml.</li>
+    <li><strong>Weight:</strong> volume × grams per ml. Where the two sources differ, both are shown as a range and the first (spooned and levelled) is used.</li>
+    <li><strong>Recipes and tins:</strong> every line is multiplied by the serving factor and the tin area ratio (round: π × d² ÷ 4; square: side²).</li>
+  </ol>
+
+  <h2 id="eggs-h">Egg weights by grade (Malaysia)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="eggs-h">
+    <table class="data">
+      <thead><tr><th scope="col">Grade</th><th scope="col">Weight per egg (in shell)</th></tr></thead>
+      <tbody>
+{{K_EGGS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips for accurate measuring</h2>
+  <ul>
+    <li><strong>Flour:</strong> spoon it into the cup and level with a knife. Scooping from the bag packs it up to 20% heavier.</li>
+    <li><strong>Brown sugar:</strong> press it firmly into the cup; recipes assume packed.</li>
+    <li><strong>A kitchen scale</strong> is the most accurate for cakes and bread. Use this chart for recipes that only give cups.</li>
+    <li>Not in the chart: cake flour, rice flour, glutinous rice flour, gula melaka and fresh grated coconut, because published figures conflict. Weigh these.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.kingarthurbaking.com/learn/ingredient-weight-chart" rel="noopener">King Arthur Baking: Ingredient weight chart</a> and <a href="https://fdc.nal.usda.gov/" rel="noopener">USDA FoodData Central</a></li>
+    <li><a href="https://www.fda.gov/food/guidance-documents-regulatory-information-topic/guidance-industry-guidelines-determining-metric-equivalents-household-measures" rel="noopener">US FDA: household measures (240 ml cup, 15 ml tablespoon, 5 ml teaspoon)</a></li>
+    <li><a href="https://www.kpdn.gov.my/images/2024/pengumuman/shmmp/booklet%20harga%20telur%20ayam.pdf" rel="noopener">KPDN: egg grades and weights</a> (P.U.(A) 223/2022)</li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> Weights are estimates for spooned and levelled ingredients. Brand, humidity and how you measure can change the real weight by 5 to 15%; use a scale for the most accurate result.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/calorie-calculator-malaysia/">Calorie Calculator<small>Daily calorie needs</small></a>
+    <a href="/profit-margin-calculator-malaysia/">Profit Margin Calculator<small>Price your cakes and kuih</small></a>
+    <a href="/spin-the-wheel/">Spin the Wheel<small>Random name picker</small></a>
+  </div>
+</section>

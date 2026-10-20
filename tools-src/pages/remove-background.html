@@ -1,0 +1,167 @@
+<!--page
+{
+  "path": "/remove-background/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/buang-background-gambar/" },
+  "title": "Remove Background from Image Free: AI, No Upload, Transparent PNG",
+  "description": "Remove the background from any photo with AI that runs in your browser: nothing is uploaded. Transparent PNG, white, colour or blur background, brush and crop.",
+  "llms": "Free background remover that runs entirely in the browser: the photo is never uploaded to a server. Three modes: People (MODNet AI, Apache-2.0 licence, a model of about 7 MB downloaded once and cached by the browser; best for portraits, selfies and hair), Object (BiRefNet-lite AI, MIT licence, about 115 MB, needs WebGPU in Chrome or Edge on a computer; for products, cars, pets and logos) and Plain background (flood fill from the edges, no download, instant; for white or single-colour backdrops). Models run with Transformers.js 3.8.1; without WebGPU they run on the CPU (WebAssembly). Controls: edge strictness, grow or shrink the subject (−10 to +10 px), soften edges (0 to 10 px), erase and restore brushes with undo, new background (transparent, white, black, blue, red, any colour, portrait-style blur or your own picture), crop to the subject, and download as PNG (transparent), WebP (transparent, smaller) or JPG (white background). Pictures are processed up to 2,048 pixels on the longest side.",
+  "datePublished": "2026-10-20",
+  "dateModified": "2026-10-20",
+  "render": "bgremove",
+  "scripts": ["/assets/js/bgremove.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["Remove Background", null]],
+  "about": ["Background removal", "Transparent PNG", "Image segmentation", "Portrait matting"],
+  "app": {
+    "name": "Background Remover",
+    "category": "DesignApplication",
+    "features": ["AI for people (MODNet) and objects (BiRefNet-lite)", "Instant plain-background mode", "Photos are never uploaded", "Erase and restore brushes with undo", "Transparent, white, colour, blur or picture backgrounds", "Crop to subject", "Download PNG, WebP or JPG", "Before/after slider"]
+  },
+  "citations": [
+    ["Hugging Face: Xenova/modnet (Apache-2.0)", "https://huggingface.co/Xenova/modnet"],
+    ["Hugging Face: onnx-community/BiRefNet_lite-ONNX (MIT)", "https://huggingface.co/onnx-community/BiRefNet_lite-ONNX"],
+    ["Ke et al.: MODNet, Real-Time Trimap-Free Portrait Matting via Objective Decomposition", "https://arxiv.org/abs/2011.11961"],
+    ["Zheng et al.: Bilateral Reference for High-Resolution Dichotomous Image Segmentation (BiRefNet)", "https://arxiv.org/abs/2401.03407"],
+    ["Hugging Face: Transformers.js", "https://huggingface.co/docs/transformers.js/index"]
+  ],
+  "faq": [
+    { "q": "How do I remove the background from a picture for free?", "a": "Choose, drop or paste a photo above. People mode removes the background automatically in a few seconds; the first time, an AI model of about 7 MB downloads once. Pick a new background or keep it transparent, then press Download." },
+    { "q": "Is my photo uploaded to a server?", "a": "No. The AI model is downloaded to your browser and the photo is processed on your own device. Only the model files (from Hugging Face) and the Transformers.js library (from jsDelivr) are downloaded; your picture is never sent anywhere." },
+    { "q": "Which mode should I choose?", "a": "People for portraits, selfies and product shots with people in them, including hair. Object for products, cars, pets and logos; it needs WebGPU (Chrome or Edge on a computer) and a model of about 115 MB. Plain background for photos on a white or single-colour backdrop; it is instant with no download." },
+    { "q": "How do I make a transparent PNG or a white background for Shopee?", "a": "For a transparent PNG, pick the Transparent background and the PNG or WebP format. For Shopee or Lazada product photos, pick White, tick Crop to subject and download the smaller JPG." },
+    { "q": "The edges around hair or shoulders are rough. How do I fix them?", "a": "Use the Edge strictness slider to remove leftover background, Grow/shrink to thicken or thin the subject, and Soften edges at 1 to 3 px. For specific spots, choose the Erase or Restore brush and paint on the picture; Undo reverses each stroke." },
+    { "q": "How large a picture can it handle?", "a": "Pictures are processed up to 2,048 pixels on the longest side; larger ones are scaled down first so it stays fast on phones. The download keeps that size, or the subject's area when Crop to subject is ticked." },
+    { "q": "Does it work on a phone?", "a": "Yes. People and Plain background modes work on Android phones and iPhones in a recent browser; the first photo takes longer while the model downloads. Object mode needs WebGPU and works best on a computer." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">Remove Background</li></ol></nav>
+  <h1>Remove Background from Image</h1>
+  <p class="answer">Remove the background from a photo automatically with <strong>AI that runs in your browser</strong>: the photo is <strong>never uploaded</strong>. Pick a photo and the background is gone in a few seconds; save it as a <strong>transparent PNG</strong>, or swap in a white, colour, blurred or picture background. Erase and restore brushes fix edges around hair.</p>
+  <p class="meta"><span>Updated <time datetime="{{B_VERIFIED_ISO}}">{{B_VERIFIED}}</time></span><span>Your photo stays on your device</span><a href="/buang-background-gambar/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="bgForm" novalidate aria-labelledby="bg-h">
+      <h2 id="bg-h">Your photo</h2>
+      <label class="drop" id="bgDrop" for="bgFile">
+        <input type="file" id="bgFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        <img id="bgPreview" alt="The photo you chose" hidden>
+        <span id="bgDropText"><strong>Choose a photo</strong> or drop it here<small>JPG, PNG or WebP. You can also paste.</small></span>
+      </label>
+      <fieldset class="field-group">
+        <legend>Mode</legend>
+        <div class="chipset"><label><input type="radio" name="engine" value="person" checked> People (AI, 7 MB)</label><label><input type="radio" name="engine" value="object"> Object (AI, 115 MB)</label><label><input type="radio" name="engine" value="plain"> Plain background</label></div>
+      </fieldset>
+      <div class="field" id="w_tol" hidden><label for="tol">Background colour tolerance</label><div class="range"><input id="tol" name="tol" type="range" min="1" max="40" step="1" value="12"><output id="o_tol" for="tol">12</output></div></div>
+      <fieldset class="field-group">
+        <legend>New background</legend>
+        <div class="chipset"><label><input type="radio" name="bg" value="transparent" checked> Transparent</label><label><input type="radio" name="bg" value="#ffffff"> White</label><label><input type="radio" name="bg" value="#000000"> Black</label><label><input type="radio" name="bg" value="#1e5aa8"> Blue</label><label><input type="radio" name="bg" value="#d62828"> Red</label><label><input type="radio" name="bg" value="color"> Other colour</label><label><input type="radio" name="bg" value="blur"> Blur</label><label><input type="radio" name="bg" value="image"> Picture</label></div>
+      </fieldset>
+      <div class="field" id="w_color" hidden><label for="color">Background colour</label><input class="color-in" id="color" name="color" type="color" value="#1e5aa8"></div>
+      <div class="field" id="w_blur" hidden><label for="blur">Blur amount</label><div class="range"><input id="blur" name="blur" type="range" min="2" max="40" step="1" value="12"><output id="o_blur" for="blur">12 px</output></div></div>
+      <div class="field" id="w_img" hidden><label for="bgfile">Background picture</label><input id="bgfile" name="bgfile" type="file" accept="image/*"></div>
+      <fieldset class="field-group">
+        <legend>Refine edges</legend>
+        <div class="field"><label for="cut">Edge strictness</label><div class="range"><input id="cut" name="cut" type="range" min="0" max="100" step="1" value="50"><output id="o_cut" for="cut">50</output></div></div>
+        <div class="field"><label for="shift">Grow (+) / shrink (−)</label><div class="range"><input id="shift" name="shift" type="range" min="-10" max="10" step="1" value="0"><output id="o_shift" for="shift">0 px</output></div></div>
+        <div class="field"><label for="feather">Soften edges</label><div class="range"><input id="feather" name="feather" type="range" min="0" max="10" step="1" value="1"><output id="o_feather" for="feather">1 px</output></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Touch-up brush</legend>
+        <div class="chipset"><label><input type="radio" name="brush" value="off" checked> Off</label><label><input type="radio" name="brush" value="erase"> Erase</label><label><input type="radio" name="brush" value="restore"> Restore</label></div>
+        <div class="field" id="w_size" hidden><label for="size">Brush size</label><div class="range"><input id="size" name="size" type="range" min="4" max="120" step="2" value="30"><output id="o_size" for="size">30 px</output></div></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="bgUndo">Undo</button></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Download</legend>
+        <div class="field"><label for="fmt">Format</label><select class="input" id="fmt" name="fmt"><option value="png" selected>PNG (transparent)</option><option value="webp">WebP (transparent, smaller)</option><option value="jpeg">JPG (white background)</option></select></div>
+        <label class="check"><input type="checkbox" name="crop"> Crop to subject</label>
+      </fieldset>
+    </form>
+
+    <section class="box" id="bgResult" aria-labelledby="bg-result-h">
+      <h2 id="bg-result-h">Result</h2>
+      <div class="stage-empty" id="bgEmpty">Choose a photo to see it without its background here.</div>
+      <div class="stage bg-stage" id="bgStage" hidden>
+        <canvas id="bgOut" role="img" aria-label="Your photo without its background"></canvas>
+        <canvas id="bgIn" role="img" aria-label="Your original photo"></canvas>
+        <span class="handle" id="bgHandle" aria-hidden="true"></span>
+      </div>
+      <div class="field" id="bgSplitWrap" hidden><label for="bgSplit">Before / after</label><div class="range"><input id="bgSplit" type="range" min="0" max="100" step="1" value="0"></div></div>
+      <progress class="bg-prog" id="bgProg" max="100" value="0" hidden></progress>
+      <p class="note" id="bgStatus">Your photo stays on this device.</p>
+      <p class="sr-only" id="bgLive" aria-live="polite"></p>
+      <div class="tool-actions"><button type="button" class="btn sm" id="bgDownload" disabled>Download</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="modes-h">Three ways to remove a background</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Mode</th><th scope="col">Method</th><th scope="col">Download</th><th scope="col">Licence</th><th scope="col">Best for</th></tr></thead>
+      <tbody>
+{{B_MODES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Example: a product photo for Shopee</h2>
+  <p>You photograph a handbag on a table. Choose <strong>Object</strong> mode (on a computer with Chrome), or <strong>Plain background</strong> if the table is one colour, then the <strong>White</strong> background, tick <strong>Crop to subject</strong> and download a <strong>JPG</strong>. The result is the handbag on clean white, cropped tight with a 2% margin, ready for an online shop.</p>
+
+  <h2 id="formula">How it works</h2>
+  <ol>
+    <li><strong>Segmentation:</strong> the AI model (MODNet or BiRefNet-lite) predicts, for every pixel, how much it belongs to the subject: 0 background, 255 subject, values in between for soft hair edges.</li>
+    <li><strong>Refine:</strong> edge strictness sets the threshold, grow/shrink dilates or erodes the mask, and soften edges blurs it slightly.</li>
+    <li><strong>Brush:</strong> Erase strokes lower the mask to 0 and Restore raises it to 255, with a soft edge.</li>
+    <li><strong>Composite:</strong> each pixel = subject × mask + new background × (1 − mask), or the alpha channel for a transparent PNG.</li>
+  </ol>
+
+  <h2 id="formats-h">Download formats</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="formats-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Format</th><th scope="col">Transparent</th><th scope="col">File size</th><th scope="col">Good for</th></tr></thead>
+      <tbody>
+{{B_FORMATS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips for the best result</h2>
+  <ul>
+    <li><strong>Contrast:</strong> a subject that differs in colour from the background gives the cleanest edge.</li>
+    <li><strong>Hair:</strong> keep Soften edges at 1 to 2 px; higher values leave a halo.</li>
+    <li><strong>Passport photos:</strong> use the <a href="/passport-photo-malaysia/">Passport Photo Maker</a>, which removes the background, places the head to the official size and lays out a 4R print sheet.</li>
+    <li><strong>WhatsApp stickers:</strong> download a transparent PNG, then pack it with the <a href="/whatsapp-sticker-maker/">WhatsApp Sticker Maker</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://huggingface.co/Xenova/modnet" rel="noopener">Xenova/modnet</a> (Apache-2.0) and the <a href="https://arxiv.org/abs/2011.11961" rel="noopener">MODNet paper</a></li>
+    <li><a href="https://huggingface.co/onnx-community/BiRefNet_lite-ONNX" rel="noopener">BiRefNet_lite-ONNX</a> (MIT) and the <a href="https://arxiv.org/abs/2401.03407" rel="noopener">BiRefNet paper</a></li>
+    <li><a href="https://huggingface.co/docs/transformers.js/index" rel="noopener">Transformers.js</a>: runs the models in the browser with WebGPU or WebAssembly</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Only use photos you have the right to use. AI models can miss parts of a subject that matches the background colour; check the edges before using the result.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/passport-photo-malaysia/">Passport Photo Maker<small>Official sizes and 4R prints</small></a>
+    <a href="/photo-to-cartoon/">Photo to Cartoon<small>Cartoon, anime, sketch</small></a>
+    <a href="/whatsapp-sticker-maker/">WhatsApp Sticker Maker<small>Photo to sticker pack</small></a>
+  </div>
+</section>
