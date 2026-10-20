@@ -1,0 +1,130 @@
+<!--page
+{
+  "path": "/find-and-replace/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Find and Replace Text Online: Regex, Remove Line Breaks, Clean Text",
+  "description": "Free find and replace tool with several rules and regex, plus one-click removal of line breaks, extra spaces, emoji, duplicates and special characters.",
+  "llms": "Free online find and replace and text cleaner that runs in the browser. Find and replace: several rules applied in order, each plain text or a JavaScript regular expression, with match case and whole-word options, capture groups ($1, $<name>, $& for the whole match) and \\n or \\t in the replacement; matches are counted and highlighted before you replace, and Undo steps back. Clean-ups: remove HTML tags, URLs, email addresses, emoji (including skin tones, flags and family emoji), accents (é to e), non-ASCII characters, numbers, punctuation and special characters; remove line breaks while keeping paragraphs or join into one line; remove extra spaces, trim lines, remove empty and duplicate lines, sort lines (natural order, so 9 before 10) and reverse line order; or delete any characters you list. Text stays in the browser.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/find-replace-text.html", "https://www.thebukitbesi.com/p/remove-characters-from-text.html"],
+  "render": "textclean",
+  "shareTitle": "Share this find and replace tool",
+  "scripts": ["/assets/js/find-replace.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Find and Replace", null]],
+  "about": ["Regular expression", "Text editor", "Data cleansing", "String (computer science)"],
+  "app": {
+    "name": "Find and Replace Text",
+    "category": "UtilitiesApplication",
+    "features": ["Several find-and-replace rules applied in order", "Regular expressions with $1 and named groups", "Match case and whole-word options", "Live match count and highlighting", "Remove line breaks, extra spaces, empty and duplicate lines", "Remove emoji, HTML tags, URLs, emails, numbers, punctuation and accents", "Sort or reverse lines", "Undo; text kept in your browser"]
+  },
+  "citations": [
+    ["MDN: Regular expressions (JavaScript)", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions"],
+    ["MDN: String.prototype.replace() and replacement patterns", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace"],
+    ["Unicode Technical Standard #51: Unicode Emoji", "https://www.unicode.org/reports/tr51/"]
+  ],
+  "faq": [
+    { "q": "How do I find and replace text online?", "a": "Paste your text, type the word to find and its replacement, and the tool counts and highlights every match before you change anything. Press Replace all to apply it, or Undo to go back. Add more rules to make several replacements in one go; they run from top to bottom." },
+    { "q": "How do I remove line breaks from text?", "a": "Tick Remove line breaks and press Clean text. Single line breaks inside a paragraph become spaces while blank lines between paragraphs stay, which fixes text copied from a PDF or email. Choose Join everything into one line to remove every break. {{FR_LB_EXAMPLE}}" },
+    { "q": "How do I use regex in find and replace?", "a": "Tick .* to treat the Find box as a JavaScript regular expression. Use groups in the replacement: $1, $2 for numbered groups, $<name> for named groups and $& for the whole match. For example, find (\\d+)-(\\d+)-(\\d+) and replace with $3/$2/$1 to turn 2026-10-19 into 19/10/2026. ^ and $ match at the start and end of each line." },
+    { "q": "How do I replace text with a new line?", "a": "Type \\n in the Replace box. For example, find a comma followed by a space and replace with \\n to put each item of a list on its own line. \\t inserts a tab. This works with or without regex." },
+    { "q": "How do I remove emoji or special characters?", "a": "Tick Remove emoji to delete every emoji, including skin-tone, flag and family emoji made of several characters. Remove special characters keeps letters (including accented and non-Latin letters), numbers, spaces and basic punctuation. Remove punctuation deletes every punctuation mark and symbol." },
+    { "q": "Can I remove duplicate lines and sort a list?", "a": "Yes. Remove duplicate lines keeps the first copy of each line, ignoring leading and trailing spaces. Sort lines A to Z uses natural order, so item 9 comes before item 10, and ignores upper and lower case. Remove empty lines deletes blank lines." },
+    { "q": "Is my text saved or uploaded?", "a": "Nothing is uploaded: every replacement runs in your browser. Your last text and rules are kept in this browser's storage so they survive a reload; Clear removes the text. Very long texts of several megabytes work, and the highlighted preview shows the first 20,000 characters." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Find and Replace</li></ol></nav>
+  <h1>Find and Replace Text and Clean Text</h1>
+  <p class="answer">Paste your text, then <strong>find and replace words with several rules at once, including regex</strong>, or <strong>remove line breaks, extra spaces, emoji, duplicates and special characters in one click</strong>. Every match is counted and highlighted before you change anything, and Undo takes you back.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{FR_VERIFIED}}</span><a href="#regex">Regex recipes</a></p>
+
+  <form class="box fr-tool" id="frForm" novalidate aria-labelledby="fr-h">
+    <h2 id="fr-h" class="sr-only">Find and replace</h2>
+    <div class="field"><label for="frText">Your text</label><textarea class="prose-in fr-text" id="frText" spellcheck="false">{{FR_TEXT}}</textarea></div>
+    <div class="tool-actions fr-row">
+      <button type="button" class="btn ghost sm" id="frUndo" disabled>Undo</button>
+      <button type="button" class="btn ghost sm" id="frCopy">Copy text</button>
+      <button type="button" class="btn ghost sm" id="frClear">Clear</button>
+    </div>
+    <div class="fr-grid">
+      <section class="ex-set" aria-labelledby="frRepH">
+        <h3 class="sub-h" id="frRepH">Find and replace</h3>
+        <div id="frRules">{{FR_RULES}}</div>
+        <div class="tool-actions fr-row"><button type="button" class="btn sm" id="frGo">Replace all</button><button type="button" class="btn ghost sm" id="frAdd">Add rule</button></div>
+        <p class="help" id="frSummary" aria-live="polite">{{FR_SUMMARY}}</p>
+        <div class="fr-preview" id="frPreview" aria-label="Matches preview">{{FR_PREVIEW}}</div>
+      </section>
+      <section class="ex-set" aria-labelledby="frCleanH">
+        <h3 class="sub-h" id="frCleanH">Clean text</h3>
+        <div class="fr-ops">{{FR_OPS}}</div>
+        <div class="field"><label for="frChars">Also remove these characters</label><input class="input" id="frChars" placeholder="e.g. #*_" autocomplete="off" spellcheck="false"></div>
+        <div class="tool-actions fr-row"><button type="button" class="btn sm" id="frClean">Clean text</button></div>
+        <p class="help" id="frCleanInfo" aria-live="polite">Tick one or more clean-ups.</p>
+      </section>
+    </div>
+    <p class="sr-only" id="frLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to find and replace or clean text</h2>
+  <ol>
+    <li><strong>Paste your text</strong> into the box.</li>
+    <li><strong>Type what to find and what to replace it with.</strong> Matches are highlighted and counted as you type. Tick Aa for match case, Word for whole words or .* for regex.</li>
+    <li><strong>Add rules</strong> for more replacements; they run in order from top to bottom.</li>
+    <li><strong>Press Replace all</strong>, or tick clean-ups and press Clean text.</li>
+    <li><strong>Copy the result.</strong> Undo steps back through every change.</li>
+  </ol>
+
+  <h2 id="regex">Regex recipes</h2>
+  <p>Paste a pattern into Find, tick .* and press Replace all. Every result below comes from the same code that runs in the tool.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="regex-cap">
+    <table class="data text fr-table"><caption id="regex-cap">Useful find-and-replace patterns</caption>
+      <thead><tr><th scope="col">Task</th><th scope="col">Find</th><th scope="col">Replace</th><th scope="col">Before → after</th></tr></thead>
+      <tbody>
+{{FR_RECIPES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cleanups">What each clean-up does</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="clean-cap">
+    <table class="data text fr-table"><caption id="clean-cap">Clean-ups with an example</caption>
+      <thead><tr><th scope="col">Clean-up</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+      <tbody>
+{{FR_CLEAN_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Tip:</strong> clean-ups run in the order listed, so HTML tags are removed before spaces are tidied. Check the result before pasting it into your website, and keep a copy of the original.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="noopener">MDN: Regular expressions</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace" rel="noopener">MDN: replacement patterns</a></li>
+    <li><a href="https://www.unicode.org/reports/tr51/" rel="noopener">Unicode Technical Standard #51: Unicode Emoji</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/case-converter/">Case Converter<small>Title case, sentence case and camelCase</small></a>
+    <a href="/word-counter/">Word Counter<small>Words, readability and keyword density</small></a>
+    <a href="/text-to-html/">Text to HTML Converter<small>Paragraphs, lists and links</small></a>
+  </div>
+</section>
+</div>

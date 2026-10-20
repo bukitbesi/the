@@ -1,0 +1,141 @@
+<!--page
+{
+  "path": "/text-to-html/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Text to HTML Converter: Paragraphs, Line Breaks, Links and Lists",
+  "description": "Free text to HTML converter: plain text or Markdown to clean HTML paragraphs, line breaks, lists and links, with a live preview. Also converts HTML to text.",
+  "llms": "Free text to HTML converter that runs in the browser. Plain text: blank lines become <p> paragraphs, single line breaks become <br> (optional), blocks where every line starts with -, *, • or a number become <ul> or <ol> lists (numbered lists keep their start number), URLs (http, https and www.) and email addresses become links, with optional rel=\"nofollow\" and opening in a new tab; every <, >, & and quote in your text is escaped so it displays as text and cannot inject code. Markdown: headings, bold, italic, strikethrough, lists, task lists, quotes, code and links, with unsafe link schemes such as javascript: removed. HTML to text: strips tags and scripts, keeps paragraphs and line breaks, turns list items into bullets, writes link URLs in brackets and decodes entities like &amp; and &#8217;. Live preview, copy, and download as a complete .html page.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/text-to-html-converter.html",
+  "render": "texthtml",
+  "shareTitle": "Share this text to HTML converter",
+  "scripts": ["/assets/js/text-to-html.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Text to HTML", null]],
+  "about": ["HTML", "Markdown", "Character encodings in HTML", "Plain text"],
+  "app": {
+    "name": "Text to HTML Converter",
+    "category": "DeveloperApplication",
+    "features": ["Paragraphs from blank lines and <br> from line breaks", "Bulleted and numbered lists detected automatically", "URLs and emails turned into links, with nofollow and new-tab options", "All special characters escaped", "Markdown to HTML", "HTML to plain text", "Live preview, copy and download .html"]
+  },
+  "citations": [
+    ["WHATWG HTML Standard: the p element", "https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element"],
+    ["MDN: <br>, the line break element", "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br"],
+    ["MDN: Entity (HTML special characters)", "https://developer.mozilla.org/en-US/docs/Glossary/Entity"],
+    ["Google Search Central: Qualify outbound links (rel=nofollow)", "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"]
+  ],
+  "faq": [
+    { "q": "How do I convert text to HTML?", "a": "Paste your text and the HTML appears at once: each block separated by a blank line becomes a <p> paragraph, line breaks inside a block become <br>, lines starting with - or 1. become lists, and web addresses become links. Copy the code into your website's HTML editor, or download it as a complete web page." },
+    { "q": "What is the difference between <p> and <br>?", "a": "<p> marks a paragraph, a block of text with space above and below; <br> is a line break inside a paragraph, used for addresses, poems and short lines. Use a blank line in your text where you want a new paragraph, and a single line break where you only want a new line. Untick Keep line breaks to join the lines of each paragraph instead." },
+    { "q": "Why are < and & changed in the HTML?", "a": "Characters that mean something in HTML must be escaped to show as text: < becomes &lt;, > becomes &gt;, & becomes &amp; and \" becomes &quot;. Without this, text like <b> or a stray & could break your page or, if it came from someone else, run code. The converter escapes every one, so \"5 < 10 & 20 > 15\" shows exactly as typed." },
+    { "q": "Can it convert Markdown to HTML?", "a": "Yes. Choose Markdown and write # for headings, **bold**, *italic*, ~~strikethrough~~, - for lists, - [ ] for task lists, > for quotes, backticks for code and [text](https://link) for links. Links with unsafe schemes such as javascript: are removed." },
+    { "q": "How do I paste the HTML into Blogger or WordPress?", "a": "In Blogger, switch the post editor from Compose view to HTML view and paste. In WordPress, add a Custom HTML block, or open the block's menu and choose Edit as HTML. Pasting HTML into the normal visual editor shows the code as text instead of formatting it." },
+    { "q": "Should links open in a new tab or use nofollow?", "a": "Links in your own content usually open in the same tab. Tick Open links in a new tab for references you want readers to keep your page open for; the tool then adds rel=\"noopener\" for security. Tick nofollow for links you do not want to vouch for; Google treats nofollow as a hint, and recommends rel=\"sponsored\" for paid or affiliate links." },
+    { "q": "How do I convert HTML back to plain text?", "a": "Choose HTML to text and paste the HTML. Tags, scripts and styles are removed, paragraphs and line breaks are kept, list items become bullets, links keep their address in brackets, and entities such as &amp; and &#8217; turn back into & and ’." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Text to HTML</li></ol></nav>
+  <h1>Text to HTML Converter</h1>
+  <p class="answer">Paste plain text and get <strong>clean HTML instantly: blank lines become &lt;p&gt; paragraphs, line breaks become &lt;br&gt;, dashes become lists and web addresses become links</strong>, with every special character escaped. It also converts Markdown to HTML and HTML back to plain text.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{TH_VERIFIED}}</span><a href="#rules">Conversion rules</a></p>
+
+  <form class="box code-tool" id="thForm" novalidate aria-labelledby="th-h">
+    <h2 id="th-h" class="sr-only">Convert text to HTML</h2>
+    <div class="code-opts">
+      <fieldset class="seg seg3" aria-label="Convert">
+        <label><input type="radio" name="mode" value="text" checked> Text → HTML</label>
+        <label><input type="radio" name="mode" value="markdown"> Markdown</label>
+        <label><input type="radio" name="mode" value="html2text"> HTML → text</label>
+      </fieldset>
+    </div>
+    <div class="th-opts" id="thOpts">
+      <label class="check"><input type="checkbox" name="breaks" checked> <span>Keep line breaks (&lt;br&gt;)</span></label>
+      <label class="check"><input type="checkbox" name="lists" checked> <span>Make lists</span></label>
+      <label class="check"><input type="checkbox" name="links" checked> <span>Make links</span></label>
+      <label class="check"><input type="checkbox" name="newTab"> <span>Open links in a new tab</span></label>
+      <label class="check"><input type="checkbox" name="nofollow"> <span>nofollow</span></label>
+      <label class="check"><input type="checkbox" name="indent" checked> <span>Indent code</span></label>
+    </div>
+    <div class="code-panes">
+      <div class="field">
+        <label for="thIn">Your text</label>
+        <textarea class="code th-in" id="thIn" spellcheck="true">{{TH_IN}}</textarea>
+        <div class="tool-actions th-row"><button type="button" class="btn ghost sm" id="thClear">Clear</button></div>
+      </div>
+      <div class="field">
+        <label for="thOut" id="thOutLabel">HTML code</label>
+        <textarea class="code" id="thOut" readonly spellcheck="false" aria-describedby="thStats">{{TH_OUT}}</textarea>
+        <p class="code-stats" id="thStats" aria-live="polite">{{TH_STATS}}</p>
+        <div class="tool-actions th-row"><button type="button" class="btn sm" id="thCopy">Copy</button><button type="button" class="btn ghost sm" id="thDownload">Download</button></div>
+      </div>
+    </div>
+    <section class="ex-set" id="thPreviewWrap" aria-labelledby="thPrevH"><h3 class="sub-h" id="thPrevH">Preview</h3><div class="th-preview prose" id="thPreview">{{TH_PREVIEW}}</div></section>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to convert text to HTML</h2>
+  <ol>
+    <li><strong>Paste your text.</strong> Leave a blank line between paragraphs.</li>
+    <li><strong>Start list lines with - or 1.</strong> to get a bulleted or numbered list.</li>
+    <li><strong>Choose the options:</strong> line breaks, links, new tab, nofollow.</li>
+    <li><strong>Check the preview</strong>, then copy the HTML code or download a complete page.</li>
+    <li><strong>Paste into the HTML view</strong> of Blogger, WordPress or your email tool.</li>
+  </ol>
+
+  <h2 id="rules">Conversion rules</h2>
+  <p>Each example below is converted by the same code the tool runs.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rules-cap">
+    <table class="data text th-table"><caption id="rules-cap">What your text becomes</caption>
+      <thead><tr><th scope="col">You type</th><th scope="col">HTML</th></tr></thead>
+      <tbody>
+{{TH_RULES}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="escape">Characters that are escaped</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="esc-cap">
+    <table class="data text"><caption id="esc-cap">HTML special characters</caption>
+      <thead><tr><th scope="col">Character</th><th scope="col">Written as</th><th scope="col">Why</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>&lt;</code></th><td><code>&amp;lt;</code></td><td>Starts a tag</td></tr>
+        <tr><th scope="row"><code>&gt;</code></th><td><code>&amp;gt;</code></td><td>Ends a tag</td></tr>
+        <tr><th scope="row"><code>&amp;</code></th><td><code>&amp;amp;</code></td><td>Starts an entity such as &amp;nbsp;</td></tr>
+        <tr><th scope="row"><code>"</code></th><td><code>&amp;quot;</code></td><td>Ends an attribute value</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Tip:</strong> the HTML is safe to paste because your text is escaped, but always paste it into the HTML view of your editor, not the visual one, or you will see the tags as text.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element" rel="noopener">WHATWG HTML Standard: the p element</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br" rel="noopener">MDN: the br element</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Entity" rel="noopener">MDN: HTML entities</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener">Google Search Central: qualify outbound links</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/html-beautifier/">HTML Beautifier and Minifier<small>Format or compress HTML</small></a>
+    <a href="/online-notepad/">Online Notepad<small>Markdown notes with export</small></a>
+    <a href="/parse-html/">Parse HTML<small>Escape code for Blogger posts</small></a>
+  </div>
+</section>
+</div>

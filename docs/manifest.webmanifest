@@ -223,6 +223,11 @@
       "description": "Fidyah calculator for Malaysia: fidyah for missed fasts at each state's 2026 rate, multiplied for de"
     },
     {
+      "name": "Find and Replace Text",
+      "url": "/find-and-replace/",
+      "description": "Free find and replace tool with several rules and regex, plus one-click removal of line breaks, extr"
+    },
+    {
       "name": "Fixed Deposit Calculator Malaysia",
       "url": "/fixed-deposit-calculator-malaysia/",
       "description": "Fixed deposit calculator for Malaysia: FD interest for 1 to 60 months, maturity amount, monthly inte"
@@ -241,6 +246,11 @@
       "name": "GDEX Tracking",
       "url": "/gdex-tracking/",
       "description": "Track a GDEX parcel with your consignment note number, see what each status means and learn the GDEX"
+    },
+    {
+      "name": "GitHub to jsDelivr Converter",
+      "url": "/github-to-jsdelivr/",
+      "description": "Free GitHub to jsDelivr converter: turn GitHub file and raw links into fast jsDelivr CDN URLs with m"
     },
     {
       "name": "Gold Price Malaysia Today",
@@ -271,6 +281,11 @@
       "name": "HTML Beautifier, Formatter & Minifier",
       "url": "/html-beautifier/",
       "description": "Free HTML beautifier, formatter and minifier. Format or compress HTML with presets for websites, Blo"
+    },
+    {
+      "name": "HTML Table Generator",
+      "url": "/html-table-generator/",
+      "description": "Free HTML table generator: edit cells or paste from Excel, Google Sheets, CSV or Markdown, pick a st"
     },
     {
       "name": "Iddah Calculator",
@@ -323,6 +338,11 @@
       "description": "Mas kahwin by state in 2026 (Selangor and WP RM300, Melaka and Pahang RM100), its value in gold and "
     },
     {
+      "name": "Meta Tag Checker",
+      "url": "/meta-tag-checker/",
+      "description": "Free meta tag checker: preview your Google result on mobile and desktop, check title and description"
+    },
+    {
       "name": "NCD Calculator Malaysia",
       "url": "/ncd-calculator-malaysia/",
       "description": "Free NCD calculator for Malaysia: your no claim discount by claim-free years for cars and motorcycle"
@@ -356,6 +376,11 @@
       "name": "Parcel Tracking Malaysia",
       "url": "/parcel-tracking-malaysia/",
       "description": "Track any parcel in Malaysia with one box. Paste your tracking number to find the courier and open i"
+    },
+    {
+      "name": "Parse HTML and Encoder/Decoder",
+      "url": "/parse-html/",
+      "description": "Free parse HTML tool: escape HTML to show code in Blogger posts, and encode or decode HTML entities,"
     },
     {
       "name": "PDF Converter",
@@ -508,6 +533,11 @@
       "description": "Termination benefits calculator for Malaysia: minimum retrenchment or termination pay (10, 15 or 20 "
     },
     {
+      "name": "Text to HTML Converter",
+      "url": "/text-to-html/",
+      "description": "Free text to HTML converter: plain text or Markdown to clean HTML paragraphs, line breaks, lists and"
+    },
+    {
       "name": "TNB Bill Calculator",
       "url": "/tnb-bill-calculator/",
       "description": "Free TNB bill calculator: your home electricity bill by the RP4 tariff (27.03 sen/kWh), EEI rebate, "
@@ -526,6 +556,11 @@
       "name": "Unused CSS Remover",
       "url": "/unused-css-remover/",
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
+    },
+    {
+      "name": "UTM Builder",
+      "url": "/utm-builder/",
+      "description": "Free UTM builder for GA4: tag links with utm_source, medium and campaign, see which GA4 channel the "
     },
     {
       "name": "Water Bill Calculator Malaysia",

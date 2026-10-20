@@ -767,6 +767,70 @@ textarea.wc-text{min-height:260px}
 .sc-checks{margin:0 0 10px;display:grid;gap:4px;font-size:.86rem}.sc-checks li{padding:6px 10px;border-radius:8px}.sc-checks .no{background:var(--hot-bg);color:var(--hot)}.sc-checks .warn{background:var(--c-content-bg);color:var(--c-content)}
 .sc-ok{margin:0 0 10px;padding:6px 10px;border-radius:8px;background:var(--new-bg);color:var(--new);font-size:.88rem;font-weight:600}
 .code-block{overflow-x:auto;padding:14px 16px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--border);font:.8rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+/* Find and replace */
+.fr-text{min-height:200px}
+.fr-grid{display:grid;gap:16px;margin-top:8px}@media(min-width:900px){.fr-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.fr-rule{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;padding:10px 0;border-bottom:1px dashed var(--border)}
+.fr-opts{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.fr-opt{display:inline-flex;align-items:center;min-height:36px;padding:0 10px;border:1px solid var(--border2);border-radius:8px;font:600 .8rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;cursor:pointer}
+.fr-opt input{position:absolute;opacity:0;width:1px;height:1px}.fr-opt:has(input:checked){background:var(--tint);border-color:var(--chip-on-b);color:var(--accent2)}.fr-opt:has(input:focus-visible){outline:3px solid var(--accent3)}
+.fr-count{margin-left:auto;font-size:.8rem;color:var(--text3)}.fr-del{width:36px;height:36px;font-size:1.2rem}.fr-err{grid-column:1/-1}
+.fr-preview{max-height:260px;overflow:auto;margin-top:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg2);font:.85rem/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.fr-preview mark{background:#ffe08a;color:#1a1a1a;border-radius:3px}
+.fr-ops{display:grid;gap:2px}.fr-ops .check{display:flex}
+.fr-table code{overflow-wrap:anywhere}.fr-nl{color:var(--text3)}
+/* Text to HTML */
+.th-opts{display:flex;flex-wrap:wrap;gap:4px 18px;margin:-6px 0 14px}
+.th-in{min-height:240px}
+.th-preview{max-height:420px;overflow:auto;padding:14px 18px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg)}
+.th-table code{overflow-wrap:anywhere}.th-table th code{font-weight:400}
+.sc-htmlf{margin-top:14px}.sc-code-sm{min-height:160px;font-size:.78rem}
+/* HTML table generator */
+.tg-opts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;margin-bottom:12px}.tg-sel{display:flex;align-items:center;gap:8px;font-size:.9rem}.tg-sel select{width:auto;min-height:38px}.tg-cap{flex:1 1 220px;margin:0}
+.tg-gridwrap{overflow-x:auto;border:1px solid var(--border2);border-radius:10px}
+.tg-grid{border-collapse:collapse;min-width:100%}.tg-grid td{padding:0;border:1px solid var(--border);min-width:110px}.tg-grid td.tg-h{background:var(--tint)}
+.tg-grid input{width:100%;min-height:40px;padding:6px 8px;border:0;background:transparent;color:var(--text);font:inherit;font-size:.9rem}.tg-grid .tg-h input{font-weight:700}
+.tg-grid input:focus{outline:2px solid var(--accent2);outline-offset:-2px}
+.tg-grid2{display:grid;gap:16px}@media(min-width:900px){.tg-grid2{grid-template-columns:1fr 1fr}}
+.tg-preview{overflow:auto;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:#12131a}
+.tg-code{min-height:260px;font-size:.78rem}.tg-import{min-height:120px}
+/* Parse HTML */
+.es-modes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.es-table code{overflow-wrap:anywhere}
+/* GitHub to jsDelivr */
+.gc-in{min-height:120px}
+.gc-card{margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+.gc-h{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin-bottom:6px}.gc-h span{font-size:.82rem;color:var(--text3)}
+.gc-rows{display:grid;gap:6px}.gc-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 10px;padding:6px 0;border-top:1px dashed var(--border)}
+.gc-l{grid-column:1/-1;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)}
+.gc-rows code{overflow-wrap:anywhere;font-size:.8rem}.gc-note{margin-top:8px}
+.gc-table code{overflow-wrap:anywhere}
+/* Meta tag checker */
+.mc-grid{display:grid;gap:16px}.mc-grid>*,.mc-two>*{min-width:0}@media(min-width:900px){.mc-grid{grid-template-columns:1fr 1fr}}
+.mc-two{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.mc-count{text-align:right}.mc-over{color:var(--hot)}
+.mc-preview{margin:10px 0;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:#fff;color:#202124;font-family:arial,sans-serif}
+.mc-mobile{max-width:360px}.mc-desktop{max-width:600px}
+.mc-site{display:flex;align-items:center;gap:10px;margin-bottom:6px}.mc-site b{display:block;font-size:14px;font-weight:400;color:#202124}.mc-site small{display:block;font-size:12px;color:#4d5156;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
+.mc-fav{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#f1f3f4;border:1px solid #dadce0;font-size:13px;font-weight:700;color:#1a0dab;flex-shrink:0}
+.mc-t{margin:0 0 4px;color:#1a0dab;font-size:20px;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.mc-desktop .mc-t{white-space:nowrap;text-overflow:ellipsis;display:block}
+.mc-d{margin:0;color:#4d5156;font-size:14px;line-height:1.58;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.mc-desktop .mc-d{-webkit-line-clamp:2}
+.mc-checks{display:grid;gap:4px;margin:8px 0}.mc-checks li{display:grid;grid-template-columns:22px 1fr;gap:0 8px;padding:6px 10px;border-radius:8px;font-size:.88rem}
+.mc-checks li>span:first-child{grid-row:1/3;font-weight:800;text-align:center}.mc-checks small{grid-column:2;color:var(--text2);overflow-wrap:anywhere}
+.mc-pass{background:var(--new-bg)}.mc-pass>span:first-child,td.mc-pass{color:var(--new)}.mc-warn{background:var(--c-content-bg)}.mc-warn>span:first-child,td.mc-warn{color:var(--c-content)}
+.mc-fail{background:var(--hot-bg)}.mc-fail>span:first-child,td.mc-fail{color:var(--hot)}.mc-info{background:var(--bg2)}td.mc-pass,td.mc-warn,td.mc-fail,td.mc-info{background:none;font-weight:700}
+.mc-social{margin-top:10px;max-width:420px;border:1px solid var(--border2);border-radius:12px;overflow:hidden;background:var(--surface)}.mc-social img,.mc-noimg{display:block;width:100%;aspect-ratio:1.91;object-fit:cover;background:var(--bg2)}
+.mc-noimg{display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:.85rem}.mc-social p{padding:10px 12px}.mc-social small{display:block;color:var(--text3);text-transform:uppercase;font-size:.7rem}.mc-social b{display:block}.mc-social span{display:block;font-size:.85rem;color:var(--text2)}
+.mc-html{min-height:140px}
+/* UTM builder */
+.ut-presets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.ut-grid{display:grid;grid-template-columns:1fr;gap:0 12px}@media(min-width:620px){.ut-grid{grid-template-columns:1fr 1fr}}.ut-grid>*{min-width:0}
+.ut-link{min-height:80px;font-size:.82rem}
+.ut-chrow{margin:8px 0}.ut-ch{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--new-bg);color:var(--new)}.ut-ch.ut-bad{background:var(--hot-bg);color:var(--hot)}
+.ut-warn{margin:0 0 10px;padding:8px 12px 8px 28px;border-radius:10px;background:var(--c-content-bg);color:var(--c-content);font-size:.88rem;list-style:disc}
+.ut-grid2{display:grid;gap:16px}@media(min-width:820px){.ut-grid2{grid-template-columns:auto 1fr}}
+.ut-recent{display:grid;gap:6px}.ut-recent li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}.ut-recent code{overflow-wrap:anywhere;font-size:.78rem}
 </style>
 
 </head>
@@ -796,9 +860,9 @@ textarea.wc-text{min-height:260px}
       <a href="/#tools" class="menu-search" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cari alat, cth. zakat, KWSP, cukai</a>
       <p class="menu-h">Kategori</p>
       <ul class="menu-cats">
-        <li><a href="/?cat=dev#tools" data-filter="dev"><span class="mi t-dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/></svg></span>Pembangun<small>9</small></a></li>
-        <li><a href="/?cat=seo#tools" data-filter="seo"><span class="mi t-seo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/></svg></span>SEO<small>4</small></a></li>
-        <li><a href="/?cat=content#tools" data-filter="content"><span class="mi t-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></span>Kandungan<small>6</small></a></li>
+        <li><a href="/?cat=dev#tools" data-filter="dev"><span class="mi t-dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"/></svg></span>Pembangun<small>8</small></a></li>
+        <li><a href="/?cat=seo#tools" data-filter="seo"><span class="mi t-seo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M8.5 11.5l2 2 3-4"/></svg></span>SEO<small>3</small></a></li>
+        <li><a href="/?cat=content#tools" data-filter="content"><span class="mi t-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 9h14M5 14h9M5 19h6"/></svg></span>Kandungan<small>5</small></a></li>
         <li><a href="/?cat=design#tools" data-filter="design"><span class="mi t-design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/></svg></span>Reka bentuk<small>6</small></a></li>
         <li><a href="/?cat=ai#tools" data-filter="ai"><span class="mi t-ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M6 18l2.5-2.5m7-7L18 6"/></svg></span>AI<small>7</small></a></li>
         <li><a href="/?cat=util#tools" data-filter="util"><span class="mi t-util"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>Utiliti<small>8</small></a></li>
@@ -808,10 +872,10 @@ textarea.wc-text{min-height:260px}
       <ul class="menu-pop">
         <li><a href="/javascript-minifier/">JavaScript Minifier &amp; Obfuscator</a></li>
         <li><a href="/css-minifier/">CSS Minifier</a></li>
-        <li><a href="https://www.thebukitbesi.com/p/html-table-generator.html">HTML Table Generator</a></li>
-        <li><a href="https://www.thebukitbesi.com/p/parser-unparser.html">Parser &amp; Unparser Tool</a></li>
+        <li><a href="/html-table-generator/">HTML Table Generator</a></li>
         <li><a href="/word-counter/">Word Counter</a></li>
         <li><a href="/image-converter/">Image Converter (WebP, JPG, PNG)</a></li>
+        <li><a href="/ai-prompt-generator/">AI Prompt Generator (Image &amp; Video)</a></li>
       </ul>
       <ul class="menu-links">
         <li><a href="/">Semua alat</a></li>
@@ -1009,20 +1073,20 @@ textarea.wc-text{min-height:260px}
         <ul class="flist">
           <li><a href="/javascript-minifier/"><i class="dot t-dev" aria-hidden="true"></i>JavaScript Minifier &amp; Obfuscator</a></li>
           <li><a href="/css-minifier/"><i class="dot t-dev" aria-hidden="true"></i>CSS Minifier</a></li>
-          <li><a href="https://www.thebukitbesi.com/p/html-table-generator.html"><i class="dot t-dev" aria-hidden="true"></i>HTML Table Generator</a></li>
-          <li><a href="https://www.thebukitbesi.com/p/parser-unparser.html"><i class="dot t-dev" aria-hidden="true"></i>Parser &amp; Unparser Tool</a></li>
+          <li><a href="/html-table-generator/"><i class="dot t-dev" aria-hidden="true"></i>HTML Table Generator</a></li>
           <li><a href="/word-counter/"><i class="dot t-content" aria-hidden="true"></i>Word Counter</a></li>
           <li><a href="/image-converter/"><i class="dot t-design" aria-hidden="true"></i>Image Converter (WebP, JPG, PNG)</a></li>
           <li><a href="/ai-prompt-generator/"><i class="dot t-ai" aria-hidden="true"></i>AI Prompt Generator (Image &amp; Video)</a></li>
           <li><a href="/unused-css-remover/"><i class="dot t-dev" aria-hidden="true"></i>Unused CSS Remover</a></li>
+          <li><a href="/html-beautifier/"><i class="dot t-dev" aria-hidden="true"></i>HTML Beautifier &amp; Minifier</a></li>
         </ul>
       </nav>
       <nav class="fbox" aria-labelledby="ft-cats">
         <h2 id="ft-cats">Kategori</h2>
         <ul class="flist">
-          <li><a href="/?cat=dev#tools" data-filter="dev"><i class="dot t-dev" aria-hidden="true"></i>Alat Pembangun<small>9</small></a></li>
-          <li><a href="/?cat=seo#tools" data-filter="seo"><i class="dot t-seo" aria-hidden="true"></i>Alat SEO<small>4</small></a></li>
-          <li><a href="/?cat=content#tools" data-filter="content"><i class="dot t-content" aria-hidden="true"></i>Alat Kandungan<small>6</small></a></li>
+          <li><a href="/?cat=dev#tools" data-filter="dev"><i class="dot t-dev" aria-hidden="true"></i>Alat Pembangun<small>8</small></a></li>
+          <li><a href="/?cat=seo#tools" data-filter="seo"><i class="dot t-seo" aria-hidden="true"></i>Alat SEO<small>3</small></a></li>
+          <li><a href="/?cat=content#tools" data-filter="content"><i class="dot t-content" aria-hidden="true"></i>Alat Kandungan<small>5</small></a></li>
           <li><a href="/?cat=design#tools" data-filter="design"><i class="dot t-design" aria-hidden="true"></i>Alat Reka Bentuk<small>6</small></a></li>
           <li><a href="/?cat=ai#tools" data-filter="ai"><i class="dot t-ai" aria-hidden="true"></i>Alat AI<small>7</small></a></li>
           <li><a href="/?cat=util#tools" data-filter="util"><i class="dot t-util" aria-hidden="true"></i>Utiliti<small>8</small></a></li>

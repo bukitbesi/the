@@ -177,6 +177,13 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/word-counter/](https://tool.thebukitbesi.com/word-counter/) | English | word counter, character counter, keyword density checker, reading time calculator, flesch readability |
 | [/json-formatter/](https://tool.thebukitbesi.com/json-formatter/) | English | json formatter, json validator, json beautifier, fix json online, json to csv |
 | [/case-converter/](https://tool.thebukitbesi.com/case-converter/) | English | case converter, title case converter, sentence case, uppercase to lowercase, camelcase converter |
+| [/find-and-replace/](https://tool.thebukitbesi.com/find-and-replace/) | English | find and replace online, remove line breaks, remove special characters, regex replace, text cleaner |
+| [/text-to-html/](https://tool.thebukitbesi.com/text-to-html/) | English | text to html converter, convert text to html, markdown to html, html to text |
+| [/html-table-generator/](https://tool.thebukitbesi.com/html-table-generator/) | English | html table generator, excel to html table, responsive table html, markdown table generator |
+| [/parse-html/](https://tool.thebukitbesi.com/parse-html/) | English | parse html blogger, html escape, html entity encoder decoder, url encode decode, base64 decode |
+| [/github-to-jsdelivr/](https://tool.thebukitbesi.com/github-to-jsdelivr/) | English | github to jsdelivr, github cdn, raw github to cdn, jsdelivr link converter |
+| [/meta-tag-checker/](https://tool.thebukitbesi.com/meta-tag-checker/) | English | meta tag checker, serp preview, title tag length checker, meta description checker, open graph checker |
+| [/utm-builder/](https://tool.thebukitbesi.com/utm-builder/) | English | utm builder, campaign url builder, ga4 utm, utm link generator, utm qr code |
 | [/color-contrast-checker/](https://tool.thebukitbesi.com/color-contrast-checker/) | English | color contrast checker, wcag contrast checker, contrast ratio, accessible colors, color blind simulator |
 | [/whatsapp-link-generator/](https://tool.thebukitbesi.com/whatsapp-link-generator/) | English | whatsapp link generator, wa.me link, whatsapp qr code, whatsapp button for website, link whatsapp |
 | [/privacy-policy-generator/](https://tool.thebukitbesi.com/privacy-policy-generator/) | English (output EN + BM) | privacy policy generator, privacy policy malaysia, pdpa privacy notice, adsense privacy policy, dasar privasi |
@@ -496,4 +503,18 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 
 **Upkeep (Privacy policy generator):** `privacy-core.js` holds the English and Malay policy text (keep the two `sections` lists in step; a test checks the ids match). Recheck yearly: the AdSense required-content page, the Google Analytics privacy disclosures policy, and the PDPA guidelines the Commissioner issues under the 2024 amendments; then `FACTS.verified`.
 
-**Upkeep (Schema markup generator):** `schema-core.js` `TYPES` lists Google's required (`req`) and recommended (`rec`) properties per type from Google Search Central; recheck the structured data gallery and the documentation updates log every six months (Google retired FAQ rich results on 7 May 2026 and seven more types in 2025), then `FACTS.verified`. Replaces two Blogger pages; the video one redirects to `#type=video`.
+**Upkeep (Schema markup generator):** `schema-core.js` `TYPES` lists Google's required (`req`) and recommended (`rec`) properties per type from Google Search Central; recheck the structured data gallery and the documentation updates log every six months (Google retired FAQ rich results on 7 May 2026 and seven more types in 2025), then `FACTS.verified`. Replaces three Blogger pages; the video one redirects to `#type=video` and the FAQ formatter to `#type=faq` (FAQ type also outputs the matching HTML accordion).
+
+**Upkeep (Find and replace):** `textclean-core.js` has no yearly figures. The regex recipes and clean-up examples on the page are generated from the core, so a change in behaviour shows up there. Replaces two Blogger pages (find-replace-text, remove-characters-from-text). English only by design.
+
+**Upkeep (Text to HTML):** `texthtml-core.js` reuses `notepad-core.js` for Markdown, so Markdown changes in the notepad show up here too. No yearly figures. English only by design.
+
+**Upkeep (HTML table generator):** `table-core.js` has no yearly figures; the five styles live in `THEMES`. English only by design.
+
+**Upkeep (Parse HTML):** `escape-core.js` has no yearly figures; tests check every mode round-trips. Replaces two Blogger pages (parse-html to `#mode=html`, parser-unparser to `#mode=js`). English only by design.
+
+**Upkeep (GitHub to jsDelivr):** `ghcdn-core.js` `FACTS` holds jsDelivr's cache times (branches 12 h, aliases 7 days) and the 20 MB GitHub file limit from jsDelivr's documentation; recheck it and the acceptable use policy yearly, then `FACTS.verified`.
+
+**Upkeep (Meta tag checker):** `metacheck-core.js` `FACTS` holds the common-practice title (30–60) and description (70–160) ranges; Google itself sets no limit. Recheck Google's title-link and snippet docs yearly and update the SERP preview CSS if Google's result layout changes noticeably.
+
+**Upkeep (UTM builder):** `utm-core.js` follows Google Analytics Help (URL builders, Default channel group). Google updates the channel rules and source lists; recheck both pages every six months (the AI Assistant channel was added in 2025-26), then `FACTS.verified`. Replaces the Blogger link generator; its base64 "protector" was dropped because encoding protects nothing.

@@ -1,0 +1,148 @@
+<!--page
+{
+  "path": "/utm-builder/",
+  "lang": "en",
+  "cat": "util",
+  "title": "UTM Builder: Campaign URL Generator for Google Analytics 4",
+  "description": "Free UTM builder for GA4: tag links with utm_source, medium and campaign, see which GA4 channel the traffic will land in, and get a QR code.",
+  "llms": "Free UTM link builder for Google Analytics 4. Adds utm_source, utm_medium and utm_campaign (which Google says to always use) plus optional utm_id, utm_term, utm_content, utm_source_platform, utm_creative_format and utm_marketing_tactic (the last two are not currently reported in GA4), keeping the page's existing parameters and #fragment and replacing old utm values. Lowercases values and replaces spaces by default because GA4 treats Facebook and facebook as different values. Predicts the GA4 default channel group using Google's published rules for manual traffic, for example medium email gives Email, medium social or a social source gives Organic Social, a social source with a medium matching cpc, ppc, retargeting or paid gives Paid Social, medium affiliate gives Affiliates and medium sms gives SMS; values that match no rule fall into Unassigned. Warns against medium organic or referral and links that already carry a Google Ads gclid. Presets for Instagram, Facebook, WhatsApp, email, TikTok, YouTube, affiliates and SMS; QR code as PNG or SVG; recent links kept in the browser.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": "https://www.thebukitbesi.com/p/secure-link-generator.html",
+  "render": "utm",
+  "shareTitle": "Share this UTM builder",
+  "scripts": ["/assets/js/utm-builder.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["UTM Builder", null]],
+  "about": ["UTM parameters", "Google Analytics", "Web analytics", "Digital marketing"],
+  "app": {
+    "name": "UTM Builder",
+    "category": "BusinessApplication",
+    "features": ["All GA4 utm parameters", "Keeps existing parameters and #fragment", "Lowercase and space cleanup", "Predicts the GA4 default channel group", "Warnings for organic, referral, gclid and Unassigned", "Presets for social, email, affiliates and SMS", "QR code as PNG or SVG", "Recent links saved in your browser"]
+  },
+  "citations": [
+    ["Google Analytics Help: URL builders, collect campaign data with custom URLs", "https://support.google.com/analytics/answer/10917952?hl=en"],
+    ["Google Analytics Help: Default channel group", "https://support.google.com/analytics/answer/9756891?hl=en"],
+    ["Google Ads Help: About auto-tagging", "https://support.google.com/google-ads/answer/3095550?hl=en"]
+  ],
+  "faq": [
+    { "q": "What is a UTM link?", "a": "A UTM link is a normal web address with tags added after a ? that tell Google Analytics where a visit came from, for example {{UT_EXAMPLE}}. The page opens as usual; Analytics reads utm_source, utm_medium and utm_campaign and shows the visit under that source and campaign in the Traffic acquisition report." },
+    { "q": "Which UTM parameters are required?", "a": "Google says to always use utm_source (where the click comes from, such as facebook or newsletter), utm_medium (the type of link, such as social, email or cpc) and utm_campaign (your campaign name). utm_id, utm_term and utm_content are optional; utm_creative_format and utm_marketing_tactic are accepted but not currently reported in Google Analytics." },
+    { "q": "Which channel will my traffic appear in?", "a": "GA4 sorts tagged visits into default channels using the medium and source. medium email becomes Email, medium social (or a source like facebook or instagram) becomes Organic Social, a social source with medium cpc, ppc or paid_social becomes Paid Social, medium affiliate becomes Affiliates and medium sms becomes SMS. The builder shows the channel as you type. {{UT_UNASSIGNED}}" },
+    { "q": "Should UTM values be lowercase?", "a": "Yes. GA4 treats Facebook, facebook and FACEBOOK as three different sources, which splits your reports. The builder lowercases values and turns spaces into underscores by default. Pick one naming style and use it for every campaign." },
+    { "q": "How do I track a QR code on a poster or flyer?", "a": "Build the link with source set to the place (poster_dungun, flyer_bazaar), a medium and a campaign, then download the QR code from this page. GA4 has no offline channel, so a medium like qr or offline lands in Unassigned; either accept that and filter by source, or create a custom channel group in GA4 for medium qr." },
+    { "q": "Do I need UTM tags for Google Ads?", "a": "Usually not. Google Ads auto-tagging adds a gclid to each click and sends campaign data to a linked GA4 property automatically. Use UTM tags for everything else: Facebook and Instagram, WhatsApp and Telegram messages, emails, affiliates, influencers, QR codes and SMS." },
+    { "q": "Should I use UTM tags on links inside my own website?", "a": "No. A UTM link on your own site starts a new session and overwrites the real source of the visit, so a visitor from Google search would suddenly look like a campaign visit. Use UTM tags only on links that bring people to your site from somewhere else." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">UTM Builder</li></ol></nav>
+  <h1>UTM Builder for Google Analytics 4</h1>
+  <p class="answer">Add <strong>utm_source, utm_medium and utm_campaign</strong> to any link and this builder shows <strong>which GA4 channel the visits will land in</strong>, using Google's own channel rules, so your Facebook, WhatsApp and email traffic never ends up in "Unassigned". Copy the link or download it as a QR code.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{UT_VERIFIED}}</span><a href="#channels">GA4 channel rules</a></p>
+
+  <form class="box ut-tool" id="utForm" novalidate aria-labelledby="ut-h">
+    <h2 id="ut-h" class="sr-only">Build a UTM link</h2>
+    <div class="field"><label for="utUrl">Page address</label><input class="input" id="utUrl" type="url" inputmode="url" value="{{UT_URL}}" autocomplete="off" aria-describedby="utErr"></div>
+    <p class="error" id="utErr" role="alert" hidden></p>
+    <div class="ut-presets" role="group" aria-label="Presets">{{UT_PRESETS}}</div>
+    <div class="ut-grid">
+      <div class="field"><label for="utSource">Source <span class="sc-req">required</span></label><input class="input" id="utSource" name="source" value="{{UT_SOURCE}}" list="utSources" autocomplete="off" placeholder="facebook, newsletter"></div>
+      <div class="field"><label for="utMedium">Medium <span class="sc-req">required</span></label><input class="input" id="utMedium" name="medium" value="{{UT_MEDIUM}}" list="utMediums" autocomplete="off" placeholder="social, email, cpc"></div>
+      <div class="field"><label for="utCampaign">Campaign <span class="sc-req">required</span></label><input class="input" id="utCampaign" name="campaign" value="{{UT_CAMPAIGN}}" autocomplete="off" placeholder="raya_sale_2026"></div>
+      <div class="field"><label for="utContent">Content</label><input class="input" id="utContent" name="content" autocomplete="off" placeholder="top_button"></div>
+    </div>
+    <datalist id="utSources"><option value="facebook"><option value="instagram"><option value="whatsapp"><option value="tiktok"><option value="youtube"><option value="newsletter"><option value="google"><option value="telegram"></datalist>
+    <datalist id="utMediums"><option value="social"><option value="paid_social"><option value="email"><option value="cpc"><option value="affiliate"><option value="sms"><option value="video"><option value="display"><option value="referral"></datalist>
+    <details class="ex-set"><summary class="sub-h">More parameters and options</summary>
+      <div class="ut-grid">
+        <div class="field"><label for="utTerm">Term (paid keyword)</label><input class="input" id="utTerm" name="term" autocomplete="off"></div>
+        <div class="field"><label for="utId">Campaign ID</label><input class="input" id="utId" name="id" autocomplete="off"></div>
+        <div class="field"><label for="utPlatform">Source platform</label><input class="input" id="utPlatform" name="platform" autocomplete="off"></div>
+        <div class="field"><label for="utFormat">Creative format</label><input class="input" id="utFormat" name="format" autocomplete="off"></div>
+        <div class="field"><label for="utTactic">Marketing tactic</label><input class="input" id="utTactic" name="tactic" autocomplete="off"></div>
+        <div class="field"><label for="utSpaces">Replace spaces with</label><select class="input" id="utSpaces" name="spaces"><option value="_" selected>_ underscore</option><option value="-">- hyphen</option><option value="">%20 (keep spaces)</option></select></div>
+      </div>
+      <label class="check"><input type="checkbox" name="lower" checked> <span>Lowercase all values (recommended)</span></label>
+    </details>
+    <div class="field ut-out"><label for="utOut">Your campaign link</label><textarea class="code ut-link" id="utOut" readonly rows="3" spellcheck="false">{{UT_OUT}}</textarea></div>
+    <p class="ut-chrow">GA4 channel: <strong class="ut-ch" id="utChannel" aria-live="polite">{{UT_CHANNEL}}</strong></p>
+    <ul class="ut-warn" id="utWarn" hidden></ul>
+    <div class="tool-actions ut-row"><button type="button" class="btn sm" id="utCopy">Copy link</button><a class="btn ghost sm" id="utOpen" href="{{UT_OUT}}" rel="noopener">Open link</a></div>
+    <div class="ut-grid2">
+      <section class="ex-set" aria-labelledby="utQrH"><h3 class="sub-h" id="utQrH">QR code</h3><div class="wa-qr" id="utQr">{{UT_QR}}</div>
+        <div class="tool-actions ut-row"><button type="button" class="btn ghost sm" id="utPng">Download PNG</button><button type="button" class="btn ghost sm" id="utSvg">Download SVG</button></div></section>
+      <section class="ex-set" id="utRecentWrap" aria-labelledby="utRecH" hidden><h3 class="sub-h" id="utRecH">Recent links</h3><ul class="ut-recent" id="utRecent"></ul>
+        <div class="tool-actions ut-row"><button type="button" class="btn ghost sm" id="utClearRecent">Clear recent</button></div></section>
+    </div>
+    <p class="sr-only" id="utLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to build a UTM link</h2>
+  <ol>
+    <li><strong>Paste the page address</strong> people should land on. Pasting a link that already has UTM tags fills the fields.</li>
+    <li><strong>Pick a preset or type a source, medium and campaign.</strong> Keep names short, lowercase and consistent.</li>
+    <li><strong>Check the GA4 channel.</strong> If it says Unassigned, change the medium.</li>
+    <li><strong>Copy the link</strong> into your post, bio, email or WhatsApp message, or download the QR code for print.</li>
+    <li><strong>See the results</strong> in GA4 under Reports, Acquisition, Traffic acquisition, by Session source / medium or Session campaign.</li>
+  </ol>
+
+  <h2 id="channels">How GA4 sorts UTM traffic into channels</h2>
+  <p>Google's default channel group checks the medium and source in a fixed order. These results come from the same rules the builder uses:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ch-cap">
+    <table class="data text"><caption id="ch-cap">Source and medium, and the GA4 channel they land in</caption>
+      <thead><tr><th scope="col">utm_source</th><th scope="col">utm_medium</th><th scope="col">GA4 channel</th></tr></thead>
+      <tbody>
+{{UT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>The source lists for social, search, video and shopping sites come from a spreadsheet Google maintains; this builder includes the best-known ones (Facebook, Instagram, LinkedIn, X, Google, Bing, YouTube, Amazon). For other sources, a clear medium such as social or email decides the channel.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="params">UTM parameters</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="p-cap">
+    <table class="data text"><caption id="p-cap">GA4 campaign parameters (Google Analytics Help)</caption>
+      <thead><tr><th scope="col">Parameter</th><th scope="col">Use</th><th scope="col">Example</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>utm_source</code> (always)</th><td>Where the click comes from</td><td>facebook, newsletter</td></tr>
+        <tr><th scope="row"><code>utm_medium</code> (always)</th><td>Type of link</td><td>social, email, cpc</td></tr>
+        <tr><th scope="row"><code>utm_campaign</code> (always)</th><td>Product, promotion or slogan</td><td>raya_sale_2026</td></tr>
+        <tr><th scope="row"><code>utm_id</code></th><td>Campaign ID for data import</td><td>rs2026</td></tr>
+        <tr><th scope="row"><code>utm_term</code></th><td>Paid keyword</td><td>kalkulator_zakat</td></tr>
+        <tr><th scope="row"><code>utm_content</code></th><td>Which link or creative was clicked</td><td>top_button</td></tr>
+        <tr><th scope="row"><code>utm_source_platform</code></th><td>Platform that sent the traffic</td><td>Search Ads 360</td></tr>
+        <tr><th scope="row"><code>utm_creative_format</code>, <code>utm_marketing_tactic</code></th><td>Accepted, not currently reported in GA4</td><td>video, remarketing</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Note:</strong> UTM tags are visible to anyone who sees the link and do not hide or protect it. Never put personal data such as names, emails or phone numbers in UTM values.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://support.google.com/analytics/answer/10917952?hl=en" rel="noopener">Google Analytics Help: URL builders</a></li>
+    <li><a href="https://support.google.com/analytics/answer/9756891?hl=en" rel="noopener">Google Analytics Help: Default channel group</a></li>
+    <li><a href="https://support.google.com/google-ads/answer/3095550?hl=en" rel="noopener">Google Ads Help: auto-tagging</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/whatsapp-link-generator/">WhatsApp Link Generator<small>wa.me link and QR code</small></a>
+    <a href="/meta-tag-checker/">Meta Tag Checker<small>Preview how your page looks</small></a>
+    <a href="/parse-html/">Parse HTML<small>URL encode and decode</small></a>
+  </div>
+</section>
+</div>

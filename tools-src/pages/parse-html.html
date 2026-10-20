@@ -1,0 +1,134 @@
+<!--page
+{
+  "path": "/parse-html/",
+  "lang": "en",
+  "cat": "dev",
+  "title": "Parse HTML for Blogger: HTML Escape, URL and Base64 Encode Decode",
+  "description": "Free parse HTML tool: escape HTML to show code in Blogger posts, and encode or decode HTML entities, URLs, Base64, JavaScript strings and Unicode escapes.",
+  "llms": "Free parse HTML and encoder/decoder that runs in the browser. HTML entities: escape & < > \" and ' so code shows as text in a Blogger or WordPress post (optionally as a ready <pre><code> block, and optionally every non-ASCII character as a numeric entity), or decode named and numeric entities (&amp;, &#8217;, &#x1F1F2;) back to text. URL: encodeURIComponent for query values or encodeURI for whole addresses, and decode with + as space. Base64: UTF-8 safe, standard or URL-safe (- and _, no padding). JavaScript/JSON string: escape quotes, backslashes, line breaks and </script>, or unescape \\n, \\t, \\x41, \\u0041 and \\u{1F600}. Unicode: write non-ASCII as \\u escapes or decode \\u, \\u{}, &#x; and U+ notation. Every mode round-trips; errors name the bad character.",
+  "datePublished": "2026-10-19",
+  "dateModified": "2026-10-19",
+  "bloggerFrom": [["https://www.thebukitbesi.com/p/parse-html.html", "#mode=html&dir=encode"], ["https://www.thebukitbesi.com/p/parser-unparser.html", "#mode=js&dir=encode"]],
+  "render": "escape",
+  "shareTitle": "Share this parse HTML tool",
+  "scripts": ["/assets/js/parse-html.js"],
+  "breadcrumb": [["Tools", "/"], ["Developer Tools", "/?cat=dev#tools"], ["Parse HTML", null]],
+  "about": ["Character encodings in HTML", "Percent-encoding", "Base64", "Escape character"],
+  "app": {
+    "name": "Parse HTML and Encoder/Decoder",
+    "category": "DeveloperApplication",
+    "features": ["Escape HTML to show code in Blogger posts", "Ready <pre><code> block", "Decode HTML entities", "URL encode and decode", "Base64 encode and decode (UTF-8, URL-safe)", "JavaScript and JSON string escape and unescape", "Unicode \\u escapes", "Swap output to input; runs in the browser"]
+  },
+  "citations": [
+    ["WHATWG HTML Standard: Named character references", "https://html.spec.whatwg.org/multipage/named-characters.html"],
+    ["IETF RFC 3986: URI Generic Syntax (percent-encoding)", "https://www.rfc-editor.org/rfc/rfc3986"],
+    ["IETF RFC 4648: Base16, Base32 and Base64 encodings", "https://www.rfc-editor.org/rfc/rfc4648"],
+    ["MDN: encodeURIComponent()", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"]
+  ],
+  "faq": [
+    { "q": "What does parse HTML mean in Blogger?", "a": "\"Parsing\" HTML for Blogger means escaping it: < becomes &lt;, > becomes &gt;, & becomes &amp; and quotes become &quot; and &#39;. The browser then shows the code as text instead of running it, which is what you need to display HTML, CSS or JavaScript examples in a post. {{ES_EXAMPLE}}" },
+    { "q": "How do I show code in a Blogger post?", "a": "Paste the code, keep HTML entities and Encode selected, tick Wrap in a code block, and copy the result. In the Blogger post editor, switch to HTML view and paste it where the code should appear. The <pre> keeps spaces and line breaks; the <code> marks it as code for screen readers and search engines." },
+    { "q": "Do I need to parse AdSense code before adding it to Blogger?", "a": "Not if you add it the recommended way: in Layout, Add a Gadget, HTML/JavaScript, paste the AdSense code unchanged. Only code pasted into the theme XML (Theme, Edit HTML) must be valid XML, where a bare & inside a script breaks saving; write it as &amp; there. Never escape the < and > of a script you want to run, or it will show as text." },
+    { "q": "What is the difference between encodeURI and encodeURIComponent?", "a": "encodeURIComponent encodes everything that has a meaning in a URL, including / ? & = and #, so use it for one value such as a search term or a parameter. encodeURI leaves those characters alone, so use it for a whole address that only needs spaces and non-ASCII letters fixed. Tick Whole URL to use encodeURI." },
+    { "q": "Is Base64 encryption?", "a": "No. Base64 only rewrites bytes with 64 safe characters (A–Z, a–z, 0–9, + and /) so binary data can travel in text such as email, JSON or data URLs. Anyone can decode it instantly, so never use it to hide passwords or links. It also makes data about 33% larger." },
+    { "q": "How do I escape a string for JavaScript or JSON?", "a": "Choose JavaScript / JSON string and Encode. Quotes become \\\", backslashes \\\\, line breaks \\n and tabs \\t, and </script> becomes <\\/script> so it cannot end a script block early. Paste the result between double quotes. Decode does the reverse and also understands \\x41, \\u0041 and \\u{1F600}." },
+    { "q": "Is my code uploaded?", "a": "No. Every conversion runs in your browser with JavaScript, so tokens, keys and private code never leave your device. Only your last input is kept in this browser's storage." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=dev#tools">Developer Tools</a></li><li aria-current="page">Parse HTML</li></ol></nav>
+  <h1>Parse HTML: Escape, Encode and Decode</h1>
+  <p class="answer">Paste code to <strong>parse (escape) HTML so it shows as text in a Blogger or WordPress post</strong>: &lt; becomes &amp;lt;, &gt; becomes &amp;gt; and &amp; becomes &amp;amp;. The same box <strong>encodes and decodes URLs, Base64, JavaScript strings and Unicode escapes</strong>, all in your browser.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules verified {{ES_VERIFIED}}</span><a href="#modes">What each mode does</a></p>
+
+  <form class="box code-tool" id="esForm" novalidate aria-labelledby="es-h">
+    <h2 id="es-h" class="sr-only">Encode or decode</h2>
+    <div class="es-modes" role="radiogroup" aria-label="Format">{{ES_MODES}}</div>
+    <div class="code-opts">
+      <fieldset class="seg" aria-label="Direction"><label><input type="radio" name="dir" value="encode" checked> Encode</label><label><input type="radio" name="dir" value="decode"> Decode</label></fieldset>
+      <label class="check" data-opt="block" data-dir="encode"><input type="checkbox" name="block"> <span>Wrap in a code block</span></label>
+      <label class="check" data-opt="quotes" data-dir="encode"><input type="checkbox" name="quotes" checked> <span>Escape quotes</span></label>
+      <label class="check" data-opt="nonAscii" data-dir="encode"><input type="checkbox" name="nonAscii"> <span>Non-ASCII as &amp;#…;</span></label>
+      <label class="check" data-opt="whole" data-dir="encode" hidden><input type="checkbox" name="whole"> <span>Whole URL (encodeURI)</span></label>
+      <label class="check" data-opt="plus" data-dir="decode" hidden><input type="checkbox" name="plus" checked> <span>+ means space</span></label>
+      <label class="check" data-opt="urlSafe" data-dir="encode" hidden><input type="checkbox" name="urlSafe"> <span>URL-safe</span></label>
+      <label class="check" data-opt="single" data-dir="encode" hidden><input type="checkbox" name="single"> <span>For single quotes</span></label>
+    </div>
+    <div class="code-panes">
+      <div class="field">
+        <label for="esIn">Input</label>
+        <textarea class="code" id="esIn" spellcheck="false" autocomplete="off" autocapitalize="off">{{ES_IN}}</textarea>
+        <div class="tool-actions es-row"><button type="submit" class="btn sm" id="esGo">Encode HTML entities</button><button type="button" class="btn ghost sm" id="esClear">Clear</button></div>
+      </div>
+      <div class="field">
+        <label for="esOut">Output</label>
+        <textarea class="code" id="esOut" readonly spellcheck="false" aria-describedby="esStats">{{ES_OUT}}</textarea>
+        <p class="code-stats" id="esStats" aria-live="polite">{{ES_STATS}}</p>
+        <p class="error" id="esErr" role="alert" hidden></p>
+        <div class="tool-actions es-row"><button type="button" class="btn sm" id="esCopy">Copy</button><button type="button" class="btn ghost sm" id="esSwap">Use as input ⇅</button></div>
+      </div>
+    </div>
+    <p class="sr-only" id="esLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to parse HTML for a Blogger post</h2>
+  <ol>
+    <li><strong>Paste the code</strong> you want to show (HTML, CSS, JavaScript or an AdSense snippet).</li>
+    <li><strong>Keep HTML entities and Encode</strong>, and tick Wrap in a code block.</li>
+    <li><strong>Copy the output.</strong></li>
+    <li><strong>In Blogger, open the post in HTML view</strong> and paste where the code should appear.</li>
+    <li><strong>Preview the post:</strong> the code shows as text, with spaces and line breaks kept.</li>
+  </ol>
+
+  <h2 id="modes">What each mode does</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="modes-cap">
+    <table class="data text es-table"><caption id="modes-cap">The same input in each format, encoded by the tool</caption>
+      <thead><tr><th scope="col">Mode</th><th scope="col">Encoded</th><th scope="col">Use it for</th></tr></thead>
+      <tbody>
+{{ES_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="entities">Common HTML entities</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ent-cap">
+    <table class="data text"><caption id="ent-cap">Characters and their entities</caption>
+      <thead><tr><th scope="col">Character</th><th scope="col">Named</th><th scope="col">Numeric</th></tr></thead>
+      <tbody>
+{{ES_ENTITIES}}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><p><strong>Security:</strong> escaping only changes how text is displayed. Base64 and URL encoding hide nothing: anyone can decode them. Never put passwords or private keys in encoded links.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://html.spec.whatwg.org/multipage/named-characters.html" rel="noopener">WHATWG HTML Standard: named character references</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc3986" rel="noopener">IETF RFC 3986: percent-encoding</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc4648" rel="noopener">IETF RFC 4648: Base64</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" rel="noopener">MDN: encodeURIComponent()</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/html-beautifier/">HTML Beautifier and Minifier<small>Format or compress HTML</small></a>
+    <a href="/text-to-html/">Text to HTML Converter<small>Paragraphs, lists and links</small></a>
+    <a href="/json-formatter/">JSON Formatter<small>Validate and escape JSON</small></a>
+  </div>
+</section>
+</div>

@@ -100,6 +100,13 @@ const contrastCore = require('../assets/js/contrast-core.js');
 const waCore = require('../assets/js/wa-core.js');
 const privacyCore = require('../assets/js/privacy-core.js');
 const schemaCore = require('../assets/js/schema-core.js');
+const textCore = require('../assets/js/textclean-core.js');
+const textHtmlCore = require('../assets/js/texthtml-core.js');
+const tableCore = require('../assets/js/table-core.js');
+const escapeCore = require('../assets/js/escape-core.js');
+const ghCore = require('../assets/js/ghcdn-core.js');
+const metaCore = require('../assets/js/metacheck-core.js');
+const utmCore = require('../assets/js/utm-core.js');
 const qrVm = {};
 vm.runInNewContext(fs.readFileSync(path.join(root, waCore.VENDOR.slice(1)), 'utf8'), qrVm);
 const imgCore = require('../assets/js/imgconv-core.js');
@@ -1192,6 +1199,125 @@ function schemaMap() {
     SC_TYPE_BTNS: Object.entries(S.TYPES).map(([k, t]) => `<button type="button" class="btn ghost sm" data-type="${k}" aria-pressed="${k === first}">${esc(t.label)}</button>`).join(''),
     SC_FIELDS: S.views.formHtml(first), SC_CHECKS: S.views.checksHtml(r), SC_OUT: esc(S.scriptTag(r.text)), SC_EXAMPLE: esc(S.scriptTag(vid.text)),
     SC_TYPE_ROWS: Object.entries(PROPS).map(([k, [req, rec]]) => `        <tr><th scope="row">${esc(S.TYPES[k].label)}</th><td>${req.length ? req.map(x => `<code>${esc(x)}</code>`).join(', ') : 'None'}</td><td>${esc(rec) || '–'}</td><td>${esc(S.TYPES[k].rich)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Find and replace: sample, first preview, recipes and clean-up examples all come from the page's core.
+const FR_SAMPLE = 'Harga kopi: RM2.50\nHarga teh: RM2.00\nHarga kopi susu: RM3.20';
+const FR_RECIPES = [
+  ['Swap a date to day/month/year', '(\\d{4})-(\\d{2})-(\\d{2})', '$3/$2/$1', 'Due 2026-10-19'],
+  ['Remove trailing spaces', '[ \\t]+$', '', 'end   '],
+  ['Collapse three or more blank lines', '\\n{3,}', '\\n\\n', 'a\n\n\n\nb'],
+  ['Remove numbering at the start of lines', '^\\d+[.)]\\s*', '', '1. Nasi\n2) Teh'],
+  ['Put each item on its own line', ',\\s*', '\\n', 'kopi, teh, milo'],
+  ['Wrap every number in bold HTML', '\\d+(?:\\.\\d+)?', '<b>$&</b>', 'RM2.50 x 3'],
+  ['Change RM10 to 10 ringgit', 'RM(\\d+)', '$1 ringgit', 'RM10 or RM25']
+];
+const FR_CLEAN = [['linebreaks', 'Line one\nline two.\n\nNew paragraph'], ['spaces', 'Too    many   spaces'], ['dupes', 'apple\nbanana\napple'], ['sort', 'item 10\nitem 9\nItem 1'],
+  ['emoji', 'Terima kasih 🙏🏽 🇲🇾!'], ['html', '<p>Hello <b>world</b></p>'], ['accents', 'Café crème'], ['numbers', 'Bilik 12A, tingkat 3'], ['punctuation', 'Hi! (Ok?) #tag'], ['urls', 'See https://example.com now']];
+function textcleanMap() {
+  const T = textCore, rule = { find: 'kopi', replace: 'coffee' }, h = T.highlight(FR_SAMPLE, rule);
+  const show = s => esc(s).replace(/\n/g, '<span class="fr-nl">↵</span><br>');
+  const lb = T.clean('Baris pertama\nbaris kedua.\n\nPerenggan baru', ['linebreaks']);
+  return {
+    FR_VERIFIED: T.FACTS.verified, FR_TEXT: esc(FR_SAMPLE), FR_RULES: T.views.ruleRow(rule, 0), FR_PREVIEW: h.html, FR_SUMMARY: `${h.count} replacements ready. Press Replace all.`,
+    FR_OPS: T.OPS.map(([k, label]) => `<label class="check"><input type="checkbox" name="op" value="${k}"${['spaces', 'trim'].includes(k) ? ' checked' : ''}> <span>${esc(label)}</span></label>`).join(''),
+    FR_LB_EXAMPLE: `For example "Baris pertama / baris kedua. / (blank line) / Perenggan baru" becomes "${lb.split('\n\n')[0]}" followed by "${lb.split('\n\n')[1]}" as its own paragraph.`,
+    FR_RECIPES: FR_RECIPES.map(([what, find, rep, input]) => {
+      const out = T.replaceAll(input, [{ find, replace: rep, regex: true, multiline: true, escapes: true }]);
+      if (out.errors[0] || !out.counts[0]) throw new Error('find-and-replace recipe failed: ' + what);
+      return `        <tr><th scope="row">${esc(what)}</th><td><code>${esc(find)}</code></td><td><code>${esc(rep) || '(empty)'}</code></td><td><code>${show(input)}</code> → <code>${show(out.text) || '(empty)'}</code></td></tr>`;
+    }).join('\n'),
+    FR_CLEAN_ROWS: FR_CLEAN.map(([k, input]) => `        <tr><th scope="row">${esc(T.OPS.find(o => o[0] === k)[1])}</th><td><code>${show(input)}</code></td><td><code>${show(T.clean(input, [k]))}</code></td></tr>`).join('\n')
+  };
+}
+
+// ---- Text to HTML: sample output and the rules table come from the page's core.
+const TH_SAMPLE = 'Kedai Kopi Bukit Besi\nJalan Besar, Dungun\n\nMenu hari ini:\n\n- Kopi O\n- Teh tarik\n- Roti canai\n\nTempah di https://www.example.com atau e-mel order@example.com. Harga < RM5 & sedap!';
+const TH_RULES = [['Blank line between blocks', 'First paragraph.\n\nSecond paragraph.'], ['Single line break', 'Jalan Besar\n23000 Dungun'], ['Lines starting with -', '- Kopi\n- Teh'],
+  ['Lines starting with numbers', '1. Wash\n2. Steam'], ['Web address and email', 'Visit www.example.com or mail hi@example.com'], ['Special characters', '5 < 10 & "quotes"']];
+function texthtmlMap() {
+  const H = textHtmlCore, out = H.fromText(TH_SAMPLE);
+  const code = s => esc(s).replace(/\n/g, '<br>');
+  return {
+    TH_VERIFIED: H.FACTS.verified, TH_IN: esc(TH_SAMPLE), TH_OUT: esc(out), TH_PREVIEW: out, TH_STATS: `${Array.from(out).length.toLocaleString('en-US')} characters`,
+    TH_RULES: TH_RULES.map(([what, input]) => `        <tr><th scope="row">${esc(what)}<br><code>${code(input)}</code></th><td><code>${code(H.fromText(input))}</code></td></tr>`).join('\n')
+  };
+}
+
+// ---- HTML table generator: grid, preview, code and the styles table come from the page's core.
+const TG_ROWS = [['Drink', 'Size', 'Price'], ['Kopi O', 'Regular', 'RM2.50'], ['Teh tarik', 'Regular', 'RM2.80'], ['Milo ais', 'Large', 'RM4.20']];
+const TG_USE = { clean: 'Blog posts and documentation', striped: 'Long price lists, easy to follow across a row', bordered: 'Data-heavy and printable tables', minimal: 'Simple two- or three-column facts', green: 'Highlighting a comparison or plan table' };
+function tableMap() {
+  const T = tableCore, o = { caption: 'Drink prices' }, html = T.html(TG_ROWS, o);
+  return {
+    TG_VERIFIED: T.FACTS.verified, TG_CAPTION: esc(o.caption), TG_GRID: T.views.gridHtml(TG_ROWS, { header: true }), TG_SIZE: `${TG_ROWS.length} × ${TG_ROWS[0].length}`,
+    TG_THEMES: Object.entries(T.THEMES).map(([k, t]) => `<option value="${k}"${k === 'clean' ? ' selected' : ''}>${t.label}</option>`).join(''),
+    TG_PREVIEW: html, TG_CODE: esc(html), TG_EXAMPLE: esc(T.html(TG_ROWS, { ...o, responsive: false, inline: false }).replace(/^<style>[\s\S]*?<\/style>\n/, '')),
+    TG_STYLE_ROWS: Object.entries(T.THEMES).map(([k, t]) => `        <tr><th scope="row">${t.label}</th><td>${t.head ? `<i class="ct-chip" style="background:${t.head}"></i>${t.head}` : 'No fill'}</td><td>${t.stripe ? 'Striped ' + t.stripe : 'Plain'}</td><td>${TG_USE[k]}</td></tr>`).join('\n')
+  };
+}
+
+// ---- Parse HTML: sample, per-mode examples and the entity table come from the page's core.
+const ES_SAMPLE = '<a href="/menu?item=kopi&size=L">Kopi & teh ☕</a>';
+const ES_USE = { html: 'Showing code in Blogger or WordPress posts, HTML attributes', url: 'Query string values, links with spaces or Malay/Chinese text', base64: 'Data URLs, email attachments, APIs that need text', js: 'Putting text inside a JavaScript or JSON string', unicode: 'Source code and JSON that must stay ASCII' };
+function escapeMap() {
+  const E = escapeCore, out = E.htmlEncode(ES_SAMPLE);
+  const ents = ['<', '>', '&', '"', "'", '\u00A0', '©', '’', '—', '…', '€', '×'];
+  const named = c => Object.entries({ lt: '<', gt: '>', amp: '&', quot: '"', apos: "'", nbsp: '\u00A0', copy: '©', rsquo: '’', mdash: '—', hellip: '…', euro: '€', times: '×' }).find(([, v]) => v === c)[0];
+  return {
+    ES_VERIFIED: E.FACTS.verified, ES_IN: esc(ES_SAMPLE), ES_OUT: esc(out), ES_STATS: `${Array.from(ES_SAMPLE).length} → ${Array.from(out).length} characters`,
+    ES_MODES: Object.entries(E.MODES).map(([k, m]) => `<label class="ic-chip"><input type="radio" name="mode" value="${k}"${k === 'html' ? ' checked' : ''}> ${esc(m.label)}</label>`).join(''),
+    ES_EXAMPLE: `For example ${ES_SAMPLE} becomes ${out}.`,
+    ES_ROWS: Object.entries(E.MODES).map(([k, m]) => `        <tr><th scope="row">${esc(m.label)}</th><td><code>${esc(E.run(k, 'encode', ES_SAMPLE).text)}</code></td><td>${ES_USE[k]}</td></tr>`).join('\n'),
+    ES_ENTITIES: ents.map(c => `        <tr><th scope="row">${c === '\u00A0' ? '(non-breaking space)' : esc(c)}</th><td><code>&amp;${named(c)};</code></td><td><code>&amp;#${c.codePointAt(0)};</code></td></tr>`).join('\n')
+  };
+}
+
+// ---- GitHub to jsDelivr: sample results and the formats table come from the page's core.
+const GC_SAMPLE = ['https://github.com/jquery/jquery/blob/3.6.4/dist/jquery.js', 'https://github.com/bukitbesi/theme/blob/main/css/style.css'];
+const GC_FORMATS = ['https://github.com/user/repo/blob/main/js/app.js', 'https://raw.githubusercontent.com/user/repo/main/js/app.js', 'https://raw.githubusercontent.com/user/repo/refs/heads/main/js/app.js',
+  'https://github.com/user/repo/blob/1.2.0/dist/app.css', 'https://github.com/user/repo/tree/main/fonts', 'https://github.com/user/repo/blob/32b00373b3f42e5cdcb709df53f3b08b7184a944/js/app.js'];
+function ghcdnMap() {
+  const G = ghCore, first = G.convert(GC_SAMPLE[0]);
+  return {
+    GC_VERIFIED: G.FACTS.verified, GC_IN: esc(GC_SAMPLE.join('\n')), GC_OUT: GC_SAMPLE.map((l, i) => G.views.resultHtml(G.convert(l), i)).join(''),
+    GC_FROM: GC_SAMPLE[0], GC_TO: first.cdn, GC_ALIAS_DAYS: G.FACTS.aliasCacheDays, GC_BRANCH_HOURS: G.FACTS.branchCacheHours, GC_MAX_MB: G.FACTS.maxFileMB,
+    GC_ROWS: GC_FORMATS.map(u => { const r = G.convert(u); if (!r.ok) throw new Error('jsDelivr example failed: ' + u); return `        <tr><td><code>${esc(u)}</code></td><td><code>${esc(r.cdn)}</code></td></tr>`; }).join('\n')
+  };
+}
+
+// ---- Meta tag checker: the preview, counts and the sample check table come from the page's core.
+const MC_SAMPLE = { title: 'Kalkulator Zakat Pendapatan 2026: Kira Zakat Gaji Bulanan', description: 'Kira zakat pendapatan 2026 dengan nisab terkini, kaedah tanpa tolakan atau dengan tolakan, dan jumlah potongan gaji bulanan anda.', url: 'https://tool.thebukitbesi.com/kalkulator-zakat-pendapatan/', site: 'The Bukit Besi', keyword: 'zakat pendapatan' };
+const MC_BAD = '<html><head><title>Home</title><meta name="robots" content="noindex"><link rel="canonical" href="/blog/"><meta property="og:title" content="Blog"><meta property="og:image" content="/og.jpg">' +
+  '<script type="application/ld+json">{"@type": "BlogPosting",}</script></head><body><h1>Welcome</h1><h1>Latest posts</h1><img src="a.jpg"><img src="b.jpg" alt="Kopi"></body></html>';
+function metacheckMap() {
+  const M = metaCore, S = MC_SAMPLE, base = { title: S.title, titles: [S.title], description: S.description, h1: [], hreflang: [], og: {}, twitter: {}, ld: [], images: 0, noAlt: 0 };
+  const list = M.check(base, { keyword: S.keyword, url: S.url }).filter(c => ['title', 'description', 'keyword'].includes(c.id));
+  const bad = M.check(M.extract(MC_BAD)), word = { pass: 'Pass', warn: 'Warning', fail: 'Error', info: 'Info' };
+  return {
+    MC_VERIFIED: M.FACTS.verified, MC_CHECKS: M.check(M.extract('<title>a</title><title>b</title><link rel="alternate" hreflang="ms" href="/ms/"><meta property="og:image" content="/i.jpg"><img src="x">'), { keyword: 'x' }).length,
+    MC_TITLE: esc(S.title), MC_DESC: esc(S.description), MC_URL: esc(S.url), MC_SITE: esc(S.site), MC_KW: esc(S.keyword),
+    MC_TITLE_N: `${Array.from(S.title).length} characters`, MC_DESC_N: `${Array.from(S.description).length} characters`,
+    MC_PREVIEW: M.views.serpHtml(S), MC_CHECK_LIST: M.views.checksHtml(list),
+    MC_T0: M.FACTS.title[0], MC_T1: M.FACTS.title[1], MC_D0: M.FACTS.description[0], MC_D1: M.FACTS.description[1],
+    MC_ROWS: bad.map(c => `        <tr><th scope="row">${esc(c.label)}</th><td class="mc-${c.status}">${word[c.status]}</td><td>${esc(c.detail)}</td></tr>`).join('\n')
+  };
+}
+
+// ---- UTM builder: first link, channel, QR code and the channel table come from the page's core.
+const UT_SAMPLE = { url: 'https://www.example.com/raya-sale', source: 'instagram', medium: 'social', campaign: 'raya_sale_2026' };
+const UT_ROWS = [['newsletter', 'email'], ['facebook', 'social'], ['whatsapp', 'social'], ['facebook', 'paid_social'], ['instagram', 'cpc'], ['google', 'cpc'], ['youtube', 'video'],
+  ['tiktok', 'paid'], ['partner_site', 'affiliate'], ['blog_kopi', 'referral'], ['sms', 'sms'], ['partner_site', 'banner'], ['poster_dungun', 'qr']];
+function utmMap() {
+  const U = utmCore, W = waCore, S = UT_SAMPLE, r = U.build(S.url, S);
+  return {
+    UT_VERIFIED: U.FACTS.verified, UT_URL: esc(S.url), UT_SOURCE: S.source, UT_MEDIUM: S.medium, UT_CAMPAIGN: S.campaign, UT_OUT: esc(r.url), UT_CHANNEL: r.channel,
+    UT_QR: W.qrSvg(W.qrMatrix(qrVm.qrcode, r.url), 'QR code for ' + r.url),
+    UT_PRESETS: U.PRESETS.map(([n], i) => `<button type="button" class="btn ghost sm" data-preset="${i}">${esc(n)}</button>`).join(''),
+    UT_EXAMPLE: U.build('https://www.example.com/promo', { source: 'facebook', medium: 'social', campaign: 'raya_sale' }).url,
+    UT_UNASSIGNED: `A medium that matches no rule, such as qr or offline, lands in ${U.channel('poster', 'qr')}.`,
+    UT_ROWS: UT_ROWS.map(([s, m]) => `        <tr><td><code>${s}</code></td><td><code>${m}</code></td><td>${U.channel(s, m)}</td></tr>`).join('\n')
   };
 }
 
@@ -2774,7 +2900,7 @@ function pdfMap() {
     PDF_MODE_ROWS: P.MODES.map(m => `        <tr><th scope="row">${esc(m.label)}</th><td>${esc(m.result)}</td><td>${esc(m.text)}</td><td>${esc(m.note)}</td></tr>`).join('\n')
   };
 }
-const RENDERERS = { schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const RENDERERS = { utm: utmMap, metacheck: metacheckMap, ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -2982,6 +3108,13 @@ const bundles = {
   'exif-editor.js': ['assets/js/exif-core.js', 'assets/js/exif-editor-ui.js'],
   'exif-remover.js': ['assets/js/exif-core.js', 'assets/js/exif-remover-ui.js'],
   'robots-txt.js': ['assets/js/robots-core.js', 'assets/js/robots-ui.js'],
+  'utm-builder.js': ['assets/js/wa-core.js', 'assets/js/utm-core.js', 'assets/js/utm-ui.js'],
+  'meta-tag-checker.js': ['assets/js/metacheck-core.js', 'assets/js/metacheck-ui.js'],
+  'github-jsdelivr.js': ['assets/js/ghcdn-core.js', 'assets/js/ghcdn-ui.js'],
+  'parse-html.js': ['assets/js/escape-core.js', 'assets/js/escape-ui.js'],
+  'html-table.js': ['assets/js/table-core.js', 'assets/js/table-ui.js'],
+  'text-to-html.js': ['assets/js/notepad-core.js', 'assets/js/texthtml-core.js', 'assets/js/texthtml-ui.js'],
+  'find-replace.js': ['assets/js/textclean-core.js', 'assets/js/textclean-ui.js'],
   'schema-markup.js': ['assets/js/schema-core.js', 'assets/js/schema-ui.js'],
   'privacy-policy.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/notepad-core.js', 'assets/js/privacy-core.js', 'assets/js/privacy-ui.js'],
   'whatsapp-link.js': ['assets/js/wa-core.js', 'assets/js/wa-ui.js'],

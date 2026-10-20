@@ -30,6 +30,8 @@
     result = S.generate(type, v);
     $('scOut').value = S.scriptTag(result.text);
     $('scChecks').innerHTML = S.views.checksHtml(result);
+    $('scHtmlWrap').hidden = !result.html;
+    $('scHtml').value = result.html || '';
     saved[type] = v;
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) { /* storage blocked */ }
   }
@@ -52,6 +54,10 @@
     a.download = type + '-schema.json';
     document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  });
+  $('scCopyHtml').addEventListener('click', function () {
+    var btn = this;
+    if (navigator.clipboard) navigator.clipboard.writeText($('scHtml').value).then(function () { flash(btn, 'Copied'); }, function () {});
   });
   $('scReset').addEventListener('click', function () { delete saved[type]; show(type, true); });
 

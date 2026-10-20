@@ -30,6 +30,12 @@
 <b:case value='https://www.thebukitbesi.com/p/currency-converter-malaysia.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/currency-converter-malaysia/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/currency-converter-malaysia/");</script>
+<b:case value='https://www.thebukitbesi.com/p/faq-formatter-tool.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/#type=faq' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/#type=faq");</script>
+<b:case value='https://www.thebukitbesi.com/p/find-replace-text.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/find-and-replace/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/find-and-replace/");</script>
 <b:case value='https://www.thebukitbesi.com/p/free-ai-image-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/ai-image-generator/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/ai-image-generator/");</script>
@@ -39,9 +45,15 @@
 <b:case value='https://www.thebukitbesi.com/p/free-word-counter-seo-keyword-density.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/word-counter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/word-counter/");</script>
+<b:case value='https://www.thebukitbesi.com/p/github-link-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/github-to-jsdelivr/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/github-to-jsdelivr/");</script>
 <b:case value='https://www.thebukitbesi.com/p/html-beautifier-online.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/html-beautifier/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/html-beautifier/");</script>
+<b:case value='https://www.thebukitbesi.com/p/html-table-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/html-table-generator/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/html-table-generator/");</script>
 <b:case value='https://www.thebukitbesi.com/p/image-converter.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/image-converter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/image-converter/");</script>
@@ -81,18 +93,36 @@
 <b:case value='https://www.thebukitbesi.com/p/online-photoshop.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/photo-editor/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/photo-editor/");</script>
+<b:case value='https://www.thebukitbesi.com/p/parse-html.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/parse-html/#mode=html&dir=encode' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/parse-html/#mode=html&dir=encode");</script>
+<b:case value='https://www.thebukitbesi.com/p/parser-unparser.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/parse-html/#mode=js&dir=encode' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/parse-html/#mode=js&dir=encode");</script>
 <b:case value='https://www.thebukitbesi.com/p/pdf-converter.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/pdf-converter/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/pdf-converter/");</script>
+<b:case value='https://www.thebukitbesi.com/p/remove-characters-from-text.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/find-and-replace/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/find-and-replace/");</script>
 <b:case value='https://www.thebukitbesi.com/p/robotstxt-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/robots-txt-generator/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/robots-txt-generator/");</script>
+<b:case value='https://www.thebukitbesi.com/p/secure-link-generator.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/utm-builder/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/utm-builder/");</script>
 <b:case value='https://www.thebukitbesi.com/p/semak-tracking-semua-kurier-di-malaysia.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/semak-tracking-parcel/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/semak-tracking-parcel/");</script>
+<b:case value='https://www.thebukitbesi.com/p/seo-meta-analyzer-tool.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/meta-tag-checker/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/meta-tag-checker/");</script>
 <b:case value='https://www.thebukitbesi.com/p/sticker-whatsapp-maker.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/whatsapp-sticker-maker/' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/whatsapp-sticker-maker/");</script>
+<b:case value='https://www.thebukitbesi.com/p/text-to-html-converter.html'/>
+<meta content='0; url=https://tool.thebukitbesi.com/text-to-html/' http-equiv='refresh'/>
+<script>location.replace("https://tool.thebukitbesi.com/text-to-html/");</script>
 <b:case value='https://www.thebukitbesi.com/p/video-schema-markup-generator.html'/>
 <meta content='0; url=https://tool.thebukitbesi.com/schema-markup-generator/#type=video' http-equiv='refresh'/>
 <script>location.replace("https://tool.thebukitbesi.com/schema-markup-generator/#type=video");</script>

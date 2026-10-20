@@ -8,7 +8,7 @@
   "llms": "Free JSON-LD schema markup generator that checks each type against Google Search Central's required and recommended properties. Types: Article/BlogPosting/NewsArticle (no required properties; recommended headline, image, datePublished, dateModified, author), Product (name plus one of offers, review or aggregateRating), Local business (name and address; opening hours from text like Mon-Fri 09:00-18:00), Organization, Event (name, startDate and location with address; online, offline or mixed attendance), Recipe (name and image; prep and cook times converted to ISO 8601), Video (name, thumbnailUrl and uploadDate; a YouTube link fills the embed URL and thumbnail; durations like 3:25 become PT3M25S), Software app (name, offers.price and a rating or review), Breadcrumb, WebSite site name, and FAQPage. Google stopped showing FAQ rich results on 7 May 2026, but FAQPage markup is still read by other search engines and AI assistants. Times default to Malaysia time (+08:00) and prices to MYR. Copy the script tag or download JSON.",
   "datePublished": "2026-10-19",
   "dateModified": "2026-10-19",
-  "bloggerFrom": ["https://www.thebukitbesi.com/p/json-schema-markup-generator.html", ["https://www.thebukitbesi.com/p/video-schema-markup-generator.html", "#type=video"]],
+  "bloggerFrom": ["https://www.thebukitbesi.com/p/json-schema-markup-generator.html", ["https://www.thebukitbesi.com/p/video-schema-markup-generator.html", "#type=video"], ["https://www.thebukitbesi.com/p/faq-formatter-tool.html", "#type=faq"]],
   "render": "schema",
   "shareTitle": "Share this schema markup generator",
   "scripts": ["/assets/js/schema-markup.js"],
@@ -17,7 +17,7 @@
   "app": {
     "name": "Schema Markup Generator",
     "category": "DeveloperApplication",
-    "features": ["JSON-LD for 11 types including Article, Product, Local business, Event, Recipe, Video and Software app", "Checks Google's required and recommended properties as you type", "YouTube link fills video embed URL and thumbnail", "Opening hours, durations and dates converted to schema.org formats", "Malaysia time zone and MYR by default", "Copy the script tag or download JSON", "Answers saved per type in your browser"]
+    "features": ["FAQ formatter: FAQ HTML accordion plus matching FAQPage JSON-LD", "JSON-LD for 11 types including Article, Product, Local business, Event, Recipe, Video and Software app", "Checks Google's required and recommended properties as you type", "YouTube link fills video embed URL and thumbnail", "Opening hours, durations and dates converted to schema.org formats", "Malaysia time zone and MYR by default", "Copy the script tag or download JSON", "Answers saved per type in your browser"]
   },
   "citations": [
     ["Google Search Central: Structured data markup that Google Search supports", "https://developers.google.com/search/docs/appearance/structured-data/search-gallery"],
@@ -29,11 +29,11 @@
   ],
   "faq": [
     { "q": "What is schema markup?", "a": "Schema markup is structured data, written in the schema.org vocabulary, that tells search engines exactly what a page is about: an article, a product with a price, a business with opening hours, a recipe, a video. Google recommends the JSON-LD format, a script block you paste into the page's HTML. Correct markup makes a page eligible for rich results such as prices, ratings, video thumbnails and recipe cards." },
-    { "q": "Does schema markup improve rankings?", "a": "Not directly. Google uses structured data to understand a page and to show rich results, and says markup does not guarantee that a rich result will appear. It can make your result richer, with a price, rating, video thumbnail or event date, which can earn more clicks, and it helps search engines and AI assistants understand and quote your content accurately." },
     { "q": "Does FAQ schema still work in Google?", "a": "No longer for rich results. Google stopped showing FAQ rich results in Search on 7 May 2026 and removed the documentation, after limiting them to government and health sites in 2023. FAQPage markup is still valid schema.org, does not hurt, and other search engines and AI assistants can still read it, so the generator keeps it, clearly labelled." },
     { "q": "Which properties does Google require for video schema?", "a": "VideoObject needs name, thumbnailUrl and uploadDate. Description, duration, contentUrl or embedUrl, and the creator are recommended. Paste a YouTube link and the generator fills the embed URL and thumbnail, and converts a duration like 3:25 into the ISO 8601 form PT3M25S that Google expects." },
     { "q": "How do I add JSON-LD to Blogger or WordPress?", "a": "Copy the script tag. In Blogger, switch the post editor to HTML view and paste it at the end of the post, or for site-wide markup (Organization, WebSite) paste it in Theme, Edit HTML, just before </head>. In WordPress, use a Custom HTML block in the post or your SEO plugin's schema settings. Then test the page in Google's Rich Results Test." },
     { "q": "Can I add review stars to my own product or app?", "a": "Only with genuine ratings from real customers that are shown on the page. Google's review snippet guidelines forbid self-written or made-up reviews, and fake ratings can lead to a manual action. Leave the rating fields empty if you do not collect reviews; a product can still show price and availability with offers alone." },
+    { "q": "How do I format an FAQ section with schema?", "a": "Choose FAQ and write each question on one line with its answer below, leaving a blank line between pairs. You get two pieces of code: the FAQ HTML, a ready-made accordion using the browser's built-in details and summary elements (no script, so it does not slow the page), and the matching FAQPage JSON-LD. Paste the HTML where the questions should appear and the script tag in the same page; the markup must match the visible text." },
     { "q": "Which schema types did Google stop supporting?", "a": "Besides FAQ (May 2026), Google phased out Book Actions, Course Info, Claim Review, Estimated Salary, Learning Video, Special Announcement and Vehicle Listing in 2025, and HowTo rich results earlier. This generator only offers types Google still uses, plus FAQPage for other search engines and AI assistants." }
   ]
 }
@@ -66,6 +66,8 @@
           <a class="btn ghost sm" href="https://search.google.com/test/rich-results" rel="noopener">Rich Results Test</a>
           <button type="button" class="btn ghost sm" id="scReset">Reset form</button>
         </div>
+        <div class="field sc-htmlf" id="scHtmlWrap" hidden><label for="scHtml">FAQ HTML (paste where the questions should show)</label><textarea class="code sc-code-sm" id="scHtml" readonly spellcheck="false"></textarea>
+          <div class="tool-actions sc-row"><button type="button" class="btn ghost sm" id="scCopyHtml">Copy FAQ HTML</button></div></div>
       </section>
     </div>
     <p class="sr-only" id="scLive" aria-live="polite"></p>
@@ -129,7 +131,7 @@
   <div class="related">
     <a href="/json-formatter/">JSON Formatter<small>Validate and fix JSON</small></a>
     <a href="/robots-txt-generator/">Robots.txt Generator<small>Control crawlers and AI bots</small></a>
-    <a href="/exif-editor/">EXIF Editor<small>Image metadata for Google Images</small></a>
+    <a href="/meta-tag-checker/">Meta Tag Checker<small>SERP preview and head tag checks</small></a>
   </div>
 </section>
 </div>
