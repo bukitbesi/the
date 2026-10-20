@@ -10,6 +10,7 @@ import vm from 'node:vm';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { statePages as solatStatePages, stateMap, solatStates } from './solat-states.mjs';
+import { batch13 } from './batch13.mjs';
 import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
@@ -2901,6 +2902,8 @@ function pdfMap() {
   };
 }
 const RENDERERS = { utm: utmMap, metacheck: metacheckMap, ghcdn: ghcdnMap, escape: escapeMap, table: tableMap, texthtml: texthtmlMap, textclean: textcleanMap, schema: schemaMap, privacy: privacyMap, wa: waMap, contrast: contrastMap, solat: solatMap, solatState: solatStateMap, case: caseMap, json: jsonMap, words: wordsMap, pdf: pdfMap, sticker: stickerMap, photo: photoMap, imgconv: imgconvMap, notepad: notepadMap, robots: robotsMap, exifEditor: exifEditorMap, exifRemover: exifRemoverMap, purge: purgeMap, html: htmlMap, js: jsMap, cgpaPercent: cgpaPercentMap, cgpa: cgpaMap, tax: taxMap, epf: epfMap, loan: loanMap, car: carMap, asb: asbMap, prorate: prorateMap, ot: otMap, land: landMap, personal: personalMap, rpgt: rpgtMap, bmi: bmiMap, zakat: zakatMap, gold: goldMap, goldprice: goldPriceMap, prompt: promptMap, img2prompt: imgMap, fuel: fuelMap, ncd: ncdMap, iddah: iddahMap, hijri: hijriMap, tnb: tnbMap, ptptn: ptptnMap, fidyah: fidyahMap, debt: debtMap, refi: refiMap, rentbuy: rentbuyMap, fd: fdMap, employer: employerMap, margin: marginMap, roas: roasMap, freelance: freelanceMap, workdays: workdaysMap, retire: retireMap, sspn: sspnMap, unittrust: unittrustMap, edu: eduMap, water: waterMap, qibla: qiblaMap, nestegg: nesteggMap, leave: leaveMap, termination: terminationMap, roadtax: roadtaxMap, sst: sstMap, bursa: bursaMap, tenancy: tenancyMap, eis: eisMap, maskahwin: maskahwinMap, haji: hajiMap, str: strMap, sspa: sspaMap, rahnu: rahnuMap, umur: umurMap, bersalin: bersalinMap, solar: solarMap, lesen: lesenMap, faraid: faraidMap, fx: fxMap, kalori: kaloriMap, kasut: kasutMap, saman: samanMap, taksiran: taksiranMap, ev: evMap, cartoon: cartoonMap, paraphrase: paraMap, summary: sumMap, caption: capMap, imagegen: genMap, track: trackMap, near: nearMap, css: cssMap };
+const b13 = batch13({ require, esc, attr, longDate, b3 });
+Object.assign(RENDERERS, b13.renderers);
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3128,6 +3131,7 @@ const bundles = {
   'whatsapp-sticker-maker.js': ['assets/js/zip-core.js', 'assets/js/imgconv-core.js', 'assets/js/sticker-core.js', 'assets/js/sticker-ui.js'],
   'pdf-converter.js': ['assets/js/zip-core.js', 'assets/js/docx-core.js', 'assets/js/pdf-core.js', 'assets/js/pdf-ui.js']
 };
+Object.assign(bundles, b13.bundles);
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
   const source = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
