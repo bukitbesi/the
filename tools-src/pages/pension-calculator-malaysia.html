@@ -1,0 +1,171 @@
+<!--page
+{
+  "path": "/pension-calculator-malaysia/",
+  "lang": "en",
+  "cat": "calc",
+  "alternates": { "ms": "/kalkulator-pencen/" },
+  "title": "Pension Calculator Malaysia: Civil Service Pension, Gratuity and GCR",
+  "description": "Work out a Malaysian civil servant's monthly pension, gratuity and GCR leave cash with JPA's formula, the RM1,000 minimum and the SSPA pension adjustment.",
+  "llms": "Malaysian civil service pension calculator, rules verified 25 October 2026 against JPA's pension service circular (MyPPSM) and JPA's SSPA retirement FAQ. Monthly pension = 1/600 × months of pensionable service × last salary, capped at 3/5 (60%, reached at 360 months); the minimum pension is RM1,000 a month with 300 months (25 years) or more, and Budget 2027 (9 October 2026) announced a rise to RM1,350 for civil service pensioners, armed forces veterans and derivative pension recipients, start date not yet announced. Gratuity = 7.5% × months of service × last salary, with no month cap. Leave cash award (GCR) = accumulated leave days (at most 180 from 2023) ÷ 30 × (last salary + fixed allowances). At least 10 years (120 months) of service is needed for a pension and gratuity. Compulsory retirement is at 60 (appointed from 1 January 2012), optional retirement from 40. Gratuity and GCR are paid on the retirement date; the pension starts at 55 for officers appointed on or after 12 April 1991 (earlier appointees 45 for women, 50 for men). JPA examples: last salary RM5,440.60 and 386 months give a pension of RM3,264.36 and gratuity of RM157,505.37; RM2,203.56 and 255 months give RM936.51 and RM42,143.08. The 2% yearly pension increase ended with the Federal Court ruling of 27 June 2023; pensions now follow SSPA pay revisions: Phase 1 (1 December 2024) last salary +8% if over RM3,000 or +RM240 if under (JUSA +4%), Phase 2 (1 January 2026) +7% (JUSA +3%), then 1/600 × service × new last salary + PKKP (for those who retired by 31 December 2022). Example: a last salary of RM5,000 with 360 months rises from RM3,000 to RM3,466.80 a month.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "pencen",
+  "scripts": ["/assets/js/pencen.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["Pension Calculator", null]],
+  "about": ["Malaysian civil service pension", "Pensions Act 1980", "Retirement gratuity", "Leave cash award (GCR)", "Public Service Remuneration System (SSPA)"],
+  "app": {
+    "name": "Malaysia Civil Service Pension Calculator",
+    "category": "FinanceApplication",
+    "features": ["Monthly pension with the 60% cap and RM1,000 minimum", "7.5% gratuity with no month cap", "GCR leave cash up to 180 days", "Compulsory or optional retirement and pension start date", "SSPA Phase 1 and Phase 2 adjustment for pensioners", "Budget 2027 RM1,350 minimum", "Shareable result link"]
+  },
+  "citations": [
+    ["JPA: Pension service circular (MyPPSM)", "https://docs.jpa.gov.my/docs/myppsm/PPSM/PP/pencen/1/"],
+    ["JPA: SSPA retirement and retirement benefits FAQ", "https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf"],
+    ["JPA: FAQ on the Federal Court pension ruling", "https://docs.jpa.gov.my/docs/faq/pencen/2023/faq_keputusan_mahkamah.pdf"],
+    ["Free Malaysia Today: Budget 2027 highlights", "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/sorotan-penting-belanjawan-2027"],
+    ["SAYS: Minimum pension rate raised to RM1,350 (Budget 2027)", "https://says.com/my/gomen/pension-belanjawan-2027"]
+  ],
+  "faq": [
+    { "q": "How is a Malaysian civil servant's pension calculated?", "a": "Monthly pension = 1/600 × months of pensionable service × last salary, capped at 60% (reached at 360 months). In JPA's own example, a last salary of RM5,440.60 with 386 months gives {{P_EX1_PEN}} a month, which is 60% because months beyond 360 do not count." },
+    { "q": "What is the minimum civil service pension?", "a": "RM1,000 a month for pensioners with at least 300 months (25 years) of service. Budget 2027 announced a rise to RM1,350 a month for civil service pensioners, armed forces veterans and derivative pension recipients, but the start date has not been announced." },
+    { "q": "How much is the retirement gratuity?", "a": "Gratuity = 7.5% × months of service × last salary, paid once on the retirement date, with no 360-month cap. JPA's examples: RM5,440.60 × 386 months gives {{P_EX1_GRAT}}; RM2,203.56 × 255 months gives {{P_EX2_GRAT}}." },
+    { "q": "How is the GCR leave cash award calculated?", "a": "GCR = accumulated rest leave days ÷ 30 × (last salary + fixed allowances), capped at 180 days from 1 January 2023. For example, 180 days with a last salary of RM6,000 and fixed allowances of RM800 gives {{P_DEF_GCR}}." },
+    { "q": "When is the pension paid if I take optional retirement?", "a": "Gratuity and GCR are paid on the retirement date, but the monthly pension only starts at 55 for officers appointed on or after 12 April 1991. For example, retiring at 45 with 252 months and a RM5,000 salary pays a gratuity of {{P_OPT_GRAT}} straight away and a pension of {{P_OPT_PEN}} a month from {{P_OPT_START}}." },
+    { "q": "Do pensions still rise 2% a year?", "a": "No. On 27 June 2023 the Federal Court ruled the 2% yearly increase invalid, so pensions now follow pay revisions. Under SSPA the last salary rose 8% (or RM240 if under RM3,000) from 1 December 2024 and 7% from 1 January 2026; a RM5,000 last salary with 360 months went from {{P_ADJ_ORIG}} to {{P_ADJ_PEN}}." },
+    { "q": "Do new civil servants still get a pension?", "a": "The government decided that new permanent posts are no longer pensionable, and new appointments from 1 February 2024 are on contract, except the armed forces (ATM) and police (PDRM). Officers already in the pension scheme stay pensionable, and this calculator is for them." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">Pension Calculator</li></ol></nav>
+  <h1>Malaysia Civil Service Pension Calculator</h1>
+  <p class="answer">A Malaysian civil servant's pension is <strong>1/600 × months of service × last salary</strong>, capped at 60% (360 months) and at least <strong>RM1,000</strong> with 25 years' service. Retiring at 60 on a RM6,000 last salary after 395 months gives a pension of <strong>{{P_DEF_PEN}}</strong> a month, a gratuity of {{P_DEF_GRAT}} and GCR of {{P_DEF_GCR}}. Enter your dates and salary for your own estimate.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>JPA pension circular formula</span><a href="/kalkulator-pencen/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="pcForm" novalidate aria-labelledby="pc-h">
+      <h2 id="pc-h">Civil servant about to retire</h2>
+      <div class="field-row">
+        <div class="field"><label for="birth">Date of birth</label><input class="input" id="birth" name="birth" type="date" min="1940-01-01" max="2005-12-31" value="1966-06-15"></div>
+        <div class="field"><label for="appointed">Appointment date</label><input class="input" id="appointed" name="appointed" type="date" min="1960-01-01" max="2026-12-31" value="1993-07-01"></div>
+      </div>
+      <div class="field"><label for="retire">Retirement date (blank for age 60)</label><input class="input" id="retire" name="retire" type="date" min="1980-01-01" max="2070-12-31" value=""></div>
+      <div class="field-row">
+        <div class="field"><label for="salary">Last salary</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="0.01" value="6000"></div></div>
+        <div class="field"><label for="allow">Fixed allowances</label><div class="input"><span aria-hidden="true">RM</span><input id="allow" name="allow" type="number" inputmode="decimal" min="0" step="0.01" value="800"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="gcr">Accumulated GCR leave</label><div class="input"><input id="gcr" name="gcr" type="number" inputmode="numeric" min="0" max="400" step="1" value="180"><span aria-hidden="true">days</span></div></div>
+        <div class="field"><label for="gender">Gender (pre-1991 appointees)</label><select class="input" id="gender" name="gender">{{P_GENDER}}</select></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Already retired? SSPA adjustment</legend>
+        <div class="field-row">
+          <div class="field"><label for="psalary">Last or equivalent salary</label><div class="input"><span aria-hidden="true">RM</span><input id="psalary" name="psalary" type="number" inputmode="decimal" min="0" step="0.01" value="5000"></div></div>
+          <div class="field"><label for="pmonths">Length of service</label><div class="input"><input id="pmonths" name="pmonths" type="number" inputmode="numeric" min="0" max="600" step="1" value="360"><span aria-hidden="true">months</span></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="pretired">Retirement date</label><input class="input" id="pretired" name="pretired" type="date" min="1960-01-01" max="2030-12-31" value="2020-05-01"></div>
+          <div class="field"><label for="pkkp">PKKP a month (MyPesara)</label><div class="input"><span aria-hidden="true">RM</span><input id="pkkp" name="pkkp" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="0"></div></div>
+        </div>
+        <div class="field"><label for="pgroup">Service group</label><select class="input" id="pgroup" name="pgroup">{{P_GROUP}}</select></div>
+      </fieldset>
+      <p class="help">Fixed allowances (ITKA, ITP, ITK, ITJU) count for GCR only. Pensioners can find their last salary, service and PKKP in the MyPesara app.</p>
+    </form>
+
+    <section class="box" aria-labelledby="pc-result-h">
+      <h2 id="pc-result-h">Your retirement benefits</h2>
+      <div class="net"><p>Monthly pension</p><output id="pcBig" for="birth appointed retire salary">{{P_BIG}}</output><p id="pcSub">{{P_SUB}}</p></div>
+      <p class="sr-only" id="pcLive" aria-live="polite"></p>
+      <div class="pc-grid" id="pcGrid">{{P_GRID}}</div>
+      <p class="ic-note" id="pcNote">{{P_NOTE}}</p>
+      <table class="rows wrap"><caption>Details</caption><tbody id="pcRows">
+{{P_ROWS}}
+      </tbody></table>
+      <h3>Pensioners: pension after SSPA</h3>
+      <div class="net"><p>New pension</p><output id="paBig" for="psalary pmonths pretired pkkp pgroup">{{A_BIG}}</output><p id="paSub">{{A_SUB}}</p></div>
+      <p class="ic-note" id="paNote">{{A_NOTE}}</p>
+      <table class="rows wrap"><caption>Adjustment</caption><tbody id="paRows">
+{{A_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="pcPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Pension and gratuity by length of service (RM4,000 last salary)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data"><thead><tr><th scope="col">Months of service</th><th scope="col">Rate</th><th scope="col">Monthly pension</th><th scope="col">Gratuity</th></tr></thead><tbody>
+{{P_TABLE}}
+    </tbody></table>
+  </div>
+  <p>At 300 months, 1/600 × 300 × RM4,000 is RM2,000, above the RM1,000 minimum; the minimum only lifts the pension for last salaries under RM2,000 with 25 years or more.</p>
+
+  <h2 id="example">JPA's official examples</h2>
+  <ul>
+    <li><strong>Last salary RM5,440.60, 386 months:</strong> pension capped at 360 months, 60% × RM5,440.60 = <strong>{{P_EX1_PEN}}</strong> a month; gratuity 7.5% × RM5,440.60 × 386 = <strong>{{P_EX1_GRAT}}</strong> (gratuity has no month cap).</li>
+    <li><strong>Last salary RM2,203.56, 255 months:</strong> pension 1/600 × 255 × RM2,203.56 = <strong>{{P_EX2_PEN}}</strong>; no minimum because it is under 300 months; gratuity <strong>{{P_EX2_GRAT}}</strong>.</li>
+    <li><strong>The default example above:</strong> born 15 June 1966, appointed 1 July 1993, retiring 15 June 2026 (395 months), RM6,000 salary and RM800 fixed allowances: pension {{P_DEF_PEN}}, gratuity {{P_DEF_GRAT}}, GCR 180 ÷ 30 × RM6,800 = {{P_DEF_GCR}}, lump sum {{P_DEF_LUMP}}.</li>
+  </ul>
+
+  <h2 id="formula">How it is calculated</h2>
+  <ol>
+    <li><strong>Service</strong> = whole months from the appointment date to the day before retirement; at least 120 months (10 years).</li>
+    <li><strong>Pension</strong> = 1/600 × months (up to 360) × last salary; RM1,000 if lower and service is 300 months or more.</li>
+    <li><strong>Gratuity</strong> = 7.5% × all months × last salary.</li>
+    <li><strong>GCR</strong> = leave days (up to 180) ÷ 30 × (last salary + fixed allowances).</li>
+    <li><strong>When paid:</strong> gratuity and GCR on the retirement date; the pension from the retirement date or age 55 (appointed from 12 April 1991), whichever is later.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="sspa-h">SSPA pension adjustment for pensioners (360 months, retired before December 2024)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sspa-h">
+    <table class="data"><thead><tr><th scope="col">Last salary</th><th scope="col">Phase 1 (1/12/2024)</th><th scope="col">Phase 2 (1/1/2026)</th><th scope="col">Pension before → after</th></tr></thead><tbody>
+{{P_SSPA}}
+    </tbody></table>
+  </div>
+  <ul>
+    <li><strong>Phase 1:</strong> last salary over RM3,000 +8%, under RM3,000 +RM240, JUSA +4%. At exactly RM3,000 both methods give RM240, so the answer is the same.</li>
+    <li><strong>Phase 2:</strong> +7%, JUSA +3%. Those who retired between 2 December 2024 and 1 January 2026 get Phase 2 only.</li>
+    <li><strong>Retired before 2013:</strong> JPA uses the "2012 equivalent last salary", not your actual last pay. Enter the figure from MyPesara.</li>
+    <li><strong>PKKP</strong> (for those who retired by 31 December 2022) is added after the formula.</li>
+  </ul>
+
+  <h2 id="rules">Other rules to know</h2>
+  <ul>
+    <li><strong>Retirement age:</strong> compulsory at 60 for appointments from 1 January 2012; earlier appointees may have chosen 55, 56, 58 or 60. For the date and EPF ages, use the <a href="/retirement-age-calculator-malaysia/">Retirement Age Calculator</a>.</li>
+    <li><strong>Fixed allowances for GCR:</strong> include ITKA, ITP, ITK and ITJU; the cost-of-living aid (BSH) is normally not counted. Confirm with your HR unit.</li>
+    <li><strong>Derivative pension:</strong> if a pensioner dies, dependants qualify under the same formula; each widow or widower gets 2 shares and each child 1 share.</li>
+    <li><strong>Special payment:</strong> Budget 2027 announced RM750 for pensioners in 2027, paid in two instalments.</li>
+    <li>Your current SSPA pay: <a href="/sspa-salary-calculator/">SSPA Salary Calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://docs.jpa.gov.my/docs/myppsm/PPSM/PP/pencen/1/" rel="noopener">JPA: Pension service circular (MyPPSM)</a>, including the pension and gratuity worked examples</li>
+    <li><a href="https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf" rel="noopener">JPA: SSPA retirement and retirement benefits FAQ</a></li>
+    <li><a href="https://docs.jpa.gov.my/docs/faq/pencen/2023/faq_keputusan_mahkamah.pdf" rel="noopener">JPA: FAQ on the Federal Court ruling (27 June 2023)</a></li>
+    <li><a href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/sorotan-penting-belanjawan-2027" rel="noopener">Free Malaysia Today: Budget 2027 highlights</a> and <a href="https://says.com/my/gomen/pension-belanjawan-2027" rel="noopener">SAYS: RM1,350 minimum pension</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate based on JPA's formula. The actual amount is set by JPA's Post-Service Division from your service record (including unpaid leave, which does not count). The RM1,350 minimum is waiting for its effective date.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/retirement-age-calculator-malaysia/">Retirement Age Calculator<small>Retirement date and EPF ages</small></a>
+    <a href="/sspa-salary-calculator/">SSPA Salary Calculator<small>New civil service pay</small></a>
+    <a href="/epf-calculator/">EPF Calculator<small>Savings at 55 and 60</small></a>
+    <a href="/asb-dividend-calculator/">ASB Dividend Calculator<small>Invest your gratuity</small></a>
+  </div>
+</section>

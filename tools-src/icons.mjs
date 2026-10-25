@@ -112,6 +112,8 @@ export const icons = {
   'image-to-text': image.replace('m3 17 5-5 4 4 3-3 6 6', 'M7 14h6M7 17h10') + p('M15 8.5h3'),
   'invoice-generator': file('') + p('M8 12h8M8 15.5h5') + p('M14 18.5h2.5'),
   'e-invoice-malaysia': rect(4, 3, 16, 18) + p('M8 8h8M8 11.5h5') + rect(13, 13.5, 4.5, 4.5, 0.5) + p('M8 16h2'),
+  'pension-calculator-malaysia': p('M3 21h18M4 10h16M12 3l8 5H4Z') + p('M6 10v8M10 10v8M14 10v8M18 10v8'),
+  'malaysia-ic-number-decoder': rect(2, 5, 20, 14) + circle(8, 11, 2.5) + p('M4.5 16.5c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3') + p('M14 9.5h5M14 12.5h5M14 15.5h3'),
   'ai-summarizer': rect(4, 3, 16, 18) + p('M8 8h8M8 12h8M8 16h4') + '<path d="m18 14 1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor"/>',
   'caption-generator': rect(3, 3, 18, 18, 5) + circle(12, 11, 3.5) + p('M7 18h10M17 6.5h.01'),
   'free-privacy-policy-generator': file('PP') + p('m7 18 2 2 4-4'),
