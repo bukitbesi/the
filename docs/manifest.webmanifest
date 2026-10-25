@@ -308,6 +308,11 @@
       "description": "Upload a picture and get 3 AI prompts for Midjourney, Stable Diffusion, ChatGPT, Flux, Veo or Sora: "
     },
     {
+      "name": "Image to Text Converter (OCR)",
+      "url": "/image-to-text/",
+      "description": "Copy text from a photo, screenshot or scanned page free: OCR in your browser for English, Malay, Chi"
+    },
+    {
       "name": "Income Tax Calculator Malaysia YA2026",
       "url": "/income-tax-calculator-malaysia/",
       "description": "Free Malaysia income tax calculator for YA2026 with all LHDN reliefs, rebates, zakat and a PCB refun"
@@ -366,6 +371,11 @@
       "name": "Online Notepad",
       "url": "/online-notepad/",
       "description": "Free online notepad with autosave, many notes, Markdown preview, find and replace, version history, "
+    },
+    {
+      "name": "Online Timer and Stopwatch",
+      "url": "/online-timer/",
+      "description": "Free online timer with alarm, stopwatch with laps, and a Pomodoro timer (25/5). Set 1 to 60-minute p"
     },
     {
       "name": "Overtime Calculator Malaysia",
@@ -451,6 +461,11 @@
       "name": "Qibla Direction Malaysia",
       "url": "/qibla-direction-malaysia/",
       "description": "Find the qibla direction from anywhere in Malaysia: the exact bearing from true north to the Kaaba f"
+    },
+    {
+      "name": "QR Code Generator",
+      "url": "/qr-code-generator/",
+      "description": "Make free QR codes that never expire: links, Wi-Fi, WhatsApp, contact cards, email and maps. Add col"
     },
     {
       "name": "Refinance Calculator Malaysia",
@@ -566,6 +581,11 @@
       "name": "Traffic Summons Calculator Malaysia",
       "url": "/traffic-summons-calculator-malaysia/",
       "description": "Work out your JPJ, PDRM or AwAS summons compound from the notice date: 50% off within 15 days, RM200"
+    },
+    {
+      "name": "Typing Speed Test",
+      "url": "/typing-test/",
+      "description": "Free typing speed test in English or Bahasa Melayu: 15 s to 2 min, net and gross WPM, accuracy, mist"
     },
     {
       "name": "Unit Trust Calculator Malaysia",

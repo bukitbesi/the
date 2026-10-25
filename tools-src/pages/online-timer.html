@@ -1,0 +1,143 @@
+<!--page
+{
+  "path": "/online-timer/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/jam-randik/" },
+  "title": "Online Timer and Stopwatch: Countdown, Laps and Pomodoro",
+  "description": "Free online timer with alarm, stopwatch with laps, and a Pomodoro timer (25/5). Set 1 to 60-minute presets, full screen, share a timer link. No sign-up.",
+  "llms": "Free online timer, stopwatch and Pomodoro timer in one page (English and Bahasa Melayu), checked 25 October 2026. Countdown timer: type a time such as 5:00, 90 (seconds), 10 min or 1h30m, or press a preset from 1 to 60 minutes; up to 100 hours; +1 minute while running; optional label; alarm of three beeps repeated 6 times with phone vibration; the tab title shows the time left. Stopwatch: hundredths of a second, laps with split and total times, fastest lap in green and slowest in red, copy laps as CSV. Pomodoro (Francesco Cirillo's method): 25-minute focus blocks, 5-minute short breaks and a long break after every 4 blocks (20 minutes by default; the method suggests 20 to 30); 4 blocks take 25+5+25+5+25+5+25 = 115 minutes; times are adjustable. Time is calculated from timestamps, so it stays exact in a background tab; the screen is kept awake while running where the browser supports the Screen Wake Lock API. Keyboard: Space start/pause, L lap, R reset, F full screen. A link such as /online-timer/#t=5m opens a 5-minute timer.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "timer",
+  "scripts": ["/assets/js/timer.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Online Timer and Stopwatch", null]],
+  "about": ["Online timer", "Stopwatch", "Countdown timer", "Pomodoro Technique"],
+  "app": {
+    "name": "Online Timer and Stopwatch",
+    "category": "UtilitiesApplication",
+    "features": ["Countdown timer with alarm and vibration", "Presets from 1 to 60 minutes", "Stopwatch with laps and CSV copy", "Pomodoro timer (25/5/20)", "Full screen", "Keeps the screen awake", "Keyboard shortcuts", "Shareable timer links"]
+  },
+  "citations": [
+    ["Francesco Cirillo: The Pomodoro Technique (archived)", "https://web.archive.org/web/20230331051358/https://francescocirillo.com/products/the-pomodoro-technique"],
+    ["Wikipedia: Pomodoro Technique", "https://en.wikipedia.org/wiki/Pomodoro_Technique"],
+    ["MDN: Screen Wake Lock API", "https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API"],
+    ["MDN: setTimeout() reasons for delays", "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#reasons_for_delays_longer_than_specified"]
+  ],
+  "faq": [
+    { "q": "How do I set a timer for 5 minutes?", "a": "Press the 5 min preset, or type 5:00 (or 300, or 5 min) in the time box and press Start. When it reaches zero the alarm beeps 6 times and the phone vibrates. You can also open /online-timer/#t=5m to load a 5-minute timer straight away." },
+    { "q": "Does the timer keep running in another tab?", "a": "Yes. The time is worked out from the clock, not by counting ticks, so it stays exact when you switch tabs; the tab title shows the time left. While it runs the screen is kept awake where the browser allows it. If a phone locks and suspends the browser, the alarm sounds as soon as you return." },
+    { "q": "How do I record laps on the stopwatch?", "a": "Choose Stopwatch, press Start, then press Lap (or the L key) at each lap. Every lap shows its split and total time; the fastest is green and the slowest red. Copy laps gives you a CSV list for a spreadsheet." },
+    { "q": "What is the Pomodoro Technique?", "a": "A time-management method created by Francesco Cirillo: work for 25 minutes, take a short break of about 5 minutes, and after 4 work blocks take a longer break of 20 to 30 minutes (20 here by default). Four blocks with breaks take 115 minutes here. You can change the focus, short and long break lengths." },
+    { "q": "What are the keyboard shortcuts?", "a": "Space starts or pauses, L records a lap, R resets and F switches full screen. Shortcuts do not fire while you are typing in a box, so you can still type a time or label." },
+    { "q": "Why can't I hear the alarm?", "a": "Browsers only allow sound after you tap the page, so press Start rather than relying on a link alone. Check that Alarm sound is ticked, the volume is up, and on iPhone that the silent switch is off, because it can mute web page sound." },
+    { "q": "How long can the timer run?", "a": "The countdown accepts up to 100 hours, typed as 1:30:00, 1h30m or 90 min, and the stopwatch shows hours once it passes 60 minutes. Use +1 min to add time while a countdown is running." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Online Timer and Stopwatch</li></ol></nav>
+  <h1>Online Timer and Stopwatch</h1>
+  <p class="answer">Set a <strong>countdown timer with an alarm</strong>, run a <strong>stopwatch with laps</strong>, or focus with a <strong>Pomodoro timer</strong> (25 minutes work, 5 minutes break) on one page. Press a preset from 1 to 60 minutes or type any time such as 5:00 or 1h30m. It keeps exact time in a background tab, and nothing to install.</p>
+  <p class="meta"><span>Checked <time datetime="{{TM_VERIFIED_ISO}}">{{TM_VERIFIED}}</time></span><span>Runs in your browser</span><a href="/jam-randik/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <section class="box" aria-labelledby="tm-h">
+      <h2 id="tm-h">Clock</h2>
+      <div class="tm-stage" id="tmStage">
+        <output class="tm-display" id="tmDisplay" for="dur">{{TM_DISPLAY}}</output>
+        <p class="tm-sub" id="tmSub"></p>
+        <div class="tm-bar-wrap" id="tmBarWrap"{{TM_BAR_HIDDEN}}><div class="tm-bar" id="tmBar"></div></div>
+      </div>
+      <div class="tool-actions go tm-go"><button type="button" class="btn" id="tmStart">Start</button><button type="button" class="btn ghost" id="tmLap"{{TM_LAP_ATTR}}>Lap</button><button type="button" class="btn ghost" id="tmPlus"{{TM_PLUS_ATTR}}>+1 min</button><button type="button" class="btn ghost" id="tmReset">Reset</button></div>
+      <p class="sr-only" id="tmLive" aria-live="assertive"></p>
+      <div id="tmLapBox" hidden>
+        <table class="rows"><caption>Laps</caption><thead><tr><th scope="col">Lap</th><th scope="col">Split</th><th scope="col">Total</th></tr></thead><tbody id="tmLaps"></tbody></table>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="tmCopy">Copy laps (CSV)</button></div>
+      </div>
+      <div id="tmPlanBox" hidden><h3>Plan (<span id="tmTotal">{{TM_PLAN_TOTAL}} min</span>)</h3><ol class="tm-plan" id="tmPlan"></ol></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tmFull">Full screen (F)</button></div>
+    </section>
+
+    <form class="box" id="tmForm" novalidate aria-labelledby="tm-set-h">
+      <h2 id="tm-set-h">Settings</h2>
+      <fieldset class="field-group"><legend>Mode</legend><div class="chipset">{{TM_MODES}}</div></fieldset>
+      <div id="tmTimerF"{{TM_TIMER_HIDDEN}}>
+        <div class="field"><label for="dur">Time (5:00, 90, 10 min, 1h30m)</label><div class="input"><input id="dur" name="dur" type="text" inputmode="text" value="5:00" autocomplete="off"></div></div>
+        <p class="help" id="tmDurMsg"></p>
+        <div class="tm-presets" role="group" aria-label="Presets">{{TM_PRESETS}}</div>
+        <div class="field"><label for="label">Label (optional)</label><div class="input"><input id="label" name="label" type="text" maxlength="40" placeholder="Rice, exam, break…"></div></div>
+      </div>
+      <div id="tmPomoF" hidden>
+        <div class="field-row">
+          <div class="field"><label for="blocks">Focus blocks</label><div class="input"><input id="blocks" name="blocks" type="number" inputmode="numeric" min="1" max="16" value="4"></div></div>
+          <div class="field"><label for="focus">Focus (min)</label><div class="input"><input id="focus" name="focus" type="number" inputmode="numeric" min="1" max="120" value="25"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="short">Short break (min)</label><div class="input"><input id="short" name="short" type="number" inputmode="numeric" min="1" max="60" value="5"></div></div>
+          <div class="field"><label for="long">Long break (min)</label><div class="input"><input id="long" name="long" type="number" inputmode="numeric" min="1" max="60" value="20"></div></div>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" name="sound" checked> Alarm sound and vibration</label>
+      <p class="help">Shortcuts: Space start/pause · L lap · R reset · F full screen.</p>
+    </form>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="pomo-h">Pomodoro plan: 4 blocks</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pomo-h">
+    <table class="data">
+      <thead><tr><th scope="col">Step</th><th scope="col">Type</th><th scope="col">Length</th><th scope="col">Clock</th></tr></thead>
+      <tbody>
+{{TM_PLAN}}
+      </tbody>
+    </table>
+  </div>
+  <p>Four Pomodoro blocks with short breaks take <strong>{{TM_PLAN_TOTAL}} minutes</strong>: 100 minutes of focus and 15 minutes of breaks. Run 8 blocks and a 20-minute long break comes after the 4th.</p>
+
+  <h2 id="example">Example: cooking rice and a study session</h2>
+  <p>Rice needs 12 minutes: type <code>12 min</code> or <code>12:00</code>, label it "Rice" and press Start. The tab title counts down, so you can keep browsing. For revision, choose Pomodoro, keep 4 blocks of 25 minutes and press Start: the timer moves to each break and back with a short alarm, and rings longer at the end of the last block.</p>
+
+  <h2 id="formula">How it keeps exact time</h2>
+  <ol>
+    <li><strong>End time, not ticks:</strong> pressing Start stores the exact finishing moment; the display shows the difference from the clock, so delays never add up.</li>
+    <li><strong>Background tabs:</strong> browsers slow down timers in hidden tabs; because the end time is fixed, the countdown is still right when you come back.</li>
+    <li><strong>Alarm:</strong> a separate check fires at the end time, beeps with the Web Audio API and vibrates phones that support it.</li>
+    <li><strong>Screen:</strong> while running, the page asks the browser to keep the screen on (Screen Wake Lock), and releases it on pause or reset.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="uses">Popular uses</h2>
+  <ul>
+    <li><strong>Classroom and exams:</strong> full-screen countdown on a projector for quizzes and presentations.</li>
+    <li><strong>Exercise:</strong> stopwatch laps for running or plank holds; copy the laps into a spreadsheet.</li>
+    <li><strong>Cooking:</strong> rice, eggs or kuih steaming with a label so you remember what the alarm is for.</li>
+    <li><strong>Focus:</strong> Pomodoro blocks for study, work or typing practice with the <a href="/typing-test/">Typing Test</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://web.archive.org/web/20230331051358/https://francescocirillo.com/products/the-pomodoro-technique" rel="noopener">Francesco Cirillo: The Pomodoro Technique</a> and <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" rel="noopener">Wikipedia: Pomodoro Technique</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API" rel="noopener">MDN: Screen Wake Lock API</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#reasons_for_delays_longer_than_specified" rel="noopener">MDN: why timers are delayed in background tabs</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Do not rely on a web page for safety-critical timing such as medication. Phones can suspend browsers when locked or on low battery; use a dedicated alarm for anything important.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/typing-test/">Typing Test<small>Check your WPM</small></a>
+    <a href="/spin-the-wheel/">Spin the Wheel<small>Random name picker</small></a>
+    <a href="/working-days-calculator-malaysia/">Working Days Calculator<small>Workdays and holidays</small></a>
+  </div>
+</section>

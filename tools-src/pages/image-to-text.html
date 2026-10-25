@@ -1,0 +1,133 @@
+<!--page
+{
+  "path": "/image-to-text/",
+  "lang": "en",
+  "cat": "ai",
+  "alternates": { "ms": "/gambar-ke-teks/" },
+  "title": "Image to Text Converter (OCR): Copy Text from Photo, Free",
+  "description": "Copy text from a photo, screenshot or scanned page free: OCR in your browser for English, Malay, Chinese and Tamil. Nothing uploaded; copy or save as .txt.",
+  "llms": "Free image to text converter (OCR) that runs in the browser, checked 25 October 2026: the picture is never uploaded. It uses Tesseract (Apache-2.0) through tesseract.js 7.0.0 with LSTM language models loaded from jsDelivr the first time and cached by the browser: English (eng, 2.95 MB), Malay (msa, 1.18 MB), Chinese simplified (chi_sim, 1.72 MB) and Tamil (tam, 1.45 MB), plus an engine of about 3.9 MB; English and Malay together are about 8 MB the first time. Steps: small pictures are enlarged (up to 3×, aiming at 1,600 px) and very large ones reduced to 2,500 px, optional Enhance converts to black and white with Otsu's threshold (flipping light text on dark), Rotate turns the picture 90°, then text is read and tidied (words broken by a line-end hyphen are joined; lines inside a paragraph can be joined). Results show the mean confidence (0 to 100%) and word count; text is editable, can be copied or saved as .txt. Tesseract works best on printed text at about 300 dpi and is not designed for handwriting.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "ocr",
+  "scripts": ["/assets/js/ocr.js"],
+  "breadcrumb": [["Tools", "/"], ["AI Tools", "/?cat=ai#tools"], ["Image to Text", null]],
+  "about": ["Optical character recognition", "Image to text", "Tesseract OCR", "Text extraction"],
+  "app": {
+    "name": "Image to Text Converter (OCR)",
+    "category": "UtilitiesApplication",
+    "features": ["OCR in the browser, picture never uploaded", "English, Malay, Chinese and Tamil", "Enhance (black and white) and rotate", "Joins hyphenated words and paragraph lines", "Confidence and word count", "Copy text or save as .txt", "Paste a screenshot with Ctrl+V"]
+  },
+  "citations": [
+    ["tesseract.js (Apache-2.0)", "https://github.com/naptha/tesseract.js"],
+    ["Tesseract documentation: Improving the quality of the output", "https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html"],
+    ["Tesseract documentation: FAQ", "https://tesseract-ocr.github.io/tessdoc/FAQ.html"],
+    ["tesseract-ocr: tessdata_best language models", "https://github.com/tesseract-ocr/tessdata_best"],
+    ["Wikipedia: Otsu's method", "https://en.wikipedia.org/wiki/Otsu%27s_method"]
+  ],
+  "faq": [
+    { "q": "How do I copy text from an image?", "a": "Choose, drop or paste a picture (a photo, screenshot or scanned page) and the text appears in the box in a few seconds. Tick the languages in the picture first; English and Malay are on by default. Edit the text if needed, then press Copy text or Save as .txt." },
+    { "q": "Is my picture uploaded?", "a": "No. The OCR engine runs in your browser on your own device. Only the engine and language files are downloaded from jsDelivr, about 8 MB the first time for English and Malay, and the browser keeps them for next time. Your picture and text are never sent anywhere." },
+    { "q": "Does it read Malay, Chinese and Tamil?", "a": "Yes. Tick Malay, Chinese (simplified) or Tamil along with English. Each language adds a one-time download of 1.2 to 3 MB. Choose only the languages that are really in the picture; extra languages slow it down and can add mistakes." },
+    { "q": "Can it read handwriting?", "a": "Not well. Tesseract, the engine used here, is designed for printed text, and its own documentation says handwriting won't work very well. Typed documents, receipts, screenshots, signs and book pages give the best results." },
+    { "q": "How do I get better results?", "a": "Use a sharp, well-lit picture taken straight on, with the text horizontal; press Rotate if it is sideways. Tick Enhance for shadows or coloured paper. Tesseract works best at about 300 dpi, so photograph close enough that the letters are clearly readable." },
+    { "q": "What does the confidence figure mean?", "a": "It is Tesseract's average confidence in the words it read, from 0 to 100%. Above about 80% the text is usually close to perfect; below 60% the tool suggests Enhance, rotating or a clearer picture, and you should check the text carefully." },
+    { "q": "Can I convert a PDF to text?", "a": "This tool reads pictures. For a scanned PDF, take a screenshot of each page or convert the pages to JPG first, for example with the PDF Converter on this site, then add the images here one at a time." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=ai#tools">AI Tools</a></li><li aria-current="page">Image to Text</li></ol></nav>
+  <h1>Image to Text Converter (OCR)</h1>
+  <p class="answer">Copy the text from any <strong>photo, screenshot or scanned page</strong> in a few seconds. The OCR runs <strong>in your browser</strong>, so the picture is <strong>never uploaded</strong>, and it reads <strong>English, Malay, Chinese and Tamil</strong>. The first use downloads about {{O_SIZE}} MB, which the browser keeps; then copy the text or save it as .txt.</p>
+  <p class="meta"><span>Checked <time datetime="{{O_VERIFIED_ISO}}">{{O_VERIFIED}}</time></span><span>Your picture stays on your device</span><a href="/gambar-ke-teks/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="ocrForm" novalidate aria-labelledby="ocr-h">
+      <h2 id="ocr-h">Your picture</h2>
+      <label class="drop" id="ocrDrop" for="ocrFile">
+        <input type="file" id="ocrFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/avif">
+        <img id="ocrPreview" alt="The picture you chose" hidden>
+        <span id="ocrDropText"><strong>Choose a picture</strong> or drop it here<small>Photo, screenshot or scan. You can also paste (Ctrl+V).</small></span>
+      </label>
+      <fieldset class="field-group"><legend>Languages in the picture</legend><div class="chipset">{{O_LANGS}}</div></fieldset>
+      <p class="help">First-time download: about <span id="ocrSize">{{O_SIZE}}</span> MB.</p>
+      <label class="check"><input type="checkbox" name="enhance"> Enhance (black and white, for shadows or coloured paper)</label>
+      <label class="check"><input type="checkbox" name="join"> Join lines into paragraphs</label>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="ocrRotate" disabled>Rotate 90°</button></div>
+    </form>
+
+    <section class="box" id="ocrResult" aria-labelledby="ocr-result-h">
+      <h2 id="ocr-result-h">Text</h2>
+      <label class="sr-only" for="ocrText">Text from the picture</label>
+      <textarea class="ocr-text" id="ocrText" spellcheck="false" placeholder="The text from your picture appears here. You can edit it."></textarea>
+      <p class="note" id="ocrCount">0 words · 0 characters</p>
+      <progress class="ocr-prog" id="ocrProg" max="100" value="0" hidden></progress>
+      <p class="note" id="ocrStatus">Your picture stays on this device.</p>
+      <p class="sr-only" id="ocrLive" aria-live="polite"></p>
+      <canvas id="ocrCanvas" aria-hidden="true"></canvas>
+      <div class="tool-actions go"><button type="button" class="btn sm" id="ocrCopy" disabled>Copy text</button><button type="button" class="btn ghost sm" id="ocrSave" disabled>Save as .txt</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ocrPrint">Print</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="langs-h">Languages and download sizes</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="langs-h">
+    <table class="data">
+      <thead><tr><th scope="col">Language</th><th scope="col">Code</th><th scope="col">One-time download</th></tr></thead>
+      <tbody>
+{{O_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>The OCR engine itself (tesseract.js {{O_VERSION}}) adds about {{O_CORE}} MB. Everything is cached by the browser, so later pictures start almost at once.</p>
+
+  <h2 id="example">Example: copying a receipt for a claim</h2>
+  <p>Photograph a printed receipt flat on the table, straight on and in good light. Drop the photo here with English and Malay ticked. The shop name, items and total appear in the text box; check the numbers against the receipt (OCR can confuse 0 and O or 1 and l), then press Copy text and paste into your claim form or spreadsheet.</p>
+
+  <h2 id="formula">How it works</h2>
+  <ol>
+    <li><strong>Prepare:</strong> small pictures are enlarged (up to 3×) and very large ones reduced to 2,500 px, so letters are a size the engine reads well.</li>
+    <li><strong>Enhance (optional):</strong> the picture becomes black and white at the threshold that best separates text from page (Otsu's method); white text on a dark background is flipped.</li>
+    <li><strong>Recognise:</strong> Tesseract's LSTM neural network reads each line in the languages you ticked and gives a confidence for each word.</li>
+    <li><strong>Tidy:</strong> words split by a hyphen at the end of a line are joined, and lines inside a paragraph can be joined into one.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips for accurate text</h2>
+  <ul>
+    <li><strong>Straight and sharp:</strong> hold the phone parallel to the page and tap to focus; blurry letters cause most errors.</li>
+    <li><strong>Even light:</strong> avoid shadows across the text, or tick Enhance.</li>
+    <li><strong>Only the right languages:</strong> extra languages slow it down and can add odd characters.</li>
+    <li><strong>Printed text only:</strong> handwriting is not supported well.</li>
+    <li>Need the text shorter or reworded? Paste it into the <a href="/ai-summarizer/">AI Summarizer</a> or <a href="/paraphrasing-tool/">Paraphrasing Tool</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://github.com/naptha/tesseract.js" rel="noopener">tesseract.js</a> (Apache-2.0) and <a href="https://github.com/tesseract-ocr/tessdata_best" rel="noopener">Tesseract language models</a></li>
+    <li><a href="https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html" rel="noopener">Tesseract: improving the quality of the output</a> and <a href="https://tesseract-ocr.github.io/tessdoc/FAQ.html" rel="noopener">Tesseract FAQ</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" rel="noopener">Wikipedia: Otsu's method</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> OCR can misread characters, especially numbers. Check important text such as amounts, IC numbers and addresses against the original before you use it.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/pdf-converter/">PDF Converter<small>PDF to JPG and more</small></a>
+    <a href="/ai-summarizer/">AI Summarizer<small>Shorten long text</small></a>
+    <a href="/image-to-prompt/">Image to Prompt<small>Describe a picture for AI art</small></a>
+  </div>
+</section>

@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/buat-qr-code/",
+  "lang": "ms",
+  "cat": "design",
+  "alternates": { "en": "/qr-code-generator/" },
+  "title": "Buat QR Code Percuma: Pautan, Wi-Fi, WhatsApp, Logo, Tiada Tamat",
+  "description": "Buat QR code percuma yang tidak tamat tempoh: pautan, Wi-Fi, WhatsApp, kad kenalan, e-mel dan peta. Tambah warna dan logo, muat turun PNG atau SVG.",
+  "llms": "Penjana QR code statik percuma (Bahasa Melayu dan Inggeris), disemak 25 Oktober 2026. Kod dibuat dalam pelayar dan menyimpan data di dalam kod itu sendiri, jadi ia tidak tamat tempoh dan tiada lencongan penjejakan. Jenis dan format kandungan (ZXing barcode contents): pautan laman web; teks; Wi-Fi sebagai WIFI:T:WPA;S:nama;P:kata laluan;; dengan \\ ; , : dan \" dilepaskan dengan garis condong terbalik (telefon menyertai rangkaian dari kamera; Android 10 ke atas membacanya dalam Tetapan); WhatsApp sebagai https://wa.me/60123456789?text=… (nombor Malaysia seperti 012-345 6789 diberi kod negara 60); kad kenalan vCard 3.0; e-mel mailto: dengan subjek dan mesej; SMS SMSTO:; panggilan tel:; lokasi geo: latitud,longitud. Reka bentuk: warna kod dan latar (dengan amaran kontras rendah atau warna terbalik), latar lutsinar, modul segi empat, bulat sudut atau titik, pembetulan ralat L 7%, M 15%, Q 25% atau H 30% (DENSO WAVE), dan logo di tengah yang menukar pembetulan ralat kepada H. Muat turun: PNG 512 hingga 4096 piksel atau SVG untuk cetakan; salin ke papan klip. Kapasiti versi 40 ialah 2,953 bait pada tahap L dan 1,273 pada tahap H. Zon senyap 4 modul dikekalkan; panduan industri (bukan sebahagian ISO/IEC 18004) mencadangkan saiz cetak sekurang-kurangnya 2 × 2 cm dan kira-kira satu persepuluh jarak imbasan. QR pembayaran DuitNow tidak disediakan: ia mengikut piawaian EMV merchant-presented dan mesti dikeluarkan melalui bank atau e-dompet yang berdaftar dengan PayNet.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "qr",
+  "scripts": ["/assets/js/qr.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat Reka Bentuk", "/?cat=design#tools"], ["Buat QR Code", null]],
+  "about": ["Kod QR", "Penjana kod QR", "QR Wi-Fi", "vCard"],
+  "app": {
+    "name": "Penjana QR Code",
+    "category": "DesignApplication",
+    "features": ["QR code statik yang tidak tamat tempoh", "Pautan, teks, Wi-Fi, WhatsApp, kenalan, e-mel, SMS, telefon dan peta", "Warna, latar lutsinar dan gaya titik", "Logo di tengah dengan pembetulan ralat 30%", "PNG hingga 4096 piksel dan SVG", "Amaran kontras warna", "Dibuat dalam pelayar, tiada muat naik"]
+  },
+  "citations": [
+    ["DENSO WAVE: QR code error correction", "https://www.qrcode.com/en/about/error_correction.html"],
+    ["DENSO WAVE: QR code versions 31 to 40 (capacity)", "https://www.qrcode.com/en/about/versionPage/versionPage31_40.html"],
+    ["DENSO WAVE: How to make a QR code (quiet zone)", "https://www.qrcode.com/en/howto/code.html"],
+    ["ZXing: Barcode contents", "https://github.com/zxing/zxing/wiki/Barcode-Contents"],
+    ["PayNet: DuitNow QR merchant-presented mode", "https://docs.developer.paynet.my/docs/duitNow-QR/integration/QR-generation-specification/merchant-presented-mode/overview"]
+  ],
+  "faq": [
+    { "q": "Bagaimana buat QR code secara percuma?", "a": "Pilih apa yang kod perlu buka (pautan, Wi-Fi, WhatsApp, kad kenalan, e-mel, SMS, nombor telefon atau lokasi peta), isi maklumat, dan QR code dikemas kini semasa anda menaip. Pilih warna atau tambah logo jika mahu, kemudian muat turun PNG atau SVG. Tiada pendaftaran dan tiada tera air." },
+    { "q": "Adakah QR code ini tamat tempoh?", "a": "Tidak. Ini QR code statik: pautan atau maklumat disimpan di dalam kod itu sendiri, bukan di sebalik lencongan pada pelayan kami, jadi ia terus berfungsi selagi pautan yang dituju berfungsi. Banyak perkhidmatan QR 'dinamik' menghantar imbasan melalui pelayan mereka, yang boleh terhenti apabila langganan tamat." },
+    { "q": "Bagaimana buat QR code untuk Wi-Fi?", "a": "Pilih Wi-Fi, masukkan nama rangkaian (SSID) dan kata laluan, dan kekalkan WPA melainkan penghala anda guna WEP atau tanpa kata laluan. Kod menyimpan WIFI:T:WPA;S:nama;P:kata laluan;; supaya tetamu hanya perlu halakan kamera untuk menyertai; Android 10 ke atas dan iPhone terkini menyokongnya." },
+    { "q": "Bolehkah saya letak logo di tengah?", "a": "Boleh. Tambah logo dan penjana menukar pembetulan ralat kepada H, yang membolehkan pengimbas memulihkan kira-kira 30% modul yang rosak atau terlindung. Logo meliputi kira-kira 22% lebar kod; sentiasa uji imbas dengan dua telefon sebelum mencetak." },
+    { "q": "Berapa saiz QR code untuk dicetak?", "a": "Sekurang-kurangnya 2 × 2 cm, dan untuk jarak jauh guna kira-kira satu persepuluh jarak imbasan: kod yang diimbas dari 1 m patut kira-kira 10 cm lebar. Ini panduan industri, bukan sebahagian piawaian QR. Kekalkan jidar putih (zon senyap) 4 modul di sekeliling kod." },
+    { "q": "Bolehkah saya buat QR DuitNow di sini?", "a": "Tidak. QR DuitNow mengikut piawaian EMV merchant-presented dan mesti dikeluarkan melalui bank atau e-dompet anda, yang mendaftarkan anda dengan PayNet. Minta QR DuitNow daripada bank anda; QR pembayaran buatan sendiri tidak akan diterima oleh aplikasi perbankan." },
+    { "q": "Berapa banyak teks muat dalam QR code?", "a": "QR code terbesar (versi 40) memuatkan 2,953 bait pada pembetulan ralat L, atau 1,273 bait pada H. Kandungan lebih pendek menghasilkan kod lebih kecil dan mudah diimbas, jadi guna pautan pendek jika boleh. Penjana memberi amaran jika teks terlalu panjang." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=design#tools">Alat Reka Bentuk</a></li><li aria-current="page">Buat QR Code</li></ol></nav>
+  <h1>Buat QR Code Percuma</h1>
+  <p class="answer">Buat <strong>QR code percuma yang tidak tamat tempoh</strong> untuk pautan, Wi-Fi, WhatsApp, kad kenalan, e-mel, SMS, nombor telefon atau lokasi peta. Maklumat disimpan di dalam kod itu sendiri, bukan di sebalik lencongan, dan dibuat dalam pelayar anda. Tambah warna dan <strong>logo</strong>, kemudian muat turun <strong>PNG atau SVG</strong>.</p>
+  <p class="meta"><span>Disemak <time datetime="{{Q_VERIFIED_ISO}}">{{Q_VERIFIED}}</time></span><span>Dibuat dalam pelayar; tiada muat naik</span><a href="/qr-code-generator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="qrForm" novalidate aria-labelledby="qr-h">
+      <h2 id="qr-h">Kandungan</h2>
+      <fieldset class="field-group"><legend>Apa yang kod QR buka?</legend><div class="chipset"><label><input type="radio" name="type" value="url" checked> Pautan</label><label><input type="radio" name="type" value="text"> Teks</label><label><input type="radio" name="type" value="wifi"> Wi-Fi</label><label><input type="radio" name="type" value="whatsapp"> WhatsApp</label><label><input type="radio" name="type" value="vcard"> Kenalan</label><label><input type="radio" name="type" value="email"> E-mel</label><label><input type="radio" name="type" value="sms"> SMS</label><label><input type="radio" name="type" value="phone"> Telefon</label><label><input type="radio" name="type" value="geo"> Lokasi</label></div></fieldset>
+      <div data-for="url"><div class="field"><label for="url">Laman web atau pautan</label><div class="input"><input id="url" name="url" type="url" inputmode="url" value="https://tool.thebukitbesi.com/" autocomplete="off"></div></div></div>
+      <div data-for="text" hidden><div class="field"><label for="text">Apa-apa teks</label><textarea class="prose-in short" id="text" name="text" rows="4" placeholder="Hingga kira-kira 2,900 aksara"></textarea></div></div>
+      <div data-for="wifi" hidden><div class="field"><label for="ssid">Nama rangkaian (SSID)</label><div class="input"><input id="ssid" name="ssid" type="text" autocomplete="off"></div></div><div class="field"><label for="password">Kata laluan</label><div class="input"><input id="password" name="password" type="text" autocomplete="off"></div></div><div class="field"><label for="security">Keselamatan</label><select class="input" id="security" name="security"><option value="WPA" selected>WPA/WPA2/WPA3</option><option value="WEP">WEP</option><option value="nopass">Tiada (rangkaian terbuka)</option></select></div><label class="check"><input type="checkbox" name="hidden"> Rangkaian tersembunyi</label></div>
+      <div data-for="whatsapp" hidden><div class="field"><label for="wphone">Nombor WhatsApp (cth. 012-345 6789)</label><div class="input"><input id="wphone" name="wphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="wmessage">Mesej sedia ada (pilihan)</label><textarea class="prose-in short" id="wmessage" name="wmessage" rows="3"></textarea></div></div>
+      <div data-for="vcard" hidden><div class="field-row"><div class="field"><label for="first">Nama pertama</label><div class="input"><input id="first" name="first" type="text" autocomplete="off"></div></div><div class="field"><label for="last">Nama akhir</label><div class="input"><input id="last" name="last" type="text" autocomplete="off"></div></div></div><div class="field-row"><div class="field"><label for="org">Syarikat</label><div class="input"><input id="org" name="org" type="text" autocomplete="off"></div></div><div class="field"><label for="title">Jawatan</label><div class="input"><input id="title" name="title" type="text" autocomplete="off"></div></div></div><div class="field"><label for="vphone">Telefon</label><div class="input"><input id="vphone" name="vphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="vemail">E-mel</label><div class="input"><input id="vemail" name="vemail" type="email" inputmode="email" autocomplete="off"></div></div><div class="field"><label for="web">Laman web</label><div class="input"><input id="web" name="web" type="url" inputmode="url" autocomplete="off"></div></div><div class="field"><label for="address">Alamat</label><div class="input"><input id="address" name="address" type="text" autocomplete="off"></div></div></div>
+      <div data-for="email" hidden><div class="field"><label for="email">Alamat e-mel</label><div class="input"><input id="email" name="email" type="email" inputmode="email" autocomplete="off"></div></div><div class="field"><label for="subject">Subjek (pilihan)</label><div class="input"><input id="subject" name="subject" type="text" autocomplete="off"></div></div><div class="field"><label for="body">Mesej (pilihan)</label><textarea class="prose-in short" id="body" name="body" rows="3"></textarea></div></div>
+      <div data-for="sms" hidden><div class="field"><label for="sphone">Nombor telefon</label><div class="input"><input id="sphone" name="sphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="smessage">Mesej</label><textarea class="prose-in short" id="smessage" name="smessage" rows="3"></textarea></div></div>
+      <div data-for="phone" hidden><div class="field"><label for="pphone">Nombor telefon (cth. 03-1234 5678)</label><div class="input"><input id="pphone" name="pphone" type="tel" inputmode="tel" autocomplete="off"></div></div></div>
+      <div data-for="geo" hidden><div class="field-row"><div class="field"><label for="lat">Latitud</label><div class="input"><input id="lat" name="lat" type="text" inputmode="decimal" autocomplete="off"></div></div><div class="field"><label for="lng">Longitud</label><div class="input"><input id="lng" name="lng" type="text" inputmode="decimal" autocomplete="off"></div></div></div><p class="help">Contoh: KLCC ialah 3.1579, 101.7116. Dalam Google Maps, tekan lama pada lokasi untuk menyalin nombornya.</p></div>
+      <fieldset class="field-group">
+        <legend>Reka bentuk</legend>
+        <div class="field-row"><div class="field"><label for="fg">Warna kod</label><input class="color-in" id="fg" name="fg" type="color" value="#000000"></div><div class="field"><label for="bg">Latar</label><input class="color-in" id="bg" name="bg" type="color" value="#ffffff"></div></div>
+        <label class="check"><input type="checkbox" name="transparent"> Latar lutsinar</label>
+        <div class="field-row"><div class="field"><label for="style">Gaya titik</label><select class="input" id="style" name="style"><option value="square" selected>Segi empat</option><option value="rounded">Bulat sudut</option><option value="dots">Titik</option></select></div>
+        <div class="field"><label for="ec">Pembetulan ralat</label><select class="input" id="ec" name="ec"><option value="L">L (7%)</option><option value="M" selected>M (15%)</option><option value="Q">Q (25%)</option><option value="H">H (30%)</option></select></div></div>
+        <div class="field"><label for="logo">Logo di tengah (pilihan)</label><input id="logo" name="logo" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="qrNoLogo">Buang logo</button></div>
+        <div class="field"><label for="size">Saiz PNG</label><select class="input" id="size" name="size"><option value="512">512 × 512 px</option><option value="1024" selected>1024 × 1024 px</option><option value="2048">2048 × 2048 px</option><option value="4096">4096 × 4096 px (cetak)</option></select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="qr-result-h">
+      <h2 id="qr-result-h">QR code anda</h2>
+      <div class="qr-out" id="qrOut">{{Q_SVG}}</div>
+      <p class="note" id="qrInfo">{{Q_INFO}}</p>
+      <p class="qr-text" id="qrText">{{Q_URL}}</p>
+      <p class="note" id="qrMsg"></p>
+      <p class="sr-only" id="qrLive" aria-live="polite"></p>
+      <div class="tool-actions go"><button type="button" class="btn sm" id="qrPng">Muat turun PNG</button><button type="button" class="btn ghost sm" id="qrSvg">Muat turun SVG</button><button type="button" class="btn ghost sm" id="qrCopy">Salin imej</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="qrPrint">Cetak</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="types-h">Apa yang setiap QR code simpan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="types-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Jenis</th><th scope="col">Teks di dalam kod (contoh)</th></tr></thead>
+      <tbody>
+{{Q_TYPES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Contoh: QR code Wi-Fi untuk kedai kopi</h2>
+  <p>Pilih <strong>Wi-Fi</strong>, masukkan rangkaian <code>Kedai Kopi</code> dan kata laluan <code>kopi1234</code>, kekalkan WPA dan muat turun PNG 1024 piksel. Cetak kira-kira 10 cm lebar untuk papan tanda kaunter: pelanggan halakan kamera dan tekan Sertai, tanpa menaip kata laluan. Jika kata laluan ditukar, buat kod baharu.</p>
+
+  <h2 id="ec-h">Pembetulan ralat dan kapasiti</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ec-h">
+    <table class="data">
+      <thead><tr><th scope="col">Tahap</th><th scope="col">Pulih hingga</th><th scope="col">Maks digit</th><th scope="col">Maks huruf (A–Z, 0–9)</th><th scope="col">Maks bait</th></tr></thead>
+      <tbody>
+{{Q_EC}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kapasiti untuk QR code terbesar, versi 40 (177 × 177 modul). M ialah tahap paling biasa; H digunakan apabila logo menutup sebahagian kod.</p>
+
+  <h2 id="print-h">Saiz cetak ikut jarak imbasan</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="print-h">
+    <table class="data">
+      <thead><tr><th scope="col">Kegunaan</th><th scope="col">Jarak imbasan</th><th scope="col">Lebar minimum</th></tr></thead>
+      <tbody>
+{{Q_PRINT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">Cara penjana berfungsi</h2>
+  <ol>
+    <li><strong>Kandungan:</strong> maklumat anda ditulis dalam format yang dikenali kamera telefon, contohnya <code>WIFI:</code>, <code>mailto:</code> atau pautan <code>wa.me</code>.</li>
+    <li><strong>Pengekodan:</strong> teks dikodkan sebagai bait UTF-8 (jadi Bahasa Melayu, Cina dan Tamil berfungsi) dan versi QR terkecil yang muat dipilih.</li>
+    <li><strong>Pembetulan ralat:</strong> kod Reed–Solomon pada tahap pilihan anda membolehkan pengimbas membaca kod yang tercalar atau terlindung sebahagian.</li>
+    <li><strong>Lukisan:</strong> modul dilukis sebagai SVG dengan warna dan gaya anda; tiga petak penjuru kekal padu supaya telefon cepat mengesannya.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips supaya QR code terus boleh diimbas</h2>
+  <ul>
+    <li><strong>Gelap atas cerah:</strong> kod cerah atas latar gelap (terbalik) gagal pada sesetengah pengimbas; penjana memberi amaran.</li>
+    <li><strong>Kekalkan jidar:</strong> tinggalkan margin putih 4 modul; jangan potong semasa mereka bentuk.</li>
+    <li><strong>Lebih pendek lebih baik:</strong> pautan pendek memberi kod kurang padat yang boleh diimbas dari jauh.</li>
+    <li><strong>Uji sebelum cetak:</strong> imbas dengan telefon Android dan iPhone pada saiz sebenar.</li>
+    <li>Perlu buang latar logo dahulu? Gunakan <a href="/buang-background-gambar/">Buang Background Gambar</a> untuk PNG lutsinar.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.qrcode.com/en/about/error_correction.html" rel="noopener">DENSO WAVE: pembetulan ralat</a>, <a href="https://www.qrcode.com/en/about/versionPage/versionPage31_40.html" rel="noopener">kapasiti versi 31 hingga 40</a> dan <a href="https://www.qrcode.com/en/howto/code.html" rel="noopener">zon senyap</a></li>
+    <li><a href="https://github.com/zxing/zxing/wiki/Barcode-Contents" rel="noopener">ZXing: Barcode contents</a> (format Wi-Fi, vCard, mailto, SMS, geo)</li>
+    <li><a href="https://docs.developer.paynet.my/docs/duitNow-QR/integration/QR-generation-specification/merchant-presented-mode/overview" rel="noopener">PayNet: spesifikasi QR DuitNow</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Semak setiap kod sebelum mencetak, dan hanya pautkan kepada kandungan yang anda percaya. QR code ialah tanda dagangan berdaftar DENSO WAVE INCORPORATED.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/buang-background-gambar/">Buang Background Gambar<small>Logo PNG lutsinar</small></a>
+    <a href="/gambar-ke-teks/">Gambar ke Teks<small>Salin teks dari foto</small></a>
+    <a href="/gambar-passport/">Gambar Passport<small>Saiz rasmi dan cetak 4R</small></a>
+  </div>
+</section>

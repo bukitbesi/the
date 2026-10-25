@@ -1,0 +1,156 @@
+<!--page
+{
+  "path": "/typing-test/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/ujian-menaip/" },
+  "title": "Typing Test: Check Your Typing Speed (WPM) Free, 1 Minute",
+  "description": "Free typing speed test in English or Bahasa Melayu: 15 s to 2 min, net and gross WPM, accuracy, mistyped keys and a WPM chart. Works with phone keyboards.",
+  "llms": "Free online typing speed test (WPM test) in English and Bahasa Melayu, checked 25 October 2026. Tests of 15 seconds, 30 seconds, 1 minute or 2 minutes with common words, sentences with punctuation, or words and numbers. Scoring uses the standard 5-character word (spaces included): gross WPM = characters typed ÷ 5 ÷ minutes; net WPM = gross WPM − uncorrected errors ÷ minutes; accuracy = correct keystrokes ÷ all keystrokes, counting mistakes that were later corrected. Example: 250 characters in 1 minute with 3 uncorrected errors = 50 gross WPM and 47 net WPM; 260 keystrokes with 13 wrong = 95% accuracy. Benchmarks: the average desktop typist in a study of 168,960 people (Dhakal et al., CHI 2018, Aalto University) typed 51.56 WPM with 1.17% uncorrected errors; on phones, 37,370 people averaged 36.2 WPM (Palin et al., MobileHCI 2019). Malaysian civil service: SPA entry for Pembantu Tadbir N1 and Pembantu Setiausaha Pejabat N1 has no typing-speed requirement; the JPA service examination for Pembantu Setiausaha Pejabat N1 requires taking notes at 30 words a minute and typing the transcript at 20 words a minute with at most 4% errors (Setiausaha Pejabat N5: notes at 50, typing at 20). Results show net and gross WPM, accuracy, characters per minute, uncorrected errors, the keys missed most, a WPM-per-second chart and a personal best saved only in the browser.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "typing",
+  "scripts": ["/assets/js/typing.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Typing Test", null]],
+  "about": ["Typing speed test", "Words per minute", "Touch typing", "Typing accuracy"],
+  "app": {
+    "name": "Typing Speed Test",
+    "category": "EducationalApplication",
+    "features": ["15 s, 30 s, 1 min and 2 min tests", "English and Bahasa Melayu texts", "Common words, sentences or numbers", "Net WPM, gross WPM and accuracy", "Keys you mistype most", "WPM-per-second chart", "Personal best on this device", "Works with phone keyboards"]
+  },
+  "citations": [
+    ["Dhakal, Feit, Kristensson and Oulasvirta: Observations on Typing from 136 Million Keystrokes (CHI 2018)", "https://userinterfaces.aalto.fi/136Mkeystrokes/"],
+    ["Palin et al.: How do People Type on Mobile Devices? (MobileHCI 2019)", "https://userinterfaces.aalto.fi/typing37k/"],
+    ["Wikipedia: Words per minute", "https://en.wikipedia.org/wiki/Words_per_minute"],
+    ["SpeedTypingOnline: Typing equations", "https://www.speedtypingonline.com/typing-equations"],
+    ["SPA: Pembantu Setiausaha Pejabat Gred N1", "https://www.spa.gov.my/syarat-permohonan/spm-svm/pembantu-setiausaha-pejabat-gred-n1"],
+    ["JPA: Peperiksaan Perkhidmatan Gred 1 hingga 4", "https://peperiksaan.jpa.gov.my/documents/Gred%201%20hingga%204_07012026.pdf"]
+  ],
+  "faq": [
+    { "q": "How is typing speed (WPM) calculated?", "a": "Every 5 characters, spaces included, count as one word. Gross WPM is characters typed ÷ 5 ÷ minutes, and net WPM subtracts uncorrected errors per minute. For example, 250 characters in 1 minute is 50 gross WPM; with 3 uncorrected errors it is 47 net WPM." },
+    { "q": "What is a good typing speed?", "a": "In a study of 168,960 people typing on computers (Aalto University, 2018) the average was 51.56 WPM with 1.17% uncorrected errors. On phones, 37,370 people averaged 36.2 WPM. Around 40 WPM is enough for most office work, 60 WPM is fast and 80 WPM or more is very fast." },
+    { "q": "What typing speed do Malaysian government jobs need?", "a": "SPA does not set a typing speed to apply for Pembantu Tadbir N1 or Pembantu Setiausaha Pejabat N1. After appointment, the JPA service examination for Pembantu Setiausaha Pejabat N1 asks you to take notes at 30 words a minute and type the transcript at 20 words a minute with at most 4% errors; Pembantu Tadbir N1 takes the ISAC computer test instead." },
+    { "q": "How is accuracy calculated?", "a": "Accuracy is correct keystrokes ÷ all keystrokes, and mistakes count even if you fix them with Backspace. If you press 260 keys and 13 were wrong, accuracy is 95%. Uncorrected errors are counted separately and lower your net WPM." },
+    { "q": "Can I take the typing test in Bahasa Melayu?", "a": "Yes. Choose Bahasa Melayu as the language for Malay common words or sentences. The score still uses the standard 5-character word, so a Malay result can be compared directly with an English one even though Malay words are often longer." },
+    { "q": "How can I type faster?", "a": "Learn touch typing: rest your fingers on the home row (A S D F and J K L ;), use the bumps on F and J to find it without looking, and return there after every key. Aim for accuracy first; speed follows with short daily practice. Check the keys you missed most after each test." },
+    { "q": "Does the test work on a phone, and is my result saved?", "a": "Yes, it works with phone keyboards; phone typing is usually about 70% of keyboard speed. Your personal best for each language, mode and duration is saved only in this browser, and nothing you type is sent to a server." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Typing Test</li></ol></nav>
+  <h1>Typing Speed Test</h1>
+  <p class="answer">Type the words below and get your <strong>speed in words per minute (WPM)</strong> and <strong>accuracy</strong>. The average computer typist does <strong>{{Y_DESKTOP}} WPM</strong> and the average phone typist {{Y_MOBILE}} WPM. One word counts as 5 characters. Choose 15 seconds to 2 minutes, in English or Bahasa Melayu; the clock starts on your first key.</p>
+  <p class="meta"><span>Checked <time datetime="{{Y_VERIFIED_ISO}}">{{Y_VERIFIED}}</time></span><span>Runs in your browser; nothing is sent</span><a href="/ujian-menaip/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <section class="box" aria-labelledby="ty-h">
+      <h2 id="ty-h">Test</h2>
+      <form id="tyForm" novalidate>
+        <div class="field-row">
+          <div class="field"><label for="lang">Language</label><select class="input" id="lang" name="lang">{{Y_LANG_OPTIONS}}</select></div>
+          <div class="field"><label for="mode">Text</label><select class="input" id="mode" name="mode">{{Y_MODE_OPTIONS}}</select></div>
+        </div>
+        <fieldset class="field-group"><legend>Duration</legend><div class="chipset">{{Y_SECS}}</div></fieldset>
+      </form>
+      <div class="ty-stats" aria-hidden="true"><div><b id="tyClock">60</b><span>seconds left</span></div><div><b id="tyLiveWpm">0</b><span>WPM</span></div><div><b id="tyLiveAcc">100%</b><span>accuracy</span></div></div>
+      <div class="ty-text" id="tyText" lang="en">{{Y_TEXT}}</div>
+      <label class="sr-only" for="tyInput">Type the text here</label>
+      <textarea class="ty-input" id="tyInput" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Start typing here…"></textarea>
+      <p class="note" id="tyStatus">Start typing to start the clock.</p>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="tyRestart">New text (Esc)</button><button type="button" class="btn ghost sm" id="tyRetry">Retry same text</button></div>
+    </section>
+
+    <section class="box" id="tyResult" aria-labelledby="ty-result-h">
+      <h2 id="ty-result-h">Your result</h2>
+      <div class="net">
+        <p>Net speed</p>
+        <output id="tyNet" for="tyInput">0</output>
+        <p>words per minute <span class="ty-band" id="tyBand">Take the test</span></p>
+        <p id="tySub">Accuracy, raw speed and characters per minute appear when the time is up.</p>
+      </div>
+      <p class="sr-only" id="tyLive" aria-live="polite"></p>
+      <table class="rows">
+        <caption>Details</caption>
+        <tbody id="tyRows">
+          <tr><th scope="row">Net WPM</th><td>–</td></tr>
+          <tr><th scope="row">Gross WPM</th><td>–</td></tr>
+          <tr><th scope="row">Accuracy</th><td>–</td></tr>
+          <tr><th scope="row">Correct characters per minute</th><td>–</td></tr>
+          <tr><th scope="row">Uncorrected errors</th><td>–</td></tr>
+          <tr><th scope="row">Time</th><td>–</td></tr>
+        </tbody>
+      </table>
+      <svg class="ty-chart" id="tyChart" viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="WPM each second"><path d="M0 77"/><text x="2" y="10">WPM each second</text></svg>
+      <p class="note" id="tyWeak"></p>
+      <p class="note" id="tyBest"></p>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tyPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="example">Example: working out WPM</h2>
+  <p>In a 1-minute test you type 250 characters, including spaces. That is 250 ÷ 5 = <strong>{{Y_EX_GROSS}} gross WPM</strong>. You left 3 mistakes uncorrected, so net WPM is 50 − 3 = <strong>{{Y_EX_NET}} WPM</strong>. You pressed 260 keys, 13 of them wrong (some later fixed with Backspace), so accuracy is 247 ÷ 260 = <strong>{{Y_EX_ACC}}%</strong>.</p>
+
+  <h2 id="bands-h">How fast is your typing?</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bands-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Level</th><th scope="col">Net speed</th><th scope="col">What it means</th></tr></thead>
+      <tbody>
+{{Y_BANDS}}
+      </tbody>
+    </table>
+  </div>
+  <p>These levels are a rough guide; there is no official scale. For reference, 168,960 people averaged {{Y_DESKTOP}} WPM on computers with {{Y_DESK_ERR}}% uncorrected errors, and 37,370 people averaged {{Y_MOBILE}} WPM on phones with {{Y_MOB_ERR}}% errors.</p>
+
+  <h2 id="formula">How the test works</h2>
+  <ol>
+    <li><strong>Text:</strong> common words, sentences or numbers are picked at random; every test is different, and Retry repeats the same text.</li>
+    <li><strong>Clock:</strong> it starts on your first key and stops at 15 s, 30 s, 1 min or 2 min, or when you finish the text.</li>
+    <li><strong>Gross WPM:</strong> characters typed ÷ 5 ÷ minutes. <strong>Net WPM:</strong> gross minus uncorrected errors per minute.</li>
+    <li><strong>Accuracy:</strong> correct keystrokes ÷ all keystrokes, so a mistake you fixed still counts once.</li>
+  </ol>
+
+  <h2 id="gov">Typing in Malaysian government jobs</h2>
+  <ul>
+    <li><strong>Applying (SPA):</strong> Pembantu Tadbir (Perkeranian/Operasi) N1 and Pembantu Setiausaha Pejabat N1 ask for SPM with a credit in Bahasa Melayu; no typing speed is set.</li>
+    <li><strong>Service examination (JPA), Pembantu Setiausaha Pejabat N1:</strong> take notes at 30 words a minute, then type the transcript at 20 words a minute with at most 4% errors.</li>
+    <li><strong>Setiausaha Pejabat N5:</strong> notes at 50 words a minute, typing at 20 words a minute, at most 4% errors, plus the ISAC computer test. Pembantu Tadbir N1 takes ISAC only.</li>
+  </ul>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">How to type faster</h2>
+  <ul>
+    <li><strong>Home row:</strong> left fingers on A S D F, right fingers on J K L ;. Feel the bumps on F and J, and return after every key.</li>
+    <li><strong>Eyes on the screen:</strong> looking down at the keys is the biggest brake on speed.</li>
+    <li><strong>Accuracy first:</strong> fixing mistakes costs more time than typing slightly slower.</li>
+    <li><strong>Short daily practice:</strong> a few 1-minute tests a day, then work on the keys this test says you miss most.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://userinterfaces.aalto.fi/136Mkeystrokes/" rel="noopener">Dhakal et al. (CHI 2018): 136 million keystrokes</a> and <a href="https://userinterfaces.aalto.fi/typing37k/" rel="noopener">Palin et al. (MobileHCI 2019): mobile typing</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Words_per_minute" rel="noopener">Wikipedia: Words per minute</a> and <a href="https://www.speedtypingonline.com/typing-equations" rel="noopener">SpeedTypingOnline: typing equations</a></li>
+    <li><a href="https://www.spa.gov.my/syarat-permohonan/spm-svm/pembantu-setiausaha-pejabat-gred-n1" rel="noopener">SPA: Pembantu Setiausaha Pejabat N1</a>, <a href="https://www.spa.gov.my/syarat-permohonan/spm-svm/pembantu-tadbir-perkeranian-operasi-gred-n1" rel="noopener">SPA: Pembantu Tadbir N1</a> and <a href="https://peperiksaan.jpa.gov.my/documents/Gred%201%20hingga%204_07012026.pdf" rel="noopener">JPA: service examination, grades 1 to 4</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> This is a practice test. Official examinations set their own texts, timing and error rules; check the latest JPA or employer guidelines before an assessment.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/word-counter/">Word Counter<small>Words, characters, reading time</small></a>
+    <a href="/online-timer/">Online Timer and Stopwatch<small>Countdown, laps, Pomodoro</small></a>
+    <a href="/image-to-text/">Image to Text<small>Copy text from a photo</small></a>
+  </div>
+</section>
