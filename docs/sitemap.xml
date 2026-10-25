@@ -86,6 +86,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/remove-background/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/buat-qr-code/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/buat-qr-code/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/qr-code-generator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/qr-code-generator/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/bursa-share-fee-calculator/</loc>
     <lastmod>2026-10-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/bursa-share-fee-calculator/"/>
@@ -283,6 +290,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/image-to-prompt/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/gambar-ke-teks/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/gambar-ke-teks/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/image-to-text/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/image-to-text/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/gambar-passport/</loc>
     <lastmod>2026-10-20</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/gambar-passport/"/>
@@ -369,11 +383,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/image-to-prompt/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/image-to-text/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/image-to-text/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/gambar-ke-teks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/image-to-text/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/income-tax-calculator-malaysia/</loc>
     <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-cukai-pendapatan/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/income-tax-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/jam-randik/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/jam-randik/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/online-timer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/online-timer/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/javascript-minifier/</loc>
@@ -854,6 +882,13 @@
     <lastmod>2026-10-17</lastmod>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/online-timer/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/online-timer/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/jam-randik/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/online-timer/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/overtime-calculator-malaysia/</loc>
     <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/overtime-calculator-malaysia/"/>
@@ -1005,6 +1040,13 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/qibla-direction-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/arah-kiblat/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/qibla-direction-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/qr-code-generator/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/qr-code-generator/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/buat-qr-code/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/qr-code-generator/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/refinance-calculator-malaysia/</loc>
@@ -1224,6 +1266,20 @@
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/tukar-tarikh-hijrah/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/hijri-date-converter/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/hijri-date-converter/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/typing-test/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/ujian-menaip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/typing-test/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/ujian-menaip/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/ujian-menaip/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/typing-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/typing-test/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/unit-trust-calculator-malaysia/</loc>

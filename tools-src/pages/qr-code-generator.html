@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/qr-code-generator/",
+  "lang": "en",
+  "cat": "design",
+  "alternates": { "ms": "/buat-qr-code/" },
+  "title": "QR Code Generator Free: Link, Wi-Fi, WhatsApp, Logo, No Expiry",
+  "description": "Make free QR codes that never expire: links, Wi-Fi, WhatsApp, contact cards, email and maps. Add colours and a logo, then download PNG or SVG. No sign-up.",
+  "llms": "Free static QR code generator (English and Bahasa Melayu), checked 25 October 2026. Codes are made in the browser and contain the data itself, so they never expire and have no tracking redirect. Types and payload formats (ZXing barcode contents): website link; plain text; Wi-Fi as WIFI:T:WPA;S:name;P:password;; with \\ ; , : and \" escaped by a backslash (phones join from the camera; Android 10+ reads it in Settings); WhatsApp as https://wa.me/60123456789?text=… (Malaysian numbers such as 012-345 6789 get the 60 country code); vCard 3.0 contact card; mailto: email with subject and body; SMSTO: SMS; tel: phone call; geo: latitude,longitude. Design: code and background colours (with a warning for low contrast or inverted colours), transparent background, square, rounded or dot modules, error correction L 7%, M 15%, Q 25% or H 30% (DENSO WAVE), and a centre logo, which switches error correction to H. Downloads: PNG from 512 to 4096 px or SVG for print; copy to clipboard. Capacity at version 40 is 2,953 bytes at level L and 1,273 at level H. A 4-module quiet zone is kept; industry guidance (not part of ISO/IEC 18004) suggests a printed size of at least 2 × 2 cm and about one tenth of the scanning distance. DuitNow payment QR codes are not offered: they follow the EMV merchant-presented standard and must be issued through a bank or e-wallet registered with PayNet.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "qr",
+  "scripts": ["/assets/js/qr.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["QR Code Generator", null]],
+  "about": ["QR code", "QR code generator", "Wi-Fi QR code", "vCard"],
+  "app": {
+    "name": "QR Code Generator",
+    "category": "DesignApplication",
+    "features": ["Static QR codes that never expire", "Link, text, Wi-Fi, WhatsApp, contact, email, SMS, phone and map", "Colours, transparent background and dot styles", "Centre logo with 30% error correction", "PNG up to 4096 px and SVG", "Colour contrast warnings", "Made in the browser, nothing uploaded"]
+  },
+  "citations": [
+    ["DENSO WAVE: QR code error correction", "https://www.qrcode.com/en/about/error_correction.html"],
+    ["DENSO WAVE: QR code versions 31 to 40 (capacity)", "https://www.qrcode.com/en/about/versionPage/versionPage31_40.html"],
+    ["DENSO WAVE: How to make a QR code (quiet zone)", "https://www.qrcode.com/en/howto/code.html"],
+    ["ZXing: Barcode contents", "https://github.com/zxing/zxing/wiki/Barcode-Contents"],
+    ["PayNet: DuitNow QR merchant-presented mode", "https://docs.developer.paynet.my/docs/duitNow-QR/integration/QR-generation-specification/merchant-presented-mode/overview"]
+  ],
+  "faq": [
+    { "q": "How do I make a QR code for free?", "a": "Choose what the code should open (a link, Wi-Fi, WhatsApp, contact card, email, SMS, phone number or map location), fill in the details, and the QR code updates as you type. Pick colours or add a logo if you like, then download it as PNG or SVG. There is no sign-up and no watermark." },
+    { "q": "Do these QR codes expire?", "a": "No. These are static QR codes: the link or details are stored inside the code itself, not behind a redirect on our server, so they keep working for as long as the link they point to works. Many 'dynamic' QR services send scans through their own server, which can stop when a subscription ends." },
+    { "q": "How do I make a QR code for Wi-Fi?", "a": "Choose Wi-Fi, enter the network name (SSID) and password, and keep WPA unless your router uses WEP or no password. The code holds WIFI:T:WPA;S:name;P:password;; so guests can point the camera and join; Android 10 and later and recent iPhones support this." },
+    { "q": "Can I put a logo in the middle?", "a": "Yes. Add a logo and the generator switches to error correction H, which lets a scanner recover about 30% of damaged or covered modules. The logo covers about 22% of the width; always test-scan with two phones before printing." },
+    { "q": "What size should I print a QR code?", "a": "Keep it at least 2 × 2 cm, and for longer distances use about one tenth of the scanning distance: a code scanned from 1 m should be about 10 cm wide. This is industry guidance, not part of the QR standard. Keep the white border (quiet zone) of 4 modules around the code." },
+    { "q": "Can I make a DuitNow QR code here?", "a": "No. DuitNow QR follows the EMV merchant-presented standard and must be issued through your bank or e-wallet, which registers you with PayNet. Ask your bank for your DuitNow QR; a self-made payment QR will not be accepted by banking apps." },
+    { "q": "How much text can a QR code hold?", "a": "The largest QR code (version 40) holds 2,953 bytes at error correction L, or 1,273 bytes at H. Shorter content makes a smaller, easier-to-scan code, so use a short link where you can. The generator warns you if the text is too long." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">QR Code Generator</li></ol></nav>
+  <h1>QR Code Generator</h1>
+  <p class="answer">Make a <strong>free QR code that never expires</strong> for a link, Wi-Fi, WhatsApp, contact card, email, SMS, phone number or map location. The details are stored inside the code, not behind a redirect, and it is made in your browser. Add colours and a <strong>logo</strong>, then download a <strong>PNG or SVG</strong>.</p>
+  <p class="meta"><span>Checked <time datetime="{{Q_VERIFIED_ISO}}">{{Q_VERIFIED}}</time></span><span>Made in your browser; nothing uploaded</span><a href="/buat-qr-code/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="qrForm" novalidate aria-labelledby="qr-h">
+      <h2 id="qr-h">Content</h2>
+      <fieldset class="field-group"><legend>What should the QR code open?</legend><div class="chipset"><label><input type="radio" name="type" value="url" checked> Link</label><label><input type="radio" name="type" value="text"> Text</label><label><input type="radio" name="type" value="wifi"> Wi-Fi</label><label><input type="radio" name="type" value="whatsapp"> WhatsApp</label><label><input type="radio" name="type" value="vcard"> Contact</label><label><input type="radio" name="type" value="email"> Email</label><label><input type="radio" name="type" value="sms"> SMS</label><label><input type="radio" name="type" value="phone"> Phone</label><label><input type="radio" name="type" value="geo"> Location</label></div></fieldset>
+      <div data-for="url"><div class="field"><label for="url">Website or link</label><div class="input"><input id="url" name="url" type="url" inputmode="url" value="https://tool.thebukitbesi.com/" autocomplete="off"></div></div></div>
+      <div data-for="text" hidden><div class="field"><label for="text">Any text</label><textarea class="prose-in short" id="text" name="text" rows="4" placeholder="Up to about 2,900 characters"></textarea></div></div>
+      <div data-for="wifi" hidden><div class="field"><label for="ssid">Network name (SSID)</label><div class="input"><input id="ssid" name="ssid" type="text" autocomplete="off"></div></div><div class="field"><label for="password">Password</label><div class="input"><input id="password" name="password" type="text" autocomplete="off"></div></div><div class="field"><label for="security">Security</label><select class="input" id="security" name="security"><option value="WPA" selected>WPA/WPA2/WPA3</option><option value="WEP">WEP</option><option value="nopass">None (open network)</option></select></div><label class="check"><input type="checkbox" name="hidden"> Hidden network</label></div>
+      <div data-for="whatsapp" hidden><div class="field"><label for="wphone">WhatsApp number (e.g. 012-345 6789)</label><div class="input"><input id="wphone" name="wphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="wmessage">Pre-filled message (optional)</label><textarea class="prose-in short" id="wmessage" name="wmessage" rows="3"></textarea></div></div>
+      <div data-for="vcard" hidden><div class="field-row"><div class="field"><label for="first">First name</label><div class="input"><input id="first" name="first" type="text" autocomplete="off"></div></div><div class="field"><label for="last">Last name</label><div class="input"><input id="last" name="last" type="text" autocomplete="off"></div></div></div><div class="field-row"><div class="field"><label for="org">Company</label><div class="input"><input id="org" name="org" type="text" autocomplete="off"></div></div><div class="field"><label for="title">Job title</label><div class="input"><input id="title" name="title" type="text" autocomplete="off"></div></div></div><div class="field"><label for="vphone">Phone</label><div class="input"><input id="vphone" name="vphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="vemail">Email</label><div class="input"><input id="vemail" name="vemail" type="email" inputmode="email" autocomplete="off"></div></div><div class="field"><label for="web">Website</label><div class="input"><input id="web" name="web" type="url" inputmode="url" autocomplete="off"></div></div><div class="field"><label for="address">Address</label><div class="input"><input id="address" name="address" type="text" autocomplete="off"></div></div></div>
+      <div data-for="email" hidden><div class="field"><label for="email">Email address</label><div class="input"><input id="email" name="email" type="email" inputmode="email" autocomplete="off"></div></div><div class="field"><label for="subject">Subject (optional)</label><div class="input"><input id="subject" name="subject" type="text" autocomplete="off"></div></div><div class="field"><label for="body">Message (optional)</label><textarea class="prose-in short" id="body" name="body" rows="3"></textarea></div></div>
+      <div data-for="sms" hidden><div class="field"><label for="sphone">Phone number</label><div class="input"><input id="sphone" name="sphone" type="tel" inputmode="tel" autocomplete="off"></div></div><div class="field"><label for="smessage">Message</label><textarea class="prose-in short" id="smessage" name="smessage" rows="3"></textarea></div></div>
+      <div data-for="phone" hidden><div class="field"><label for="pphone">Phone number (e.g. 03-1234 5678)</label><div class="input"><input id="pphone" name="pphone" type="tel" inputmode="tel" autocomplete="off"></div></div></div>
+      <div data-for="geo" hidden><div class="field-row"><div class="field"><label for="lat">Latitude</label><div class="input"><input id="lat" name="lat" type="text" inputmode="decimal" autocomplete="off"></div></div><div class="field"><label for="lng">Longitude</label><div class="input"><input id="lng" name="lng" type="text" inputmode="decimal" autocomplete="off"></div></div></div><p class="help">Example: KLCC is 3.1579, 101.7116. In Google Maps, long-press a spot to copy its numbers.</p></div>
+      <fieldset class="field-group">
+        <legend>Design</legend>
+        <div class="field-row"><div class="field"><label for="fg">Code colour</label><input class="color-in" id="fg" name="fg" type="color" value="#000000"></div><div class="field"><label for="bg">Background</label><input class="color-in" id="bg" name="bg" type="color" value="#ffffff"></div></div>
+        <label class="check"><input type="checkbox" name="transparent"> Transparent background</label>
+        <div class="field-row"><div class="field"><label for="style">Dot style</label><select class="input" id="style" name="style"><option value="square" selected>Square</option><option value="rounded">Rounded</option><option value="dots">Dots</option></select></div>
+        <div class="field"><label for="ec">Error correction</label><select class="input" id="ec" name="ec"><option value="L">L (7%)</option><option value="M" selected>M (15%)</option><option value="Q">Q (25%)</option><option value="H">H (30%)</option></select></div></div>
+        <div class="field"><label for="logo">Logo in the centre (optional)</label><input id="logo" name="logo" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="qrNoLogo">Remove logo</button></div>
+        <div class="field"><label for="size">PNG size</label><select class="input" id="size" name="size"><option value="512">512 × 512 px</option><option value="1024" selected>1024 × 1024 px</option><option value="2048">2048 × 2048 px</option><option value="4096">4096 × 4096 px (print)</option></select></div>
+      </fieldset>
+    </form>
+
+    <section class="box" aria-labelledby="qr-result-h">
+      <h2 id="qr-result-h">Your QR code</h2>
+      <div class="qr-out" id="qrOut">{{Q_SVG}}</div>
+      <p class="note" id="qrInfo">{{Q_INFO}}</p>
+      <p class="qr-text" id="qrText">{{Q_URL}}</p>
+      <p class="note" id="qrMsg"></p>
+      <p class="sr-only" id="qrLive" aria-live="polite"></p>
+      <div class="tool-actions go"><button type="button" class="btn sm" id="qrPng">Download PNG</button><button type="button" class="btn ghost sm" id="qrSvg">Download SVG</button><button type="button" class="btn ghost sm" id="qrCopy">Copy image</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="qrPrint">Print</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="types-h">What each QR code contains</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="types-h">
+    <table class="data text">
+      <thead><tr><th scope="col">Type</th><th scope="col">Text inside the code (example)</th></tr></thead>
+      <tbody>
+{{Q_TYPES}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="example">Example: a Wi-Fi QR code for a café</h2>
+  <p>Choose <strong>Wi-Fi</strong>, enter the network <code>Kedai Kopi</code> and password <code>kopi1234</code>, keep WPA and download a PNG at 1024 px. Print it about 10 cm wide for a counter sign: customers point their camera at it and tap Join, without typing the password. If you change the password later, make a new code.</p>
+
+  <h2 id="ec-h">Error correction and capacity</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ec-h">
+    <table class="data">
+      <thead><tr><th scope="col">Level</th><th scope="col">Recovers up to</th><th scope="col">Max digits</th><th scope="col">Max letters (A–Z, 0–9)</th><th scope="col">Max bytes</th></tr></thead>
+      <tbody>
+{{Q_EC}}
+      </tbody>
+    </table>
+  </div>
+  <p>Capacity is for the largest QR code, version 40 (177 × 177 modules). M is the most common level; H is used when a logo covers part of the code.</p>
+
+  <h2 id="print-h">Print size by scanning distance</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="print-h">
+    <table class="data">
+      <thead><tr><th scope="col">Use</th><th scope="col">Scanning distance</th><th scope="col">Minimum width</th></tr></thead>
+      <tbody>
+{{Q_PRINT}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formula">How the generator works</h2>
+  <ol>
+    <li><strong>Payload:</strong> your details are written in the format phone cameras recognise, for example <code>WIFI:</code>, <code>mailto:</code> or a <code>wa.me</code> link.</li>
+    <li><strong>Encoding:</strong> the text is encoded as UTF-8 bytes (so Malay, Chinese and Tamil work) and the smallest QR version that fits is chosen.</li>
+    <li><strong>Error correction:</strong> Reed–Solomon codes at the level you pick let scanners read a scratched or partly covered code.</li>
+    <li><strong>Drawing:</strong> the modules are drawn as SVG with your colours and style; the three corner squares stay solid so phones lock on quickly.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips for QR codes that scan first time</h2>
+  <ul>
+    <li><strong>Dark on light:</strong> light codes on dark backgrounds (inverted) fail on some scanners; the generator warns you.</li>
+    <li><strong>Keep the border:</strong> leave the white margin of 4 modules; do not crop it when designing.</li>
+    <li><strong>Short is better:</strong> a short link gives a less dense code that scans from further away.</li>
+    <li><strong>Test before printing:</strong> scan with an Android phone and an iPhone at the real size.</li>
+    <li>Need a chat link only? The <a href="/whatsapp-link-generator/">WhatsApp Link Generator</a> also makes its QR code.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.qrcode.com/en/about/error_correction.html" rel="noopener">DENSO WAVE: error correction</a>, <a href="https://www.qrcode.com/en/about/versionPage/versionPage31_40.html" rel="noopener">capacity of versions 31 to 40</a> and <a href="https://www.qrcode.com/en/howto/code.html" rel="noopener">quiet zone</a></li>
+    <li><a href="https://github.com/zxing/zxing/wiki/Barcode-Contents" rel="noopener">ZXing: Barcode contents</a> (Wi-Fi, vCard, mailto, SMS, geo formats)</li>
+    <li><a href="https://docs.developer.paynet.my/docs/duitNow-QR/integration/QR-generation-specification/merchant-presented-mode/overview" rel="noopener">PayNet: DuitNow QR specification</a></li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Check every code before you print it, and only link to content you trust. QR code is a registered trademark of DENSO WAVE INCORPORATED.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/whatsapp-link-generator/">WhatsApp Link Generator<small>wa.me links and buttons</small></a>
+    <a href="/utm-builder/">UTM Builder<small>Track campaign links</small></a>
+    <a href="/image-to-text/">Image to Text<small>Copy text from a photo</small></a>
+  </div>
+</section>

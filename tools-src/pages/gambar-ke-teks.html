@@ -1,0 +1,133 @@
+<!--page
+{
+  "path": "/gambar-ke-teks/",
+  "lang": "ms",
+  "cat": "ai",
+  "alternates": { "en": "/image-to-text/" },
+  "title": "Gambar ke Teks (OCR) Percuma: Salin Teks dari Foto dan Skrin",
+  "description": "Salin teks dari foto, tangkap skrin atau dokumen imbasan secara percuma: OCR dalam pelayar untuk Bahasa Melayu, Inggeris, Cina dan Tamil. Tiada muat naik.",
+  "llms": "Penukar gambar ke teks (OCR) percuma yang berjalan dalam pelayar, disemak 25 Oktober 2026: gambar tidak dimuat naik. Ia menggunakan Tesseract (Apache-2.0) melalui tesseract.js 7.0.0 dengan model bahasa LSTM yang dimuat turun dari jsDelivr kali pertama dan disimpan oleh pelayar: Inggeris (eng, 2.95 MB), Melayu (msa, 1.18 MB), Cina ringkas (chi_sim, 1.72 MB) dan Tamil (tam, 1.45 MB), serta enjin kira-kira 3.9 MB; Inggeris dan Melayu bersama kira-kira 8 MB kali pertama. Langkah: gambar kecil dibesarkan (hingga 3 kali, sasaran 1,600 piksel) dan gambar sangat besar dikecilkan kepada 2,500 piksel, pilihan Tingkatkan menukar kepada hitam putih dengan ambang Otsu (teks cerah atas latar gelap diterbalikkan), Pusing memutar gambar 90°, kemudian teks dibaca dan dikemaskan (perkataan yang dipecah sempang di hujung baris disambung; baris dalam perenggan boleh disambung). Keputusan menunjukkan purata keyakinan (0 hingga 100%) dan bilangan perkataan; teks boleh disunting, disalin atau disimpan sebagai .txt. Tesseract paling baik untuk teks bercetak pada kira-kira 300 dpi dan tidak direka untuk tulisan tangan.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "ocr",
+  "scripts": ["/assets/js/ocr.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat AI", "/?cat=ai#tools"], ["Gambar ke Teks", null]],
+  "about": ["Pengecaman aksara optik", "Gambar ke teks", "Tesseract OCR", "Ekstrak teks"],
+  "app": {
+    "name": "Gambar ke Teks (OCR)",
+    "category": "UtilitiesApplication",
+    "features": ["OCR dalam pelayar, gambar tidak dimuat naik", "Bahasa Melayu, Inggeris, Cina dan Tamil", "Tingkatkan (hitam putih) dan pusing", "Sambung perkataan bersempang dan baris perenggan", "Keyakinan dan bilangan perkataan", "Salin teks atau simpan .txt", "Tampal tangkap skrin dengan Ctrl+V"]
+  },
+  "citations": [
+    ["tesseract.js (Apache-2.0)", "https://github.com/naptha/tesseract.js"],
+    ["Tesseract documentation: Improving the quality of the output", "https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html"],
+    ["Tesseract documentation: FAQ", "https://tesseract-ocr.github.io/tessdoc/FAQ.html"],
+    ["tesseract-ocr: tessdata_best language models", "https://github.com/tesseract-ocr/tessdata_best"],
+    ["Wikipedia: Otsu's method", "https://en.wikipedia.org/wiki/Otsu%27s_method"]
+  ],
+  "faq": [
+    { "q": "Bagaimana salin teks dari gambar?", "a": "Pilih, letakkan atau tampal gambar (foto, tangkap skrin atau halaman imbasan) dan teks muncul dalam kotak dalam beberapa saat. Tandakan bahasa dalam gambar dahulu; Melayu dan Inggeris dipilih secara lalai. Sunting teks jika perlu, kemudian tekan Salin teks atau Simpan .txt." },
+    { "q": "Adakah gambar saya dimuat naik?", "a": "Tidak. Enjin OCR berjalan dalam pelayar pada peranti anda sendiri. Hanya fail enjin dan bahasa dimuat turun dari jsDelivr, kira-kira 8 MB kali pertama untuk Melayu dan Inggeris, dan pelayar menyimpannya untuk kali seterusnya. Gambar dan teks anda tidak dihantar ke mana-mana." },
+    { "q": "Bolehkah ia membaca Bahasa Melayu, Cina dan Tamil?", "a": "Boleh. Tandakan Melayu, Cina (ringkas) atau Tamil bersama Inggeris. Setiap bahasa menambah muat turun sekali sahaja sebanyak 1.2 hingga 3 MB. Pilih hanya bahasa yang benar-benar ada dalam gambar; bahasa tambahan memperlahankan proses dan boleh menambah kesilapan." },
+    { "q": "Bolehkah ia membaca tulisan tangan?", "a": "Kurang baik. Tesseract, enjin yang digunakan di sini, direka untuk teks bercetak, dan dokumentasinya sendiri menyatakan tulisan tangan tidak berfungsi dengan baik. Dokumen bertaip, resit, tangkap skrin, papan tanda dan halaman buku memberi hasil terbaik." },
+    { "q": "Bagaimana mendapat hasil lebih tepat?", "a": "Gunakan gambar yang tajam dan terang, diambil lurus dengan teks mendatar; tekan Pusing jika gambar menyenget. Tandakan Tingkatkan untuk bayang atau kertas berwarna. Tesseract paling baik pada kira-kira 300 dpi, jadi ambil foto cukup dekat supaya huruf jelas dibaca." },
+    { "q": "Apakah maksud angka keyakinan?", "a": "Ia purata keyakinan Tesseract terhadap perkataan yang dibaca, dari 0 hingga 100%. Melebihi kira-kira 80% teks biasanya hampir sempurna; di bawah 60% alat ini mencadangkan Tingkatkan, pusing atau gambar lebih jelas, dan anda perlu menyemak teks dengan teliti." },
+    { "q": "Bolehkah saya tukar PDF ke teks?", "a": "Alat ini membaca gambar. Untuk PDF imbasan, tangkap skrin setiap halaman atau tukar halaman kepada JPG dahulu, contohnya dengan PDF Converter di laman ini, kemudian masukkan gambar di sini satu demi satu." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=ai#tools">Alat AI</a></li><li aria-current="page">Gambar ke Teks</li></ol></nav>
+  <h1>Gambar ke Teks (OCR)</h1>
+  <p class="answer">Salin teks dari mana-mana <strong>foto, tangkap skrin atau halaman imbasan</strong> dalam beberapa saat. OCR berjalan <strong>dalam pelayar anda</strong>, jadi gambar <strong>tidak dimuat naik</strong>, dan ia membaca <strong>Bahasa Melayu, Inggeris, Cina dan Tamil</strong>. Kali pertama memuat turun kira-kira {{O_SIZE}} MB yang disimpan pelayar; kemudian salin teks atau simpan sebagai .txt.</p>
+  <p class="meta"><span>Disemak <time datetime="{{O_VERIFIED_ISO}}">{{O_VERIFIED}}</time></span><span>Gambar kekal pada peranti anda</span><a href="/image-to-text/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="ocrForm" novalidate aria-labelledby="ocr-h">
+      <h2 id="ocr-h">Gambar anda</h2>
+      <label class="drop" id="ocrDrop" for="ocrFile">
+        <input type="file" id="ocrFile" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/avif">
+        <img id="ocrPreview" alt="Gambar yang anda pilih" hidden>
+        <span id="ocrDropText"><strong>Pilih gambar</strong> atau letakkan di sini<small>Foto, tangkap skrin atau imbasan. Anda juga boleh tampal (Ctrl+V).</small></span>
+      </label>
+      <fieldset class="field-group"><legend>Bahasa dalam gambar</legend><div class="chipset">{{O_LANGS}}</div></fieldset>
+      <p class="help">Muat turun kali pertama: kira-kira <span id="ocrSize">{{O_SIZE}}</span> MB.</p>
+      <label class="check"><input type="checkbox" name="enhance"> Tingkatkan (hitam putih, untuk bayang atau kertas berwarna)</label>
+      <label class="check"><input type="checkbox" name="join"> Sambung baris menjadi perenggan</label>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="ocrRotate" disabled>Pusing 90°</button></div>
+    </form>
+
+    <section class="box" id="ocrResult" aria-labelledby="ocr-result-h">
+      <h2 id="ocr-result-h">Teks</h2>
+      <label class="sr-only" for="ocrText">Teks dari gambar</label>
+      <textarea class="ocr-text" id="ocrText" spellcheck="false" placeholder="Teks dari gambar anda muncul di sini. Anda boleh menyuntingnya."></textarea>
+      <p class="note" id="ocrCount">0 perkataan · 0 aksara</p>
+      <progress class="ocr-prog" id="ocrProg" max="100" value="0" hidden></progress>
+      <p class="note" id="ocrStatus">Gambar anda kekal pada peranti ini.</p>
+      <p class="sr-only" id="ocrLive" aria-live="polite"></p>
+      <canvas id="ocrCanvas" aria-hidden="true"></canvas>
+      <div class="tool-actions go"><button type="button" class="btn sm" id="ocrCopy" disabled>Salin teks</button><button type="button" class="btn ghost sm" id="ocrSave" disabled>Simpan .txt</button></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ocrPrint">Cetak</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="langs-h">Bahasa dan saiz muat turun</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="langs-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bahasa</th><th scope="col">Kod</th><th scope="col">Muat turun sekali</th></tr></thead>
+      <tbody>
+{{O_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Enjin OCR (tesseract.js {{O_VERSION}}) menambah kira-kira {{O_CORE}} MB. Semuanya disimpan oleh pelayar, jadi gambar seterusnya bermula hampir serta-merta.</p>
+
+  <h2 id="example">Contoh: menyalin resit untuk tuntutan</h2>
+  <p>Ambil foto resit bercetak yang diletak rata di atas meja, lurus dan dalam cahaya yang baik. Letakkan foto di sini dengan Melayu dan Inggeris ditanda. Nama kedai, barang dan jumlah muncul dalam kotak teks; semak nombor dengan resit (OCR boleh keliru antara 0 dan O atau 1 dan l), kemudian tekan Salin teks dan tampal ke borang tuntutan atau hamparan.</p>
+
+  <h2 id="formula">Cara ia berfungsi</h2>
+  <ol>
+    <li><strong>Sediakan:</strong> gambar kecil dibesarkan (hingga 3 kali) dan gambar sangat besar dikecilkan kepada 2,500 piksel, supaya saiz huruf sesuai untuk enjin.</li>
+    <li><strong>Tingkatkan (pilihan):</strong> gambar ditukar kepada hitam putih pada ambang yang paling baik memisahkan teks dan kertas (kaedah Otsu); teks putih atas latar gelap diterbalikkan.</li>
+    <li><strong>Kenal pasti:</strong> rangkaian neural LSTM Tesseract membaca setiap baris dalam bahasa yang ditanda dan memberi keyakinan bagi setiap perkataan.</li>
+    <li><strong>Kemaskan:</strong> perkataan yang dipecah sempang di hujung baris disambung, dan baris dalam perenggan boleh disatukan.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="tips">Tips untuk teks yang tepat</h2>
+  <ul>
+    <li><strong>Lurus dan tajam:</strong> pegang telefon selari dengan kertas dan ketik untuk fokus; huruf kabur punca kebanyakan kesilapan.</li>
+    <li><strong>Cahaya sekata:</strong> elakkan bayang di atas teks, atau tandakan Tingkatkan.</li>
+    <li><strong>Bahasa yang betul sahaja:</strong> bahasa tambahan memperlahankan proses dan boleh menambah aksara pelik.</li>
+    <li><strong>Teks bercetak sahaja:</strong> tulisan tangan kurang disokong.</li>
+    <li>Mahu teks lebih ringkas atau ditulis semula? Tampal ke <a href="/ringkaskan-teks/">Ringkaskan Teks</a> atau <a href="/parafrasa-ayat/">Parafrasa Ayat</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://github.com/naptha/tesseract.js" rel="noopener">tesseract.js</a> (Apache-2.0) dan <a href="https://github.com/tesseract-ocr/tessdata_best" rel="noopener">model bahasa Tesseract</a></li>
+    <li><a href="https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html" rel="noopener">Tesseract: meningkatkan kualiti hasil</a> dan <a href="https://tesseract-ocr.github.io/tessdoc/FAQ.html" rel="noopener">Soalan lazim Tesseract</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" rel="noopener">Wikipedia: Otsu's method</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> OCR boleh tersilap membaca aksara, terutamanya nombor. Semak teks penting seperti jumlah wang, nombor IC dan alamat dengan dokumen asal sebelum digunakan.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/ringkaskan-teks/">Ringkaskan Teks<small>Ringkasan dengan AI</small></a>
+    <a href="/gambar-ke-prompt/">Gambar ke Prompt<small>Huraikan gambar untuk seni AI</small></a>
+    <a href="/buat-qr-code/">Buat QR Code<small>Pautan, Wi-Fi, WhatsApp</small></a>
+  </div>
+</section>

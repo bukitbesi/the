@@ -279,6 +279,42 @@
     "live": true
   },
   {
+    "name": "Typing Test",
+    "desc": "Check your typing speed in WPM with 15-second to 2-minute tests in English or Bahasa Melayu: net and gross WPM, accuracy, missed keys and a WPM chart. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/typing-test/",
+    "cat": "util",
+    "icon": "typing-test",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "QR Code Generator",
+    "desc": "Make static QR codes that never expire for links, Wi-Fi, WhatsApp, contact cards, email, SMS and maps, with colours, dot styles, a logo and PNG or SVG download. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/qr-code-generator/",
+    "cat": "design",
+    "icon": "qr-code-generator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Online Timer and Stopwatch",
+    "desc": "Countdown timer with alarm, stopwatch with laps and a Pomodoro timer in one page, exact in background tabs, with presets, full screen and shareable links. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/online-timer/",
+    "cat": "util",
+    "icon": "online-timer",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Image to Text (OCR)",
+    "desc": "Copy text from photos, screenshots and scans in your browser, never uploaded, in English, Malay, Chinese and Tamil, then copy or save as .txt. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/image-to-text/",
+    "cat": "ai",
+    "icon": "image-to-text",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "AI Summarizer",
     "desc": "Summarize articles, essays and notes of up to 12,000 characters as bullets, a paragraph or key points, in English or Malay, with reading time saved. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/ai-summarizer/",

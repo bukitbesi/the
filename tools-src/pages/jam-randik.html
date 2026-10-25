@@ -1,0 +1,143 @@
+<!--page
+{
+  "path": "/jam-randik/",
+  "lang": "ms",
+  "cat": "util",
+  "alternates": { "en": "/online-timer/" },
+  "title": "Jam Randik dan Pemasa Online: Stopwatch, Kira Detik, Pomodoro",
+  "description": "Jam randik (stopwatch) online dengan pusingan, pemasa kira detik dengan penggera, dan pemasa Pomodoro 25/5. Pratetap 1 hingga 60 minit, skrin penuh, percuma.",
+  "llms": "Jam randik (stopwatch), pemasa kira detik dan pemasa Pomodoro percuma dalam satu halaman (Bahasa Melayu dan Inggeris), disemak 25 Oktober 2026. Jam randik: perseratus saat, pusingan (lap) dengan masa pecahan dan jumlah, pusingan terpantas berwarna hijau dan terlambat merah, salin pusingan sebagai CSV. Pemasa: taip masa seperti 5:00, 90 (saat), 10 minit, 1,5 jam atau 1h30m, atau tekan pratetap 1 hingga 60 minit; hingga 100 jam; +1 minit semasa berjalan; label pilihan; penggera tiga bip diulang 6 kali dengan getaran telefon; tajuk tab menunjukkan baki masa. Pomodoro (kaedah Francesco Cirillo): blok fokus 25 minit, rehat pendek 5 minit dan rehat panjang selepas setiap 4 blok (20 minit secara lalai; kaedah ini mencadangkan 20 hingga 30 minit); 4 blok mengambil 25+5+25+5+25+5+25 = 115 minit. Masa dikira daripada cap masa, jadi tepat walaupun tab di latar belakang; skrin dikekalkan menyala semasa berjalan jika pelayar menyokong Screen Wake Lock API. Papan kekunci: Space mula/jeda, L pusingan, R set semula, F skrin penuh. Pautan /jam-randik/#mode=timer&t=10m membuka pemasa 10 minit.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "timer",
+  "scripts": ["/assets/js/timer.js"],
+  "breadcrumb": [["Alat", "/"], ["Utiliti", "/?cat=util#tools"], ["Jam Randik dan Pemasa", null]],
+  "about": ["Jam randik", "Pemasa", "Kira detik", "Teknik Pomodoro"],
+  "app": {
+    "name": "Jam Randik dan Pemasa Online",
+    "category": "UtilitiesApplication",
+    "features": ["Jam randik dengan pusingan dan salinan CSV", "Pemasa kira detik dengan penggera dan getaran", "Pratetap 1 hingga 60 minit", "Pemasa Pomodoro (25/5/20)", "Skrin penuh", "Skrin kekal menyala", "Pintasan papan kekunci", "Pautan pemasa boleh dikongsi"]
+  },
+  "citations": [
+    ["Francesco Cirillo: The Pomodoro Technique (arkib)", "https://web.archive.org/web/20230331051358/https://francescocirillo.com/products/the-pomodoro-technique"],
+    ["Wikipedia: Pomodoro Technique", "https://en.wikipedia.org/wiki/Pomodoro_Technique"],
+    ["MDN: Screen Wake Lock API", "https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API"],
+    ["MDN: setTimeout() reasons for delays", "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#reasons_for_delays_longer_than_specified"]
+  ],
+  "faq": [
+    { "q": "Bagaimana guna jam randik dengan pusingan?", "a": "Tekan Mula, kemudian tekan Pusingan (atau kekunci L) setiap kali satu pusingan tamat. Setiap pusingan menunjukkan masa pecahan dan jumlah masa; yang terpantas berwarna hijau dan terlambat merah. Salin pusingan memberi senarai CSV untuk hamparan." },
+    { "q": "Bagaimana set pemasa 10 minit?", "a": "Pilih Pemasa, tekan pratetap 10 min atau taip 10:00 (atau 10 minit) dan tekan Mula. Apabila sampai kosong, penggera berbunyi 6 kali dan telefon bergetar. Pautan /jam-randik/#mode=timer&t=10m terus membuka pemasa 10 minit." },
+    { "q": "Adakah pemasa terus berjalan di tab lain?", "a": "Ya. Masa dikira daripada jam, bukan dengan mengira detik, jadi ia kekal tepat apabila anda bertukar tab; tajuk tab menunjukkan baki masa. Semasa berjalan, skrin dikekalkan menyala jika pelayar membenarkan. Jika telefon dikunci dan pelayar digantung, penggera berbunyi sebaik anda kembali." },
+    { "q": "Apakah teknik Pomodoro?", "a": "Kaedah pengurusan masa oleh Francesco Cirillo: bekerja 25 minit, rehat pendek kira-kira 5 minit, dan selepas 4 blok ambil rehat panjang 20 hingga 30 minit (20 minit di sini secara lalai). Empat blok dengan rehat mengambil 115 minit. Panjang fokus dan rehat boleh diubah." },
+    { "q": "Apakah pintasan papan kekunci?", "a": "Space untuk mula atau jeda, L untuk pusingan, R untuk set semula dan F untuk skrin penuh. Pintasan tidak berfungsi semasa anda menaip dalam kotak, jadi anda masih boleh menaip masa atau label." },
+    { "q": "Kenapa penggera tidak berbunyi?", "a": "Pelayar hanya membenarkan bunyi selepas anda menekan halaman, jadi tekan Mula dan bukan bergantung pada pautan sahaja. Pastikan Bunyi penggera ditanda, kelantangan dikuatkan, dan pada iPhone suis senyap dimatikan kerana ia boleh menyenyapkan bunyi laman web." },
+    { "q": "Berapa lama pemasa boleh berjalan?", "a": "Pemasa menerima hingga 100 jam, ditaip sebagai 1:30:00, 1h30m, 1,5 jam atau 90 minit, dan jam randik menunjukkan jam selepas 60 minit. Gunakan +1 min untuk menambah masa semasa pemasa berjalan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Jam Randik dan Pemasa</li></ol></nav>
+  <h1>Jam Randik dan Pemasa Online</h1>
+  <p class="answer">Gunakan <strong>jam randik (stopwatch) dengan pusingan</strong>, <strong>pemasa kira detik dengan penggera</strong>, atau <strong>pemasa Pomodoro</strong> (25 minit kerja, 5 minit rehat) dalam satu halaman. Tekan pratetap 1 hingga 60 minit atau taip apa-apa masa seperti 5:00 atau 1,5 jam. Masa kekal tepat di tab latar belakang, tanpa perlu dipasang.</p>
+  <p class="meta"><span>Disemak <time datetime="{{TM_VERIFIED_ISO}}">{{TM_VERIFIED}}</time></span><span>Berjalan dalam pelayar</span><a href="/online-timer/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <section class="box" aria-labelledby="tm-h">
+      <h2 id="tm-h">Jam</h2>
+      <div class="tm-stage" id="tmStage">
+        <output class="tm-display" id="tmDisplay" for="dur">{{TM_DISPLAY}}</output>
+        <p class="tm-sub" id="tmSub"></p>
+        <div class="tm-bar-wrap" id="tmBarWrap"{{TM_BAR_HIDDEN}}><div class="tm-bar" id="tmBar"></div></div>
+      </div>
+      <div class="tool-actions go tm-go"><button type="button" class="btn" id="tmStart">Mula</button><button type="button" class="btn ghost" id="tmLap"{{TM_LAP_ATTR}}>Pusingan</button><button type="button" class="btn ghost" id="tmPlus"{{TM_PLUS_ATTR}}>+1 min</button><button type="button" class="btn ghost" id="tmReset">Set semula</button></div>
+      <p class="sr-only" id="tmLive" aria-live="assertive"></p>
+      <div id="tmLapBox" hidden>
+        <table class="rows"><caption>Pusingan</caption><thead><tr><th scope="col">Pusingan</th><th scope="col">Pecahan</th><th scope="col">Jumlah</th></tr></thead><tbody id="tmLaps"></tbody></table>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="tmCopy">Salin pusingan (CSV)</button></div>
+      </div>
+      <div id="tmPlanBox" hidden><h3>Pelan (<span id="tmTotal">{{TM_PLAN_TOTAL}} min</span>)</h3><ol class="tm-plan" id="tmPlan"></ol></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="tmFull">Skrin penuh (F)</button></div>
+    </section>
+
+    <form class="box" id="tmForm" novalidate aria-labelledby="tm-set-h">
+      <h2 id="tm-set-h">Tetapan</h2>
+      <fieldset class="field-group"><legend>Mod</legend><div class="chipset">{{TM_MODES}}</div></fieldset>
+      <div id="tmTimerF"{{TM_TIMER_HIDDEN}}>
+        <div class="field"><label for="dur">Masa (5:00, 90, 10 minit, 1,5 jam)</label><div class="input"><input id="dur" name="dur" type="text" inputmode="text" value="5:00" autocomplete="off"></div></div>
+        <p class="help" id="tmDurMsg"></p>
+        <div class="tm-presets" role="group" aria-label="Pratetap">{{TM_PRESETS}}</div>
+        <div class="field"><label for="label">Label (pilihan)</label><div class="input"><input id="label" name="label" type="text" maxlength="40" placeholder="Nasi, peperiksaan, rehat…"></div></div>
+      </div>
+      <div id="tmPomoF" hidden>
+        <div class="field-row">
+          <div class="field"><label for="blocks">Blok fokus</label><div class="input"><input id="blocks" name="blocks" type="number" inputmode="numeric" min="1" max="16" value="4"></div></div>
+          <div class="field"><label for="focus">Fokus (min)</label><div class="input"><input id="focus" name="focus" type="number" inputmode="numeric" min="1" max="120" value="25"></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="short">Rehat pendek (min)</label><div class="input"><input id="short" name="short" type="number" inputmode="numeric" min="1" max="60" value="5"></div></div>
+          <div class="field"><label for="long">Rehat panjang (min)</label><div class="input"><input id="long" name="long" type="number" inputmode="numeric" min="1" max="60" value="20"></div></div>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" name="sound" checked> Bunyi penggera dan getaran</label>
+      <p class="help">Pintasan: Space mula/jeda · L pusingan · R set semula · F skrin penuh.</p>
+    </form>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="pomo-h">Pelan Pomodoro: 4 blok</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pomo-h">
+    <table class="data">
+      <thead><tr><th scope="col">Langkah</th><th scope="col">Jenis</th><th scope="col">Tempoh</th><th scope="col">Jam</th></tr></thead>
+      <tbody>
+{{TM_PLAN}}
+      </tbody>
+    </table>
+  </div>
+  <p>Empat blok Pomodoro dengan rehat pendek mengambil <strong>{{TM_PLAN_TOTAL}} minit</strong>: 100 minit fokus dan 15 minit rehat. Jalankan 8 blok dan rehat panjang 20 minit datang selepas blok ke-4.</p>
+
+  <h2 id="example">Contoh: larian dan sesi ulang kaji</h2>
+  <p>Untuk larian 4 pusingan padang, pilih Jam randik, tekan Mula dan tekan Pusingan setiap kali melintasi garisan. Jadual menunjukkan masa setiap pusingan, dengan yang terpantas berwarna hijau. Untuk ulang kaji, pilih Pomodoro, kekalkan 4 blok 25 minit dan tekan Mula: pemasa bertukar ke rehat dan kembali dengan penggera pendek, dan berbunyi lebih lama di akhir blok terakhir.</p>
+
+  <h2 id="formula">Cara masa kekal tepat</h2>
+  <ol>
+    <li><strong>Masa tamat, bukan detik:</strong> tekan Mula menyimpan saat tamat yang tepat; paparan menunjukkan beza dengan jam, jadi kelewatan tidak terkumpul.</li>
+    <li><strong>Tab latar belakang:</strong> pelayar memperlahankan pemasa dalam tab tersembunyi; kerana masa tamat tetap, kiraan masih betul apabila anda kembali.</li>
+    <li><strong>Penggera:</strong> semakan berasingan berbunyi pada masa tamat menggunakan Web Audio API dan menggetarkan telefon yang menyokongnya.</li>
+    <li><strong>Skrin:</strong> semasa berjalan, halaman meminta pelayar mengekalkan skrin menyala (Screen Wake Lock) dan melepaskannya apabila dijeda.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="uses">Kegunaan popular</h2>
+  <ul>
+    <li><strong>Kelas dan peperiksaan:</strong> kira detik skrin penuh pada projektor untuk kuiz dan pembentangan.</li>
+    <li><strong>Senaman:</strong> pusingan jam randik untuk larian atau plank; salin pusingan ke hamparan.</li>
+    <li><strong>Memasak:</strong> nasi, telur atau kuih kukus dengan label supaya anda ingat penggera itu untuk apa.</li>
+    <li><strong>Fokus:</strong> blok Pomodoro untuk belajar, bekerja atau latihan <a href="/ujian-menaip/">Ujian Menaip</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://web.archive.org/web/20230331051358/https://francescocirillo.com/products/the-pomodoro-technique" rel="noopener">Francesco Cirillo: The Pomodoro Technique</a> dan <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" rel="noopener">Wikipedia: Pomodoro Technique</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API" rel="noopener">MDN: Screen Wake Lock API</a> dan <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#reasons_for_delays_longer_than_specified" rel="noopener">MDN: sebab pemasa lambat di tab latar belakang</a></li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> Jangan bergantung pada laman web untuk masa yang kritikal seperti ubat. Telefon boleh menggantung pelayar apabila dikunci atau bateri rendah; gunakan penggera khas untuk perkara penting.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/ujian-menaip/">Ujian Menaip<small>Semak kelajuan WPM</small></a>
+    <a href="/cabutan-bertuah/">Cabutan Bertuah<small>Roda putar nama rawak</small></a>
+    <a href="/kalkulator-hari-bekerja/">Kalkulator Hari Bekerja<small>Hari kerja dan cuti</small></a>
+  </div>
+</section>
