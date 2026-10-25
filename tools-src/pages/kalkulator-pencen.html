@@ -1,0 +1,171 @@
+<!--page
+{
+  "path": "/kalkulator-pencen/",
+  "lang": "ms",
+  "cat": "calc",
+  "alternates": { "en": "/pension-calculator-malaysia/" },
+  "title": "Kalkulator Pencen Penjawat Awam 2026: Pencen, Ganjaran dan GCR",
+  "description": "Kira pencen bulanan, ganjaran dan GCR penjawat awam ikut formula JPA, termasuk pencen minimum RM1,000, persaraan pilihan dan pelarasan SSPA pesara.",
+  "llms": "Kalkulator pencen penjawat awam Malaysia, peraturan disemak 25 Oktober 2026 dengan Pekeliling Perkhidmatan Pencen JPA (MyPPSM) dan soalan lazim SSPA JPA. Pencen bulanan = 1/600 × bulan perkhidmatan berpencen × gaji akhir, maksimum 3/5 (60%, dicapai pada 360 bulan); pencen minimum RM1,000 sebulan bagi 300 bulan (25 tahun) atau lebih, dan Belanjawan 2027 (9 Oktober 2026) mengumumkan kenaikan kepada RM1,350 bagi pesara awam, veteran ATM dan penerima pencen terbitan, tarikh mula belum diumumkan. Ganjaran = 7.5% × bulan perkhidmatan × gaji akhir, tanpa had bulan. Gantian cuti rehat (GCR) = hari cuti terkumpul (maksimum 180 hari mulai 2023) ÷ 30 × (gaji akhir + imbuhan tetap). Sekurang-kurangnya 10 tahun (120 bulan) perkhidmatan diperlukan untuk pencen dan ganjaran. Bersara wajib pada 60 (lantikan mulai 1 Januari 2012), persaraan pilihan dari umur 40. Ganjaran dan GCR dibayar pada tarikh bersara; pencen bermula pada umur 55 bagi lantikan pada atau selepas 12 April 1991 (sebelum itu 45 bagi perempuan, 50 bagi lelaki). Contoh JPA: gaji akhir RM5,440.60 dan 386 bulan memberi pencen RM3,264.36 dan ganjaran RM157,505.37; RM2,203.56 dan 255 bulan memberi RM936.51 dan RM42,143.08. Kenaikan pencen 2% setahun terbatal selepas keputusan Mahkamah Persekutuan 27 Jun 2023; pencen kini dilaraskan ikut gaji SSPA: Fasa 1 (1 Disember 2024) gaji akhir +8% jika melebihi RM3,000 atau +RM240 jika kurang (JUSA +4%), Fasa 2 (1 Januari 2026) +7% (JUSA +3%), kemudian 1/600 × tempoh × gaji akhir baharu + PKKP (bagi yang bersara hingga 31 Disember 2022). Contoh: gaji akhir RM5,000 dan 360 bulan naik daripada RM3,000 kepada RM3,466.80 sebulan.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "pencen",
+  "scripts": ["/assets/js/pencen.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Pencen", null]],
+  "about": ["Pencen penjawat awam Malaysia", "Akta Pencen 1980", "Ganjaran persaraan", "Gantian cuti rehat", "Sistem Saraan Perkhidmatan Awam"],
+  "app": {
+    "name": "Kalkulator Pencen Penjawat Awam",
+    "category": "FinanceApplication",
+    "features": ["Pencen bulanan dengan had 60% dan minimum RM1,000", "Ganjaran 7.5% tanpa had bulan", "Gantian cuti rehat (GCR) hingga 180 hari", "Persaraan wajib atau pilihan dan tarikh pencen bermula", "Pelarasan pencen SSPA Fasa 1 dan Fasa 2 bagi pesara", "Pencen minimum Belanjawan 2027 RM1,350", "Keputusan dalam pautan untuk dikongsi"]
+  },
+  "citations": [
+    ["JPA: Pekeliling Perkhidmatan Pencen (MyPPSM)", "https://docs.jpa.gov.my/docs/myppsm/PPSM/PP/pencen/1/"],
+    ["JPA: Soalan lazim persaraan dan faedah persaraan SSPA", "https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf"],
+    ["JPA: Soalan lazim keputusan Mahkamah Persekutuan berkaitan pencen", "https://docs.jpa.gov.my/docs/faq/pencen/2023/faq_keputusan_mahkamah.pdf"],
+    ["Free Malaysia Today: Sorotan penting Belanjawan 2027", "https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/sorotan-penting-belanjawan-2027"],
+    ["SAYS: Minimum pension rate raised to RM1,350 (Belanjawan 2027)", "https://says.com/my/gomen/pension-belanjawan-2027"]
+  ],
+  "faq": [
+    { "q": "Bagaimana pencen penjawat awam dikira?", "a": "Pencen bulanan = 1/600 × bulan perkhidmatan berpencen × gaji akhir, maksimum 60% (dicapai pada 360 bulan). Contoh JPA: gaji akhir RM5,440.60 dengan 386 bulan memberi {{P_EX1_PEN}} sebulan, iaitu 60% kerana bulan melebihi 360 tidak dikira." },
+    { "q": "Berapa pencen minimum penjawat awam?", "a": "RM1,000 sebulan bagi pesara dengan sekurang-kurangnya 300 bulan (25 tahun) perkhidmatan. Belanjawan 2027 mengumumkan kenaikan kepada RM1,350 sebulan bagi pesara awam, veteran ATM dan penerima pencen terbitan, tetapi tarikh mula belum diumumkan." },
+    { "q": "Berapa ganjaran persaraan?", "a": "Ganjaran = 7.5% × bulan perkhidmatan × gaji akhir, dibayar sekali pada tarikh bersara, dan tiada had 360 bulan. Contoh JPA: RM5,440.60 × 386 bulan memberi {{P_EX1_GRAT}}; RM2,203.56 × 255 bulan memberi {{P_EX2_GRAT}}." },
+    { "q": "Bagaimana gantian cuti rehat (GCR) dikira?", "a": "GCR = hari cuti rehat terkumpul ÷ 30 × (gaji akhir + imbuhan tetap), maksimum 180 hari mulai 1 Januari 2023. Contohnya 180 hari dengan gaji akhir RM6,000 dan imbuhan tetap RM800 memberi {{P_DEF_GCR}}." },
+    { "q": "Bila pencen dibayar jika saya bersara pilihan?", "a": "Ganjaran dan GCR dibayar pada tarikh bersara, tetapi pencen bulanan hanya bermula pada umur 55 bagi yang dilantik pada atau selepas 12 April 1991. Contohnya bersara pada umur 45 dengan 252 bulan dan gaji RM5,000 memberi ganjaran {{P_OPT_GRAT}} terus, dan pencen {{P_OPT_PEN}} sebulan bermula {{P_OPT_START}}." },
+    { "q": "Adakah pencen masih naik 2% setiap tahun?", "a": "Tidak. Mahkamah Persekutuan pada 27 Jun 2023 memutuskan kenaikan 2% setahun tidak sah, jadi pencen kini dilaraskan ikut kenaikan gaji. Di bawah SSPA, gaji akhir dinaikkan 8% (atau RM240 jika bawah RM3,000) mulai 1 Disember 2024 dan 7% mulai 1 Januari 2026; gaji akhir RM5,000 dengan 360 bulan naik daripada {{P_ADJ_ORIG}} kepada {{P_ADJ_PEN}}." },
+    { "q": "Adakah penjawat awam baharu masih dapat pencen?", "a": "Kerajaan memutuskan jawatan tetap baharu tidak lagi berpencen, dan lantikan baharu mulai 1 Februari 2024 dibuat secara kontrak, kecuali ATM dan PDRM. Pegawai yang sudah dalam skim pencen kekal berpencen, dan kalkulator ini untuk mereka." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Pencen</li></ol></nav>
+  <h1>Kalkulator Pencen Penjawat Awam</h1>
+  <p class="answer">Pencen penjawat awam ialah <strong>1/600 × bulan perkhidmatan × gaji akhir</strong>, maksimum 60% (360 bulan) dan sekurang-kurangnya <strong>RM1,000</strong> dengan 25 tahun perkhidmatan. Bersara pada 60 dengan gaji akhir RM6,000 selepas 395 bulan memberi pencen <strong>{{P_DEF_PEN}}</strong> sebulan, ganjaran {{P_DEF_GRAT}} dan GCR {{P_DEF_GCR}}. Masukkan tarikh dan gaji anda untuk anggaran anda sendiri.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{P_VERIFIED_ISO}}">{{P_VERIFIED}}</time></span><span>Formula Pekeliling Pencen JPA</span><a href="/pension-calculator-malaysia/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="pcForm" novalidate aria-labelledby="pc-h">
+      <h2 id="pc-h">Penjawat awam yang akan bersara</h2>
+      <div class="field-row">
+        <div class="field"><label for="birth">Tarikh lahir</label><input class="input" id="birth" name="birth" type="date" min="1940-01-01" max="2005-12-31" value="1966-06-15"></div>
+        <div class="field"><label for="appointed">Tarikh lantikan</label><input class="input" id="appointed" name="appointed" type="date" min="1960-01-01" max="2026-12-31" value="1993-07-01"></div>
+      </div>
+      <div class="field"><label for="retire">Tarikh bersara (kosong = umur 60)</label><input class="input" id="retire" name="retire" type="date" min="1980-01-01" max="2070-12-31" value=""></div>
+      <div class="field-row">
+        <div class="field"><label for="salary">Gaji akhir</label><div class="input"><span aria-hidden="true">RM</span><input id="salary" name="salary" type="number" inputmode="decimal" min="0" step="0.01" value="6000"></div></div>
+        <div class="field"><label for="allow">Imbuhan tetap</label><div class="input"><span aria-hidden="true">RM</span><input id="allow" name="allow" type="number" inputmode="decimal" min="0" step="0.01" value="800"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="gcr">Cuti GCR terkumpul</label><div class="input"><input id="gcr" name="gcr" type="number" inputmode="numeric" min="0" max="400" step="1" value="180"><span aria-hidden="true">hari</span></div></div>
+        <div class="field"><label for="gender">Jantina (lantikan pra-1991)</label><select class="input" id="gender" name="gender">{{P_GENDER}}</select></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Sudah bersara? Pelarasan SSPA</legend>
+        <div class="field-row">
+          <div class="field"><label for="psalary">Gaji akhir atau bersamaan</label><div class="input"><span aria-hidden="true">RM</span><input id="psalary" name="psalary" type="number" inputmode="decimal" min="0" step="0.01" value="5000"></div></div>
+          <div class="field"><label for="pmonths">Tempoh perkhidmatan</label><div class="input"><input id="pmonths" name="pmonths" type="number" inputmode="numeric" min="0" max="600" step="1" value="360"><span aria-hidden="true">bulan</span></div></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="pretired">Tarikh bersara</label><input class="input" id="pretired" name="pretired" type="date" min="1960-01-01" max="2030-12-31" value="2020-05-01"></div>
+          <div class="field"><label for="pkkp">PKKP sebulan (MyPesara)</label><div class="input"><span aria-hidden="true">RM</span><input id="pkkp" name="pkkp" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="0"></div></div>
+        </div>
+        <div class="field"><label for="pgroup">Kumpulan perkhidmatan</label><select class="input" id="pgroup" name="pgroup">{{P_GROUP}}</select></div>
+      </fieldset>
+      <p class="help">Imbuhan tetap (ITKA, ITP, ITK, ITJU) hanya untuk GCR. Gaji akhir, tempoh dan PKKP pesara ada dalam aplikasi MyPesara.</p>
+    </form>
+
+    <section class="box" aria-labelledby="pc-result-h">
+      <h2 id="pc-result-h">Faedah persaraan anda</h2>
+      <div class="net"><p>Pencen bulanan</p><output id="pcBig" for="birth appointed retire salary">{{P_BIG}}</output><p id="pcSub">{{P_SUB}}</p></div>
+      <p class="sr-only" id="pcLive" aria-live="polite"></p>
+      <div class="pc-grid" id="pcGrid">{{P_GRID}}</div>
+      <p class="ic-note" id="pcNote">{{P_NOTE}}</p>
+      <table class="rows wrap"><caption>Butiran</caption><tbody id="pcRows">
+{{P_ROWS}}
+      </tbody></table>
+      <h3>Pesara: pencen selepas SSPA</h3>
+      <div class="net"><p>Pencen baharu</p><output id="paBig" for="psalary pmonths pretired pkkp pgroup">{{A_BIG}}</output><p id="paSub">{{A_SUB}}</p></div>
+      <p class="ic-note" id="paNote">{{A_NOTE}}</p>
+      <table class="rows wrap"><caption>Pelarasan</caption><tbody id="paRows">
+{{A_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="pcPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="table-h">Pencen dan ganjaran ikut tempoh perkhidmatan (gaji akhir RM4,000)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-h">
+    <table class="data"><thead><tr><th scope="col">Bulan perkhidmatan</th><th scope="col">Kadar</th><th scope="col">Pencen sebulan</th><th scope="col">Ganjaran</th></tr></thead><tbody>
+{{P_TABLE}}
+    </tbody></table>
+  </div>
+  <p>Pada 300 bulan, 1/600 × 300 × RM4,000 ialah RM2,000, melebihi minimum RM1,000; minimum hanya menaikkan pencen bagi gaji akhir bawah RM2,000 dengan 25 tahun atau lebih.</p>
+
+  <h2 id="example">Contoh rasmi JPA</h2>
+  <ul>
+    <li><strong>Gaji akhir RM5,440.60, 386 bulan:</strong> pencen dihadkan kepada 360 bulan, 60% × RM5,440.60 = <strong>{{P_EX1_PEN}}</strong> sebulan; ganjaran 7.5% × RM5,440.60 × 386 = <strong>{{P_EX1_GRAT}}</strong> (ganjaran tiada had bulan).</li>
+    <li><strong>Gaji akhir RM2,203.56, 255 bulan:</strong> pencen 1/600 × 255 × RM2,203.56 = <strong>{{P_EX2_PEN}}</strong>; tiada minimum kerana kurang 300 bulan; ganjaran <strong>{{P_EX2_GRAT}}</strong>.</li>
+    <li><strong>Contoh lalai di atas:</strong> lahir 15 Jun 1966, dilantik 1 Julai 1993, bersara 15 Jun 2026 (395 bulan), gaji RM6,000 dan imbuhan tetap RM800: pencen {{P_DEF_PEN}}, ganjaran {{P_DEF_GRAT}}, GCR 180 ÷ 30 × RM6,800 = {{P_DEF_GCR}}, jumlah sekali gus {{P_DEF_LUMP}}.</li>
+  </ul>
+
+  <h2 id="formula">Cara ia dikira</h2>
+  <ol>
+    <li><strong>Tempoh perkhidmatan</strong> = bulan penuh dari tarikh lantikan hingga sehari sebelum tarikh bersara; sekurang-kurangnya 120 bulan (10 tahun).</li>
+    <li><strong>Pencen</strong> = 1/600 × bulan (hingga 360) × gaji akhir; RM1,000 jika lebih rendah dan tempoh 300 bulan atau lebih.</li>
+    <li><strong>Ganjaran</strong> = 7.5% × semua bulan × gaji akhir.</li>
+    <li><strong>GCR</strong> = hari cuti (hingga 180) ÷ 30 × (gaji akhir + imbuhan tetap).</li>
+    <li><strong>Bila dibayar:</strong> ganjaran dan GCR pada tarikh bersara; pencen dari tarikh bersara atau umur 55 (lantikan mulai 12 April 1991), mana yang kemudian.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="sspa-h">Pelarasan pencen SSPA bagi pesara (360 bulan, bersara sebelum Disember 2024)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sspa-h">
+    <table class="data"><thead><tr><th scope="col">Gaji akhir</th><th scope="col">Fasa 1 (1/12/2024)</th><th scope="col">Fasa 2 (1/1/2026)</th><th scope="col">Pencen sebelum → selepas</th></tr></thead><tbody>
+{{P_SSPA}}
+    </tbody></table>
+  </div>
+  <ul>
+    <li><strong>Fasa 1:</strong> gaji akhir melebihi RM3,000 +8%, kurang RM3,000 +RM240, JUSA +4%. Pada RM3,000 tepat kedua-dua cara memberi RM240, jadi jawapannya sama.</li>
+    <li><strong>Fasa 2:</strong> +7%, JUSA +3%. Yang bersara antara 2 Disember 2024 dan 1 Januari 2026 hanya menerima Fasa 2.</li>
+    <li><strong>Bersara sebelum 2013:</strong> JPA guna "gaji akhir bersamaan 2012", bukan gaji sebenar anda. Masukkan angka daripada MyPesara.</li>
+    <li><strong>PKKP</strong> (bagi yang bersara hingga 31 Disember 2022) ditambah selepas formula.</li>
+  </ul>
+
+  <h2 id="rules">Peraturan lain yang perlu tahu</h2>
+  <ul>
+    <li><strong>Umur bersara:</strong> wajib 60 bagi lantikan mulai 1 Januari 2012; yang dilantik lebih awal mungkin memilih 55, 56, 58 atau 60. Untuk tarikh dan umur KWSP, guna <a href="/kalkulator-umur-bersara/">Kalkulator Umur Bersara</a>.</li>
+    <li><strong>Imbuhan tetap untuk GCR:</strong> termasuk ITKA, ITP, ITK dan ITJU; Bantuan Sara Hidup biasanya tidak dikira. Sahkan dengan unit sumber manusia anda.</li>
+    <li><strong>Pencen terbitan:</strong> jika pesara meninggal dunia, waris layak mengikut formula yang sama; balu atau duda menerima 2 bahagian setiap seorang dan anak 1 bahagian.</li>
+    <li><strong>Bayaran khas:</strong> Belanjawan 2027 mengumumkan RM750 kepada pesara pada 2027, dibayar dalam dua ansuran.</li>
+    <li>Gaji semasa SSPA anda: <a href="/kalkulator-gaji-sspa/">Kalkulator Gaji SSPA</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://docs.jpa.gov.my/docs/myppsm/PPSM/PP/pencen/1/" rel="noopener">JPA: Pekeliling Perkhidmatan Pencen (MyPPSM)</a>, termasuk contoh pengiraan pencen dan ganjaran</li>
+    <li><a href="https://docs.jpa.gov.my/docs/sspa/faq_persaraan_dan_faedah_persaraan.pdf" rel="noopener">JPA: Soalan lazim persaraan dan faedah persaraan SSPA</a></li>
+    <li><a href="https://docs.jpa.gov.my/docs/faq/pencen/2023/faq_keputusan_mahkamah.pdf" rel="noopener">JPA: Soalan lazim keputusan Mahkamah Persekutuan (27 Jun 2023)</a></li>
+    <li><a href="https://www.freemalaysiatoday.com/category/bahasa/tempatan/2026/10/09/sorotan-penting-belanjawan-2027" rel="noopener">Free Malaysia Today: Sorotan penting Belanjawan 2027</a> dan <a href="https://says.com/my/gomen/pension-belanjawan-2027" rel="noopener">SAYS: pencen minimum RM1,350</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran berdasarkan formula JPA. Amaun sebenar ditetapkan oleh Bahagian Pasca Perkhidmatan JPA berdasarkan rekod perkhidmatan anda (termasuk cuti tanpa gaji yang tidak dikira). Pencen minimum RM1,350 menunggu tarikh kuat kuasa.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-umur-bersara/">Kalkulator Umur Bersara<small>Tarikh bersara dan umur KWSP</small></a>
+    <a href="/kalkulator-gaji-sspa/">Kalkulator Gaji SSPA<small>Gaji baharu penjawat awam</small></a>
+    <a href="/kalkulator-kwsp/">Kalkulator KWSP<small>Simpanan pada umur 55 dan 60</small></a>
+    <a href="/kalkulator-dividen-asb/">Kalkulator Dividen ASB<small>Laburkan ganjaran anda</small></a>
+  </div>
+</section>

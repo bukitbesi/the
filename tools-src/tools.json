@@ -333,6 +333,24 @@
     "live": true
   },
   {
+    "name": "Pension Calculator Malaysia",
+    "desc": "Work out a civil servant's monthly pension, gratuity and GCR leave cash with JPA's formula, the RM1,000 minimum, optional retirement and the SSPA adjustment for pensioners. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/pension-calculator-malaysia/",
+    "cat": "calc",
+    "icon": "pension-calculator-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "MyKad IC Number Decoder",
+    "desc": "Read a Malaysian IC number: date of birth, age and state or country of birth from JPN's official codes, with a list mode and masked CSV. Nothing is stored or sent. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/malaysia-ic-number-decoder/",
+    "cat": "util",
+    "icon": "malaysia-ic-number-decoder",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "AI Summarizer",
     "desc": "Summarize articles, essays and notes of up to 12,000 characters as bullets, a paragraph or key points, in English or Malay, with reading time saved. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/ai-summarizer/",
