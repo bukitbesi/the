@@ -183,6 +183,11 @@
       "description": "Work out your due date from your last period, pregnancy week and trimester, plus your 98-day materni"
     },
     {
+      "name": "e-Invoice Malaysia Checker",
+      "url": "/e-invoice-malaysia/",
+      "description": "Check if your business must issue LHDN e-invoices or is exempt under the RM3 million rule from 1 Sep"
+    },
+    {
       "name": "Education Cost Calculator Malaysia",
       "url": "/education-cost-calculator-malaysia/",
       "description": "Education cost calculator for Malaysian parents: your child's university cost at future prices and t"
@@ -316,6 +321,11 @@
       "name": "Income Tax Calculator Malaysia YA2026",
       "url": "/income-tax-calculator-malaysia/",
       "description": "Free Malaysia income tax calculator for YA2026 with all LHDN reliefs, rebates, zakat and a PCB refun"
+    },
+    {
+      "name": "Invoice Generator Malaysia",
+      "url": "/invoice-generator/",
+      "description": "Make a free invoice, quotation or receipt in RM with SST, discounts, deposit and amount in words, th"
     },
     {
       "name": "JavaScript Minifier & Obfuscator",

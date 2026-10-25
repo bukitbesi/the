@@ -20,7 +20,7 @@ export function batch15({ require, esc, longDate }) {
   renderers.invoice = lang => {
     const L = lang === 'ms' ? 1 : 0, S = SAMPLE[lang], k = L ? 'ms' : 'en', date = inv.FACTS.verified;
     const taxOpts = sel => TAXES[k].map(([v, t]) => opt(v, t, v === sel)).join('');
-    const row = it => `<tr><td><input class="inv-in" data-k="desc" type="text" value="${esc(it.desc)}" aria-label="${L ? 'Perihal' : 'Description'}"></td><td><input class="inv-in n" data-k="qty" type="text" inputmode="decimal" value="${esc(it.qty)}" aria-label="${L ? 'Kuantiti' : 'Quantity'}"></td><td><input class="inv-in n" data-k="price" type="text" inputmode="decimal" value="${esc(it.price)}" aria-label="${L ? 'Harga seunit (RM)' : 'Unit price (RM)'}"></td><td><input class="inv-in n" data-k="discount" type="text" inputmode="decimal" value="${esc(it.discount)}" placeholder="0" aria-label="${L ? 'Diskaun %' : 'Discount %'}"></td><td><select class="inv-in" data-k="tax" aria-label="${L ? 'Cukai' : 'Tax'}">${taxOpts(it.tax)}</select></td><td><button type="button" class="inv-del" aria-label="${L ? 'Buang baris' : 'Remove line'}">×</button></td></tr>`;
+    const row = it => `<tr><td><input class="inv-in" data-k="desc" type="text" value="${esc(it.desc)}" aria-label="${L ? 'Perihal' : 'Description'}"></td><td data-l="${L ? 'Kuantiti' : 'Qty'}"><input class="inv-in n" data-k="qty" type="text" inputmode="decimal" value="${esc(it.qty)}" aria-label="${L ? 'Kuantiti' : 'Quantity'}"></td><td data-l="${L ? 'Harga (RM)' : 'Price (RM)'}"><input class="inv-in n" data-k="price" type="text" inputmode="decimal" value="${esc(it.price)}" aria-label="${L ? 'Harga seunit (RM)' : 'Unit price (RM)'}"></td><td data-l="${L ? 'Diskaun %' : 'Disc. %'}"><input class="inv-in n" data-k="discount" type="text" inputmode="decimal" value="${esc(it.discount)}" placeholder="0" aria-label="${L ? 'Diskaun %' : 'Discount %'}"></td><td data-l="${L ? 'Cukai' : 'Tax'}"><select class="inv-in" data-k="tax" aria-label="${L ? 'Cukai' : 'Tax'}">${taxOpts(it.tax)}</select></td><td><button type="button" class="inv-del" aria-label="${L ? 'Buang baris' : 'Remove line'}">×</button></td></tr>`;
     const doc = { lang: k, doc: 'invoice', number: 'INV-2026-0001', date, terms: '14', cur: 'RM', from: { name: S.fromName, reg: S.fromReg, sst: S.fromSst, addr: S.fromAddr, contact: S.fromContact }, to: { name: S.toName, addr: S.toAddr }, items: S.items, shipping: '20', notes: S.notes };
     const t = inv.totals(doc);
     const ex = inv.totals({ items: [{ qty: 3, price: '150', tax: 'st8' }, { qty: 2, price: '45.50', tax: 'none' }], shipping: '20' });
@@ -38,6 +38,29 @@ export function batch15({ require, esc, longDate }) {
     };
   };
   bundles['invoice.js'] = ['assets/js/invoice-core.js', 'assets/js/invoice-ui.js'];
+
+  // ---- LHDN e-invoice checker
+  const ei = require('../assets/js/einvoice-core.js');
+  renderers.einvoice = lang => {
+    const L = lang === 'ms' ? 1 : 0, k = L ? 'ms' : 'en', E = ei, F = E.FACTS, today = F.verified;
+    const MON = (L ? 'Januari Februari Mac April Mei Jun Julai Ogos September Oktober November Disember' : 'January February March April May June July August September October November December').split(' ');
+    const date = iso => { const [y, m, d] = iso.split('-'); return `${Number(d)} ${MON[Number(m) - 1]} ${y}`; };
+    const def = { started: 'by2022', rev2022: '2500000', reached: '', group: false, commenced: '' }, r = E.describe(def, k, today);
+    const ya = [['by2022', L ? 'Sebelum atau dalam 2022' : 'In 2022 or earlier'], ['2023', '2023'], ['2024', '2024'], ['2025', '2025'], ['2026+', L ? '2026 atau kemudian' : '2026 or later']].map(([v, t]) => opt(v, t, v === 'by2022')).join('');
+    const reached = [['', L ? 'Tidak, belum pernah' : 'No, never'], ['YA2023-2025', L ? 'Ya, dalam YA2023 hingga YA2025' : 'Yes, in YA2023 to YA2025']].concat([2026, 2027, 2028, 2029, 2030].map(y => [String(y), (L ? 'Ya, dalam YA' : 'Yes, in YA') + y])).map(([v, t]) => opt(v, t, v === '')).join('');
+    const names = L ? ['Lebih RM100 juta', 'Lebih RM25 juta hingga RM100 juta', 'Lebih RM5 juta hingga RM25 juta', 'RM3 juta hingga RM5 juta'] : ['Over RM100 million', 'Over RM25 million to RM100 million', 'Over RM5 million to RM25 million', 'RM3 million to RM5 million'];
+    const phases = F.phases.map((p, i) => `<tr><th scope="row">${L ? 'Fasa' : 'Phase'} ${i + 1}</th><td>${names[i]}</td><td>${date(p[2])}</td><td>${date(p[3])}</td></tr>`).join('\n') +
+      `\n<tr><th scope="row">${L ? 'Konsesi' : 'Concessionary'}</th><td>${L ? 'Bawah RM3 juta tetapi tidak layak dikecualikan, atau mencapai RM3 juta dalam YA2023 hingga YA2025' : 'Below RM3 million but not exempt, or reached RM3 million in YA2023 to YA2025'}</td><td>${date(F.concession)}</td><td>${date(F.relax2026)}</td></tr>` +
+      `\n<tr><th scope="row">${L ? 'Dikecualikan' : 'Exempt'}</th><td>${L ? 'Bawah RM3 juta, tiada kaitan kumpulan RM3 juta ke atas' : 'Below RM3 million, no group link of RM3 million or more'}</td><td>${L ? 'Tiada (mula 1 Januari tahun kedua selepas YA mencapai RM3 juta)' : 'None (start 1 January of the second year after the YA that reaches RM3 million)'}</td><td>–</td></tr>`;
+    const hist = [['RM150,000', L ? 'Cadangan asal' : 'Original plan'], ['RM500,000', L ? 'Jun 2025' : 'June 2025'], ['RM1 juta', L ? 'Disember 2025' : 'December 2025'], ['RM3 juta', L ? 'Mulai 1 September 2026 (semasa)' : 'From 1 September 2026 (current)']]
+      .map(([a, b]) => `<tr><th scope="row">${L ? a : a.replace(' juta', ' million')}</th><td>${b}</td></tr>`).join('\n');
+    return {
+      HEAD_EXTRA: CSS, E_STARTED: ya, E_REACHED: reached, E_PHASES: phases, E_HISTORY: hist,
+      E_CLASS: r.must ? 'warn' : 'ok', E_BADGE: esc(r.badge), E_DATE: esc(r.date), E_RELAX: esc(r.relax), E_WHY: esc(r.why), E_STEPS: r.steps.map(x => `<li>${esc(x)}</li>`).join(''),
+      E_FAQ_DATE: longDate(F.faqDate, lang), E_VERIFIED: longDate(F.verified, lang), E_VERIFIED_ISO: F.verified
+    };
+  };
+  bundles['einvoice.js'] = ['assets/js/einvoice-core.js', 'assets/js/einvoice-ui.js'];
 
   return { renderers, bundles };
 }

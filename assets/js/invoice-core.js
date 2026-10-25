@@ -122,6 +122,8 @@
   }
   // d: { lang, doc, number, date, terms, cur, from: {name, reg, sst, tin, addr, contact, logo}, to: {...}, items, discount, shipping, paid, cashRounding, notes }
   function preview(d) {
+    // Blank lines (no description and no price) are left off the document.
+    d = Object.assign({}, d, { items: (d.items || []).filter(function (it) { return String(it.desc || '').trim() || sen(it.price); }) });
     var lang = d.lang === 'ms' ? 'ms' : 'en', T = L[lang], doc = L.en[d.doc] ? d.doc : 'invoice', cur = d.cur || 'RM', t = totals(d), anyDisc = t.lines.some(function (l) { return l.discount; });
     var m = function (v) { return money(v, cur); }, from = d.from || {}, to = d.to || {}, id = function (p) { return [p.reg ? T.reg + ' ' + esc(p.reg) : '', p.sst ? T.sst + ' ' + esc(p.sst) : '', p.tin ? T.tin + ' ' + esc(p.tin) : ''].filter(Boolean).join(' · '); };
     var rows = (d.items || []).map(function (it, i) {
@@ -139,7 +141,7 @@
     return '<div class="inv-doc" lang="' + lang + '">' +
       '<header class="inv-head"><div class="inv-from">' + (from.logo ? '<img class="inv-logo" src="' + esc(from.logo) + '" alt="">' : '') + '<strong>' + esc(from.name) + '</strong>' + (id(from) ? '<span>' + id(from) + '</span>' : '') + '<span>' + br(from.addr) + '</span><span>' + br(from.contact) + '</span></div>' +
       '<div class="inv-meta"><h3>' + T[doc] + '</h3><dl><dt>' + T.no + '</dt><dd>' + esc(d.number) + '</dd><dt>' + T.date + '</dt><dd>' + fmtDate(d.date, lang) + '</dd>' + (showDue ? '<dt>' + dueLabel + '</dt><dd>' + fmtDate(dueDate(d.date, d.terms), lang) + '</dd>' : '') + '</dl></div></header>' +
-      '<section class="inv-to"><small>' + (doc === 'receipt' ? T.recv : T.to) + '</small><strong>' + esc(to.name) + '</strong>' + (id(to) ? '<span>' + id(to) + '</span>' : '') + '<span>' + br(to.addr) + '</span><span>' + br(to.contact) + '</span></section>' +
+      (to.name || to.addr || to.reg || to.contact ? '<section class="inv-to"><small>' + (doc === 'receipt' ? T.recv : T.to) + '</small><strong>' + esc(to.name) + '</strong>' + (id(to) ? '<span>' + id(to) + '</span>' : '') + '<span>' + br(to.addr) + '</span><span>' + br(to.contact) + '</span></section>' : '') +
       '<table class="inv-items"><thead><tr><th scope="col">' + T.item + '</th><th scope="col" class="n">' + T.qty + '</th><th scope="col" class="n">' + T.price + '</th>' + (anyDisc ? '<th scope="col" class="n">' + T.disc + '</th>' : '') + '<th scope="col" class="n">' + T.amount + '</th></tr></thead><tbody>' + rows + '</tbody></table>' +
       '<table class="inv-sum"><tbody>' + sum.map(function (r) { return '<tr><th scope="row">' + r[0] + '</th><td>' + m(r[1]) + '</td></tr>'; }).join('') + foot + '</tbody></table>' +
       (cur === 'RM' ? '<p class="inv-words"><small>' + T.words + '</small>' + esc(words(doc === 'invoice' && t.paid ? t.due : t.total, lang)) + '</p>' : '') +

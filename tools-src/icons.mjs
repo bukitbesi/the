@@ -110,6 +110,8 @@ export const icons = {
   'qr-code-generator': rect(3, 3, 7, 7, 1) + rect(14, 3, 7, 7, 1) + rect(3, 14, 7, 7, 1) + p('M14 14h3v3h-3zM20 14v1M14 20h1M18 18h3v3') + p('M6 6h1v1H6zM17 6h1v1h-1zM6 17h1v1H6z'),
   'online-timer': circle(12, 13.5, 8) + p('M12 9v4.5l3 2') + p('M9.5 2h5M12 2v3.5M19 6l1.5-1.5'),
   'image-to-text': image.replace('m3 17 5-5 4 4 3-3 6 6', 'M7 14h6M7 17h10') + p('M15 8.5h3'),
+  'invoice-generator': file('') + p('M8 12h8M8 15.5h5') + p('M14 18.5h2.5'),
+  'e-invoice-malaysia': rect(4, 3, 16, 18) + p('M8 8h8M8 11.5h5') + rect(13, 13.5, 4.5, 4.5, 0.5) + p('M8 16h2'),
   'ai-summarizer': rect(4, 3, 16, 18) + p('M8 8h8M8 12h8M8 16h4') + '<path d="m18 14 1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor"/>',
   'caption-generator': rect(3, 3, 18, 18, 5) + circle(12, 11, 3.5) + p('M7 18h10M17 6.5h.01'),
   'free-privacy-policy-generator': file('PP') + p('m7 18 2 2 4-4'),

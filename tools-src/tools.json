@@ -315,6 +315,24 @@
     "live": true
   },
   {
+    "name": "Invoice Generator Malaysia",
+    "desc": "Make free invoices, quotations and receipts in ringgit with SST per line, discounts, deposit and the amount in words, then save as PDF; drafts stay on your device. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/invoice-generator/",
+    "cat": "util",
+    "icon": "invoice-generator",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "e-Invoice Malaysia Checker",
+    "desc": "Check whether your business must issue LHDN e-invoices or is exempt under the RM3 million rule from 1 September 2026, with your start date and relaxation period. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/e-invoice-malaysia/",
+    "cat": "calc",
+    "icon": "e-invoice-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "AI Summarizer",
     "desc": "Summarize articles, essays and notes of up to 12,000 characters as bullets, a paragraph or key points, in English or Malay, with reading time saved. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/ai-summarizer/",

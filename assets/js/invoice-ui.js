@@ -36,13 +36,12 @@
     $('invPaidF').hidden = d.doc !== 'invoice';
     $('invTermsF').hidden = d.doc === 'receipt';
   }
-  function save() {
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      var d = data(); d.cash = f('cash').checked;
-      try { localStorage.setItem(KEY, JSON.stringify(d)); $('invSaved').textContent = T.saved; } catch (e) { /* storage off or full */ }
-    }, 400);
+  function flush() {
+    clearTimeout(timer); timer = 0;
+    try { localStorage.setItem(KEY, JSON.stringify(data())); $('invSaved').textContent = T.saved; } catch (e) { /* storage off or full */ }
   }
+  function save(now) { clearTimeout(timer); if (now) flush(); else timer = setTimeout(flush, 400); }
+  window.addEventListener('pagehide', function () { if (timer) flush(); });
   function load() {
     var d; try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { d = null; }
     if (!d) return false;
@@ -91,7 +90,7 @@
   $('invNew').addEventListener('click', function () {
     f('number').value = I.nextNumber(f('number').value); f('date').value = new Date().toISOString().slice(0, 10);
     ['toName', 'toReg', 'toAddr', 'toContact', 'discount', 'shipping', 'paid'].forEach(function (n) { f(n).value = ''; });
-    body.textContent = ''; addRow(); render(); save(); $('invSaved').textContent = T.newDoc(f('number').value);
+    body.textContent = ''; addRow(); render(); save(true); $('invSaved').textContent = T.newDoc(f('number').value);
   });
   $('invClear').addEventListener('click', function () {
     try { localStorage.removeItem(KEY); } catch (e) { /* ignore */ }

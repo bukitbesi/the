@@ -1,0 +1,190 @@
+<!--page
+{
+  "path": "/invoice-generator/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/buat-invois/" },
+  "title": "Free Invoice Generator Malaysia: Invoice, Quotation, Receipt PDF",
+  "description": "Make a free invoice, quotation or receipt in RM with SST, discounts, deposit and amount in words, then save as PDF. No sign-up; your data stays on your device.",
+  "llms": "Free invoice, quotation and receipt generator for Malaysian businesses (English and Bahasa Melayu), checked 25 October 2026. Amounts in ringgit (or S$, US$, €, £), worked in whole sen: each line is quantity × unit price less a line discount; a whole-bill discount (RM or %) is spread over the lines before tax; each line can carry SST service tax 8% (general rate since 1 March 2024) or 6% (food and beverage, telecommunications, parking, logistics, construction, private healthcare, private education and, from 1 January 2026, rental and leasing), or sales tax 10% or 5%, rounded to the sen; plus delivery, less any deposit. Example: 3 × RM150 design with 8% service tax plus 2 × RM45.50 printing and RM20 delivery = subtotal RM541.00, service tax RM36.00, total RM597.00 (Ringgit Malaysia Five hundred and ninety-seven only). Optional rounding of the total bill to the nearest 5 sen follows Bank Negara Malaysia's rounding mechanism (1–2 sen down, 3–4 up to 5, 6–7 down to 5, 8–9 up). Shows the amount in words in English or Malay, SSM and SST numbers, logo and payment notes; saves as PDF through the print dialog, copies a WhatsApp summary, and keeps the draft only in the browser. SST-registered persons must show the invoice serial number, date, their name, address and registration number, a description, discounts, the amount excluding tax, the tax rate and tax amount separately and the total including tax (Service Tax Regulations 2018 reg. 10; Sales Tax Regulations 2018 reg. 7 also needs the buyer's name and address). Only registered persons may charge SST. A PDF invoice is not an LHDN e-invoice: since 1 September 2026 businesses with annual turnover below RM3 million are exempt from e-invoicing unless a corporate shareholder, holding company, related company or joint venture has RM3 million or more.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "invoice",
+  "scripts": ["/assets/js/invoice.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Invoice Generator", null]],
+  "about": ["Invoice", "Quotation", "Sales and Service Tax", "Small business"],
+  "app": {
+    "name": "Invoice Generator Malaysia",
+    "category": "BusinessApplication",
+    "features": ["Invoice, quotation and receipt", "Ringgit amounts with SST service tax 8% or 6% and sales tax 10% or 5% per line", "Line and whole-bill discounts, delivery, deposit and balance", "Amount in words in English and Malay", "BNM cash rounding to 5 sen", "Logo, SSM and SST numbers", "Save as PDF and copy for WhatsApp", "Draft saved on your device only"]
+  },
+  "citations": [["RMCD MySST: Issuing invoices (Service Tax Regulations 2018, reg. 10)", "https://mysst.customs.gov.my/issuing-invoices/"], ["RMCD MySST: Service tax FAQ", "https://mysst.customs.gov.my/faq-services-tax/"], ["Ministry of Finance: Updated SST policy (5 January 2026)", "https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf"], ["Bank Negara Malaysia: Rounding mechanism for over-the-counter payments", "https://www.bnm.gov.my/-/introduction-of-a-rounding-mechanism-for-over-the-counter-payments"], ["LHDN: e-Invoice FAQ (updated 4 September 2026)", "https://www.hasil.gov.my/wp-content/uploads/lhdnm-e-invoice-general-faqs.pdf"]],
+  "faq": [
+    {
+      "q": "How do I make an invoice for free?",
+      "a": "Enter your business details, your customer and each item with its quantity and price, and the invoice appears beside the form as you type. Choose Invoice, Quotation or Receipt, then press Save PDF / print to download a PDF or Copy for WhatsApp to send a summary. There is no sign-up and no watermark."
+    },
+    {
+      "q": "What must an invoice show in Malaysia?",
+      "a": "If you are registered for SST, the invoice must show its serial number and date, your name, address and SST registration number, a description of the goods or services, any discount, the amount excluding tax, the tax rate and tax amount separately, and the total including tax (Service Tax Regulations 2018, regulation 10). It may be in Bahasa Melayu or English."
+    },
+    {
+      "q": "Can I add SST if I am not registered?",
+      "a": "No. Only businesses registered with the Royal Malaysian Customs Department may charge service tax or sales tax and show an SST number. If you are not registered, set every line to No tax. Registration is generally required once taxable sales pass RM500,000 in 12 months (RM1.5 million for food and beverage)."
+    },
+    {
+      "q": "Which SST rate should I choose?",
+      "a": "Service tax is 8% for most services and 6% for food and beverage, telecommunications, parking, logistics, construction, private healthcare, private education and, from 1 January 2026, rental and leasing. Sales tax on goods is 10% or 5% depending on the goods. Each line can have its own rate."
+    },
+    {
+      "q": "Is this invoice an LHDN e-invoice?",
+      "a": "No. A PDF or printed invoice is not an e-invoice; an e-invoice must be submitted to LHDN through MyInvois and validated with a unique ID and QR code. Since 1 September 2026, businesses with annual turnover below RM3 million are exempt unless a corporate shareholder, holding company, related company or joint venture has RM3 million or more, so most small businesses can keep using normal invoices."
+    },
+    {
+      "q": "How do I write the amount in words?",
+      "a": "The generator writes it for you in the document language, for example RM597.00 becomes 'Ringgit Malaysia Five hundred and ninety-seven only' in English or 'Ringgit Malaysia Lima ratus sembilan puluh tujuh sahaja' in Malay. When a deposit is entered it spells out the balance due."
+    },
+    {
+      "q": "Where are my details saved?",
+      "a": "Only in this browser on this device, so your business details and the last document are ready next time. Nothing is uploaded to our server. Use Clear all to delete them, and New document to keep your business details but move to the next invoice number."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Invoice Generator</li></ol></nav>
+  <h1>Invoice Generator Malaysia</h1>
+  <p class="answer">Fill in your business, customer and items, and a <strong>ready-to-send invoice, quotation or receipt in ringgit</strong> appears beside the form, with <strong>SST per line</strong>, discounts, delivery, deposit and the <strong>amount in words</strong>. Save it as PDF or copy it for WhatsApp. It is free with no sign-up, and your details are saved only on this device.</p>
+  <p class="meta"><span>Checked <time datetime="{{I_VERIFIED_ISO}}">{{I_VERIFIED}}</time></span><span>Made in your browser; nothing uploaded</span><a href="/buat-invois/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="inv-tool">
+    <form class="box" id="invForm" novalidate aria-labelledby="inv-h">
+      <h2 id="inv-h">Details</h2>
+      <div class="field-row">
+        <div class="field"><label for="doc">Document</label><select class="input" id="doc" name="doc">{{I_DOC_OPTIONS}}</select></div>
+        <div class="field"><label for="dlang">Document language</label><select class="input" id="dlang" name="dlang">{{I_LANG_OPTIONS}}</select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="number">Number</label><div class="input"><input id="number" name="number" type="text" value="INV-2026-0001" autocomplete="off"></div></div>
+        <div class="field"><label for="date">Date</label><div class="input"><input id="date" name="date" type="date" value="{{I_DATE}}" autocomplete="off"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="invTermsF"><label for="terms">Payment terms / valid for</label><select class="input" id="terms" name="terms">{{I_TERMS_OPTIONS}}</select></div>
+        <div class="field"><label for="cur">Currency</label><select class="input" id="cur" name="cur">{{I_CUR_OPTIONS}}</select></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>From (your business)</legend>
+        <div class="field"><label for="fromName">Business name</label><div class="input"><input id="fromName" name="fromName" type="text" value="{{I_V_FROMNAME}}" autocomplete="off"></div></div>
+        <div class="field-row"><div class="field"><label for="fromReg">SSM reg. no.</label><div class="input"><input id="fromReg" name="fromReg" type="text" value="{{I_V_FROMREG}}" autocomplete="off"></div></div><div class="field"><label for="fromSst">SST no. (if registered)</label><div class="input"><input id="fromSst" name="fromSst" type="text" value="{{I_V_FROMSST}}" autocomplete="off"></div></div></div>
+        <div class="field"><label for="fromTin">Tax identification no. (TIN, optional)</label><div class="input"><input id="fromTin" name="fromTin" type="text" value="{{I_V_FROMTIN}}" autocomplete="off"></div></div>
+        <div class="field"><label for="fromAddr">Address</label><textarea class="prose-in short" id="fromAddr" name="fromAddr" rows="2">{{I_V_FROMADDR}}</textarea></div>
+        <div class="field"><label for="fromContact">Phone / email</label><div class="input"><input id="fromContact" name="fromContact" type="text" value="{{I_V_FROMCONTACT}}" autocomplete="off"></div></div>
+        <div class="field"><label for="logo">Logo (optional)</label><input id="logo" name="logo" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="invNoLogo">Remove logo</button></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>To (customer)</legend>
+        <div class="field"><label for="toName">Customer name</label><div class="input"><input id="toName" name="toName" type="text" value="{{I_V_TONAME}}" autocomplete="off"></div></div>
+        <div class="field"><label for="toReg">Customer reg. no. / TIN (optional)</label><div class="input"><input id="toReg" name="toReg" type="text" value="{{I_V_TOREG}}" autocomplete="off"></div></div>
+        <div class="field"><label for="toAddr">Address</label><textarea class="prose-in short" id="toAddr" name="toAddr" rows="2">{{I_V_TOADDR}}</textarea></div>
+        <div class="field"><label for="toContact">Phone / email</label><div class="input"><input id="toContact" name="toContact" type="text" value="{{I_V_TOCONTACT}}" autocomplete="off"></div></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Items</legend>
+        <div class="inv-wrap"><table class="inv-items-in"><thead><tr><th scope="col">Description</th><th scope="col">Qty</th><th scope="col">Price (RM)</th><th scope="col">Disc. %</th><th scope="col">Tax</th><th scope="col"><span class="sr-only">Remove</span></th></tr></thead><tbody id="invItems">{{I_ROWS}}</tbody></table></div>
+        <template id="invRowTpl">{{I_ROW_TPL}}</template>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="invAdd">+ Add line</button></div>
+        <div class="field"><label for="deftax">Tax for new lines</label><select class="input" id="deftax" name="deftax">{{I_TAX_OPTIONS}}</select></div>
+      </fieldset>
+      <fieldset class="field-group">
+        <legend>Totals</legend>
+        <div class="field-row"><div class="field"><label for="discount">Discount (RM or %)</label><div class="input"><input id="discount" name="discount" type="text" inputmode="decimal" placeholder="10% or 50" value="" autocomplete="off"></div></div><div class="field"><label for="shipping">Delivery (RM)</label><div class="input"><input id="shipping" name="shipping" type="text" inputmode="decimal" value="20" autocomplete="off"></div></div></div>
+        <div id="invPaidF"><div class="field"><label for="paid">Deposit / already paid (RM)</label><div class="input"><input id="paid" name="paid" type="text" inputmode="decimal" value="" autocomplete="off"></div></div></div>
+        <label class="check"><input type="checkbox" name="cash"> Round the total to the nearest 5 sen (BNM counter rounding)</label>
+        <div class="field"><label for="notes">Notes / payment details</label><textarea class="prose-in short" id="notes" name="notes" rows="3">{{I_V_NOTES}}</textarea></div>
+      </fieldset>
+    </form>
+
+    <section class="box inv-out" aria-labelledby="inv-out-h">
+      <h2 id="inv-out-h">Preview</h2>
+      <div class="inv-total"><span>Total <small id="invSub">{{I_SUB}}</small></span><output id="invTotal" for="invForm">{{I_TOTAL}}</output></div>
+      <p class="sr-only" id="invLive" aria-live="polite"></p>
+      <div class="inv-paper" id="invPreview">{{I_PREVIEW}}</div>
+      <div class="tool-actions go"><button type="button" class="btn" id="invPrint">Save PDF / print</button><button type="button" class="btn ghost sm" id="invText">Copy for WhatsApp</button></div>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="invNew">New document (next number)</button><button type="button" class="btn ghost sm" id="invClear">Clear all</button></div>
+      <p class="note" id="invSaved">Your details are saved in this browser only, so they are here next time.</p>
+      <div class="tool-actions"></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="example">Example: a design job with service tax</h2>
+  <p>A design studio registered for SST bills 3 hours of logo design at RM150 (service tax 8%) and 2 boxes of flyers at RM45.50 (no tax), plus RM20 delivery. Subtotal <strong>{{I_EX_SUB}}</strong>, service tax 8% on RM450 = <strong>{{I_EX_TAX}}</strong>, total <strong>{{I_EX_TOTAL}}</strong>: "{{I_EX_WORDS}}". The generator works this out per line, so mixed taxed and untaxed items are handled correctly.</p>
+
+  <h2 id="must-h">What a Malaysian invoice should show</h2>
+  <ul>
+    <li><strong>Every invoice:</strong> a unique serial number, the date, your business name and address, the customer, a description, quantity and price of each item, and the total.</li>
+    <li><strong>SST-registered businesses</strong> (Service Tax Regulations 2018, regulation 10): your SST registration number, any discount, the amount excluding tax, the tax rate and tax amount shown separately, and the total including tax. Foreign-currency amounts must also be shown in ringgit.</li>
+    <li><strong>Sales tax (goods):</strong> the buyer's name and address, and the type, quantity and amount of each item (Sales Tax Regulations 2018, regulation 7).</li>
+    <li><strong>Language:</strong> Bahasa Melayu or English; this generator does both, including the amount in words.</li>
+  </ul>
+
+  <h2 id="round-h">Rounding to the nearest 5 sen</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="round-h">
+    <table class="data">
+      <thead><tr><th scope="col">Bill total</th><th scope="col">Rounded (cash)</th></tr></thead>
+      <tbody>
+{{I_ROUND_TABLE}}
+      </tbody>
+    </table>
+  </div>
+  <p>Bank Negara Malaysia's rounding mechanism (since 1 April 2008) rounds the <strong>total bill</strong>, never each item, for payments made at the counter. Published guidance differs on whether card payments are included, so tick the box only if you round totals at your counter; leave it off for bank transfers.</p>
+
+  <h2 id="formula">How the totals are worked out</h2>
+  <ol>
+    <li><strong>Each line:</strong> quantity × unit price, less the line discount, in whole sen so nothing drifts.</li>
+    <li><strong>Whole-bill discount:</strong> spread across the lines in proportion before tax, so the tax is charged on what the customer really pays.</li>
+    <li><strong>Tax:</strong> each line's rate (service tax 8% or 6%, sales tax 10% or 5%) is applied and rounded to the sen; totals are shown per rate.</li>
+    <li><strong>Total:</strong> subtotal − discount + tax + delivery, optionally rounded to the nearest 5 sen, then less any deposit to give the balance due.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="einv">Invoice or e-invoice?</h2>
+  <p>An invoice made here is a normal invoice (PDF or paper). An <strong>LHDN e-invoice</strong> is different: it is submitted to the MyInvois system and validated with a unique ID and QR code. Since <strong>1 September 2026</strong>, businesses with annual turnover <strong>below RM3 million</strong> are exempt from e-invoicing, unless a corporate shareholder, holding company, related company or joint venture has turnover of RM3 million or more. Exempt businesses keep issuing normal invoices like these. Check your own start date with the <a href="/e-invoice-malaysia/">e-Invoice Checker</a>.</p>
+
+  <h2 id="tips">Tips for getting paid faster</h2>
+  <ul>
+    <li><strong>Clear terms:</strong> state the due date (14 or 30 days) and your bank account or DuitNow details in the notes.</li>
+    <li><strong>One number per document:</strong> use New document to move to the next number; never reuse a number.</li>
+    <li><strong>Quotation first:</strong> send a quotation, then switch the same details to Invoice once the customer agrees.</li>
+    <li><strong>Deposit:</strong> enter what the customer has already paid and the invoice shows the balance due.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://mysst.customs.gov.my/issuing-invoices/" rel="noopener">RMCD MySST: issuing invoices</a> and <a href="https://mysst.customs.gov.my/faq-services-tax/" rel="noopener">service tax FAQ</a></li>
+    <li><a href="https://www.mof.gov.my/portal/images/2026/01/05/Siaran-Media-Pemakluman-Dasar-Dikemaskini-Berhubung-Cukai-Jualan-Dan-Cukai-Perkhidmatan-SST.pdf" rel="noopener">Ministry of Finance: updated SST policy (5 January 2026)</a></li>
+    <li><a href="https://www.bnm.gov.my/-/introduction-of-a-rounding-mechanism-for-over-the-counter-payments" rel="noopener">Bank Negara Malaysia: rounding mechanism</a></li>
+    <li><a href="https://www.hasil.gov.my/wp-content/uploads/lhdnm-e-invoice-general-faqs.pdf" rel="noopener">LHDN: e-Invoice FAQ (updated 4 September 2026)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> This tool formats documents and does the arithmetic; it is not tax advice and does not submit anything to LHDN or the Royal Malaysian Customs Department. Charge SST only if you are registered, and check the latest rules for your business.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/e-invoice-malaysia/">e-Invoice Checker<small>LHDN MyInvois phase and dates</small></a>
+    <a href="/sst-calculator-malaysia/">SST Calculator<small>Service and sales tax</small></a>
+    <a href="/profit-margin-calculator-malaysia/">Profit Margin Calculator<small>Price your services</small></a>
+  </div>
+</section>

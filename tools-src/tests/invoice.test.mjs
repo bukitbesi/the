@@ -58,3 +58,8 @@ test('preview: escapes input, shows SST line, words and balance; receipt and quo
   assert.ok(ms.includes('SEBUT HARGA') && ms.includes('Sah sehingga') && ms.includes('Cukai perkhidmatan 8%') && ms.includes('sahaja'));
   assert.ok(I.preview({ ...d, doc: 'receipt' }).includes('Received with thanks.'));
 });
+
+test('preview leaves out blank lines and an empty customer box', () => {
+  const h = I.preview({ lang: 'en', doc: 'invoice', number: 'A1', date: '2026-10-25', from: { name: 'Me' }, to: {}, items: [{ desc: 'Work', qty: 1, price: '10' }, { desc: '', qty: 1, price: '' }] });
+  assert.equal((h.match(/<tr><td>/g) || []).length, 1); assert.ok(!h.includes('inv-to'));
+});
