@@ -1,0 +1,198 @@
+<!--page
+{
+  "path": "/kod-negeri-ic/",
+  "lang": "ms",
+  "cat": "util",
+  "alternates": {
+    "en": "/malaysia-ic-number-decoder/"
+  },
+  "title": "Kod Negeri IC: Semak Tarikh Lahir, Umur dan Negeri dari Nombor MyKad",
+  "description": "Semak kod negeri IC dan maksud nombor MyKad: tarikh lahir, umur dan tempat lahir ikut kod JPN. Berjalan dalam pelayar; tiada data disimpan.",
+  "llms": "Penyemak nombor MyKad (kad pengenalan) Malaysia, kod disemak 25 Oktober 2026 dengan senarai Kod Negeri dan Kod Negara Jabatan Pendaftaran Negara (JPN). Nombor 12 digit ialah YYMMDD-PB-###G: YYMMDD ialah tarikh lahir, PB kod tempat lahir dan ###G nombor siri yang digit akhirnya, mengikut amalan yang lazim (tidak diterbitkan JPN), ganjil bagi lelaki dan genap bagi perempuan. Kod negeri: Johor 01, 21–24; Kedah 02, 25–27; Kelantan 03, 28–29; Melaka 04, 30; Negeri Sembilan 05, 31, 59; Pahang 06, 32–33; Pulau Pinang 07, 34–35; Perak 08, 36–39; Perlis 09, 40; Selangor 10, 41–44; Terengganu 11, 45–46; Sabah 12, 47–49; Sarawak 13, 50–53; WP Kuala Lumpur 14, 54–57; WP Labuan 15, 58; WP Putrajaya 16; negeri tidak diketahui 82. Lahir di luar Malaysia: 60 Brunei, 61 Indonesia, 62 Kemboja, 63 Laos, 64 Myanmar, 65 Filipina, 66 Singapura, 67 Thailand, 68 Vietnam, 71–72 luar negara (kad lama), 74 China, 75 India, 76 Pakistan, 77 Arab Saudi, 78 Sri Lanka, 79 Bangladesh, 83–93 kumpulan rantau (cth. 87 United Kingdom atau Ireland, 89 Jepun, Korea dan Taiwan, 91 Amerika Utara), 98 tanpa negara, 99 pelarian atau tidak dinyatakan. Tahun dua digit boleh mengelirukan (00 boleh jadi 1900 atau 2000); alat ini mengandaikan tarikh terkini yang mungkin dan membenarkan pengguna menukar abad. Mod senarai menyemak banyak nombor dan mengeksport CSV dengan nombor bertopeng. Tiada apa disimpan, dihantar atau diletak dalam pautan, kerana nombor MyKad ialah data peribadi di bawah Akta Perlindungan Data Peribadi 2010; hanya pegawai yang diberi kuasa boleh memeriksa MyKad di bawah peraturan 7(1) Peraturan-Peraturan Pendaftaran Negara 1990.",
+  "datePublished": "2026-10-25",
+  "dateModified": "2026-10-25",
+  "render": "ic",
+  "scripts": [
+    "/assets/js/ic.js"
+  ],
+  "breadcrumb": [
+    [
+      "Alat",
+      "/"
+    ],
+    [
+      "Utiliti",
+      "/?cat=util#tools"
+    ],
+    [
+      "Kod Negeri IC",
+      null
+    ]
+  ],
+  "about": [
+    "MyKad",
+    "Kad pengenalan Malaysia",
+    "Jabatan Pendaftaran Negara",
+    "Kod tempat lahir"
+  ],
+  "app": {
+    "name": "Semakan Kod Negeri IC",
+    "category": "UtilitiesApplication",
+    "features": [
+      "Tarikh lahir, hari dan umur",
+      "Negeri atau negara lahir ikut kod JPN",
+      "Tukar abad bagi tahun yang mengelirukan",
+      "Mod senarai untuk banyak nombor dengan eksport CSV",
+      "Hanya nombor bertopeng dalam eksport",
+      "Tiada data disimpan atau dihantar"
+    ]
+  },
+  "citations": [
+    [
+      "JPN: Kod Negeri",
+      "https://www.jpn.gov.my/informasi/kod-negeri/"
+    ],
+    [
+      "JPN: Kod Negara",
+      "https://www.jpn.gov.my/informasi/kod-negara/"
+    ],
+    [
+      "Wikipedia: Malaysian identity card",
+      "https://en.wikipedia.org/wiki/Malaysian_identity_card"
+    ],
+    [
+      "The Vibes (Bernama): NRD says security guards cannot demand or scan MyKad (10 June 2025)",
+      "https://www.thevibes.com/articles/news/109203/no-legal-right-security-guards-cannot-demand-or-scan-mykad-warns-nrd"
+    ]
+  ],
+  "faq": [
+    {
+      "q": "Apakah maksud nombor IC Malaysia?",
+      "a": "Nombor MyKad mempunyai 12 digit dalam bentuk YYMMDD-PB-###G. Enam digit pertama ialah tarikh lahir, dua digit seterusnya kod tempat lahir JPN, dan empat digit akhir nombor siri. Contohnya, 900101-14-5679 ialah orang yang lahir pada 1 Januari 1990 di Kuala Lumpur."
+    },
+    {
+      "q": "Apakah kod negeri dalam nombor IC?",
+      "a": "Ia digit ke-7 dan ke-8. Setiap negeri ada satu atau lebih kod: Johor 01 dan 21 hingga 24, Kedah 02 dan 25 hingga 27, Selangor 10 dan 41 hingga 44, Kuala Lumpur 14 dan 54 hingga 57, Sabah 12 dan 47 hingga 49, Sarawak 13 dan 50 hingga 53, dan seterusnya. Kod 82 bermaksud lahir di Malaysia tetapi negeri tidak diketahui."
+    },
+    {
+      "q": "Apakah maksud kod 60 hingga 99?",
+      "a": "Kod ini untuk mereka yang lahir di luar Malaysia, contohnya 66 Singapura, 61 Indonesia, 74 China dan 75 India. Kod 83 hingga 93 ialah kumpulan rantau, bukan satu negara, seperti 87 untuk United Kingdom atau Ireland dan 91 untuk Amerika Utara; 98 bermaksud tanpa negara."
+    },
+    {
+      "q": "Adakah digit akhir menunjukkan lelaki atau perempuan?",
+      "a": "Mengikut amalan yang lazim, digit akhir ganjil ialah lelaki dan genap ialah perempuan. JPN tidak menerbitkan peraturan ini dalam halaman kodnya, jadi anggap ia sebagai amalan, bukan medan rasmi."
+    },
+    {
+      "q": "Kenapa tahun lahir boleh jadi 19xx atau 20xx?",
+      "a": "Nombor hanya menyimpan dua digit akhir tahun, jadi 05 boleh jadi 1905 atau 2005. Penyemak memilih tarikh terkini yang sudah berlaku dan memberi nota jika kedua-duanya mungkin; tukar abad jika orang itu lebih tua."
+    },
+    {
+      "q": "Selamatkah menaip nombor IC di sini?",
+      "a": "Semakan berjalan sepenuhnya dalam pelayar anda. Tiada apa dihantar ke pelayan, disimpan, atau ditambah ke pautan halaman, dan eksport hanya menunjukkan nombor bertopeng. Nombor MyKad ialah data peribadi di bawah Akta Perlindungan Data Peribadi 2010, jadi semak hanya nombor yang anda berhak gunakan."
+    },
+    {
+      "q": "Bolehkah sesiapa meminta atau menyimpan MyKad saya?",
+      "a": "Di bawah peraturan 7(1) Peraturan-Peraturan Pendaftaran Negara 1990, hanya pegawai yang diberi kuasa seperti JPN, polis, kastam, anggota tentera yang bertugas dan pegawai awam yang diberi kuasa Ketua Pengarah boleh memeriksa MyKad. JPN menyatakan pengawal keselamatan tidak berhak meminta, menyimpan atau mengimbasnya."
+    }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Kod Negeri IC</li></ol></nav>
+  <h1>Kod Negeri IC dan Maksud Nombor MyKad</h1>
+  <p class="answer">Nombor MyKad dibaca <strong>YYMMDD-PB-###G</strong>: enam digit pertama ialah <strong>tarikh lahir</strong>, digit ke-7 dan ke-8 ialah <strong>kod negeri tempat lahir</strong> (contohnya 14 Kuala Lumpur, 10 Selangor), dan empat digit akhir nombor siri. Taip nombor untuk melihat tarikh lahir, umur dan negeri atau negara lahir, ikut senarai kod rasmi JPN.</p>
+  <p class="meta"><span>Kod disemak <time datetime="{{C_VERIFIED_ISO}}">{{C_VERIFIED}}</time></span><span>Tiada data disimpan atau dihantar</span><a href="/malaysia-ic-number-decoder/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="icForm" novalidate autocomplete="off" aria-labelledby="ic-h">
+      <h2 id="ic-h">Nombor MyKad</h2>
+      <div class="field ic-in"><label for="ic">Nombor IC 12 digit</label><div class="input"><input id="ic" name="ic" type="text" inputmode="numeric" maxlength="14" value="{{C_SAMPLE}}" autocomplete="off" spellcheck="false"></div></div>
+      <div class="field"><label for="century">Abad lahir</label><select class="input" id="century" name="century">{{C_CENTURY}}</select></div>
+      <fieldset class="field-group">
+        <legend>Semak banyak nombor (satu setiap baris)</legend>
+        <div class="field"><label for="list" class="sr-only">Nombor IC, satu setiap baris</label><textarea class="prose-in short" id="list" name="list" rows="4" spellcheck="false" placeholder="900101-14-5679&#10;050615-10-1234"></textarea></div>
+      </fieldset>
+      <div class="tool-actions go"><button type="button" class="btn ghost sm" id="icClear">Kosongkan</button></div>
+      <p class="help">Berjalan dalam pelayar sahaja: tiada apa dihantar, disimpan atau diletak dalam pautan halaman.</p>
+    </form>
+
+    <section class="box" aria-labelledby="ic-result-h">
+      <h2 id="ic-result-h">Maksud nombor</h2>
+      <div class="net"><p>Tarikh lahir</p><output id="icBirth" for="ic century">{{C_BIRTH}}</output><p id="icSub">{{C_SUB}}</p></div>
+      <p class="sr-only" id="icLive" aria-live="polite"></p>
+      <p class="ic-note" id="icNote"></p>
+      <table class="rows wrap"><caption>Butiran</caption><tbody id="icRows">
+{{C_ROWS}}
+      </tbody></table>
+      <div id="icListBox" hidden>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Keputusan senarai"><table class="data"><thead><tr><th scope="col">Nombor</th><th scope="col">Tarikh lahir</th><th scope="col">Umur</th><th scope="col">Tempat lahir</th><th scope="col">Digit akhir</th></tr></thead><tbody id="icList"></tbody></table></div>
+        <div class="tool-actions go"><button type="button" class="btn ghost sm" id="icCsv" disabled>Muat turun CSV (bertopeng)</button></div>
+      </div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="icPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="states-h">Kod negeri dalam nombor MyKad</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="states-h">
+    <table class="data text"><thead><tr><th scope="col">Negeri atau wilayah</th><th scope="col">Kod (digit ke-7 dan ke-8)</th></tr></thead><tbody>
+{{C_STATES}}
+    </tbody></table>
+  </div>
+  <p>JPN menyenaraikan {{C_STATE_COUNT}} kod untuk 16 negeri dan wilayah. Nombor lama kebanyakannya guna kod pertama (01 hingga 16); nombor kemudian guna kod tambahan apabila julat setiap negeri penuh.</p>
+
+  <h2 id="abroad-h">Kod bagi mereka yang lahir di luar Malaysia</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="abroad-h">
+    <table class="data text"><thead><tr><th scope="col">Kod</th><th scope="col">Negara atau rantau</th></tr></thead><tbody>
+{{C_ABROAD}}
+    </tbody></table>
+  </div>
+  <p>Senarai negara JPN mempunyai beberapa ketidakselarasan (contohnya Byelorussia di bawah 64 walaupun Belarus 92), jadi kod 83 hingga 93 ditunjukkan sebagai rantau, bukan satu negara.</p>
+
+  <h2 id="example">Contoh</h2>
+  <p><strong>900101-14-5679</strong>: 90-01-01 ialah 1 Januari 1990, hari Isnin; 14 ialah WP Kuala Lumpur; 5679 nombor siri, dan digit akhirnya 9 ganjil, yang mengikut amalan bermaksud lelaki. Pada {{C_VERIFIED}} orang ini berumur 36 tahun.</p>
+
+  <h2 id="formula">Cara penyemak membaca nombor</h2>
+  <ol>
+    <li><strong>Bersihkan:</strong> sempang dan jarak dibuang; tepat 12 digit diperlukan.</li>
+    <li><strong>Tarikh:</strong> YYMMDD mesti tarikh sebenar (29 Februari hanya pada tahun lompat). Jika 19YY dan 20YY kedua-duanya sudah berlalu, yang terkini dipilih dan nota dipaparkan.</li>
+    <li><strong>Tempat:</strong> digit ke-7 dan ke-8 dicari dalam senarai Kod Negeri dan Kod Negara JPN; kod yang tiada dalam senarai ditandakan.</li>
+    <li><strong>Digit akhir:</strong> ganjil atau genap ditunjukkan bersama digit itu, kerana amalan jantina tidak diterbitkan JPN.</li>
+  </ol>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="privacy">Privasi dan MyKad anda</h2>
+  <ul>
+    <li>Nombor MyKad ialah data peribadi di bawah Akta Perlindungan Data Peribadi 2010. Alat ini tidak menghantar, menyimpan atau meletakkannya dalam pautan halaman.</li>
+    <li>Hanya pegawai yang diberi kuasa (JPN, polis, kastam, tentera yang bertugas dan pegawai awam yang diberi kuasa) boleh memeriksa MyKad (Peraturan-Peraturan Pendaftaran Negara 1990, peraturan 7(1)).</li>
+    <li>Bagi senarai, eksport CSV hanya menyimpan nombor bertopeng (contohnya 900101-14-****).</li>
+    <li>Perlu umur tepat untuk borang? Gunakan <a href="/kalkulator-umur/">Kalkulator Umur</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.jpn.gov.my/informasi/kod-negeri/" rel="noopener">JPN: Kod Negeri</a> dan <a href="https://www.jpn.gov.my/informasi/kod-negara/" rel="noopener">JPN: Kod Negara</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="noopener">Wikipedia: Malaysian identity card</a></li>
+    <li><a href="https://www.thevibes.com/articles/news/109203/no-legal-right-security-guards-cannot-demand-or-scan-mykad-warns-nrd" rel="noopener">The Vibes (Bernama): JPN tentang siapa boleh memeriksa MyKad</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Alat ini membaca struktur nombor; ia tidak menyemak dengan JPN sama ada kad itu tulen, sah atau milik sesiapa. Untuk pengesahan rasmi, hubungi JPN.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-umur/">Kalkulator Umur<small>Umur tepat dalam tahun dan hari</small></a>
+    <a href="/kalkulator-umur-bersara/">Kalkulator Umur Bersara<small>Tarikh bersara dan umur KWSP</small></a>
+    <a href="/gambar-passport/">Gambar Passport<small>35 × 50 mm, MyOnline</small></a>
+  </div>
+</section>
