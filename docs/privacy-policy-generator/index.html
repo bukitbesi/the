@@ -130,6 +130,8 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .header>.container{height:100%;display:flex;align-items:center;gap:6px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;min-height:44px;margin-right:auto;white-space:nowrap}
 .logo img{width:36px;height:36px;border-radius:10px}
+.logo-t{display:flex;flex-direction:column;line-height:1.05}
+.logo-t small{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3)}
 .nav{display:none;gap:2px;margin-right:8px}
 .nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;font-size:.88rem;font-weight:600;color:var(--text2);border-radius:8px}
 .nav a::after{content:"";position:absolute;left:11px;right:11px;bottom:6px;height:2px;border-radius:2px;background:var(--grad);transform:scaleX(0);transition:transform .2s}
@@ -143,8 +145,8 @@ h2{font-size:clamp(1.65rem,4vw,2.5rem);font-weight:800;line-height:1.15;letter-s
 .burger path{transition:transform .2s,opacity .2s;transform-origin:12px 12px}
 .menu-open .burger .b1{transform:translateY(5px) rotate(45deg)}.menu-open .burger .b2{opacity:0}.menu-open .burger .b3{transform:translateY(-5px) rotate(-45deg)}
 .btn.lang{min-width:44px;min-height:42px;padding:0 12px}
-@media(max-width:400px){.header>.container{padding:0 12px;gap:5px}.logo{font-size:.9rem;gap:8px}.hbtn{width:40px;height:40px}.btn.lang{min-width:40px;padding:0 10px}}
-@media(max-width:350px){.logo span{display:none}}
+@media(max-width:400px){.header>.container{padding:0 12px;gap:4px}.logo{font-size:.84rem;gap:7px;flex-shrink:0}.logo img{width:32px;height:32px}.hbtn{width:38px;height:38px}.btn.lang{min-width:38px;padding:0 8px}}
+@media(max-width:350px){.logo-the{display:none}}
 
 /* Mobile menu */
 .menu{position:fixed;top:64px;left:0;right:0;max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain;background:var(--bg);border-bottom:1px solid var(--border);box-shadow:var(--shadow);padding:16px 0 22px}
@@ -839,7 +841,7 @@ textarea.wc-text{min-height:260px}
 
 <header class="header">
   <div class="container">
-    <a href="/" class="logo" aria-label="The Bukit Besi Tools home"><img src="/assets/favicon-image/bukit-besi-72.webp" width="36" height="36" alt="" decoding="async"><span>The Bukit Besi</span></a>
+    <a href="/" class="logo" aria-label="The Bukit Besi Tools home"><img src="/assets/favicon-image/bukit-besi-72.webp" width="36" height="36" alt="" decoding="async"><span class="logo-t"><b><span class="logo-the">The </span>Bukit Besi</b><small>Tools</small></span></a>
     <nav class="nav" aria-label="Site">
       <a href="/?cat=dev#tools" data-filter="dev">Developer</a>
       <a href="/?cat=seo#tools" data-filter="seo">SEO</a>
