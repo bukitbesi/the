@@ -342,6 +342,15 @@
     "live": true
   },
   {
+    "name": "LPPSA Calculator",
+    "desc": "Work out a civil servant's LPPSA home financing limit by net income (up to RM1 million from 4 October 2026), the instalment at 4% or the blended 4.5% rate, tenure up to 40 years and second financing. English and Bahasa Melayu.",
+    "url": "https://tool.thebukitbesi.com/lppsa-calculator/",
+    "cat": "calc",
+    "icon": "lppsa-calculator",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "MyKad IC Number Decoder",
     "desc": "Read a Malaysian IC number: date of birth, age and state or country of birth from JPN's official codes, with a list mode and masked CSV. Nothing is stored or sent. English and Bahasa Melayu.",
     "url": "https://tool.thebukitbesi.com/malaysia-ic-number-decoder/",

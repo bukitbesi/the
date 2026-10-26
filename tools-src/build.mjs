@@ -14,6 +14,7 @@ import { batch13 } from './batch13.mjs';
 import { batch14 } from './batch14.mjs';
 import { batch15 } from './batch15.mjs';
 import { batch16 } from './batch16.mjs';
+import { batch17 } from './batch17.mjs';
 import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
@@ -2913,6 +2914,8 @@ const b15 = batch15({ require, esc, longDate });
 Object.assign(RENDERERS, b15.renderers);
 const b16 = batch16({ require, esc, longDate });
 Object.assign(RENDERERS, b16.renderers);
+const b17 = batch17({ require, esc, longDate });
+Object.assign(RENDERERS, b17.renderers);
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3144,6 +3147,7 @@ Object.assign(bundles, b13.bundles);
 Object.assign(bundles, b14.bundles);
 Object.assign(bundles, b15.bundles);
 Object.assign(bundles, b16.bundles);
+Object.assign(bundles, b17.bundles);
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
   const source = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
