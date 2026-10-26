@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/lppsa-calculator/",
+  "lang": "en",
+  "cat": "calc",
+  "alternates": { "ms": "/kalkulator-lppsa/" },
+  "title": "LPPSA Calculator 2026: Financing Limit up to RM1 Million, Instalment",
+  "description": "Work out your LPPSA home financing limit by net income (up to RM1 million from 4 October 2026), the monthly instalment at 4%, tenure and second financing.",
+  "llms": "LPPSA (Public Sector Home Financing Board) calculator for Malaysian civil servants, rules verified 26 October 2026 against LPPSA's official notices and FAQ. From 4 October 2026 the maximum financing follows net income: up to RM2,500 RM280,000; RM3,000 RM350,000; RM3,500 RM430,000; RM4,000 RM480,000; RM4,500 RM550,000; RM5,000 RM610,000; RM5,500 RM670,000; RM6,000 RM730,000; RM6,500 RM780,000; RM7,000 RM800,000; RM7,500 RM830,000; RM8,000 RM850,000; RM8,500 RM880,000; RM9,000 RM900,000; RM9,500 RM930,000; RM10,000 RM950,000; over RM10,000 RM1 million. The profit rate is 4% a year on financing up to RM750,000 and 4.5% on the part above RM750,000 (a weighted blended rate across first and second financing; RM800,000 = 4.03%, RM1 million = 4.13%), on a reducing balance. The monthly instalment may not exceed 60% of basic salary plus fixed allowances, total debts may not exceed 80% of net income, and take-home pay must stay at least 20% of gross income. Net income = basic salary + fixed allowances (ITP, ITKA, ITK, ITKT, ITJU, EPW, acting allowance, COLA, BIW, BISM, BISS) − mandatory deductions (EPF, SOCSO, income tax, court orders, salary repayment, government housing loans); zakat, Tabung Haji and ASB are not counted. Tenure is up to 420 months (35 years), or 480 months (40 years) under the Young Civil Servants' Housing Financing Scheme (SPPM) for those aged 30 and under (applications until 31 December 2026), and not past age 90 on the pension scheme or the retirement age on the EPF scheme. A second financing is allowed without settling the first from 4 October 2026, at up to a 90% margin and within the remaining limit. Example: RM100,000 over 35 years at 4% is RM442.77 a month.",
+  "datePublished": "2026-10-26",
+  "dateModified": "2026-10-26",
+  "render": "lppsa",
+  "scripts": ["/assets/js/lppsa.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["LPPSA Calculator", null]],
+  "about": ["Public Sector Home Financing Board (LPPSA)", "Civil servant housing loan Malaysia", "Young Civil Servants' Housing Financing Scheme (SPPM)", "LPPSA second financing"],
+  "app": {
+    "name": "LPPSA Calculator",
+    "category": "FinanceApplication",
+    "features": ["Financing limit from the 2026 net income table (up to RM1 million)", "Blended 4% and 4.5% rate", "Monthly instalment and total profit", "The 60%, 80% and 20% rules", "Pension, EPF and 40-year SPPM schemes", "Second financing while the first is active", "Shareable result link"]
+  },
+  "citations": [
+    ["LPPSA: 2026 home financing improvements and FAQ (25 September 2026)", "https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/523442ad-28a1-4ed5-a1e2-ec7ce0e223a8.pdf"],
+    ["LPPSA: Financing limit up to RM1 million", "https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/726ed27b-9b23-4de8-b00c-8ff83804137e.pdf"],
+    ["LPPSA: Eligibility calculation FAQ", "https://myfinancing.lppsa.gov.my/my/faq4"],
+    ["LPPSA: Young Civil Servants' Housing Financing Scheme (SPPM)", "https://myfinancing.lppsa.gov.my/my/faq23"],
+    ["LPPSA: Longer financing tenure (Budget 2019)", "https://www.lppsa.gov.my/v3/my/upload/announcements/2018/Hebahan-Pemanjangan-Tempoh-Pembiayaan-Belanjawan-2019.pdf"]
+  ],
+  "faq": [
+    { "q": "What is the LPPSA financing limit in 2026?", "a": "From 4 October 2026 the limit follows net income: RM280,000 for a net income up to RM2,500, rising every RM500 to RM950,000 at RM10,000, and RM1 million for a net income above RM10,000. For example, a net income of {{L_DEF_NET}} qualifies for up to {{L_DEF_TABLE}}." },
+    { "q": "What is the LPPSA profit rate?", "a": "4% a year on financing up to RM750,000, and 4.5% only on the part above RM750,000. The final rate is a weighted average: RM800,000 is charged 4.03% and RM1 million 4.13%. The rate is fixed for the whole tenure." },
+    { "q": "What is the LPPSA monthly instalment for RM100,000?", "a": "At 4% on a reducing balance, RM100,000 over 35 years is {{L_100K}} a month, and over 40 years (SPPM) {{L_100K40}} a month. Scale it to your amount; for example, RM300,000 over 35 years is about RM1,328.32." },
+    { "q": "How does LPPSA work out eligibility?", "a": "Three tests: the instalment may not exceed 60% of basic salary plus fixed allowances, total debts may not exceed 80% of net income, and take-home pay must stay at least 20% of gross income. In LPPSA's own payslip example (RM3,371 basic, RM4,321 gross), the highest instalment is {{L_EX_ROOM}}." },
+    { "q": "What is the maximum LPPSA tenure?", "a": "Up to 35 years (420 months), but not past age 90 on the pension scheme or your retirement age on the EPF scheme. Civil servants aged 30 and under can get 40 years (480 months) under SPPM for applications made until 31 December 2026." },
+    { "q": "Can I take a second LPPSA financing without settling the first?", "a": "Yes, from 4 October 2026, if salary deductions for the first financing have started and there are no arrears. The second financing uses what is left of your limit, with a margin of up to 90% of the property price while the first financing is still active." },
+    { "q": "What does net income mean in LPPSA's calculation?", "a": "Basic salary + fixed allowances (such as ITP, ITKA, COLA and BIW) − mandatory deductions (EPF, SOCSO, income tax, court orders and government housing loans). Zakat, Tabung Haji and savings such as ASB are not counted as mandatory deductions." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">LPPSA Calculator</li></ol></nav>
+  <h1>LPPSA Calculator: Financing Limit and Instalment</h1>
+  <p class="answer">LPPSA finances civil servants' homes up to <strong>RM1 million</strong> from 4 October 2026, based on net income, at <strong>4% a year</strong> (4.5% only on the part above RM750,000). With a net income of {{L_DEF_NET}}, your limit is <strong>{{L_DEF_MAX}}</strong> and the 35-year instalment is {{L_DEF_PAY}} a month. Enter your payslip for your own limit and instalment.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{L_VERIFIED_ISO}}">{{L_VERIFIED}}</time></span><span>LPPSA's official table and formula</span><a href="/kalkulator-lppsa/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="lpForm" novalidate aria-labelledby="lp-h">
+      <h2 id="lp-h">Your payslip</h2>
+      <div class="field-row">
+        <div class="field"><label for="basic">Basic salary</label><div class="input"><span aria-hidden="true">RM</span><input id="basic" name="basic" type="number" inputmode="decimal" min="0" step="0.01" value="4500"></div></div>
+        <div class="field"><label for="allow">Fixed allowances</label><div class="input"><span aria-hidden="true">RM</span><input id="allow" name="allow" type="number" inputmode="decimal" min="0" step="0.01" value="1100"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="mand">Mandatory deductions</label><div class="input"><span aria-hidden="true">RM</span><input id="mand" name="mand" type="number" inputmode="decimal" min="0" step="0.01" value="850"></div></div>
+        <div class="field"><label for="debts">Other loan deductions</label><div class="input"><span aria-hidden="true">RM</span><input id="debts" name="debts" type="number" inputmode="decimal" min="0" step="0.01" value="400"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="others">Zakat, Tabung Haji, ASB</label><div class="input"><span aria-hidden="true">RM</span><input id="others" name="others" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="0"></div></div>
+        <div class="field"><label for="age">Age</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="18" max="70" step="1" value="32"><span aria-hidden="true">years</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="scheme">Retirement scheme</label><select class="input" id="scheme" name="scheme">{{L_SCHEME}}</select></div>
+        <div class="field" id="lpRetire" hidden><label for="retire">Retirement age</label><div class="input"><input id="retire" name="retire" type="number" inputmode="numeric" min="40" max="70" step="1" value="60"><span aria-hidden="true">years</span></div></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Financing</legend>
+        <div class="field"><label for="second">Type</label><select class="input" id="second" name="second">{{L_SECOND}}</select></div>
+        <div class="field" id="lpFirst" hidden><label for="first">First financing amount approved</label><div class="input"><span aria-hidden="true">RM</span><input id="first" name="first" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="0"></div><p class="help">Add your first financing instalment to mandatory deductions (government housing loans count as mandatory deductions).</p></div>
+        <div class="field-row">
+          <div class="field"><label for="price">Property price</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="None"></div></div>
+          <div class="field"><label for="amount">Amount applied for</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="Max"></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Mandatory: EPF, SOCSO, tax, court orders. Other loans: Angkasa, cooperative, personal loan.</p>
+    </form>
+
+    <section class="box" aria-labelledby="lp-result-h">
+      <h2 id="lp-result-h">Your eligibility</h2>
+      <div class="net"><p>Maximum financing</p><output id="lpBig" for="basic allow mand debts age scheme price amount">{{L_BIG}}</output><p id="lpSub">{{L_SUB}}</p></div>
+      <p class="sr-only" id="lpLive" aria-live="polite"></p>
+      <div class="lp-grid" id="lpGrid">{{L_GRID}}</div>
+      <p class="lp-note" id="lpNote">{{L_NOTE}}</p>
+      <table class="rows wrap"><caption>Details</caption><tbody id="lpRows">
+{{L_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="lpPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="limits-h">LPPSA financing limit table from 4 October 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="limits-h">
+    <table class="data"><thead><tr><th scope="col">Monthly net income</th><th scope="col">Maximum financing</th></tr></thead><tbody>
+{{L_LIMITS}}
+    </tbody></table>
+  </div>
+  <p>The table does not apply to members of the administration, state assemblymen and judges, who have their own remuneration rules. Applications made before 4 October 2026 are processed under the old limits.</p>
+
+  <h2 id="inst-h">Monthly instalment at 4% by tenure</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="inst-h">
+    <table class="data"><thead><tr><th scope="col">Amount</th><th scope="col">20 years</th><th scope="col">25 years</th><th scope="col">30 years</th><th scope="col">35 years</th><th scope="col">40 years (SPPM)</th></tr></thead><tbody>
+{{L_INST}}
+    </tbody></table>
+  </div>
+
+  <h2 id="blend-h">Blended rate for financing above RM750,000 (LPPSA's examples)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="blend-h">
+    <table class="data"><thead><tr><th scope="col">Situation</th><th scope="col">Final rate</th><th scope="col">Instalment (35 years; second 30 years)</th></tr></thead><tbody>
+{{L_BLEND}}
+    </tbody></table>
+  </div>
+  <p>LPPSA's formula: rate = (A₁ × 4% + A₂ × 4.5%) ÷ amount, where A₁ is the part up to RM750,000 and A₂ the part above it, counted across first and second financing. Joint applicants (husband and wife) are worked out separately.</p>
+
+  <h2 id="formula">How it is calculated</h2>
+  <ol>
+    <li><strong>Net income</strong> = basic salary + fixed allowances − mandatory deductions.</li>
+    <li><strong>Table limit</strong> comes from the net income table above (for a second financing, minus the first amount).</li>
+    <li><strong>Highest instalment</strong> is the lowest of: 60% × (basic + fixed allowances); 80% × net income − other loans; and current take-home pay − 20% × gross income.</li>
+    <li><strong>Tenure</strong> = 420 months (SPPM 480, second 360), capped at age 90 (pension) or retirement age (EPF).</li>
+    <li><strong>Maximum financing</strong> = the lowest of the table limit, the amount the highest instalment can repay, and the property price (90% for a second financing while the first is active).</li>
+  </ol>
+  <p><strong>LPPSA's payslip example:</strong> basic RM3,371, ITP RM400, ITKA RM250, COLA RM300 (RM4,321 in all), tax RM21, personal loan and Angkasa RM772, zakat and Tabung Haji RM63. Net income RM4,300, table limit {{L_EX_MAX}}, highest instalment {{L_EX_ROOM}}, and RM550,000 over 35 years is {{L_EX_PAY}} a month.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">LPPSA rules to know</h2>
+  <ul>
+    <li><strong>SPPM (age 30 and under):</strong> first financing only, Types 1, 2, 3, 5 (house) and 6, tenure up to 40 years; open until 31 December 2026 (subject to extension).</li>
+    <li><strong>Second financing:</strong> 100% margin if the first is settled, 90% while it is active, 100% for Type 5 (takeover) and Type 7 (renovation) on the same property.</li>
+    <li><strong>Instalment method:</strong> LPPSA charges profit on a reducing balance; this calculator uses monthly rests. LPPSA's SmartKira also includes the insurance/takaful interim period, so the official figure can differ slightly.</li>
+    <li><strong>Second financing tenure</strong> is 360 months under LPPSA's tenure notice (Budget 2019); the 2026 notices do not change it.</li>
+    <li>Not a civil servant, or comparing with a bank? Use the <a href="/home-loan-calculator-malaysia/">Home Loan Calculator</a>. Your pension after retiring: <a href="/pension-calculator-malaysia/">Pension Calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/523442ad-28a1-4ed5-a1e2-ec7ce0e223a8.pdf" rel="noopener">LPPSA: 2026 financing improvements and FAQ (25 September 2026)</a></li>
+    <li><a href="https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/726ed27b-9b23-4de8-b00c-8ff83804137e.pdf" rel="noopener">LPPSA: Financing limit up to RM1 million</a></li>
+    <li><a href="https://myfinancing.lppsa.gov.my/my/faq4" rel="noopener">LPPSA: Eligibility calculation FAQ</a> and <a href="https://myfinancing.lppsa.gov.my/my/faq23" rel="noopener">SPPM</a></li>
+    <li><a href="https://www.lppsa.gov.my/v3/my/upload/announcements/2018/Hebahan-Pemanjangan-Tempoh-Pembiayaan-Belanjawan-2019.pdf" rel="noopener">LPPSA: Longer financing tenure (Budget 2019)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate based on LPPSA's rules. Actual approval depends on LPPSA's assessment, the JPPH valuation and your payslip; check with <a href="https://selfservice.lppsa.gov.my/smartkira" rel="noopener">SmartKira LPPSA</a>.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/home-loan-calculator-malaysia/">Home Loan Calculator<small>Bank loan, stamp duty and legal fees</small></a>
+    <a href="/pension-calculator-malaysia/">Pension Calculator<small>Pension, gratuity and GCR</small></a>
+    <a href="/sspa-salary-calculator/">SSPA Salary Calculator<small>New civil service pay</small></a>
+    <a href="/refinance-calculator-malaysia/">Refinance Calculator<small>Is it worth it</small></a>
+  </div>
+</section>

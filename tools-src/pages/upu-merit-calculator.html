@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/upu-merit-calculator/",
+  "lang": "en",
+  "cat": "calc",
+  "alternates": { "ms": "/kalkulator-merit-upu/" },
+  "title": "UPU Merit Calculator 2026/2027: SPM, STPM and Matriculation Merit",
+  "description": "Work out your UPU merit score with the official 2026/2027 formula: SPM (STEM A, B, C, Arts), STPM, matriculation and STAM, 90% academic plus 10% co-curriculum.",
+  "llms": "UPU (Unit Pengambilan Universiti, Ministry of Higher Education) merit score calculator for the 2026/2027 academic session, checked 26 October 2026 against UPU's official admission circulars. Merit = academic marks (90%) + co-curriculum marks (10%, supplied by KPM's BSKK for school candidates). SPM grade values: A+ 18, A 16, A- 14, B+ 12, B 10, C+ 8, C 6, D 4, E 2, G 0. SPM academic marks = [(total of the 4 universal subjects Bahasa Melayu, English, Mathematics and History ÷ 72 × 40) + (2 best package subjects ÷ 36 × 30; STEM C only 1 ÷ 18 × 30) + (2 best other subjects ÷ 36 × 10)] ÷ 80 × 90. Package STEM A = Physics, Chemistry, Biology and Additional Mathematics; STEM B = two pure sciences, Additional Mathematics and at least one elective; STEM C = at least two applied STEM electives or one vocational subject (MPV); Arts and Humanities = Language, Islamic Studies, Humanities and Arts electives. UPU's examples: STEM A (BM A+, English A, History A+, Mathematics A+, Physics A+, Chemistry A, Additional Mathematics A, Biology A-, Islamic Education A+) = 38.89 + 28.33 + 9.44 → academic 86.24, with 7 co-curriculum merit 93.24; STEM C = 69.37 + 9.5 = 78.87; Arts and Humanities = 72.51 + 9.5 = 82.01. STPM, matriculation and asasi: academic = CGPA ÷ 4.00 × 90 (A and A+ 4.00, A- 3.67, B+ 3.33, B 3.00, B- 2.67, C+ 2.33, C 2.00, C- 1.67, D+ 1.33, D 1.00, F 0), for example CGPA 3.50 = 78.75, with 9.00 co-curriculum merit 87.75. STAM: Mumtaz 4.00, Jayyid Jiddan 3.00, Jayyid 2.00, Makbul 1.00, Rasib 0.00.",
+  "datePublished": "2026-10-26",
+  "dateModified": "2026-10-26",
+  "render": "merit",
+  "scripts": ["/assets/js/merit.js"],
+  "breadcrumb": [["Tools", "/"], ["Calculators", "/?cat=calc#tools"], ["UPU Merit Calculator", null]],
+  "about": ["UPU merit score", "Unit Pengambilan Universiti", "SPM university admission", "STPM and matriculation admission"],
+  "app": {
+    "name": "UPU Merit Calculator",
+    "category": "EducationalApplication",
+    "features": ["UPU's official 2026/2027 formula", "SPM: STEM A, STEM B, STEM C and Arts and Humanities", "STPM, matriculation and asasi by CGPA", "STAM by pangkat", "Universal, package and best-other breakdown", "Shareable result link"]
+  },
+  "citations": [
+    ["UPU: SPM leavers' admission circular to public universities, polytechnics, community colleges and MARA, 2026/2027", "https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20LEPASAN%20SPM%20KE%20UA,%20POLITEKNIK,%20KK%20DAN%20MARA%20BPT%20SESI%20AKADEMIK%202627.pdf"],
+    ["UPU: STPM, matriculation, asasi and STAM admission circular, 2026/2027", "https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20STPM_MATRIK_ASASI_STAM%20KE%20UNIVERSITI%20AWAM%20SESI%20AKADEMIK%202627.pdf"],
+    ["UPU: Official portal", "https://upu.mohe.gov.my/"],
+    ["UPU ePanduan: SPM merit calculator", "https://online.mohe.gov.my/epanduan/kalkulatorMerit/spm"]
+  ],
+  "faq": [
+    { "q": "How is the UPU merit score calculated?", "a": "Merit = academic marks (90%) + co-curriculum marks (10%), so the maximum is 100. For SPM leavers the academic part comes from SPM grades; for STPM, matriculation and asasi it comes from CGPA; co-curriculum marks are supplied by KPM's BSKK." },
+    { "q": "What is the UPU merit formula for SPM leavers?", "a": "Academic = [(4 universal subjects ÷ 72 × 40) + (2 best package subjects ÷ 36 × 30) + (2 best other subjects ÷ 36 × 10)] ÷ 80 × 90. In UPU's STEM A example, 38.89 + 28.33 + 9.44 gives academic marks of {{M_EXA}}, and with 7 for co-curriculum the merit is {{M_EXM}}." },
+    { "q": "Which are the universal subjects in UPU merit?", "a": "Bahasa Melayu, English, Mathematics and History (Sejarah), which carry 40 of the 80 points. Islamic Education, Moral Education and Science count in the best other subjects if they are among your two best." },
+    { "q": "How is STEM C merit calculated?", "a": "For the STEM C package only one package subject counts, ÷ 18 × 30, not two. UPU's example with BM A, English B, Mathematics B+, History A-, package A- and best others A+ and A gives academic marks of {{M_EXCA}} and merit {{M_EXC}} with 9.5 co-curriculum." },
+    { "q": "How is STPM and matriculation merit calculated?", "a": "Academic marks = CGPA ÷ 4.00 × 90, plus co-curriculum marks (maximum 10). UPU's example: a CGPA of 3.50 gives 78.75, and with 9.00 co-curriculum the merit score is {{M_CG350}}." },
+    { "q": "Where do co-curriculum marks come from?", "a": "For school candidates (SPM, STPM, STAM) the 10% co-curriculum mark is set by KPM's Sports, Co-curriculum and Arts Division (BSKK) from PAJSK records. For matriculation and asasi it is supplied by the division or university running the programme." },
+    { "q": "What are the SPM grade values for UPU merit?", "a": "A+ 18, A 16, A- 14, B+ 12, B 10, C+ 8, C 6, D 4, E 2 and G 0. For STPM and matriculation, A and A+ are worth 4.00, A- 3.67, B+ 3.33, B 3.00, and so on down to F 0.00." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=calc#tools">Calculators</a></li><li aria-current="page">UPU Merit Calculator</li></ol></nav>
+  <h1>UPU Merit Calculator {{M_SESSION}}</h1>
+  <p class="answer">The UPU merit score = <strong>90% academic + 10% co-curriculum</strong>. For SPM, academic = [(4 universal subjects ÷ 72 × 40) + (2 best package ÷ 36 × 30) + (2 best others ÷ 36 × 10)] ÷ 80 × 90; UPU's official STEM A example scores <strong>{{M_EXM}}</strong>. For STPM and matriculation, academic = CGPA ÷ 4 × 90. Pick your grades for your own merit score.</p>
+  <p class="meta"><span>Formula checked <time datetime="{{M_VERIFIED_ISO}}">{{M_VERIFIED}}</time></span><span>UPU admission circulars {{M_SESSION}}</span><a href="/kalkulator-merit-upu/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="mtForm" novalidate aria-labelledby="mt-h">
+      <h2 id="mt-h">Your results</h2>
+      <div class="field"><label for="mode">Qualification</label><select class="input" id="mode" name="mode">{{M_MODE}}</select></div>
+      <div id="mtSpm">
+        <div class="field"><label for="pkg">SPM package</label><select class="input" id="pkg" name="pkg">{{M_PKG}}</select></div>
+        <fieldset class="field-group"><legend>Universal subjects (40%)</legend>{{M_UNI}}</fieldset>
+        <fieldset class="field-group"><legend>Package subjects (30%)</legend>{{M_PACK}}</fieldset>
+        <fieldset class="field-group"><legend>Other subjects (10%)</legend>{{M_OTH}}</fieldset>
+      </div>
+      <div class="field" id="mtCg" hidden><label for="cgpa">CGPA</label><div class="input"><input id="cgpa" name="cgpa" type="number" inputmode="decimal" min="0" max="4" step="0.01" value="3.50"></div></div>
+      <div class="field" id="mtStam" hidden><label for="stam">STAM pangkat</label><select class="input" id="stam" name="stam">{{M_STAM}}</select></div>
+      <div class="field"><label for="koko">Co-curriculum marks (0–10)</label><div class="input"><input id="koko" name="koko" type="number" inputmode="decimal" min="0" max="10" step="0.01" value="7"></div></div>
+      <p class="help">Package: enter all your package subjects; the best two count (STEM C: one), the rest compete under "other".</p>
+    </form>
+
+    <section class="box" aria-labelledby="mt-result-h">
+      <h2 id="mt-result-h">Merit score</h2>
+      <div class="net"><p>Merit score (out of 100)</p><output id="mtBig" for="mode pkg koko">{{M_BIG}}</output><p id="mtSub">{{M_SUB}}</p></div>
+      <p class="sr-only" id="mtLive" aria-live="polite"></p>
+      <p class="lp-note" id="mtNote">{{M_NOTE}}</p>
+      <table class="rows wrap"><caption>Breakdown</caption><tbody id="mtRows">
+{{M_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="mtPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grades-h">SPM grade values for UPU merit</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grades-h">
+    <table class="data"><thead><tr><th scope="col">Grade</th><th scope="col">Value</th></tr></thead><tbody>
+{{M_GRADES_T}}
+    </tbody></table>
+  </div>
+
+  <h2 id="example">UPU's official examples</h2>
+  <ul>
+    <li><strong>STEM A</strong> (BM A+, English A, History A+, Mathematics A+, Physics A+, Chemistry A, Additional Mathematics A, Biology A-, Islamic Education A+): universal (18+16+18+18) ÷ 72 × 40 = 38.89; package (18+16) ÷ 36 × 30 = 28.33; best others (18+16) ÷ 36 × 10 = 9.44; academic (38.89 + 28.33 + 9.44) ÷ 80 × 90 = <strong>{{M_EXA}}</strong>; with 7 co-curriculum, merit <strong>{{M_EXM}}</strong>.</li>
+    <li><strong>STEM C</strong>: universal 28.89, one package subject A- ÷ 18 × 30 = 23.33, best others 9.44 → academic {{M_EXCA}}, merit {{M_EXC}} with 9.5 co-curriculum.</li>
+    <li><strong>Arts and Humanities</strong> (package Economics A-, Principles of Accounting A+): 32.22 + 26.67 + 5.56 → academic {{M_EXKA}}, merit {{M_EXK}} with 9.5 co-curriculum.</li>
+  </ul>
+
+  <h2 id="formula">How it is calculated</h2>
+  <ol>
+    <li><strong>Universal (40):</strong> Bahasa Melayu + English + Mathematics + History ÷ 72 × 40.</li>
+    <li><strong>Package (30):</strong> the two best package subjects ÷ 36 × 30 (STEM C: one ÷ 18 × 30).</li>
+    <li><strong>Best others (10):</strong> the two best of the remaining subjects (including Islamic or Moral Education, Science and leftover package subjects) ÷ 36 × 10.</li>
+    <li><strong>Academic (90):</strong> (universal + package + best others) ÷ 80 × 90, each part rounded to 2 decimals as in UPU's examples.</li>
+    <li><strong>Merit:</strong> academic + co-curriculum (maximum 10).</li>
+  </ol>
+  <p>The circular's STEM B example lists Bahasa Melayu as A+ but counts it as A (16), so it is not used as a test; this calculator follows the set grade values.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cg-h">STPM, matriculation and asasi merit by CGPA</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cg-h">
+    <table class="data"><thead><tr><th scope="col">CGPA</th><th scope="col">Academic (90%)</th><th scope="col">Merit (co-curriculum 8)</th><th scope="col">Merit (co-curriculum 10)</th></tr></thead><tbody>
+{{M_CG_T}}
+    </tbody></table>
+  </div>
+  <h2 id="stpm-h">STPM and matriculation grade values</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="stpm-h">
+    <table class="data"><thead><tr><th scope="col">Grade</th><th scope="col">Value</th></tr></thead><tbody>
+{{M_STPM_T}}
+    </tbody></table>
+  </div>
+
+  <h2 id="rules">Other things to know</h2>
+  <ul>
+    <li><strong>Merit is not the only test:</strong> you must also meet the programme's general and special requirements, minimum grades in set subjects, any interview or test, and the number of places.</li>
+    <li><strong>Candidates are ranked</strong> by merit from highest to lowest, then offered places in the order of their choices.</li>
+    <li>Plan study costs: <a href="/ptptn-repayment-calculator/">PTPTN Calculator</a> and <a href="/sspn-calculator/">SSPN Calculator</a>. University grades: <a href="/cgpa-calculator/">CGPA Calculator</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20LEPASAN%20SPM%20KE%20UA,%20POLITEKNIK,%20KK%20DAN%20MARA%20BPT%20SESI%20AKADEMIK%202627.pdf" rel="noopener">UPU: SPM leavers' admission circular 2026/2027</a> (section 5 and Appendix A)</li>
+    <li><a href="https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20STPM_MATRIK_ASASI_STAM%20KE%20UNIVERSITI%20AWAM%20SESI%20AKADEMIK%202627.pdf" rel="noopener">UPU: STPM, matriculation, asasi and STAM admission circular 2026/2027</a></li>
+    <li><a href="https://online.mohe.gov.my/epanduan/kalkulatorMerit/spm" rel="noopener">UPU ePanduan: official merit calculator</a></li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> An estimate using the formula in UPU's circulars. The official merit score is worked out by UPU from the exam results and co-curriculum marks supplied to it.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/ptptn-repayment-calculator/">PTPTN Repayment Calculator<small>Study loan repayment</small></a>
+    <a href="/sspn-calculator/">SSPN Calculator<small>Education savings and tax relief</small></a>
+    <a href="/cgpa-calculator/">CGPA Calculator<small>Semester and course grades</small></a>
+  </div>
+</section>

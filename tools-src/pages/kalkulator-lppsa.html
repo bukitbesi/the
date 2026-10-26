@@ -1,0 +1,161 @@
+<!--page
+{
+  "path": "/kalkulator-lppsa/",
+  "lang": "ms",
+  "cat": "calc",
+  "alternates": { "en": "/lppsa-calculator/" },
+  "title": "Kalkulator LPPSA 2026: Had Pembiayaan RM1 Juta dan Ansuran Bulanan",
+  "description": "Kira had pembiayaan LPPSA ikut pendapatan bersih (hingga RM1 juta mulai 4 Oktober 2026), ansuran bulanan pada 4%, tempoh hingga 40 tahun dan pembiayaan kedua.",
+  "llms": "Kalkulator pembiayaan perumahan LPPSA (Lembaga Pembiayaan Perumahan Sektor Awam) untuk penjawat awam Malaysia, peraturan disemak 26 Oktober 2026 dengan notis dan soalan lazim rasmi LPPSA. Mulai 4 Oktober 2026 had pembiayaan maksimum ikut pendapatan bersih: sehingga RM2,500 RM280,000; RM3,000 RM350,000; RM3,500 RM430,000; RM4,000 RM480,000; RM4,500 RM550,000; RM5,000 RM610,000; RM5,500 RM670,000; RM6,000 RM730,000; RM6,500 RM780,000; RM7,000 RM800,000; RM7,500 RM830,000; RM8,000 RM850,000; RM8,500 RM880,000; RM9,000 RM900,000; RM9,500 RM930,000; RM10,000 RM950,000; lebih RM10,000 RM1 juta. Kadar keuntungan 4% setahun bagi pembiayaan sehingga RM750,000 dan 4.5% bagi bahagian melebihi RM750,000 (kadar purata wajaran, termasuk pembiayaan pertama dan kedua; contoh RM800,000 = 4.03%, RM1 juta = 4.13%), dikira atas baki berkurangan. Ansuran bulanan tidak melebihi 60% gaji pokok dan elaun tetap, jumlah hutang tidak melebihi 80% pendapatan bersih, dan gaji bersih sekurang-kurangnya 20% pendapatan kasar. Pendapatan bersih = gaji pokok + elaun tetap (ITP, ITKA, ITK, ITKT, ITJU, EPW, elaun memangku, COLA, BIW, BISM, BISS) − potongan wajib (KWSP, PERKESO, cukai, arahan mahkamah, bayaran balik gaji, pinjaman perumahan kerajaan); zakat, Tabung Haji dan ASB tidak dikira. Tempoh sehingga 420 bulan (35 tahun), atau 480 bulan (40 tahun) di bawah Skim Pembiayaan Perumahan Muda (SPPM) bagi umur 30 tahun dan ke bawah (permohonan hingga 31 Disember 2026), dan tidak melebihi umur 90 bagi skim pencen atau umur bersara bagi skim KWSP. Pembiayaan kedua dibenarkan tanpa menyelesaikan pembiayaan pertama mulai 4 Oktober 2026, dengan margin sehingga 90% dan baki had kelayakan. Contoh: RM100,000 selama 35 tahun pada 4% = RM442.77 sebulan.",
+  "datePublished": "2026-10-26",
+  "dateModified": "2026-10-26",
+  "render": "lppsa",
+  "scripts": ["/assets/js/lppsa.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator LPPSA", null]],
+  "about": ["Lembaga Pembiayaan Perumahan Sektor Awam", "Pinjaman perumahan penjawat awam", "Skim Pembiayaan Perumahan Muda", "Pembiayaan kedua LPPSA"],
+  "app": {
+    "name": "Kalkulator LPPSA",
+    "category": "FinanceApplication",
+    "features": ["Had pembiayaan ikut jadual pendapatan bersih 2026 (hingga RM1 juta)", "Kadar 4% dan 4.5% purata wajaran", "Ansuran bulanan dan jumlah keuntungan", "Peraturan 60%, 80% dan 20%", "Skim pencen, KWSP dan SPPM 40 tahun", "Pembiayaan kedua semasa pembiayaan pertama aktif", "Keputusan dalam pautan untuk dikongsi"]
+  },
+  "citations": [
+    ["LPPSA: Penambahbaikan kemudahan pembiayaan perumahan 2026 dan soalan lazim (25 September 2026)", "https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/523442ad-28a1-4ed5-a1e2-ec7ce0e223a8.pdf"],
+    ["LPPSA: Had kelayakan pembiayaan sehingga RM1 juta", "https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/726ed27b-9b23-4de8-b00c-8ff83804137e.pdf"],
+    ["LPPSA: Soalan lazim pengiraan kelayakan", "https://myfinancing.lppsa.gov.my/my/faq4"],
+    ["LPPSA: Skim Pembiayaan Perumahan Muda (SPPM)", "https://myfinancing.lppsa.gov.my/my/faq23"],
+    ["LPPSA: Pemanjangan tempoh pembiayaan (Belanjawan 2019)", "https://www.lppsa.gov.my/v3/my/upload/announcements/2018/Hebahan-Pemanjangan-Tempoh-Pembiayaan-Belanjawan-2019.pdf"]
+  ],
+  "faq": [
+    { "q": "Berapa had pembiayaan LPPSA 2026?", "a": "Mulai 4 Oktober 2026 had ikut pendapatan bersih: RM280,000 bagi pendapatan bersih sehingga RM2,500, naik setiap RM500 hingga RM950,000 bagi RM10,000, dan RM1 juta bagi pendapatan bersih melebihi RM10,000. Contohnya pendapatan bersih {{L_DEF_NET}} layak sehingga {{L_DEF_TABLE}}." },
+    { "q": "Berapa kadar keuntungan LPPSA?", "a": "4% setahun bagi pembiayaan sehingga RM750,000, dan 4.5% hanya bagi bahagian melebihi RM750,000. Kadar akhir ialah purata wajaran: RM800,000 dikenakan 4.03%, dan RM1 juta dikenakan 4.13%. Kadar ini tetap sepanjang tempoh." },
+    { "q": "Berapa ansuran bulanan LPPSA bagi RM100,000?", "a": "Pada 4% atas baki berkurangan, RM100,000 selama 35 tahun ialah {{L_100K}} sebulan, dan selama 40 tahun (SPPM) {{L_100K40}} sebulan. Darabkan dengan amaun anda; contohnya RM300,000 selama 35 tahun ialah kira-kira RM1,328.32." },
+    { "q": "Bagaimana LPPSA mengira kelayakan?", "a": "Tiga syarat: ansuran tidak melebihi 60% gaji pokok dan elaun tetap, jumlah hutang tidak melebihi 80% pendapatan bersih, dan gaji bersih kekal sekurang-kurangnya 20% pendapatan kasar. Dalam contoh slip gaji LPPSA (gaji pokok RM3,371, pendapatan RM4,321), ansuran tertinggi ialah {{L_EX_ROOM}}." },
+    { "q": "Berapa lama tempoh maksimum pembiayaan LPPSA?", "a": "Sehingga 35 tahun (420 bulan), tetapi tidak melebihi umur 90 bagi skim pencen atau umur bersara bagi skim KWSP. Penjawat awam berumur 30 tahun dan ke bawah boleh mendapat 40 tahun (480 bulan) di bawah SPPM bagi permohonan hingga 31 Disember 2026." },
+    { "q": "Bolehkah saya memohon pembiayaan kedua LPPSA tanpa menyelesaikan yang pertama?", "a": "Ya, mulai 4 Oktober 2026, jika potongan gaji pembiayaan pertama sudah berjalan dan tiada tunggakan. Pembiayaan kedua menggunakan baki had kelayakan anda, dengan margin sehingga 90% harga hartanah semasa pembiayaan pertama masih aktif." },
+    { "q": "Apa itu pendapatan bersih dalam pengiraan LPPSA?", "a": "Gaji pokok + elaun tetap (seperti ITP, ITKA, COLA dan BIW) − potongan wajib (KWSP, PERKESO, cukai pendapatan, arahan mahkamah dan pinjaman perumahan kerajaan). Potongan zakat, Tabung Haji dan simpanan seperti ASB tidak dikira sebagai potongan wajib." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator LPPSA</li></ol></nav>
+  <h1>Kalkulator LPPSA: Had Pembiayaan dan Ansuran</h1>
+  <p class="answer">LPPSA membiayai rumah penjawat awam sehingga <strong>RM1 juta</strong> mulai 4 Oktober 2026, ikut pendapatan bersih, pada <strong>4% setahun</strong> (4.5% hanya bagi bahagian melebihi RM750,000). Dengan pendapatan bersih {{L_DEF_NET}}, had anda ialah <strong>{{L_DEF_MAX}}</strong> dan ansuran 35 tahun ialah {{L_DEF_PAY}} sebulan. Masukkan slip gaji anda untuk had dan ansuran anda sendiri.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{L_VERIFIED_ISO}}">{{L_VERIFIED}}</time></span><span>Jadual dan formula rasmi LPPSA</span><a href="/lppsa-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="lpForm" novalidate aria-labelledby="lp-h">
+      <h2 id="lp-h">Slip gaji anda</h2>
+      <div class="field-row">
+        <div class="field"><label for="basic">Gaji pokok</label><div class="input"><span aria-hidden="true">RM</span><input id="basic" name="basic" type="number" inputmode="decimal" min="0" step="0.01" value="4500"></div></div>
+        <div class="field"><label for="allow">Elaun tetap</label><div class="input"><span aria-hidden="true">RM</span><input id="allow" name="allow" type="number" inputmode="decimal" min="0" step="0.01" value="1100"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="mand">Potongan wajib</label><div class="input"><span aria-hidden="true">RM</span><input id="mand" name="mand" type="number" inputmode="decimal" min="0" step="0.01" value="850"></div></div>
+        <div class="field"><label for="debts">Potongan hutang lain</label><div class="input"><span aria-hidden="true">RM</span><input id="debts" name="debts" type="number" inputmode="decimal" min="0" step="0.01" value="400"></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="others">Zakat, Tabung Haji, ASB</label><div class="input"><span aria-hidden="true">RM</span><input id="others" name="others" type="number" inputmode="decimal" min="0" step="0.01" value="" placeholder="0"></div></div>
+        <div class="field"><label for="age">Umur</label><div class="input"><input id="age" name="age" type="number" inputmode="numeric" min="18" max="70" step="1" value="32"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="scheme">Skim persaraan</label><select class="input" id="scheme" name="scheme">{{L_SCHEME}}</select></div>
+        <div class="field" id="lpRetire" hidden><label for="retire">Umur bersara</label><div class="input"><input id="retire" name="retire" type="number" inputmode="numeric" min="40" max="70" step="1" value="60"><span aria-hidden="true">tahun</span></div></div>
+      </div>
+      <fieldset class="field-group">
+        <legend>Pembiayaan</legend>
+        <div class="field"><label for="second">Jenis</label><select class="input" id="second" name="second">{{L_SECOND}}</select></div>
+        <div class="field" id="lpFirst" hidden><label for="first">Amaun pembiayaan pertama yang diluluskan</label><div class="input"><span aria-hidden="true">RM</span><input id="first" name="first" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="0"></div><p class="help">Masukkan ansuran pembiayaan pertama dalam potongan wajib (pinjaman perumahan kerajaan dikira sebagai potongan wajib).</p></div>
+        <div class="field-row">
+          <div class="field"><label for="price">Harga hartanah</label><div class="input"><span aria-hidden="true">RM</span><input id="price" name="price" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="Tiada"></div></div>
+          <div class="field"><label for="amount">Amaun dipohon</label><div class="input"><span aria-hidden="true">RM</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="1000" value="" placeholder="Maks"></div></div>
+        </div>
+      </fieldset>
+      <p class="help">Potongan wajib: KWSP, PERKESO, cukai, arahan mahkamah. Hutang lain: Angkasa, koperasi, pinjaman peribadi.</p>
+    </form>
+
+    <section class="box" aria-labelledby="lp-result-h">
+      <h2 id="lp-result-h">Kelayakan anda</h2>
+      <div class="net"><p>Pembiayaan maksimum</p><output id="lpBig" for="basic allow mand debts age scheme price amount">{{L_BIG}}</output><p id="lpSub">{{L_SUB}}</p></div>
+      <p class="sr-only" id="lpLive" aria-live="polite"></p>
+      <div class="lp-grid" id="lpGrid">{{L_GRID}}</div>
+      <p class="lp-note" id="lpNote">{{L_NOTE}}</p>
+      <table class="rows wrap"><caption>Butiran</caption><tbody id="lpRows">
+{{L_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="lpPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="limits-h">Jadual had pembiayaan LPPSA mulai 4 Oktober 2026</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="limits-h">
+    <table class="data"><thead><tr><th scope="col">Pendapatan bersih sebulan</th><th scope="col">Had pembiayaan maksimum</th></tr></thead><tbody>
+{{L_LIMITS}}
+    </tbody></table>
+  </div>
+  <p>Jadual ini tidak terpakai kepada Anggota Pentadbiran, ADUN dan hakim, yang mempunyai peraturan saraan sendiri. Permohonan sebelum 4 Oktober 2026 diproses ikut had lama.</p>
+
+  <h2 id="inst-h">Ansuran bulanan pada 4% ikut tempoh</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="inst-h">
+    <table class="data"><thead><tr><th scope="col">Amaun</th><th scope="col">20 tahun</th><th scope="col">25 tahun</th><th scope="col">30 tahun</th><th scope="col">35 tahun</th><th scope="col">40 tahun (SPPM)</th></tr></thead><tbody>
+{{L_INST}}
+    </tbody></table>
+  </div>
+
+  <h2 id="blend-h">Kadar purata wajaran bagi pembiayaan melebihi RM750,000 (contoh LPPSA)</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="blend-h">
+    <table class="data"><thead><tr><th scope="col">Situasi</th><th scope="col">Kadar akhir</th><th scope="col">Ansuran (35 tahun; kedua 30 tahun)</th></tr></thead><tbody>
+{{L_BLEND}}
+    </tbody></table>
+  </div>
+  <p>Formula LPPSA: kadar = (A₁ × 4% + A₂ × 4.5%) ÷ amaun, dengan A₁ bahagian sehingga RM750,000 dan A₂ bahagian melebihi RM750,000, dikira bersama pembiayaan pertama dan kedua. Pemohon bersama (suami dan isteri) dikira berasingan.</p>
+
+  <h2 id="formula">Cara ia dikira</h2>
+  <ol>
+    <li><strong>Pendapatan bersih</strong> = gaji pokok + elaun tetap − potongan wajib.</li>
+    <li><strong>Had jadual</strong> dibaca daripada jadual pendapatan bersih di atas (bagi pembiayaan kedua, tolak amaun pertama).</li>
+    <li><strong>Ansuran tertinggi</strong> ialah yang paling rendah antara: 60% × (gaji pokok + elaun tetap); 80% × pendapatan bersih − hutang lain; dan gaji bersih semasa − 20% × pendapatan kasar.</li>
+    <li><strong>Tempoh</strong> = 420 bulan (SPPM 480, kedua 360), dihadkan ke umur 90 (pencen) atau umur bersara (KWSP).</li>
+    <li><strong>Pembiayaan maksimum</strong> = yang paling rendah antara had jadual, amaun yang mampu dibayar dengan ansuran tertinggi, dan harga hartanah (90% bagi pembiayaan kedua semasa yang pertama aktif).</li>
+  </ol>
+  <p><strong>Contoh slip gaji LPPSA:</strong> gaji pokok RM3,371, ITP RM400, ITKA RM250, COLA RM300 (jumlah RM4,321), cukai RM21, pinjaman peribadi dan Angkasa RM772, zakat dan Tabung Haji RM63. Pendapatan bersih RM4,300, had jadual {{L_EX_MAX}}, ansuran tertinggi {{L_EX_ROOM}}, dan RM550,000 selama 35 tahun ialah {{L_EX_PAY}} sebulan.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="rules">Peraturan LPPSA yang perlu tahu</h2>
+  <ul>
+    <li><strong>SPPM (umur 30 ke bawah):</strong> pembiayaan pertama sahaja, Jenis 1, 2, 3, 5 (rumah) dan 6, tempoh sehingga 40 tahun; dibuka hingga 31 Disember 2026 (tertakluk kepada lanjutan).</li>
+    <li><strong>Pembiayaan kedua:</strong> margin 100% jika pembiayaan pertama selesai, 90% jika masih aktif, 100% bagi Jenis 5 (ambil alih) dan Jenis 7 (ubah suai) hartanah yang sama.</li>
+    <li><strong>Kaedah ansuran:</strong> LPPSA mengira keuntungan atas baki berkurangan; kalkulator ini guna baki bulanan. SmartKira LPPSA turut memasukkan tempoh interim insurans/takaful, jadi angka rasmi boleh berbeza sedikit.</li>
+    <li><strong>Tempoh pembiayaan kedua</strong> 360 bulan ikut notis tempoh LPPSA (Belanjawan 2019); notis 2026 tidak mengubahnya.</li>
+    <li>Bukan penjawat awam, atau ingin membandingkan dengan bank? Guna <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan</a>. Pencen anda selepas bersara: <a href="/kalkulator-pencen/">Kalkulator Pencen</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/523442ad-28a1-4ed5-a1e2-ec7ce0e223a8.pdf" rel="noopener">LPPSA: Penambahbaikan kemudahan pembiayaan 2026 dan soalan lazim (25 September 2026)</a></li>
+    <li><a href="https://www.lppsa.gov.my/my/upload/pengumuman/2026/09/726ed27b-9b23-4de8-b00c-8ff83804137e.pdf" rel="noopener">LPPSA: Had kelayakan sehingga RM1 juta</a></li>
+    <li><a href="https://myfinancing.lppsa.gov.my/my/faq4" rel="noopener">LPPSA: Soalan lazim pengiraan kelayakan</a> dan <a href="https://myfinancing.lppsa.gov.my/my/faq23" rel="noopener">SPPM</a></li>
+    <li><a href="https://www.lppsa.gov.my/v3/my/upload/announcements/2018/Hebahan-Pemanjangan-Tempoh-Pembiayaan-Belanjawan-2019.pdf" rel="noopener">LPPSA: Pemanjangan tempoh pembiayaan (Belanjawan 2019)</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran berdasarkan peraturan LPPSA. Kelulusan sebenar tertakluk kepada penilaian LPPSA, penilaian JPPH dan slip gaji anda; semak juga dengan <a href="https://selfservice.lppsa.gov.my/smartkira" rel="noopener">SmartKira LPPSA</a>.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-pinjaman-perumahan/">Kalkulator Pinjaman Perumahan<small>Pinjaman bank, duti setem dan yuran guaman</small></a>
+    <a href="/kalkulator-pencen/">Kalkulator Pencen<small>Pencen, ganjaran dan GCR</small></a>
+    <a href="/kalkulator-gaji-sspa/">Kalkulator Gaji SSPA<small>Gaji baharu penjawat awam</small></a>
+    <a href="/kalkulator-refinance-rumah/">Kalkulator Refinance Rumah<small>Berbaloi atau tidak</small></a>
+  </div>
+</section>

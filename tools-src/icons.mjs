@@ -113,6 +113,8 @@ export const icons = {
   'invoice-generator': file('') + p('M8 12h8M8 15.5h5') + p('M14 18.5h2.5'),
   'e-invoice-malaysia': rect(4, 3, 16, 18) + p('M8 8h8M8 11.5h5') + rect(13, 13.5, 4.5, 4.5, 0.5) + p('M8 16h2'),
   'pension-calculator-malaysia': p('M3 21h18M4 10h16M12 3l8 5H4Z') + p('M6 10v8M10 10v8M14 10v8M18 10v8'),
+  'lppsa-calculator': p('M3 11 12 4l9 7') + p('M5 10v10h14V10') + p('M10 20v-5h4v5') + p('M15.5 7.5V5h2v4'),
+  'upu-merit-calculator': rect(4, 3, 16, 18) + p('M8 8h8') + p('m8.5 13 1.5 1.5 3-3') + p('M8 17.5h8'),
   'malaysia-ic-number-decoder': rect(2, 5, 20, 14) + circle(8, 11, 2.5) + p('M4.5 16.5c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3') + p('M14 9.5h5M14 12.5h5M14 15.5h3'),
   'ai-summarizer': rect(4, 3, 16, 18) + p('M8 8h8M8 12h8M8 16h4') + '<path d="m18 14 1 2 2 1-2 1-1 2-1-2-2-1 2-1Z" fill="currentColor"/>',
   'caption-generator': rect(3, 3, 18, 18, 5) + circle(12, 11, 3.5) + p('M7 18h10M17 6.5h.01'),

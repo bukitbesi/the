@@ -353,6 +353,11 @@
       "description": "Free land area converter for Malaysia: acres, square feet, square metres, hectares, relung, orlong a"
     },
     {
+      "name": "LPPSA Calculator",
+      "url": "/lppsa-calculator/",
+      "description": "Work out your LPPSA home financing limit by net income (up to RM1 million from 4 October 2026), the "
+    },
+    {
       "name": "Malaysian IC Number Decoder",
       "url": "/malaysia-ic-number-decoder/",
       "description": "Decode a MyKad number: date of birth, age and place of birth from JPN's state and country codes. Run"
@@ -616,6 +621,11 @@
       "name": "Unused CSS Remover",
       "url": "/unused-css-remover/",
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
+    },
+    {
+      "name": "UPU Merit Calculator",
+      "url": "/upu-merit-calculator/",
+      "description": "Work out your UPU merit score with the official 2026/2027 formula: SPM (STEM A, B, C, Arts), STPM, m"
     },
     {
       "name": "UTM Builder",

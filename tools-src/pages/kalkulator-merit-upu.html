@@ -1,0 +1,144 @@
+<!--page
+{
+  "path": "/kalkulator-merit-upu/",
+  "lang": "ms",
+  "cat": "calc",
+  "alternates": { "en": "/upu-merit-calculator/" },
+  "title": "Kalkulator Merit UPU 2026/2027: Kira Markah Merit SPM dan STPM",
+  "description": "Kira markah merit UPU ikut formula rasmi 2026/2027: SPM (STEM A, B, C, Sastera), STPM, Matrikulasi, Asasi dan STAM, 90% akademik dan 10% kokurikulum.",
+  "llms": "Kalkulator markah merit UPU (Unit Pengambilan Universiti, Kementerian Pendidikan Tinggi) bagi sesi akademik 2026/2027, disemak 26 Oktober 2026 dengan pekeliling kemasukan rasmi UPU. Merit = markah akademik (90%) + markah kokurikulum (10%, dibekalkan oleh BSKK KPM bagi calon sekolah). Nilai gred SPM: A+ 18, A 16, A- 14, B+ 12, B 10, C+ 8, C 6, D 4, E 2, G 0. Markah akademik SPM = [(jumlah 4 mata pelajaran universal Bahasa Melayu, Bahasa Inggeris, Matematik dan Sejarah ÷ 72 × 40) + (2 mata pelajaran pakej terbaik ÷ 36 × 30; STEM C hanya 1 ÷ 18 × 30) + (2 mata pelajaran terbaik lain ÷ 36 × 10)] ÷ 80 × 90. Pakej STEM A = Fizik, Kimia, Biologi dan Matematik Tambahan; STEM B = dua sains tulen, Matematik Tambahan dan sekurang-kurangnya satu elektif; STEM C = sekurang-kurangnya dua elektif STEM sains gunaan dan teknologi atau satu mata pelajaran vokasional (MPV); Sastera dan Kemanusiaan = elektif Bahasa, Pengajian Islam, Kemanusiaan dan Sastera Ikhtisas. Contoh UPU: STEM A (BM A+, BI A, Sejarah A+, Matematik A+, Fizik A+, Kimia A, Matematik Tambahan A, Biologi A-, Pendidikan Islam A+) = 38.89 + 28.33 + 9.44 → akademik 86.24, dengan kokurikulum 7 merit 93.24; STEM C = 69.37 + 9.5 = 78.87; Sastera = 72.51 + 9.5 = 82.01. STPM, Matrikulasi dan Asasi: akademik = PNGK ÷ 4.00 × 90 (A dan A+ 4.00, A- 3.67, B+ 3.33, B 3.00, B- 2.67, C+ 2.33, C 2.00, C- 1.67, D+ 1.33, D 1.00, F 0), contohnya PNGK 3.50 = 78.75, dengan kokurikulum 9.00 merit 87.75. STAM: Mumtaz 4.00, Jayyid Jiddan 3.00, Jayyid 2.00, Makbul 1.00, Rasib 0.00.",
+  "datePublished": "2026-10-26",
+  "dateModified": "2026-10-26",
+  "render": "merit",
+  "scripts": ["/assets/js/merit.js"],
+  "breadcrumb": [["Alat", "/"], ["Kalkulator", "/?cat=calc#tools"], ["Kalkulator Merit UPU", null]],
+  "about": ["Markah merit UPU", "Unit Pengambilan Universiti", "Kemasukan lepasan SPM", "Kemasukan lepasan STPM dan Matrikulasi"],
+  "app": {
+    "name": "Kalkulator Merit UPU",
+    "category": "EducationalApplication",
+    "features": ["Formula rasmi UPU sesi 2026/2027", "SPM: STEM A, STEM B, STEM C dan Sastera dan Kemanusiaan", "STPM, Matrikulasi dan Asasi ikut PNGK", "STAM ikut pangkat", "Pecahan universal, pakej dan terbaik lain", "Keputusan dalam pautan untuk dikongsi"]
+  },
+  "citations": [
+    ["UPU: Pekeliling kemasukan lepasan SPM ke UA, Politeknik, KK dan MARA BPT sesi 2026/2027", "https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20LEPASAN%20SPM%20KE%20UA,%20POLITEKNIK,%20KK%20DAN%20MARA%20BPT%20SESI%20AKADEMIK%202627.pdf"],
+    ["UPU: Pekeliling kemasukan lepasan STPM, Matrikulasi, Asasi dan STAM ke UA sesi 2026/2027", "https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20STPM_MATRIK_ASASI_STAM%20KE%20UNIVERSITI%20AWAM%20SESI%20AKADEMIK%202627.pdf"],
+    ["UPU: Portal rasmi", "https://upu.mohe.gov.my/"],
+    ["UPU ePanduan: Kalkulator merit SPM", "https://online.mohe.gov.my/epanduan/kalkulatorMerit/spm"]
+  ],
+  "faq": [
+    { "q": "Bagaimana markah merit UPU dikira?", "a": "Markah merit = markah akademik (90%) + markah kokurikulum (10%), jadi maksimum 100. Bagi lepasan SPM, akademik dikira daripada gred SPM; bagi STPM, Matrikulasi dan Asasi, daripada PNGK; markah kokurikulum dibekalkan oleh BSKK KPM." },
+    { "q": "Apakah formula merit UPU lepasan SPM?", "a": "Akademik = [(4 mata pelajaran universal ÷ 72 × 40) + (2 mata pelajaran pakej terbaik ÷ 36 × 30) + (2 mata pelajaran terbaik lain ÷ 36 × 10)] ÷ 80 × 90. Dalam contoh STEM A UPU, 38.89 + 28.33 + 9.44 memberi akademik {{M_EXA}}, dan dengan kokurikulum 7 merit {{M_EXM}}." },
+    { "q": "Apakah mata pelajaran universal dalam merit UPU?", "a": "Bahasa Melayu, Bahasa Inggeris, Matematik dan Sejarah, yang membawa 40 daripada 80 mata. Pendidikan Islam, Pendidikan Moral dan Sains dikira dalam mata pelajaran terbaik lain jika ia antara dua terbaik anda." },
+    { "q": "Bagaimana merit STEM C dikira?", "a": "Bagi Pakej STEM C, hanya satu mata pelajaran pakej dikira, iaitu ÷ 18 × 30, bukan dua. Contoh UPU dengan BM A, BI B, Matematik B+, Sejarah A-, pakej A- dan terbaik lain A+ dan A memberi akademik {{M_EXCA}} dan merit {{M_EXC}} dengan kokurikulum 9.5." },
+    { "q": "Bagaimana merit STPM dan Matrikulasi dikira?", "a": "Markah akademik = PNGK ÷ 4.00 × 90, ditambah markah kokurikulum (maksimum 10). Contoh UPU: PNGK 3.50 memberi 78.75, dan dengan kokurikulum 9.00 markah merit ialah {{M_CG350}}." },
+    { "q": "Dari mana markah kokurikulum datang?", "a": "Bagi calon sekolah (SPM, STPM, STAM), markah kokurikulum 10% diselaraskan oleh Bahagian Sukan, Kokurikulum dan Kesenian (BSKK) KPM daripada rekod PAJSK. Bagi Matrikulasi dan Asasi, ia dibekalkan oleh bahagian atau universiti yang menjalankan program tersebut." },
+    { "q": "Berapa nilai gred SPM bagi merit UPU?", "a": "A+ 18, A 16, A- 14, B+ 12, B 10, C+ 8, C 6, D 4, E 2 dan G 0. Bagi STPM dan Matrikulasi, A dan A+ bernilai 4.00, A- 3.67, B+ 3.33, B 3.00, dan seterusnya hingga F 0.00." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=calc#tools">Kalkulator</a></li><li aria-current="page">Kalkulator Merit UPU</li></ol></nav>
+  <h1>Kalkulator Merit UPU {{M_SESSION}}</h1>
+  <p class="answer">Markah merit UPU = <strong>90% akademik + 10% kokurikulum</strong>. Bagi SPM, akademik = [(4 mata pelajaran universal ÷ 72 × 40) + (2 pakej terbaik ÷ 36 × 30) + (2 terbaik lain ÷ 36 × 10)] ÷ 80 × 90; contoh STEM A rasmi UPU memberi <strong>{{M_EXM}}</strong>. Bagi STPM dan Matrikulasi, akademik = PNGK ÷ 4 × 90. Pilih gred anda untuk markah merit anda.</p>
+  <p class="meta"><span>Formula disemak <time datetime="{{M_VERIFIED_ISO}}">{{M_VERIFIED}}</time></span><span>Pekeliling kemasukan UPU {{M_SESSION}}</span><a href="/upu-merit-calculator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="mtForm" novalidate aria-labelledby="mt-h">
+      <h2 id="mt-h">Keputusan anda</h2>
+      <div class="field"><label for="mode">Kelayakan</label><select class="input" id="mode" name="mode">{{M_MODE}}</select></div>
+      <div id="mtSpm">
+        <div class="field"><label for="pkg">Pakej SPM</label><select class="input" id="pkg" name="pkg">{{M_PKG}}</select></div>
+        <fieldset class="field-group"><legend>Mata pelajaran universal (40%)</legend>{{M_UNI}}</fieldset>
+        <fieldset class="field-group"><legend>Mata pelajaran pakej (30%)</legend>{{M_PACK}}</fieldset>
+        <fieldset class="field-group"><legend>Mata pelajaran lain (10%)</legend>{{M_OTH}}</fieldset>
+      </div>
+      <div class="field" id="mtCg" hidden><label for="cgpa">PNGK</label><div class="input"><input id="cgpa" name="cgpa" type="number" inputmode="decimal" min="0" max="4" step="0.01" value="3.50"></div></div>
+      <div class="field" id="mtStam" hidden><label for="stam">Pangkat STAM</label><select class="input" id="stam" name="stam">{{M_STAM}}</select></div>
+      <div class="field"><label for="koko">Markah kokurikulum (0–10)</label><div class="input"><input id="koko" name="koko" type="number" inputmode="decimal" min="0" max="10" step="0.01" value="7"></div></div>
+      <p class="help">Pakej: masukkan semua mata pelajaran pakej anda; dua terbaik dikira (STEM C: satu), bakinya bersaing dalam "lain".</p>
+    </form>
+
+    <section class="box" aria-labelledby="mt-result-h">
+      <h2 id="mt-result-h">Markah merit</h2>
+      <div class="net"><p>Markah merit (daripada 100)</p><output id="mtBig" for="mode pkg koko">{{M_BIG}}</output><p id="mtSub">{{M_SUB}}</p></div>
+      <p class="sr-only" id="mtLive" aria-live="polite"></p>
+      <p class="lp-note" id="mtNote">{{M_NOTE}}</p>
+      <table class="rows wrap"><caption>Pecahan</caption><tbody id="mtRows">
+{{M_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="mtPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="grades-h">Nilai gred SPM bagi merit UPU</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="grades-h">
+    <table class="data"><thead><tr><th scope="col">Gred</th><th scope="col">Nilai</th></tr></thead><tbody>
+{{M_GRADES_T}}
+    </tbody></table>
+  </div>
+
+  <h2 id="example">Contoh rasmi UPU</h2>
+  <ul>
+    <li><strong>STEM A</strong> (BM A+, BI A, Sejarah A+, Matematik A+, Fizik A+, Kimia A, Matematik Tambahan A, Biologi A-, Pendidikan Islam A+): universal (18+16+18+18) ÷ 72 × 40 = 38.89; pakej (18+16) ÷ 36 × 30 = 28.33; terbaik lain (18+16) ÷ 36 × 10 = 9.44; akademik (38.89 + 28.33 + 9.44) ÷ 80 × 90 = <strong>{{M_EXA}}</strong>; dengan kokurikulum 7, merit <strong>{{M_EXM}}</strong>.</li>
+    <li><strong>STEM C</strong>: universal 28.89, satu pakej A- ÷ 18 × 30 = 23.33, terbaik lain 9.44 → akademik {{M_EXCA}}, merit {{M_EXC}} dengan kokurikulum 9.5.</li>
+    <li><strong>Sastera dan Kemanusiaan</strong> (pakej Ekonomi A-, Prinsip Perakaunan A+): 32.22 + 26.67 + 5.56 → akademik {{M_EXKA}}, merit {{M_EXK}} dengan kokurikulum 9.5.</li>
+  </ul>
+
+  <h2 id="formula">Cara ia dikira</h2>
+  <ol>
+    <li><strong>Universal (40):</strong> Bahasa Melayu + Bahasa Inggeris + Matematik + Sejarah ÷ 72 × 40.</li>
+    <li><strong>Pakej (30):</strong> dua mata pelajaran pakej terbaik ÷ 36 × 30 (STEM C: satu ÷ 18 × 30).</li>
+    <li><strong>Terbaik lain (10):</strong> dua terbaik daripada baki mata pelajaran (termasuk Pendidikan Islam atau Moral, Sains dan baki pakej) ÷ 36 × 10.</li>
+    <li><strong>Akademik (90):</strong> (universal + pakej + terbaik lain) ÷ 80 × 90, setiap bahagian dibundarkan ke 2 tempat perpuluhan seperti contoh UPU.</li>
+    <li><strong>Merit:</strong> akademik + kokurikulum (maksimum 10).</li>
+  </ol>
+  <p>Contoh STEM B dalam pekeliling menyenaraikan Bahasa Melayu A+ tetapi mengiranya sebagai A (16), jadi ia tidak digunakan sebagai ujian; kalkulator ini mengikut nilai gred yang ditetapkan.</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="cg-h">Merit STPM, Matrikulasi dan Asasi ikut PNGK</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cg-h">
+    <table class="data"><thead><tr><th scope="col">PNGK</th><th scope="col">Akademik (90%)</th><th scope="col">Merit (koko 8)</th><th scope="col">Merit (koko 10)</th></tr></thead><tbody>
+{{M_CG_T}}
+    </tbody></table>
+  </div>
+  <h2 id="stpm-h">Nilai gred STPM dan Matrikulasi</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="stpm-h">
+    <table class="data"><thead><tr><th scope="col">Gred</th><th scope="col">Nilai</th></tr></thead><tbody>
+{{M_STPM_T}}
+    </tbody></table>
+  </div>
+
+  <h2 id="rules">Perkara lain yang perlu tahu</h2>
+  <ul>
+    <li><strong>Merit bukan satu-satunya syarat:</strong> anda juga mesti memenuhi Syarat Am dan Syarat Khas program, gred minimum mata pelajaran tertentu, temu duga atau ujian (jika ada) dan bilangan tempat.</li>
+    <li><strong>Calon disusun</strong> ikut merit dari tertinggi ke terendah, kemudian ditawarkan ikut keutamaan pilihan anda.</li>
+    <li>Rancang kos pengajian: <a href="/kalkulator-ptptn/">Kalkulator PTPTN</a> dan <a href="/kalkulator-sspn/">Kalkulator SSPN</a>.</li>
+  </ul>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20LEPASAN%20SPM%20KE%20UA,%20POLITEKNIK,%20KK%20DAN%20MARA%20BPT%20SESI%20AKADEMIK%202627.pdf" rel="noopener">UPU: Pekeliling kemasukan lepasan SPM sesi 2026/2027</a> (bahagian 5 dan Lampiran A)</li>
+    <li><a href="https://upu.mohe.gov.my/PEKELILING%20KEMASUKAN%20STPM_MATRIK_ASASI_STAM%20KE%20UNIVERSITI%20AWAM%20SESI%20AKADEMIK%202627.pdf" rel="noopener">UPU: Pekeliling kemasukan lepasan STPM, Matrikulasi, Asasi dan STAM sesi 2026/2027</a></li>
+    <li><a href="https://online.mohe.gov.my/epanduan/kalkulatorMerit/spm" rel="noopener">UPU ePanduan: Kalkulator merit rasmi</a></li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> Anggaran mengikut formula dalam pekeliling UPU. Markah merit rasmi dikira oleh UPU daripada keputusan peperiksaan dan markah kokurikulum yang dibekalkan kepadanya.</p></div>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-ptptn/">Kalkulator PTPTN<small>Bayaran balik pinjaman pengajian</small></a>
+    <a href="/kalkulator-sspn/">Kalkulator SSPN<small>Simpanan pendidikan dan pelepasan cukai</small></a>
+    <a href="/kalkulator-kos-pendidikan-anak/">Kalkulator Kos Pendidikan Anak<small>Berapa perlu disimpan</small></a>
+  </div>
+</section>
