@@ -316,7 +316,7 @@ const ldJson = graph => JSON.stringify({ '@context': 'https://schema.org', '@gra
 
 function render(map) {
   const shared = {
-    BRAND: site.brand, ORIGIN: site.origin, MAIN_SITE: site.mainSite, YEAR: date.getUTCFullYear(),
+    BRAND: site.brand, BRAND_HTML: esc(site.brand).replace(/^The /, '<span class="logo-the">The </span>'), ORIGIN: site.origin, MAIN_SITE: site.mainSite, YEAR: date.getUTCFullYear(),
     LOGO_72: site.logo.local72, LOGO_192: site.logo.local192,
     OG_IMAGE: abs(site.ogImage.url), OG_W: site.ogImage.width, OG_H: site.ogImage.height, OG_ALT: esc(site.ogImage.alt),
     TWITTER_CARD: site.ogImage.width / site.ogImage.height >= 1.5 ? 'summary_large_image' : 'summary',
