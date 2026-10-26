@@ -623,6 +623,11 @@
       "description": "Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes"
     },
     {
+      "name": "UPU Merit Calculator",
+      "url": "/upu-merit-calculator/",
+      "description": "Work out your UPU merit score with the official 2026/2027 formula: SPM (STEM A, B, C, Arts), STPM, m"
+    },
+    {
       "name": "UTM Builder",
       "url": "/utm-builder/",
       "description": "Free UTM builder for GA4: tag links with utm_source, medium and campaign, see which GA4 channel the "
