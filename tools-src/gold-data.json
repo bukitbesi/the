@@ -1,28 +1,24 @@
 {
-  "fetchedAt": "2026-10-27T02:51:01.448Z",
-  "spot": {
-    "usdOz": 4011.399902,
-    "at": "2026-10-27T02:50:47Z",
-    "source": "gold-api.com"
-  },
+  "fetchedAt": "2026-10-27T09:48:21.007Z",
+  "spot": null,
   "fx": {
-    "usdMyr": 4.0875,
-    "date": "2026-10-26",
-    "source": "ECB"
+    "usdMyr": 4.0815,
+    "date": "2026-10-27",
+    "source": "BNM"
   },
   "kijang": {
-    "date": "2026-10-26",
+    "date": "2026-10-27",
     "oneOz": {
-      "buy": 16599,
-      "sell": 17286
+      "buy": 16695,
+      "sell": 17388
     },
     "halfOz": {
-      "buy": 8299,
-      "sell": 8806
+      "buy": 8347,
+      "sell": 8858
     },
     "quarterOz": {
-      "buy": 4150,
-      "sell": 4484
+      "buy": 4174,
+      "sell": 4511
     }
   },
   "history": [
@@ -220,6 +216,11 @@
       "date": "2026-10-26",
       "buy": 16599,
       "sell": 17286
+    },
+    {
+      "date": "2026-10-27",
+      "buy": 16695,
+      "sell": 17388
     }
   ],
   "prev": {
