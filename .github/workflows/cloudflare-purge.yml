@@ -3,15 +3,22 @@ name: Purge Cloudflare cache
 # Cloudflare caches tool.thebukitbesi.com at the edge for a day (Cache Rule "tool-cache-all"), so every Pages deploy
 # must purge it or visitors see stale pages. Runs after GitHub's own "pages-build-deployment" finishes, which also
 # covers the bot commits from the gold/fuel/solat jobs (their pushes can't trigger push workflows).
+# After the purge, the pages that changed in this deploy are sent to IndexNow, so crawlers fetch the new version.
 # Setup: documentation/cloudflare.md
 on:
   workflow_run:
     workflows: ["pages-build-deployment"]
     types: [completed]
   workflow_dispatch:
+    inputs:
+      indexnow_all:
+        description: 'Also send every sitemap URL to IndexNow (after a key change)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: cloudflare-purge
@@ -52,3 +59,32 @@ jobs:
               console.log('Cloudflare cache purged.');
             })();
           "
+
+  # Sends only the pages whose HTML changed since the previous successful Pages deploy (IndexNow guidance).
+  # Bing's index also feeds ChatGPT search and Copilot. A failure here is reported but never blocks anything.
+  indexnow:
+    needs: purge
+    if: ${{ !cancelled() && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 200
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Submit changed pages to IndexNow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          ALL: ${{ inputs.indexnow_all && '1' || '' }}
+        run: |
+          if [ "$ALL" = 1 ]; then node tools-src/indexnow.mjs --all; exit; fi
+          if [ -z "$HEAD_SHA" ]; then echo "Manual run without 'every sitemap URL': nothing to compare."; exit 0; fi
+          # The commit the previous successful Pages deploy published; falls back to the parent commit.
+          prev=$(gh run list -R "$GITHUB_REPOSITORY" -w pages-build-deployment -s success -L 10 --json headSha \
+            -q "[.[].headSha | select(. != \"$HEAD_SHA\")][0]" 2>/dev/null || true)
+          if [ -z "$prev" ] || ! git cat-file -e "$prev^{commit}" 2>/dev/null; then prev="$HEAD_SHA~1"; fi
+          echo "Comparing $prev..$HEAD_SHA"
+          node tools-src/indexnow.mjs "$prev" "$HEAD_SHA"

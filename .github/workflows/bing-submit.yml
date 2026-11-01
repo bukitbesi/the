@@ -1,0 +1,47 @@
+name: Submit blog to Bing
+
+# Every 6 hours, sends www.thebukitbesi.com (Blogger) posts and pages published or updated since the last run to
+# Bing (Bing Webmaster URL Submission API). Blogger can't host an IndexNow key file, so the blog uses this API;
+# the tools site uses IndexNow (cloudflare-purge.yml). Bing's index also powers ChatGPT search, Copilot,
+# DuckDuckGo and Yahoo. Read-only on Blogger: it only reads the public feed. Needs the BING_API_KEY secret;
+# without it the run lists what it would send and succeeds.
+# Google has no equivalent for normal pages; it uses the sitemap submitted in Search Console.
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      submit_all:
+        description: 'Submit every post and page (use once after setup)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bing-submit
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools-src/bing-submit.mjs
+            tools-src/site.json
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Submit new and updated URLs
+        run: node tools-src/bing-submit.mjs
+        env:
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
+          SUBMIT_ALL: ${{ inputs.submit_all && '1' || '' }}
+          WINDOW_HOURS: '7'

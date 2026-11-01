@@ -49,8 +49,8 @@ host must install it again from `tool.thebukitbesi.com`.
 2. Submit `https://tool.thebukitbesi.com/sitemap.xml` and request indexing
    of the home page in URL Inspection.
 3. In Bing Webmaster Tools, import from Search Console. Each deployment also
-   pings IndexNow (see `.github/workflows/deploy.yml`), which reaches Bing and
-   the Bing-backed answers in ChatGPT search and Copilot.
+   pings IndexNow with the changed pages (see `.github/workflows/cloudflare-purge.yml`),
+   which reaches Bing and the Bing-backed answers in ChatGPT search and Copilot.
 4. Google's *Change of Address* tool works only for root domains, not
    subdomains; the redirect in step 3 does that job here.
 
