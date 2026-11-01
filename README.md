@@ -35,7 +35,9 @@ The full, always-current list is generated into [`llms.txt`](llms.txt).
   against the visible content on every build.
 - **AEO / LLM visibility:** answer-first FAQ, an `llms.txt` directory
   ([llmstxt.org](https://llmstxt.org/)), open crawling for AI agents and an
-  IndexNow ping on every deployment (Bing, ChatGPT search, Copilot).
+  IndexNow ping after every deployment with only the pages that changed (Bing,
+  ChatGPT search, Copilot). Blog posts on `www.thebukitbesi.com` go to Bing
+  through the Webmaster API every 6 hours (see [Bing and IndexNow](#bing-and-indexnow)).
 - **PWA:** web app manifest with maskable icons and install screenshots, a
   versioned service worker (network-first directory, offline fallback,
   consent-based updates). See [PWA details](documentation/pwa.md).
@@ -502,13 +504,28 @@ minutes or billing are involved. After changing any source file, run the build
 and commit `docs/` with it.
 
 The `Check site` workflow runs the tests, build and validator on pull requests
-and pushes, fails if `docs/` is out of date, and pings IndexNow after a push to
-`main`. Update `dateModified` in `site.json` when published content changes.
+and pushes, fails if `docs/` is out of date. Update `dateModified` in `site.json` when published content changes.
 Set `live: true` only after a tool's page returns HTTP 200. Never edit files in
 `docs/` by hand; they are overwritten on every build.
 
 The `CNAME` file and the `origin` in `site.json` must match; the build checks
 this and copies `CNAME` into `docs/`. See [the domain migration](documentation/domain-migration.md).
+
+## Bing and IndexNow
+
+- **Tools site (IndexNow, no secret):** after every Pages deploy, including the
+  gold/fuel/solat bot commits, `cloudflare-purge.yml` purges Cloudflare and then
+  runs `tools-src/indexnow.mjs`, which sends only the sitemap pages whose HTML
+  changed since the previous deploy. The key is `indexNowKey` in `site.json`;
+  the build publishes it as `/<key>.txt`. After changing the key, run
+  Actions → "Purge Cloudflare cache" with "every sitemap URL" ticked once.
+- **Blog (Bing Webmaster API, secret `BING_API_KEY`):** `bing-submit.yml` runs
+  `tools-src/bing-submit.mjs` every 6 hours and submits posts and pages
+  updated in the last 7 hours, read from the public Blogger feed. Run it once
+  by hand with "Submit every post and page" ticked after setup; it never sends
+  more than the day's Bing quota. The key comes from Bing Webmaster Tools →
+  Settings → API access, signed in to the account that verified
+  `www.thebukitbesi.com`. Never put it in the repository.
 
 ## More documentation
 
