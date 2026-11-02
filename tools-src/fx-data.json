@@ -1,182 +1,164 @@
 {
-  "fetchedAt": "2026-11-02T02:38:04.932Z",
-  "date": "2026-10-30",
-  "session": "ECB",
-  "source": "ECB",
+  "fetchedAt": "2026-11-02T09:38:04.873Z",
+  "date": "2026-11-02",
+  "session": "1200",
+  "source": "BNM",
   "rates": {
-    "AUD": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 2.849895978796774
-    },
-    "BRL": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.7468259895444361
-    },
-    "CAD": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 2.9043594435247306
-    },
-    "CHF": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 4.929751047572098
-    },
-    "CNY": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.6098304671301379
-    },
-    "CZK": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.18611576400521124
-    },
-    "DKK": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.6064649160046092
-    },
-    "EUR": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 4.532475184698364
-    },
-    "GBP": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 5.435964340073928
-    },
-    "HKD": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.5170898185014737
-    },
-    "HUF": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.012373174956693888
-    },
-    "IDR": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.00022355110937238027
-    },
-    "ILS": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 1.2968486577616392
-    },
-    "INR": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.04272773884806016
-    },
-    "ISK": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.033326667999733384
-    },
-    "JPY": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.02579979360165119
-    },
-    "KRW": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.0030383131285510287
-    },
-    "MXN": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.2145646483285414
-    },
-    "NOK": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.43954111907168913
-    },
-    "NZD": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 2.286498227963873
-    },
-    "PHP": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.06370968769511093
-    },
-    "PLN": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 1.0292195428206792
-    },
-    "RON": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.8480325644504749
-    },
-    "SEK": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.4128648693282689
-    },
-    "SGD": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 3.17359568390987
-    },
-    "THB": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.12027904738994467
-    },
-    "TRY": {
-      "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.08122487105551719
+    "VND": {
+      "unit": 100,
+      "buy": 0.0158,
+      "sell": 0.0158,
+      "mid": 0.0158
     },
     "USD": {
       "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 4.056959714390036
+      "buy": 4.064,
+      "sell": 4.069,
+      "mid": 4.0665
     },
-    "ZAR": {
+    "TWD": {
+      "unit": 100,
+      "buy": 12.464,
+      "sell": 12.4831,
+      "mid": 12.4735
+    },
+    "THB": {
+      "unit": 100,
+      "buy": 12.0237,
+      "sell": 12.0456,
+      "mid": 12.0346
+    },
+    "SGD": {
       "unit": 1,
-      "buy": null,
-      "sell": null,
-      "mid": 0.24309016214113816
+      "buy": 3.1765,
+      "sell": 3.1809,
+      "mid": 3.1787
+    },
+    "SAR": {
+      "unit": 100,
+      "buy": 108.2838,
+      "sell": 108.4315,
+      "mid": 108.3577
+    },
+    "PKR": {
+      "unit": 100,
+      "buy": 1.4675,
+      "sell": 1.4724,
+      "mid": 1.47
+    },
+    "PHP": {
+      "unit": 100,
+      "buy": 6.378,
+      "sell": 6.3984,
+      "mid": 6.3882
+    },
+    "NZD": {
+      "unit": 1,
+      "buy": 2.2819,
+      "sell": 2.2856,
+      "mid": 2.2837
+    },
+    "NPR": {
+      "unit": 100,
+      "buy": 2.6788,
+      "sell": 2.6823,
+      "mid": 2.6805
+    },
+    "MMK": {
+      "unit": 100,
+      "buy": 0.1941,
+      "sell": 0.1943,
+      "mid": 0.1942
+    },
+    "KRW": {
+      "unit": 100,
+      "buy": 0.302,
+      "sell": 0.3025,
+      "mid": 0.3023
+    },
+    "KHR": {
+      "unit": 100,
+      "buy": 0.0986,
+      "sell": 0.0999,
+      "mid": 0.0992
+    },
+    "JPY": {
+      "unit": 100,
+      "buy": 2.573,
+      "sell": 2.5769,
+      "mid": 2.575
+    },
+    "INR": {
+      "unit": 100,
+      "buy": 4.2859,
+      "sell": 4.2916,
+      "mid": 4.2888
+    },
+    "IDR": {
+      "unit": 100,
+      "buy": 0.0224,
+      "sell": 0.0224,
+      "mid": 0.0224
+    },
+    "HKD": {
+      "unit": 100,
+      "buy": 51.7931,
+      "sell": 51.8602,
+      "mid": 51.8266
+    },
+    "GBP": {
+      "unit": 1,
+      "buy": 5.4401,
+      "sell": 5.448,
+      "mid": 5.444
+    },
+    "EUR": {
+      "unit": 1,
+      "buy": 4.5395,
+      "sell": 4.5455,
+      "mid": 4.5425
+    },
+    "EGP": {
+      "unit": 1,
+      "buy": 0.0729,
+      "sell": 0.0731,
+      "mid": 0.073
+    },
+    "CNY": {
+      "unit": 1,
+      "buy": 0.6112,
+      "sell": 0.612,
+      "mid": 0.6116
+    },
+    "CHF": {
+      "unit": 1,
+      "buy": 4.9285,
+      "sell": 4.9363,
+      "mid": 4.9324
+    },
+    "CAD": {
+      "unit": 1,
+      "buy": 2.9058,
+      "sell": 2.91,
+      "mid": 2.9079
+    },
+    "BND": {
+      "unit": 1,
+      "buy": 3.1765,
+      "sell": 3.1809,
+      "mid": 3.1787
+    },
+    "AUD": {
+      "unit": 1,
+      "buy": 2.8541,
+      "sell": 2.8581,
+      "mid": 2.8561
+    },
+    "AED": {
+      "unit": 100,
+      "buy": 110.6543,
+      "sell": 110.7965,
+      "mid": 110.7254
     }
   }
 }
