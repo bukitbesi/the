@@ -1,14 +1,14 @@
 {
-  "fetchedAt": "2026-11-03T02:37:58.709Z",
+  "fetchedAt": "2026-11-03T09:38:03.419Z",
   "spot": {
-    "usdOz": 3944.5,
-    "at": "2026-11-03T02:37:55Z",
+    "usdOz": 3909,
+    "at": "2026-11-03T09:37:56Z",
     "source": "gold-api.com"
   },
   "fx": {
-    "usdMyr": 4.0705,
-    "date": "2026-11-02",
-    "source": "ECB"
+    "usdMyr": 4.0725,
+    "date": "2026-11-03",
+    "source": "BNM"
   },
   "kijang": {
     "date": "2026-11-03",
