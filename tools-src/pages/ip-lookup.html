@@ -1,0 +1,137 @@
+<!--page
+{
+  "path": "/ip-lookup/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/semak-ip/" },
+  "title": "IP Lookup: What Is My IP Address, ISP and Network Owner",
+  "description": "See your public IP address, country and ISP, then look up any IP or domain: owner, network range, abuse email, reverse DNS and private or public type.",
+  "llms": "Free IP address lookup that runs in the browser with no API key and no tracking. Your public IP and country come from this site's own Cloudflare edge (/cdn-cgi/trace). Any IPv4 or IPv6 address or domain name can be looked up: the network owner (ISP or organisation), registered country, address range and CIDR block, network name, regional internet registry (APNIC for Malaysia, ARIN, RIPE NCC, LACNIC, AFRINIC), abuse contact email and registration dates come from the official registry record over RDAP (RFC 9083, via rdap.org); reverse DNS (PTR) and domain A/AAAA records come from Cloudflare DNS-over-HTTPS with Google Public DNS as fallback. Every address is also classified against the IANA IPv4 and IPv6 Special-Purpose Address Registries (private RFC 1918 10/8, 172.16/12, 192.168/16; carrier-grade NAT 100.64.0.0/10; loopback; link-local; documentation; multicast; unique local fc00::/7) and shown in decimal, hexadecimal, binary, full IPv6 form and as its in-addr.arpa or ip6.arpa name. It does not show street-level location: registry data names the network owner, and city-level IP geolocation is an estimate.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "ip",
+  "shareTitle": "Share this IP lookup",
+  "scripts": ["/assets/js/ip.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["IP Lookup", null]],
+  "about": ["IP address", "Registration Data Access Protocol", "Reverse DNS lookup", "Private network"],
+  "app": {
+    "name": "IP Lookup",
+    "category": "UtilitiesApplication",
+    "features": ["Your public IPv4 or IPv6 address and country", "ISP and network owner from the official registry (RDAP)", "Look up any IP address or domain", "Abuse contact email and CIDR block", "Reverse DNS (PTR)", "Private, CGNAT, loopback and other special ranges (IANA)", "Decimal, hex, binary and full IPv6 forms", "No API key, no tracking"]
+  },
+  "citations": [
+    ["IANA IPv4 Special-Purpose Address Registry", "https://www.iana.org/assignments/iana-ipv4-special-registry/"],
+    ["IANA IPv6 Special-Purpose Address Registry", "https://www.iana.org/assignments/iana-ipv6-special-registry/"],
+    ["RFC 9083: JSON Responses for the Registration Data Access Protocol (RDAP)", "https://www.rfc-editor.org/rfc/rfc9083"],
+    ["RFC 1918: Address Allocation for Private Internets", "https://www.rfc-editor.org/rfc/rfc1918"],
+    ["RFC 5952: Recommendation for IPv6 Address Text Representation", "https://www.rfc-editor.org/rfc/rfc5952"],
+    ["APNIC: Whois and RDAP", "https://www.apnic.net/manage-ip/using-whois/"]
+  ],
+  "faq": [
+    { "q": "What is my IP address?", "a": "It is shown at the top of this page as soon as it loads, with your country and the Cloudflare data centre that served you; the network owner (your ISP) appears a moment later from the registry record. This is your public address, the one websites see. Your phone or laptop also has a private address such as 192.168.1.10 on your home Wi-Fi, which only your router sees." },
+    { "q": "Can an IP lookup find someone's home address?", "a": "No. The registry record names the network owner, such as {{I_TM_ORG}} for {{I_TM_CIDR}}, and its country, not the person using the address. Only the ISP can link an address to a subscriber at a given time, and Malaysian ISPs release that only to authorities such as the police when the law requires it. City-level IP location shown by other sites is an estimate and is often wrong by tens of kilometres." },
+    { "q": "Why does my IP start with 100.64 or change often?", "a": "100.64.0.0/10 is carrier-grade NAT space (RFC 6598): many mobile and some fibre customers share one public address, and your router's WAN address falls in that range. Home broadband and mobile data addresses are usually dynamic, so they change when the router or phone reconnects. A fixed (static) IP is normally a business plan add-on." },
+    { "q": "What are private IP addresses?", "a": "RFC 1918 sets aside 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16 for private networks: they are never routed on the internet, so millions of homes use 192.168.0.1 for their router without conflict. IPv6 uses fc00::/7 (unique local) for the same purpose. The lookup labels these and does not query a registry for them." },
+    { "q": "How do I report abuse from an IP address?", "a": "Look the address up and email the abuse contact shown, which comes from the registry record (for TM's block it is {{I_TM_ABUSE}}). Include the IP address, the exact date, time and time zone, and log lines or email headers. For scams or threats in Malaysia, also report to the police or the NSRC on 997." },
+    { "q": "What is reverse DNS?", "a": "Reverse DNS turns an address back into a host name using a PTR record under in-addr.arpa (IPv4) or ip6.arpa (IPv6): 8.8.8.8 is looked up as {{I_REV}} and answers dns.google. Mail servers check it to spot spam. Many home connections have no PTR record or a generic one set by the ISP." },
+    { "q": "Is my lookup private?", "a": "This site stores nothing. To find your IP, the page asks this site's own server. To look up an owner, the address is sent to the regional internet registry through rdap.org, and for reverse DNS or domains the name is sent to Cloudflare's public DNS resolver (Google's as fallback); these are the same public services any network tool uses. Private addresses are never sent anywhere." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">IP Lookup</li></ol></nav>
+  <h1>IP Lookup: What Is My IP Address?</h1>
+  <p class="answer">Your <strong>public IP address is shown below as the page loads</strong>, with your country and ISP from the official internet registry. Type any IP address or domain to see its <strong>network owner, address range, abuse contact, reverse DNS</strong> and whether it is public, private (192.168.x.x, 10.x.x.x) or shared carrier-grade NAT.</p>
+  <p class="meta"><span>Ranges verified <time datetime="{{I_VERIFIED_ISO}}">{{I_VERIFIED}}</time></span><span>IANA registries, RDAP</span><a href="/semak-ip/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <section class="box" aria-labelledby="ip-mine-h">
+      <h2 id="ip-mine-h">Your IP address</h2>
+      <div class="net ip-mine"><p>Public IP</p><output id="ipMine">–</output><p id="ipMineSub">Needs JavaScript and this site's own server.</p></div>
+      <div class="tool-actions"><button type="button" class="btn sm" id="ipCopy" disabled>Copy my IP</button><button type="button" class="btn ghost sm" id="ipMineBtn" disabled>Look up my IP</button></div>
+      <form id="ipForm" novalidate aria-labelledby="ip-q-h">
+        <h2 id="ip-q-h" class="sub-h">Look up an IP address or domain</h2>
+        <div class="ip-q"><div class="input"><input id="ipQ" name="q" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="8.8.8.8, 2001:4860:4860::8888 or example.com" aria-label="IP address or domain"></div><button type="submit" class="btn">Look up</button></div>
+        <p class="ip-status" id="ipStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="box" aria-labelledby="ip-result-h">
+      <h2 id="ip-result-h">Details for <span id="ipFor">{{I_FOR}}</span></h2>
+      <p class="sr-only" id="ipLive" aria-live="polite"></p>
+      <div class="ip-table"><table class="rows wrap"><caption>Registry and address details</caption><tbody id="ipRows">
+{{I_ROWS}}
+      </tbody></table></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ipPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How the lookup works</h2>
+  <ol>
+    <li><strong>Your IP:</strong> the page asks this site's own Cloudflare server which address your request came from (<code>/cdn-cgi/trace</code>), so no outside IP service sees you.</li>
+    <li><strong>Owner:</strong> the address is checked against the official record of the regional internet registry that issued it, over RDAP (RFC 9083). Malaysian addresses are issued by APNIC.</li>
+    <li><strong>Reverse DNS:</strong> the PTR record is read from Cloudflare's public DNS-over-HTTPS resolver. A domain you type is first resolved to its IPv4 and IPv6 addresses the same way.</li>
+    <li><strong>Type:</strong> the address is compared with the IANA special-purpose registries to tell public, private, carrier-grade NAT, loopback, documentation and multicast addresses apart.</li>
+  </ol>
+
+  <h2 id="example">Example: a TM Unifi address</h2>
+  <p>175.139.0.1 sits in a block registered with APNIC to TM (registry record read {{I_VERIFIED}}):</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tm-cap">
+    <table class="data text"><caption id="tm-cap">Registry record for 175.139.0.1</caption><tbody>
+{{I_TM_ROWS}}
+    </tbody></table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="ranges">Special IP address ranges</h2>
+  <p>These blocks are reserved by the IETF and listed by IANA; they are not owned by an ISP, so a lookup explains them instead of querying a registry.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sp-cap">
+    <table class="data text"><caption id="sp-cap">IANA special-purpose addresses (IPv4 and IPv6)</caption>
+      <thead><tr><th scope="col">Block</th><th scope="col">Use</th><th scope="col">Defined in</th></tr></thead>
+      <tbody>
+{{I_SPECIAL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formats">IP address formats</h2>
+  <ul>
+    <li><strong>Decimal:</strong> an IPv4 address is a 32-bit number; 8.8.8.8 = {{I_DEC}}.</li>
+    <li><strong>Binary:</strong> 8.8.8.8 = {{I_BIN}}, which is how subnet masks are worked out.</li>
+    <li><strong>IPv6 short form:</strong> written per RFC 5952, lowercase with the longest run of zero groups as <code>::</code>, so 2001:0db8:0000:0000:0000:0000:0000:0001 is 2001:db8::1.</li>
+    <li><strong>Reverse DNS name:</strong> 2001:db8::1 is looked up as <code>{{I_V6REV}}</code>.</li>
+  </ul>
+  <div class="callout"><p><strong>Disclaimer:</strong> registry records are supplied by the address holder and can be out of date; they show who holds a block, not who used an address at a given moment. Do not use an IP lookup to identify or confront a person. Addresses with leading zeros (such as 010.1.1.1) are refused because some systems read them as octal.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/" rel="noopener">IANA IPv4 Special-Purpose Address Registry</a></li>
+    <li><a href="https://www.iana.org/assignments/iana-ipv6-special-registry/" rel="noopener">IANA IPv6 Special-Purpose Address Registry</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc9083" rel="noopener">RFC 9083: RDAP JSON responses</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1918" rel="noopener">RFC 1918: Private address space</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc5952" rel="noopener">RFC 5952: IPv6 text representation</a></li>
+    <li><a href="https://www.apnic.net/manage-ip/using-whois/" rel="noopener">APNIC: Whois and RDAP</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/internet-speed-test.html">Internet Speed Test<small>Download, upload and ping</small></a>
+    <a href="/meta-tag-checker/">Meta Tag Checker<small>SERP preview</small></a>
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>Crawler rules</small></a>
+    <a href="/unit-converter/">Unit Converter<small>Data units: MB, GB, GiB, Mbps</small></a>
+  </div>
+</section>
+</div>

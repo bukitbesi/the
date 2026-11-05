@@ -328,6 +328,11 @@
       "description": "Make a free invoice, quotation or receipt in RM with SST, discounts, deposit and amount in words, th"
     },
     {
+      "name": "IP Lookup",
+      "url": "/ip-lookup/",
+      "description": "See your public IP address, country and ISP, then look up any IP or domain: owner, network range, ab"
+    },
+    {
       "name": "JavaScript Minifier & Obfuscator",
       "url": "/javascript-minifier/",
       "description": "Free JavaScript minifier and obfuscator powered by Terser. Compress JS, remove console logs, create "
@@ -351,6 +356,11 @@
       "name": "Land Size Converter Malaysia",
       "url": "/land-size-converter-malaysia/",
       "description": "Free land area converter for Malaysia: acres, square feet, square metres, hectares, relung, orlong a"
+    },
+    {
+      "name": "List to Paragraph Converter",
+      "url": "/list-to-paragraph/",
+      "description": "Turn a list into a paragraph or comma-separated line with \"and\" and the Oxford comma, or split a par"
     },
     {
       "name": "LPPSA Calculator",
@@ -503,6 +513,11 @@
       "description": "Remove the background from any photo with AI that runs in your browser: nothing is uploaded. Transpa"
     },
     {
+      "name": "Remove Duplicate Lines",
+      "url": "/remove-duplicate-lines/",
+      "description": "Delete duplicate lines and keep the first copy, ignore case or spaces, list what repeated, or remove"
+    },
+    {
       "name": "Rent vs Buy Calculator Malaysia",
       "url": "/rent-vs-buy-calculator-malaysia/",
       "description": "Rent vs buy calculator for Malaysia: compare your wealth after 5, 10 or 20 years, with stamp duty, l"
@@ -558,6 +573,11 @@
       "description": "Work out your TNB bill saving and payback for home solar under Solar ATAP 2026: exports credited at "
     },
     {
+      "name": "Sort Lines",
+      "url": "/sort-lines/",
+      "description": "Sort lines A to Z or Z to A in natural order (2 before 10), by the number in each line, by length, l"
+    },
+    {
       "name": "Spin the Wheel and Lucky Draw",
       "url": "/spin-the-wheel/",
       "description": "Free spin the wheel and lucky draw: enter names, spin for one winner or draw several at once with no"
@@ -611,6 +631,11 @@
       "name": "Typing Speed Test",
       "url": "/typing-test/",
       "description": "Free typing speed test in English or Bahasa Melayu: 15 s to 2 min, net and gross WPM, accuracy, mist"
+    },
+    {
+      "name": "Unit Converter",
+      "url": "/unit-converter/",
+      "description": "Convert length, weight, volume, area, temperature, speed, data, pressure, energy, power and fuel eco"
     },
     {
       "name": "Unit Trust Calculator Malaysia",

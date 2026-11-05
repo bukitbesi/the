@@ -144,6 +144,33 @@
     "live": true
   },
   {
+    "name": "List to Paragraph Converter",
+    "desc": "Turn a list into a paragraph or comma-separated line with \"and\" and the Oxford comma, or split a paragraph into bullets, numbers or an HTML list.",
+    "url": "https://tool.thebukitbesi.com/list-to-paragraph/",
+    "cat": "content",
+    "icon": "list-to-paragraph",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Remove Duplicate Lines",
+    "desc": "Delete duplicate lines (ignore case or spaces), keep unique or repeated lines only, or remove line breaks from PDF text while keeping paragraphs.",
+    "url": "https://tool.thebukitbesi.com/remove-duplicate-lines/",
+    "cat": "content",
+    "icon": "remove-duplicate-lines",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Sort Lines",
+    "desc": "Sort lines A to Z or Z to A in natural order, by number, length, last word or CSV column, remove duplicates, or shuffle at random.",
+    "url": "https://tool.thebukitbesi.com/sort-lines/",
+    "cat": "content",
+    "icon": "sort-lines",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "EXIF Editor",
     "desc": "View and edit photo metadata: date, camera, GPS, and the copyright and credit Google Images shows. JPEG, PNG, WebP.",
     "url": "https://tool.thebukitbesi.com/exif-editor/",
@@ -437,6 +464,24 @@
     "url": "https://tool.thebukitbesi.com/currency-converter-malaysia/",
     "cat": "util",
     "icon": "currency-converter-malaysia",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "IP Lookup (What Is My IP)",
+    "desc": "See your public IP, country and ISP, and look up any IP or domain: owner, range, abuse email, reverse DNS and private or public type.",
+    "url": "https://tool.thebukitbesi.com/ip-lookup/",
+    "cat": "util",
+    "icon": "ip-lookup",
+    "badge": "new",
+    "live": true
+  },
+  {
+    "name": "Unit Converter",
+    "desc": "Convert length, weight, volume, temperature, speed, data, pressure, energy, power and fuel economy, plus kati, tahil, pikul and gantang.",
+    "url": "https://tool.thebukitbesi.com/unit-converter/",
+    "cat": "util",
+    "icon": "unit-converter",
     "badge": "new",
     "live": true
   },

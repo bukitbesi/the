@@ -1,11 +1,11 @@
-# The Bukit Besi Tools — 106 Free Online Tools for Developers & Creators
+# The Bukit Besi Tools — 119 Free Online Tools for Developers & Creators
 
 [![Deploy](https://github.com/bukitbesi/the/actions/workflows/deploy.yml/badge.svg)](https://github.com/bukitbesi/the/actions/workflows/deploy.yml)
 [![Live site](https://img.shields.io/badge/live-tool.thebukitbesi.com-6c5ce7)](https://tool.thebukitbesi.com/)
 [![License: All rights reserved](https://img.shields.io/badge/license-all%20rights%20reserved-d63031)](LICENSE)
 
 **[tool.thebukitbesi.com](https://tool.thebukitbesi.com/)** is a free, installable
-directory of 106 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
+directory of 119 browser-based tools from [The Bukit Besi](https://www.thebukitbesi.com/):
 code minifiers, SEO and schema generators, writing utilities, image editors,
 AI prompt tools and Malaysian calculators (zakat, faraid, BMI and more).
 No signup, no tracking scripts, works offline after one visit.
@@ -141,6 +141,8 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/kos-lesen-memandu/](https://tool.thebukitbesi.com/kos-lesen-memandu/) + [/driving-licence-cost-malaysia/](https://tool.thebukitbesi.com/driving-licence-cost-malaysia/) | BM + English | kos lesen memandu, renew lesen, yuran jpj; driving licence cost malaysia |
 | [/kalkulator-faraid/](https://tool.thebukitbesi.com/kalkulator-faraid/) + [/faraid-calculator/](https://tool.thebukitbesi.com/faraid-calculator/) | BM + English | kalkulator faraid, pembahagian harta pusaka; faraid calculator malaysia |
 | [/penukar-mata-wang/](https://tool.thebukitbesi.com/penukar-mata-wang/) + [/currency-converter-malaysia/](https://tool.thebukitbesi.com/currency-converter-malaysia/) | BM + English | penukar mata wang, kadar tukaran BNM; currency converter malaysia |
+| [/unit-converter/](https://tool.thebukitbesi.com/unit-converter/) + [/penukar-unit/](https://tool.thebukitbesi.com/penukar-unit/) | English + BM | unit converter, kati to kg, feet to cm, psi to bar; penukar unit, 1 kati berapa kg |
+| [/ip-lookup/](https://tool.thebukitbesi.com/ip-lookup/) + [/semak-ip/](https://tool.thebukitbesi.com/semak-ip/) | English + BM | what is my ip, ip lookup, ip address owner, reverse dns; semak ip, apa ip saya |
 | [/kalkulator-kalori/](https://tool.thebukitbesi.com/kalkulator-kalori/) + [/calorie-calculator-malaysia/](https://tool.thebukitbesi.com/calorie-calculator-malaysia/) | BM + English | kalkulator kalori, BMR, TDEE; calorie calculator malaysia |
 | [/kalkulator-saiz-kasut/](https://tool.thebukitbesi.com/kalkulator-saiz-kasut/) + [/shoe-size-converter/](https://tool.thebukitbesi.com/shoe-size-converter/) | BM + English | saiz kasut UK EU US, panjang kaki cm; shoe size converter |
 | [/kalkulator-saman-trafik/](https://tool.thebukitbesi.com/kalkulator-saman-trafik/) + [/traffic-summons-calculator-malaysia/](https://tool.thebukitbesi.com/traffic-summons-calculator-malaysia/) | BM + English | kalkulator saman, kadar kompaun 2026, bayar saman awal; traffic summons calculator |
@@ -194,6 +196,9 @@ scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 | [/json-formatter/](https://tool.thebukitbesi.com/json-formatter/) | English | json formatter, json validator, json beautifier, fix json online, json to csv |
 | [/case-converter/](https://tool.thebukitbesi.com/case-converter/) | English | case converter, title case converter, sentence case, uppercase to lowercase, camelcase converter |
 | [/find-and-replace/](https://tool.thebukitbesi.com/find-and-replace/) | English | find and replace online, remove line breaks, remove special characters, regex replace, text cleaner |
+| [/list-to-paragraph/](https://tool.thebukitbesi.com/list-to-paragraph/) | English | list to paragraph converter, convert list to comma separated, paragraph to list, add oxford comma |
+| [/remove-duplicate-lines/](https://tool.thebukitbesi.com/remove-duplicate-lines/) | English | remove duplicate lines, delete duplicate lines online, remove line breaks, dedupe list |
+| [/sort-lines/](https://tool.thebukitbesi.com/sort-lines/) | English | sort lines alphabetically, sort list online, sort numbers, natural sort, shuffle lines |
 | [/text-to-html/](https://tool.thebukitbesi.com/text-to-html/) | English | text to html converter, convert text to html, markdown to html, html to text |
 | [/html-table-generator/](https://tool.thebukitbesi.com/html-table-generator/) | English | html table generator, excel to html table, responsive table html, markdown table generator |
 | [/parse-html/](https://tool.thebukitbesi.com/parse-html/) | English | parse html blogger, html escape, html entity encoder decoder, url encode decode, base64 decode |
@@ -450,6 +455,9 @@ assets/js/umur-core.js      exact age, Hijri age, next birthday, Malaysian age m
 assets/js/bersalin-core.js  due date, pregnancy week, maternity and paternity leave dates
 assets/js/solar-core.js     Solar ATAP bill saving, export credit and payback
 assets/js/lesen-core.js     JPJ driving licence fees and renewal
+assets/js/lines-core.js     list to paragraph and back, duplicate lines, line breaks, line sorting (three pages)
+assets/js/unit-core.js      unit converter: 12 categories, exact NIST/SI factors, kati, tahil, pikul, gantang
+assets/js/ip-core.js        IP parsing, IANA special ranges, RDAP and trace parsing for the IP lookup
 assets/js/land-core.js      land area units (acre, hectare, relung, orlong, jemba, rood, pole), lot size, price per area
 assets/js/personal-core.js  personal loan: flat rate / EIR (uses carloan-core.js), stamp duty, amount received
 assets/js/rpgt-core.js      RPGT: holding year, Schedule 5 rates, exemptions, retention
@@ -553,6 +561,12 @@ Copyright © The Bukit Besi. All rights reserved. The code and content are propr
 **Upkeep (Schema markup generator):** `schema-core.js` `TYPES` lists Google's required (`req`) and recommended (`rec`) properties per type from Google Search Central; recheck the structured data gallery and the documentation updates log every six months (Google retired FAQ rich results on 7 May 2026 and seven more types in 2025), then `FACTS.verified`. Replaces three Blogger pages; the video one redirects to `#type=video` and the FAQ formatter to `#type=faq` (FAQ type also outputs the matching HTML accordion).
 
 **Upkeep (Find and replace):** `textclean-core.js` has no yearly figures. The regex recipes and clean-up examples on the page are generated from the core, so a change in behaviour shows up there. Replaces two Blogger pages (find-replace-text, remove-characters-from-text). English only by design.
+
+**Upkeep (Line tools):** List to Paragraph, Remove Duplicate Lines and Sort Lines share `lines-core.js` (`run()` is used by both the page script `lines-ui.js` and the build, so the first result never shifts; tested in `lines.test.mjs`). No yearly figures. English only by design, like the other content tools; they overlap with the one-click clean-ups in Find and Replace on purpose, as dedicated pages for their own searches.
+
+**Upkeep (Unit converter):** `unit-core.js` holds exact NIST/SI factors and the Malaysian units (kati = 1⅓ lb, tahil = 1/16 kati, pikul = 100 kati, gantang = imperial gallon, cupak = ¼ gantang); no yearly figures. The 600 g "kati" some sites use and the regional length units (depa, hasta, jengkal) are left out on purpose and explained on the page.
+
+**Upkeep (IP lookup):** `ip-core.js` copies the IANA IPv4 and IPv6 Special-Purpose Address Registries into `SPECIAL`; recheck them yearly (new blocks such as 3fff::/20 appear) and update `FACTS.verified`. The page uses only free, keyless, CORS-open services: same-origin `/cdn-cgi/trace` (needs the site behind Cloudflare), `rdap.org` for registry records, and Cloudflare / Google DNS-over-HTTPS. If one stops answering, the page falls back to local details. The example table reads `tools-src/tests/fixtures/rdap-*.json` (real records saved 5 November 2026).
 
 **Upkeep (Text to HTML):** `texthtml-core.js` reuses `notepad-core.js` for Markdown, so Markdown changes in the notepad show up here too. No yearly figures. English only by design.
 

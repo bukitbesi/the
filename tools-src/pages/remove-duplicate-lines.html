@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/remove-duplicate-lines/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Remove Duplicate Lines and Line Breaks Online",
+  "description": "Delete duplicate lines and keep the first copy, ignore case or spaces, list what repeated, or remove line breaks from PDF text while keeping paragraphs.",
+  "llms": "Free online duplicate line remover and line break remover that runs in the browser. Duplicate lines: keeps the first (or last) copy of each line in its original order, optionally ignoring upper and lower case, leading and trailing spaces and repeated spaces inside a line; modes to keep only lines that appear once, or only one copy of each line that repeats; empty lines are kept or removed; a summary counts total, unique and removed lines and names the most repeated lines. Line breaks: remove every line break (one line), remove line breaks but keep paragraphs (for text copied from a PDF or email), rejoin words hyphenated across lines, collapse several blank lines into one, remove empty lines, put one sentence per line, add <br> tags, or turn lines into a comma-separated list. Text stays in the browser.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "linesdedupe",
+  "shareTitle": "Share this duplicate line remover",
+  "scripts": ["/assets/js/lines.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Remove Duplicate Lines", null]],
+  "about": ["Data deduplication", "Newline", "Plain text", "Data cleansing"],
+  "app": {
+    "name": "Remove Duplicate Lines",
+    "category": "UtilitiesApplication",
+    "features": ["Remove duplicate lines, keep first or last copy", "Ignore case, spaces and repeated spaces", "Unique-only and duplicates-only modes", "Counts and the most repeated lines", "Remove line breaks, keep paragraphs", "Rejoin hyphenated words from PDFs", "Collapse blank lines, one sentence per line, add br tags", "Text stays in your browser"]
+  },
+  "citations": [
+    ["Wikipedia: Newline (line break characters on Windows, macOS and Linux)", "https://en.wikipedia.org/wiki/Newline"],
+    ["GNU coreutils: uniq invocation", "https://www.gnu.org/software/coreutils/manual/html_node/uniq-invocation.html"],
+    ["Unicode Standard Annex #14: Line Breaking Algorithm", "https://www.unicode.org/reports/tr14/"]
+  ],
+  "faq": [
+    { "q": "How do I remove duplicate lines?", "a": "Paste your text: duplicates are removed as you type and the first copy of each line stays in its original place. In the sample email list, {{LN_D0_REMOVED}} of {{LN_D0_TOTAL}} lines are removed. Copy the result or download it as a .txt file." },
+    { "q": "Does it treat \"Ali\" and \"ali\" as the same line?", "a": "Only if you tick Ignore case. By default the match is exact apart from spaces at the start and end of a line. With Ignore case on and empty lines removed, the sample list loses {{LN_D1_REMOVED}} lines and keeps {{LN_D1_KEPT}}. Tick Ignore extra spaces to treat \"a  b\" and \"a b\" as the same." },
+    { "q": "Can I keep only lines that appear once?", "a": "Yes. Choose Unique lines only: every line that appears more than once is dropped completely, which is how you find entries that have no match. Duplicates only does the opposite and lists one copy of each line that repeats, for example to find customers who ordered twice." },
+    { "q": "How do I remove line breaks from text copied from a PDF?", "a": "Switch to Line breaks and choose Remove line breaks, keep paragraphs. Single breaks inside a paragraph become spaces and blank lines between paragraphs stay. The hyphen option also rejoins words split across lines, so \"avail-\" and \"able\" become \"{{LN_HYPH_EX}}\"." },
+    { "q": "How do I put all text on one line?", "a": "Choose Remove all line breaks (one line). Every line break and the spaces around it become a single space: \"first line\" and \"second line\" become \"{{LN_JOIN_EX}}\". Choose Lines to comma-separated to join with commas instead." },
+    { "q": "Does it keep the original order?", "a": "Yes. Lines stay in the order they appear; only the repeated copies are removed. Keep the last copy moves each line to the position of its last appearance. To sort the cleaned list alphabetically or by number, use the Sort Lines tool." },
+    { "q": "Is my text saved or uploaded?", "a": "Nothing is uploaded: the work runs in your browser, and lists of several hundred thousand lines work. Your last text is kept in this browser's local storage so it survives a reload; Clear removes it. Only the options go into the page address." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Remove Duplicate Lines</li></ol></nav>
+  <h1>Remove Duplicate Lines and Line Breaks</h1>
+  <p class="answer">Paste your list and <strong>duplicate lines are removed as you type, keeping the first copy in its original order</strong>; tick Ignore case to treat "Ali" and "ali" as one. The summary shows how many lines were removed and which repeated most. Switch to <strong>Line breaks</strong> to join lines or fix text copied from a PDF.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules checked {{LN_VERIFIED}}</span><a href="#breaks">Line break options</a></p>
+
+  <form class="box ln-tool" id="lnForm" data-tool="dedupe" novalidate aria-labelledby="ln-h">
+    <h2 id="ln-h" class="sr-only">Remove duplicate lines or line breaks</h2>
+    <div class="seg" role="radiogroup" aria-label="Task">
+      <label><input type="radio" name="mode" value="dupes" checked> Duplicate lines</label>
+      <label><input type="radio" name="mode" value="breaks"> Line breaks</label>
+    </div>
+    <div class="code-panes">
+      <div class="field"><label for="lnIn">Your text</label><textarea class="code" id="lnIn" spellcheck="false" aria-describedby="lnInStats">{{LN_IN}}</textarea><p class="code-stats" id="lnInStats">{{LN_STATS}}</p></div>
+      <div class="field"><label for="lnOut">Result</label><textarea class="code ln-out" id="lnOut" readonly spellcheck="false">{{LN_OUT}}</textarea><p class="ln-sum" id="lnSummary">{{LN_SUMMARY}}</p></div>
+    </div>
+    <div class="ln-opts" data-show="mode=dupes">
+      <div class="field"><label for="kind">Keep</label><select class="input" id="kind" name="kind"><option value="dedupe" selected>One copy of every line</option><option value="unique">Only lines that appear once</option><option value="dupes">Only lines that repeat (one copy)</option></select></div>
+      <div class="field"><label for="keep">Which copy</label><select class="input" id="keep" name="keep"><option value="first" selected>First copy</option><option value="last">Last copy</option></select></div>
+    </div>
+    <div class="ln-checks" data-show="mode=dupes">
+      <label class="check"><input type="checkbox" name="ignoreCase"> <span>Ignore case</span></label>
+      <label class="check"><input type="checkbox" name="trim" checked> <span>Trim spaces at line ends</span></label>
+      <label class="check"><input type="checkbox" name="ignoreSpaces"> <span>Ignore extra spaces</span></label>
+      <label class="check"><input type="checkbox" name="removeEmpty"> <span>Remove empty lines</span></label>
+    </div>
+    <div class="ln-opts" data-show="mode=breaks" hidden>
+      <div class="field"><label for="brk">Line breaks</label><select class="input" id="brk" name="brk">
+        <option value="paragraphs" selected>Remove line breaks, keep paragraphs</option><option value="join">Remove all line breaks (one line)</option><option value="hyphens">Keep paragraphs and rejoin hyphenated words</option>
+        <option value="collapse">Collapse blank lines into one</option><option value="empty">Remove empty lines</option><option value="sentences">One sentence per line</option>
+        <option value="br">Add &lt;br&gt; at line breaks (HTML)</option><option value="comma">Lines to comma-separated</option></select></div>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn sm" id="lnCopy">Copy result</button>
+      <button type="button" class="btn ghost sm" id="lnUse">Use result as text</button>
+      <button type="button" class="btn ghost sm" id="lnDl">Download .txt</button>
+      <button type="button" class="btn ghost sm" id="lnClear">Clear</button>
+    </div>
+    <p class="sr-only" id="lnLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to remove duplicate lines</h2>
+  <ol>
+    <li><strong>Paste your list</strong>: emails, phone numbers, keywords, URLs, product codes, one per line.</li>
+    <li><strong>Choose the match:</strong> exact, or ignore case and extra spaces.</li>
+    <li><strong>Choose what to keep:</strong> one copy of every line, only lines that appear once, or only the lines that repeat.</li>
+    <li><strong>Copy or download</strong> the cleaned list. The summary tells you how many lines went.</li>
+  </ol>
+
+  <h2 id="examples">Every duplicate mode on one list</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="mode-cap">
+    <table class="data text"><caption id="mode-cap">The sample email list with empty lines removed</caption>
+      <thead><tr><th scope="col">Option</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{LN_MODE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="breaks">Remove line breaks</h2>
+  <p>Text copied from a PDF, email or WhatsApp often breaks in the middle of sentences. This sample has a break after every few words and a word hyphenated across two lines: {{LN_PDF}}</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="brk-cap">
+    <table class="data text"><caption id="brk-cap">The sample with each line-break option</caption>
+      <thead><tr><th scope="col">Option</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{LN_BRK_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">How lines are compared</h2>
+  <ul>
+    <li><strong>Line endings:</strong> Windows (CR LF), old Mac (CR) and Linux (LF) line breaks are all read as one line break.</li>
+    <li><strong>Spaces:</strong> spaces and tabs at the start and end of a line are ignored by default; untick Trim to compare them too. Ignore extra spaces also treats several spaces inside a line as one.</li>
+    <li><strong>Case:</strong> exact by default. Ignore case uses the browser's Unicode lowercase, so accented and non-Latin letters match too.</li>
+    <li><strong>Order:</strong> unlike the command-line <code>uniq</code>, duplicates do not have to be next to each other and the list is not sorted.</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> "Remove line breaks" cannot tell a real line break (an address, a poem, a list) from a broken sentence. Check lists and addresses after cleaning, or clean only the paragraphs you need.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Newline" rel="noopener">Wikipedia: Newline</a></li>
+    <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/uniq-invocation.html" rel="noopener">GNU coreutils: uniq</a></li>
+    <li><a href="https://www.unicode.org/reports/tr14/" rel="noopener">Unicode Standard Annex #14: Line Breaking</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/sort-lines/">Sort Lines<small>A to Z, numbers, length, shuffle</small></a>
+    <a href="/list-to-paragraph/">List to Paragraph<small>Comma-separated and back</small></a>
+    <a href="/find-and-replace/">Find and Replace<small>Regex rules and text clean-up</small></a>
+    <a href="/word-counter/">Word Counter<small>Words, readability and keyword density</small></a>
+  </div>
+</section>
+</div>

@@ -1,0 +1,159 @@
+<!--page
+{
+  "path": "/list-to-paragraph/",
+  "lang": "en",
+  "cat": "content",
+  "title": "List to Paragraph Converter (and Paragraph to List)",
+  "description": "Turn a list into a paragraph or comma-separated line with \"and\" and the Oxford comma, or split a paragraph into a bulleted, numbered or HTML list.",
+  "llms": "Free online list to paragraph converter that runs in the browser. List to paragraph: removes bullets, numbers (1. 2) (3)), letters (a.) and check boxes, then joins the items with a comma, a comma plus a final \"and\" or \"or\" (with or without the Oxford comma; Malay \"dan\"/\"atau\" never takes one), semicolons, spaces, pipes, tabs or any separator, or turns each line into a sentence ending with a full stop; items can be wrapped in single quotes for an SQL IN list or double quotes for CSV (inner quotes doubled); blank lines can start a new paragraph. Example: Apples, Bananas, Cherries becomes \"Apples, Bananas, and Cherries\". Paragraph to list: splits at commas (treating the final \"and\"/\"or\"/\"dan\"/\"atau\" as a separator), sentences (abbreviations such as Dr. and a.m. kept), line breaks, semicolons, spaces or a custom character, and outputs dash, bullet, numbered, lettered, checklist, HTML ul or ol, or plain lines, with optional duplicate removal. Text stays in the browser.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "lineslist",
+  "shareTitle": "Share this list to paragraph converter",
+  "scripts": ["/assets/js/lines.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["List to Paragraph", null]],
+  "about": ["List (writing)", "Serial comma", "Comma-separated values", "Paragraph"],
+  "app": {
+    "name": "List to Paragraph Converter",
+    "category": "UtilitiesApplication",
+    "features": ["List to paragraph or comma-separated line", "Final \"and\" or \"or\" with or without the Oxford comma", "Quotes for SQL IN lists and CSV", "Each line as a sentence", "Paragraph to bulleted, numbered, lettered or checklist list", "HTML ul and ol output", "Strips existing bullets and numbers", "Text stays in your browser"]
+  },
+  "citations": [
+    ["Wikipedia: Serial (Oxford) comma", "https://en.wikipedia.org/wiki/Serial_comma"],
+    ["Merriam-Webster: What is the Oxford comma?", "https://www.merriam-webster.com/grammar/what-is-an-oxford-comma"],
+    ["IETF RFC 4180: Common format for comma-separated values (CSV)", "https://www.rfc-editor.org/rfc/rfc4180"],
+    ["MDN: The ul element", "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul"]
+  ],
+  "faq": [
+    { "q": "How do I convert a list into a paragraph?", "a": "Paste the list with one item per line and choose a separator. Bullets, numbers and check boxes are removed first, then the items are joined: Apples, Bananas and Cherries on three lines become \"{{LN_ABC_AND}}\" with the default comma-and-\"and\" separator. Copy the result or press Use result to keep editing it." },
+    { "q": "How do I turn a list into comma-separated values?", "a": "Choose Comma as the separator. For an SQL IN list or a spreadsheet, also choose quotes: single quotes give {{LN_ABC_SQL}}, and double quotes give CSV, where a quote inside an item is doubled as RFC 4180 requires. A blank line starts a new comma-separated line unless you untick Keep paragraphs." },
+    { "q": "Should I use the Oxford comma?", "a": "Both are correct; be consistent. The Oxford (serial) comma before the final \"and\" is standard in American style guides such as Chicago and APA: \"{{LN_ABC_AND}}\". Most British news style and the AP Stylebook leave it out: \"{{LN_ABC_NOOX}}\". Untick Oxford comma to drop it. Malay lists never take one: \"{{LN_DAN}}\"." },
+    { "q": "How do I split a paragraph into a list?", "a": "Switch to Paragraph to list. Auto splits at commas and semicolons (and treats the final \"and\", \"or\", \"dan\" or \"atau\" as a separator), or at sentences when there are no commas. Choose dashes, bullets, numbers, letters, a checklist or an HTML list, and tick Remove full stops to drop the trailing full stop from each item." },
+    { "q": "Will it split \"salt and pepper\" into two items?", "a": "No. Only the \"and\" or \"or\" after the last comma is treated as a separator, so \"salt and pepper, rice\" stays two items. Sentence splitting also ignores the full stops in abbreviations such as Dr., Sdn. Bhd. and a.m., and in decimals such as 9.30." },
+    { "q": "Can I turn each line into a sentence?", "a": "Yes. Choose the Sentences separator: each line becomes a sentence and a full stop is added where the line has no ending punctuation, so numbered steps turn into a readable paragraph. Lines that already end with ? or ! keep it." },
+    { "q": "Is my text saved or uploaded?", "a": "Nothing is uploaded: the conversion runs in your browser. Your last text is kept in this browser's local storage so it survives a reload; Clear removes it. Only the options (not the text) are stored in the page address, so a shared link opens with the same settings." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">List to Paragraph</li></ol></nav>
+  <h1>List to Paragraph Converter</h1>
+  <p class="answer">Paste a list with one item per line and it <strong>becomes one paragraph or comma-separated line instantly</strong>: bullets and numbers are removed and the last item gets "and" (Oxford comma optional), so Apples, Bananas, Cherries becomes <em>{{LN_ABC_AND}}</em>. Switch to <strong>Paragraph to list</strong> to split text into bullets, numbers or an HTML list.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules checked {{LN_VERIFIED}}</span><a href="#examples">Examples</a></p>
+
+  <form class="box ln-tool" id="lnForm" data-tool="list" novalidate aria-labelledby="ln-h">
+    <h2 id="ln-h" class="sr-only">Convert a list or a paragraph</h2>
+    <div class="seg" role="radiogroup" aria-label="Direction">
+      <label><input type="radio" name="mode" value="l2p" checked> List → paragraph</label>
+      <label><input type="radio" name="mode" value="p2l"> Paragraph → list</label>
+    </div>
+    <div class="code-panes">
+      <div class="field"><label for="lnIn">Your text</label><textarea class="code" id="lnIn" spellcheck="false" aria-describedby="lnInStats">{{LN_IN}}</textarea><p class="code-stats" id="lnInStats">{{LN_STATS}}</p></div>
+      <div class="field"><label for="lnOut">Result</label><textarea class="code ln-out" id="lnOut" readonly spellcheck="false">{{LN_OUT}}</textarea><p class="ln-sum" id="lnSummary">{{LN_SUMMARY}}</p></div>
+    </div>
+    <div class="ln-opts" data-show="mode=l2p">
+      <div class="field"><label for="sep">Join with</label><select class="input" id="sep" name="sep">
+        <option value="and" selected>Comma and "and"</option><option value="or">Comma and "or"</option><option value="comma">Comma</option><option value="semicolon">Semicolon</option>
+        <option value="sentence">Sentences (add full stops)</option><option value="space">Space</option><option value="pipe">Pipe |</option><option value="tab">Tab</option><option value="custom">Custom…</option></select></div>
+      <div class="field" data-show="sep=custom" hidden><label for="custom">Custom separator</label><input class="input" id="custom" name="custom" value=" / " autocomplete="off" spellcheck="false"></div>
+      <div class="field"><label for="quote">Wrap each item in</label><select class="input" id="quote" name="quote"><option value="" selected>Nothing</option><option value="'">Single quotes (SQL)</option><option value="&quot;">Double quotes (CSV)</option></select></div>
+    </div>
+    <div class="ln-checks" data-show="mode=l2p">
+      <label class="check"><input type="checkbox" name="oxford" checked> <span>Oxford comma</span></label>
+      <label class="check"><input type="checkbox" name="strip" checked> <span>Remove bullets and numbers</span></label>
+      <label class="check"><input type="checkbox" name="groups" checked> <span>Keep paragraphs (blank lines)</span></label>
+      <label class="check"><input type="checkbox" name="end"> <span>End with a full stop</span></label>
+    </div>
+    <div class="ln-opts" data-show="mode=p2l" hidden>
+      <div class="field"><label for="split">Split at</label><select class="input" id="split" name="split">
+        <option value="auto" selected>Auto (commas or sentences)</option><option value="comma">Commas and "and"</option><option value="sentence">Sentences</option><option value="line">Line breaks</option>
+        <option value="semicolon">Semicolons</option><option value="space">Spaces (words)</option><option value="custom">Custom…</option></select></div>
+      <div class="field" data-show="split=custom" hidden><label for="pcustom">Split at this text</label><input class="input" id="pcustom" name="pcustom" value="|" autocomplete="off" spellcheck="false"></div>
+      <div class="field"><label for="bullet">List style</label><select class="input" id="bullet" name="bullet">
+        <option value="dash" selected>Dash - (Markdown)</option><option value="bullet">Bullet •</option><option value="star">Star *</option><option value="number">Numbers 1.</option><option value="paren">Numbers 1)</option>
+        <option value="letter">Letters a.</option><option value="check">Checklist - [ ]</option><option value="ul">HTML &lt;ul&gt;</option><option value="ol">HTML &lt;ol&gt;</option><option value="none">One per line, no marker</option></select></div>
+    </div>
+    <div class="ln-checks" data-show="mode=p2l" hidden>
+      <label class="check"><input type="checkbox" name="dropEnd"> <span>Remove full stops</span></label>
+      <label class="check"><input type="checkbox" name="dedupe"> <span>Remove duplicate items</span></label>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn sm" id="lnCopy">Copy result</button>
+      <button type="button" class="btn ghost sm" id="lnUse">Use result as text</button>
+      <button type="button" class="btn ghost sm" id="lnDl">Download .txt</button>
+      <button type="button" class="btn ghost sm" id="lnClear">Clear</button>
+    </div>
+    <p class="sr-only" id="lnLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to convert a list to a paragraph</h2>
+  <ol>
+    <li><strong>Paste your list</strong>, one item per line. Bullets (-, •, *), numbers (1. 2) (3)), letters (a.) and check boxes are removed automatically.</li>
+    <li><strong>Choose how to join</strong> the items: commas with a final "and" or "or", plain commas, semicolons, sentences or your own separator.</li>
+    <li><strong>Add quotes</strong> if the line is for SQL or a spreadsheet.</li>
+    <li><strong>Copy</strong> the result, or press <em>Use result as text</em> to keep working on it.</li>
+  </ol>
+
+  <h2 id="examples">Separator examples</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sep-cap">
+    <table class="data text"><caption id="sep-cap">Apples, Bananas and Cherries on three lines, joined each way</caption>
+      <thead><tr><th scope="col">Separator</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{LN_SEP_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Steps into a paragraph:</strong> {{LN_STEPS_IN}} with the Sentences separator becomes "{{LN_STEPS_OUT}}"</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="p2l">Paragraph to list</h2>
+  <p>"{{LN_PARA}}" split at commas, with full stops removed:</p>
+  <p>{{LN_PARA_OUT}}</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="bul-cap">
+    <table class="data text"><caption id="bul-cap">"red, green and blue" in each list style</caption>
+      <thead><tr><th scope="col">Style</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{LN_BULLET_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">Rules the converter follows</h2>
+  <ul>
+    <li><strong>Oxford comma:</strong> on by default (Chicago Manual of Style, APA); untick it for AP and most British style. Two items never get a comma: "tea and coffee".</li>
+    <li><strong>CSV quoting:</strong> double quotes inside an item are doubled (<code>say "hi"</code> becomes <code>"say ""hi"""</code>), as in RFC 4180.</li>
+    <li><strong>Sentence splitting:</strong> a full stop, question mark or exclamation mark followed by a space ends a sentence, except after common abbreviations (Dr., Prof., Sdn., Bhd., e.g., a.m.) or before a lowercase word.</li>
+    <li><strong>Final conjunction:</strong> "and", "or", "dan" and "atau" after the last comma separate the last two items; "and" inside an item such as "salt and pepper" is kept.</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> the converter does not change capitalisation. To make the joined paragraph sentence case, run it through the <a href="/case-converter/">case converter</a>.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Serial_comma" rel="noopener">Wikipedia: Serial (Oxford) comma</a></li>
+    <li><a href="https://www.merriam-webster.com/grammar/what-is-an-oxford-comma" rel="noopener">Merriam-Webster: What is the Oxford comma?</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc4180" rel="noopener">IETF RFC 4180: CSV format</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" rel="noopener">MDN: the ul element</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/remove-duplicate-lines/">Remove Duplicate Lines<small>And remove line breaks</small></a>
+    <a href="/sort-lines/">Sort Lines<small>A to Z, numbers, length, shuffle</small></a>
+    <a href="/case-converter/">Case Converter<small>Sentence case, Title Case</small></a>
+    <a href="/find-and-replace/">Find and Replace<small>Regex rules and text clean-up</small></a>
+  </div>
+</section>
+</div>

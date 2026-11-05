@@ -425,6 +425,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/invoice-generator/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/ip-lookup/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ip-lookup/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-ip/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ip-lookup/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/jam-randik/</loc>
     <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/jam-randik/"/>
@@ -895,6 +902,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/land-size-converter-malaysia/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/list-to-paragraph/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/lppsa-calculator/</loc>
     <lastmod>2026-10-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/lppsa-calculator/"/>
@@ -1037,6 +1048,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/currency-converter-malaysia/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/penukar-unit/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/penukar-unit/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/unit-converter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/unit-converter/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/</loc>
     <lastmod>2026-10-15</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/personal-loan-calculator-malaysia/"/>
@@ -1140,6 +1158,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/remove-background/"/>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/remove-duplicate-lines/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/rent-vs-buy-calculator-malaysia/</loc>
     <lastmod>2026-10-14</lastmod>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/rent-vs-buy-calculator-malaysia/"/>
@@ -1204,6 +1226,13 @@
     <lastmod>2026-10-19</lastmod>
   </url>
   <url>
+    <loc>https://tool.thebukitbesi.com/semak-ip/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-ip/"/>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/ip-lookup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/ip-lookup/"/>
+  </url>
+  <url>
     <loc>https://tool.thebukitbesi.com/semak-tracking-citylink/</loc>
     <lastmod>2026-10-12</lastmod>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/semak-tracking-citylink/"/>
@@ -1258,6 +1287,10 @@
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/solar-calculator-malaysia/"/>
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/kalkulator-solar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/solar-calculator-malaysia/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/sort-lines/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/spin-the-wheel/</loc>
@@ -1357,6 +1390,13 @@
     <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/ujian-menaip/"/>
     <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/typing-test/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/typing-test/"/>
+  </url>
+  <url>
+    <loc>https://tool.thebukitbesi.com/unit-converter/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-MY" href="https://tool.thebukitbesi.com/unit-converter/"/>
+    <xhtml:link rel="alternate" hreflang="ms-MY" href="https://tool.thebukitbesi.com/penukar-unit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tool.thebukitbesi.com/unit-converter/"/>
   </url>
   <url>
     <loc>https://tool.thebukitbesi.com/unit-trust-calculator-malaysia/</loc>
