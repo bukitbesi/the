@@ -1,0 +1,137 @@
+<!--page
+{
+  "path": "/semak-ip/",
+  "lang": "ms",
+  "cat": "util",
+  "alternates": { "en": "/ip-lookup/" },
+  "title": "Semak IP: Apa Alamat IP Saya, ISP dan Pemilik Rangkaian",
+  "description": "Lihat alamat IP awam, negara dan ISP anda, kemudian semak mana-mana IP atau domain: pemilik, julat rangkaian, e-mel aduan, DNS songsang dan jenis IP.",
+  "llms": "Semakan alamat IP percuma yang berjalan dalam pelayar tanpa kunci API dan tanpa penjejakan. Alamat IP awam dan negara anda diambil dari pelayan Cloudflare laman ini sendiri (/cdn-cgi/trace). Mana-mana alamat IPv4 atau IPv6 atau nama domain boleh disemak: pemilik rangkaian (ISP atau organisasi), negara berdaftar, julat alamat dan blok CIDR, nama rangkaian, daftar internet wilayah (APNIC untuk Malaysia, ARIN, RIPE NCC, LACNIC, AFRINIC), e-mel aduan salah guna dan tarikh pendaftaran daripada rekod rasmi daftar melalui RDAP (RFC 9083, melalui rdap.org); DNS songsang (PTR) dan rekod A/AAAA domain daripada DNS-over-HTTPS Cloudflare dengan Google Public DNS sebagai sandaran. Setiap alamat juga dikelaskan mengikut Daftar Alamat Tujuan Khas IPv4 dan IPv6 IANA (peribadi RFC 1918 10/8, 172.16/12, 192.168/16; NAT gred pembawa 100.64.0.0/10; loopback; pautan setempat; dokumentasi; multicast; setempat unik fc00::/7) dan dipaparkan dalam bentuk perpuluhan, heksadesimal, perduaan, IPv6 penuh dan nama in-addr.arpa atau ip6.arpa. Alat ini tidak menunjukkan alamat rumah: data daftar hanya menamakan pemilik rangkaian.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "ip",
+  "shareTitle": "Kongsi alat semak IP ini",
+  "scripts": ["/assets/js/ip.js"],
+  "breadcrumb": [["Alat", "/"], ["Utiliti", "/?cat=util#tools"], ["Semak IP", null]],
+  "about": ["Alamat IP", "Registration Data Access Protocol", "DNS songsang", "Rangkaian peribadi"],
+  "app": {
+    "name": "Semak IP",
+    "category": "UtilitiesApplication",
+    "features": ["Alamat IPv4 atau IPv6 awam dan negara anda", "ISP dan pemilik rangkaian daripada daftar rasmi (RDAP)", "Semak mana-mana alamat IP atau domain", "E-mel aduan salah guna dan blok CIDR", "DNS songsang (PTR)", "Julat peribadi, CGNAT, loopback dan julat khas lain (IANA)", "Bentuk perpuluhan, heks, perduaan dan IPv6 penuh", "Tanpa kunci API, tanpa penjejakan"]
+  },
+  "citations": [
+    ["IANA IPv4 Special-Purpose Address Registry", "https://www.iana.org/assignments/iana-ipv4-special-registry/"],
+    ["IANA IPv6 Special-Purpose Address Registry", "https://www.iana.org/assignments/iana-ipv6-special-registry/"],
+    ["RFC 9083: JSON Responses for the Registration Data Access Protocol (RDAP)", "https://www.rfc-editor.org/rfc/rfc9083"],
+    ["RFC 1918: Address Allocation for Private Internets", "https://www.rfc-editor.org/rfc/rfc1918"],
+    ["RFC 5952: Recommendation for IPv6 Address Text Representation", "https://www.rfc-editor.org/rfc/rfc5952"],
+    ["APNIC: Whois and RDAP", "https://www.apnic.net/manage-ip/using-whois/"]
+  ],
+  "faq": [
+    { "q": "Apa alamat IP saya?", "a": "Ia dipaparkan di bahagian atas halaman ini sebaik halaman dimuatkan, bersama negara anda dan pusat data Cloudflare yang melayan anda; pemilik rangkaian (ISP anda) muncul sejurus kemudian daripada rekod daftar. Ini alamat awam anda, yang dilihat oleh laman web. Telefon atau komputer riba anda juga ada alamat peribadi seperti 192.168.1.10 di Wi-Fi rumah, yang hanya dilihat oleh router anda." },
+    { "q": "Bolehkah semakan IP mencari alamat rumah seseorang?", "a": "Tidak. Rekod daftar menamakan pemilik rangkaian, contohnya {{I_TM_ORG}} bagi {{I_TM_CIDR}}, dan negaranya, bukan orang yang menggunakan alamat itu. Hanya ISP boleh mengaitkan alamat dengan pelanggan pada masa tertentu, dan ISP Malaysia hanya memberikannya kepada pihak berkuasa seperti polis apabila dikehendaki undang-undang. Lokasi bandar yang ditunjukkan laman lain hanyalah anggaran dan selalunya meleset berpuluh kilometer." },
+    { "q": "Kenapa IP saya bermula dengan 100.64 atau selalu berubah?", "a": "100.64.0.0/10 ialah ruang NAT gred pembawa (RFC 6598): ramai pelanggan data mudah alih dan sesetengah gentian berkongsi satu alamat awam, dan alamat WAN router anda jatuh dalam julat itu. Alamat jalur lebar rumah dan data mudah alih biasanya dinamik, jadi ia berubah apabila router atau telefon bersambung semula. IP tetap (statik) biasanya tambahan pelan perniagaan." },
+    { "q": "Apakah alamat IP peribadi?", "a": "RFC 1918 mengasingkan 10.0.0.0/8, 172.16.0.0/12 dan 192.168.0.0/16 untuk rangkaian peribadi: ia tidak pernah dihala di internet, jadi berjuta rumah boleh guna 192.168.0.1 untuk router tanpa bertembung. IPv6 menggunakan fc00::/7 (setempat unik) untuk tujuan sama. Alat ini melabel alamat begini dan tidak menyemak daftar untuknya." },
+    { "q": "Bagaimana melaporkan salah guna dari satu alamat IP?", "a": "Semak alamat itu dan hantar e-mel ke kenalan aduan yang ditunjukkan, yang diambil daripada rekod daftar (bagi blok TM ialah {{I_TM_ABUSE}}). Sertakan alamat IP, tarikh, masa dan zon waktu yang tepat, serta baris log atau pengepala e-mel. Untuk penipuan atau ugutan di Malaysia, laporkan juga kepada polis atau NSRC di talian 997." },
+    { "q": "Apakah DNS songsang?", "a": "DNS songsang menukar alamat kembali kepada nama hos melalui rekod PTR di bawah in-addr.arpa (IPv4) atau ip6.arpa (IPv6): 8.8.8.8 disemak sebagai {{I_REV}} dan menjawab dns.google. Pelayan e-mel menyemaknya untuk mengesan spam. Banyak sambungan rumah tiada rekod PTR atau hanya rekod umum yang ditetapkan ISP." },
+    { "q": "Adakah semakan saya peribadi?", "a": "Laman ini tidak menyimpan apa-apa. Untuk mencari IP anda, halaman bertanya kepada pelayan laman ini sendiri. Untuk mencari pemilik, alamat dihantar ke daftar internet wilayah melalui rdap.org, dan untuk DNS songsang atau domain, nama dihantar ke penyelesai DNS awam Cloudflare (Google sebagai sandaran); ini perkhidmatan awam yang sama digunakan alat rangkaian lain. Alamat peribadi tidak dihantar ke mana-mana." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Semak IP</li></ol></nav>
+  <h1>Semak IP: Apa Alamat IP Saya?</h1>
+  <p class="answer"><strong>Alamat IP awam anda dipaparkan di bawah sebaik halaman dimuatkan</strong>, bersama negara dan ISP anda daripada daftar internet rasmi. Taip mana-mana alamat IP atau domain untuk melihat <strong>pemilik rangkaian, julat alamat, kenalan aduan, DNS songsang</strong> dan sama ada ia awam, peribadi (192.168.x.x, 10.x.x.x) atau NAT gred pembawa yang dikongsi.</p>
+  <p class="meta"><span>Julat disemak <time datetime="{{I_VERIFIED_ISO}}">{{I_VERIFIED}}</time></span><span>Daftar IANA, RDAP</span><a href="/ip-lookup/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <section class="box" aria-labelledby="ip-mine-h">
+      <h2 id="ip-mine-h">Alamat IP anda</h2>
+      <div class="net ip-mine"><p>IP awam</p><output id="ipMine">–</output><p id="ipMineSub">Memerlukan JavaScript dan pelayan laman ini.</p></div>
+      <div class="tool-actions"><button type="button" class="btn sm" id="ipCopy" disabled>Salin IP saya</button><button type="button" class="btn ghost sm" id="ipMineBtn" disabled>Semak IP saya</button></div>
+      <form id="ipForm" novalidate aria-labelledby="ip-q-h">
+        <h2 id="ip-q-h" class="sub-h">Semak alamat IP atau domain</h2>
+        <div class="ip-q"><div class="input"><input id="ipQ" name="q" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="8.8.8.8, 2001:4860:4860::8888 atau contoh.com" aria-label="Alamat IP atau domain"></div><button type="submit" class="btn">Semak</button></div>
+        <p class="ip-status" id="ipStatus" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="box" aria-labelledby="ip-result-h">
+      <h2 id="ip-result-h">Butiran untuk <span id="ipFor">{{I_FOR}}</span></h2>
+      <p class="sr-only" id="ipLive" aria-live="polite"></p>
+      <div class="ip-table"><table class="rows wrap"><caption>Butiran daftar dan alamat</caption><tbody id="ipRows">
+{{I_ROWS}}
+      </tbody></table></div>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="ipPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">Cara semakan berfungsi</h2>
+  <ol>
+    <li><strong>IP anda:</strong> halaman bertanya kepada pelayan Cloudflare laman ini sendiri dari alamat mana permintaan anda datang (<code>/cdn-cgi/trace</code>), jadi tiada perkhidmatan IP luar yang melihat anda.</li>
+    <li><strong>Pemilik:</strong> alamat disemak dengan rekod rasmi daftar internet wilayah yang mengeluarkannya, melalui RDAP (RFC 9083). Alamat Malaysia dikeluarkan oleh APNIC.</li>
+    <li><strong>DNS songsang:</strong> rekod PTR dibaca daripada penyelesai DNS-over-HTTPS awam Cloudflare. Domain yang anda taip ditukar dahulu kepada alamat IPv4 dan IPv6 dengan cara yang sama.</li>
+    <li><strong>Jenis:</strong> alamat dibandingkan dengan daftar tujuan khas IANA untuk membezakan alamat awam, peribadi, NAT gred pembawa, loopback, dokumentasi dan multicast.</li>
+  </ol>
+
+  <h2 id="example">Contoh: alamat TM Unifi</h2>
+  <p>175.139.0.1 berada dalam blok yang didaftarkan dengan APNIC kepada TM (rekod daftar dibaca {{I_VERIFIED}}):</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="tm-cap">
+    <table class="data text"><caption id="tm-cap">Rekod daftar bagi 175.139.0.1</caption><tbody>
+{{I_TM_ROWS}}
+    </tbody></table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="ranges">Julat alamat IP khas</h2>
+  <p>Blok ini dikhaskan oleh IETF dan disenaraikan oleh IANA; ia tidak dimiliki mana-mana ISP, jadi alat ini menerangkannya dan tidak menyemak daftar.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sp-cap">
+    <table class="data text"><caption id="sp-cap">Alamat tujuan khas IANA (IPv4 dan IPv6)</caption>
+      <thead><tr><th scope="col">Blok</th><th scope="col">Kegunaan</th><th scope="col">Ditakrif dalam</th></tr></thead>
+      <tbody>
+{{I_SPECIAL}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="formats">Format alamat IP</h2>
+  <ul>
+    <li><strong>Perpuluhan:</strong> alamat IPv4 ialah nombor 32 bit; 8.8.8.8 = {{I_DEC}}.</li>
+    <li><strong>Perduaan:</strong> 8.8.8.8 = {{I_BIN}}, cara topeng subnet dikira.</li>
+    <li><strong>IPv6 bentuk pendek:</strong> ditulis mengikut RFC 5952, huruf kecil dengan rangkaian kumpulan sifar terpanjang sebagai <code>::</code>, jadi 2001:0db8:0000:0000:0000:0000:0000:0001 ialah 2001:db8::1.</li>
+    <li><strong>Nama DNS songsang:</strong> 2001:db8::1 disemak sebagai <code>{{I_V6REV}}</code>.</li>
+  </ul>
+  <div class="callout"><p><strong>Penafian:</strong> rekod daftar dibekalkan oleh pemegang alamat dan mungkin lapuk; ia menunjukkan siapa memegang satu blok, bukan siapa menggunakan alamat pada satu-satu masa. Jangan gunakan semakan IP untuk mengenal pasti atau bersemuka dengan seseorang. Alamat dengan sifar di depan (seperti 010.1.1.1) ditolak kerana sesetengah sistem membacanya sebagai oktal.</p></div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/" rel="noopener">IANA IPv4 Special-Purpose Address Registry</a></li>
+    <li><a href="https://www.iana.org/assignments/iana-ipv6-special-registry/" rel="noopener">IANA IPv6 Special-Purpose Address Registry</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc9083" rel="noopener">RFC 9083: respons JSON RDAP</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc1918" rel="noopener">RFC 1918: ruang alamat peribadi</a></li>
+    <li><a href="https://www.rfc-editor.org/rfc/rfc5952" rel="noopener">RFC 5952: perwakilan teks IPv6</a></li>
+    <li><a href="https://www.apnic.net/manage-ip/using-whois/" rel="noopener">APNIC: Whois dan RDAP</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="https://www.thebukitbesi.com/p/internet-speed-test.html">Ujian Kelajuan Internet<small>Muat turun, muat naik dan ping</small></a>
+    <a href="/penukar-unit/">Penukar Unit<small>Unit data: MB, GB, GiB, Mbps</small></a>
+    <a href="/semak-tracking-parcel/">Semak Tracking Parcel<small>Pos Laju, J&amp;T, Ninja Van</small></a>
+    <a href="/kod-negeri-ic/">Kod Negeri IC<small>Nyahkod nombor MyKad</small></a>
+  </div>
+</section>
+</div>

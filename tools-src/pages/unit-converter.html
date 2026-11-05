@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/unit-converter/",
+  "lang": "en",
+  "cat": "util",
+  "alternates": { "ms": "/penukar-unit/" },
+  "title": "Unit Converter: Length, Weight, Kati to kg, Temperature and More",
+  "description": "Convert length, weight, volume, area, temperature, speed, data, pressure, energy, power and fuel economy, plus Malaysian kati, tahil, pikul and gantang.",
+  "llms": "Free online unit converter for Malaysia covering 12 categories: length (mm, cm, m, km, inch, foot, yard, mile, nautical mile), mass (mg, g, kg, tonne, ounce, pound, stone, US and UK ton, carat, and the Malaysian tahil, kati and pikul), volume (ml, litre, m³, US teaspoon, tablespoon, fluid ounce, cup, pint, quart and gallon, metric cup, imperial gallon and pint, cubic foot, oil barrel, and the Malaysian cupak and gantang), area, temperature (Celsius, Fahrenheit, Kelvin), speed (km/h, m/s, mph, knot), time, digital storage (decimal kB/MB/GB/TB and binary KiB/MiB/GiB/TiB, megabits), pressure (Pa, kPa, bar, psi, atm, mmHg, kgf/cm²), energy (J, kJ, cal, kcal, Wh, kWh, BTU), power (W, kW, mechanical hp, metric PS, BTU/h) and fuel economy (km/L, L/100 km, US and UK mpg). Exact definitions from NIST and the BIPM SI Brochure: 1 inch = 2.54 cm, 1 lb = 0.45359237 kg, 1 US gallon = 3.785411784 L, 1 imperial gallon = 4.54609 L. Malaysian units: 1 kati = 1⅓ lb = 604.79 g, 1 tahil = 1/16 kati = 37.80 g, 1 pikul = 100 kati = 60.48 kg, 1 gantang = 1 imperial gallon = 4.54609 L, 1 cupak = ¼ gantang = 1.137 L.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "unit",
+  "shareTitle": "Share this unit converter",
+  "scripts": ["/assets/js/unit.js"],
+  "breadcrumb": [["Tools", "/"], ["Utilities", "/?cat=util#tools"], ["Unit Converter", null]],
+  "about": ["Conversion of units", "International System of Units", "Malay units of measurement", "Imperial and US customary units"],
+  "app": {
+    "name": "Unit Converter",
+    "category": "UtilitiesApplication",
+    "features": ["12 categories, 99 units", "Malaysian kati, tahil, pikul, gantang and cupak", "Exact NIST and SI definitions", "Every unit shown at once", "Temperature and fuel economy formulas", "Decimal and binary data units", "Swap units and shareable link", "Works offline"]
+  },
+  "citations": [
+    ["NIST Special Publication 811: Guide for the Use of the SI, Appendix B (conversion factors)", "https://www.nist.gov/pml/special-publication-811"],
+    ["NIST Handbook 44 Appendix C: General Tables of Units of Measurement", "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"],
+    ["BIPM: The International System of Units (SI Brochure, 9th edition)", "https://www.bipm.org/en/publications/si-brochure"],
+    ["NIST: Prefixes for binary multiples (IEC 80000-13)", "https://physics.nist.gov/cuu/Units/binary.html"],
+    ["Wikipedia: Malay units of measurement", "https://en.wikipedia.org/wiki/Malay_units_of_measurement"],
+    ["Wikipedia: Catty (Weights and Measures Act 1972, Malaysia)", "https://en.wikipedia.org/wiki/Catty"]
+  ],
+  "faq": [
+    { "q": "How many kg is 1 kati?", "a": "1 kati = {{U_KATI_KG}} kg ({{U_KATI_G}} g), because a kati is defined as 1⅓ pounds and a pound is exactly 0.45359237 kg. So 1 kg = {{U_KG_KATI}} kati. A tahil is 1/16 kati ({{U_TAHIL_G}} g) and a pikul is 100 kati ({{U_PIKUL_KG}} kg). Some market scales and websites round the kati to 600 g; the converter uses the legal 1⅓ lb definition." },
+    { "q": "How many litres is a gantang?", "a": "1 gantang = 1 imperial gallon = {{U_GANTANG_L}} litres, and 1 cupak = ¼ gantang = {{U_CUPAK_L}} litres. The gantang is a volume, not a weight: how many kilograms of rice fill one depends on the grain, so convert by weighing rather than by a fixed kg figure." },
+    { "q": "What is 5 feet 6 inches in cm?", "a": "5 ft 6 in = 5.5 ft = {{U_55FT}} cm, since 1 inch is exactly 2.54 cm and 1 foot is 30.48 cm. Going the other way, 170 cm = {{U_170CM}}. Choose Length, Foot to Centimetre, and type the height in feet with a decimal (5 ft 9 in = 5.75 ft)." },
+    { "q": "How do I convert Celsius to Fahrenheit?", "a": "Multiply by 9/5 and add 32: 30 °C = {{U_30C}} °F, 37 °C = 98.6 °F and 100 °C = 212 °F. From Fahrenheit, subtract 32 and multiply by 5/9. Kelvin is Celsius plus 273.15." },
+    { "q": "What is the difference between GB and GiB?", "a": "A gigabyte (GB) is 1,000,000,000 bytes; a gibibyte (GiB) is 1,073,741,824 bytes (2³⁰). Drive makers use GB, while Windows reports GiB but labels it \"GB\", which is why a 1 TB drive shows about {{U_TB_GIB}} \"GB\". Internet speed is in megabits: 100 Mbps moves {{U_100MBIT}} megabytes a second." },
+    { "q": "How do I convert tyre pressure from psi to bar?", "a": "Divide by 14.504, or use the converter: 32 psi = {{U_32PSI}} bar = {{U_32PSI_KPA}} kPa. 1 psi is exactly 6,894.757 pascals and 1 bar is 100,000 pascals. Use the pressure printed on your car's door frame, measured when the tyres are cold." },
+    { "q": "How do I convert km/L to L/100 km or mpg?", "a": "L/100 km = 100 ÷ km/L, so 8 L/100 km = {{U_8L100}} km/L. For US mpg multiply km/L by 2.352; for UK mpg by 2.825 (the UK gallon is bigger). Fuel economy categories use these formulas, not a fixed factor, because L/100 km is a reciprocal." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=util#tools">Utilities</a></li><li aria-current="page">Unit Converter</li></ol></nav>
+  <h1>Unit Converter</h1>
+  <p class="answer">Pick a category and type a value to <strong>convert between {{U_UNIT_COUNT}} units in {{U_CAT_COUNT}} categories</strong> using exact NIST and SI definitions, including Malaysian units: <strong>1 kati = {{U_KATI_G}} g</strong>, 1 gantang = {{U_GANTANG_L}} litres, and 5 ft 6 in = {{U_55FT}} cm. Every other unit in the category is shown at once.</p>
+  <p class="meta"><span>Definitions verified <time datetime="{{U_VERIFIED_ISO}}">{{U_VERIFIED}}</time></span><span>NIST SP 811, BIPM SI Brochure</span><a href="/penukar-unit/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <div class="calc">
+    <form class="box" id="uForm" novalidate aria-labelledby="u-h">
+      <h2 id="u-h">Convert</h2>
+      <div class="field"><label for="cat">Category</label><select class="input" id="cat" name="cat">{{U_CAT}}</select></div>
+      <div class="field"><label for="v">Value</label><div class="input"><input id="v" name="v" type="text" inputmode="decimal" autocomplete="off" value="{{U_VALUE}}"></div></div>
+      <div class="u-row">
+        <div class="field"><label for="from">From</label><select class="input" id="from" name="from">{{U_FROM}}</select></div>
+        <button type="button" class="btn ghost u-swap" id="uSwap" aria-label="Swap units">⇄</button>
+        <div class="field"><label for="to">To</label><select class="input" id="to" name="to">{{U_TO}}</select></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="u-result-h">
+      <h2 id="u-result-h">Result</h2>
+      <div class="net"><p id="uSub">{{U_SUB}}</p><output id="uBig" for="v from to">{{U_BIG}}</output><p class="u-rule" id="uRule">{{U_RULE}}</p></div>
+      <p class="sr-only" id="uLive" aria-live="polite"></p>
+      <table class="rows wrap"><caption>In every unit</caption><tbody id="uRows">
+{{U_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="uPrint">Print or save PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to convert units</h2>
+  <ol>
+    <li><strong>Choose a category</strong>: length, weight, volume, area, temperature, speed, time, data, pressure, energy, power or fuel economy.</li>
+    <li><strong>Type the value</strong>. Decimals and negative numbers (for temperature) work; commas are ignored.</li>
+    <li><strong>Pick the units</strong> to convert from and to, or press ⇄ to swap them. Every other unit appears in the table.</li>
+    <li><strong>Share or print</strong>: the page address keeps your conversion.</li>
+  </ol>
+
+  <h2 id="malay">Malaysian traditional units</h2>
+  <p>Malaysia went metric in the 1970s, but the kati and tahil are still used at wet markets, in gold and herb shops and in old recipes, and the gantang in older padi and rice records.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="trad-cap">
+    <table class="data"><caption id="trad-cap">Exact definitions</caption>
+      <thead><tr><th scope="col">Unit</th><th scope="col">Definition</th><th scope="col">Metric</th></tr></thead>
+      <tbody>
+{{U_TRAD}}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kati-cap">
+    <table class="data"><caption id="kati-cap">Kati to kg, grams and pounds</caption>
+      <thead><tr><th scope="col">Kati</th><th scope="col">Kilograms</th><th scope="col">Grams</th><th scope="col">Pounds</th></tr></thead>
+      <tbody>
+{{U_KATI}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kilograms to kati: {{U_KG2KATI}}.</p>
+  <div class="callout"><p><strong>Conflicting figures:</strong> some websites and newer market scales use a rounded kati of 600 g (the mainland Chinese jin is 500 g). The converter uses 1⅓ lb = {{U_KATI_G}} g, the figure given for Malaysia's Weights and Measures Act 1972 and Singapore's Act. Traditional length units (depa, hasta, jengkal) varied by region and are left out because we could not confirm one legal value.</p></div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="quick">Common conversions</h2>
+  <p>Tap a conversion to load it into the converter.</p>
+{{U_QUICK}}
+
+  <h2 id="defs">Definitions used</h2>
+  <ul>
+    <li><strong>Length:</strong> 1 inch = 2.54 cm exactly; 1 foot = 12 in = 0.3048 m; 1 mile = 1.609344 km; 1 nautical mile = 1,852 m.</li>
+    <li><strong>Mass:</strong> 1 pound = 0.45359237 kg exactly, so 1 kg = {{U_KG_LB}} lb; 1 ounce = 1/16 lb; 1 carat = 0.2 g.</li>
+    <li><strong>Volume:</strong> 1 US gallon = 3.785411784 L; 1 imperial gallon = 4.54609 L; US cup = 1/16 US gallon (236.6 ml); the metric cup used in Malaysian and Australian recipes is 250 ml.</li>
+    <li><strong>Area:</strong> 1 acre = 43,560 sq ft = {{U_ACRE_M2}} m²; 1 hectare = 10,000 m². For relung, orlong and old land titles use the <a href="/land-size-converter-malaysia/">land size converter</a>.</li>
+    <li><strong>Data:</strong> SI prefixes are powers of 1,000 (1 MB = 1,000,000 bytes); IEC binary prefixes are powers of 1,024 (1 MiB = 1,048,576 bytes); 1 byte = 8 bits.</li>
+    <li><strong>Power:</strong> mechanical horsepower = 550 ft·lbf/s = {{U_HP}} kW; metric horsepower (PS, used by many car makers) = {{U_PS}} kW. An air conditioner rated 9,000 BTU/h moves {{U_1BTU9000}} W of heat; that is cooling capacity, not its electricity use.</li>
+    <li><strong>Energy:</strong> 1 kWh (one TNB unit) = 3,600 kJ; the food Calorie is the kilocalorie, 1 kcal = 4.184 kJ.</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> results are rounded to 10 significant figures for display. For legal trade, engineering or medical dosing, check the figure against the instrument or document that sets the requirement.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.nist.gov/pml/special-publication-811" rel="noopener">NIST SP 811: Guide for the Use of the SI (conversion factors)</a></li>
+    <li><a href="https://www.nist.gov/pml/owm/nist-handbook-44-current-edition" rel="noopener">NIST Handbook 44, Appendix C: tables of units</a></li>
+    <li><a href="https://www.bipm.org/en/publications/si-brochure" rel="noopener">BIPM: SI Brochure, 9th edition</a></li>
+    <li><a href="https://physics.nist.gov/cuu/Units/binary.html" rel="noopener">NIST: Prefixes for binary multiples</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Malay_units_of_measurement" rel="noopener">Wikipedia: Malay units of measurement</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Catty" rel="noopener">Wikipedia: Catty (Malaysia and Singapore definitions)</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/land-size-converter-malaysia/">Land Size Converter<small>Relung, ekar, hektar, sq ft</small></a>
+    <a href="/cups-to-grams/">Cups to Grams<small>Baking conversions</small></a>
+    <a href="/currency-converter-malaysia/">Currency Converter<small>Bank Negara rates</small></a>
+    <a href="/shoe-size-converter/">Shoe Size Converter<small>UK, US, EU sizes</small></a>
+  </div>
+</section>
+</div>

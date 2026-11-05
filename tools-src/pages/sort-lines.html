@@ -1,0 +1,145 @@
+<!--page
+{
+  "path": "/sort-lines/",
+  "lang": "en",
+  "cat": "content",
+  "title": "Sort Lines Online: Alphabetical, Numeric, by Length, Shuffle",
+  "description": "Sort lines A to Z or Z to A in natural order (2 before 10), by the number in each line, by length, last word or CSV column, or shuffle them at random.",
+  "llms": "Free online text line sorter that runs in the browser. Orders: A to Z and Z to A with natural sorting (item 2 before item 10, toggle off for plain character order), case-insensitive by default or case-sensitive with capitals first; numeric by the first number in each line (commas as thousands separators, decimals and negatives understood, lines without a number go last), ascending or descending; by length, shortest or longest first; reverse the current order; random shuffle (Fisher-Yates). Sort keys: the whole line, the last word (sort names by surname) or a column of comma, tab, semicolon, pipe or space separated data. Options: ignore leading articles (the, a, an), English or Malay alphabetical rules, remove duplicates, remove empty lines. Ties keep their original order (stable sort). Text stays in the browser.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "linessort",
+  "shareTitle": "Share this line sorter",
+  "scripts": ["/assets/js/lines.js"],
+  "breadcrumb": [["Tools", "/"], ["Content Tools", "/?cat=content#tools"], ["Sort Lines", null]],
+  "about": ["Sorting algorithm", "Natural sort order", "Alphabetical order", "Collation"],
+  "app": {
+    "name": "Sort Lines",
+    "category": "UtilitiesApplication",
+    "features": ["A to Z and Z to A, natural order", "Case-insensitive or capitals first", "Sort by the number in each line", "Sort by length", "Sort by last word or a CSV column", "Random shuffle", "Ignore the, a, an", "Remove duplicates and empty lines"]
+  },
+  "citations": [
+    ["Wikipedia: Natural sort order", "https://en.wikipedia.org/wiki/Natural_sort_order"],
+    ["MDN: Intl.Collator (numeric and case options)", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator"],
+    ["Unicode Technical Standard #10: Unicode Collation Algorithm", "https://www.unicode.org/reports/tr10/"],
+    ["Wikipedia: Fisher-Yates shuffle", "https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle"]
+  ],
+  "faq": [
+    { "q": "How do I sort lines alphabetically?", "a": "Paste your text with one item per line: it is sorted A to Z as you type, ignoring upper and lower case, and empty lines are removed. Choose Z to A to reverse it. Copy the result or download it as a .txt file." },
+    { "q": "Why does 10 come before 2 in other sorters?", "a": "Plain character order compares one character at a time, and \"1\" comes before \"2\", so you get {{LN_PLAIN}}. Natural sort reads whole numbers, giving {{LN_NAT}}. Natural order is on by default; untick it if you need strict character order." },
+    { "q": "How do I sort numbers or prices?", "a": "Choose Numbers, smallest first (or largest first). Each line is sorted by its first number, so text around it is fine: \"RM1,200 rent\" sorts after \"RM 85 phone\". Commas as thousands separators, decimals and minus signs are understood; lines without a number go to the end." },
+    { "q": "Can I sort names by surname?", "a": "Choose Sort by last word. \"Siti Aminah\", \"Ahmad Zaki\" and \"Lim Wei\" sort as Aminah, Wei, Zaki. Malay names with bin or binti and Chinese names with the family name first are better sorted on the whole line, since the last word is not the family name." },
+    { "q": "How do I sort CSV data by a column?", "a": "Choose Sort by column, pick the separator (comma, tab, semicolon, pipe or space) and the column number. \"Ali,32\", \"Bala,25\" and \"Chong,41\" sorted by column 2 as numbers become Bala, Ali, Chong. A header row is sorted with the data, so cut it first and paste it back." },
+    { "q": "How do I shuffle lines randomly?", "a": "Press Shuffle. It uses the Fisher-Yates method, so every order is equally likely; press again for a new order. For a fair draw with a spinning wheel, use the Spin the Wheel tool." },
+    { "q": "Is my text saved or uploaded?", "a": "Nothing is uploaded: sorting runs in your browser. Your last text is kept in this browser's local storage so it survives a reload; Clear removes it. Only the options go into the page address, so a shared link opens with the same sort settings." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=content#tools">Content Tools</a></li><li aria-current="page">Sort Lines</li></ol></nav>
+  <h1>Sort Lines Alphabetically, by Number or Length</h1>
+  <p class="answer">Paste one item per line and it is <strong>sorted A to Z as you type, in natural order so 2 comes before 10</strong> ({{LN_NAT}}). Switch to Z to A, sort by the number in each line, by length, by last word or by a CSV column, remove duplicates, or shuffle the list at random.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Rules checked {{LN_VERIFIED}}</span><a href="#examples">Examples</a></p>
+
+  <form class="box ln-tool" id="lnForm" data-tool="sort" novalidate aria-labelledby="ln-h">
+    <h2 id="ln-h" class="sr-only">Sort lines</h2>
+    <div class="code-panes">
+      <div class="field"><label for="lnIn">Your lines</label><textarea class="code" id="lnIn" spellcheck="false" aria-describedby="lnInStats">{{LN_IN}}</textarea><p class="code-stats" id="lnInStats">{{LN_STATS}}</p></div>
+      <div class="field"><label for="lnOut">Sorted</label><textarea class="code ln-out" id="lnOut" readonly spellcheck="false">{{LN_OUT}}</textarea><p class="ln-sum" id="lnSummary">{{LN_SUMMARY}}</p></div>
+    </div>
+    <div class="ln-opts">
+      <div class="field"><label for="order">Order</label><select class="input" id="order" name="order">
+        <option value="az" selected>A to Z</option><option value="za">Z to A</option><option value="num">Numbers, smallest first</option><option value="numDesc">Numbers, largest first</option>
+        <option value="len">Shortest first</option><option value="lenDesc">Longest first</option><option value="reverse">Reverse current order</option></select></div>
+      <div class="field"><label for="by">Sort by</label><select class="input" id="by" name="by"><option value="line" selected>Whole line</option><option value="last">Last word (surname)</option><option value="col">Column…</option></select></div>
+      <div class="field" data-show="by=col" hidden><label for="delim">Column separator</label><select class="input" id="delim" name="delim"><option value="," selected>Comma</option><option value="tab">Tab</option><option value=";">Semicolon</option><option value="|">Pipe</option><option value="space">Space</option></select></div>
+      <div class="field" data-show="by=col" hidden><label for="col">Column number</label><div class="input"><input id="col" name="col" type="number" inputmode="numeric" min="1" max="99" step="1" value="1"></div></div>
+      <div class="field"><label for="lang">Alphabet rules</label><select class="input" id="lang" name="lang"><option value="en" selected>English</option><option value="ms">Bahasa Melayu</option></select></div>
+    </div>
+    <div class="ln-checks">
+      <label class="check"><input type="checkbox" name="natural" checked> <span>Natural order (2 before 10)</span></label>
+      <label class="check"><input type="checkbox" name="caseSensitive"> <span>Case-sensitive</span></label>
+      <label class="check"><input type="checkbox" name="ignoreArticles"> <span>Ignore "the", "a", "an"</span></label>
+      <label class="check"><input type="checkbox" name="dedupe"> <span>Remove duplicates</span></label>
+      <label class="check"><input type="checkbox" name="removeEmpty" checked> <span>Remove empty lines</span></label>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn sm" id="lnCopy">Copy result</button>
+      <button type="button" class="btn ghost sm" id="lnShuffle">Shuffle</button>
+      <button type="button" class="btn ghost sm" id="lnUse">Use result as text</button>
+      <button type="button" class="btn ghost sm" id="lnDl">Download .txt</button>
+      <button type="button" class="btn ghost sm" id="lnClear">Clear</button>
+    </div>
+    <p class="sr-only" id="lnLive" aria-live="polite"></p>
+  </form>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">How to sort lines</h2>
+  <ol>
+    <li><strong>Paste your list</strong>, one item per line.</li>
+    <li><strong>Choose the order</strong>: A to Z, Z to A, by number, by length, or press Shuffle.</li>
+    <li><strong>Choose what to sort by</strong>: the whole line, the last word, or a column of CSV or tab-separated data.</li>
+    <li><strong>Copy or download</strong> the sorted list. Tick Remove duplicates to clean it in the same step.</li>
+  </ol>
+
+  <h2 id="examples">Sort orders compared</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="ord-cap">
+    <table class="data text"><caption id="ord-cap">The sample list in each order</caption>
+      <thead><tr><th scope="col">Order</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+{{LN_ORDER_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="special">Numbers, surnames and columns</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sp-cap">
+    <table class="data text"><caption id="sp-cap">Worked examples</caption>
+      <thead><tr><th scope="col">Lines</th><th scope="col">Option</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+        <tr><td>{{LN_MONEY_IN}}</td><td>Numbers, smallest first</td><td>{{LN_MONEY_OUT}}</td></tr>
+        <tr><td>{{LN_NAMES_IN}}</td><td>Last word</td><td>{{LN_NAMES_OUT}}</td></tr>
+        <tr><td>{{LN_CSV_IN}}</td><td>Column 2, comma, numbers</td><td>{{LN_CSV_OUT}}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="rules">How the sorter compares lines</h2>
+  <ul>
+    <li><strong>Collation:</strong> the browser's Unicode collation (Intl.Collator) for English or Malay, so accented letters sort next to their base letter (é with e) instead of after z.</li>
+    <li><strong>Case:</strong> ignored by default; Case-sensitive puts capitals before lowercase for the same word (A, a, B, b).</li>
+    <li><strong>Ties:</strong> lines that compare equal keep their original order (stable sort).</li>
+    <li><strong>Numbers:</strong> the first number in the line or column is used; "1,050.50" is one thousand and fifty point five.</li>
+  </ul>
+  <div class="callout"><p><strong>Note:</strong> Excel and Google Sheets sort numbers stored as text in plain character order (10 before 2). If your sorted list will go back into a spreadsheet, sort it there by a number column, or keep Natural order on here.</p></div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Natural_sort_order" rel="noopener">Wikipedia: Natural sort order</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator" rel="noopener">MDN: Intl.Collator</a></li>
+    <li><a href="https://www.unicode.org/reports/tr10/" rel="noopener">Unicode Technical Standard #10: Collation</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle" rel="noopener">Wikipedia: Fisher-Yates shuffle</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/remove-duplicate-lines/">Remove Duplicate Lines<small>And remove line breaks</small></a>
+    <a href="/list-to-paragraph/">List to Paragraph<small>Comma-separated and back</small></a>
+    <a href="/spin-the-wheel/">Spin the Wheel<small>Random picker</small></a>
+    <a href="/find-and-replace/">Find and Replace<small>Regex rules and text clean-up</small></a>
+  </div>
+</section>
+</div>

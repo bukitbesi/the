@@ -9,6 +9,11 @@ const image = rect(3, 4, 18, 16) + circle(8, 9, 1.5) + p('m3 17 5-5 4 4 3-3 6 6'
 const chat = p('M20 15a3 3 0 0 1-3 3H8l-5 3V6a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3Z');
 
 export const icons = {
+  'list-to-paragraph': p('M4 5h1M4 9h1M4 13h1M8 5h6M8 9h6M8 13h6') + p('m16 9 3 3-3 3') + p('M4 19h16'),
+  'remove-duplicate-lines': p('M4 6h10M4 10h10') + p('M4 14h7M4 18h7') + p('m15 14 5 5m0-5-5 5'),
+  'sort-lines': p('M4 6h8M4 12h6M4 18h4') + p('M17 4v16m-3-3 3 3 3-3'),
+  'ip-lookup': circle(12, 12, 9) + p('M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18'),
+  'unit-converter': p('M3 8h18v8H3Z') + p('M7 8v3M11 8v4M15 8v3M19 8v2') + p('M6 20h12m-3-2 3 2-3 2'),
   'car-loan-calculator-malaysia': p('M5 17H3v-5l2-5h11l3 5h2v5h-2') + circle(7.5, 17, 2) + circle(16.5, 17, 2) + p('M9.5 17h5M4 12h16'),
   'asb-dividend-calculator': circle(12, 12, 9) + p('M12 7v10M9.5 9.5c0-1 1-1.8 2.5-1.8s2.5.8 2.5 1.8-1 1.6-2.5 2-2.5 1-2.5 2 1 1.8 2.5 1.8 2.5-.8 2.5-1.8'),
   'prorated-salary-calculator-malaysia': rect(3, 5, 18, 16) + p('M3 10h18M8 3v4M16 3v4') + p('M12 10v11') + p('M3 15.5h9'),

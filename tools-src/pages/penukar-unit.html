@@ -1,0 +1,147 @@
+<!--page
+{
+  "path": "/penukar-unit/",
+  "lang": "ms",
+  "cat": "util",
+  "alternates": { "en": "/unit-converter/" },
+  "title": "Penukar Unit: Kati ke Kg, Kaki ke cm, Celsius ke Fahrenheit",
+  "description": "Tukar panjang, berat, isi padu, luas, suhu, laju, data, tekanan, tenaga, kuasa dan penggunaan minyak, termasuk kati, tahil, pikul, gantang dan cupak.",
+  "llms": "Penukar unit percuma untuk Malaysia dengan 12 kategori: panjang (mm, cm, m, km, inci, kaki, ela, batu, batu nautika), jisim (mg, g, kg, tan metrik, auns, paun, stone, tan AS dan UK, karat, serta tahil, kati dan pikul), isi padu (ml, liter, m³, sudu kecil, sudu besar, auns cecair, cawan, pain, kuart dan gelen AS, cawan metrik 250 ml, gelen dan pain imperial, kaki padu, tong minyak, serta cupak dan gantang), luas, suhu (Celsius, Fahrenheit, Kelvin), laju (km/j, m/s, mph, knot), masa, storan digital (kB/MB/GB/TB perpuluhan dan KiB/MiB/GiB/TiB perduaan, megabit), tekanan (Pa, kPa, bar, psi, atm, mmHg, kgf/cm²), tenaga (J, kJ, kal, kkal, Wh, kWj, BTU), kuasa (W, kW, kuasa kuda mekanikal, PS metrik, BTU/j) dan penggunaan bahan api (km/L, L/100 km, mpg AS dan UK). Takrif tepat NIST dan Brosur SI BIPM: 1 inci = 2.54 cm, 1 paun = 0.45359237 kg, 1 gelen AS = 3.785411784 L, 1 gelen imperial = 4.54609 L. Unit Melayu: 1 kati = 1⅓ paun = 604.79 g, 1 tahil = 1/16 kati = 37.80 g, 1 pikul = 100 kati = 60.48 kg, 1 gantang = 1 gelen imperial = 4.54609 L, 1 cupak = ¼ gantang = 1.137 L.",
+  "datePublished": "2026-11-05",
+  "dateModified": "2026-11-05",
+  "render": "unit",
+  "shareTitle": "Kongsi penukar unit ini",
+  "scripts": ["/assets/js/unit.js"],
+  "breadcrumb": [["Alat", "/"], ["Utiliti", "/?cat=util#tools"], ["Penukar Unit", null]],
+  "about": ["Penukaran unit", "Sistem Unit Antarabangsa", "Unit ukuran Melayu", "Kati"],
+  "app": {
+    "name": "Penukar Unit",
+    "category": "UtilitiesApplication",
+    "features": ["12 kategori, 99 unit", "Kati, tahil, pikul, gantang dan cupak", "Takrif tepat NIST dan SI", "Semua unit dipaparkan serentak", "Formula suhu dan penggunaan minyak", "Unit data perpuluhan dan perduaan", "Tukar arah unit dan pautan boleh dikongsi", "Berfungsi luar talian"]
+  },
+  "citations": [
+    ["NIST Special Publication 811: Guide for the Use of the SI, Appendix B", "https://www.nist.gov/pml/special-publication-811"],
+    ["NIST Handbook 44 Appendix C: General Tables of Units of Measurement", "https://www.nist.gov/pml/owm/nist-handbook-44-current-edition"],
+    ["BIPM: The International System of Units (SI Brochure, edisi ke-9)", "https://www.bipm.org/en/publications/si-brochure"],
+    ["NIST: Prefixes for binary multiples (IEC 80000-13)", "https://physics.nist.gov/cuu/Units/binary.html"],
+    ["Wikipedia: Malay units of measurement", "https://en.wikipedia.org/wiki/Malay_units_of_measurement"],
+    ["Wikipedia: Catty (Akta Timbang dan Sukat 1972, Malaysia)", "https://en.wikipedia.org/wiki/Catty"]
+  ],
+  "faq": [
+    { "q": "1 kati berapa kg?", "a": "1 kati = {{U_KATI_KG}} kg ({{U_KATI_G}} g), kerana kati ditakrifkan sebagai 1⅓ paun dan 1 paun tepat 0.45359237 kg. Jadi 1 kg = {{U_KG_KATI}} kati. 1 tahil = 1/16 kati ({{U_TAHIL_G}} g) dan 1 pikul = 100 kati ({{U_PIKUL_KG}} kg). Sesetengah penimbang pasar dan laman web membundarkan kati kepada 600 g; penukar ini menggunakan takrif sah 1⅓ paun." },
+    { "q": "1 gantang berapa liter?", "a": "1 gantang = 1 gelen imperial = {{U_GANTANG_L}} liter, dan 1 cupak = ¼ gantang = {{U_CUPAK_L}} liter. Gantang ialah sukatan isi padu, bukan berat: berapa kilogram beras yang muat bergantung pada jenis beras, jadi timbang beras itu dan jangan guna satu angka kg yang tetap." },
+    { "q": "5 kaki 6 inci berapa cm?", "a": "5 kaki 6 inci = 5.5 kaki = {{U_55FT}} cm, kerana 1 inci tepat 2.54 cm dan 1 kaki 30.48 cm. Sebaliknya, 170 cm = {{U_170CM}}. Pilih Panjang, Kaki ke Sentimeter, dan taip tinggi dalam kaki berperpuluhan (5 kaki 9 inci = 5.75 kaki)." },
+    { "q": "Bagaimana tukar Celsius ke Fahrenheit?", "a": "Darab dengan 9/5 dan tambah 32: 30 °C = {{U_30C}} °F, 37 °C = 98.6 °F dan 100 °C = 212 °F. Dari Fahrenheit, tolak 32 dan darab dengan 5/9. Kelvin ialah Celsius tambah 273.15." },
+    { "q": "Apakah beza GB dan GiB?", "a": "Satu gigabait (GB) ialah 1,000,000,000 bait; satu gibibait (GiB) ialah 1,073,741,824 bait (2³⁰). Pengeluar cakera guna GB, tetapi Windows mengira dalam GiB dan melabelnya \"GB\", sebab itu cakera 1 TB dipaparkan kira-kira {{U_TB_GIB}} \"GB\". Kelajuan internet dalam megabit: 100 Mbps memindahkan {{U_100MBIT}} megabait sesaat." },
+    { "q": "Bagaimana tukar tekanan tayar psi ke bar?", "a": "Bahagi dengan 14.504, atau guna penukar: 32 psi = {{U_32PSI}} bar = {{U_32PSI_KPA}} kPa. 1 psi tepat 6,894.757 pascal dan 1 bar = 100,000 pascal. Ikut tekanan yang tertera pada bingkai pintu kereta anda, diukur semasa tayar sejuk." },
+    { "q": "Bagaimana tukar km/L ke L/100 km atau mpg?", "a": "L/100 km = 100 ÷ km/L, jadi 8 L/100 km = {{U_8L100}} km/L. Untuk mpg AS darab km/L dengan 2.352; untuk mpg UK dengan 2.825 (gelen UK lebih besar). Penukaran ini guna formula, bukan faktor tetap, kerana L/100 km ialah salingan." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=util#tools">Utiliti</a></li><li aria-current="page">Penukar Unit</li></ol></nav>
+  <h1>Penukar Unit</h1>
+  <p class="answer">Pilih kategori dan taip nilai untuk <strong>menukar antara {{U_UNIT_COUNT}} unit dalam {{U_CAT_COUNT}} kategori</strong> mengikut takrif tepat NIST dan SI, termasuk unit Melayu: <strong>1 kati = {{U_KATI_G}} g</strong>, 1 gantang = {{U_GANTANG_L}} liter, dan 5 kaki 6 inci = {{U_55FT}} cm. Semua unit lain dalam kategori itu dipaparkan serentak.</p>
+  <p class="meta"><span>Takrif disemak <time datetime="{{U_VERIFIED_ISO}}">{{U_VERIFIED}}</time></span><span>NIST SP 811, Brosur SI BIPM</span><a href="/unit-converter/" hreflang="en" lang="en">Read in English</a></p>
+
+  <div class="calc">
+    <form class="box" id="uForm" novalidate aria-labelledby="u-h">
+      <h2 id="u-h">Tukar</h2>
+      <div class="field"><label for="cat">Kategori</label><select class="input" id="cat" name="cat">{{U_CAT}}</select></div>
+      <div class="field"><label for="v">Nilai</label><div class="input"><input id="v" name="v" type="text" inputmode="decimal" autocomplete="off" value="{{U_VALUE}}"></div></div>
+      <div class="u-row">
+        <div class="field"><label for="from">Dari</label><select class="input" id="from" name="from">{{U_FROM}}</select></div>
+        <button type="button" class="btn ghost u-swap" id="uSwap" aria-label="Tukar arah unit">⇄</button>
+        <div class="field"><label for="to">Ke</label><select class="input" id="to" name="to">{{U_TO}}</select></div>
+      </div>
+    </form>
+
+    <section class="box" aria-labelledby="u-result-h">
+      <h2 id="u-result-h">Jawapan</h2>
+      <div class="net"><p id="uSub">{{U_SUB}}</p><output id="uBig" for="v from to">{{U_BIG}}</output><p class="u-rule" id="uRule">{{U_RULE}}</p></div>
+      <p class="sr-only" id="uLive" aria-live="polite"></p>
+      <table class="rows wrap"><caption>Dalam setiap unit</caption><tbody id="uRows">
+{{U_ROWS}}
+      </tbody></table>
+      <div class="tool-actions"><button type="button" class="btn ghost sm" id="uPrint">Cetak atau simpan PDF</button></div>
+    </section>
+  </div>
+</div>
+{{AD_TOP}}
+<div class="container prose cv">
+  <h2 id="how">Cara menukar unit</h2>
+  <ol>
+    <li><strong>Pilih kategori</strong>: panjang, berat, isi padu, luas, suhu, laju, masa, data, tekanan, tenaga, kuasa atau penggunaan minyak.</li>
+    <li><strong>Taip nilai</strong>. Perpuluhan dan nombor negatif (untuk suhu) boleh; koma diabaikan.</li>
+    <li><strong>Pilih unit</strong> asal dan sasaran, atau tekan ⇄ untuk menukar arah. Semua unit lain dipaparkan dalam jadual.</li>
+    <li><strong>Kongsi atau cetak</strong>: alamat halaman menyimpan penukaran anda.</li>
+  </ol>
+
+  <h2 id="malay">Unit tradisional Melayu</h2>
+  <p>Malaysia beralih ke sistem metrik pada 1970-an, tetapi kati dan tahil masih digunakan di pasar basah, kedai emas dan herba serta resipi lama, dan gantang dalam rekod padi dan beras lama.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="trad-cap">
+    <table class="data"><caption id="trad-cap">Takrif tepat</caption>
+      <thead><tr><th scope="col">Unit</th><th scope="col">Takrif</th><th scope="col">Metrik</th></tr></thead>
+      <tbody>
+{{U_TRAD}}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="kati-cap">
+    <table class="data"><caption id="kati-cap">Kati ke kg, gram dan paun</caption>
+      <thead><tr><th scope="col">Kati</th><th scope="col">Kilogram</th><th scope="col">Gram</th><th scope="col">Paun</th></tr></thead>
+      <tbody>
+{{U_KATI}}
+      </tbody>
+    </table>
+  </div>
+  <p>Kilogram ke kati: {{U_KG2KATI}}.</p>
+  <div class="callout"><p><strong>Angka bercanggah:</strong> sesetengah laman web dan penimbang pasar baharu menggunakan kati yang dibundarkan kepada 600 g (jin di China tanah besar ialah 500 g). Penukar ini menggunakan 1⅓ paun = {{U_KATI_G}} g, angka bagi Akta Timbang dan Sukat 1972 Malaysia dan Akta Singapura. Unit panjang tradisional (depa, hasta, jengkal) berbeza mengikut tempat dan tidak dimasukkan kerana tiada satu nilai sah yang dapat kami sahkan.</p></div>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose">
+  <h2 id="quick">Penukaran biasa</h2>
+  <p>Tekan satu penukaran untuk memuatkannya ke dalam penukar.</p>
+{{U_QUICK}}
+
+  <h2 id="defs">Takrif yang digunakan</h2>
+  <ul>
+    <li><strong>Panjang:</strong> 1 inci = 2.54 cm tepat; 1 kaki = 12 inci = 0.3048 m; 1 batu = 1.609344 km; 1 batu nautika = 1,852 m.</li>
+    <li><strong>Jisim:</strong> 1 paun = 0.45359237 kg tepat, jadi 1 kg = {{U_KG_LB}} paun; 1 auns = 1/16 paun; 1 karat = 0.2 g.</li>
+    <li><strong>Isi padu:</strong> 1 gelen AS = 3.785411784 L; 1 gelen imperial = 4.54609 L; cawan AS = 1/16 gelen AS (236.6 ml); cawan metrik dalam resipi Malaysia dan Australia ialah 250 ml.</li>
+    <li><strong>Luas:</strong> 1 ekar = 43,560 kaki persegi = {{U_ACRE_M2}} m²; 1 hektar = 10,000 m². Untuk relung, orlong dan geran tanah lama, guna <a href="/kalkulator-ukuran-tanah/">kalkulator ukuran tanah</a>.</li>
+    <li><strong>Data:</strong> awalan SI ialah gandaan 1,000 (1 MB = 1,000,000 bait); awalan perduaan IEC ialah gandaan 1,024 (1 MiB = 1,048,576 bait); 1 bait = 8 bit.</li>
+    <li><strong>Kuasa:</strong> kuasa kuda mekanikal = 550 kaki·paun-daya/s = {{U_HP}} kW; kuasa kuda metrik (PS, digunakan banyak pengeluar kereta) = {{U_PS}} kW. Penghawa dingin 9,000 BTU/j memindahkan {{U_1BTU9000}} W haba; itu kapasiti penyejukan, bukan penggunaan elektriknya.</li>
+    <li><strong>Tenaga:</strong> 1 kWj (satu unit TNB) = 3,600 kJ; kalori makanan ialah kilokalori, 1 kkal = 4.184 kJ.</li>
+  </ul>
+  <div class="callout"><p><strong>Nota:</strong> jawapan dibundarkan kepada 10 angka bererti untuk paparan. Untuk perdagangan sah, kejuruteraan atau dos ubat, semak angka dengan alat atau dokumen yang menetapkan keperluan itu.</p></div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://www.nist.gov/pml/special-publication-811" rel="noopener">NIST SP 811: Guide for the Use of the SI</a></li>
+    <li><a href="https://www.nist.gov/pml/owm/nist-handbook-44-current-edition" rel="noopener">NIST Handbook 44, Lampiran C</a></li>
+    <li><a href="https://www.bipm.org/en/publications/si-brochure" rel="noopener">BIPM: Brosur SI, edisi ke-9</a></li>
+    <li><a href="https://physics.nist.gov/cuu/Units/binary.html" rel="noopener">NIST: Awalan gandaan perduaan</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Malay_units_of_measurement" rel="noopener">Wikipedia: Malay units of measurement</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Catty" rel="noopener">Wikipedia: Catty (takrif Malaysia dan Singapura)</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/kalkulator-ukuran-tanah/">Kalkulator Ukuran Tanah<small>Relung, ekar, hektar, kaki persegi</small></a>
+    <a href="/sukatan-cawan-ke-gram/">Sukatan Cawan ke Gram<small>Penukaran resipi</small></a>
+    <a href="/penukar-mata-wang/">Penukar Mata Wang<small>Kadar Bank Negara</small></a>
+    <a href="/kalkulator-saiz-kasut/">Kalkulator Saiz Kasut<small>Saiz UK, AS, EU</small></a>
+  </div>
+</section>
+</div>
