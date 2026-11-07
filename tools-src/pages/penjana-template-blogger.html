@@ -1,0 +1,216 @@
+<!--page
+{
+  "path": "/penjana-template-blogger/",
+  "lang": "ms",
+  "cat": "design",
+  "alternates": { "en": "/blogger-template-generator/" },
+  "title": "Penjana Template Blogger Percuma: Tema Pantas, Pratonton Langsung",
+  "description": "Reka template Blogger percuma dengan pratonton langsung, mod gelap dan semakan kontras WCAG, muat turun XML, dan audit kelajuan serta SEO tema anda.",
+  "llms": "Penjana template Blogger percuma yang berjalan dalam pelayar. Ia menyesuaikan TBB Lite 1.0.1, tema Blogger asli berlesen CC BY 4.0 (XML 33.5 KB, tanpa skrip luaran, fon web atau jQuery, Blogger layouts versi 3), dan memuat turun fail XML sedia dipasang. Kawalan: warna jenama dengan palet cerah dan gelap automatik, 14 warna individu, 5 tindanan fon sistem, saiz teks 15 hingga 20 px, lebar halaman 960 hingga 1400 px, lebar bar sisi 260 hingga 380 px, pautan menu, pautan kaki halaman dan teks tentang blog. Pratonton langsung dalam kotak pasir memaparkan halaman utama atau entri, cerah atau gelap, di telefon atau desktop. Setiap 13 pasangan teks dan latar disemak mengikut WCAG 2.2 AA (4.5:1) dalam kedua-dua mod, dan satu klik membaiki kegagalan dengan mengubah kecerahan sahaja. Warna jenama tidak digunakan sebagai teks pautan: dalam TBB Lite 1.0.0 merah jenama #e5002b sebagai pautan hanya 3.97:1 pada latar gelap dan 4.45:1 pada kad cerah, jadi 1.0.1 menambah warna pautan berasingan (#dd002a, 4.73:1; #ff2d54, 4.70:1). Audit tema memberi skor daripada 100 kepada mana-mana XML tema Blogger berdasarkan 13 semakan berwajaran: saiz fail, skrip menyekat dalam head, jQuery, fon ikon, helaian gaya luaran, kanonik dan meta description berganda (all-head-content sudah mencetak kedua-duanya), viewport, JSON-LD artikel, noindex pada halaman carian dan label, imej lazy-load, layouts versi 3 dan b:css false. Head tema lama biasa dengan jQuery, skrip slider yang menyekat, Google Fonts, Font Awesome dan kanonik berganda mendapat 35 (F); TBB Lite mendapat 100. Pasang dalam Blogger: Tema, Lagi, Sandaran dahulu, kemudian Pulihkan, Muat naik. Tiada apa-apa dimuat naik ke laman ini.",
+  "datePublished": "2026-11-07",
+  "dateModified": "2026-11-07",
+  "render": "blogger",
+  "shareTitle": "Kongsi penjana template Blogger ini",
+  "scripts": ["/assets/js/blogger-template.js"],
+  "breadcrumb": [["Alat", "/"], ["Alat Reka Bentuk", "/?cat=design#tools"], ["Penjana Template Blogger", null]],
+  "about": ["Blogger", "Sistem templat web", "Garis Panduan Kebolehcapaian Kandungan Web", "Prestasi laman web"],
+  "app": {
+    "name": "Penjana Template Blogger",
+    "category": "DesignApplication",
+    "features": ["Pratonton langsung: halaman utama atau entri, cerah atau gelap, telefon atau desktop", "Palet cerah dan gelap penuh daripada satu warna jenama", "Semakan WCAG 2.2 AA untuk 13 pasangan teks dengan pembaikan satu klik", "Tindanan fon sistem, lebar halaman dan bar sisi", "Menu, pautan kaki halaman dan teks tentang blog ditulis ke dalam tema", "Muat turun XML Blogger sedia dipasang (TBB Lite, CC BY 4.0)", "Audit tema Blogger: skor kelajuan dan SEO daripada 100 dengan cara membaiki", "Pautan boleh dikongsi bersama reka bentuk"]
+  },
+  "citations": [
+    ["Bantuan Blogger: Use themes to change how your blog looks", "https://support.google.com/blogger/answer/1227173"],
+    ["Bantuan Blogger: Change the design of your blog", "https://support.google.com/blogger/answer/46870"],
+    ["Bantuan Blogger: Customize CSS tags for layouts", "https://support.google.com/blogger/answer/46871"],
+    ["W3C: Understanding SC 1.4.3 Contrast (Minimum)", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"],
+    ["Chrome for Developers: Eliminate render-blocking resources", "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources"],
+    ["Google Search Central: Consolidate duplicate URLs (canonical)", "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"],
+    ["Kod sumber TBB Lite (GitHub)", "https://github.com/bukitbesi/blogger-xml/tree/main/themes/tbb-lite"]
+  ],
+  "faq": [
+    { "q": "Adakah template Blogger ini benar-benar percuma?", "a": "Ya. Penjana ini menghasilkan TBB Lite {{BT_THEME_V}}, tema asli berlesen CC BY 4.0: anda boleh menggunakan dan mengubahnya untuk blog peribadi atau komersial, asalkan kredit di kaki halaman dikekalkan atau penulis dikreditkan di bahagian lain blog. Saiz failnya {{BT_SIZE_KB}} KB tanpa jQuery, fon web atau skrip luaran." },
+    { "q": "Bagaimana cara memasang template yang dimuat turun ke Blogger?", "a": "Buat sandaran tema semasa dahulu: dalam Blogger buka Tema, klik Lagi (anak panah di penjuru kanan atas), kemudian Sandaran dan Muat turun. Kemudian dalam menu yang sama pilih Pulihkan, klik Muat naik dan pilih tbb-lite-custom.xml. Akhir sekali buka Reka Letak untuk menyemak widget menu, kaki halaman dan bar sisi." },
+    { "q": "Adakah entri saya hilang jika saya tukar template?", "a": "Tidak. Tema hanya mengawal reka bentuk; entri, halaman, komen dan label kekal. Widget dalam bahagian yang tiada dalam tema baharu boleh terbuang, jadi muat turun sandaran dahulu dan salin kod widget HTML yang ingin disimpan. Cuba dahulu pada blog ujian jika tema semasa anda ada banyak widget tersuai." },
+    { "q": "Kenapa penjana menukar warna pautan saya?", "a": "Pautan ialah teks, jadi WCAG 2.2 AA memerlukan 4.5:1 pada setiap latar yang dipijaknya. Warna jenama yang terang selalunya gagal: kuning #ffeb3b pada putih hanya kira-kira 1.2:1, jadi penjana mengekalkannya untuk butang dan sempadan, dan hanya menggelapkan warna pautan kepada {{BT_YELLOW_LINK}} ({{BT_YELLOW_R}}:1) dengan teks butang {{BT_YELLOW_INK}}. Rona warna tidak pernah berubah." },
+    { "q": "Apakah yang disemak oleh audit tema Blogger?", "a": "13 semakan berwajaran yang berjumlah 100: saiz fail, skrip yang menyekat paparan dalam head, jQuery, fon ikon, helaian gaya luaran, tag kanonik atau meta description berganda, viewport mudah alih, data berstruktur artikel, noindex pada halaman carian dan label, imej lazy-load, layouts versi 3 dan b:css false. Head tema lama biasa mendapat {{BT_LEGACY_SCORE}}; TBB Lite mendapat {{BT_LITE_SCORE}}." },
+    { "q": "Adakah tema saya dimuat naik semasa audit?", "a": "Tidak. Audit dan penjana berjalan sepenuhnya dalam pelayar anda; XML yang ditampal tidak meninggalkan peranti anda. Satu-satunya fail yang dimuat turun oleh halaman ini ialah tema TBB Lite sendiri, dari laman ini, untuk membina salinan anda dan pratonton." },
+    { "q": "Bolehkah saya tukar warna dan fon kemudian tanpa alat ini?", "a": "Boleh. Kesemua {{BT_VARS}} tetapan ialah pemboleh ubah Theme Designer Blogger, jadi selepas dipasang buka Tema, klik Sesuaikan, kemudian Lanjutan untuk menukar mana-mana warna, fon atau lebar. Nilai yang anda pilih di sini menjadi titik permulaan, dan butang Tetapkan Semula dalam Blogger mengembalikan reka bentuk yang dijana." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Alat</a></li><li><a href="/?cat=design#tools">Alat Reka Bentuk</a></li><li aria-current="page">Penjana Template Blogger</li></ol></nav>
+  <h1>Penjana Template Blogger</h1>
+  <p class="answer">Reka template Blogger mengikut warna anda dan muat turun <strong>tema XML sedia dipasang bersaiz {{BT_SIZE_KB}} KB tanpa skrip luaran</strong>, dengan kesemua {{BT_PAIRS}} warna teks disemak mengikut WCAG AA (4.5:1) dalam mod cerah dan gelap. Tampal tema semasa anda di bawah untuk mendapat <strong>skor kelajuan dan SEO daripada 100</strong> berserta cara membaiki setiap masalah.</p>
+  <p class="meta"><span>Peraturan disemak <time datetime="{{BT_VERIFIED_ISO}}">{{BT_VERIFIED}}</time></span><span>{{BT_THEME}}, CC BY 4.0</span><a href="#install">Cara memasang</a><a href="/blogger-template-generator/" hreflang="en" lang="en">Read in English</a></p>
+
+  <form class="box bt-tool" id="btForm" novalidate aria-labelledby="bt-h">
+    <h2 id="bt-h" class="sr-only">Reka template Blogger anda</h2>
+    <div class="bt-cols">
+      <div class="bt-panel">
+        <h3>Warna</h3>
+        <div class="field"><label for="btBrand">Warna jenama (butang dan aksen)</label>
+          <div class="bt-brand"><input type="color" id="btBrandPick" value="{{BT_BRAND}}" aria-label="Pilih warna jenama"><input class="input" id="btBrand" value="{{BT_BRAND}}" autocomplete="off" spellcheck="false" aria-describedby="btBrandHelp"></div>
+          <div class="bt-swatches" role="group" aria-label="Warna jenama pantas">{{BT_SWATCHES}}</div>
+          <p class="help" id="btBrandHelp">Hex, rgb() atau nama warna CSS.</p>
+        </div>
+        <label class="check"><input type="checkbox" id="btAuto" checked> Bina palet cerah dan gelap daripada warna jenama</label>
+        <details class="ex-set"><summary class="sub-h">Kesemua {{BT_COLOR_COUNT}} warna</summary>
+          <fieldset id="btColorsBox" disabled><legend class="sr-only">Warna individu (nyahtanda pilihan palet untuk mengedit)</legend><div class="bt-colors">{{BT_COLORS}}</div></fieldset>
+          <p class="help">Nyahtanda pilihan palet di atas untuk mengedit warna satu demi satu.</p>
+        </details>
+        <h3>Fon dan susun atur</h3>
+        <div class="bt-two">
+          <div class="field"><label for="btBodyFont">Fon teks</label><select class="input" id="btBodyFont">{{BT_BODY_FONTS}}</select></div>
+          <div class="field"><label for="btHeadFont">Fon tajuk</label><select class="input" id="btHeadFont">{{BT_HEAD_FONTS}}</select></div>
+        </div>
+        <div class="field"><label for="btSize">Saiz teks</label><div class="range"><input type="range" id="btSize" min="15" max="20" step="1" value="17"><output id="btSizeOut" for="btSize">17px</output></div></div>
+        <div class="field"><label for="btWidth">Lebar maksimum halaman</label><div class="range"><input type="range" id="btWidth" min="960" max="1400" step="20" value="1140"><output id="btWidthOut" for="btWidth">1140px</output></div></div>
+        <div class="field"><label for="btSide">Lebar bar sisi (desktop)</label><div class="range"><input type="range" id="btSide" min="260" max="380" step="10" value="320"><output id="btSideOut" for="btSide">320px</output></div></div>
+        <h3>Menu dan kaki halaman</h3>
+        <div class="field"><label for="btTitle">Tajuk blog (untuk pratonton; tetapkan dalam Tetapan Blogger)</label><input class="input" id="btTitle" value="Blog Saya" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label for="btMenu">Pautan menu, satu setiap baris: Label | URL</label><textarea class="prose-in short" id="btMenu" spellcheck="false" aria-describedby="btLinkHelp">Utama | /
+Tentang | /p/tentang.html
+Hubungi | /p/hubungi.html</textarea></div>
+        <div class="field"><label for="btPages">Pautan kaki halaman: Label | URL</label><textarea class="prose-in short" id="btPages" spellcheck="false">Dasar privasi | /p/dasar-privasi.html
+Hubungi | /p/hubungi.html</textarea></div>
+        <div class="field"><label for="btAbout">Teks tentang blog di kaki halaman</label><textarea class="prose-in short" id="btAbout" maxlength="400">Tulis satu atau dua ayat tentang siapa yang mengendalikan blog ini dan apa yang pembaca akan temui di sini.</textarea></div>
+        <p class="help" id="btLinkHelp" aria-live="polite"></p>
+      </div>
+
+      <div class="bt-panel bt-preview">
+        <div class="bt-bar">
+          <div class="seg" role="radiogroup" aria-label="Halaman"><label><input type="radio" name="btView" value="home" checked> Utama</label><label><input type="radio" name="btView" value="post"> Entri</label></div>
+          <div class="seg" role="radiogroup" aria-label="Mod warna"><label><input type="radio" name="btMode" value="light" checked> Cerah</label><label><input type="radio" name="btMode" value="dark"> Gelap</label></div>
+          <div class="seg" role="radiogroup" aria-label="Peranti"><label><input type="radio" name="btDevice" value="desktop" checked> Desktop</label><label><input type="radio" name="btDevice" value="phone"> Telefon</label></div>
+        </div>
+        <div class="bt-stage" id="btStage"><iframe id="btFrame" title="Pratonton langsung template Blogger anda" sandbox="" loading="lazy" srcdoc="{{BT_SRCDOC}}"></iframe></div>
+        <div class="bt-actions">
+          <button type="button" class="btn" id="btDownload">Muat turun tema XML</button>
+          <button type="button" class="btn ghost sm" id="btCopy">Salin pautan</button>
+          <button type="button" class="btn ghost sm" id="btPrint">Cetak</button>
+        </div>
+        <p class="bt-status" id="btStatus" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <section class="bt-guard" aria-labelledby="btGuardH">
+      <h3 class="sub-h" id="btGuardH">Semakan kebolehcapaian: kontras teks WCAG 2.2 AA</h3>
+      <p class="bt-sum" id="btSum" aria-live="polite">{{BT_SUM}}</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="btGuardH"><table class="data text"><thead><tr><th scope="col">Teks</th><th scope="col">Mod</th><th scope="col">Warna</th><th scope="col">Nisbah</th><th scope="col">AA</th></tr></thead><tbody id="btChecks">{{BT_CHECKS}}</tbody></table></div>
+      <div class="bt-actions"><button type="button" class="btn ghost sm" id="btFix">Baiki kontras</button></div>
+    </section>
+  </form>
+
+  <section class="box bt-audit" id="audit" aria-labelledby="bt-audit-h">
+    <h2 id="bt-audit-h">Audit tema Blogger semasa anda</h2>
+    <p>Blogger → Tema → Lagi (▾) → <strong>Edit HTML</strong>, pilih semua, salin dan tampal di sini, atau buka fail sandaran .xml. Semakan dibuat dalam pelayar anda dan tidak dimuat naik.</p>
+    <label class="drop" for="btAuditFile"><span>Buka fail tema Blogger .xml</span><input type="file" id="btAuditFile" accept=".xml,application/xml,text/xml" class="sr-only"><small>atau tampal kod di bawah</small></label>
+    <div class="field"><label for="btAuditIn">XML tema</label><textarea class="prose-in" id="btAuditIn" spellcheck="false" placeholder="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;"></textarea></div>
+    <p class="bt-status" id="btAuditStatus" aria-live="polite">Contoh di bawah: head tema lama yang biasa.</p>
+    <div id="btAuditOut">{{BT_AUDIT_EXAMPLE}}</div>
+  </section>
+</div>
+{{AD_TOP}}
+<div class="container prose cv bt-cv1">
+  <h2 id="how">Cara membuat template Blogger dengan penjana ini</h2>
+  <ol>
+    <li><strong>Pilih warna jenama.</strong> Penjana membina warna halaman, kad, teks, kapsyen, sempadan dan pautan untuk mod cerah dan gelap, dengan sedikit rona warna anda dalam kelabu.</li>
+    <li><strong>Pilih fon dan lebar.</strong> Setiap fon ialah tindanan fon sistem, jadi tiada muat turun tambahan dan teks muncul serta-merta.</li>
+    <li><strong>Masukkan pautan menu dan kaki halaman</strong> sebagai <code>Label | URL</code>, satu setiap baris. Pautan yang bermula dengan <code>/</code> kekal dalam blog anda.</li>
+    <li><strong>Semak pratonton</strong> di telefon dan desktop, dalam mod cerah dan gelap, di halaman utama dan entri.</li>
+    <li><strong>Baca jadual kontras.</strong> Jika ada pasangan gagal, tekan Baiki kontras: hanya kecerahan berubah, rona warna tidak.</li>
+    <li><strong>Muat turun tema XML</strong> dan pasang dalam Blogger (langkah di bawah). Alamat halaman menyimpan reka bentuk anda, jadi anda boleh kembali kepadanya.</li>
+  </ol>
+
+  <h2 id="install">Cara memasang template di Blogger</h2>
+  <ol>
+    <li>Dalam Blogger, buka <strong>Tema</strong> di menu kiri.</li>
+    <li><strong>Buat sandaran dahulu:</strong> klik <strong>Lagi</strong> (anak panah di penjuru kanan atas), kemudian <strong>Sandaran</strong> dan <strong>Muat turun</strong>.</li>
+    <li>Buka menu yang sama, pilih <strong>Pulihkan</strong>, klik <strong>Muat naik</strong> dan pilih <code>tbb-lite-custom.xml</code>.</li>
+    <li>Buka <strong>Reka Letak</strong> untuk menyemak widget menu, bar sisi dan kaki halaman, dan muat naik logo dalam bahagian Logo / tajuk blog jika ada.</li>
+    <li>Perubahan kemudian: <strong>Tema → Sesuaikan → Lanjutan</strong> menyenaraikan kesemua {{BT_VARS}} warna, fon dan lebar.</li>
+  </ol>
+  <div class="callout"><p><strong>Sebelum memulihkan:</strong> tema baharu menggantikan reka bentuk lama. Entri dan halaman selamat, tetapi widget dalam bahagian yang tiada dalam tema baharu boleh terbuang. Simpan sandaran dan salin kod widget HTML yang anda perlukan. Untuk blog dengan banyak widget tersuai, cuba tema pada blog ujian dahulu. Alat ini tidak bergabung dengan Google atau Blogger.</p></div>
+
+  <h2 id="palette">Contoh: satu warna jenama, tiga warna selamat</h2>
+  <p>Pautan ialah teks, jadi ia perlukan 4.5:1 pada kad dan juga pada halaman. Penjana mengekalkan warna jenama untuk butang dan sempadan, dan hanya melaraskan yang gagal:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pal-cap">
+    <table class="data text"><caption id="pal-cap">Warna yang dipilih oleh penjana, dengan kontras pada latar kad</caption>
+      <thead><tr><th scope="col">Jenama</th><th scope="col">Pautan, mod cerah</th><th scope="col">Pautan, mod gelap</th><th scope="col">Teks butang</th></tr></thead>
+      <tbody>
+{{BT_PALETTE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Semakan ini menemui masalah sebenar dalam tema kami sendiri. Dalam TBB Lite 1.0.0, merah jenama <code>#e5002b</code> juga warna pautan: {{BT_OLD_DARK}}:1 pada latar gelap, {{BT_OLD_DARKCARD}}:1 pada kad gelap dan {{BT_OLD_CARD}}:1 pada kad cerah, semuanya di bawah 4.5:1. Versi 1.0.1 menambah warna pautan berasingan, <code>{{BT_LINK_L}}</code> ({{BT_LINK_L_R}}:1) dan <code>{{BT_LINK_D}}</code> ({{BT_LINK_D_R}}:1).</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose cv bt-cv2">
+  <h2 id="checks">Apa yang disemak oleh audit tema</h2>
+  <p>Setiap semakan ada wajaran; lulus mendapat wajaran penuh, "Perbaiki" mendapat separuh. Skor daripada 100.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="aud-cap">
+    <table class="data text"><caption id="aud-cap">13 semakan dan wajarannya</caption>
+      <thead><tr><th scope="col">Semakan</th><th scope="col">Wajaran</th><th scope="col">Lulus · Perbaiki</th><th scope="col">Kenapa penting</th></tr></thead>
+      <tbody>
+{{BT_AUDIT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>Contoh di atas mengaudit head tema lama yang biasa ini, yang mendapat {{BT_LEGACY_SCORE}} ({{BT_LEGACY_GRADE}}). TBB Lite mendapat {{BT_LITE_SCORE}}.</p>
+  <pre class="bt-code"><code>{{BT_LEGACY_CODE}}</code></pre>
+  <p>Blogger menyimpan satu tag bagi setiap cabang <code>b:if</code>, jadi beberapa tag kanonik atau description masih boleh bermaksud satu setiap halaman; audit meminta anda menyemaknya dan tidak menggagalkannya. Satu-satunya pendua yang pasti ialah tag tulisan tangan bersama <code>&lt;b:include name='all-head-content'/&gt;</code>, kerana include itu mencetak tagnya sendiri.</p>
+
+  <h2 id="variables">Tetapan Theme Designer dalam fail</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="var-cap">
+    <table class="data text"><caption id="var-cap">{{BT_VARS}} pemboleh ubah yang boleh ditukar kemudian di Tema → Sesuaikan → Lanjutan</caption>
+      <thead><tr><th scope="col">Pemboleh ubah</th><th scope="col">Mengawal</th><th scope="col">Lalai</th></tr></thead>
+      <tbody>
+{{BT_VAR_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="fonts">Pilihan fon</h2>
+  <p>Tindanan fon sistem menggunakan fon yang sudah ada dalam peranti pembaca, jadi tiada muat turun fon dan teks tidak hilang sementara.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="font-cap">
+    <table class="data text"><caption id="font-cap">Tindanan fon dan rupanya pada peranti ini</caption>
+      <thead><tr><th scope="col">Pilihan</th><th scope="col">Contoh</th><th scope="col">Tindanan</th></tr></thead>
+      <tbody>
+{{BT_FONT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sumber</h2>
+  <ul>
+    <li><a href="https://support.google.com/blogger/answer/1227173" rel="noopener">Bantuan Blogger: Use themes to change how your blog looks</a> (Sandaran, Sesuaikan, Lanjutan)</li>
+    <li><a href="https://support.google.com/blogger/answer/46870" rel="noopener">Bantuan Blogger: Change the design of your blog</a> (Reka Letak, Edit HTML)</li>
+    <li><a href="https://support.google.com/blogger/answer/46871" rel="noopener">Bantuan Blogger: Customize CSS tags for layouts</a> (pemboleh ubah Theme Designer)</li>
+    <li><a href="https://support.pipdig.co/articles/bie-blogger-template-xml-file/" rel="noopener">pipdig: How to upload the Blogger template XML file</a> (Pulihkan, Muat naik)</li>
+    <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" rel="noopener">W3C: Understanding SC 1.4.3 Contrast (Minimum)</a></li>
+    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources" rel="noopener">Chrome for Developers: Eliminate render-blocking resources</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" rel="noopener">Google Search Central: Consolidate duplicate URLs</a></li>
+    <li><a href="https://github.com/bukitbesi/blogger-xml/tree/main/themes/tbb-lite" rel="noopener">Kod sumber dan lesen TBB Lite di GitHub</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Soalan lazim</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Alat berkaitan</h2>
+  <div class="related">
+    <a href="/buat-qr-code/">Buat QR Code<small>Pautan blog, Wi-Fi, WhatsApp</small></a>
+    <a href="/buang-background-gambar/">Buang Background Gambar<small>Logo dan gambar lutsinar</small></a>
+    <a href="/gambar-ke-prompt/">Gambar ke Prompt AI<small>Idea gambar untuk entri</small></a>
+    <a href="/kalkulator-roas/">Kalkulator ROAS<small>Pulangan iklan blog</small></a>
+  </div>
+</section>
+</div>

@@ -16,6 +16,7 @@ import { batch15 } from './batch15.mjs';
 import { batch16 } from './batch16.mjs';
 import { batch17 } from './batch17.mjs';
 import { batch18 } from './batch18.mjs';
+import { batch19 } from './batch19.mjs';
 import { icons, renderIcon } from './icons.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
@@ -2919,6 +2920,8 @@ const b17 = batch17({ require, esc, longDate });
 Object.assign(RENDERERS, b17.renderers);
 const b18 = batch18({ require, esc, longDate });
 Object.assign(RENDERERS, b18.renderers);
+const b19 = batch19({ require, esc, longDate });
+Object.assign(RENDERERS, b19.renderers);
 
 // ---- Share: plain links to each network (no third-party scripts), copy link, and the device share sheet
 // where supported. "Share result" shares the current URL, whose hash holds the calculator inputs.
@@ -3152,6 +3155,7 @@ Object.assign(bundles, b15.bundles);
 Object.assign(bundles, b16.bundles);
 Object.assign(bundles, b17.bundles);
 Object.assign(bundles, b18.bundles);
+Object.assign(bundles, b19.bundles);
 for (const [name, files] of Object.entries(bundles)) {
   // Minified with the vendored Terser (the same build the JavaScript Minifier page runs); validate.mjs compiles the result.
   const source = files.map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
@@ -3263,7 +3267,7 @@ const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub
 fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
 // Prayer time years roll over; a clean copy drops years no longer in the source.
 fs.rmSync(path.join(pub, 'assets/solat'), { recursive: true, force: true });
-['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img', 'assets/solat'].forEach(f => copy(f));
+['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img', 'assets/solat', 'assets/blogger'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
 const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f)

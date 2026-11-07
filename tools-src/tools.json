@@ -207,6 +207,15 @@
     "live": true
   },
   {
+    "name": "Blogger Template Generator",
+    "desc": "Design a fast Blogger theme with live preview, dark mode and WCAG contrast checks, download the XML, and audit your current theme's speed and SEO.",
+    "url": "https://tool.thebukitbesi.com/blogger-template-generator/",
+    "cat": "design",
+    "icon": "blogger-template",
+    "badge": "new",
+    "live": true
+  },
+  {
     "name": "Online Photo Editor",
     "desc": "Crop, adjust and filter photos, add text, shapes and drawings on layers, then export JPG, PNG or WebP. A free Photoshop alternative.",
     "url": "https://tool.thebukitbesi.com/photo-editor/",

@@ -1,0 +1,216 @@
+<!--page
+{
+  "path": "/blogger-template-generator/",
+  "lang": "en",
+  "cat": "design",
+  "alternates": { "ms": "/penjana-template-blogger/" },
+  "title": "Blogger Template Generator: Free Fast Theme with Live Preview",
+  "description": "Design a free Blogger template with live preview, dark mode and WCAG contrast checks, then download the XML. Includes a free Blogger theme speed and SEO audit.",
+  "llms": "Free Blogger template generator that runs in the browser. It customises TBB Lite 1.0.1, an original CC BY 4.0 Blogger theme (33.5 KB XML, no external scripts, fonts or jQuery, Blogger layouts version 3), and downloads a ready-to-install XML file. Controls: brand colour with an automatic light and dark palette, 14 individual colours, 5 system font stacks, body size 15 to 20 px, page width 960 to 1400 px, sidebar width 260 to 380 px, menu links, footer links and about text. A sandboxed live preview shows the home page or a post, light or dark, on a phone or desktop. Every one of 13 text and background pairs is checked against WCAG 2.2 AA (4.5:1) in both modes, and one click fixes failures by changing lightness only. The brand colour is not used as link text: in TBB Lite 1.0.0 the brand red #e5002b as a link was 3.97:1 on the dark background and 4.45:1 on light cards, so 1.0.1 added separate link colours (#dd002a, 4.73:1; #ff2d54, 4.70:1). A theme audit scores any pasted Blogger theme XML out of 100 on 13 weighted checks: file size (100 KB pass, 200 KB limit), render-blocking scripts in head, jQuery, icon fonts, external stylesheets, canonical and meta description duplicates (all-head-content already prints both), viewport, article JSON-LD, noindex on search and label pages, lazy-loaded images, layouts version 3 and b:css false. A typical older theme head with jQuery, a blocking slider script, Google Fonts, Font Awesome and a duplicate canonical scores 35 (F); TBB Lite scores 100. Install in Blogger with Theme, More, Backup first, then Restore, Upload. Nothing is uploaded to this site.",
+  "datePublished": "2026-11-07",
+  "dateModified": "2026-11-07",
+  "render": "blogger",
+  "shareTitle": "Share this Blogger template generator",
+  "scripts": ["/assets/js/blogger-template.js"],
+  "breadcrumb": [["Tools", "/"], ["Design Tools", "/?cat=design#tools"], ["Blogger Template Generator", null]],
+  "about": ["Blogger", "Web template system", "Web Content Accessibility Guidelines", "Website performance"],
+  "app": {
+    "name": "Blogger Template Generator",
+    "category": "DesignApplication",
+    "features": ["Live sandboxed preview: home or post, light or dark, phone or desktop", "Full light and dark palette from one brand colour", "WCAG 2.2 AA check of 13 text pairs with one-click fix", "System font stacks, page and sidebar width", "Menu, footer links and about text written into the theme", "Ready-to-install Blogger XML download (TBB Lite, CC BY 4.0)", "Blogger theme audit: speed and SEO score out of 100 with fixes", "Shareable link with the design"]
+  },
+  "citations": [
+    ["Blogger Help: Use themes to change how your blog looks", "https://support.google.com/blogger/answer/1227173"],
+    ["Blogger Help: Change the design of your blog", "https://support.google.com/blogger/answer/46870"],
+    ["Blogger Help: Customize CSS tags for layouts", "https://support.google.com/blogger/answer/46871"],
+    ["W3C: Understanding SC 1.4.3 Contrast (Minimum)", "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"],
+    ["Chrome for Developers: Eliminate render-blocking resources", "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources"],
+    ["Google Search Central: Consolidate duplicate URLs (canonical)", "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"],
+    ["TBB Lite source code (GitHub)", "https://github.com/bukitbesi/blogger-xml/tree/main/themes/tbb-lite"]
+  ],
+  "faq": [
+    { "q": "Is this Blogger template really free?", "a": "Yes. The generator outputs TBB Lite {{BT_THEME_V}}, an original theme released under CC BY 4.0: you can use and change it on personal and commercial blogs as long as the footer credit stays or you credit the author elsewhere on the blog. The file is {{BT_SIZE_KB}} KB with no jQuery, web fonts or external scripts." },
+    { "q": "How do I install the downloaded template on Blogger?", "a": "First back up your current theme: in Blogger open Theme, click More (the arrow at the top right), then Backup and Download. Then use the same menu, choose Restore, click Upload and pick tbb-lite-custom.xml. Finally open Layout to check the menu, footer and sidebar widgets." },
+    { "q": "Will I lose my posts if I change the template?", "a": "No. A theme only controls the design; posts, pages, comments and labels stay where they are. Widgets in sections that the new theme does not have can be removed, so download the backup first and copy any HTML widget code you want to keep. Test on a spare blog if your current theme has many custom widgets." },
+    { "q": "Why did the generator change my link colour?", "a": "Links are text, so WCAG 2.2 AA needs 4.5:1 against every background they sit on. A bright brand colour often fails: yellow #ffeb3b on white is about 1.2:1, so the generator keeps it for buttons and borders and darkens only the link colour to {{BT_YELLOW_LINK}} ({{BT_YELLOW_R}}:1), with {{BT_YELLOW_INK}} button text. The hue never changes." },
+    { "q": "What does the Blogger theme audit check?", "a": "13 weighted checks that add up to 100: file size, render-blocking scripts in the head, jQuery, icon fonts, external stylesheets, duplicate canonical or meta description tags, the mobile viewport, article structured data, noindex on search and label pages, lazy-loaded images, layouts version 3 and b:css false. A typical older theme head scores {{BT_LEGACY_SCORE}}; TBB Lite scores {{BT_LITE_SCORE}}." },
+    { "q": "Is my theme uploaded when I run the audit?", "a": "No. The audit and the generator run entirely in your browser; the pasted XML never leaves your device. The only file this page downloads is the TBB Lite theme itself, from this site, to build your copy and the preview." },
+    { "q": "Can I change colours and fonts later without this tool?", "a": "Yes. All {{BT_VARS}} settings are Blogger Theme Designer variables, so after installing open Theme, click Customize, then Advanced to change any colour, font or width. Values you chose here appear as the starting point, and the Reset button in Blogger returns them to your generated design." }
+  ]
+}
+-->
+<div class="page">
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li><a href="/?cat=design#tools">Design Tools</a></li><li aria-current="page">Blogger Template Generator</li></ol></nav>
+  <h1>Blogger Template Generator</h1>
+  <p class="answer">Design a Blogger template in your colours and download a <strong>ready-to-install XML theme of {{BT_SIZE_KB}} KB with no external scripts</strong>, with all {{BT_PAIRS}} text colours checked against WCAG AA (4.5:1) in light and dark mode. Paste your current theme below to get a <strong>speed and SEO score out of 100</strong> with the fix for each problem.</p>
+  <p class="meta"><span>Rules verified <time datetime="{{BT_VERIFIED_ISO}}">{{BT_VERIFIED}}</time></span><span>{{BT_THEME}}, CC BY 4.0</span><a href="#install">How to install</a><a href="/penjana-template-blogger/" hreflang="ms" lang="ms">Baca dalam Bahasa Melayu</a></p>
+
+  <form class="box bt-tool" id="btForm" novalidate aria-labelledby="bt-h">
+    <h2 id="bt-h" class="sr-only">Design your Blogger template</h2>
+    <div class="bt-cols">
+      <div class="bt-panel">
+        <h3>Colours</h3>
+        <div class="field"><label for="btBrand">Brand colour (buttons and accents)</label>
+          <div class="bt-brand"><input type="color" id="btBrandPick" value="{{BT_BRAND}}" aria-label="Pick brand colour"><input class="input" id="btBrand" value="{{BT_BRAND}}" autocomplete="off" spellcheck="false" aria-describedby="btBrandHelp"></div>
+          <div class="bt-swatches" role="group" aria-label="Quick brand colours">{{BT_SWATCHES}}</div>
+          <p class="help" id="btBrandHelp">Hex, rgb() or a CSS colour name.</p>
+        </div>
+        <label class="check"><input type="checkbox" id="btAuto" checked> Build the light and dark palette from the brand colour</label>
+        <details class="ex-set"><summary class="sub-h">All {{BT_COLOR_COUNT}} colours</summary>
+          <fieldset id="btColorsBox" disabled><legend class="sr-only">Individual colours (untick the palette option to edit)</legend><div class="bt-colors">{{BT_COLORS}}</div></fieldset>
+          <p class="help">Untick the palette option above to edit colours one by one.</p>
+        </details>
+        <h3>Fonts and layout</h3>
+        <div class="bt-two">
+          <div class="field"><label for="btBodyFont">Body font</label><select class="input" id="btBodyFont">{{BT_BODY_FONTS}}</select></div>
+          <div class="field"><label for="btHeadFont">Heading font</label><select class="input" id="btHeadFont">{{BT_HEAD_FONTS}}</select></div>
+        </div>
+        <div class="field"><label for="btSize">Body text size</label><div class="range"><input type="range" id="btSize" min="15" max="20" step="1" value="17"><output id="btSizeOut" for="btSize">17px</output></div></div>
+        <div class="field"><label for="btWidth">Maximum page width</label><div class="range"><input type="range" id="btWidth" min="960" max="1400" step="20" value="1140"><output id="btWidthOut" for="btWidth">1140px</output></div></div>
+        <div class="field"><label for="btSide">Sidebar width (desktop)</label><div class="range"><input type="range" id="btSide" min="260" max="380" step="10" value="320"><output id="btSideOut" for="btSide">320px</output></div></div>
+        <h3>Menu and footer</h3>
+        <div class="field"><label for="btTitle">Blog title (preview only; set it in Blogger Settings)</label><input class="input" id="btTitle" value="My Blog" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label for="btMenu">Menu links, one per line: Label | URL</label><textarea class="prose-in short" id="btMenu" spellcheck="false" aria-describedby="btLinkHelp">Home | /
+About | /p/about.html
+Contact | /p/contact.html</textarea></div>
+        <div class="field"><label for="btPages">Footer links: Label | URL</label><textarea class="prose-in short" id="btPages" spellcheck="false">Privacy policy | /p/privacy-policy.html
+Contact | /p/contact.html</textarea></div>
+        <div class="field"><label for="btAbout">Footer about text</label><textarea class="prose-in short" id="btAbout" maxlength="400">Write one or two sentences about who runs this blog and what readers will find here.</textarea></div>
+        <p class="help" id="btLinkHelp" aria-live="polite"></p>
+      </div>
+
+      <div class="bt-panel bt-preview">
+        <div class="bt-bar">
+          <div class="seg" role="radiogroup" aria-label="Page"><label><input type="radio" name="btView" value="home" checked> Home</label><label><input type="radio" name="btView" value="post"> Post</label></div>
+          <div class="seg" role="radiogroup" aria-label="Colour mode"><label><input type="radio" name="btMode" value="light" checked> Light</label><label><input type="radio" name="btMode" value="dark"> Dark</label></div>
+          <div class="seg" role="radiogroup" aria-label="Device"><label><input type="radio" name="btDevice" value="desktop" checked> Desktop</label><label><input type="radio" name="btDevice" value="phone"> Phone</label></div>
+        </div>
+        <div class="bt-stage" id="btStage"><iframe id="btFrame" title="Live preview of your Blogger template" sandbox="" loading="lazy" srcdoc="{{BT_SRCDOC}}"></iframe></div>
+        <div class="bt-actions">
+          <button type="button" class="btn" id="btDownload">Download theme XML</button>
+          <button type="button" class="btn ghost sm" id="btCopy">Copy link</button>
+          <button type="button" class="btn ghost sm" id="btPrint">Print</button>
+        </div>
+        <p class="bt-status" id="btStatus" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <section class="bt-guard" aria-labelledby="btGuardH">
+      <h3 class="sub-h" id="btGuardH">Accessibility check: WCAG 2.2 AA text contrast</h3>
+      <p class="bt-sum" id="btSum" aria-live="polite">{{BT_SUM}}</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="btGuardH"><table class="data text"><thead><tr><th scope="col">Text</th><th scope="col">Mode</th><th scope="col">Colours</th><th scope="col">Ratio</th><th scope="col">AA</th></tr></thead><tbody id="btChecks">{{BT_CHECKS}}</tbody></table></div>
+      <div class="bt-actions"><button type="button" class="btn ghost sm" id="btFix">Fix contrast</button></div>
+    </section>
+  </form>
+
+  <section class="box bt-audit" id="audit" aria-labelledby="bt-audit-h">
+    <h2 id="bt-audit-h">Audit your current Blogger theme</h2>
+    <p>Blogger → Theme → More (▾) → <strong>Edit HTML</strong>, select all, copy and paste here, or open the backup .xml file. It is checked in your browser and never uploaded.</p>
+    <label class="drop" for="btAuditFile"><span>Open a Blogger theme .xml file</span><input type="file" id="btAuditFile" accept=".xml,application/xml,text/xml" class="sr-only"><small>or paste the code below</small></label>
+    <div class="field"><label for="btAuditIn">Theme XML</label><textarea class="prose-in" id="btAuditIn" spellcheck="false" placeholder="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;"></textarea></div>
+    <p class="bt-status" id="btAuditStatus" aria-live="polite">Example below: a typical older theme head.</p>
+    <div id="btAuditOut">{{BT_AUDIT_EXAMPLE}}</div>
+  </section>
+</div>
+{{AD_TOP}}
+<div class="container prose cv bt-cv1">
+  <h2 id="how">How to make a Blogger template with this generator</h2>
+  <ol>
+    <li><strong>Pick a brand colour.</strong> The generator builds the page, card, text, caption, border and link colours for light and dark mode, with a hint of your hue in the greys.</li>
+    <li><strong>Choose fonts and widths.</strong> Every font is a system font stack, so nothing extra downloads and text appears immediately.</li>
+    <li><strong>Add your menu and footer links</strong> as <code>Label | URL</code>, one per line. Links that start with <code>/</code> stay on your blog.</li>
+    <li><strong>Check the preview</strong> on a phone and a desktop, in light and dark mode, on the home page and a post.</li>
+    <li><strong>Read the contrast table.</strong> If a pair fails, press Fix contrast: only lightness changes, never the hue.</li>
+    <li><strong>Download the theme XML</strong> and install it in Blogger (steps below). The page address keeps your design, so you can come back to it.</li>
+  </ol>
+
+  <h2 id="install">How to install the template on Blogger</h2>
+  <ol>
+    <li>In Blogger, open <strong>Theme</strong> in the left menu.</li>
+    <li><strong>Back up first:</strong> click <strong>More</strong> (the arrow at the top right), then <strong>Backup</strong> and <strong>Download</strong>.</li>
+    <li>Open the same menu, choose <strong>Restore</strong>, click <strong>Upload</strong> and pick <code>tbb-lite-custom.xml</code>.</li>
+    <li>Open <strong>Layout</strong> to check the menu, sidebar and footer widgets, and upload a logo in the Logo / blog title section if you have one.</li>
+    <li>Later changes: <strong>Theme → Customize → Advanced</strong> lists all {{BT_VARS}} colours, fonts and widths.</li>
+  </ol>
+  <div class="callout"><p><strong>Before you restore:</strong> a new theme replaces the old design. Posts and pages are safe, but widgets in sections the new theme does not have can be removed. Keep the backup and copy any HTML widget code you need. For a blog with many custom widgets, try the theme on a spare test blog first. This tool is not affiliated with Google or Blogger.</p></div>
+
+  <h2 id="palette">Worked example: one brand colour, three safe colours</h2>
+  <p>Links are text, so they need 4.5:1 on cards as well as on the page. The generator keeps your brand for buttons and borders and adjusts only what fails:</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="pal-cap">
+    <table class="data text"><caption id="pal-cap">Colours the generator picks, with contrast on the card background</caption>
+      <thead><tr><th scope="col">Brand</th><th scope="col">Link, light mode</th><th scope="col">Link, dark mode</th><th scope="col">Button text</th></tr></thead>
+      <tbody>
+{{BT_PALETTE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>This check found a real problem in our own theme. In TBB Lite 1.0.0 the brand red <code>#e5002b</code> was also the link colour: {{BT_OLD_DARK}}:1 on the dark background, {{BT_OLD_DARKCARD}}:1 on dark cards and {{BT_OLD_CARD}}:1 on light cards, all under 4.5:1. Version 1.0.1 added separate link colours, <code>{{BT_LINK_L}}</code> ({{BT_LINK_L_R}}:1) and <code>{{BT_LINK_D}}</code> ({{BT_LINK_D_R}}:1).</p>
+</div>
+{{AD_MIDDLE}}
+<div class="container prose cv bt-cv2">
+  <h2 id="checks">What the theme audit checks</h2>
+  <p>Each check has a weight; a pass earns the full weight, "Improve" earns half. The score is out of 100.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="aud-cap">
+    <table class="data text"><caption id="aud-cap">The 13 checks and their weights</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Weight</th><th scope="col">Pass · Improve</th><th scope="col">Why it matters</th></tr></thead>
+      <tbody>
+{{BT_AUDIT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+  <p>The example at the top audits this typical older theme head, which scores {{BT_LEGACY_SCORE}} ({{BT_LEGACY_GRADE}}). TBB Lite scores {{BT_LITE_SCORE}}.</p>
+  <pre class="bt-code"><code>{{BT_LEGACY_CODE}}</code></pre>
+  <p>Blogger keeps one tag per <code>b:if</code> branch, so several canonical or description tags can still mean one per page; the audit asks you to check those instead of failing them. The only certain duplicate is a hand-written tag next to <code>&lt;b:include name='all-head-content'/&gt;</code>, because that include prints its own.</p>
+
+  <h2 id="variables">Theme Designer settings in the file</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="var-cap">
+    <table class="data text"><caption id="var-cap">The {{BT_VARS}} variables you can change later in Theme → Customize → Advanced</caption>
+      <thead><tr><th scope="col">Variable</th><th scope="col">Controls</th><th scope="col">Default</th></tr></thead>
+      <tbody>
+{{BT_VAR_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="fonts">Font choices</h2>
+  <p>System font stacks use fonts already on the reader's device, so there is no font download and no flash of invisible text.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="font-cap">
+    <table class="data text"><caption id="font-cap">Font stacks and how they look on this device</caption>
+      <thead><tr><th scope="col">Option</th><th scope="col">Sample</th><th scope="col">Stack</th></tr></thead>
+      <tbody>
+{{BT_FONT_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://support.google.com/blogger/answer/1227173" rel="noopener">Blogger Help: Use themes to change how your blog looks</a> (Backup, Customize, Advanced)</li>
+    <li><a href="https://support.google.com/blogger/answer/46870" rel="noopener">Blogger Help: Change the design of your blog</a> (Layout, Edit HTML)</li>
+    <li><a href="https://support.google.com/blogger/answer/46871" rel="noopener">Blogger Help: Customize CSS tags for layouts</a> (Theme Designer variables)</li>
+    <li><a href="https://support.pipdig.co/articles/bie-blogger-template-xml-file/" rel="noopener">pipdig: How to upload the Blogger template XML file</a> (Restore, Upload)</li>
+    <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" rel="noopener">W3C: Understanding SC 1.4.3 Contrast (Minimum)</a></li>
+    <li><a href="https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources" rel="noopener">Chrome for Developers: Eliminate render-blocking resources</a></li>
+    <li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" rel="noopener">Google Search Central: Consolidate duplicate URLs</a></li>
+    <li><a href="https://github.com/bukitbesi/blogger-xml/tree/main/themes/tbb-lite" rel="noopener">TBB Lite source code and licence on GitHub</a></li>
+  </ul>
+</div>
+
+<section class="container faq-wrap prose" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Frequently asked questions</h2>
+  <div class="faq">
+{{FAQ_HTML}}
+  </div>
+</section>
+{{AD_BOTTOM}}
+<section class="container prose" aria-labelledby="related-h">
+  <h2 id="related-h">Related tools</h2>
+  <div class="related">
+    <a href="/color-contrast-checker/">Color Contrast Checker<small>WCAG AA and AAA</small></a>
+    <a href="/unused-css-remover/">Unused CSS Remover<small>Trim a Blogger theme's CSS</small></a>
+    <a href="/schema-markup-generator/">Schema Markup Generator<small>JSON-LD for posts</small></a>
+    <a href="/robots-txt-generator/">Robots.txt Generator<small>For Blogger and WordPress</small></a>
+  </div>
+</section>
+</div>
