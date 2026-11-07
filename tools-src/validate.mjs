@@ -72,6 +72,19 @@ for (const [p, page] of pageHtml) {
 }
 for (const f of fs.readdirSync(path.join(pub, 'assets/js'))) new vm.Script(read('assets/js/' + f));
 assert(read('sitemap.xml').includes('xmlns:xhtml'), 'Sitemap carries hreflang alternates');
+// Pinterest feeds (one per board): every tool page (not the generated state prayer time pages) has a pin image, and every item points at a real file on this host.
+const feeds = fs.readdirSync(pub).filter(f => /^pinterest-[a-z]+\.xml$/.test(f));
+assert(feeds.length > 0, 'Pinterest feeds built');
+const pinned = new Set();
+for (const f of feeds) {
+  const x = read(f);
+  for (const m of x.matchAll(/<enclosure url="([^"]+)" length="(\d+)"/g)) {
+    assert(m[1].startsWith(site.origin + '/assets/pins/'), `Pin image on this host in ${f}`);
+    assert.equal(fs.statSync(path.join(pub, m[1].slice(site.origin.length))).size, +m[2], `Pin size matches in ${f}`);
+  }
+  for (const m of x.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)) { assert(pageHtml.has(m[1].replace(site.origin, '')), `Pin links a page in ${f}`); pinned.add(m[1].replace(site.origin, '')); }
+}
+for (const [p, page] of pageHtml) if (page.includes('"@type":"WebApplication"') && (p === '/prayer-times-malaysia/' || !/^\/(waktu-solat|prayer-times)-/.test(p))) assert(pinned.has(p), `Missing Pinterest pin for ${p}: run node tools-src/pins.mjs`);
 assert(read('robots.txt').includes(`Sitemap: ${site.origin}/sitemap.xml`), 'Robots sitemap URL');
 assert(!read('robots.txt').includes('Disallow:'), 'Public resources and noindex 404 remain crawlable');
 assert(read('404.html').includes('content="noindex,follow"'), '404 indexing directive');

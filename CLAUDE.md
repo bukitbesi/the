@@ -23,7 +23,7 @@ correct maths, SEO/E-E-A-T/AEO/LLM-ready content, and top Core Web Vitals. Never
    factual paragraph for llms.txt), `about`, `app` (WebApplication schema), `citations`, `faq` (FAQPage schema),
    `breadcrumb`, `datePublished`/`dateModified`.
 8. **Catalog:** record in `tools-src/tools.json` (`live: true`), unique icon in `tools-src/icons.mjs`, README row and
-   upkeep note, links added from related existing pages.
+   upkeep note, links added from related existing pages. Run `node tools-src/pins.mjs` for the Pinterest pin of each new page.
 9. **Checks before push:** `node --test tools-src/tests/*.test.mjs`, `node tools-src/build.mjs`,
    `node tools-src/validate.mjs`, Playwright at 390 px (inputs work, no overflow, no console errors), Lighthouse
    mobile 100/100/100/100 with CLS 0. Commit `docs/` with the sources.

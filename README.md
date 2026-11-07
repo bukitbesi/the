@@ -81,6 +81,36 @@ writes `ads.txt`. The AdSense library loads only after the visitor's first
 scroll, tap, key press or mouse move; the ad code itself is unmodified. With
 `client` empty, no ad code is published.
 
+## Pinterest
+
+Every tool page (English and Bahasa Melayu) has a 1000×1500 pin in `assets/pins/`, and the build writes one RSS
+feed per category, each meant for its own board:
+
+| Feed | Board name to create | Pins |
+| --- | --- | --- |
+| `https://tool.thebukitbesi.com/pinterest-calc.xml` | Malaysia Calculators (Kalkulator Malaysia) | calculators |
+| `https://tool.thebukitbesi.com/pinterest-util.xml` | Free Online Utilities | utilities |
+| `https://tool.thebukitbesi.com/pinterest-ai.xml` | Free AI Tools | AI tools |
+| `https://tool.thebukitbesi.com/pinterest-design.xml` | Free Design and Image Tools | design tools |
+| `https://tool.thebukitbesi.com/pinterest-content.xml` | Free Writing and Text Tools | content tools |
+| `https://tool.thebukitbesi.com/pinterest-dev.xml` | Free Developer Tools | developer tools |
+| `https://tool.thebukitbesi.com/pinterest-seo.xml` | Free SEO Tools | SEO tools |
+
+1. **Claim the site:** Pinterest business account → Settings → Claimed accounts → Websites → claim
+   `tool.thebukitbesi.com` with the HTML tag; paste only the `content` value into `pinterestVerify` in
+   `tools-src/site.json`, rebuild, push, then press Verify. Auto-publish only accepts links on a claimed domain.
+2. **Create the seven boards** above (public).
+3. **Connect each feed:** Settings → Bulk create Pins → Auto-publish → paste a feed URL → pick its board (desktop only).
+
+Pinterest creates up to 200 pins a day, oldest first, and checks feeds about once a day, so the first ~220 pins
+appear over two days; later tools appear the day after they are deployed. Links carry
+`utm_source=pinterest&utm_medium=social&utm_campaign=<category>` for GA4. Pin images carry no rates or ringgit
+amounts (Pinterest never refetches an image); figures stay in the feed text. Board names live in `BOARDS` in
+`tools-src/pinterest.mjs`.
+
+**Upkeep:** after adding a tool page, run `node tools-src/pins.mjs` (draws only missing pins; `--force` redraws all
+after a design change), then build. `validate.mjs` fails if a tool page has no pin.
+
 ## Hosted calculators
 
 | Page | Language | Targets |
@@ -410,6 +440,8 @@ tools-src/build.mjs         writes the whole public site to docs/ (pages, bundle
 tools-src/validate.mjs      fails the deploy on SEO, schema, accessibility-attribute or PWA drift
 tools-src/tests/            unit tests for calculation cores (node --test)
 tools-src/images.mjs        renders the social card, tool hero images and PWA screenshots (Playwright)
+tools-src/pins.mjs          renders the Pinterest pin of every tool page into assets/pins/ (Playwright)
+tools-src/pinterest.mjs     Pinterest boards, per-category RSS feeds and the pin design (used by build and pins.mjs)
 assets/js/salary-*.js       salary calculator core and UI (bundled to docs/assets/js/salary.js)
 assets/js/tax-core.js       annual income tax: YA2026 rules and the Budget 2027 (YA2027) proposal
 assets/js/epf-core.js       EPF projection: Third Schedule contributions, 75/15/10 split, dividend method, RIA benchmarks
@@ -506,6 +538,7 @@ node tools-src/build.mjs
 node tools-src/validate.mjs
 node tools-src/preview.mjs        # http://127.0.0.1:8765/
 node tools-src/images.mjs         # only after brand, count or layout changes
+node tools-src/pins.mjs           # after adding a tool page (draws missing Pinterest pins)
 ```
 
 **Publishing:** `docs/` is the complete public site and is committed. GitHub

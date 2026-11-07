@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Bukit Besi Tools: Free Developer Tools</title>
+    <link>https://tool.thebukitbesi.com/?cat=dev#tools</link>
+    <atom:link href="https://tool.thebukitbesi.com/pinterest-dev.xml" rel="self" type="application/rss+xml"/>
+    <description>Minify JavaScript, CSS and HTML, remove unused CSS, format HTML and JSON, generate tables and convert developer data.</description>
+    <language>en-MY</language>
+    <lastBuildDate>Mon, 19 Oct 2026 01:00:00 GMT</lastBuildDate>
+    <item>
+      <title>GitHub to jsDelivr Converter</title>
+      <link>https://tool.thebukitbesi.com/github-to-jsdelivr/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free GitHub to jsDelivr converter: turn GitHub file and raw links into fast jsDelivr CDN URLs with minified versions and ready script or link tags.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/github-to-jsdelivr/</guid>
+      <pubDate>Mon, 19 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/github-to-jsdelivr.jpg" length="95133" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/github-to-jsdelivr.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>HTML Table Generator</title>
+      <link>https://tool.thebukitbesi.com/html-table-generator/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free HTML table generator: edit cells or paste from Excel, Google Sheets, CSV or Markdown, pick a style, and copy responsive, accessible table HTML.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/html-table-generator/</guid>
+      <pubDate>Mon, 19 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/html-table-generator.jpg" length="87363" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/html-table-generator.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>Parse HTML and Encoder/Decoder</title>
+      <link>https://tool.thebukitbesi.com/parse-html/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free parse HTML tool: escape HTML to show code in Blogger posts, and encode or decode HTML entities, URLs, Base64, JavaScript strings and Unicode escapes.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/parse-html/</guid>
+      <pubDate>Mon, 19 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/parse-html.jpg" length="89092" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/parse-html.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>JSON Formatter and Validator</title>
+      <link>https://tool.thebukitbesi.com/json-formatter/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free JSON formatter and validator: beautify or minify JSON, see errors by line and column, fix common mistakes, tree view, JSONPath and JSON to CSV.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/json-formatter/</guid>
+      <pubDate>Sat, 17 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/json-formatter.jpg" length="101508" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/json-formatter.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>HTML Beautifier, Formatter &amp; Minifier</title>
+      <link>https://tool.thebukitbesi.com/html-beautifier/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free HTML beautifier, formatter and minifier. Format or compress HTML with presets for websites, Blogger themes and emails, and find unclosed tags by line.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/html-beautifier/</guid>
+      <pubDate>Tue, 13 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/html-beautifier.jpg" length="109349" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/html-beautifier.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>Unused CSS Remover</title>
+      <link>https://tool.thebukitbesi.com/unused-css-remover/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free unused CSS remover. Compare your CSS with pages, files or URLs and delete selectors, @keyframes and fonts no page uses. Works with Blogger and WordPress.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/unused-css-remover/</guid>
+      <pubDate>Tue, 13 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/unused-css-remover.jpg" length="105049" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/unused-css-remover.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>CSS Minifier</title>
+      <link>https://tool.thebukitbesi.com/css-minifier/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free CSS minifier. Paste or upload CSS to remove comments and whitespace safely, see bytes saved and gzip size, then copy or download. Also beautifies CSS.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/css-minifier/</guid>
+      <pubDate>Mon, 12 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/css-minifier.jpg" length="89289" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/css-minifier.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>JavaScript Minifier &amp; Obfuscator</title>
+      <link>https://tool.thebukitbesi.com/javascript-minifier/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=dev</link>
+      <description>Free JavaScript minifier and obfuscator powered by Terser. Compress JS, remove console logs, create source maps or obfuscate code, all in your browser.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/javascript-minifier/</guid>
+      <pubDate>Mon, 12 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free Developer Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/javascript-minifier.jpg" length="103780" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/javascript-minifier.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+  </channel>
+</rss>
