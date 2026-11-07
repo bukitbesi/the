@@ -1,0 +1,48 @@
+/* Batch 19 pages only (inlined through HEAD_EXTRA): Blogger Template Generator */
+.bt-tool{margin-top:24px}
+.bt-tool [hidden]{display:none!important}
+.bt-cols{display:grid;gap:20px}
+.bt-panel{min-width:0}
+.bt-panel h3{margin:18px 0 10px;font-size:1rem}
+.bt-panel h3:first-child{margin-top:0}
+.bt-brand{display:flex;gap:8px;align-items:center}
+.bt-brand .input{flex:1;min-width:0;font-variant-numeric:tabular-nums}
+.bt-brand input[type=color],.bt-colors input[type=color]{flex:none;width:48px;height:44px;padding:2px;border:1px solid var(--border2);border-radius:10px;background:var(--surface);cursor:pointer}
+.bt-swatches{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.bt-swatches button{width:36px;height:36px;padding:0;border:2px solid var(--surface);border-radius:50%;box-shadow:0 0 0 1px var(--border2);cursor:pointer}
+.bt-swatches button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.bt-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:8px;margin-top:10px}
+.bt-colors label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.84rem;color:var(--text2)}
+.bt-colors input[type=color]{width:40px;height:36px}
+.bt-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:4px 14px}
+.bt-two .field{margin-bottom:8px}
+.bt-stage{position:relative;height:620px;overflow:hidden;border:1px solid var(--border2);border-radius:14px;background:var(--bg2)}
+.bt-stage iframe{position:absolute;top:0;left:0;width:1280px;height:620px;border:0;background:#fff;transform-origin:0 0}
+.bt-stage.is-phone iframe{left:50%;width:390px;margin-left:-195px}
+.bt-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.bt-bar .seg{grid-template-columns:repeat(2,minmax(0,1fr));width:auto;min-width:0;flex:1 1 150px}
+.bt-guard{margin-top:14px}
+.bt-sum{min-height:3em;margin:8px 0;padding:10px 12px;border-radius:10px;background:var(--tint);font-size:.9rem;color:var(--text2)}
+.bt-pair{display:inline-grid;place-items:center;width:2.2em;height:1.6em;border-radius:6px;font-weight:700;font-size:.85rem;box-shadow:0 0 0 1px var(--border2)}
+.bt-guard td,.bt-audit td{white-space:normal;text-align:left;vertical-align:middle}
+.bt-guard code{font-size:.78rem}
+.bt-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.bt-score{display:flex;align-items:baseline;gap:10px;margin:6px 0 10px}
+.bt-score b{font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.bt-score span{color:var(--text2);font-size:.9rem}
+.bt-audit .rb-warn{color:#a15c00}
+:root[data-theme=dark] .bt-audit .rb-warn{color:#fbbf24}
+.bt-audit td:last-child{font-size:.86rem;color:var(--text2);min-width:14em}
+.bt-audit .drop{min-height:96px}
+.bt-audit textarea{min-height:120px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem}
+.bt-hosts{font-size:.86rem;color:var(--text2);overflow-wrap:anywhere}
+.bt-status{min-height:1.5em;margin-top:8px;font-size:.88rem;color:var(--text2)}
+.bt-pro{margin-top:18px;padding:14px 16px;border:1px solid var(--tint-b);border-radius:12px;background:var(--tint)}
+.bt-pro p{margin:0 0 8px}
+@media(min-width:960px){.bt-cols{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}.bt-preview{position:sticky;top:80px;align-self:start}}
+@media(max-width:600px){.bt-stage{height:560px}.bt-stage iframe{height:560px}}
+@media print{.bt-stage,.bt-bar,.bt-actions,.bt-audit .drop,.bt-audit textarea,.bt-panel details{display:none!important}}
+.bt-code{max-width:100%;overflow-x:auto;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--bg2);font-size:.78rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+/* Measured heights of the two long content blocks, so content-visibility reserves about the right space and the footer does not move as they render */
+.bt-cv1{contain-intrinsic-size:auto 2400px}.bt-cv2{contain-intrinsic-size:auto 4300px}
+@media(min-width:768px){.bt-cv1{contain-intrinsic-size:auto 1500px}.bt-cv2{contain-intrinsic-size:auto 3250px}}

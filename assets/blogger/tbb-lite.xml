@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.1' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale.language' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<!--
+  TBB Lite 1.0.1: a free, lightweight Blogger theme by The Bukit Besi
+  https://www.thebukitbesi.com/
+  Licence: CC BY 4.0. Keep the footer credit or credit the author elsewhere on the blog.
+  Theme-owned JavaScript: one 0.3 KB inline menu toggle; the menu still works without it.
+-->
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <meta content='light dark' name='color-scheme'/>
+  <meta expr:content='data:skin.vars.brand_color' name='theme-color'/>
+  <title><b:if cond='data:view.isHomepage'><data:blog.title.escaped/><b:else/><data:view.title.escaped/> | <data:blog.title.escaped/></b:if></title>
+  <link expr:href='data:view.url.canonical' rel='canonical'/>
+  <b:if cond='data:view.description'>
+    <meta expr:content='data:view.description' name='description'/>
+  </b:if>
+  <b:if cond='data:view.isSearch or data:view.isArchive or data:view.isError'>
+    <meta content='noindex, follow' name='robots'/>
+  <b:else/>
+    <meta content='index, follow, max-image-preview:large' name='robots'/>
+  </b:if>
+  <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' type='image/x-icon'/>
+  <link expr:href='data:blog.homepageUrl.canonical + &quot;feeds/posts/default&quot;' expr:title='data:blog.title + &quot; - Atom&quot;' rel='alternate' type='application/atom+xml'/>
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <meta expr:content='data:view.isPost ? &quot;article&quot; : &quot;website&quot;' property='og:type'/>
+  <meta expr:content='data:view.isHomepage ? data:blog.title : data:view.title' property='og:title'/>
+  <meta expr:content='data:view.url.canonical' property='og:url'/>
+  <b:if cond='data:view.description'>
+    <meta expr:content='data:view.description' property='og:description'/>
+  </b:if>
+  <b:if cond='data:view.featuredImage'>
+    <meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' property='og:image'/>
+    <meta content='summary_large_image' name='twitter:card'/>
+  <b:else/>
+    <meta content='summary' name='twitter:card'/>
+  </b:if>
+  <b:if cond='data:view.isHomepage'>
+    <script type='application/ld+json'>{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:blog.title.jsonEscaped/>&quot;,&quot;url&quot;:&quot;<data:blog.homepageUrl.canonical.jsonEscaped/>&quot;}</script>
+  </b:if>
+  <b:skin version='1.0.0'><![CDATA[/*
+-----------------------------------------------
+TBB Lite
+Version: 1.0.1
+Author:  The Bukit Besi (https://www.thebukitbesi.com/)
+----------------------------------------------- */
+
+/* Variable definitions
+<Group description="Brand" selector="body">
+  <Variable name="brand.color" description="Brand colour (links, buttons)" type="color" default="#e5002b" value="#e5002b"/>
+  <Variable name="brand.ink" description="Text on brand colour" type="color" default="#ffffff" value="#ffffff"/>
+  <Variable name="link.color" description="Links (light mode, 4.5:1 on cards)" type="color" default="#dd002a" value="#dd002a"/>
+</Group>
+<Group description="Light colours" selector="body">
+  <Variable name="page.bg" description="Page background" type="color" default="#ffffff" value="#ffffff"/>
+  <Variable name="surface.bg" description="Card and header background" type="color" default="#f6f6f7" value="#f6f6f7"/>
+  <Variable name="text.color" description="Text" type="color" default="#18181b" value="#18181b"/>
+  <Variable name="muted.color" description="Dates and captions" type="color" default="#5b5b66" value="#5b5b66"/>
+  <Variable name="line.color" description="Borders" type="color" default="#e4e4e7" value="#e4e4e7"/>
+</Group>
+<Group description="Dark mode colours" selector="body">
+  <Variable name="dark.bg" description="Dark page background" type="color" default="#0f0f12" value="#0f0f12"/>
+  <Variable name="dark.surface" description="Dark card background" type="color" default="#1b1b20" value="#1b1b20"/>
+  <Variable name="dark.text" description="Dark mode text" type="color" default="#ececf1" value="#ececf1"/>
+  <Variable name="dark.muted" description="Dark mode muted text" type="color" default="#a1a1aa" value="#a1a1aa"/>
+  <Variable name="dark.line" description="Dark mode borders" type="color" default="#2e2e35" value="#2e2e35"/>
+  <Variable name="dark.link" description="Links (dark mode, 4.5:1 on cards)" type="color" default="#ff2d54" value="#ff2d54"/>
+</Group>
+<Group description="Fonts" selector="body">
+  <Variable name="body.font" description="Body font" type="font" default="normal 400 17px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" value="normal 400 17px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"/>
+  <Variable name="heading.font" description="Heading font" type="font" default="normal 700 16px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" value="normal 700 16px system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"/>
+</Group>
+<Group description="Layout" selector="body">
+  <Variable name="content.width" description="Maximum page width" type="length" default="1140px" min="960px" max="1400px" value="1140px"/>
+  <Variable name="sidebar.width" description="Sidebar width (desktop)" type="length" default="320px" min="260px" max="380px" value="320px"/>
+</Group>
+*/
+
+:root{
+  --tbb-brand:$(brand.color);--tbb-brand-ink:$(brand.ink);--tbb-link:$(link.color);
+  --tbb-bg:$(page.bg);--tbb-surface:$(surface.bg);--tbb-text:$(text.color);--tbb-muted:$(muted.color);--tbb-line:$(line.color);
+  --tbb-max:$(content.width);--tbb-side:$(sidebar.width);--tbb-radius:12px;--tbb-gap:clamp(16px,3vw,32px)
+}
+@media (prefers-color-scheme:dark){
+  :root{--tbb-bg:$(dark.bg);--tbb-surface:$(dark.surface);--tbb-text:$(dark.text);--tbb-muted:$(dark.muted);--tbb-line:$(dark.line);--tbb-link:$(dark.link)}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font:$(body.font);line-height:1.7;color:var(--tbb-text);background:var(--tbb-bg);overflow-wrap:break-word}
+h1,h2,h3,h4{font:$(heading.font);line-height:1.25;margin:1.6em 0 .6em}
+h1{font-size:clamp(1.75rem,4vw,2.4rem);margin-top:0}
+h2{font-size:clamp(1.35rem,3vw,1.7rem)}
+h3{font-size:1.2rem}
+a{color:var(--tbb-link);text-underline-offset:.18em}
+a:hover{text-decoration-thickness:2px}
+img,video,iframe{max-width:100%}
+img{height:auto}
+:focus-visible{outline:3px solid var(--tbb-brand);outline-offset:2px}
+.tbb-sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tbb-skip{position:absolute;left:8px;top:-60px;z-index:10;padding:10px 14px;border-radius:8px;background:var(--tbb-brand);color:var(--tbb-brand-ink)}
+.tbb-skip:focus{top:8px}
+.tbb-wrap{width:100%;max-width:var(--tbb-max);margin:0 auto;padding:0 16px}
+
+/* Header and menu */
+.tbb-header{background:var(--tbb-surface);border-bottom:1px solid var(--tbb-line)}
+.tbb-header__bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;min-height:64px;padding-block:8px}
+.tbb-header .widget{margin:0}
+.tbb-brand{display:flex;align-items:center;gap:10px;color:var(--tbb-text);text-decoration:none}
+.tbb-brand__title{margin:0;font:$(heading.font);font-size:1.3rem;line-height:1.2}
+.tbb-brand__logo{display:block;max-height:48px;width:auto}
+.tbb-brand__tagline{margin:2px 0 0;font-size:.85rem;color:var(--tbb-muted)}
+.tbb-menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;padding:0;color:var(--tbb-text);background:none;border:0;border-radius:8px;cursor:pointer}
+.tbb-menu-btn[hidden]{display:none}
+.tbb-menu-btn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2}
+.tbb-menu ul{list-style:none;margin:0;padding:8px 0}
+.tbb-menu a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;color:var(--tbb-text);text-decoration:none;font-weight:600}
+.tbb-menu a:hover{background:var(--tbb-bg)}
+.tbb-search{display:flex;flex:1 1 100%;min-width:0;gap:8px;margin:0}
+.tbb-search input{flex:1;min-width:0;min-height:44px;padding:0 14px;font:inherit;font-size:1rem;color:var(--tbb-text);background:var(--tbb-bg);border:1px solid var(--tbb-line);border-radius:999px}
+.tbb-btn,.tbb-search button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;font:inherit;font-size:.95rem;font-weight:600;color:var(--tbb-brand-ink);background:var(--tbb-brand);border:0;border-radius:999px;cursor:pointer;text-decoration:none}
+
+/* Layout */
+.tbb-main{display:grid;gap:var(--tbb-gap);padding-block:var(--tbb-gap)}
+.tbb-content{min-width:0}
+.tbb-slot .widget{margin:0 0 var(--tbb-gap)}
+.tbb-slot .widget:has(ins.adsbygoogle){min-height:100px}
+
+/* Post list */
+.tbb-heading{margin:0 0 var(--tbb-gap);font-size:1.4rem}
+.tbb-grid{display:grid;gap:var(--tbb-gap);grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.tbb-card{display:flex;flex-direction:column;background:var(--tbb-surface);border:1px solid var(--tbb-line);border-radius:var(--tbb-radius);overflow:hidden}
+.tbb-card__thumb{display:block;aspect-ratio:16/9;background:var(--tbb-line)}
+.tbb-card__thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.tbb-card__body{display:flex;flex-direction:column;gap:8px;padding:16px}
+.tbb-card__title{margin:0;font-size:1.15rem}
+.tbb-card__title a{color:var(--tbb-text);text-decoration:none}
+.tbb-card__title a:hover{color:var(--tbb-link)}
+.tbb-card__snippet{margin:0;color:var(--tbb-muted);font-size:.95rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tbb-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0;font-size:.875rem;color:var(--tbb-muted)}
+.tbb-meta a{color:inherit}
+.tbb-pager{display:flex;justify-content:space-between;gap:12px;margin-top:var(--tbb-gap)}
+.tbb-pager__next{margin-left:auto}
+.tbb-empty{padding:24px;background:var(--tbb-surface);border-radius:var(--tbb-radius)}
+
+/* Single post */
+.tbb-crumbs ol{display:flex;flex-wrap:wrap;gap:4px;list-style:none;margin:0 0 12px;padding:0;font-size:.875rem;color:var(--tbb-muted)}
+.tbb-crumbs li+li::before{content:"/";margin-right:4px}
+.tbb-crumbs a{color:inherit}
+.tbb-post__header{margin-bottom:24px}
+.tbb-post__body{font-size:1.06rem}
+.tbb-post__body img{border-radius:8px}
+.tbb-post__body a img{display:inline-block}
+.tbb-post__body blockquote{margin:1.5em 0;padding:4px 0 4px 18px;border-left:4px solid var(--tbb-brand);color:var(--tbb-muted)}
+.tbb-post__body pre{overflow:auto;padding:16px;background:var(--tbb-surface);border:1px solid var(--tbb-line);border-radius:8px;font-size:.9rem;line-height:1.5}
+.tbb-post__body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
+.tbb-post__body table{display:block;overflow-x:auto;border-collapse:collapse;max-width:100%}
+.tbb-post__body th,.tbb-post__body td{padding:8px 12px;border:1px solid var(--tbb-line);text-align:left}
+.tbb-post__body iframe{display:block;aspect-ratio:16/9;width:100%;height:auto;border:0}
+.tbb-post__body .tr-caption{font-size:.85rem;color:var(--tbb-muted)}
+.tbb-tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:32px 0 0;padding:0}
+.tbb-tags a,.tbb-labels a{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid var(--tbb-line);border-radius:999px;color:var(--tbb-text);text-decoration:none;font-size:.9rem}
+.tbb-tags a:hover,.tbb-labels a:hover{border-color:var(--tbb-brand);color:var(--tbb-link)}
+.tbb-author{display:flex;gap:16px;align-items:flex-start;margin-top:32px;padding:20px;background:var(--tbb-surface);border-radius:var(--tbb-radius)}
+.tbb-author img{border-radius:50%;flex:none}
+.tbb-author strong a{display:inline-flex;align-items:center;min-height:24px}
+.tbb-author p{margin:4px 0 0;font-size:.95rem;color:var(--tbb-muted)}
+.tbb-comments{margin-top:40px;padding-top:24px;border-top:1px solid var(--tbb-line)}
+.tbb-comments h2{margin-top:0}
+.tbb-comments .comment-thread ol{list-style:none;margin:0;padding:0}
+.tbb-comments .comment-thread li{margin:0 0 16px}
+.tbb-comments .comment-replies{margin-left:20px;padding-left:16px;border-left:2px solid var(--tbb-line)}
+.tbb-comments .avatar-image-container{float:left;margin-right:12px}
+.tbb-comments .avatar-image-container img{width:36px;height:36px;border-radius:50%}
+.tbb-comments .comment-block{overflow:hidden}
+.tbb-comments .user{font-weight:700}
+.tbb-comments .datetime,.tbb-comments .comment-actions{font-size:.85rem;color:var(--tbb-muted)}
+.tbb-comments .comment-actions a{margin-right:12px}
+.tbb-comments .thread-toggle,.tbb-comments .continue,.tbb-comments .loadmore{display:none}
+.tbb-comments #comment-editor{display:block;width:100%;min-height:275px;border:0}
+
+/* Sidebar and footer widgets */
+.tbb-side .widget,.tbb-footer .widget{margin:0 0 var(--tbb-gap)}
+.tbb-side .widget{padding:20px;background:var(--tbb-surface);border:1px solid var(--tbb-line);border-radius:var(--tbb-radius)}
+.tbb-side h2,.tbb-side h3,.tbb-footer h2,.tbb-footer h3{margin:0 0 12px;font-size:1.05rem}
+.tbb-side ul,.tbb-footer ul{list-style:none;margin:0;padding:0}
+.tbb-labels{display:flex;flex-wrap:wrap;gap:8px}
+.tbb-popular li{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;padding:8px 0}
+.tbb-popular li+li{border-top:1px solid var(--tbb-line)}
+.tbb-popular img{display:block;width:72px;height:72px;object-fit:cover;border-radius:8px}
+.tbb-popular a{display:block;min-height:24px;color:var(--tbb-text);text-decoration:none;font-weight:600;line-height:1.35}
+.tbb-popular a:hover{color:var(--tbb-link)}
+.tbb-popular li:not(:has(img)){grid-template-columns:1fr}
+.tbb-footer{margin-top:var(--tbb-gap);padding-block:var(--tbb-gap) 16px;background:var(--tbb-surface);border-top:1px solid var(--tbb-line);font-size:.95rem}
+.tbb-footer__cols{display:grid;gap:var(--tbb-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.tbb-footer li a{display:inline-flex;align-items:center;min-height:36px;color:var(--tbb-text)}
+.tbb-footer__bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--tbb-line);color:var(--tbb-muted);font-size:.85rem}
+.tbb-footer__bar a{color:inherit}
+
+@media (min-width:768px){
+  .tbb-menu-btn,.tbb-menu-btn[hidden]{display:none}
+  .tbb-menu{margin-left:auto}
+  .tbb-menu ul{display:flex;flex-wrap:wrap;gap:4px;padding:0}
+  .tbb-search{flex:0 1 280px}
+}
+@media (max-width:767.98px){
+  .tbb-menu{flex:1 1 100%;order:3}
+  .tbb-js .tbb-menu:not(.is-open){display:none}
+}
+@media (min-width:1000px){
+  .tbb-main{grid-template-columns:minmax(0,1fr) var(--tbb-side)}
+  .tbb-main--wide{grid-template-columns:minmax(0,1fr)}
+  .tbb-side{position:sticky;top:16px;align-self:start}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{.tbb-header,.tbb-side,.tbb-footer,.tbb-comments,.tbb-slot,.tbb-pager,.tbb-skip{display:none!important}body{background:#fff;color:#000}}
+]]></b:skin>
+  <b:template-skin><![CDATA[
+body#layout .tbb-wrap{max-width:900px}
+body#layout .tbb-main{display:flex;gap:16px}
+body#layout .tbb-content{flex:1}
+body#layout .tbb-side{width:280px}
+body#layout .tbb-footer__cols{display:flex;gap:16px}
+body#layout .tbb-footer__cols > div{flex:1}
+]]></b:template-skin>
+</head>
+<body>
+  <b:class cond='data:view.isLayoutMode' name='tbb-layout'/>
+  <a class='tbb-skip' href='#tbb-content'>Skip to content</a>
+
+  <header class='tbb-header'>
+    <div class='tbb-wrap tbb-header__bar'>
+      <b:section class='tbb-brand-area' id='header' maxwidgets='1' name='Logo / blog title' showaddelement='no'>
+        <b:widget id='Header1' locked='true' title='Blog title' type='Header' version='2' visible='true'>
+          <b:includable id='main' var='this'>
+            <a class='tbb-brand' expr:href='data:blog.homepageUrl'>
+              <b:if cond='data:sourceUrl'>
+                <img class='tbb-brand__logo' expr:alt='data:blog.title' expr:height='data:height' expr:src='data:sourceUrl' expr:width='data:width' fetchpriority='high'/>
+                <b:if cond='data:view.isHomepage'><h1 class='tbb-sr'><data:blog.title/></h1></b:if>
+              <b:else/>
+                <b:tag class='tbb-brand__title' expr:name='data:view.isHomepage ? &quot;h1&quot; : &quot;p&quot;'><data:title/></b:tag>
+              </b:if>
+            </a>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <button aria-controls='tbb-nav' aria-expanded='false' aria-label='Menu' class='tbb-menu-btn' hidden='hidden' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M4 7h16M4 12h16M4 17h16'/></svg></button>
+      <div class='tbb-menu' id='tbb-nav'>
+        <b:section class='tbb-menu-area' id='menu' maxwidgets='1' name='Main menu' showaddelement='yes'>
+          <b:widget id='LinkList1' locked='false' title='Menu' type='LinkList' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-0'>Home</b:widget-setting>
+              <b:widget-setting name='link-0'>/</b:widget-setting>
+              <b:widget-setting name='text-1'>About</b:widget-setting>
+              <b:widget-setting name='link-1'>/p/about.html</b:widget-setting>
+              <b:widget-setting name='text-2'>Contact</b:widget-setting>
+              <b:widget-setting name='link-2'>/p/contact.html</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='this'>
+              <nav aria-label='Main'>
+                <ul>
+                  <b:loop values='data:links' var='link'>
+                    <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                  </b:loop>
+                </ul>
+              </nav>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+
+      <form action='/search' class='tbb-search' method='get' role='search'>
+        <label class='tbb-sr' for='tbb-q'>Search this blog</label>
+        <input id='tbb-q' name='q' placeholder='Search…' type='search'/>
+        <button type='submit'>Search</button>
+      </form>
+    </div>
+  </header>
+
+  <div class='tbb-wrap'>
+    <main class='tbb-main' id='tbb-content'>
+      <b:class cond='data:view.isPage' name='tbb-main--wide'/>
+      <div class='tbb-content'>
+        <b:section class='tbb-slot' id='top-slot' name='Above posts (ads or notices)' showaddelement='yes'/>
+
+        <b:section class='tbb-posts' id='main' maxwidgets='1' name='Blog posts' showaddelement='no'>
+          <b:widget id='Blog1' locked='true' title='Blog posts' type='Blog' version='2' visible='true'>
+            <b:includable id='main' var='this'>
+              <b:if cond='data:view.isSingleItem'>
+                <b:loop values='data:posts' var='post'>
+                  <b:include data='post' name='tbbSingle'/>
+                </b:loop>
+              <b:else/>
+                <b:include name='tbbListHeading'/>
+                <b:if cond='data:posts.empty'>
+                  <p class='tbb-empty'><data:messages.noResultsFound/></p>
+                <b:else/>
+                  <div class='tbb-grid'>
+                    <b:loop index='i' values='data:posts' var='post'>
+                      <b:include data='{ post: data:post, i: data:i }' name='tbbCard'/>
+                    </b:loop>
+                  </div>
+                </b:if>
+                <b:include name='tbbPager'/>
+              </b:if>
+            </b:includable>
+
+            <b:includable id='tbbListHeading'>
+              <b:if cond='data:view.search.label'>
+                <h1 class='tbb-heading'><data:view.search.label/></h1>
+              <b:elseif cond='data:view.search.query'/>
+                <h1 class='tbb-heading'><data:messages.search/>: <data:view.search.query.escaped/></h1>
+              <b:elseif cond='data:view.isArchive'/>
+                <h1 class='tbb-heading'><data:view.archive.rangeMessage/></h1>
+              <b:elseif cond='data:view.isHomepage'/>
+                <h2 class='tbb-heading'>Latest posts</h2>
+              </b:if>
+            </b:includable>
+
+            <b:includable id='tbbCard' var='card'>
+              <article class='tbb-card'>
+                <b:if cond='data:card.post.featuredImage'>
+                  <a class='tbb-card__thumb' expr:aria-label='data:card.post.title' expr:href='data:card.post.url' tabindex='-1'>
+                    <b:if cond='data:card.post.featuredImage.isYouTube'>
+                      <img alt='' expr:src='data:card.post.featuredImage' height='360' width='640'>
+                        <b:attr cond='data:card.i != 0' name='loading' value='lazy'/>
+                      </img>
+                    <b:else/>
+                      <img alt='' decoding='async' expr:src='resizeImage(data:card.post.featuredImage, 640, &quot;16:9&quot;)' expr:srcset='sourceSet(data:card.post.featuredImage, [360, 640, 960], &quot;16:9&quot;)' height='360' sizes='(min-width: 1000px) 400px, 100vw' width='640'>
+                        <b:attr cond='data:card.i != 0' name='loading' value='lazy'/>
+                        <b:attr cond='data:card.i == 0' name='fetchpriority' value='high'/>
+                      </img>
+                    </b:if>
+                  </a>
+                </b:if>
+                <div class='tbb-card__body'>
+                  <h2 class='tbb-card__title'><a expr:href='data:card.post.url'><b:eval expr='data:card.post.title ?: data:messages.noTitle'/></a></h2>
+                  <p class='tbb-meta'><time expr:datetime='data:card.post.date.iso8601'><data:card.post.date/></time></p>
+                  <b:if cond='data:card.post.snippets.short'>
+                    <p class='tbb-card__snippet'><data:card.post.snippets.short/></p>
+                  </b:if>
+                </div>
+              </article>
+            </b:includable>
+
+            <b:includable id='tbbPager'>
+              <b:if cond='data:newerPageUrl or data:olderPageUrl'>
+                <nav aria-label='Pagination' class='tbb-pager'>
+                  <b:if cond='data:newerPageUrl'>
+                    <a class='tbb-btn' expr:href='data:newerPageUrl.canonical' rel='prev'>← <data:messages.newer/></a>
+                  </b:if>
+                  <b:if cond='data:olderPageUrl'>
+                    <a class='tbb-btn tbb-pager__next' expr:href='data:olderPageUrl.canonical' rel='next'><data:messages.older/> →</a>
+                  </b:if>
+                </nav>
+              </b:if>
+            </b:includable>
+
+            <b:includable id='tbbSingle' var='post'>
+              <article class='tbb-post'>
+                <header class='tbb-post__header'>
+                  <b:if cond='data:view.isPost'>
+                    <nav aria-label='Breadcrumb' class='tbb-crumbs'>
+                      <ol>
+                        <li><a expr:href='data:blog.homepageUrl'><data:messages.home/></a></li>
+                        <b:if cond='data:post.labels'>
+                          <li><a expr:href='data:post.labels.first.url.canonical'><data:post.labels.first.name/></a></li>
+                        </b:if>
+                        <li aria-current='page'><span class='tbb-sr'><data:post.title/></span><span aria-hidden='true'>Article</span></li>
+                      </ol>
+                    </nav>
+                  </b:if>
+                  <h1><b:eval expr='data:post.title ?: data:messages.noTitle'/></h1>
+                  <b:if cond='data:view.isPost'>
+                    <p class='tbb-meta'>
+                      <span><data:post.author.name/></span>
+                      <time expr:datetime='data:post.date.iso8601'><data:post.date/></time>
+                      <b:if cond='data:post.allowComments and data:post.numberOfComments != 0'>
+                        <a href='#comments'><data:post.numberOfComments/> <data:messages.comments/></a>
+                      </b:if>
+                    </p>
+                  </b:if>
+                </header>
+                <div class='tbb-post__body' expr:id='&quot;post-body-&quot; + data:post.id'>
+                  <data:post.body/>
+                </div>
+                <b:if cond='data:view.isPost'>
+                  <b:if cond='data:post.labels'>
+                    <ul class='tbb-tags'>
+                      <b:loop values='data:post.labels' var='label'>
+                        <li><a expr:href='data:label.url.canonical' rel='tag'><data:label.name/></a></li>
+                      </b:loop>
+                    </ul>
+                  </b:if>
+                  <b:if cond='data:post.author.aboutMe'>
+                    <aside class='tbb-author'>
+                      <b:if cond='data:post.author.authorPhoto.image'>
+                        <img alt='' expr:src='resizeImage(data:post.author.authorPhoto.image, 128, &quot;1:1&quot;)' height='64' loading='lazy' width='64'/>
+                      </b:if>
+                      <div>
+                        <strong><a expr:href='data:post.author.profileUrl' rel='author'><data:post.author.name/></a></strong>
+                        <p><data:post.author.aboutMe/></p>
+                      </div>
+                    </aside>
+                  </b:if>
+                  <b:include data='post' name='tbbSchema'/>
+                </b:if>
+                <b:if cond='data:post.allowComments'>
+                  <b:include data='post' name='tbbComments'/>
+                </b:if>
+              </article>
+            </b:includable>
+
+            <b:includable id='tbbComments' var='post'>
+              <section class='tbb-comments' id='comments'>
+                <h2><data:messages.comments/> (<data:post.numberOfComments/>)</h2>
+                <b:if cond='data:post.embedCommentForm'>
+                  <b:if cond='data:post.numberOfComments != 0'>
+                    <div class='comments-content'>
+                      <div id='comment-holder'><data:post.commentHtml/></div>
+                    </div>
+                  </b:if>
+                  <b:if cond='data:post.allowNewComments'>
+                    <a name='comment-form'/>
+                    <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' expr:src='data:post.commentFormIframeSrc' frameborder='0' height='275' id='comment-editor' name='comment-editor' title='Comment form' width='100%'/>
+                  <b:elseif cond='data:post.noNewCommentsText'/>
+                    <p><data:post.noNewCommentsText/></p>
+                  </b:if>
+                <b:else/>
+                  <b:if cond='data:post.allowNewComments'>
+                    <a class='tbb-btn' expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'><data:messages.postAComment/></a>
+                  </b:if>
+                </b:if>
+              </section>
+            </b:includable>
+
+            <b:includable id='tbbSchema' var='post'>
+              <script type='application/ld+json'>{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@graph&quot;:[{&quot;@type&quot;:&quot;BlogPosting&quot;,&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#article&quot;,&quot;mainEntityOfPage&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;,&quot;headline&quot;:&quot;<data:post.title.jsonEscaped/>&quot;,&quot;description&quot;:&quot;<data:post.snippets.short.jsonEscaped/>&quot;,<b:if cond='data:post.featuredImage'>&quot;image&quot;:&quot;<data:post.featuredImage.jsonEscaped/>&quot;,</b:if>&quot;datePublished&quot;:&quot;<data:post.date.iso8601.jsonEscaped/>&quot;,&quot;dateModified&quot;:&quot;<data:view.lastUpdated.iso8601/>&quot;,&quot;author&quot;:{&quot;@type&quot;:&quot;Person&quot;,&quot;name&quot;:&quot;<data:post.author.name.jsonEscaped/>&quot;,&quot;url&quot;:&quot;<data:post.author.profileUrl.jsonEscaped/>&quot;},&quot;publisher&quot;:{&quot;@type&quot;:&quot;Organization&quot;,&quot;name&quot;:&quot;<data:blog.title.jsonEscaped/>&quot;,&quot;url&quot;:&quot;<data:blog.homepageUrl.canonical.jsonEscaped/>&quot;}}<b:if cond='data:post.labels'>,{&quot;@type&quot;:&quot;BreadcrumbList&quot;,&quot;itemListElement&quot;:[{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:1,&quot;name&quot;:&quot;<data:messages.home.jsonEscaped/>&quot;,&quot;item&quot;:&quot;<data:blog.homepageUrl.canonical.jsonEscaped/>&quot;},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:2,&quot;name&quot;:&quot;<data:post.labels.first.name.jsonEscaped/>&quot;,&quot;item&quot;:&quot;<data:post.labels.first.url.canonical.jsonEscaped/>&quot;},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:3,&quot;name&quot;:&quot;<data:post.title.jsonEscaped/>&quot;}]}</b:if>]}</script>
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+        <b:section class='tbb-slot' id='bottom-slot' name='Below posts (ads or notices)' showaddelement='yes'/>
+      </div>
+
+      <b:if cond='!data:view.isPage'>
+        <aside aria-label='Sidebar' class='tbb-side'>
+          <b:section class='tbb-side-area' id='sidebar' name='Sidebar' showaddelement='yes'>
+            <b:widget id='PopularPosts1' locked='false' title='Popular posts' type='PopularPosts' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
+                <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+                <b:widget-setting name='showSnippets'>false</b:widget-setting>
+                <b:widget-setting name='timeRange'>LAST_MONTH</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main' var='this'>
+                <b:if cond='data:title'><h2><data:title/></h2></b:if>
+                <ul class='tbb-popular'>
+                  <b:loop values='data:posts' var='post'>
+                    <li>
+                      <b:if cond='data:post.featuredImage'>
+                        <img alt='' expr:src='resizeImage(data:post.featuredImage, 144, &quot;1:1&quot;)' height='72' loading='lazy' width='72'/>
+                      </b:if>
+                      <a expr:href='data:post.url'><data:post.title/></a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </b:includable>
+            </b:widget>
+            <b:widget id='Label1' locked='false' title='Topics' type='Label' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+                <b:widget-setting name='display'>LIST</b:widget-setting>
+                <b:widget-setting name='showType'>ALL</b:widget-setting>
+                <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main' var='this'>
+                <b:if cond='data:title'><h2><data:title/></h2></b:if>
+                <div class='tbb-labels'>
+                  <b:loop values='data:labels' var='label'>
+                    <a expr:href='data:label.url.canonical'><data:label.name/><b:if cond='data:this.showFreqNumbers'> (<data:label.count/>)</b:if></a>
+                  </b:loop>
+                </div>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </aside>
+      </b:if>
+    </main>
+  </div>
+
+  <footer class='tbb-footer'>
+    <div class='tbb-wrap'>
+      <div class='tbb-footer__cols'>
+        <b:section class='tbb-footer-area' id='footer-1' name='Footer column 1' showaddelement='yes'>
+          <b:widget id='Text1' locked='false' title='About this blog' type='Text' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>Write one or two sentences about who runs this blog and what readers will find here.</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='this'>
+              <b:if cond='data:title'><h2><data:title/></h2></b:if>
+              <div><data:content/></div>
+            </b:includable>
+          </b:widget>
+        </b:section>
+        <b:section class='tbb-footer-area' id='footer-2' name='Footer column 2' showaddelement='yes'>
+          <b:widget id='LinkList2' locked='false' title='Pages' type='LinkList' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-0'>Privacy policy</b:widget-setting>
+              <b:widget-setting name='link-0'>/p/privacy-policy.html</b:widget-setting>
+              <b:widget-setting name='text-1'>Contact</b:widget-setting>
+              <b:widget-setting name='link-1'>/p/contact.html</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='this'>
+              <b:if cond='data:title'><h2><data:title/></h2></b:if>
+              <ul>
+                <b:loop values='data:links' var='link'>
+                  <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                </b:loop>
+              </ul>
+            </b:includable>
+          </b:widget>
+        </b:section>
+        <b:section class='tbb-footer-area' id='footer-3' name='Footer column 3' showaddelement='yes'/>
+      </div>
+      <div class='tbb-footer__bar'>
+        <span>© <data:blog.title/></span>
+        <span>Theme: <a href='https://www.thebukitbesi.com/' rel='nofollow'>TBB Lite</a></span>
+      </div>
+    </div>
+  </footer>
+  <script>//<![CDATA[
+(function(){var b=document.querySelector('.tbb-menu-btn'),n=document.getElementById('tbb-nav');if(!b||!n)return;document.documentElement.classList.add('tbb-js');b.hidden=false;b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(o));n.classList.toggle('is-open',o)})})();
+//]]></script>
+</body>
+</html>

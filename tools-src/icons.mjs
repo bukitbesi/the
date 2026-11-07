@@ -98,6 +98,7 @@ export const icons = {
   'exif-editor': rect(2, 4, 14, 12) + circle(6.5, 8.5, 1.5) + p('m2 14 4-3 3 2 3-3 4 3') + p('M14.5 20.5 20 15l2 2-5.5 5.5H14.5Z'),
   'exif-remover': rect(2, 4, 14, 12) + p('M9 7.5a2.2 2.2 0 0 0-2.2 2.2c0 1.7 2.2 3.8 2.2 3.8s2.2-2.1 2.2-3.8A2.2 2.2 0 0 0 9 7.5Z') + p('m16 15 6 6m0-6-6 6'),
   'image-converter': image + p('m15 2 3 2-3 2M6 18l-3 2 3 2'),
+  'blogger-template': rect(3, 4, 18, 16, 2) + p('M3 9h18M15 9v11M6 13h6M6 16h4') + circle(6, 6.5, 0.6) + circle(8.5, 6.5, 0.6),
   'color-contrast': circle(12, 12, 9) + '<path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor"/>',
   'online-photoshop': p('m15 3 6 6-9 9-6 2 2-6Zm-7 11 4 4M4 3v5M2 5h5'),
   'sticker-whatsapp-maker': p('M20 14V6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h8Zm-6 6v-6h6') + circle(8, 9, 1) + circle(14, 9, 1) + p('M7 13c2 3 5 3 7 0'),
