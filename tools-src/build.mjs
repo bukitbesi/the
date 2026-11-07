@@ -16,6 +16,7 @@ import { batch15 } from './batch15.mjs';
 import { batch16 } from './batch16.mjs';
 import { batch17 } from './batch17.mjs';
 import { batch18 } from './batch18.mjs';
+import { BOARDS, pinItems, feed as pinFeed } from './pinterest.mjs';
 import { batch19 } from './batch19.mjs';
 import { icons, renderIcon } from './icons.mjs';
 
@@ -323,7 +324,7 @@ function render(map) {
     LOGO_72: site.logo.local72, LOGO_192: site.logo.local192,
     OG_IMAGE: abs(site.ogImage.url), OG_W: site.ogImage.width, OG_H: site.ogImage.height, OG_ALT: esc(site.ogImage.alt),
     TWITTER_CARD: site.ogImage.width / site.ogImage.height >= 1.5 ? 'summary_large_image' : 'summary',
-    TWITTER: site.twitter, BASE_CSS: read('css/base.css').trim(), FOOTER_POPULAR: footerPopular, AD_LOADER: adLoader, GTM_HEAD: gtmHead, GTM_BODY: gtmBody,
+    TWITTER: site.twitter, BASE_CSS: read('css/base.css').trim(), FOOTER_POPULAR: footerPopular, AD_LOADER: adLoader, GTM_HEAD: gtmHead + (site.pinterestVerify ? `\n<meta name="p:domain_verify" content="${esc(site.pinterestVerify)}">` : ''), GTM_BODY: gtmBody,
     ROBOTS: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1', HEAD_EXTRA: '', PAGE_SCRIPTS: ''
   };
   const lang = map.LANG;
@@ -3267,7 +3268,7 @@ const copy = (from, to = from) => fs.cpSync(path.join(root, from), path.join(pub
 fs.rmSync(path.join(pub, 'assets/vendor'), { recursive: true, force: true });
 // Prayer time years roll over; a clean copy drops years no longer in the source.
 fs.rmSync(path.join(pub, 'assets/solat'), { recursive: true, force: true });
-['CNAME', '404.html', 'offline.html', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img', 'assets/solat', 'assets/blogger'].forEach(f => copy(f));
+['CNAME', '404.html', 'offline.html', 'assets/pins', 'assets/favicon-image', 'assets/PWA/pwa.min.js', 'assets/PWA/icons', 'assets/PWA/screenshots', 'assets/vendor', 'assets/img', 'assets/solat', 'assets/blogger'].forEach(f => copy(f));
 // Large libraries are cached by the worker on first use instead of on install, so they work offline afterwards
 // without making every visitor download them.
 const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.endsWith('.js')).map(f => '/assets/vendor/' + f)
@@ -3276,6 +3277,20 @@ const lazy = fs.readdirSync(path.join(root, 'assets/vendor')).filter(f => f.ends
   // A visitor's prayer time zone is kept after first use, so the app shows the times offline.
   .concat(fs.readdirSync(path.join(root, 'assets/solat')).flatMap(y => fs.readdirSync(path.join(root, 'assets/solat', y)).map(f => `/assets/solat/${y}/${f}`)));
 fs.rmSync(path.join(pub, 'assets/favicon-image/favicon'), { force: true });
+// ---- Pinterest: one RSS feed per category, each auto-publishing to its own board (tools-src/pinterest.mjs).
+// Pin images come from tools-src/pins.mjs; a page without one is left out until it is rendered.
+// Flat files at the root (/pinterest-calc.xml): every folder in docs/ is checked as a page.
+for (const f of fs.readdirSync(pub)) if (/^pinterest-[a-z]+\.xml$/.test(f)) fs.rmSync(path.join(pub, f));
+{
+  const items = pinItems(pages, tools, site.origin);
+  const sizes = new Map(items.filter(i => fs.existsSync(path.join(root, i.image))).map(i => [i.image, fs.statSync(path.join(root, i.image)).size]));
+  for (const cat of Object.keys(site.categories)) {
+    if (!items.some(i => i.cat === cat && sizes.has(i.image))) continue;
+    fs.writeFileSync(path.join(pub, `pinterest-${cat}.xml`), pinFeed(cat, items, { origin: site.origin, brand: site.brand, label: BOARDS[cat] || site.categories[cat].label, blurb: site.categories[cat].blurb, sizes }));
+  }
+  const missing = items.filter(i => !sizes.has(i.image)).length;
+  if (missing) console.log(`Pinterest: ${missing} page(s) have no pin image yet; run node tools-src/pins.mjs`);
+}
 // Serve files exactly as built; Jekyll processing is unnecessary and slower.
 fs.writeFileSync(path.join(pub, '.nojekyll'), '');
 const fileFor = url => path.join(pub, url);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Bukit Besi Tools: Free SEO Tools</title>
+    <link>https://tool.thebukitbesi.com/?cat=seo#tools</link>
+    <atom:link href="https://tool.thebukitbesi.com/pinterest-seo.xml" rel="self" type="application/rss+xml"/>
+    <description>Build schema and robots.txt, format FAQs and review meta tags or keyword frequency.</description>
+    <language>en-MY</language>
+    <lastBuildDate>Mon, 19 Oct 2026 01:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Meta Tag Checker</title>
+      <link>https://tool.thebukitbesi.com/meta-tag-checker/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=seo</link>
+      <description>Free meta tag checker: preview your Google result on mobile and desktop, check title and description length, Open Graph, canonical, robots and JSON-LD.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/meta-tag-checker/</guid>
+      <pubDate>Mon, 19 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free SEO Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/meta-tag-checker.jpg" length="101354" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/meta-tag-checker.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>Schema Markup Generator</title>
+      <link>https://tool.thebukitbesi.com/schema-markup-generator/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=seo</link>
+      <description>Free JSON-LD schema generator for Article, Product, Local Business, Event, Recipe, Video and more, checked against Google's required properties.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/schema-markup-generator/</guid>
+      <pubDate>Mon, 19 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free SEO Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/schema-markup-generator.jpg" length="111948" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/schema-markup-generator.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+    <item>
+      <title>Robots.txt Generator and Tester</title>
+      <link>https://tool.thebukitbesi.com/robots-txt-generator/?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=seo</link>
+      <description>Free robots.txt generator and tester: Blogger and WordPress presets, block AI crawlers like GPTBot, test any URL against Google's matching rules.</description>
+      <guid isPermaLink="true">https://tool.thebukitbesi.com/robots-txt-generator/</guid>
+      <pubDate>Sat, 17 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Free SEO Tools</category>
+      <enclosure url="https://tool.thebukitbesi.com/assets/pins/robots-txt-generator.jpg" length="102764" type="image/jpeg"/>
+      <media:content url="https://tool.thebukitbesi.com/assets/pins/robots-txt-generator.jpg" medium="image" type="image/jpeg" width="1000" height="1500"/>
+    </item>
+  </channel>
+</rss>
