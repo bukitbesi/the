@@ -503,6 +503,7 @@ tools-src/gold-worker/      Cloudflare Worker that serves the live gold price (d
 assets/js/prompt-core.js    AI prompts: platform formats, variations, surprise ideas, image palette, vision parsing, URL state
 assets/js/prompt-cards.js   shared prompt cards, copy and saved prompts (AI Prompt Generator, Image to Prompt)
 tools-src/vision-worker/    Cloudflare Workers AI worker that describes uploaded pictures (deploy: documentation/vision-worker.md)
+tools-src/edge-check.mjs    live check of hosts, redirects, robots.txt, sitemap and ads.txt per crawler (settings: documentation/cloudflare.md)
 assets/js/grade-core.js     CGPA maths shared by cgpa-ui.js and cgpa-percent-ui.js (bundled per page)
 assets/js/tracking-core.js  parcel tracking: courier list, tracking-number detection, official tracking links
 assets/js/css-core.js       CSS minifier and beautifier (tokenizer, safe value shortening)
