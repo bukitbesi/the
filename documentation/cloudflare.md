@@ -1,8 +1,13 @@
 # Cloudflare
 
-`thebukitbesi.com` uses Cloudflare DNS (Free plan). Only `tool.thebukitbesi.com` (GitHub Pages) and the retired
-`the.thebukitbesi.com` (redirect only) are proxied (orange cloud). `www` (Blogger) and the root domain stay DNS-only
+`thebukitbesi.com` uses Cloudflare DNS (Free plan). Only `tool.thebukitbesi.com` (GitHub Pages) and the redirect-only
+hosts `the.` and `www.tool.` are proxied (orange cloud). `www` (Blogger), the root domain and `assets` stay DNS-only
 (grey cloud).
+
+**State on 2026-11-15:** everything below is applied through the API (token in the cloud environment, zone
+`3e4e059b5f06fb9c4452a487a67a8e88`). Before that date two custom rules put a Managed Challenge on all tool traffic
+and on `/robots.txt`, `/sitemap.xml`, `/llms.txt` and `/ads.txt`. That was the "robots.txt 403". The redirect
+rules held pasted Markdown links and never matched. Never use Challenge or Block on the tool host; use Skip.
 
 Run `node tools-src/edge-check.mjs` after any Cloudflare or Blogger change. It checks every host, redirect, robots.txt,
 sitemap and ads.txt with search and AI crawler user-agents and exits non-zero on a problem.
@@ -25,22 +30,27 @@ The only Blogger-side fix is its robots.txt (see the last section).
 | Type | Name | Content | Proxy |
 |---|---|---|---|
 | CNAME | `tool` | `bukitbesi.github.io` (GitHub Pages) | Proxied |
-| AAAA | `the` | `100::` (placeholder; the Redirect Rule answers) | Proxied |
+| CNAME | `the` | `tool.thebukitbesi.com` (the Redirect Rule answers) | Proxied |
+| AAAA | `www.tool` | `100::` (the Redirect Rule answers) | Proxied |
+| CNAME | `assets` | `bukitbesi.github.io` (repo `bukitbesi/tbb-assets`, PWA files loaded by the Blogger theme) | DNS only |
+| CNAME | `data` | `tbbcom.github.io`: serves "Site not found". Point it at a live Pages site or delete it. | Proxied |
+| TXT | `@` / `*._domainkey` / `_dmarc` | `v=spf1 -all`, null DKIM, `v=DMARC1; p=reject; …`: the domain sends no email | DNS only |
 | CNAME | `www` | `ghs.googlehosted.com` | DNS only |
 | A | `@` | `216.239.32.21`, `216.239.34.21`, `216.239.36.21`, `216.239.38.21` (four records) | DNS only |
 | CNAME | Blogger verification name | `gv-….dv.googlehosted.com` | DNS only |
 
 Blogger → Settings → Publishing → "Redirect domain" must be on, so the root domain redirects to `www`.
 
-`the.thebukitbesi.com` stopped resolving when DNS moved from Namecheap to Cloudflare (the Namecheap URL Redirect record
-did not move). Any backlinks or old index entries on that host are dead until the `AAAA the` record and the Redirect
-Rule below exist.
+When DNS moved from Namecheap to Cloudflare, the `the` redirect and the `assets` record were lost. Without `assets`,
+every Blogger page logged a failed `tbb-pwa.min.js` load. Both were restored on 2026-11-15. Keep `assets` grey: GitHub
+renews its certificate only while the name points straight at GitHub.
 
 ## Settings for the zone (dashboard paths as of November 2026)
 
 ### SSL/TLS
 
 - Encryption mode: **Full (strict)** (GitHub Pages has a valid certificate; grey-cloud hosts are not affected).
+- Security Level: **Essentially off**, Browser Integrity Check: **off** (static site; DDoS protection stays on).
 - Edge Certificates: **Always Use HTTPS on**, **Automatic HTTPS Rewrites on**, minimum TLS **1.2**.
 - HSTS: leave off in Cloudflare. GitHub Pages already sends it for `tool`, and a zone-wide `includeSubDomains` would
   pin `www` to whatever Blogger does.
@@ -69,7 +79,7 @@ Security → Security rules → Create rule → Custom rule:
 - Expression (Edit expression):
 
   ```
-  (http.host eq "tool.thebukitbesi.com" and http.request.uri.path in {"/robots.txt" "/sitemap.xml" "/llms.txt" "/ads.txt" "/9d56c171df1cfe0535b521f4e72344ea.txt"})
+  (http.host eq "tool.thebukitbesi.com" and http.request.uri.path in {"/robots.txt" "/sitemap.xml" "/llms.txt" "/ads.txt" "/9d56c171df1cfe0535b521f4e72344ea.txt" "/manifest.webmanifest"})
   ```
 
 - Action: **Skip** → tick all remaining custom rules, all rate limiting rules, all managed rules, all Super Bot Fight
@@ -79,14 +89,28 @@ Security → Security rules → Create rule → Custom rule:
 If you ever add a block/challenge rule (country, ASN, etc.), add `and not cf.client.bot` to it so verified search and
 AI crawlers pass.
 
-### Redirect Rule: retired host
+### Redirect Rules
 
-Rules → Redirect Rules → Create rule (Single Redirect):
+Rules → Redirect Rules (Single Redirects), both Dynamic, status **301**, **Preserve query string** on:
 
-- Name: `the-to-tool`
-- When: Hostname equals `the.thebukitbesi.com`
-- Then: Dynamic, expression `concat("https://tool.thebukitbesi.com", http.request.uri.path)`, status **301**,
-  **Preserve query string** on.
+| Name | When | Target expression |
+|---|---|---|
+| `the-to-tool (retired host)` | `(http.host eq "the.thebukitbesi.com")` | `concat("https://tool.thebukitbesi.com", http.request.uri.path)` |
+| `www.tool-to-tool` | `(http.host eq "www.tool.thebukitbesi.com")` | same |
+
+Type expressions in the expression editor, never pasted from chat: a pasted link turns into `[host](https://host)` and
+silently never matches. There is no `www` → root rule; Blogger lives on `www`.
+
+### Configuration Rule: no Cloudflare beacon
+
+`tool: no Cloudflare RUM beacon`: `(http.host eq "tool.thebukitbesi.com")` → Disable Real User Monitoring. Web
+Analytics' automatic setup injected `static.cloudflareinsights.com/beacon.min.js` into every tool page (a third-party
+script; analytics runs through GTM/GA4 only).
+
+### Crawler Hints
+
+Caching → Configuration → **Crawler Hints: on**. Cloudflare then pings IndexNow (Bing, Yandex, Seznam, Naver) when cached
+content changes, in addition to the `indexnow` job in the purge workflow.
 
 ### Speed and caching (tool host only)
 
