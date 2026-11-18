@@ -1,6 +1,10 @@
 {
-  "fetchedAt": "2026-11-18T10:38:19.782Z",
-  "spot": null,
+  "fetchedAt": "2026-11-18T18:20:24.871Z",
+  "spot": {
+    "usdOz": 3737.800049,
+    "at": "2026-11-18T18:20:01Z",
+    "source": "gold-api.com"
+  },
   "fx": {
     "usdMyr": 4.0895,
     "date": "2026-11-18",
