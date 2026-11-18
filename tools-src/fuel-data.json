@@ -1,16 +1,7 @@
 {
- "fetchedAt": "2026-11-12T00:37:42.201Z",
+ "fetchedAt": "2026-11-18T19:29:38.133Z",
  "source": "https://api.data.gov.my/data-catalogue?id=fuelprice&filter=level@series_type",
  "history": [
-  {
-   "date": "2025-11-20",
-   "ron95_budi95": 1.99,
-   "ron95": 2.65,
-   "ron97": 3.28,
-   "diesel": 3.1,
-   "diesel_eastmsia": 2.15,
-   "diesel_budi": null
-  },
   {
    "date": "2025-11-27",
    "ron95_budi95": 1.99,
@@ -468,6 +459,15 @@
    "ron97": 4.2,
    "diesel": 4.87,
    "diesel_eastmsia": 4.87,
+   "diesel_budi": 2.1
+  },
+  {
+   "date": "2026-11-19",
+   "ron95_budi95": 1.99,
+   "ron95": 3.72,
+   "ron97": 4,
+   "diesel": 4.72,
+   "diesel_eastmsia": 4.72,
    "diesel_budi": 2.1
   }
  ]
