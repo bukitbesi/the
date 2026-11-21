@@ -5,19 +5,75 @@
   "policy": true,
   "schemaType": "ContactPage",
   "title": "Contact and Corrections",
-  "description": "Report an outdated rate or a wrong result, suggest a new Malaysian calculator, or ask about advertising on The Bukit Besi Tools.",
+  "description": "Send a message to The Bukit Besi Tools: report an outdated rate or wrong result, suggest a Malaysian calculator, or ask about advertising.",
   "datePublished": "2026-10-15",
-  "dateModified": "2026-10-15",
+  "dateModified": "2026-11-21",
+  "scripts": ["/assets/js/contact.js"],
   "breadcrumb": [["Tools", "/"], ["Contact", null]]
 }
 -->
+<style>
+.contact__topics{display:grid;gap:12px;margin:20px 0 8px}
+@media(min-width:640px){.contact__topics{grid-template-columns:repeat(3,1fr)}}
+.contact__topics a{display:block;padding:14px 16px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-weight:600;text-decoration:none;color:var(--text)}
+.contact__topics a:hover{border-color:var(--card-hover)}
+.contact__topics small{display:block;font-weight:400;color:var(--text3);margin-top:4px}
+.contact{margin:28px 0 8px;scroll-margin-top:90px}
+.contact__grid{display:grid;gap:0 16px}
+@media(min-width:640px){.contact__grid{grid-template-columns:1fr 1fr}}
+.contact .input{width:100%;font-size:1rem;color:var(--text)}
+.contact textarea.input{display:block;min-height:160px;padding:12px;resize:vertical;line-height:1.6;font:inherit}
+.contact .input:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px var(--tint-b)}
+.contact>h2{margin:0 0 14px}
+.contact__opt{font-weight:400;color:var(--text3)}
+.contact__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.contact__note{font-size:.85rem;color:var(--text3);margin:4px 0 16px}
+.contact__note a,.contact__status a{color:var(--accent2);text-decoration:underline}
+.contact__status{min-height:1.5em;margin-top:12px;font-size:.92rem}
+.contact__status--ok{padding:12px 14px;border-radius:12px;background:var(--tint);border:1px solid var(--tint-b);color:var(--text)}
+.contact__status--err{color:#b42318}
+:root[data-theme=dark] .contact__status--err{color:#ff9b8f}
+.contact__done h2{margin:0 0 8px;font-size:1.2rem}
+.contact__done:focus{outline:none}
+</style>
 <div class="page">
 <div class="container prose">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Tools</a></li><li aria-current="page">Contact</li></ol></nav>
   <h1>Contact The Bukit Besi Tools</h1>
-  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span></p>
+  <p class="answer">Send a message with the form below or email <a href="mailto:editor@thebukitbesi.com"><strong>editor@thebukitbesi.com</strong></a>. We reply to every genuine message, usually within two working days.</p>
+  <p class="meta"><span>Updated <time datetime="{{DATE_ISO}}">{{DATE_TEXT}}</time></span><span>Messages go to our inbox and are not stored on this site</span></p>
 
-  <p>Messages are handled through the <strong><a href="{{MAIN_SITE}}/p/contact.html">contact form on {{BRAND}}</a></strong>, which covers this tools site as well. You can also reach us on X at <a href="https://x.com/BukitBesiBlog" rel="noopener">@BukitBesiBlog</a>.</p>
+  <div class="contact__topics">
+    <a href="/contact/?topic=correction#form">Report an error<small>Outdated rate, wrong result or broken tool</small></a>
+    <a href="/contact/?topic=tool#form">Suggest a tool<small>A calculator or tool you need, in BM or English</small></a>
+    <a href="/contact/?topic=advertising#form">Advertising<small>Sponsorships and partnerships</small></a>
+  </div>
+
+  <form class="box contact" id="form" action="/api/contact" method="post" data-tbb-contact data-email="editor@thebukitbesi.com" aria-labelledby="form-h">
+    <h2 id="form-h">Send a message</h2>
+    <p class="contact__status contact__status--ok" data-sent hidden>Thank you, your message is on its way. We usually reply within two working days.</p>
+    <p class="contact__status contact__status--err" data-failed hidden>Your message could not be sent. Please email <a href="mailto:editor@thebukitbesi.com">editor@thebukitbesi.com</a>.</p>
+    <div class="contact__grid">
+      <div class="field"><label for="cf-name">Your name</label><input class="input" id="cf-name" name="name" autocomplete="name" required minlength="2" maxlength="100"></div>
+      <div class="field"><label for="cf-email">Email address</label><input class="input" id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200"></div>
+      <div class="field"><label for="cf-company">Company or website <span class="contact__opt">(optional)</span></label><input class="input" id="cf-company" name="company" autocomplete="organization" maxlength="120"></div>
+      <div class="field"><label for="cf-topic">Topic</label><select class="input" id="cf-topic" name="topic">
+        <option value="general">General question</option>
+        <option value="correction">Wrong rate or result</option>
+        <option value="tool">Tool idea or feedback</option>
+        <option value="advertising">Advertising and sponsorship</option>
+        <option value="business">Partnership or business use</option>
+        <option value="press">Press and media</option>
+      </select></div>
+    </div>
+    <div class="field"><label for="cf-message">Message</label><textarea class="input" id="cf-message" name="message" rows="6" required minlength="10" maxlength="5000"></textarea></div>
+    <div class="contact__hp" aria-hidden="true"><label for="cf-website">Leave this empty</label><input id="cf-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <input type="hidden" name="t" value="">
+    <input type="hidden" name="page" value="">
+    <p class="contact__note">We use your name and email only to reply to you. Messages are delivered to our inbox, never stored on this website, and never added to a mailing list. See our <a href="/privacy/">privacy policy</a>.</p>
+    <button class="btn" type="submit">Send message</button>
+    <p class="contact__status" role="status" aria-live="polite" data-status></p>
+  </form>
 
   <h2 id="errors">Report an error or outdated rate</h2>
   <p>Please include:</p>
@@ -32,9 +88,12 @@
   <p>Tell us the calculation you need and who it is for. Suggestions are reviewed and the most requested ones are built, in Bahasa Melayu and English.</p>
 
   <h2 id="business">Advertising and partnerships</h2>
-  <p>Use the same form. Paid placements are not mixed into calculator results.</p>
+  <p>Choose "Advertising and sponsorship" in the form. Paid placements are always labelled and never change a calculator's result.</p>
+
+  <h2 id="other">Other ways to reach us</h2>
+  <p>Email <a href="mailto:editor@thebukitbesi.com">editor@thebukitbesi.com</a>, or find us on X at <a href="https://x.com/BukitBesiBlog" rel="noopener">@BukitBesiBlog</a>. Questions about the main blog can also go through the <a href="{{MAIN_SITE}}/p/contact.html">contact page on {{BRAND}}</a>.</p>
 
   <h2 id="ms" lang="ms">Hubungi kami</h2>
-  <p lang="ms">Gunakan <a href="{{MAIN_SITE}}/p/contact.html">borang hubungi {{BRAND}}</a> untuk melaporkan kadar yang lapuk atau keputusan yang salah (sertakan pautan halaman dan sumber rasmi), atau mencadangkan kalkulator baharu.</p>
+  <p lang="ms">Gunakan borang di atas (boleh ditulis dalam Bahasa Melayu) atau e-mel <a href="mailto:editor@thebukitbesi.com">editor@thebukitbesi.com</a> untuk melaporkan kadar yang lapuk atau keputusan yang salah (sertakan pautan halaman dan sumber rasmi), mencadangkan kalkulator baharu, atau bertanya tentang pengiklanan. Kami membalas setiap mesej yang tulen, biasanya dalam dua hari bekerja.</p>
 </div>
 </div>

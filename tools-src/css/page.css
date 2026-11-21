@@ -1,6 +1,6 @@
 /* Tool and policy pages. */
 .page{padding:96px 0 24px}
-.crumbs ol{display:flex;flex-wrap:wrap;gap:6px;list-style:none;font-size:.85rem;color:var(--text3)}
+.crumbs ol,.prose .crumbs ol{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0;font-size:.85rem;color:var(--text3)}
 .crumbs li+li::before{content:"/";margin-right:6px;color:var(--border2)}
 .crumbs a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
 .page h1{font-size:clamp(1.8rem,5vw,2.75rem);font-weight:900;line-height:1.12;letter-spacing:-.025em;margin:14px 0 14px}
