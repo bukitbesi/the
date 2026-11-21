@@ -3048,6 +3048,7 @@ for (const p of pages) {
 fs.mkdirSync(path.join(pub, 'assets/js'), { recursive: true });
 const bundles = {
   'site.js': ['assets/js/site-ui.js'],
+  'contact.js': ['assets/js/contact-ui.js'],
   'salary.js': ['assets/js/salary-core.js', 'assets/js/salary-ui.js'],
   'cgpa-percent.js': ['assets/js/grade-core.js', 'assets/js/cgpa-percent-ui.js'],
   'cgpa.js': ['assets/js/grade-core.js', 'assets/js/cgpa-ui.js'],
